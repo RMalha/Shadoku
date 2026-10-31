@@ -1,0 +1,6583 @@
+{
+ "id": "case8",
+ "title": "The Hunter's Moon",
+ "titleKey": "CASE.case8.TITLE",
+ "subtitleKey": "CASE.case8.SUBTITLE",
+ "subtitle": "Hard · Forest",
+ "theme": "FOREST",
+ "difficulty": "Hard",
+ "tier": "hard",
+ "shape": "rect",
+ "seed": 1808,
+ "attempt": 8,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "FOH1010RAR1-1808",
+ "puzzleId": "FOH1010RAR1-1808",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 202,
+ "zoneWord": "area",
+ "size": 10,
+ "rooms": [
+  [
+   4,
+   3,
+   3,
+   1,
+   1,
+   1,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   3,
+   3,
+   1,
+   1,
+   1,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   3,
+   3,
+   1,
+   1,
+   1,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   3,
+   3,
+   1,
+   1,
+   1,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   3,
+   3,
+   1,
+   1,
+   1,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   3,
+   3,
+   1,
+   1,
+   1,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   2,
+   2,
+   2,
+   2,
+   2,
+   0,
+   0,
+   6,
+   6
+  ],
+  [
+   4,
+   2,
+   2,
+   2,
+   2,
+   2,
+   0,
+   0,
+   7,
+   7
+  ],
+  [
+   4,
+   2,
+   2,
+   2,
+   2,
+   2,
+   0,
+   0,
+   7,
+   7
+  ],
+  [
+   4,
+   5,
+   5,
+   5,
+   5,
+   5,
+   0,
+   0,
+   7,
+   7
+  ]
+ ],
+ "roomNames": [
+  "Hollow",
+  "Pine Grove",
+  "Birch Wood",
+  "Glade",
+  "Campsite",
+  "Creek",
+  "Clearing",
+  "Waterfall"
+ ],
+ "roomIds": [
+  "HOLLOW",
+  "PINE_GROVE",
+  "BIRCH_WOOD",
+  "GLADE",
+  "CAMPSITE",
+  "CREEK",
+  "CLEARING",
+  "WATERFALL"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    5
+   ],
+   [
+    0,
+    6
+   ]
+  ],
+  [
+   [
+    1,
+    0
+   ],
+   [
+    1,
+    1
+   ]
+  ],
+  [
+   [
+    1,
+    2
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  [
+   [
+    1,
+    7
+   ],
+   [
+    1,
+    8
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    2,
+    5
+   ],
+   [
+    2,
+    6
+   ]
+  ],
+  [
+   [
+    3,
+    0
+   ],
+   [
+    3,
+    1
+   ]
+  ],
+  [
+   [
+    3,
+    5
+   ],
+   [
+    3,
+    6
+   ]
+  ],
+  [
+   [
+    3,
+    7
+   ],
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   [
+    4,
+    3
+   ]
+  ],
+  [
+   [
+    4,
+    5
+   ],
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   [
+    4,
+    7
+   ],
+   [
+    4,
+    8
+   ]
+  ],
+  [
+   [
+    5,
+    0
+   ],
+   [
+    5,
+    1
+   ]
+  ],
+  [
+   [
+    5,
+    2
+   ],
+   [
+    5,
+    3
+   ]
+  ],
+  [
+   [
+    5,
+    2
+   ],
+   [
+    6,
+    2
+   ]
+  ],
+  [
+   [
+    5,
+    4
+   ],
+   [
+    6,
+    4
+   ]
+  ],
+  [
+   [
+    5,
+    5
+   ],
+   [
+    6,
+    5
+   ]
+  ],
+  [
+   [
+    6,
+    0
+   ],
+   [
+    6,
+    1
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    6,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    8
+   ],
+   [
+    7,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    9
+   ],
+   [
+    7,
+    9
+   ]
+  ],
+  [
+   [
+    8,
+    0
+   ],
+   [
+    8,
+    1
+   ]
+  ],
+  [
+   [
+    8,
+    1
+   ],
+   [
+    9,
+    1
+   ]
+  ],
+  [
+   [
+    8,
+    2
+   ],
+   [
+    9,
+    2
+   ]
+  ],
+  [
+   [
+    8,
+    3
+   ],
+   [
+    9,
+    3
+   ]
+  ],
+  [
+   [
+    8,
+    5
+   ],
+   [
+    8,
+    6
+   ]
+  ],
+  [
+   [
+    8,
+    7
+   ],
+   [
+    8,
+    8
+   ]
+  ],
+  [
+   [
+    9,
+    0
+   ],
+   [
+    9,
+    1
+   ]
+  ]
+ ],
+ "windows": [],
+ "contents": [
+  [
+   "TENT",
+   "FAIRY_RING",
+   "",
+   "FERN",
+   "",
+   "",
+   "",
+   "BIRCH",
+   "",
+   ""
+  ],
+  [
+   "PUDDLE",
+   "",
+   "STUMP",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "STUMP"
+  ],
+  [
+   "TENT",
+   "",
+   "STUMP",
+   "",
+   "PINE",
+   "",
+   "",
+   "",
+   "",
+   "FAIRY_RING"
+  ],
+  [
+   "CORPSE",
+   "",
+   "TENT",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "OAK"
+  ],
+  [
+   "STUMP",
+   "FALLEN_LOG",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "STUMP",
+   "",
+   "",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "OAK",
+   "",
+   "OAK",
+   ""
+  ],
+  [
+   "FALLEN_LOG",
+   "",
+   "FALLEN_LOG",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "FERN",
+   "FERN",
+   "",
+   "",
+   "",
+   "FERN",
+   "STUMP",
+   ""
+  ],
+  [
+   "",
+   "MOSS",
+   "",
+   "FAIRY_RING",
+   "BIRCH",
+   "",
+   "",
+   "",
+   "",
+   "SHRUB"
+  ],
+  [
+   "FOOTPRINTS",
+   "",
+   "STUMP",
+   "MOSS",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "FERN"
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  3,
+  0
+ ],
+ "biomeProps": [
+  "BIRCH",
+  "FAIRY_RING",
+  "FALLEN_LOG",
+  "FERN",
+  "MOSS",
+  "OAK",
+  "PINE",
+  "SHRUB",
+  "STUMP",
+  "TENT"
+ ],
+ "propClasses": {
+  "BIRCH": "TALL",
+  "FAIRY_RING": "LOW",
+  "FALLEN_LOG": "LOW",
+  "FERN": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "MOSS": "LOW",
+  "OAK": "TALL",
+  "PINE": "TALL",
+  "PUDDLE": "LOW",
+  "SHRUB": "TALL",
+  "STUMP": "LOW",
+  "TENT": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.238,
+  "lowTiles": 20,
+  "openTiles": 84,
+  "lowKinds": [
+   "FAIRY_RING",
+   "FALLEN_LOG",
+   "FOOTPRINTS",
+   "MOSS",
+   "PUDDLE",
+   "STUMP"
+  ],
+  "roomProps": {
+   "CAMPSITE": [
+    "FALLEN_LOG",
+    "FOOTPRINTS",
+    "PUDDLE",
+    "STUMP",
+    "TENT"
+   ],
+   "GLADE": [
+    "FAIRY_RING",
+    "FALLEN_LOG",
+    "STUMP",
+    "TENT"
+   ],
+   "PINE_GROVE": [
+    "FERN",
+    "FOOTPRINTS",
+    "PINE"
+   ],
+   "HOLLOW": [
+    "BIRCH",
+    "FERN",
+    "OAK"
+   ],
+   "CLEARING": [
+    "FAIRY_RING",
+    "OAK",
+    "STUMP"
+   ],
+   "BIRCH_WOOD": [
+    "BIRCH",
+    "FAIRY_RING",
+    "FALLEN_LOG",
+    "FERN",
+    "MOSS"
+   ],
+   "WATERFALL": [
+    "FERN",
+    "SHRUB",
+    "STUMP"
+   ],
+   "CREEK": [
+    "MOSS",
+    "STUMP"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alma",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 7
+   },
+   "look": "blonde curly hair, bowtie",
+   "clue": "Alma was north of Fiona and was in the same area as Clara.",
+   "text": "Alma was north of Fiona and was in the same area as Clara.",
+   "atoms": [
+    {
+     "kind": "NORTH_OF",
+     "subject": "A",
+     "params": {
+      "other": "F"
+     }
+    },
+    {
+     "kind": "SAME_ROOM",
+     "subject": "A",
+     "params": {
+      "other": "C"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    7
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Beatrice",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 5
+   },
+   "look": "blonde curly hair, scarf",
+   "clue": "Beatrice stood on bare ground (no fairy ring, fallen log, moss patch, puddle, trail of footprints or tree stump).",
+   "text": "Beatrice stood on bare ground (no fairy ring, fallen log, moss patch, puddle, trail of footprints or tree stump).",
+   "atoms": [
+    {
+     "kind": "BARE",
+     "subject": "B",
+     "params": {
+      "surface": "GROUND",
+      "lows": [
+       "FAIRY_RING",
+       "FALLEN_LOG",
+       "MOSS",
+       "PUDDLE",
+       "FOOTPRINTS",
+       "STUMP"
+      ]
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    9,
+    1
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Clara",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "red",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 4
+   },
+   "look": "red long hair, horn-rimmed glasses",
+   "clue": "Clara was beside a fern.",
+   "text": "Clara was beside a fern.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "FERN"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    6
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dmitri",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "beard",
+    "tie": "necktie",
+    "skin": 2,
+    "cloth": 4
+   },
+   "look": "red curly hair, peaked, beard, necktie",
+   "clue": "Dmitri was in the Glade.",
+   "text": "Dmitri was in the Glade.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "D",
+     "params": {
+      "room": "GLADE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Ezra",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 0
+   },
+   "look": "brown short hair, horn-rimmed glasses, bowtie",
+   "clue": "Ezra was in column 10.",
+   "text": "Ezra was in column 10.",
+   "atoms": [
+    {
+     "kind": "COL",
+     "subject": "E",
+     "params": {
+      "index": 9
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    9
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Fiona",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 6
+   },
+   "look": "brown curly hair, beret, bowtie",
+   "clue": "Fiona was exactly one column east of Alma. She was in an area with at least two people wearing glasses.",
+   "text": "Fiona was exactly one column east of Alma. She was in an area with at least two people wearing glasses.",
+   "atoms": [
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "F",
+     "params": {
+      "other": "A",
+      "dir": "E",
+      "dist": 1
+     }
+    },
+    {
+     "kind": "TWO_P_ROOM",
+     "subject": "F",
+     "params": {
+      "trait": "GLASSES",
+      "selfMatch": false
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": [
+     1
+    ]
+   },
+   "solution": [
+    3,
+    8
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gustav",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "peaked",
+    "facialHair": "beard",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 0
+   },
+   "look": "black wavy hair, round glasses, peaked, beard",
+   "clue": "Gustav was standing on a trail of footprints.",
+   "text": "Gustav was standing on a trail of footprints.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "G",
+     "params": {
+      "prop": "FOOTPRINTS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    5
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Hugo",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 6
+   },
+   "look": "brown crop hair, peaked, scarf",
+   "clue": "Hugo was in the Pine Grove or in the Birch Wood and was exactly one column west of Gustav.",
+   "text": "Hugo was in the Pine Grove or in the Birch Wood and was exactly one column west of Gustav.",
+   "atoms": [
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "H",
+     "params": {
+      "other": "G",
+      "dir": "W",
+      "dist": 1
+     }
+    },
+    {
+     "kind": "ROOM_PAIR",
+     "subject": "H",
+     "params": {
+      "room": "PINE_GROVE",
+      "room2": "BIRCH_WOOD"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    4
+   ]
+  },
+  {
+   "id": "I",
+   "name": "Ignatius",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "necktie",
+    "skin": 0,
+    "cloth": 6
+   },
+   "look": "bald, goatee, necktie",
+   "clue": "Ignatius was at the Campsite.",
+   "text": "Ignatius was at the Campsite.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "I",
+     "params": {
+      "room": "CAMPSITE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "I",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    8,
+    0
+   ]
+  },
+  {
+   "id": "J",
+   "name": "Judith",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 4
+   },
+   "look": "black ponytail hair",
+   "clue": "Judith was in the Glade and was in row 3.",
+   "text": "Judith was in the Glade and was in row 3.",
+   "atoms": [
+    {
+     "kind": "ROW",
+     "subject": "J",
+     "params": {
+      "index": 2
+     }
+    },
+    {
+     "kind": "ROOM",
+     "subject": "J",
+     "params": {
+      "room": "GLADE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "J",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    1
+   ]
+  },
+  {
+   "id": "K",
+   "name": "Kenneth",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 0
+   },
+   "look": "brown wavy hair, scarf",
+   "clue": "Kenneth was beside a pine tree.",
+   "text": "Kenneth was beside a pine tree.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "K",
+     "params": {
+      "prop": "PINE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "K",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    4
+   ]
+  },
+  {
+   "id": "L",
+   "name": "Lucille",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 2,
+    "cloth": 7
+   },
+   "look": "brown bun hair, necktie",
+   "clue": "Lucille was beside a shrub.",
+   "text": "Lucille was beside a shrub.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "L",
+     "params": {
+      "prop": "SHRUB"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "L",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    8,
+    8
+   ]
+  },
+  {
+   "id": "M",
+   "name": "Margot",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 0
+   },
+   "look": "blonde ponytail hair, horn-rimmed glasses",
+   "clue": "Margot was in the Clearing or by the Waterfall and was the only person on a tree stump.",
+   "text": "Margot was in the Clearing or by the Waterfall and was the only person on a tree stump.",
+   "atoms": [
+    {
+     "kind": "ONLY_ON",
+     "subject": "M",
+     "params": {
+      "prop": "STUMP"
+     }
+    },
+    {
+     "kind": "ROOM_PAIR",
+     "subject": "M",
+     "params": {
+      "room": "CLEARING",
+      "room2": "WATERFALL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "M",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    9
+   ]
+  }
+ ],
+ "shadow": [
+  0,
+  6
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EVERY_ROOM",
+   "text": "Every area holds at least one suspect.",
+   "kind": "EVERY_ROOM",
+   "params": {}
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Fiona was in an area with at least two people wearing glasses. Polaroid check — people wearing glasses: Clara, Ezra, Gustav and Margot. Fewer than two of them can still reach the Hollow, the Birch Wood, the Glade, the Campsite or the Creek, so Fiona cannot be there. Eliminated → Fiona: r1c2, r1c3, r1c7, r2c1, r2c2, r2c3, r2c7, r2c8, r3c2, r3c3, r3c7, r3c8, r4c2, r4c7, r4c8, r5c1, r5c2, r5c3, r5c7, r5c8, r6c1, r6c2, r6c3, r6c8, r7c1, r7c2, r7c3, r7c4, r7c5, r7c6, r7c7, r7c8, r8c1, r8c2, r8c5, r8c6, r8c7, r9c1, r9c2, r9c3, r9c4, r9c6, r9c7, r9c8, r10c1, r10c2, r10c3, r10c4, r10c5, r10c6, r10c7, r10c8.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     9,
+     0
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      9,
+      3
+     ],
+     [
+      9,
+      4
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      9,
+      6
+     ],
+     [
+      9,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_FEW_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "F",
+        "params": {
+         "trait": "GLASSES",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "GLASSES",
+       "holders": [
+        "C",
+        "E",
+        "G",
+        "M"
+       ]
+      }
+     },
+     "rooms": [
+      "HOLLOW",
+      "BIRCH_WOOD",
+      "GLADE",
+      "CAMPSITE",
+      "CREEK"
+     ],
+     "suspect": "F"
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Judith can only be at r3c2 or r3c3, and those tiles all lie on one sightline. Whichever one Judith takes, the whole stretch is watched, so nobody else can stand on r3c2, r3c3, r3c4. Eliminated → Alma: r3c2, r3c3, r3c4 · Beatrice: r3c2, r3c4 · Dmitri: r3c2, r3c3 · Fiona: r3c4 · Hugo: r3c4 · Kenneth: r3c4.",
+   "focus": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "B": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "D": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ]
+    ],
+    "F": [
+     [
+      2,
+      3
+     ]
+    ],
+    "H": [
+     [
+      2,
+      3
+     ]
+    ],
+    "K": [
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "J",
+     "options": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ]
+     ],
+     "coords": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Margot was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump. Eliminated → Alma: r2c3, r2c10, r5c1, r6c1, r8c9, r10c3 · Dmitri: r2c3 · Ezra: r2c10 · Fiona: r2c10, r8c9 · Ignatius: r5c1, r6c1 · Judith: r3c3.",
+   "focus": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     9,
+     2
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      9
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      9,
+      2
+     ]
+    ],
+    "D": [
+     [
+      1,
+      2
+     ]
+    ],
+    "E": [
+     [
+      1,
+      9
+     ]
+    ],
+    "F": [
+     [
+      1,
+      9
+     ],
+     [
+      7,
+      8
+     ]
+    ],
+    "I": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ]
+    ],
+    "J": [
+     [
+      2,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_ON",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "M",
+     "prop": "STUMP"
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Judith — “was in the Glade and was in row 3”. The clue fits 2 tiles; r3c3 is a tree stump (only Margot may be on one). Only r3c2 is left. Place Judith at r3c2; Judith's sightlines now watch 7 tiles.",
+   "focus": [
+    [
+     2,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "B": [
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "D": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "suspect": "J",
+   "cell": [
+    2,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          2,
+          2
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "M"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "J",
+     "clueOf": "J",
+     "coord": [
+      2,
+      1
+     ],
+     "watch": 7
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Alma was north of Fiona. Fiona can reach row 10 at most, so Alma must be in rows 1–9; Alma is in row 1 at the earliest, so Fiona must be in rows 2–10. Eliminated → Alma: r10c1, r10c2, r10c4, r10c5, r10c6, r10c7, r10c8, r10c9 · Fiona: r1c5, r1c6, r1c9, r1c10.",
+   "focus": [
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     9,
+     0
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      9,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      3
+     ],
+     [
+      9,
+      4
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      9,
+      6
+     ],
+     [
+      9,
+      7
+     ],
+     [
+      9,
+      8
+     ]
+    ],
+    "F": [
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      0,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "NORTH_OF",
+        "subject": "A",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
+       "params": {
+        "y": "F",
+        "line": 9,
+        "x": "A",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 8
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_COMPASS_MIN.ROW",
+       "params": {
+        "x": "A",
+        "line": 0,
+        "y": "F",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 1,
+          "to": 9
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Fiona was exactly one column east of Alma. Fiona can only be in columns 4, 5, 6, 9 or 10, which leaves Alma columns 3, 4, 5, 8 or 9. Eliminated → Alma: r1c6, r1c7, r1c10, r2c1, r2c6, r2c7, r3c6, r3c7, r3c10, r4c6, r4c7, r5c6, r5c7, r5c10, r6c6, r6c10, r7c1, r7c2, r7c6, r7c7, r7c10, r8c1, r8c2, r8c6, r8c7, r8c10, r9c1, r9c2, r9c6, r9c7.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     9
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      9
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      9
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      9
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      9
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      9
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "A",
+         "dir": "E",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "F",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           3,
+           4,
+           5,
+           8,
+           9
+          ]
+         }
+        },
+        "x": "A",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           2,
+           3,
+           4,
+           7,
+           8
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Hugo was exactly one column west of Gustav. Gustav can only be in columns 1, 4, 5 or 6, which leaves Hugo columns 3–5; Hugo can only be in columns 3–5, which leaves Gustav columns 4–6. Eliminated → Gustav: r10c1 · Hugo: r1c6, r2c6, r3c6, r4c6, r5c6, r6c6, r7c2, r7c6, r8c2, r8c6, r9c2, r9c6.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     9,
+     0
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      9,
+      0
+     ]
+    ],
+    "H": [
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "H",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "H",
+        "params": {
+         "other": "G",
+         "dir": "W",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           0,
+           3,
+           4,
+           5
+          ]
+         }
+        },
+        "x": "H",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.COL",
+         "params": {
+          "from": 2,
+          "to": 4
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "H",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.COL",
+         "params": {
+          "from": 2,
+          "to": 4
+         }
+        },
+        "x": "G",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.COL",
+         "params": {
+          "from": 3,
+          "to": 5
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Gustav can only be at r6c4, r6c5 or r6c6, and those tiles all lie on one sightline. Whichever one Gustav takes, the whole stretch is watched, so nobody else can stand on r6c3, r6c4, r6c5, r6c6. Eliminated → Alma: r6c3, r6c4, r6c5 · Beatrice: r6c3 · Dmitri: r6c3 · Fiona: r6c4, r6c5, r6c6 · Hugo: r6c4, r6c5.",
+   "focus": [
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "B": [
+     [
+      5,
+      2
+     ]
+    ],
+    "D": [
+     [
+      5,
+      2
+     ]
+    ],
+    "F": [
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      5
+     ]
+    ],
+    "H": [
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ]
+     ],
+     "coords": [
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Alma was in the same area as Clara, so both must be in an area they can both still reach (Birch Wood, Hollow, Pine Grove, Waterfall). Eliminated → Alma: r1c3, r1c9, r2c9, r3c9, r4c9, r5c3, r5c9, r7c9.",
+   "focus": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     6,
+     8
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      6,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "A",
+     "other": "C",
+     "rooms": [
+      "BIRCH_WOOD",
+      "HOLLOW",
+      "PINE_GROVE",
+      "WATERFALL"
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 2,
+   "rule": "No empty area",
+   "kind": "eliminate",
+   "text": "Every area holds at least one suspect. Only Beatrice can still reach the Creek, so Beatrice must be in it. Eliminated → Beatrice: r1c3, r1c5, r1c6, r1c7, r1c9, r1c10, r2c4, r2c5, r2c6, r2c7, r2c8, r2c9, r3c6, r3c7, r3c8, r3c9, r4c4, r4c5, r4c6, r4c7, r4c8, r4c9, r5c3, r5c4, r5c5, r5c6, r5c7, r5c8, r5c9, r5c10, r6c8, r6c10, r7c2, r7c4, r7c5, r7c6, r7c7, r7c8, r7c9, r7c10, r8c1, r8c2, r8c5, r8c6, r8c7, r8c10, r9c1, r9c3, r9c6, r9c7, r9c8, r9c9, r10c7, r10c8, r10c9.",
+   "focus": [
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      0,
+      9
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      4,
+      9
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      9
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      8
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      9
+     ],
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      8
+     ],
+     [
+      9,
+      6
+     ],
+     [
+      9,
+      7
+     ],
+     [
+      9,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_EVERY_ROOM",
+    "ruleKey": "RULE_EVERY_ROOM",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EVERY_ROOM",
+      "params": {}
+     },
+     "suspect": "B",
+     "room": "CREEK"
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Beatrice can only be at r10c2, r10c5 or r10c6, and those tiles all lie on one sightline. Whichever one Beatrice takes, the whole stretch is watched, so nobody else can stand on r10c1. Eliminated → Ignatius: r10c1.",
+   "focus": [
+    [
+     9,
+     0
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      9,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "B",
+     "options": [
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "coords": [
+      [
+       9,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r5c1 cannot be a hiding spot (Margot was the only person on a tree stump), so someone must watch it. Only Ignatius can still see it, so Ignatius must stand on r7c1, r8c1, r9c1. Eliminated → Ignatius: r2c1.",
+   "focus": [
+    [
+     4,
+     0
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     8,
+     0
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      1,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      4,
+      0
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "M",
+       "atom": {
+        "kind": "ONLY_ON",
+        "subject": "M",
+        "params": {
+         "prop": "STUMP"
+        }
+       }
+      }
+     },
+     "suspect": "I",
+     "coords": [
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       8,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 3,
+   "rule": "Common watched tiles (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Lucille can only be at r8c10 or r9c9. the two options cross each other's sightlines, so r8c9 is watched from both — nobody else can stand on r8c9. Eliminated → Margot: r8c9.",
+   "focus": [
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "M": [
+     [
+      7,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_LOOKAHEAD_CROSSING",
+    "ruleKey": "RULE_PAIR_WATCH",
+    "params": {
+     "suspect": "L",
+     "options": [
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "common": [
+      [
+       7,
+       8
+      ]
+     ],
+     "coords": [
+      [
+       7,
+       8
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Margot — “was in the Clearing or by the Waterfall and was the only person on a tree stump”. The clue fits 2 tiles; r8c9 is watched by Lucille either way. Only r2c10 is left. Place Margot at r2c10; Margot's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     1,
+     9
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      7
+     ]
+    ],
+    "E": [
+     [
+      0,
+      9
+     ],
+     [
+      2,
+      9
+     ]
+    ],
+    "F": [
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      9
+     ]
+    ]
+   },
+   "suspect": "M",
+   "cell": [
+    1,
+    9
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          7,
+          8
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "L"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "M",
+     "clueOf": "M",
+     "coord": [
+      1,
+      9
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Ezra can only be at r5c10, r6c10, r7c10 or r8c10, and those tiles all lie on one sightline. Whichever one Ezra takes, the whole stretch is watched, so nobody else can stand on r5c10, r6c10, r7c10, r8c10. Eliminated → Fiona: r5c10, r6c10, r7c10, r8c10 · Lucille: r8c10.",
+   "focus": [
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     9
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     9
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      4,
+      9
+     ],
+     [
+      5,
+      9
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      7,
+      9
+     ]
+    ],
+    "L": [
+     [
+      7,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "E",
+     "options": [
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       9
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       9
+      ]
+     ],
+     "coords": [
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       9
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       9
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Lucille — “was beside a shrub”. The clue fits 2 tiles; r8c10 is watched by Ezra either way. Only r9c9 is left. Place Lucille at r9c9; Lucille's sightlines now watch 6 tiles.",
+   "focus": [
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      8
+     ]
+    ],
+    "C": [
+     [
+      8,
+      7
+     ],
+     [
+      9,
+      8
+     ]
+    ],
+    "F": [
+     [
+      6,
+      8
+     ],
+     [
+      8,
+      8
+     ],
+     [
+      9,
+      8
+     ]
+    ]
+   },
+   "suspect": "L",
+   "cell": [
+    8,
+    8
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          7,
+          9
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "L",
+     "clueOf": "L",
+     "coord": [
+      8,
+      8
+     ],
+     "watch": 6
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Alma was north of Fiona. Fiona can reach row 5 at most, so Alma must be in rows 1–4. Eliminated → Alma: r5c4, r5c5, r5c8, r6c8, r7c3, r7c4, r7c5, r7c8, r8c5, r9c3, r9c4.",
+   "focus": [
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "NORTH_OF",
+        "subject": "A",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
+       "params": {
+        "y": "F",
+        "line": 4,
+        "x": "A",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 3
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Fiona was exactly one column east of Alma. Alma can only be in columns 4, 5 or 8, which leaves Fiona columns 5, 6 or 9. Eliminated → Fiona: r2c4, r4c4, r5c4.",
+   "focus": [
+    [
+     1,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "A",
+         "dir": "E",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "A",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           3,
+           4,
+           7
+          ]
+         }
+        },
+        "x": "F",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           4,
+           5,
+           8
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Alma was in the same area as Clara, so both must be in an area they can both still reach (Hollow, Pine Grove). Eliminated → Clara: r7c3, r7c4, r8c2, r8c5, r9c3, r9c4.",
+   "focus": [
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "A",
+     "other": "C",
+     "rooms": [
+      "HOLLOW",
+      "PINE_GROVE"
+     ]
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 2,
+   "rule": "No empty area",
+   "kind": "eliminate",
+   "text": "Every area holds at least one suspect. Only Hugo can still reach the Birch Wood, so Hugo must be in it. Eliminated → Hugo: r1c5, r2c4, r2c5, r4c4, r4c5, r5c4, r5c5.",
+   "focus": [
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_EVERY_ROOM",
+    "ruleKey": "RULE_EVERY_ROOM",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EVERY_ROOM",
+      "params": {}
+     },
+     "suspect": "H",
+     "room": "BIRCH_WOOD"
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Alma was north of Fiona. From r2c5, Fiona would see every tile where Alma could still stand to make that true, and no two suspects may see each other. So Fiona cannot be there. Eliminated → Fiona: r2c5.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "NORTH_OF",
+        "subject": "A",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       1,
+       4
+      ]
+     ],
+     "x": "F",
+     "y": "A"
+    }
+   }
+  },
+  {
+   "n": 22,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Alma was in the same area as Clara. From r2c5, Alma would see every tile where Clara could still stand to make that true, and no two suspects may see each other. So Alma cannot be there. Eliminated → Alma: r2c5.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "SAME_ROOM",
+        "subject": "A",
+        "params": {
+         "other": "C"
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       1,
+       4
+      ]
+     ],
+     "x": "A",
+     "y": "C"
+    }
+   }
+  },
+  {
+   "n": 23,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Alma was in the same area as Clara. From r7c8, Clara would see every tile where Alma could still stand to make that true, and no two suspects may see each other. So Clara cannot be there. Eliminated → Clara: r7c8.",
+   "focus": [
+    [
+     6,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      6,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "SAME_ROOM",
+        "subject": "A",
+        "params": {
+         "other": "C"
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       6,
+       7
+      ]
+     ],
+     "x": "C",
+     "y": "A"
+    }
+   }
+  },
+  {
+   "n": 24,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Clara stood on r1c5? Without following any clue further, r8c7, r10c7 could never be watched. So Clara cannot be on r1c5. Eliminated → Clara: r1c5.",
+   "focus": [
+    [
+     0,
+     4
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      0,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "C",
+     "coord": [
+      0,
+      4
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         7,
+         6
+        ],
+        [
+         9,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 25,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Alma was in the same area as Clara. From r2c4, r4c4, Alma would see every tile where Clara could still stand to make that true, and no two suspects may see each other. So Alma cannot be there. Eliminated → Alma: r2c4, r4c4.",
+   "focus": [
+    [
+     1,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      3
+     ],
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "SAME_ROOM",
+        "subject": "A",
+        "params": {
+         "other": "C"
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       1,
+       3
+      ],
+      [
+       3,
+       3
+      ]
+     ],
+     "x": "A",
+     "y": "C"
+    }
+   }
+  },
+  {
+   "n": 26,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Fiona was exactly one column east of Alma. Alma can only be in columns 5 or 8, which leaves Fiona columns 6 or 9. Eliminated → Fiona: r4c5, r5c5.",
+   "focus": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "A",
+         "dir": "E",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "A",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           4,
+           7
+          ]
+         }
+        },
+        "x": "F",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           5,
+           8
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 27,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Fiona was in an area with at least two people wearing glasses. From r2c6, Fiona would see every tile where people wearing glasses could still join her, and no two suspects may see each other. So Fiona cannot be there. Eliminated → Fiona: r2c6.",
+   "focus": [
+    [
+     1,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT_TRAIT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "F",
+        "params": {
+         "trait": "GLASSES",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       1,
+       5
+      ]
+     ],
+     "suspect": "F",
+     "trait": "GLASSES"
+    }
+   }
+  },
+  {
+   "n": 28,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Clara stood on r2c4? Without following any clue further, r8c7, r10c7 could never be watched. So Clara cannot be on r2c4. Eliminated → Clara: r2c4.",
+   "focus": [
+    [
+     1,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "C",
+     "coord": [
+      1,
+      3
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         7,
+         6
+        ],
+        [
+         9,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 29,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Clara — “was beside a fern”. The clue alone allows 12 tiles, but every one except r8c7 is already ruled out — watched or occupied by Lucille; outside every area Alma can reach; ruled out by a coverage check; in sight of every tile left for Alma. Place Clara at r8c7; Clara's sightlines now watch 3 tiles.",
+   "focus": [
+    [
+     7,
+     6
+    ]
+   ],
+   "elims": {},
+   "suspect": "C",
+   "cell": [
+    7,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 12,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "L"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_OUTSIDE_PARTNER_ZONES",
+         "params": {
+          "other": "A"
+         }
+        },
+        {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_SEES_ALL_PARTNER_TILES",
+         "params": {
+          "other": "A"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      7,
+      6
+     ],
+     "watch": 3
+    }
+   }
+  },
+  {
+   "n": 30,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Fiona was in an area with at least two people wearing glasses. Polaroid check — people wearing glasses: Clara, Ezra, Gustav and Margot. Fewer than two of them can still reach the Pine Grove, so Fiona cannot be there. Eliminated → Fiona: r3c6, r4c6, r5c6.",
+   "focus": [
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_FEW_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "F",
+        "params": {
+         "trait": "GLASSES",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "GLASSES",
+       "holders": [
+        "C",
+        "E",
+        "G",
+        "M"
+       ]
+      }
+     },
+     "rooms": [
+      "PINE_GROVE"
+     ],
+     "suspect": "F"
+    }
+   }
+  },
+  {
+   "n": 31,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Fiona was exactly one column east of Alma. Fiona can only be in column 9, which leaves Alma column 8. Eliminated → Alma: r1c5, r4c5.",
+   "focus": [
+    [
+     0,
+     4
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "A",
+         "dir": "E",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "F",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 8
+         }
+        },
+        "x": "A",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 32,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Alma was north of Fiona. Alma is in row 3 at the earliest, so Fiona must be in rows 4–10. Eliminated → Fiona: r3c9.",
+   "focus": [
+    [
+     2,
+     8
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      2,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "NORTH_OF",
+        "subject": "A",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.ROW",
+       "params": {
+        "x": "A",
+        "line": 2,
+        "y": "F",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 3,
+          "to": 9
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 33,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Fiona was in an area with at least two people wearing glasses. Polaroid check — people wearing glasses: Clara, Ezra, Gustav and Margot. Only Ezra and Margot can still share an area with Fiona, so they must be in the Clearing. Eliminated → Ezra: r8c10.",
+   "focus": [
+    [
+     7,
+     9
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      7,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SHARE_TWO",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "F",
+        "params": {
+         "trait": "GLASSES",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "GLASSES",
+       "holders": [
+        "C",
+        "E",
+        "G",
+        "M"
+       ]
+      }
+     },
+     "suspects": [
+      "E",
+      "M"
+     ],
+     "owner": "F",
+     "rooms": [
+      "CLEARING"
+     ]
+    }
+   }
+  },
+  {
+   "n": 34,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Dmitri stood on r5c3? Without following any clue further, r1c3, r1c7 could never be watched. So Dmitri cannot be on r5c3. Eliminated → Dmitri: r5c3.",
+   "focus": [
+    [
+     4,
+     2
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      4,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "D",
+     "coord": [
+      4,
+      2
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         2
+        ],
+        [
+         0,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 35,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dmitri — “was in the Glade”. The clue alone allows 11 tiles, but every one except r1c3 is already ruled out — watched or occupied by Judith; a tree stump (only Margot may be on one); watched by Judith either way; ruled out by a coverage check; watched by Gustav either way. Place Dmitri at r1c3; Dmitri's sightlines now watch 3 tiles.",
+   "focus": [
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    0,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 11,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "J"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "M"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      0,
+      2
+     ],
+     "watch": 3
+    }
+   }
+  },
+  {
+   "n": 36,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Kenneth stood on r3c6? Without following any clue further, r1c5, r1c7 could never be watched. So Kenneth cannot be on r3c6. Eliminated → Kenneth: r3c6.",
+   "focus": [
+    [
+     2,
+     5
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      2,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "K",
+     "coord": [
+      2,
+      5
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         4
+        ],
+        [
+         0,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 37,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Alma stood on r4c8? Without following any clue further, r1c7, r3c7 could never be watched. So Alma cannot be on r4c8. Eliminated → Alma: r4c8.",
+   "focus": [
+    [
+     3,
+     7
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      3,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "A",
+     "coord": [
+      3,
+      7
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         2,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 38,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alma — “was north of Fiona and was in the same area as Clara”. The clue alone allows 84 tiles, but every one except r3c8 is already ruled out — watched or occupied by Judith, Lucille, Margot; a tree stump (only Margot may be on one); not one column west of any tile left for Fiona; ruled out by a coverage check; watched by Gustav either way; not north of any tile left for Fiona; watched by Judith either way; outside every area Clara can reach; in sight of every tile left for Clara. Place Alma at r3c8; Alma's sightlines now watch 9 tiles.",
+   "focus": [
+    [
+     2,
+     7
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    2,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 84,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "J",
+           "L",
+           "M"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "M"
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_OFFSET_OF_ANY.W",
+         "params": {
+          "other": "F"
+         }
+        },
+        {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_DIR_OF_ANY.N",
+         "params": {
+          "other": "F"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_OUTSIDE_PARTNER_ZONES",
+         "params": {
+          "other": "C"
+         }
+        },
+        {
+         "templateKey": "REASON_SEES_ALL_PARTNER_TILES",
+         "params": {
+          "other": "C"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      2,
+      7
+     ],
+     "watch": 9
+    }
+   }
+  },
+  {
+   "n": 39,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Kenneth stood on r4c5? Without following any clue further, r1c5, r1c7 could never be watched. So Kenneth cannot be on r4c5. Eliminated → Kenneth: r4c5.",
+   "focus": [
+    [
+     3,
+     4
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      3,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "K",
+     "coord": [
+      3,
+      4
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         4
+        ],
+        [
+         0,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 40,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Kenneth — “was beside a pine tree”. The clue fits 4 tiles; r3c4 is watched by Judith either way; r3c6, r4c5 are ruled out by a coverage check. Only r2c5 is left. Place Kenneth at r2c5; Kenneth's sightlines now watch 6 tiles.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "K",
+   "cell": [
+    1,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          2,
+          3
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "J"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          2,
+          5
+         ],
+         [
+          3,
+          4
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        }
+       }
+      }
+     ],
+     "suspect": "K",
+     "clueOf": "K",
+     "coord": [
+      1,
+      4
+     ],
+     "watch": 6
+    }
+   }
+  },
+  {
+   "n": 41,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Fiona stood on r5c9? Without following any clue further, r1c7, r4c7 could never be watched. So Fiona cannot be on r5c9. Eliminated → Fiona: r5c9.",
+   "focus": [
+    [
+     4,
+     8
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      4,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "F",
+     "coord": [
+      4,
+      8
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         3,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 42,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Fiona — “was exactly one column east of Alma. She was in an area with at least two people wearing glasses”. The clue alone allows 84 tiles, but every one except r4c9 is already ruled out — watched or occupied by Lucille, Margot; in an area fewer than two of the people wearing glasses can reach; watched by Ezra either way; watched by Gustav either way; not south of any tile left for Alma; a tree stump (only Margot may be on one); ruled out by a coverage check; in sight of every tile left for Alma; watched by Judith either way; not one column east of any tile left for Alma; in sight of every tile where people wearing glasses could share the area. Place Fiona at r4c9; Fiona's sightlines now watch 9 tiles.",
+   "focus": [
+    [
+     3,
+     8
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    3,
+    8
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 84,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "L",
+           "M"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_ZONE_FEW_REACH",
+         "params": {
+          "trait": "GLASSES"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "E"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_DIR_OF_ANY.S",
+         "params": {
+          "other": "A"
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "M"
+         }
+        },
+        {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_SEES_ALL_PARTNER_TILES",
+         "params": {
+          "other": "A"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_OFFSET_OF_ANY.E",
+         "params": {
+          "other": "A"
+         }
+        },
+        {
+         "templateKey": "REASON_SEES_ALL_TRAIT_TILES",
+         "params": {
+          "trait": "GLASSES"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      3,
+      8
+     ],
+     "watch": 9
+    }
+   }
+  },
+  {
+   "n": 43,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Ezra stood on r6c10? Without following any clue further, r1c7, r5c7 could never be watched. So Ezra cannot be on r6c10. Eliminated → Ezra: r6c10.",
+   "focus": [
+    [
+     5,
+     9
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      5,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "E",
+     "coord": [
+      5,
+      9
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         4,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 44,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Ezra stood on r7c10? Without following any clue further, r1c7, r5c7 could never be watched. So Ezra cannot be on r7c10. Eliminated → Ezra: r7c10.",
+   "focus": [
+    [
+     6,
+     9
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      6,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "E",
+     "coord": [
+      6,
+      9
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         4,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 45,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Ezra — “was in column 10”. The clue fits 7 tiles; r1c10, r3c10 are watched by Margot; r2c10 is a tree stump (only Margot may be on one); r6c10, r7c10 are ruled out by a coverage check; r8c10 is outside every area Fiona can be in. Only r5c10 is left. Place Ezra at r5c10; Ezra's sightlines now watch 11 tiles.",
+   "focus": [
+    [
+     4,
+     9
+    ]
+   ],
+   "elims": {},
+   "suspect": "E",
+   "cell": [
+    4,
+    9
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          0,
+          9
+         ],
+         [
+          2,
+          9
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "M"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          9
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "M"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          5,
+          9
+         ],
+         [
+          6,
+          9
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          7,
+          9
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_OUTSIDE_OWNER_ZONES",
+         "params": {
+          "owner": "F"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      4,
+      9
+     ],
+     "watch": 11
+    }
+   }
+  },
+  {
+   "n": 46,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Gustav stood on r6c4? Without following any clue further, r1c6, r1c7 could never be watched. So Gustav cannot be on r6c4. Eliminated → Gustav: r6c4.",
+   "focus": [
+    [
+     5,
+     3
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "G",
+     "coord": [
+      5,
+      3
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         5
+        ],
+        [
+         0,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 47,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Hugo was exactly one column west of Gustav. Gustav can only be in columns 5–6, which leaves Hugo columns 4–5. Eliminated → Hugo: r7c3, r9c3.",
+   "focus": [
+    [
+     6,
+     2
+    ],
+    [
+     8,
+     2
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      6,
+      2
+     ],
+     [
+      8,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "H",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "H",
+        "params": {
+         "other": "G",
+         "dir": "W",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.COL",
+         "params": {
+          "from": 4,
+          "to": 5
+         }
+        },
+        "x": "H",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.COL",
+         "params": {
+          "from": 3,
+          "to": 4
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 48,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Gustav stood on r6c5? Without following any clue further, r1c6, r1c7 could never be watched. So Gustav cannot be on r6c5. Eliminated → Gustav: r6c5.",
+   "focus": [
+    [
+     5,
+     4
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "G",
+     "coord": [
+      5,
+      4
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         5
+        ],
+        [
+         0,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 49,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gustav — “was standing on a trail of footprints”. The clue fits 4 tiles; r6c4, r6c5 are ruled out by a coverage check; r10c1 is not one column east of any tile left for Hugo. Only r6c6 is left. Place Gustav at r6c6; Gustav's sightlines now watch 13 tiles.",
+   "focus": [
+    [
+     5,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    5,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          5,
+          3
+         ],
+         [
+          5,
+          4
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          9,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_NOT_OFFSET_OF_ANY.E",
+         "params": {
+          "other": "H"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      5,
+      5
+     ],
+     "watch": 13
+    }
+   }
+  },
+  {
+   "n": 50,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Hugo was exactly one column west of Gustav. Gustav can only be in column 6, which leaves Hugo column 5. Eliminated → Hugo: r7c4, r9c4.",
+   "focus": [
+    [
+     6,
+     3
+    ],
+    [
+     8,
+     3
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      6,
+      3
+     ],
+     [
+      8,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "H",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "H",
+        "params": {
+         "other": "G",
+         "dir": "W",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 5
+         }
+        },
+        "x": "H",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 4
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 51,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Ignatius stood on r7c1? Without following any clue further, r1c7, r9c3 could never be watched. So Ignatius cannot be on r7c1. Eliminated → Ignatius: r7c1.",
+   "focus": [
+    [
+     6,
+     0
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      6,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "I",
+     "coord": [
+      6,
+      0
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 52,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Hugo stood on r8c5? Without following any clue further, r1c7, r7c3 could never be watched. So Hugo cannot be on r8c5. Eliminated → Hugo: r8c5.",
+   "focus": [
+    [
+     7,
+     4
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      7,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "H",
+     "coord": [
+      7,
+      4
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         6,
+         2
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 53,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Hugo — “was in the Pine Grove or in the Birch Wood and was exactly one column west of Gustav”. The clue alone allows 28 tiles, but every one except r7c5 is already ruled out — outside the Birch Wood, which only Hugo can fill; not one column west of any tile left for Gustav; watched by Gustav either way; ruled out by a coverage check; watched by Judith either way. Place Hugo at r7c5; Hugo's sightlines now watch 9 tiles.",
+   "focus": [
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "H",
+   "cell": [
+    6,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 28,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "REASON_OUTSIDE_ONLY_FILLER",
+         "params": {
+          "room": "BIRCH_WOOD",
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_OFFSET_OF_ANY.W",
+         "params": {
+          "other": "G"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        },
+        {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "J"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      6,
+      4
+     ],
+     "watch": 9
+    }
+   }
+  },
+  {
+   "n": 54,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Ignatius stood on r8c1? Without following any clue further, r1c7, r9c3 could never be watched. So Ignatius cannot be on r8c1. Eliminated → Ignatius: r8c1.",
+   "focus": [
+    [
+     7,
+     0
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      7,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "I",
+     "coord": [
+      7,
+      0
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 55,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Ignatius — “was at the Campsite”. The clue fits 7 tiles; r2c1 is out of sight of r5c1, which only Ignatius can watch; r5c1, r6c1 are a tree stump (only Margot may be on one); r7c1, r8c1 are ruled out by a coverage check; r10c1 is watched by Beatrice either way. Only r9c1 is left. Place Ignatius at r9c1; Ignatius's sightlines now watch 8 tiles.",
+   "focus": [
+    [
+     8,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "I",
+   "cell": [
+    8,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_ONLY_WATCHER",
+         "params": {
+          "coord": [
+           4,
+           0
+          ],
+          "owner": "I"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          0
+         ],
+         [
+          5,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "M"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          6,
+          0
+         ],
+         [
+          7,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          9,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "B"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "I",
+     "clueOf": "I",
+     "coord": [
+      8,
+      0
+     ],
+     "watch": 8
+    }
+   }
+  },
+  {
+   "n": 56,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Beatrice stood on r10c5? Without following any clue further, r1c7, r8c2 could never be watched. So Beatrice cannot be on r10c5. Eliminated → Beatrice: r10c5.",
+   "focus": [
+    [
+     9,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      9,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "B",
+     "coord": [
+      9,
+      4
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         7,
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 57,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Beatrice stood on r10c6? Without following any clue further, r1c7, r8c2 could never be watched. So Beatrice cannot be on r10c6. Eliminated → Beatrice: r10c6.",
+   "focus": [
+    [
+     9,
+     5
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      9,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "B",
+     "coord": [
+      9,
+      5
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         7,
+         1
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 58,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Beatrice — “stood on bare ground (no fairy ring, fallen log, moss patch, puddle, trail of footprints or tree stump)”. The clue alone allows 64 tiles, but every one except r10c2 is already ruled out — watched or occupied by Judith; outside the Creek, which only Beatrice can fill; watched by Judith either way; ruled out by a coverage check; watched by Gustav either way. Place Beatrice at r10c2; Beatrice's sightlines now watch 8 tiles.",
+   "focus": [
+    [
+     9,
+     1
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    9,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 64,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "J"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_OUTSIDE_ONLY_FILLER",
+         "params": {
+          "room": "CREEK",
+          "owner": "B"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_COVER_CHECK",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      9,
+      1
+     ],
+     "watch": 8
+    }
+   }
+  },
+  {
+   "n": 59,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r1c7. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     0,
+     6
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    0,
+    6
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      0,
+      6
+     ]
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.053,
+   "elims_before_first_place": 3,
+   "last_fifth_t1_share": 0.333,
+   "hardest_last_pos": 0.982,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.0,
+   "late_elim_gap": 5,
+   "place_push": 1.92,
+   "global_uses": 2,
+   "global_first_t2": false
+  },
+  "flow_arc_ok": false,
+  "shadow_candidates_before_last": 6,
+  "shadow_candidates_before_last_two": 12,
+  "dark_known_at": 13,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 1,
+  "trait_atoms": [
+   "TWO_P_ROOM"
+  ],
+  "trait_rules_used": [
+   "trait_filter",
+   "trait_partner"
+  ],
+  "trait_load_bearing": true,
+  "biome_props_on_board": [
+   "BIRCH",
+   "FAIRY_RING",
+   "FALLEN_LOG",
+   "FERN",
+   "MOSS",
+   "OAK",
+   "PINE",
+   "SHRUB",
+   "STUMP",
+   "TENT"
+  ],
+  "biome_props_in_clues": [
+   "FERN",
+   "PINE",
+   "SHRUB",
+   "STUMP"
+  ],
+  "biome_props_load_bearing": [
+   "FERN",
+   "PINE",
+   "SHRUB",
+   "STUMP"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 221551,
+  "rules_used": [
+   "compass",
+   "cover_check",
+   "every_room",
+   "monopoly",
+   "pair_watch",
+   "partner_sight",
+   "ray_block",
+   "same_room",
+   "shadow_law",
+   "trait_filter",
+   "trait_partner"
+  ],
+  "steps": 58,
+  "difficulty_score": 202,
+  "hardest_step_tier": 3,
+  "tall_scale": 1.0
+ }
+}

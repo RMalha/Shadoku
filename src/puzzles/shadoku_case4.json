@@ -1,0 +1,2029 @@
+{
+ "id": "case4",
+ "title": "Whiteout at the Ski Lodge",
+ "titleKey": "CASE.case4.TITLE",
+ "subtitleKey": "CASE.case4.SUBTITLE",
+ "subtitle": "Easy · Mountains",
+ "theme": "MOUNTAINS",
+ "difficulty": "Easy",
+ "tier": "easy",
+ "shape": "rect",
+ "seed": 1424,
+ "attempt": 329,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "MOE0808RAR1-1424",
+ "puzzleId": "MOE0808RAR1-1424",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 16,
+ "zoneWord": "area",
+ "size": 8,
+ "rooms": [
+  [
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  [
+   2,
+   2,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   2,
+   2,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   0,
+   0,
+   0,
+   4,
+   4,
+   4,
+   4,
+   5
+  ],
+  [
+   0,
+   0,
+   0,
+   4,
+   4,
+   4,
+   4,
+   5
+  ],
+  [
+   0,
+   0,
+   0,
+   4,
+   4,
+   4,
+   4,
+   5
+  ],
+  [
+   0,
+   0,
+   0,
+   4,
+   4,
+   4,
+   4,
+   5
+  ]
+ ],
+ "roomNames": [
+  "Glacier",
+  "Base Camp",
+  "Ridge",
+  "Hot Spring",
+  "Ski Slope",
+  "Summit"
+ ],
+ "roomIds": [
+  "GLACIER",
+  "BASE_CAMP",
+  "RIDGE",
+  "HOT_SPRING",
+  "SKI_SLOPE",
+  "SUMMIT"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    3
+   ]
+  ],
+  [
+   [
+    1,
+    2
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ]
+  ],
+  [
+   [
+    3,
+    2
+   ],
+   [
+    3,
+    3
+   ]
+  ],
+  [
+   [
+    3,
+    7
+   ],
+   [
+    4,
+    7
+   ]
+  ],
+  [
+   [
+    5,
+    6
+   ],
+   [
+    5,
+    7
+   ]
+  ]
+ ],
+ "windows": [],
+ "contents": [
+  [
+   "",
+   "SNOWDRIFT",
+   "",
+   "",
+   "HOT_POOL",
+   "",
+   "",
+   "FOOTPRINTS"
+  ],
+  [
+   "SNOWDRIFT",
+   "",
+   "",
+   "CHAIR",
+   "",
+   "",
+   "PUDDLE",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "BOULDER"
+  ],
+  [
+   "CORPSE",
+   "",
+   "",
+   "",
+   "",
+   "TENT",
+   "",
+   ""
+  ],
+  [
+   "",
+   "ICE",
+   "",
+   "SNOWMAN",
+   "SNOW_PINE",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "FOOTPRINTS",
+   "SLED",
+   "",
+   "",
+   "ICE"
+  ],
+  [
+   "CAIRN",
+   "ICE_PILLAR",
+   "",
+   "FOOTPRINTS",
+   "SKI_RACK",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "SNOWDRIFT",
+   "",
+   "FOOTPRINTS",
+   "",
+   "",
+   "",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     3
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  3,
+  0
+ ],
+ "biomeProps": [
+  "BOULDER",
+  "CAIRN",
+  "HOT_POOL",
+  "ICE",
+  "ICE_PILLAR",
+  "SKI_RACK",
+  "SLED",
+  "SNOWDRIFT",
+  "SNOWMAN",
+  "SNOW_PINE",
+  "TENT"
+ ],
+ "propClasses": {
+  "BOULDER": "TALL",
+  "CAIRN": "SHORT",
+  "CHAIR": "LOW",
+  "FOOTPRINTS": "LOW",
+  "HOT_POOL": "LOW",
+  "ICE": "LOW",
+  "ICE_PILLAR": "TALL",
+  "PUDDLE": "LOW",
+  "SKI_RACK": "SHORT",
+  "SLED": "LOW",
+  "SNOWDRIFT": "LOW",
+  "SNOWMAN": "SHORT",
+  "SNOW_PINE": "TALL",
+  "TENT": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.232,
+  "lowTiles": 13,
+  "openTiles": 56,
+  "lowKinds": [
+   "CHAIR",
+   "FOOTPRINTS",
+   "HOT_POOL",
+   "ICE",
+   "PUDDLE",
+   "SLED",
+   "SNOWDRIFT"
+  ],
+  "roomProps": {
+   "RIDGE": [
+    "SNOWDRIFT"
+   ],
+   "HOT_SPRING": [
+    "FOOTPRINTS",
+    "HOT_POOL"
+   ],
+   "BASE_CAMP": [
+    "BOULDER",
+    "CHAIR",
+    "PUDDLE",
+    "TENT"
+   ],
+   "GLACIER": [
+    "CAIRN",
+    "ICE",
+    "ICE_PILLAR",
+    "SNOWDRIFT"
+   ],
+   "SKI_SLOPE": [
+    "FOOTPRINTS",
+    "SKI_RACK",
+    "SLED",
+    "SNOWMAN",
+    "SNOW_PINE"
+   ],
+   "SUMMIT": [
+    "ICE"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alma",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 3,
+    "cloth": 0
+   },
+   "look": "blonde bun hair, fedora, bowtie",
+   "clue": "Alma stood diagonally next to a man.",
+   "text": "Alma stood diagonally next to a man.",
+   "atoms": [
+    {
+     "kind": "DIAG_P",
+     "subject": "A",
+     "params": {
+      "trait": "MALE",
+      "selfMatch": false
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [],
+    "people": [
+     0
+    ]
+   },
+   "solution": [
+    7,
+    6
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Barnaby",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 7
+   },
+   "look": "bald, mustache",
+   "clue": "Barnaby was beside a stone cairn and was in a corner.",
+   "text": "Barnaby was beside a stone cairn and was in a corner.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "CAIRN"
+     }
+    },
+    {
+     "kind": "CORNER",
+     "subject": "B",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    0
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Clement",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 3
+   },
+   "look": "blonde short hair",
+   "clue": "Clement was alone and was beside a boulder.",
+   "text": "Clement was alone and was beside a boulder.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "BOULDER"
+     }
+    },
+    {
+     "kind": "ALONE",
+     "subject": "C",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    6
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Daphne",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 4
+   },
+   "look": "black bob hair, beret, bowtie",
+   "clue": "Daphne was standing in a snowdrift.",
+   "text": "Daphne was standing in a snowdrift.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "D",
+     "params": {
+      "prop": "SNOWDRIFT"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Esme",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 4
+   },
+   "look": "blonde curly hair",
+   "clue": "Esme was the only person on an ice patch.",
+   "text": "Esme was the only person on an ice patch.",
+   "atoms": [
+    {
+     "kind": "ONLY_ON",
+     "subject": "E",
+     "params": {
+      "prop": "ICE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    7
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Frederick",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "peaked",
+    "facialHair": "goatee",
+    "tie": "scarf",
+    "skin": 3,
+    "cloth": 5
+   },
+   "look": "brown curly hair, round glasses, peaked, goatee, scarf",
+   "clue": "Frederick was next to a path between two areas and was in row 2.",
+   "text": "Frederick was next to a path between two areas and was in row 2.",
+   "atoms": [
+    {
+     "kind": "ROW",
+     "subject": "F",
+     "params": {
+      "index": 1
+     }
+    },
+    {
+     "kind": "DOOR",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gwendolyn",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 6
+   },
+   "look": "black bob hair, horn-rimmed glasses",
+   "clue": "Gwendolyn was beside the Corpse.",
+   "text": "Gwendolyn was beside the Corpse.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "G",
+     "params": {
+      "prop": "CORPSE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    1
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Hector",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "bowtie",
+    "skin": 3,
+    "cloth": 4
+   },
+   "look": "bald, mustache, bowtie",
+   "clue": "Hector stood on bare ground (no chair, hot pool, ice patch, puddle, sled, snowdrift or trail of footprints) and was the only person beside a ski rack.",
+   "text": "Hector stood on bare ground (no chair, hot pool, ice patch, puddle, sled, snowdrift or trail of footprints) and was the only person beside a ski rack.",
+   "atoms": [
+    {
+     "kind": "ONLY_BESIDE",
+     "subject": "H",
+     "params": {
+      "prop": "SKI_RACK"
+     }
+    },
+    {
+     "kind": "BARE",
+     "subject": "H",
+     "params": {
+      "surface": "GROUND",
+      "lows": [
+       "CHAIR",
+       "HOT_POOL",
+       "ICE",
+       "PUDDLE",
+       "SLED",
+       "SNOWDRIFT",
+       "FOOTPRINTS"
+      ]
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    5
+   ]
+  }
+ ],
+ "shadow": [
+  2,
+  0
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Barnaby — “was beside a stone cairn and was in a corner”. The clue fits exactly one tile: r8c1. Place Barnaby at r8c1; Barnaby's sightlines now watch 4 tiles.",
+   "focus": [
+    [
+     7,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ]
+    ],
+    "D": [
+     [
+      7,
+      1
+     ]
+    ],
+    "G": [
+     [
+      4,
+      0
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    7,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      7,
+      0
+     ],
+     "watch": 4
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gwendolyn — “was beside the Corpse”. The clue fits 2 tiles; r5c1 is watched by Barnaby. Only r4c2 is left. Place Gwendolyn at r4c2; Gwendolyn's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     3,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ],
+    "E": [
+     [
+      4,
+      1
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    3,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "B"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      3,
+      1
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Esme — “was the only person on an ice patch”. The clue fits 2 tiles; r5c2 is watched by Gwendolyn. Only r6c8 is left. Place Esme at r6c8; Esme's sightlines now watch 8 tiles.",
+   "focus": [
+    [
+     5,
+     7
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      7
+     ]
+    ],
+    "C": [
+     [
+      3,
+      7
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    5,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "G"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      5,
+      7
+     ],
+     "watch": 8
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Alma stood diagonally next to a man. Polaroid check — men: Barnaby, Clement, Frederick and Hector. None of them can still stand on a diagonal neighbour of r1c1, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r2c1, r2c2, r2c3, r2c4, r2c5, r2c7, r3c1, r3c3, r3c4, r3c6, r4c7, r5c3, r5c6, r5c7, r6c3, r7c3, r7c7, r8c4, r8c6, so Alma cannot be there. Eliminated → Alma: r1c1, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r2c1, r2c2, r2c3, r2c4, r2c5, r2c7, r3c1, r3c3, r3c4, r3c6, r4c7, r5c3, r5c6, r5c7, r6c3, r7c3, r7c7, r8c4, r8c6.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_NO_DIAG",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "DIAG_P",
+        "subject": "A",
+        "params": {
+         "trait": "MALE",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "MALE",
+       "holders": [
+        "B",
+        "C",
+        "F",
+        "H"
+       ]
+      }
+     },
+     "coords": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       5
+      ]
+     ],
+     "suspect": "A"
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Frederick can only be at r2c3 or r2c4, and those tiles all lie on one sightline. Whichever one Frederick takes, the whole stretch is watched, so nobody else can stand on r2c1, r2c6, r2c8. Eliminated → Alma: r2c6, r2c8 · Clement: r2c8 · Daphne: r2c1.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      7
+     ]
+    ],
+    "C": [
+     [
+      1,
+      7
+     ]
+    ],
+    "D": [
+     [
+      1,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "F",
+     "options": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "coords": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Clement — “was alone and was beside a boulder”. The clue fits 3 tiles; r2c8 is watched by Frederick either way; r4c8 is watched by Esme. Only r3c7 is left. Place Clement at r3c7; Clement's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     2,
+     6
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      6
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    2,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          7
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          7
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      2,
+      6
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Daphne — “was standing in a snowdrift”. The clue fits 3 tiles; r2c1 is watched by Frederick either way; r8c2 is watched by Barnaby. Only r1c2 is left. Place Daphne at r1c2; Daphne's sightlines now watch 9 tiles.",
+   "focus": [
+    [
+     0,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      1
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    0,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          7,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "B"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      0,
+      1
+     ],
+     "watch": 9
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Hector was the only person beside a ski rack, so no other suspect (and not S. H. Adow) can be beside any ski rack. Eliminated → Alma: r7c4, r7c6, r8c5.",
+   "focus": [
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     7,
+     4
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "H",
+     "prop": "SKI_RACK"
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alma — “stood diagonally next to a man”. The clue alone allows 56 tiles, but every one except r8c7 is already ruled out — watched or occupied by Barnaby, Gwendolyn, Esme, Daphne, Clement; with none of the men able to stand diagonally next to it; beside a ski rack (only Hector may stand there); watched by Frederick either way. Place Alma at r8c7; Alma's sightlines now watch 6 tiles.",
+   "focus": [
+    [
+     7,
+     6
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      7,
+      4
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    7,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 56,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "B",
+           "G",
+           "E",
+           "D",
+           "C"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_NO_DIAG_PARTNER",
+         "params": {
+          "trait": "MALE"
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_BESIDE",
+         "params": {
+          "prop": "SKI_RACK",
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      7,
+      6
+     ],
+     "watch": 6
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Hector — “stood on bare ground (no chair, hot pool, ice patch, puddle, sled, snowdrift or trail of footprints) and was the only person beside a ski rack”. The clue fits 2 tiles; r8c5 is watched by Alma. Only r7c6 is left. Place Hector at r7c6; Hector's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "H",
+   "cell": [
+    6,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          7,
+          4
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      6,
+      5
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Clement was alone and is placed at the Base Camp, so nobody else can be at the Base Camp. Eliminated → Frederick: r2c4.",
+   "focus": [
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "C",
+     "room": "BASE_CAMP"
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Frederick — “was next to a path between two areas and was in row 2”. The clue fits 2 tiles; r2c4 is at the Base Camp, where Clement is alone. Only r2c3 is left. Place Frederick at r2c3; Frederick's sightlines now watch 14 tiles.",
+   "focus": [
+    [
+     1,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    1,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          3
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_ROOM_OWNER_ALONE",
+         "params": {
+          "room": "BASE_CAMP",
+          "owner": "C"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      1,
+      2
+     ],
+     "watch": 14
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r3c1. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     2,
+     0
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    2,
+    0
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      2,
+      0
+     ]
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 0.667,
+   "hardest_last_pos": 0.909,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.5,
+   "late_elim_gap": 1,
+   "place_push": 3.62,
+   "global_uses": 0,
+   "global_first_t2": false
+  },
+  "flow_arc_ok": true,
+  "shadow_candidates_before_last": 10,
+  "shadow_candidates_before_last_two": 12,
+  "dark_known_at": 8,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 1,
+  "trait_atoms": [
+   "DIAG_P"
+  ],
+  "trait_rules_used": [
+   "trait_filter"
+  ],
+  "trait_load_bearing": true,
+  "biome_props_on_board": [
+   "BOULDER",
+   "CAIRN",
+   "HOT_POOL",
+   "ICE",
+   "ICE_PILLAR",
+   "SKI_RACK",
+   "SLED",
+   "SNOWDRIFT",
+   "SNOWMAN",
+   "SNOW_PINE",
+   "TENT"
+  ],
+  "biome_props_in_clues": [
+   "BOULDER",
+   "CAIRN",
+   "ICE",
+   "SKI_RACK",
+   "SNOWDRIFT"
+  ],
+  "biome_props_load_bearing": [
+   "BOULDER",
+   "CAIRN",
+   "ICE",
+   "SKI_RACK",
+   "SNOWDRIFT"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 34,
+  "rules_used": [
+   "alone",
+   "monopoly",
+   "ray_block",
+   "trait_filter"
+  ],
+  "steps": 12,
+  "difficulty_score": 16,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.7
+ }
+}

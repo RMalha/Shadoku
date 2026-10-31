@@ -1,0 +1,874 @@
+{
+ "id": "tutorial",
+ "title": "The Art of the Ghost",
+ "titleKey": "CASE.tutorial.TITLE",
+ "subtitleKey": "CASE.tutorial.SUBTITLE",
+ "subtitle": "Tutorial · Mansion",
+ "theme": "MANSION",
+ "difficulty": "Tutorial",
+ "tier": "easy",
+ "shape": "rect",
+ "seed": 110,
+ "attempt": 22,
+ "traitMode": "off",
+ "propMode": "require",
+ "castKey": "MAT0505ROR1-110",
+ "puzzleId": "MAT0505ROR1-110",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 6,
+ "zoneWord": "room",
+ "size": 5,
+ "rooms": [
+  [
+   2,
+   2,
+   2,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0
+  ],
+  [
+   1,
+   1,
+   1,
+   0,
+   0
+  ]
+ ],
+ "roomNames": [
+  "Kitchen",
+  "Vault",
+  "Cloakroom",
+  "Music Room"
+ ],
+ "roomIds": [
+  "KITCHEN",
+  "VAULT",
+  "CLOAKROOM",
+  "MUSIC_ROOM"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    2
+   ],
+   [
+    0,
+    3
+   ]
+  ],
+  [
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    2
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   [
+    4,
+    3
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   4,
+   4,
+   "S"
+  ],
+  [
+   0,
+   2,
+   "N"
+  ],
+  [
+   0,
+   4,
+   "N"
+  ]
+ ],
+ "contents": [
+  [
+   "",
+   "BROKEN_GLASS",
+   "",
+   "",
+   ""
+  ],
+  [
+   "PLANT",
+   "",
+   "FOOTPRINTS",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "CORPSE",
+   "",
+   ""
+  ],
+  [
+   "PIANO",
+   "",
+   "",
+   "",
+   "STOVE"
+  ],
+  [
+   "FOOTPRINTS",
+   "SAFE",
+   "",
+   "STOOL",
+   "STOOL"
+  ]
+ ],
+ "multiTile": [],
+ "corpse": [
+  2,
+  2
+ ],
+ "biomeProps": [
+  "PIANO",
+  "PLANT",
+  "SAFE",
+  "STOVE"
+ ],
+ "propClasses": {
+  "BROKEN_GLASS": "LOW",
+  "FOOTPRINTS": "LOW",
+  "PIANO": "PERCH",
+  "PLANT": "TALL",
+  "SAFE": "TALL",
+  "STOOL": "LOW",
+  "STOVE": "SHORT"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.238,
+  "lowTiles": 5,
+  "openTiles": 21,
+  "lowKinds": [
+   "BROKEN_GLASS",
+   "FOOTPRINTS",
+   "STOOL"
+  ],
+  "roomProps": {
+   "CLOAKROOM": [
+    "BROKEN_GLASS"
+   ],
+   "MUSIC_ROOM": [
+    "FOOTPRINTS",
+    "PIANO",
+    "PLANT"
+   ],
+   "KITCHEN": [
+    "STOOL",
+    "STOVE"
+   ],
+   "VAULT": [
+    "FOOTPRINTS",
+    "SAFE"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Astrid",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 0
+   },
+   "look": "blonde wavy hair, horn-rimmed glasses, fedora",
+   "clue": "Astrid sat on a stool.",
+   "text": "Astrid sat on a stool.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "A",
+     "params": {
+      "prop": "STOOL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    4
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Boris",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 6
+   },
+   "look": "brown curly hair, beret",
+   "clue": "Boris was sitting at a piano.",
+   "text": "Boris was sitting at a piano.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "B",
+     "params": {
+      "prop": "PIANO"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    0
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Cordelia",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 2
+   },
+   "look": "brown curly hair, fedora, scarf",
+   "clue": "Cordelia was in front of a door and was in row 1.",
+   "text": "Cordelia was in front of a door and was in row 1.",
+   "atoms": [
+    {
+     "kind": "DOOR",
+     "subject": "C",
+     "params": {}
+    },
+    {
+     "kind": "ROW",
+     "subject": "C",
+     "params": {
+      "index": 0
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    3
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Daphne",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 2
+   },
+   "look": "brown ponytail hair, round glasses",
+   "clue": "Daphne was beside a safe.",
+   "text": "Daphne was beside a safe.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "SAFE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    0
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elliot",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 3,
+    "cloth": 7
+   },
+   "look": "red short hair, beret, necktie",
+   "clue": "Elliot was standing on a trail of footprints.",
+   "text": "Elliot was standing on a trail of footprints.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "E",
+     "params": {
+      "prop": "FOOTPRINTS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    2
+   ]
+  }
+ ],
+ "shadow": [
+  2,
+  1
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Boris — “was sitting at a piano”. The clue fits exactly one tile: r4c1. Place Boris at r4c1; Boris's sightlines now watch 3 tiles.",
+   "focus": [
+    [
+     3,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    3,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      3,
+      0
+     ],
+     "watch": 3
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Astrid can only be at r5c4 or r5c5, and those tiles all lie on one sightline. Whichever one Astrid takes, the whole stretch is watched, so nobody else can stand on r5c3. Eliminated → Daphne: r5c3.",
+   "focus": [
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      4,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ]
+     ],
+     "coords": [
+      [
+       4,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Daphne — “was beside a safe”. The clue fits 2 tiles; r5c3 is watched by Astrid either way. Only r5c1 is left. Place Daphne at r5c1; Daphne's sightlines now watch 0 tiles.",
+   "focus": [
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      4,
+      0
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    4,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          2
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      4,
+      0
+     ],
+     "watch": 0
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elliot — “was standing on a trail of footprints”. The clue fits 2 tiles; r5c1 is taken by Daphne. Only r2c3 is left. Place Elliot at r2c3; Elliot's sightlines now watch 3 tiles.",
+   "focus": [
+    [
+     1,
+     2
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      0,
+      2
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    1,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_TAKEN_BY",
+         "params": {
+          "suspect": "D"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      1,
+      2
+     ],
+     "watch": 3
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Cordelia — “was in front of a door and was in row 1”. The clue fits 2 tiles; r1c3 is watched by Elliot. Only r1c4 is left. Place Cordelia at r1c4; Cordelia's sightlines now watch 8 tiles.",
+   "focus": [
+    [
+     0,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    0,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          0,
+          2
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      0,
+      3
+     ],
+     "watch": 8
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Astrid — “sat on a stool”. The clue fits 2 tiles; r5c4 is watched by Cordelia. Only r5c5 is left. Place Astrid at r5c5; Astrid's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     4,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    4,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          3
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "C"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      4,
+      4
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r3c2. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     2,
+     1
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    2,
+    1
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      2,
+      1
+     ]
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 1.0,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 1.0,
+   "late_elim_gap": 0,
+   "place_push": 0.6,
+   "global_uses": 0,
+   "global_first_t2": false
+  },
+  "flow_arc_ok": true,
+  "shadow_candidates_before_last": 4,
+  "shadow_candidates_before_last_two": 11,
+  "dark_known_at": 5,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "PIANO",
+   "PLANT",
+   "SAFE",
+   "STOVE"
+  ],
+  "biome_props_in_clues": [
+   "PIANO",
+   "SAFE"
+  ],
+  "biome_props_load_bearing": [
+   "PIANO",
+   "SAFE"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 16,
+  "rules_used": [
+   "ray_block"
+  ],
+  "steps": 6,
+  "difficulty_score": 6,
+  "hardest_step_tier": 1,
+  "tall_scale": 1.0
+ },
+ "tutorialLore": [
+  {
+   "title": "The Illusion of Justice",
+   "text": "Ah, S. H. Adow, new blood. The inspector has scribbled scapegoats across the board, a parlour trick we have been feeding him for centuries.",
+   "titleKey": "LORE.tutorial.1.TITLE",
+   "textKey": "LORE.tutorial.1.TEXT"
+  },
+  {
+   "title": "The Ray Block",
+   "text": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+   "titleKey": "LORE.tutorial.2.TITLE",
+   "textKey": "LORE.tutorial.2.TEXT"
+  },
+  {
+   "title": "The Geometry of Panic",
+   "text": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+   "titleKey": "LORE.tutorial.3.TITLE",
+   "textKey": "LORE.tutorial.3.TEXT"
+  },
+  {
+   "title": "The Sanctuary",
+   "text": "Here is the masterstroke: every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows.",
+   "titleKey": "LORE.tutorial.4.TITLE",
+   "textKey": "LORE.tutorial.4.TEXT"
+  }
+ ]
+}

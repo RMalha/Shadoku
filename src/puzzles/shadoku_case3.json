@@ -1,0 +1,1524 @@
+{
+ "id": "case3",
+ "title": "The Lantern in the Pines",
+ "titleKey": "CASE.case3.TITLE",
+ "subtitleKey": "CASE.case3.SUBTITLE",
+ "subtitle": "Easy · Forest",
+ "theme": "FOREST",
+ "difficulty": "Easy",
+ "tier": "easy",
+ "shape": "lwing",
+ "seed": 1303,
+ "attempt": 852,
+ "traitMode": "require",
+ "propMode": "require",
+ "castKey": "FOE0707LRR1-1303",
+ "puzzleId": "FOE0707LRR1-1303",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 16,
+ "zoneWord": "area",
+ "size": 7,
+ "rooms": [
+  [
+   0,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2
+  ],
+  [
+   0,
+   1,
+   1,
+   1,
+   3,
+   3,
+   3
+  ],
+  [
+   0,
+   1,
+   1,
+   1,
+   3,
+   3,
+   3
+  ],
+  [
+   0,
+   1,
+   1,
+   1,
+   3,
+   3,
+   3
+  ],
+  [
+   0,
+   1,
+   1,
+   1,
+   3,
+   3,
+   3
+  ],
+  [
+   -1,
+   -1,
+   4,
+   4,
+   3,
+   3,
+   3
+  ],
+  [
+   -1,
+   -1,
+   4,
+   4,
+   3,
+   3,
+   3
+  ]
+ ],
+ "roomNames": [
+  "Campsite",
+  "Lodge",
+  "Log Bridge",
+  "Birch Wood",
+  "Creek"
+ ],
+ "roomIds": [
+  "CAMPSITE",
+  "LODGE",
+  "LOG_BRIDGE",
+  "BIRCH_WOOD",
+  "CREEK"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    3
+   ],
+   [
+    0,
+    4
+   ]
+  ],
+  [
+   [
+    1,
+    3
+   ],
+   [
+    1,
+    4
+   ]
+  ],
+  [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ],
+  [
+   [
+    5,
+    3
+   ],
+   [
+    5,
+    4
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   0,
+   1,
+   "N"
+  ],
+  [
+   0,
+   2,
+   "N"
+  ]
+ ],
+ "contents": [
+  [
+   "WOODPILE",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "PUDDLE"
+  ],
+  [
+   "STUMP",
+   "TABLE",
+   "LANTERN",
+   "CHAIR",
+   "",
+   "FAIRY_RING",
+   ""
+  ],
+  [
+   "",
+   "",
+   "BEARSKIN",
+   "FOOTPRINTS",
+   "",
+   "",
+   ""
+  ],
+  [
+   "FALLEN_LOG",
+   "CHAIR",
+   "",
+   "FOOTPRINTS",
+   "",
+   "STUMP",
+   ""
+  ],
+  [
+   "TENT",
+   "FIREPLACE",
+   "",
+   "FOOTPRINTS",
+   "",
+   "",
+   ""
+  ],
+  [
+   "VOID",
+   "VOID",
+   "",
+   "FALLEN_LOG",
+   "",
+   "FERN",
+   ""
+  ],
+  [
+   "VOID",
+   "VOID",
+   "CORPSE",
+   "",
+   "",
+   "BIRCH",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  6,
+  2
+ ],
+ "biomeProps": [
+  "BEARSKIN",
+  "BIRCH",
+  "FAIRY_RING",
+  "FALLEN_LOG",
+  "FERN",
+  "FIREPLACE",
+  "LANTERN",
+  "STUMP",
+  "TENT",
+  "WOODPILE"
+ ],
+ "propClasses": {
+  "BEARSKIN": "LOW",
+  "BIRCH": "TALL",
+  "CHAIR": "LOW",
+  "FAIRY_RING": "LOW",
+  "FALLEN_LOG": "LOW",
+  "FERN": "SHORT",
+  "FIREPLACE": "TALL",
+  "FOOTPRINTS": "LOW",
+  "LANTERN": "SHORT",
+  "PUDDLE": "LOW",
+  "STUMP": "LOW",
+  "TABLE": "SHORT",
+  "TENT": "TALL",
+  "WOODPILE": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.324,
+  "lowTiles": 12,
+  "openTiles": 37,
+  "lowKinds": [
+   "BEARSKIN",
+   "CHAIR",
+   "FAIRY_RING",
+   "FALLEN_LOG",
+   "FOOTPRINTS",
+   "PUDDLE",
+   "STUMP"
+  ],
+  "roomProps": {
+   "CAMPSITE": [
+    "FALLEN_LOG",
+    "STUMP",
+    "TENT",
+    "WOODPILE"
+   ],
+   "LOG_BRIDGE": [
+    "PUDDLE"
+   ],
+   "LODGE": [
+    "BEARSKIN",
+    "CHAIR",
+    "FIREPLACE",
+    "FOOTPRINTS",
+    "LANTERN",
+    "TABLE"
+   ],
+   "BIRCH_WOOD": [
+    "BIRCH",
+    "FAIRY_RING",
+    "FERN",
+    "STUMP"
+   ],
+   "CREEK": [
+    "FALLEN_LOG"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Ambrose",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 0
+   },
+   "look": "bald, bowtie",
+   "clue": "Ambrose was beside a table.",
+   "text": "Ambrose was beside a table.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "A",
+     "params": {
+      "prop": "TABLE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    1
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Beatrice",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 3
+   },
+   "look": "blonde ponytail hair",
+   "clue": "Beatrice was beside a fern and was in column 7.",
+   "text": "Beatrice was beside a fern and was in column 7.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "FERN"
+     }
+    },
+    {
+     "kind": "COL",
+     "subject": "B",
+     "params": {
+      "index": 6
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    6
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Clement",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 1
+   },
+   "look": "grey wavy hair, necktie",
+   "clue": "Clement was the only person on a tree stump.",
+   "text": "Clement was the only person on a tree stump.",
+   "atoms": [
+    {
+     "kind": "ONLY_ON",
+     "subject": "C",
+     "params": {
+      "prop": "STUMP"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    5
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Duncan",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "goatee",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 4
+   },
+   "look": "red curly hair, fedora, goatee",
+   "clue": "Duncan was beside a fireplace.",
+   "text": "Duncan was beside a fireplace.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "FIREPLACE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    2
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elliot",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 5
+   },
+   "look": "grey crop hair, peaked, bowtie",
+   "clue": "Elliot was at the Campsite.",
+   "text": "Elliot was at the Campsite.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "E",
+     "params": {
+      "room": "CAMPSITE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    0
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Fiona",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 4
+   },
+   "look": "blonde curly hair, round glasses",
+   "clue": "Fiona could see into another area. She was in the same area as another woman.",
+   "text": "Fiona could see into another area. She was in the same area as another woman.",
+   "atoms": [
+    {
+     "kind": "WITH_P",
+     "subject": "F",
+     "params": {
+      "trait": "FEMALE",
+      "selfMatch": true
+     }
+    },
+    {
+     "kind": "SEE_OTHER_ROOM",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     1
+    ],
+    "people": [
+     0
+    ]
+   },
+   "solution": [
+    1,
+    4
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Greta",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 7
+   },
+   "look": "brown bob hair, bowtie",
+   "clue": "Greta was by the Creek.",
+   "text": "Greta was by the Creek.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "G",
+     "params": {
+      "room": "CREEK"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    3
+   ]
+  }
+ ],
+ "shadow": [
+  3,
+  3
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_BESIDE:STUMP",
+   "text": "Exactly one person was beside a tree stump.",
+   "kind": "EXACTLY_ONE_BESIDE",
+   "params": {
+    "prop": "STUMP"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Beatrice — “was beside a fern and was in column 7”. The clue fits exactly one tile: r6c7. Place Beatrice at r6c7; Beatrice's sightlines now watch 8 tiles.",
+   "focus": [
+    [
+     5,
+     6
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      6
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "G": [
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    5,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      5,
+      6
+     ],
+     "watch": 8
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Greta — “was by the Creek”. The clue fits 3 tiles; r6c3, r6c4 are watched by Beatrice. Only r7c4 is left. Place Greta at r7c4; Greta's sightlines now watch 1 tile.",
+   "focus": [
+    [
+     6,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    6,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          5,
+          2
+         ],
+         [
+          5,
+          3
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "B"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      6,
+      3
+     ],
+     "watch": 1
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Fiona was in the same area as another woman. Polaroid check — other women: Beatrice and Greta. None of them can still reach the Campsite, the Lodge or the Log Bridge, so Fiona cannot be there. Eliminated → Fiona: r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r2c4, r3c1, r3c2, r3c3, r3c4.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_NONE_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "WITH_P",
+        "subject": "F",
+        "params": {
+         "trait": "FEMALE",
+         "selfMatch": true
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL.SELF",
+      "params": {
+       "trait": "FEMALE",
+       "holders": [
+        "B",
+        "G"
+       ]
+      }
+     },
+     "rooms": [
+      "CAMPSITE",
+      "LODGE",
+      "LOG_BRIDGE"
+     ],
+     "suspect": "F"
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Ambrose can only be at r1c2 or r3c2, and those tiles all lie on one sightline. Whichever one Ambrose takes, the whole stretch is watched, so nobody else can stand on r4c2. Eliminated → Duncan: r4c2.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      3,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       1
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Duncan — “was beside a fireplace”. The clue fits 2 tiles; r4c2 is watched by Ambrose either way. Only r5c3 is left. Place Duncan at r5c3; Duncan's sightlines now watch 4 tiles.",
+   "focus": [
+    [
+     4,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    4,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      4,
+      2
+     ],
+     "watch": 4
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Elliot can only be at r2c1, r3c1 or r4c1, and those tiles all lie on one sightline. Whichever one Elliot takes, the whole stretch is watched, so nobody else can stand on r2c1. Eliminated → Clement: r2c1.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "E",
+     "options": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ]
+     ],
+     "coords": [
+      [
+       1,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Clement — “was the only person on a tree stump”. The clue fits 2 tiles; r2c1 is watched by Elliot either way. Only r4c6 is left. Place Clement at r4c6; Clement's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     3,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      5
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    3,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      3,
+      5
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Fiona — “could see into another area. She was in the same area as another woman”. The clue alone allows 18 tiles, but every one except r2c5 is already ruled out — watched or occupied by Clement, Beatrice; in an area none of the women can reach. Place Fiona at r2c5; Fiona's sightlines now watch 8 tiles.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    1,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 18,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "C",
+           "B"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_ZONE_NONE_REACH",
+         "params": {
+          "trait": "FEMALE"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      1,
+      4
+     ],
+     "watch": 8
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Clement was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump. Eliminated → Elliot: r2c1.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      1,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_ON",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "C",
+     "prop": "STUMP"
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was beside a tree stump. Only Elliot can still reach a tile beside a tree stump, so he must stand beside one. Eliminated → Elliot: r4c1.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      3,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH_BESIDE",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_BESIDE",
+      "params": {
+       "prop": "STUMP"
+      }
+     },
+     "owner": "E",
+     "prop": "STUMP"
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elliot — “was at the Campsite”. The clue fits 3 tiles; r2c1 is a tree stump (only Clement may be on one); r4c1 is not beside a tree stump, and only Elliot can be. Only r3c1 is left. Place Elliot at r3c1; Elliot's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     2,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      2,
+      1
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    2,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_MONOPOLY_ON",
+         "params": {
+          "prop": "STUMP",
+          "owner": "C"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_CENSUS_ONLY_BESIDE",
+         "params": {
+          "prop": "STUMP",
+          "owner": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      2,
+      0
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Ambrose — “was beside a table”. The clue fits 2 tiles; r3c2 is watched by Elliot. Only r1c2 is left. Place Ambrose at r1c2; Ambrose's sightlines now watch 7 tiles.",
+   "focus": [
+    [
+     0,
+     1
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    0,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          2,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      0,
+      1
+     ],
+     "watch": 7
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c4. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    3,
+    3
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      3,
+      3
+     ]
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 0.667,
+   "hardest_last_pos": 0.818,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.5,
+   "late_elim_gap": 2,
+   "place_push": 1.29,
+   "global_uses": 1,
+   "global_first_t2": false
+  },
+  "flow_arc_ok": true,
+  "shadow_candidates_before_last": 6,
+  "shadow_candidates_before_last_two": 10,
+  "dark_known_at": 7,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 1,
+  "trait_atoms": [
+   "WITH_P"
+  ],
+  "trait_rules_used": [
+   "trait_filter"
+  ],
+  "trait_load_bearing": true,
+  "G9_trait_load_bearing": true,
+  "biome_props_on_board": [
+   "BEARSKIN",
+   "BIRCH",
+   "FAIRY_RING",
+   "FALLEN_LOG",
+   "FERN",
+   "FIREPLACE",
+   "LANTERN",
+   "STUMP",
+   "TENT",
+   "WOODPILE"
+  ],
+  "biome_props_in_clues": [
+   "FERN",
+   "FIREPLACE",
+   "STUMP"
+  ],
+  "biome_props_load_bearing": [
+   "FERN",
+   "FIREPLACE",
+   "STUMP"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 46,
+  "rules_used": [
+   "global_prop_monopoly",
+   "monopoly",
+   "ray_block",
+   "trait_filter"
+  ],
+  "steps": 12,
+  "difficulty_score": 16,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.85
+ }
+}

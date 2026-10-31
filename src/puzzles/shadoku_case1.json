@@ -1,0 +1,967 @@
+{
+ "id": "case1",
+ "title": "The Scarecrow's Silence",
+ "titleKey": "CASE.case1.TITLE",
+ "subtitleKey": "CASE.case1.SUBTITLE",
+ "subtitle": "Very Easy · Farm",
+ "theme": "FARM",
+ "difficulty": "Very Easy",
+ "tier": "easy",
+ "shape": "rect",
+ "seed": 1101,
+ "attempt": 4,
+ "traitMode": "off",
+ "propMode": "require",
+ "castKey": "FAV0505ROR1-1101",
+ "puzzleId": "FAV0505ROR1-1101",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 9,
+ "zoneWord": "area",
+ "size": 5,
+ "rooms": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   2,
+   2,
+   3,
+   3,
+   3
+  ],
+  [
+   2,
+   2,
+   3,
+   3,
+   3
+  ]
+ ],
+ "roomNames": [
+  "Tool Shed",
+  "Greenhouse",
+  "Garden",
+  "Silo Yard"
+ ],
+ "roomIds": [
+  "TOOL_SHED",
+  "GREENHOUSE",
+  "GARDEN",
+  "SILO_YARD"
+ ],
+ "doors": [
+  [
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    1
+   ]
+  ],
+  [
+   [
+    2,
+    3
+   ],
+   [
+    3,
+    3
+   ]
+  ],
+  [
+   [
+    3,
+    1
+   ],
+   [
+    3,
+    2
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   0,
+   2,
+   "N"
+  ]
+ ],
+ "contents": [
+  [
+   "",
+   "CHAIR",
+   "",
+   "",
+   ""
+  ],
+  [
+   "WHEELBARROW",
+   "",
+   "",
+   "STRAW_MAT",
+   "TABLE"
+  ],
+  [
+   "",
+   "",
+   "STOOL",
+   "CORPSE",
+   "CHAIR"
+  ],
+  [
+   "TREE",
+   "MUD",
+   "",
+   "",
+   "TRACTOR"
+  ],
+  [
+   "MUD",
+   "",
+   "HAYBALE",
+   "",
+   ""
+  ]
+ ],
+ "multiTile": [],
+ "corpse": [
+  2,
+  3
+ ],
+ "biomeProps": [
+  "HAYBALE",
+  "MUD",
+  "STRAW_MAT",
+  "TRACTOR",
+  "TREE",
+  "WHEELBARROW"
+ ],
+ "propClasses": {
+  "CHAIR": "LOW",
+  "HAYBALE": "TALL",
+  "MUD": "LOW",
+  "STOOL": "LOW",
+  "STRAW_MAT": "LOW",
+  "TABLE": "SHORT",
+  "TRACTOR": "TALL",
+  "TREE": "TALL",
+  "WHEELBARROW": "SHORT"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.316,
+  "lowTiles": 6,
+  "openTiles": 19,
+  "lowKinds": [
+   "CHAIR",
+   "MUD",
+   "STOOL",
+   "STRAW_MAT"
+  ],
+  "roomProps": {
+   "TOOL_SHED": [
+    "CHAIR",
+    "STRAW_MAT",
+    "TABLE",
+    "WHEELBARROW"
+   ],
+   "GREENHOUSE": [
+    "CHAIR",
+    "STOOL"
+   ],
+   "GARDEN": [
+    "MUD",
+    "TREE"
+   ],
+   "SILO_YARD": [
+    "HAYBALE",
+    "TRACTOR"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Arthur",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 1
+   },
+   "look": "black curly hair, goatee, bowtie",
+   "clue": "Arthur was beside a table.",
+   "text": "Arthur was beside a table.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "A",
+     "params": {
+      "prop": "TABLE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    4
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Bruno",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 1
+   },
+   "look": "brown crop hair, round glasses, mustache",
+   "clue": "Bruno was alone and was in column 2.",
+   "text": "Bruno was alone and was in column 2.",
+   "atoms": [
+    {
+     "kind": "COL",
+     "subject": "B",
+     "params": {
+      "index": 1
+     }
+    },
+    {
+     "kind": "ALONE",
+     "subject": "B",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    1
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Cordelia",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 6
+   },
+   "look": "brown short hair, necktie",
+   "clue": "Cordelia was beside a tractor.",
+   "text": "Cordelia was beside a tractor.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "TRACTOR"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    4
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dorothy",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 1
+   },
+   "look": "blonde ponytail hair, beret, scarf",
+   "clue": "Dorothy was standing on a mud patch.",
+   "text": "Dorothy was standing on a mud patch.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "D",
+     "params": {
+      "prop": "MUD"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    0
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Edith",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 6
+   },
+   "look": "brown bob hair",
+   "clue": "Edith was sitting on a straw mat.",
+   "text": "Edith was sitting on a straw mat.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "E",
+     "params": {
+      "prop": "STRAW_MAT"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    3
+   ]
+  }
+ ],
+ "shadow": [
+  3,
+  2
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Edith — “was sitting on a straw mat”. The clue fits exactly one tile: r2c4. Place Edith at r2c4; Edith's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     1,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      3
+     ]
+    ],
+    "B": [
+     [
+      1,
+      1
+     ]
+    ],
+    "C": [
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    1,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      1,
+      3
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Arthur — “was beside a table”. The clue fits 2 tiles; r2c4 is taken by Edith. Only r1c5 is left. Place Arthur at r1c5; Arthur's sightlines now watch 4 tiles.",
+   "focus": [
+    [
+     0,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      0,
+      1
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    0,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          3
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_TAKEN_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      0,
+      4
+     ],
+     "watch": 4
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Cordelia — “was beside a tractor”. The clue fits 2 tiles; r4c4 is watched by Edith. Only r5c5 is left. Place Cordelia at r5c5; Cordelia's sightlines now watch 1 tile.",
+   "focus": [
+    [
+     4,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "C",
+   "cell": [
+    4,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          3
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      4,
+      4
+     ],
+     "watch": 1
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Bruno can only be at r3c2, r4c2 or r5c2, and those tiles all lie on one sightline. Whichever one Bruno takes, the whole stretch is watched, so nobody else can stand on r4c2. Eliminated → Dorothy: r4c2.",
+   "focus": [
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      3,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "B",
+     "options": [
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dorothy — “was standing on a mud patch”. The clue fits 2 tiles; r4c2 is watched by Bruno either way. Only r5c1 is left. Place Dorothy at r5c1; Dorothy's sightlines now watch 1 tile.",
+   "focus": [
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      4,
+      1
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    4,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "B"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      4,
+      0
+     ],
+     "watch": 1
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Bruno was alone in the area, but Dorothy must be in the Garden, so Bruno cannot be in it. Eliminated → Bruno: r4c2.",
+   "focus": [
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "B",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "D"
+        ],
+        "room": "GARDEN"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Bruno — “was alone and was in column 2”. The clue fits 5 tiles; r1c2 is watched by Arthur; r2c2 is watched by Edith; r4c2 is in the Garden, which must hold Dorothy; r5c2 is watched by Dorothy. Only r3c2 is left. Place Bruno at r3c2; Bruno's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     2,
+     1
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    2,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          0,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          1,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_ROOM_MUST_HOLD",
+         "params": {
+          "room": "GARDEN",
+          "suspects": [
+           "D"
+          ]
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          1
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "D"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      2,
+      1
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c3. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     2
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    3,
+    2
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      3,
+      2
+     ]
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 0.5,
+   "hardest_last_pos": 0.833,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.0,
+   "late_elim_gap": 1,
+   "place_push": 1.0,
+   "global_uses": 0,
+   "global_first_t2": false
+  },
+  "flow_arc_ok": true,
+  "shadow_candidates_before_last": 5,
+  "shadow_candidates_before_last_two": 6,
+  "dark_known_at": 5,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "HAYBALE",
+   "MUD",
+   "STRAW_MAT",
+   "TRACTOR",
+   "TREE",
+   "WHEELBARROW"
+  ],
+  "biome_props_in_clues": [
+   "MUD",
+   "STRAW_MAT",
+   "TRACTOR"
+  ],
+  "biome_props_load_bearing": [
+   "MUD",
+   "STRAW_MAT",
+   "TRACTOR"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 12,
+  "rules_used": [
+   "alone",
+   "ray_block"
+  ],
+  "steps": 7,
+  "difficulty_score": 9,
+  "hardest_step_tier": 2,
+  "tall_scale": 1.0
+ }
+}

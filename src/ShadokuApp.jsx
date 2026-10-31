@@ -1,0 +1,821 @@
+/* eslint-disable react/prop-types */
+/**
+ * ShadokuApp.jsx — shadoku.net shell (router + site chrome around the game)
+ * ------------------------------------------------------------------------------------------
+ *   /      → <ShadokuHome />                      landing page; the envelope opens into /play
+ *   /play  → the CONTRACTS page: every puzzle in an envelope, grouped by difficulty (click one to open it, click the card to accept)
+ *            (before the initiation is done, /play opens the tutorial instead)
+ *   /play/<puzzle-name>                            one puzzle, e.g. /play/the-art-of-the-ghost (slim top bar + <ShadokuGame />; the URL follows the contract picker)
+ *
+ * The game itself lives in ./ShadokuGame.jsx (it used to be called ShadokuApp.jsx).
+ *
+ * THE MASTER'S INITIATION (the tutorial)
+ *   · The tutorial is the puzzle with id "tutorial" ("The Art of the Ghost"). On a first visit to /play
+ *     (no `shadoku-tutorial-done` in localStorage) the player starts on it and the case picker is locked
+ *     (lock icon, tooltip "Complete The Master's initiation first").
+ *   · A dossier card pinned under the board shows <MasterPolaroid/> and walks the player through a hands-on lesson
+ *     (`buildTutorial`): it IS the puzzle's solution, in the Master's voice. The board starts with the Inspector's scribbles, so step 1 is
+ *     "hold the Eraser to wipe the board"; then pick a suspect → hold-to-place → Hint → drag-paint notes → the ray block with the
+ *     Light Switch → placements → Eraser (one tile, Undo) → the last dark tile → Submit. No tile coordinates anywhere: tiles are named by what they touch.
+ *     Every hands-on step advances ONLY when ShadokuGame's `onGameEvent` reports that the player did it (the pulsing `coach` highlight
+ *     shows where); lore steps have a Continue button. "Skip Initiation" is always there.
+ *   · Solving the tutorial, or skipping, sets `shadoku-tutorial-done` = "1", unlocks the picker and shows the brass
+ *     "Initiation Complete — Enter Case #1 →" button. Picking "The Art of the Ghost" later brings the card back.
+ *   · Wiring uses ShadokuGame's optional props: lockCaseMenu, forcePuzzleId, onGameEvent, onCaseChange, jumpTo (+seedNotes), helpExtra, insetY, fixedCase, onExit, hideLogo.
+ *   · A puzzle's own page (/play/<name>) has NO contract picker (fixedCase): you change puzzles only from the /play contracts page.
+ *   · Hints, the 6 difficulty badges (Tutorial … Expert) and the 12×12 / 14-suspect ergonomics live in ShadokuGame.jsx.
+ *
+ * Routing is window.history.pushState + popstate, with a React-state fallback so it still works in
+ * sandboxed preview iframes where pushState throws.
+ * (Cloudflare Pages: add `public/_redirects` containing `/* /index.html 200` so a deep link to /play works.)
+ *
+ *   <ShadokuApp
+ *     onSignIn={(provider) => profile}        // see ShadokuHome.jsx for the auth hook contracts
+ *     onCheckUsername={(name) => bool}
+ *     onUsernameChange={(name) => void}
+ *     screenshots={[url1, url2, url3]}        // optional: static images instead of the live showcases
+ *     puzzles logoSrc lab                     // forwarded to <ShadokuGame />
+ *   />
+ */
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import ShadokuHome, {
+  ShadokuProviders, SiteHeader, ContractEnvelope, LanguageSelector, useLang, store, pushPath, registerTranslations, translate,
+} from "./ShadokuHome.jsx";
+import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
+import { MasterPolaroid } from "./ShadokuArt.jsx";
+import { localizeHead, trOf } from "./caseText.js";
+import { RelicBadge, RelicModal, ObsidianEnvelope, OmegaFolder, EvidenceBoard, SanctumFolder, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD } from "./umbra.jsx";
+
+export const TUTORIAL_KEY = "shadoku-tutorial-done";
+export const TUTORIAL_PUZZLE = "tutorial"; // "The Art of the Ghost"
+const BAR_H = 61; // px, the site header on /play (the same <SiteHeader/> as the landing page: 40px logo + 2×10px padding + 1px border)
+const useBrowserLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+/* ═════════════════════════ STRINGS (English; other languages fall back to these) ═════════════════════════
+ * The tutorial's own lines are not here: they are ui.tutorial.* keys in src/locales/en.json (see buildTutorial). */
+registerTranslations("en", {
+  "help.replay": "↺ Replay Master U. M. Bra's initiation",
+
+  "tut.badge": "Master U. M. Bra's Initiation",
+  "tut.dossier": "Master U. M. Bra's initiation dossier",
+  "tut.stage": "Stage {n} of {total}",
+  "tut.step": "Step {n} of {total}",
+  "hub.title": "Your contracts",
+    "hub.contracts": "Contracts",
+  "hub.open": "Open the envelope",
+  "hub.close": "Close",
+  "tut.continue": "Continue →",
+  "tut.waiting": "Do it on the board and I will go on.",
+  "tut.doneTitle": "Master U. M. Bra nods",
+  "tut.prev": "← Prev",
+  "tut.next": "Next →",
+  "tut.skip": "Skip Initiation",
+  "tut.minimize": "Minimize",
+  "tut.expand": "Expand",
+  "tut.enter": "Initiation Complete — Choose Your First Contract →",
+  "tut.solved": "Contract fulfilled — and S. H. Adow was in the one tile no eye could reach.",
+  "tut.skipped": "The initiation is behind you. The contracts are open.",
+});
+
+/**
+ * The Master's four lessons, the last fallback for his lines. They come from the locale through the keys the tutorial JSON carries
+ * (`tutorialLore[i].titleKey/textKey` = LORE.tutorial.N.TITLE/TEXT, generated by the engine into en.json); the JSON's own title/text are
+ * only used when no locale has the key, and these when the puzzle has neither. Line 1 matches en.json.
+ */
+export const LORE_FALLBACK = [
+  { title: "The Illusion of Justice", text: "Ah, S. H. Adow, new blood. The inspector has scribbled scapegoats across the board, a parlour trick we have been feeding him for centuries." },
+  { title: "The Ray Block", text: "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat." },
+  { title: "The Geometry of Panic", text: "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other." },
+  { title: "The Sanctuary", text: "Here is the masterstroke: every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows." },
+];
+/** The short how-to-play note of the initiation: t(LORE_NOTE_KEY). */
+export const LORE_NOTE_KEY = "ui.tutorial.loreNote";
+
+/** English through the locale files, for callers without a t(). */
+const ENGLISH = (key, vars) => translate("en", key, vars);
+/** t(key, vars), or `fb` when no locale file (nor the in-code English) has the key. */
+const textOr = (t, key, fb, vars) => {
+  if (!key) return fb;
+  const v = t(key, vars);
+  return typeof v === "string" && v && v !== key ? v : fb;
+};
+
+/** Four { title, text } stages of `puzzle.tutorialLore`: locale (titleKey/textKey) → the JSON's title/text → LORE_FALLBACK (strings and partial entries are tolerated). */
+export function loreOf(puzzle, t = ENGLISH) {
+  const raw = puzzle && Array.isArray(puzzle.tutorialLore) ? puzzle.tutorialLore : [];
+  return LORE_FALLBACK.map((fb, i) => {
+    const e = raw[i];
+    const title = textOr(t, `LORE.tutorial.${i + 1}.TITLE`, fb.title), text = textOr(t, `LORE.tutorial.${i + 1}.TEXT`, fb.text); // no entry: the Master's own line
+    if (typeof e === "string" && e.trim()) return { title, text: e };
+    if (e && typeof e === "object") return { title: textOr(t, e.titleKey, e.title || title), text: textOr(t, e.textKey, e.text || e.body || text) };
+    return { title, text };
+  });
+}
+
+/** "m", "f" or "n" (neutral: S. H. Adow, or a suspect without a known gender): the suffix of a gendered ui.tutorial.* key. */
+const genderOf = (puzzle, id) => {
+  if (id === "S") return "n";
+  const q = ((puzzle && puzzle.suspects) || []).find((x) => x.id === id);
+  const g = String((q && q.gender) || "").toLowerCase();
+  return g === "m" || g === "f" ? g : "n";
+};
+
+/** The tutorial's text lookup: `ui.tutorial.<k>`, plus the suspects' display names and genders. */
+function tutorialText(puzzle, t) {
+  const K = (k, vars) => t(`ui.tutorial.${k}`, vars);
+  const nameOf = (id) => (id === "S" ? K("adow") : (((puzzle && puzzle.suspects) || []).find((q) => q.id === id) || {}).name || id);
+  const gender = (id) => genderOf(puzzle, id);
+  /** A placement nudge for suspect `id`: someone else was placed, or `id` went on the wrong tile. */
+  const wrongPlace = (id) => (e) => (e.type !== "place" ? null
+    : e.id !== id ? K(`nudge.wrongSuspect.${gender(e.id)}`, { name: nameOf(e.id), target: nameOf(id) })
+      : K("nudge.wrongTile", { name: nameOf(id) }));
+  return { K, nameOf, gender, wrongPlace };
+}
+
+/**
+ * The hands-on lesson. Every step is { key, chapter, title, text (the Master's voice), task (what to do), coach (what pulses),
+ * gate(e) → true once the player did it, nudge(e) → a gentle correction, done (the little ✓ line) }. A step with no `gate` is a
+ * reading step (Continue button). Placements, tiles and names are read from the puzzle itself, so the lesson survives edits to it.
+ * Every line is a ui.tutorial.generic.* (or shared ui.tutorial.*) key, read through `t`.
+ */
+export function buildGenericTutorial(puzzle, lore, t = ENGLISH) {
+  if (!puzzle) return [];
+  const { K, nameOf, wrongPlace } = tutorialText(puzzle, t);
+  const sus = new Map((puzzle.suspects || []).map((q) => [q.id, q]));
+  const cn = ([r, c]) => `r${r + 1}c${c + 1}`;
+  const same = (e, r, c) => e.r === r && e.c === c;
+  const isPlace = (e, id, cell) => e.type === "place" && e.id === id && same(e, cell[0], cell[1]);
+  const logicOf = (tx, fb) => String(tx || fb || "").replace(/\s*Place .*$/s, "").trim() || fb || "";
+
+  const fromSteps = (puzzle.steps || []).filter((x) => x.kind === "place" && x.suspect && sus.get(x.suspect));
+  const order = (fromSteps.length ? fromSteps.map((x) => ({ id: x.suspect, text: x.text })) : (puzzle.suspects || []).map((q) => ({ id: q.id, text: q.clue })))
+    .map((o) => ({ id: o.id, cell: sus.get(o.id).solution, logic: logicOf(o.text, sus.get(o.id).clue) }))
+    .filter((o) => Array.isArray(o.cell));
+  const first = order[0] || null;
+  const taken = new Set([...order.map((o) => cn(o.cell)), puzzle.shadow ? cn(puzzle.shadow) : "", puzzle.corpse ? cn(puzzle.corpse) : ""]);
+  let lightCell = null; // an empty floor tile that is neither a suspect's nor the blind spot: safe to switch on by hand
+  for (let r = (puzzle.contents || []).length - 1; r >= 0 && !lightCell; r--) {
+    for (let c = 0; c < puzzle.contents[r].length; c++) if (!puzzle.contents[r][c] && !taken.has(cn([r, c]))) { lightCell = [r, c]; break; }
+  }
+
+  const placeStep = (o, i) => {
+    const name = nameOf(o.id);
+    return {
+      key: `place-${o.id}`, chapter: K(i === 0 ? "chapter.placing" : "chapter.solving"), title: K(i === 0 ? "generic.place.titleFirst" : "generic.place.titleNext", { name }), text: o.logic,
+      task: K("generic.place.task", { name }),
+      coach: { card: o.id, cells: [o.cell] }, gate: (e) => isPlace(e, o.id, o.cell),
+      nudge: wrongPlace(o.id),
+      done: K("done.inPlace", { name }),
+    };
+  };
+
+  const out = [];
+  [0, 1, 2].forEach((i) => out.push({ key: `lore${i}`, chapter: K("chapter.master"), title: lore[i].title, text: lore[i].text, task: null }));
+  if (first) {
+    const name = nameOf(first.id);
+    out.push({ key: "select", chapter: K("chapter.notes"), title: K("generic.select.title"),
+      text: K("generic.select.text"),
+      task: K("common.tapCard", { name }), coach: { card: first.id }, gate: (e) => e.type === "select" && e.id === first.id, done: K("done.isYourTool", { name }) });
+    out.push({ key: "note", chapter: K("chapter.notes"), title: K("generic.note.title"),
+      text: K("generic.note.text"),
+      task: K("generic.note.task"), gate: (e) => e.type === "note", done: K("done.noted") });
+    out.push({ key: "paint", chapter: K("chapter.notes"), title: K("generic.paint.title"),
+      text: K("generic.paint.text"),
+      task: K("generic.paint.task"), gate: (e) => e.type === "note" && e.drag, done: K("done.fineTrail") });
+    out.push({ key: "eraser", chapter: K("chapter.cleaning"), title: K("generic.eraser.title"),
+      text: K("generic.eraser.text"),
+      task: K("generic.eraser.task"), coach: { tool: "eraser" }, gate: (e) => e.type === "tool" && e.tool === "eraser", done: K("done.eraserInHand") });
+    out.push({ key: "erase1", chapter: K("chapter.cleaning"), title: K("generic.erase1.title"),
+      text: K("generic.erase1.text"),
+      task: K("generic.erase1.task"), gate: (e) => e.type === "erase" && !e.all, done: K("done.gone") });
+    out.push({ key: "undo", chapter: K("chapter.cleaning"), title: K("generic.undo.title"),
+      text: K("generic.undo.text"),
+      task: K("generic.undo.task"), coach: { tool: "undo" }, gate: (e) => e.type === "undo", done: K("done.backFromDead") });
+    out.push({ key: "clearall", chapter: K("chapter.cleaning"), title: K("generic.clearall.title"),
+      text: K("generic.clearall.text"),
+      task: K("generic.clearall.task"), coach: { tool: "eraser" }, gate: (e) => e.type === "erase" && e.all, done: K("done.cleanBoard") });
+  }
+  order.forEach((o, i) => {
+    out.push(placeStep(o, i));
+    if (i === 1) {
+      out.push({ key: "lights", chapter: K("chapter.lights"), title: K("generic.lights.title"),
+        text: K("generic.lights.text"),
+        task: null });
+      if (lightCell) {
+        out.push({ key: "lamp", chapter: K("chapter.lights"), title: K("generic.lamp.title"),
+          text: K("generic.lamp.text"),
+          task: K("generic.lamp.task"), coach: { tool: "light" }, gate: (e) => e.type === "tool" && e.tool === "light", done: K("done.switchReady") });
+        out.push({ key: "lamp2", chapter: K("chapter.lights"), title: K("generic.lamp2.title"),
+          text: K("generic.lamp2.text"),
+          task: K("generic.lamp2.task"), coach: { cells: [lightCell], tool: "light" }, gate: (e) => e.type === "light" && e.on && same(e, lightCell[0], lightCell[1]), done: K("done.lit") });
+      }
+      out.push({ key: "hint", chapter: K("chapter.hints"), title: K("generic.hint.title"),
+        text: K("generic.hint.text"),
+        task: K("generic.hint.task"), coach: { tool: "hint" }, gate: (e) => e.type === "hint" && e.open, done: K("done.myCounsel") });
+      out.push({ key: "hint2", chapter: K("chapter.hints"), title: K("generic.hint2.title"),
+        text: K("generic.hint2.text"),
+        task: K("generic.hint2.task"), coach: { tool: "hint" }, gate: (e) => e.type === "hint" && !e.open, done: K("done.backToWork") });
+    }
+  });
+  if (puzzle.shadow) {
+    out.push({ key: "shadow", chapter: K("chapter.sanctuary"), title: lore[3].title,
+      text: lore[3].text,
+      task: K("generic.shadow.task"),
+      coach: { card: "S", cells: [puzzle.shadow] }, gate: (e) => isPlace(e, "S", puzzle.shadow),
+      nudge: (e) => (e.type === "place" && e.id === "S" ? K("nudge.shadow") : null), done: K("done.inShadows") });
+  }
+  out.push({ key: "submit", chapter: K("chapter.verdict"), title: K("generic.submit.title"),
+    text: K("generic.submit.text"),
+    task: K("generic.submit.task"), coach: { tool: "submit" }, gate: (e) => e.type === "solved", done: K("done.contractFulfilled") });
+  return out;
+}
+
+/**
+ * The scripted lesson for "The Art of the Ghost" (V10.1, Puzzle ID MAT0505ROR1-110): it IS the solution of the puzzle, told in the Master's
+ * voice. Every step points at the tiles that matter (by what they are next to, never by coordinates), teaches one control through them, and
+ * carries one of the Master's lines (the puzzle's own `tutorialLore` where it fits). Returns null when the puzzle is not the expected one (the
+ * generic lesson takes over). The board shows every prop class: a piano (PERCH: sit on it, it blocks sight), the stools and footprints (LOW:
+ * stand on them), the stove (SHORT: sight passes over), the safe and the palm (TALL), the Corpse (sight passes over it) and doors (sight
+ * passes through). The walkthrough's one non-placement step is the ray block: Astrid's two stools share one row, so the tile beside the
+ * safe is lit whichever stool she took.
+ * `seen` (3rd gate argument) is the set of "type:id:r,c:d|t" keys of every event since the step began, for steps that need several actions.
+ * The board starts with the Inspector's wrong scribbles on it (see `tutorialSeed`), and step 1 is wiping them off.
+ */
+function scriptedParts(puzzle) {
+  if (!puzzle || !Array.isArray(puzzle.suspects) || !Array.isArray(puzzle.contents) || !Array.isArray(puzzle.rooms) || !puzzle.shadow) return null;
+  const sol = {};
+  puzzle.suspects.forEach((q) => { sol[q.id] = q.solution; });
+  const want = { A: [4, 4], B: [3, 0], C: [0, 3], D: [4, 0], E: [1, 2] };
+  if (Object.keys(want).some((id) => !sol[id] || sol[id][0] !== want[id][0] || sol[id][1] !== want[id][1])) return null;
+  const all = (kind) => { const out = []; for (let r = 0; r < puzzle.contents.length; r++) for (let c = 0; c < puzzle.contents[r].length; c++) if (puzzle.contents[r][c] === kind) out.push([r, c]); return out; };
+  const piano = all("PIANO")[0], safe = all("SAFE")[0], stools = all("STOOL");
+  const same = (a, b) => a[0] === b[0] && a[1] === b[1];
+  if (!piano || !safe || stools.length !== 2 || !same(piano, sol.B)) return null;
+  const width = puzzle.contents[0].length;
+  const room = ([r, c]) => puzzle.rooms[r][c];
+  const free = (r, c) => r >= 0 && c >= 0 && r < puzzle.contents.length && c < width && !puzzle.contents[r][c];
+  // the two sides of the safe inside its own room: Daphne's (on the footprints) and the one Astrid's row lights (the ray block)
+  const sides = [[safe[0], safe[1] - 1], [safe[0], safe[1] + 1]].filter(([r, c]) => c >= 0 && c < width && room([r, c]) === room(safe));
+  const beyond = sides.find((x) => !same(x, sol.D));
+  const litStool = stools.find((x) => !same(x, sol.A));
+  const ray = (puzzle.steps || []).find((x) => x.i18n && x.i18n.ruleKey === "RULE_RAY_BLOCK");
+  const rayHits = ray ? Object.values(ray.elims || {}).flat() : [];
+  if (sides.length !== 2 || !beyond || !litStool || !stools.some((x) => same(x, sol.A)) || !rayHits.some((x) => same(x, beyond))) return null;
+  return { sol, piano, safe, stools, beyond, litStool, free };
+}
+
+/** The Inspector's wrong scribbles that the tutorial board starts with: [[r, c, "letters"], …] (empty unless the scripted lesson applies). */
+export function tutorialSeed(puzzle) {
+  const p = scriptedParts(puzzle);
+  if (!p) return [];
+  const taken = new Set([...Object.values(p.sol), puzzle.shadow].map(([r, c]) => `${r},${c}`));
+  const letters = ["E", "CD", "B", "AE", "D", "C", "B"], out = [];
+  let i = 0;
+  for (let r = 0; r < puzzle.contents.length; r++) {
+    for (let c = 0; c < puzzle.contents[r].length; c++) {
+      if (p.free(r, c) && !taken.has(`${r},${c}`) && i++ % 2 === 0 && out.length < letters.length) out.push([r, c, letters[out.length]]);
+    }
+  }
+  return out;
+}
+
+/** Where `cell` is next to `ref`: "above" | "below" | "left" | "right" (the ui.tutorial.lightTile.<side> sentence names the tile by what it touches). */
+const sideOf = (cell, ref) => {
+  const dr = cell[0] - ref[0], dc = cell[1] - ref[1];
+  return dr < 0 ? "above" : dr > 0 ? "below" : dc < 0 ? "left" : "right";
+};
+
+/** The scripted lesson's lines are ui.tutorial.scripted.* (and shared ui.tutorial.*) keys, read through `t`. */
+function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
+  const p = scriptedParts(puzzle);
+  if (!p) return null;
+  const { sol, safe, stools, beyond, litStool } = p;
+  const { K, nameOf, wrongPlace } = tutorialText(puzzle, t);
+  const same = (e, [r, c]) => e.r === r && e.c === c;
+  const k = (type, id, [r, c], d) => `${type}:${id}:${r},${c}:${d ? "d" : "t"}`;
+  const isPlace = (e, id, cell) => e.type === "place" && e.id === id && same(e, cell);
+  const wrongTile = (type, cells, msg) => (e) => (e.type === type && !e.all && !cells.some((c) => same(e, c)) ? msg : null);
+  const place = (id, chapter, title, text, task) => ({
+    key: `place-${id}`, chapter, title, text, task, coach: { card: id, cells: [sol[id]] },
+    gate: (e) => isPlace(e, id, sol[id]), nudge: wrongPlace(id), done: K("done.inPlace", { name: nameOf(id) }),
+  });
+
+  const [LA, LB, LC, LD] = lore; // the four lore beats (title + the Master's line): the steps below read both, so the lines live in one place
+  const A = nameOf("A"), B = nameOf("B"), C = nameOf("C"), D = nameOf("D"), E = nameOf("E");
+  return [
+    { key: "clearall", chapter: K("chapter.cleanup"), title: LA.title,
+      text: LA.text,
+      task: K("scripted.clearall.task"), coach: { tool: "eraser" },
+      gate: (e) => e.type === "erase" && e.all, done: K("done.spotless") },
+    { key: "select-B", chapter: K("chapter.alibis"), title: K("scripted.selectPiano.title"),
+      text: K("scripted.selectPiano.text", { name: B }),
+      task: K("common.tapCard", { name: B }), coach: { card: "B" },
+      gate: (e) => e.type === "select" && e.id === "B", done: K("done.isYourTool", { name: B }) },
+    place("B", K("chapter.placing"), K("scripted.placeA.title", { name: B }),
+      K("scripted.placePiano.text"),
+      K("scripted.placePiano.task")),
+    { key: "hint", chapter: K("chapter.hints"), title: K("scripted.hint.title"),
+      text: K("scripted.hintPiano.text", { name: B }),
+      task: K("scripted.hint.task"), coach: { tool: "hint" },
+      gate: (e) => e.type === "hint" && e.open, done: K("done.myCounsel") },
+    { key: "hint2", chapter: K("chapter.hints"), title: K("scripted.hint2.title"),
+      text: K("scripted.hint2.text"),
+      task: K("scripted.hint2.task"), coach: { tool: "hint" },
+      gate: (e) => e.type === "hint" && !e.open, done: K("done.backToWork") },
+    { key: "select-A", chapter: K("chapter.notes"), title: LB.title,
+      text: LB.text,
+      task: K("common.tapCard", { name: A }),
+      coach: { card: "A" }, gate: (e) => e.type === "select" && e.id === "A", done: K("done.isYourTool", { name: A }) },
+    { key: "drag-A", chapter: K("chapter.notes"), title: K("scripted.dragB.title"),
+      text: K("scripted.dragStools.text"),
+      task: K("scripted.dragStools.task"), coach: { cells: stools },
+      gate: (e, seen) => stools.every((x) => seen.has(k("note", "A", x, true))),
+      nudge: (e) => (e.type === "note" && !e.drag ? K("scripted.dragStools.nudge") : null), done: K("done.fineTrail") },
+    { key: "lamp", chapter: K("chapter.light"), title: K("scripted.rayLight.title"),
+      text: K("scripted.rayLight.text", { name: A }),
+      task: K("scripted.lamp.task"), coach: { tool: "light" }, gate: (e) => e.type === "tool" && e.tool === "light", done: K("done.switchReady") },
+    { key: "lamp1", chapter: K("chapter.light"), title: K("scripted.rayLamp.title"),
+      text: K("scripted.rayLamp.text"),
+      task: K(`lightTile.${sideOf(beyond, safe)}`, { noun: K("noun.safe") }), coach: { cells: [beyond], tool: "light" },
+      gate: (e) => e.type === "light" && e.on && same(e, beyond), nudge: wrongTile("light", [beyond], K("scripted.rayLamp.nudge")), done: K("done.lit") },
+    place("D", K("chapter.placing"), LC.title,
+      LC.text,
+      K("scripted.placeTask", { name: D })),
+    place("E", K("chapter.placing"), K("scripted.placeFoot.title", { name: E }),
+      K("scripted.placeFoot.text", { name: E, other: D }),
+      K("scripted.placeTask", { name: E })),
+    place("C", K("chapter.placing"), K("scripted.placeDoor.title"),
+      K("scripted.placeDoor.text", { name: C, other: E }),
+      K("scripted.placeTask", { name: C })),
+    { key: "eraser", chapter: K("chapter.cleanup"), title: K("scripted.eraser.title"),
+      text: K("scripted.eraserStool.text", { watcher: C, name: A }),
+      task: K("scripted.eraser.task"), coach: { tool: "eraser" }, gate: (e) => e.type === "tool" && e.tool === "eraser", done: K("done.eraserInHand") },
+    { key: "erase1", chapter: K("chapter.cleanup"), title: K("scripted.erase1.title"),
+      text: K("scripted.erase1.text"),
+      task: K("scripted.eraseStool.task"), coach: { cells: [litStool] },
+      gate: (e) => e.type === "erase" && !e.all && same(e, litStool), nudge: wrongTile("erase", [litStool], K("scripted.eraseStool.nudge")), done: K("done.gone") },
+    { key: "undo", chapter: K("chapter.cleanup"), title: K("scripted.undo.title"),
+      text: K("scripted.undo.text"),
+      task: K("scripted.undo.task"), coach: { tool: "undo" }, gate: (e) => e.type === "undo", done: K("done.backFromDead") },
+    { key: "erase2", chapter: K("chapter.cleanup"), title: K("scripted.erase2.title"),
+      text: K("scripted.eraseStool2.text", { name: C }),
+      task: K("scripted.eraseStool2.task"), coach: { cells: [litStool] },
+      gate: (e) => e.type === "erase" && !e.all && same(e, litStool), nudge: wrongTile("erase", [litStool], K("scripted.eraseStool.nudge")), done: K("done.clean") },
+    place("A", K("chapter.placing"), K("scripted.placeStool.title", { name: A }),
+      K("scripted.placeStool.text"),
+      K("scripted.placeTask", { name: A })),
+    { key: "shadow", chapter: K("chapter.sanctuary"), title: LD.title,
+      text: LD.text,
+      task: K("scripted.shadow.task"), coach: { card: "S", cells: [puzzle.shadow] }, gate: (e) => isPlace(e, "S", puzzle.shadow),
+      nudge: (e) => (e.type === "place" && e.id === "S" ? K("nudge.shadow") : null), done: K("done.inShadows") },
+    { key: "submit", chapter: K("chapter.verdict"), title: K("scripted.submit.title"),
+      text: K("scripted.submit.text"),
+      task: K("scripted.submit.task"), coach: { tool: "submit" }, gate: (e) => e.type === "solved", done: K("done.contractFulfilled") },
+  ];
+}
+
+/** The lesson for a puzzle: the scripted walkthrough of "The Art of the Ghost", or a generic one for any other puzzle pack. `t` = useLang().t (English when omitted). */
+export function buildTutorial(puzzle, lore, t = ENGLISH) {
+  return buildScriptedTutorial(puzzle, lore, t) || buildGenericTutorial(puzzle, lore, t);
+}
+
+/* ═════════════════════════ ROUTER ═════════════════════════ */
+const normalise = (p) => (String(p || "/").replace(/\/+$/, "") || "/");
+export const toView = (p) => { const n = normalise(p); return n === "/play" || n.startsWith("/play/") ? "play" : "home"; };
+/** The address the router follows. Opened from disk (file://, the standalone bundle) the app lives in the hash: index.html#/play/<name>. */
+const currentPath = () => {
+  try {
+    const l = window.location;
+    if (l.protocol === "file:") { const h = l.hash.replace(/^#/, ""); return h.startsWith("/") ? h : "/"; }
+    return l.pathname;
+  } catch { return "/"; }
+};
+
+/** "The Art of the Ghost" → "the-art-of-the-ghost" (accents folded, apostrophes dropped, anything else becomes a dash). */
+export const slugify = (s) => String(s || "").normalize("NFD").replace(/\p{M}+/gu, "").replace(/['’]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+/** The puzzle's address name: its title slug (the id is accepted too when reading a URL). */
+export const puzzleSlug = (q) => (q ? slugify(q.title) || q.id : "");
+/** /play/the-art-of-the-ghost → "the-art-of-the-ghost" · /play → "" */
+export const slugOfPath = (p) => {
+  const m = /^\/play\/([^/]+)/.exec(normalise(p));
+  if (!m) return "";
+  try { return decodeURIComponent(m[1]).toLowerCase(); } catch { return m[1].toLowerCase(); }
+};
+export const findPuzzleBySlug = (pack, slug) => (slug ? pack.find((q) => puzzleSlug(q) === slug) || pack.find((q) => String(q.id).toLowerCase() === slug) || null : null);
+
+/** → [view, go, path, sync]. `go` navigates (and scrolls to the top); `sync` only keeps the address bar in step with the game. */
+export function useRoute() {
+  const [path, setPath] = useState(() => currentPath());
+  useEffect(() => {
+    const onPop = () => setPath(currentPath());
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+  const go = useCallback((to) => {
+    pushPath(to);   // the real URL when the environment allows it …
+    setPath(to);    // … and the state fallback when pushState is blocked
+    try { window.scrollTo(0, 0); } catch { /* noop */ }
+  }, []);
+  const sync = useCallback((to, replace) => {
+    if (replace) { try { window.history.replaceState({}, "", to); } catch { /* sandboxed preview: state only */ } } else pushPath(to);
+    setPath(to);
+  }, []);
+  return [toView(path), go, path, sync];
+}
+
+/* ═════════════════════════ THE MASTER'S DOSSIER ═════════════════════════ */
+function MasterDossier({ step, index, total, finished, skipped, canEnter, ok, nudge, onContinue, onSkip, onEnter, onHeight }) {
+  const { t } = useLang();
+  const read = !!step && !step.gate;
+  const ref = useRef(null);
+
+  // The game is shortened by exactly this card's height, so nothing it needs is ever hidden behind it.
+  useBrowserLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const set = () => onHeight(Math.ceil(el.getBoundingClientRect().height));
+    set();
+    if (typeof ResizeObserver === "undefined") return undefined;
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    return () => { ro.disconnect(); onHeight(0); };
+  }, [onHeight]);
+
+  return (
+    <aside className={`sh-dos${finished ? " fin" : ""}`} ref={ref} role="region" aria-live="polite" aria-label={t("tut.dossier")}>
+      <div className="sh-dos-in">
+        <div className="sh-dos-photo"><MasterPolaroid size={100} /></div>
+        <div className="sh-dos-body">
+          <div className="sh-dos-top">
+            <span className="sh-dos-badge sh-type">{t("tut.badge")}</span>
+            {!finished && step && <span className="sh-dos-step">{t("tut.chapterStep", { chapter: step.chapter, step: t("tut.step", { n: index + 1, total }) })}</span>}
+          </div>
+
+          {finished ? <h2 className="sh-type">{t("tut.doneTitle")}</h2> : step && <h2 className="sh-type">{step.title}</h2>}
+          {!finished && step && (
+            <p className={`sh-dos-text${nudge ? " bad" : ""}`} role={nudge ? "alert" : undefined}>
+              <span className="q">{step.text}</span>{nudge || step.task ? " " : ""}
+              {(nudge || step.task) && <b className="t">{nudge || step.task}</b>}
+            </p>
+          )}
+
+          <div className="sh-dos-actions">
+            {finished ? <span className="sh-dos-win">{skipped ? t("tut.skipped") : t("tut.solved")}</span>
+              : <button type="button" className="sh-dos-skip" onClick={onSkip}>{t("tut.skip")}</button>}
+            <div className="sh-dos-nav">
+              {!finished && !read && <span className="sh-dos-cue" aria-hidden="true">{t("tut.waiting")}</span>}
+              {!finished && read && <button type="button" className="sh-dos-btn go" onClick={onContinue} autoFocus>{t("tut.continue")}</button>}
+              {finished && canEnter && <button type="button" className="sh-enter" onClick={onEnter}>{t("tut.enter")}</button>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+/* ═════════════════════════ /play — THE CONTRACTS PAGE ═════════════════════════ */
+const DIFF_ORDER = ["Tutorial", "Very Easy", "Easy", "Medium", "Hard", "Expert"];
+const pad3 = (n) => String(n).padStart(3, "0");
+
+function ContractsScreen({ go, puzzles, logoSrc }) {
+  const { t } = useLang();
+  const all = useMemo(() => (puzzles ? normalizePuzzles(puzzles) : PUZZLES), [puzzles]);
+  const [bests] = useState(() => readBestTimes(all)); // { id: best seconds } of every fulfilled contract
+  const solved = useMemo(() => new Set(Object.keys(bests)), [bests]);
+  const tick = useUmbraTick(); // an Umbra lock opened: show its contract
+  const pack = useMemo(() => all.filter((q) => isUnlocked(q.id, solved)), [all, solved, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  const [umbra, setUmbra] = useState(null); // "board" | "sanctum" | { relic: caseId } | null
+  const launch = (id) => { const q = all.find((x) => x.id === id); setUmbra(null); if (q) go(`/play/${puzzleSlug(q)}`); };
+  const [picked, setPicked] = useState(null); // puzzle whose envelope is open
+  const numbered = useMemo(() => { let n = 0; return pack.map((q) => ({ q, n: q.id === TUTORIAL_PUZZLE ? 0 : ++n })); }, [pack]);
+  const groups = useMemo(() => {
+    const byDiff = new Map();
+    numbered.forEach((x) => { const d = x.q.difficulty || "Easy"; if (!byDiff.has(d)) byDiff.set(d, []); byDiff.get(d).push(x); });
+    const known = DIFF_ORDER.filter((d) => byDiff.has(d)), extra = [...byDiff.keys()].filter((d) => !DIFF_ORDER.includes(d));
+    return [...known, ...extra].map((d) => [d, byDiff.get(d)]);
+  }, [numbered]);
+  const trf = useMemo(() => trOf(t), [t]);
+  const diffName = (d) => localizeHead({ difficulty: d }, trf).difficulty; // "Very Easy" in the active language (the English name stays the group's id)
+  const labelOf = (n) => (n === 0 ? t("env.caseFile") : t("hub.contractNo", { n: pad3(n) }));
+
+  useEffect(() => {
+    const prev = document.title;
+    document.title = t("page.contracts");
+    return () => { document.title = prev; };
+  }, [t]);
+  useEffect(() => {
+    if (!picked) return undefined;
+    const esc = (e) => { if (e.key === "Escape") setPicked(null); };
+    document.addEventListener("keydown", esc);
+    return () => document.removeEventListener("keydown", esc);
+  }, [picked]);
+
+  return (
+    <div className="sh-hub">
+      <SiteHeader onLogo={() => go("/")} style={{ height: BAR_H }} onNav={go} current="/play" menu={[{ to: "/", label: t("nav.pHome") }, { to: "/play", label: t("nav.pContracts") }]} />
+      <main className="sh-hub-main">
+        <h1 className="sh-type">{t("hub.title")}</h1>
+        {allRelics(solved) && (
+          <section className="sh-hub-umbra" aria-label={t("hub.umbra")}>
+            <h2 className="sh-hub-h"><span className="sh-hub-diff d-umbra">{t("hub.umbra")}</span></h2>
+            <div className="sh-hub-umbra-row">
+              <ObsidianEnvelope onOpen={() => setUmbra("board")} />
+              {solved.has(UMBRA_HARD) && <OmegaFolder onOpen={() => setUmbra("sanctum")} />}
+            </div>
+          </section>
+        )}
+        {groups.map(([diff, items]) => {
+          const done = items.filter((x) => solved.has(x.q.id)).length;
+          return (
+            <section key={diff} className="sh-hub-group" aria-label={diffName(diff)}>
+              <h2 className="sh-hub-h"><span className={`sh-hub-diff d-${String(diff).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{diffName(diff)}</span><small>{t("hub.progress", { done, total: items.length })}</small></h2>
+              <div className="sh-hub-grid">
+                {items.map(({ q, n }) => {
+                  const ok = solved.has(q.id);
+                  return (
+                    <div className="sh-hub-item" key={q.id}>
+                      <ContractEnvelope variant="mini" puzzle={q} label={labelOf(n)} done={ok} best={bests[q.id]} onPick={() => setPicked({ q, n })} />
+                      {ok && <RelicBadge caseId={q.id} onOpen={(id) => setUmbra({ relic: id })} />}
+                      <p className="sh-hub-cap sh-type"><b>{n === 0 ? t("hub.capInitiation") : t("hub.capNo", { n: pad3(n) })}</b>{" "}{ok ? <span className="ok">{t("hub.capDone", { title: localizeHead(q, trf).title, time: fmtTime(bests[q.id]) })}</span> : <span>{t("hub.capInfo", { size: `${q.rooms.length}×${q.rooms[0].length}`, n: q.suspects.length })}</span>}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </main>
+
+      {umbra === "board" && <EvidenceBoard onClose={() => setUmbra(null)} onLaunch={launch} />}
+      {umbra === "sanctum" && <SanctumFolder onClose={() => setUmbra(null)} onLaunch={launch} />}
+      {umbra && umbra.relic && <RelicModal caseId={umbra.relic} onClose={() => setUmbra(null)} />}
+      {picked && (
+        <div className="sh-hub-modal" role="dialog" aria-modal="true" aria-label={labelOf(picked.n)} onPointerDown={(e) => e.target === e.currentTarget && setPicked(null)}>
+          <div className="sh-hub-modal-in">
+            <button type="button" className="sh-hub-x" onClick={() => setPicked(null)} aria-label={t("hub.close")}>×</button>
+            <ContractEnvelope key={picked.q.id} variant="modal" puzzle={picked.q} label={labelOf(picked.n)} done={solved.has(picked.q.id)} best={bests[picked.q.id]} onAccept={() => go(`/play/${puzzleSlug(picked.q)}`)} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═════════════════════════ /play ═════════════════════════ */
+function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
+  const { t } = useLang();
+  const pack = useMemo(() => (puzzles ? normalizePuzzles(puzzles) : PUZZLES), [puzzles]);
+  const tutorial = pack.find((q) => q.id === TUTORIAL_PUZZLE) || null;
+  const tutorialId = tutorial ? tutorial.id : (pack[0] && pack[0].id) || TUTORIAL_PUZZLE; // a pack without the tutorial: teach on its first case
+  const firstCase = pack.find((q) => q.id !== tutorialId) || null; // "Case #1"
+  const lore = useMemo(() => loreOf(tutorial, t), [tutorial, t]); // the Master's lines, from the locale (LORE.tutorial.N.*)
+  const steps = useMemo(() => buildTutorial(tutorial || pack.find((q) => q.id === tutorialId) || null, lore, t), [tutorial, pack, tutorialId, lore, t]);
+  const seedOf = useMemo(() => tutorialSeed(tutorial || pack.find((q) => q.id === tutorialId) || null), [tutorial, pack, tutorialId]); // the Inspector's scribbles
+  const stepRef = useRef(0), stepsRef = useRef(steps), finRef = useRef(false), okTimer = useRef(null), seenRef = useRef(new Set());
+  stepsRef.current = steps;
+
+  const [initiated, setInitiated] = useState(() => !!store.get(TUTORIAL_KEY)); // "shadoku-tutorial-done"
+  const [caseId, setCaseId] = useState(() => (store.get(TUTORIAL_KEY) ? null : tutorialId));
+  const [step, setStep] = useState(0);   // index into `steps`: the lesson only moves on when the player has done the step
+  const [ok, setOk] = useState("");       // the little "✓ Noted." after a step
+  const [nudge, setNudge] = useState(""); // a gentle correction (wrong tile / wrong suspect)
+  stepRef.current = step;
+  const [finished, setFinished] = useState(false); // solved (or skipped) during this visit to the tutorial
+  const [skipped, setSkipped] = useState(false);
+  const slug = slugOfPath(path);
+  const jumpFor = (q, n) => (q.id === tutorialId ? { id: q.id, n, fresh: true, seedNotes: seedOf } : { id: q.id, n }); // the tutorial always opens on a clean, scribbled board
+  const openable = (q) => q && isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack)))); // The Umbra Conspiracy's locked contracts stay closed
+  const umbraTick = useUmbraTick();
+  const [solvedTick, setSolvedTick] = useState(0); // a contract was fulfilled: the conspiracy's locks are re-read
+  const shown = useMemo(() => pack.filter((q) => openable(q)), [pack, umbraTick, solvedTick]); // eslint-disable-line react-hooks/exhaustive-deps -- the case menu skips locked Umbra contracts
+  const [jump, setJump] = useState(() => {
+    const q0 = !store.get(TUTORIAL_KEY) ? null : findPuzzleBySlug(pack, slug); // a deep link; before the initiation everyone starts on the tutorial
+    const q = openable(q0) ? q0 : null;
+    return q ? jumpFor(q, 0) : (store.get(TUTORIAL_KEY) ? null : { id: tutorialId, n: 0, fresh: true, seedNotes: seedOf });
+  });
+  const caseRef = useRef(null), urlSynced = useRef(false);
+  const [cardH, setCardH] = useState(0);
+  const [view, setView] = useState("play"); // the game's own "play" / Inspector ("lab") switch
+
+  useEffect(() => {
+    const prev = document.title;
+    document.title = t("page.play");
+    return () => { document.title = prev; };
+  }, [t]);
+
+  useEffect(() => () => { if (okTimer.current) clearTimeout(okTimer.current); }, []);
+  const advance = useCallback((n) => { stepRef.current = n; seenRef.current = new Set(); setStep(n); setNudge(""); }, []);
+
+  const complete = useCallback((how) => { // solved or skipped: either way the case files unlock for good
+    finRef.current = true;
+    store.set(TUTORIAL_KEY, "1");
+    setInitiated(true);
+    setFinished(true);
+    setSkipped(how === "skip");
+  }, []);
+
+  const onGameEvent = useCallback((e) => {
+    const type = typeof e === "string" ? e : e && e.type;
+    if (type === "view") { setView(e.view === "lab" ? "lab" : "play"); return; }
+    if (type === "solved") setSolvedTick((n) => n + 1);
+    if (type === "solved" && (!e.id || e.id === tutorialId)) { complete("solved"); return; }
+    // the lesson: the current step's gate decides whether the player really did what the Master asked
+    if (finRef.current || caseRef.current !== tutorialId || !e || typeof e !== "object") return;
+    const cur = stepsRef.current[stepRef.current];
+    if (!cur || !cur.gate) return;
+    ['', e.id || ''].forEach((id) => seenRef.current.add(`${e.type}:${id}:${e.r},${e.c}:${e.drag ? "d" : "t"}`)); // once with the suspect, once for any suspect
+    if (cur.gate(e, seenRef.current)) {
+      advance(stepRef.current + 1);
+      setOk(cur.done || "");
+      if (okTimer.current) clearTimeout(okTimer.current);
+      okTimer.current = setTimeout(() => setOk(""), 3200);
+    } else if (cur.nudge) {
+      const n = cur.nudge(e);
+      if (n) setNudge(n);
+    }
+  }, [complete, tutorialId, advance]);
+
+  const onCaseChange = useCallback((id) => {
+    const prev = caseRef.current;
+    caseRef.current = id;
+    setCaseId(id);
+    if (id === tutorialId && prev && prev !== tutorialId) { advance(0); setOk(""); setJump({ id, n: Date.now(), fresh: true, seedNotes: seedOf }); } // back to the tutorial from the picker: a clean lesson
+    const q = pack.find((x) => x.id === id);
+    if (q) { // the address bar follows the case picker: /play/<puzzle-name>
+      const want = `/play/${puzzleSlug(q)}`;
+      if (normalise(currentPath()) !== want) sync(want, !urlSynced.current); // the first sync replaces "/play"; after that every pick is a history step
+      urlSynced.current = true;
+    }
+    if (id !== tutorialId) { setFinished(false); setSkipped(false); finRef.current = false; }
+  }, [tutorialId, pack, sync, advance, seedOf]);
+
+  // Back / Forward (or a pasted link) to another /play/<name>: open that puzzle
+  useEffect(() => {
+    const q = findPuzzleBySlug(pack, slug);
+    if (!q || !initiated || q.id === caseRef.current) return;
+    if (!openable(q)) { go("/play"); return; }
+    setJump(jumpFor(q, Date.now()));
+  }, [slug]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const enter = useCallback(() => go("/play"), [go]); // the contracts page
+
+  const replay = useCallback(() => {
+    advance(0); setOk(""); setFinished(false); setSkipped(false); finRef.current = false;
+    setJump({ id: tutorialId, n: Date.now(), fresh: true, seedNotes: seedOf });
+  }, [tutorialId, advance, seedOf]);
+
+  const helpExtra = useCallback(({ close }) => (
+    <div className="sh-help-extra">
+      <button type="button" className="sk-btn primary" onClick={() => { close(); replay(); }}>{t("help.replay")}</button>
+    </div>
+  ), [replay, t]);
+
+  const showCard = caseId === tutorialId && view === "play"; // the Inspector gets the whole screen
+
+  return (
+    <div className="sh-playroot">
+      <SiteHeader onLogo={() => go("/")} style={{ height: BAR_H }} onNav={go} menu={[{ to: "/", label: t("nav.pHome") }, { to: "/play", label: t("nav.pContracts") }]}
+        extra={initiated ? <a className="sh-btn ghost sm keep" href="/play" onClick={(e) => { e.preventDefault(); go("/play"); }}>✉ {t("hub.contracts")}</a> : null} />
+
+      <ShadokuGame
+        t={t}
+        puzzles={shown} logoSrc={logoSrc} lab={lab}
+        insetY={BAR_H + (showCard ? cardH : 0)}
+        hideLogo fixedCase={initiated} onExit={enter}
+        lockCaseMenu={!initiated}
+        forcePuzzleId={!initiated ? tutorialId : null}
+        onGameEvent={onGameEvent}
+        onCaseChange={onCaseChange}
+        jumpTo={jump}
+        helpExtra={helpExtra}
+        langPicker={<LanguageSelector />}
+        onLaunch={(id) => { const q = pack.find((x) => x.id === id); if (q) setJump(jumpFor(q, Date.now())); }}
+        coach={showCard && !finished && steps[step] ? steps[step].coach || null : null}
+      />
+
+      {showCard && (
+        <MasterDossier step={steps[Math.min(step, steps.length - 1)]} index={Math.min(step, steps.length - 1)} total={steps.length}
+          finished={finished} skipped={skipped} canEnter ok={ok} nudge={nudge}
+          onContinue={() => advance(Math.min(steps.length - 1, step + 1))} onSkip={() => complete("skip")} onEnter={enter} onHeight={setCardH} />
+      )}
+    </div>
+  );
+}
+
+/* ═════════════════════════ ROOT ═════════════════════════ */
+export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange, screenshots, puzzles, logoSrc, lab }) {
+  const [view, go, path, sync] = useRoute();
+  const startSlug = useMemo(() => puzzleSlug((puzzles ? normalizePuzzles(puzzles) : PUZZLES).find((q) => q.id === TUTORIAL_PUZZLE)) || "the-art-of-the-ghost", [puzzles]); // the home envelope opens the tutorial puzzle itself
+  const initiated = !!store.get(TUTORIAL_KEY);
+  const tick = useUmbraTick();
+  const locked = useMemo(() => { // /play/<name> of an Umbra contract that is still locked: show the envelopes instead
+    if (view !== "play" || !initiated) return false;
+    const pack = puzzles ? normalizePuzzles(puzzles) : PUZZLES, q = findPuzzleBySlug(pack, slugOfPath(path));
+    return !!q && !isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack))));
+  }, [view, initiated, puzzles, path, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (locked) sync("/play", true); }, [locked, sync]);
+  const contracts = view === "play" && initiated && (!slugOfPath(path) || locked); // /play after the initiation: the envelopes
+  return (
+    <ShadokuProviders onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}>
+      <style data-shadoku="app">{APP_CSS}</style>
+      {contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
+        : view === "play"
+        ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
+        : <ShadokuHome onPlay={() => go("/play")} onNav={go} onStart={() => go(`/play/${startSlug}`)} screenshots={screenshots} />}
+    </ShadokuProviders>
+  );
+}
+
+const APP_CSS = `
+.sh-playroot{height:100vh;height:100dvh;overflow:hidden;background:#141419;color:#F5F0E6;font-family:'Barlow',system-ui,sans-serif}
+.sh-playroot *{box-sizing:border-box}
+.sh-header a.sh-btn{text-decoration:none}
+
+/* The Master's dossier card: pinned under the game, mahogany + brass like his Polaroid */
+.sh-dos{position:fixed;z-index:45;left:0;right:0;bottom:0;background:linear-gradient(180deg,#2a1d1c,#1d1615);color:#F5F0E6;border-top:2px solid #D99B26;
+  box-shadow:0 -12px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(217,155,38,.25);padding-bottom:env(safe-area-inset-bottom);font-family:'Barlow',system-ui,sans-serif}
+.sh-dos *{box-sizing:border-box}
+.sh-dos-in{max-width:1040px;margin:0 auto;padding:10px 16px 11px;display:flex;gap:14px;align-items:flex-start}
+.sh-dos-photo{flex:0 0 72px;width:72px;margin-top:4px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
+.sh-dos-body{flex:1 1 auto;min-width:0}
+.sh-dos-top{display:flex;align-items:center;gap:4px 10px;flex-wrap:wrap;line-height:1.2}
+.sh-dos-badge{background:#D99B26;color:#1b1305;font-size:12px;padding:2px 8px;border-radius:3px;letter-spacing:.06em}
+.sh-dos-step{font-size:12px;color:#b9ad97;font-weight:600}
+.sh-dos-text{margin:2px 0 6px;font-size:14.5px;line-height:1.42;color:#F5F0E6}
+.sh-dos-text .q{font-style:italic;color:#e9dfc9}.sh-dos-text .t{color:#fff;font-weight:700}
+.sh-dos-text.bad .t{color:#ff9a96}
+.sh-dos-dots{display:flex;gap:2px;margin-inline-start:auto}
+.sh-dos-dots button{width:18px;height:18px;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.sh-dos-dots button:after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#5a4a3e;transition:transform .15s,background .15s}
+.sh-dos-dots button.past:after{background:#D99B26}.sh-dos-dots button.on:after{background:#C83E3B;transform:scale(1.3)}
+.sh-dos h2{margin:1px 0 2px;font-size:clamp(18px,3.2vw,23px);color:#f0b94a;font-weight:400;line-height:1.15}
+.sh-dos-note{margin:0 0 6px;font-size:13px;line-height:1.4;color:#e9d9b8;padding:6px 9px;border-left:3px solid #D99B26;background:rgba(217,155,38,.1);border-radius:0 6px 6px 0}
+.sh-dos-win{font-size:13px;font-weight:700;color:#7fe0b4;line-height:1.3;flex:1 1 220px;min-width:0}
+.sh-dos-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
+.sh-dos-skip{background:none;border:0;padding:2px 0;font:inherit;font-size:12.5px;color:#9d917c;text-decoration:underline;text-decoration-color:rgba(157,145,124,.45);text-underline-offset:3px;cursor:pointer}
+.sh-dos-skip:hover{color:#d9cdb6}
+.sh-dos-nav{display:flex;align-items:center;gap:8px;margin-inline-start:auto;flex-wrap:wrap;justify-content:flex-end}
+.sh-dos-cue{font-size:12px;color:#b9ad97;font-weight:600;margin-right:2px}
+.sh-dos-btn{font:inherit;font-size:13.5px;font-weight:700;padding:6px 13px;border-radius:9px;border:1px solid #5a4a3e;background:rgba(255,255,255,.05);color:#F5F0E6;cursor:pointer}
+.sh-dos-btn:hover:not([disabled]){background:rgba(255,255,255,.1)}
+.sh-dos-btn.go{background:#D99B26;border-color:#f0b94a;color:#1b1305}
+.sh-dos-btn.go:hover:not([disabled]){background:#f0b94a}
+.sh-dos-btn[disabled]{opacity:.38;cursor:default}
+.sh-dos button:focus-visible{outline:2px solid #6fd0ff;outline-offset:2px}
+.sh-enter{padding:7px 14px;border-radius:10px;border:1px solid #f0b94a;background:linear-gradient(180deg,#f0b94a,#D99B26);color:#1b1305;font:inherit;font-size:14px;font-weight:800;letter-spacing:.01em;cursor:pointer;
+  box-shadow:0 0 0 3px rgba(217,155,38,.2),0 6px 18px rgba(0,0,0,.4);animation:shEnter 2.2s ease-in-out infinite}
+.sh-enter:hover{background:#f6c564}
+@keyframes shEnter{0%,100%{box-shadow:0 0 0 3px rgba(217,155,38,.2),0 6px 18px rgba(0,0,0,.4)}50%{box-shadow:0 0 0 6px rgba(217,155,38,.32),0 6px 22px rgba(217,155,38,.25)}}
+/* the contracts page */
+.sh-hub{min-height:100vh;min-height:100dvh;background:radial-gradient(ellipse 80% 30% at 50% -6%,rgba(217,155,38,.14),transparent 70%),#141419;color:#F5F0E6;font-family:'Barlow',system-ui,sans-serif}
+.sh-hub *{box-sizing:border-box}
+.sh-hub-main{max-width:1100px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(14px,3vw,28px) 70px}
+.sh-hub-main h1{margin:0 0 clamp(18px,3vw,34px);font-size:clamp(28px,5vw,44px);font-weight:400;text-align:center;line-height:1.1}
+.sh-hub-group{margin-top:clamp(22px,4vw,40px)}
+.sh-hub-h{display:flex;align-items:center;gap:12px;margin:0 0 clamp(8px,2vw,16px);padding-bottom:8px;border-bottom:1px solid #30303f;font-size:16px;font-weight:400}
+.sh-hub-h small{color:#8d8a80;font-size:13px;font-weight:600;letter-spacing:.04em}
+.sh-hub-diff{font-family:'Special Elite','Courier New',monospace;font-size:clamp(17px,2.4vw,21px);padding:3px 14px;border-radius:4px;background:#2a2a36;color:#F5F0E6;border-left:4px solid #D99B26}
+.sh-hub-diff.d-tutorial{border-color:#8ea0ff}.sh-hub-diff.d-very-easy{border-color:#58b784}.sh-hub-diff.d-easy{border-color:#8fcf5a}.sh-hub-diff.d-medium{border-color:#D99B26}.sh-hub-diff.d-hard{border-color:#e0743a}.sh-hub-diff.d-expert{border-color:#C83E3B}
+.sh-hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:clamp(14px,2.4vw,26px) clamp(14px,2.4vw,24px)}
+.sh-hub-item{min-width:0}
+.sh-hub-item .sh-env-cq.mini{border-radius:8px}
+.sh-hub-cap{margin:4px 0 0;text-align:center;font-size:13.5px;color:#cfc8b6;line-height:1.3}.sh-hub-cap b{color:#D99B26;font-weight:400}.sh-hub-cap .ok{color:#7fe0b4}
+.sh-hub-item{position:relative}
+.sh-hub-umbra{margin:0 0 26px}.sh-hub-umbra-row{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+.sh-hub-diff.d-umbra{color:#e9e6f2;background:linear-gradient(135deg,#2b2933,#0d0c12);border-color:#8a8598}
+.sh-hub-modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;overflow:auto;background:rgba(8,8,12,.82);animation:shHubFade .2s ease}
+@keyframes shHubFade{from{opacity:0}to{opacity:1}}
+.sh-hub-modal-in{position:relative;width:min(560px,100%);padding:0 0 30px}
+.sh-hub-x{position:absolute;top:-6px;right:-4px;z-index:5;width:38px;height:38px;border-radius:50%;border:1px solid #5a4a3e;background:#1d1615;color:#F5F0E6;font-size:22px;line-height:1;cursor:pointer}
+.sh-hub-x:hover{background:#2a1d1c}
+.sh-help-extra{margin-top:12px;display:flex;justify-content:flex-end}
+.sh-help-extra .sk-btn{padding:8px 14px}
+@media (max-width:520px){.sh-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.sh-hub-cap{font-size:12px}}
+@media (max-width:640px){
+  .sh-dos-in{padding:8px 12px 9px;gap:10px}
+  .sh-dos-photo{flex-basis:56px;width:56px}
+  .sh-dos-text{font-size:13.5px;line-height:1.38;margin-bottom:4px}
+  .sh-dos-note{font-size:12px;padding:4px 7px}
+  .sh-dos-cue{display:none}
+  .sh-dos.fin .sh-dos-note{display:none}
+  .sh-enter{flex:1 1 100%;padding:9px 12px;font-size:14px}
+  .sh-dos-btn{padding:5px 11px;font-size:13px}
+  .sh-dos h2{margin:3px 0 2px}
+}
+.sh-dos-photo svg{width:100%!important;height:auto!important}
+/* desktop: a taller, fixed-height card (so the board does not resize from step to step) with room for the Master's whole line */
+@media (min-width:961px){
+  .sh-dos{height:clamp(210px,26vh,280px)}
+  .sh-dos-in{height:100%;max-width:1120px;padding:16px 24px 16px;gap:20px}
+  .sh-dos-photo{flex-basis:96px;width:96px;margin-top:2px}
+  .sh-dos-body{display:flex;flex-direction:column;min-height:0;height:100%}
+  .sh-dos h2{font-size:clamp(21px,2.2vw,27px);margin:3px 0 4px}
+  .sh-dos-text{flex:1 1 auto;min-height:0;overflow-y:auto;font-size:16.5px;line-height:1.5;margin:2px 0 8px;scrollbar-width:thin}
+  .sh-dos-actions{margin-top:auto;flex:0 0 auto}
+  .sh-dos-skip{font-size:13.5px}
+  .sh-dos-btn{font-size:14.5px;padding:8px 16px}
+  .sh-enter{font-size:15px;padding:9px 18px}
+}
+@media (prefers-reduced-motion:reduce){.sh-enter{animation:none}}
+`;

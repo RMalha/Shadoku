@@ -1,0 +1,4687 @@
+{
+ "id": "case6",
+ "title": "Last Call at the Jazz Club",
+ "titleKey": "CASE.case6.TITLE",
+ "subtitleKey": "CASE.case6.SUBTITLE",
+ "subtitle": "Medium · Street",
+ "theme": "STREET",
+ "difficulty": "Medium",
+ "tier": "medium",
+ "shape": "courtyard",
+ "seed": 1606,
+ "attempt": 12,
+ "traitMode": "off",
+ "propMode": "require",
+ "castKey": "STM0909COR1-1606",
+ "puzzleId": "STM0909COR1-1606",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 62,
+ "zoneWord": "area",
+ "size": 9,
+ "rooms": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   1,
+   1,
+   1,
+   5,
+   -1,
+   2,
+   2,
+   3,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   5,
+   -1,
+   2,
+   2,
+   3,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   5,
+   -1,
+   5,
+   5,
+   3,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   5,
+   -1,
+   5,
+   5,
+   3,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   5,
+   5,
+   5,
+   5,
+   3,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6
+  ]
+ ],
+ "roomNames": [
+  "Pool Hall",
+  "Laundromat",
+  "Bus Stop",
+  "Alleyway",
+  "Pawn Shop",
+  "Courtyard",
+  "Diner"
+ ],
+ "roomIds": [
+  "POOL_HALL",
+  "LAUNDROMAT",
+  "BUS_STOP",
+  "ALLEYWAY",
+  "PAWN_SHOP",
+  "COURTYARD",
+  "DINER"
+ ],
+ "doors": [
+  [
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ],
+  [
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    2
+   ]
+  ],
+  [
+   [
+    1,
+    7
+   ],
+   [
+    2,
+    7
+   ]
+  ],
+  [
+   [
+    1,
+    8
+   ],
+   [
+    2,
+    8
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    2,
+    6
+   ],
+   [
+    2,
+    7
+   ]
+  ],
+  [
+   [
+    3,
+    6
+   ],
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   [
+    4,
+    6
+   ],
+   [
+    4,
+    7
+   ]
+  ],
+  [
+   [
+    5,
+    7
+   ],
+   [
+    5,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    4
+   ],
+   [
+    7,
+    4
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ]
+  ],
+  [
+   [
+    6,
+    6
+   ],
+   [
+    7,
+    6
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    6,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    7
+   ]
+  ],
+  [
+   [
+    7,
+    1
+   ],
+   [
+    8,
+    1
+   ]
+  ],
+  [
+   [
+    7,
+    5
+   ],
+   [
+    8,
+    5
+   ]
+  ],
+  [
+   [
+    7,
+    6
+   ],
+   [
+    8,
+    6
+   ]
+  ],
+  [
+   [
+    7,
+    8
+   ],
+   [
+    8,
+    8
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   0,
+   1,
+   "N"
+  ],
+  [
+   1,
+   8,
+   "E"
+  ]
+ ],
+ "contents": [
+  [
+   "CHAIR",
+   "CHAIR",
+   "",
+   "",
+   "",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "JUKEBOX",
+   "",
+   "BILLIARD_TABLE",
+   "BILLIARD_TABLE",
+   "",
+   ""
+  ],
+  [
+   "CHAIR",
+   "",
+   "",
+   "",
+   "VOID",
+   "POSTER_COLUMN",
+   "BENCH",
+   "",
+   "BROKEN_GLASS"
+  ],
+  [
+   "WASHER",
+   "",
+   "",
+   "",
+   "VOID",
+   "",
+   "BENCH",
+   "DUMPSTER",
+   "TRAPDOOR"
+  ],
+  [
+   "",
+   "CORPSE",
+   "",
+   "PHONE_BOOTH",
+   "VOID",
+   "FOUNTAIN",
+   "BENCH",
+   "PUDDLE",
+   "DISPLAY_CASE"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "VOID",
+   "",
+   "STATUE",
+   "GRATE",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "STREETLIGHT",
+   "MANHOLE",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "CHAIR",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "CHAIR",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "PHONE_BOOTH",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ]
+   ]
+  },
+  {
+   "kind": "BILLIARD_TABLE",
+   "cells": [
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  4,
+  1
+ ],
+ "biomeProps": [
+  "BENCH",
+  "BILLIARD_TABLE",
+  "DISPLAY_CASE",
+  "DUMPSTER",
+  "FOUNTAIN",
+  "GRATE",
+  "JUKEBOX",
+  "MANHOLE",
+  "PHONE_BOOTH",
+  "POSTER_COLUMN",
+  "STATUE",
+  "STREETLIGHT",
+  "WASHER"
+ ],
+ "propClasses": {
+  "BENCH": "LOW",
+  "BILLIARD_TABLE": "SHORT",
+  "BROKEN_GLASS": "LOW",
+  "CHAIR": "LOW",
+  "DISPLAY_CASE": "SHORT",
+  "DUMPSTER": "TALL",
+  "FOOTPRINTS": "LOW",
+  "FOUNTAIN": "TALL",
+  "GRATE": "LOW",
+  "JUKEBOX": "SHORT",
+  "MANHOLE": "LOW",
+  "PHONE_BOOTH": "TALL",
+  "POSTER_COLUMN": "TALL",
+  "PUDDLE": "LOW",
+  "STATUE": "TALL",
+  "STREETLIGHT": "TALL",
+  "TRAPDOOR": "LOW",
+  "WASHER": "SHORT"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.25,
+  "lowTiles": 16,
+  "openTiles": 64,
+  "lowKinds": [
+   "BENCH",
+   "BROKEN_GLASS",
+   "CHAIR",
+   "FOOTPRINTS",
+   "GRATE",
+   "MANHOLE",
+   "PUDDLE",
+   "TRAPDOOR"
+  ],
+  "roomProps": {
+   "POOL_HALL": [
+    "BILLIARD_TABLE",
+    "CHAIR",
+    "FOOTPRINTS",
+    "JUKEBOX"
+   ],
+   "LAUNDROMAT": [
+    "CHAIR",
+    "WASHER"
+   ],
+   "BUS_STOP": [
+    "BENCH",
+    "POSTER_COLUMN"
+   ],
+   "PAWN_SHOP": [
+    "BROKEN_GLASS",
+    "DISPLAY_CASE",
+    "TRAPDOOR"
+   ],
+   "ALLEYWAY": [
+    "DUMPSTER",
+    "GRATE",
+    "PUDDLE"
+   ],
+   "COURTYARD": [
+    "BENCH",
+    "FOUNTAIN",
+    "MANHOLE",
+    "PHONE_BOOTH",
+    "STATUE",
+    "STREETLIGHT"
+   ],
+   "DINER": [
+    "CHAIR",
+    "PHONE_BOOTH"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alma",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 7
+   },
+   "look": "blonde long hair, horn-rimmed glasses",
+   "clue": "Alma was in column 6 and was west of Felix.",
+   "text": "Alma was in column 6 and was west of Felix.",
+   "atoms": [
+    {
+     "kind": "WEST_OF",
+     "subject": "A",
+     "params": {
+      "other": "F"
+     }
+    },
+    {
+     "kind": "COL",
+     "subject": "A",
+     "params": {
+      "index": 5
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    5
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Beatrice",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 1
+   },
+   "look": "brown short hair",
+   "clue": "Beatrice was exactly one row south of Imogen.",
+   "text": "Beatrice was exactly one row south of Imogen.",
+   "atoms": [
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "B",
+     "params": {
+      "other": "I",
+      "dir": "S",
+      "dist": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    8
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Celeste",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 2
+   },
+   "look": "grey bun hair, horn-rimmed glasses",
+   "clue": "Celeste was in the same area as Elliot.",
+   "text": "Celeste was in the same area as Elliot.",
+   "atoms": [
+    {
+     "kind": "SAME_ROOM",
+     "subject": "C",
+     "params": {
+      "other": "E"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    6
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Delphine",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 0
+   },
+   "look": "black bob hair",
+   "clue": "Delphine was in front of a doorway.",
+   "text": "Delphine was in front of a doorway.",
+   "atoms": [
+    {
+     "kind": "DOOR",
+     "subject": "D",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elliot",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "scarf",
+    "skin": 3,
+    "cloth": 6
+   },
+   "look": "blonde crop hair, horn-rimmed glasses, goatee, scarf",
+   "clue": "Elliot was beside an advertising column and was south of Gilbert.",
+   "text": "Elliot was beside an advertising column and was south of Gilbert.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "E",
+     "params": {
+      "prop": "POSTER_COLUMN"
+     }
+    },
+    {
+     "kind": "SOUTH_OF",
+     "subject": "E",
+     "params": {
+      "other": "G"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    5
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Felix",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 2,
+    "cloth": 3
+   },
+   "look": "black curly hair, horn-rimmed glasses, necktie",
+   "clue": "Felix was in the Pool Hall and was in a corner.",
+   "text": "Felix was in the Pool Hall and was in a corner.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "F",
+     "params": {
+      "room": "POOL_HALL"
+     }
+    },
+    {
+     "kind": "CORNER",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    8
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gilbert",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 3
+   },
+   "look": "blonde short hair",
+   "clue": "Gilbert was in the same area as the Corpse and stood on bare pavement (no bench, chair, manhole cover, patch of broken glass, puddle, steam grate, trail of footprints or trapdoor).",
+   "text": "Gilbert was in the same area as the Corpse and stood on bare pavement (no bench, chair, manhole cover, patch of broken glass, puddle, steam grate, trail of footprints or trapdoor).",
+   "atoms": [
+    {
+     "kind": "CORPSE_ROOM",
+     "subject": "G",
+     "params": {}
+    },
+    {
+     "kind": "BARE",
+     "subject": "G",
+     "params": {
+      "surface": "PAVEMENT",
+      "lows": [
+       "BENCH",
+       "CHAIR",
+       "MANHOLE",
+       "BROKEN_GLASS",
+       "PUDDLE",
+       "GRATE",
+       "FOOTPRINTS",
+       "TRAPDOOR"
+      ]
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    2
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Horace",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "goatee",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 4
+   },
+   "look": "bald, peaked, goatee",
+   "clue": "Horace was alone.",
+   "text": "Horace was alone.",
+   "atoms": [
+    {
+     "kind": "ALONE",
+     "subject": "H",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    8,
+    1
+   ]
+  },
+  {
+   "id": "I",
+   "name": "Imogen",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 3
+   },
+   "look": "brown wavy hair, round glasses, beret",
+   "clue": "Imogen was in the Alleyway.",
+   "text": "Imogen was in the Alleyway.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "I",
+     "params": {
+      "room": "ALLEYWAY"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "I",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    7
+   ]
+  },
+  {
+   "id": "J",
+   "name": "Julian",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "goatee",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 7
+   },
+   "look": "blonde short hair, beret, goatee, scarf",
+   "clue": "Julian was the only person beside a lamppost and was east of Delphine.",
+   "text": "Julian was the only person beside a lamppost and was east of Delphine.",
+   "atoms": [
+    {
+     "kind": "ONLY_BESIDE",
+     "subject": "J",
+     "params": {
+      "prop": "STREETLIGHT"
+     }
+    },
+    {
+     "kind": "EAST_OF",
+     "subject": "J",
+     "params": {
+      "other": "D"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "J",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    3
+   ]
+  }
+ ],
+ "shadow": [
+  3,
+  3
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_ON:CHAIR",
+   "text": "Exactly one person was on a chair.",
+   "kind": "EXACTLY_ONE_ON",
+   "params": {
+    "prop": "CHAIR"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Felix can only be at r1c1 or r1c9, and those tiles all lie on one sightline. Whichever one Felix takes, the whole stretch is watched, so nobody else can stand on r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r1c9. Eliminated → Alma: r1c6 · Beatrice: r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r1c9 · Celeste: r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r1c9 · Horace: r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r1c9.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      5
+     ]
+    ],
+    "B": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ]
+    ],
+    "C": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ]
+    ],
+    "H": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "F",
+     "options": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       8
+      ]
+     ],
+     "coords": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Julian was the only person beside a lamppost, so no other suspect (and not S. H. Adow) can be beside any lamppost. Eliminated → Beatrice: r6c4, r7c5 · Celeste: r6c4, r7c5 · Delphine: r7c5 · Horace: r6c4, r7c5.",
+   "focus": [
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "C": [
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "D": [
+     [
+      6,
+      4
+     ]
+    ],
+    "H": [
+     [
+      5,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "J",
+     "prop": "STREETLIGHT"
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Horace was alone in the area, but Felix must be in the Pool Hall, Gilbert must be in the Laundromat, Elliot must be at the Bus Stop, Imogen must be in the Alleyway and Julian must be in the Courtyard, so Horace cannot be in any of them. Eliminated → Horace: r2c1, r2c2, r2c3, r2c5, r2c8, r2c9, r3c1, r3c2, r3c3, r3c4, r3c7, r3c8, r4c2, r4c3, r4c4, r4c6, r4c7, r5c1, r5c3, r5c7, r5c8, r6c1, r6c2, r6c3, r6c6, r6c8, r7c1, r7c2, r7c3, r7c6, r7c7, r7c8, r8c1, r8c2, r8c3, r8c4, r8c5, r8c6, r8c7, r8c8, r8c9.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_MANY",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "H",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "F"
+        ],
+        "room": "POOL_HALL"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "G"
+        ],
+        "room": "LAUNDROMAT"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "E"
+        ],
+        "room": "BUS_STOP"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "I"
+        ],
+        "room": "ALLEYWAY"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "J"
+        ],
+        "room": "COURTYARD"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Alma was west of Felix. Alma is in column 6 at the earliest, so Felix must be in columns 7–9. Eliminated → Felix: r1c1.",
+   "focus": [
+    [
+     0,
+     0
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "A",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "A",
+        "line": 5,
+        "y": "F",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 6,
+          "to": 8
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Felix — “was in the Pool Hall and was in a corner”. The clue fits 2 tiles; r1c1 is not east of any tile left for Alma. Only r1c9 is left. Place Felix at r1c9; Felix's sightlines now watch 13 tiles.",
+   "focus": [
+    [
+     0,
+     8
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      8
+     ]
+    ],
+    "C": [
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      8
+     ]
+    ],
+    "D": [
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      8
+     ]
+    ],
+    "H": [
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      8
+     ]
+    ]
+   },
+   "suspect": "F",
+   "cell": [
+    0,
+    8
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          0,
+          0
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_NOT_DIR_OF_ANY.E",
+         "params": {
+          "other": "A"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      0,
+      8
+     ],
+     "watch": 13
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Horace was alone and can only be in the Diner, so nobody else can be in the Diner. Eliminated → Alma: r9c6 · Beatrice: r9c1, r9c2, r9c3, r9c4, r9c5, r9c6, r9c7, r9c9 · Celeste: r9c1, r9c2, r9c3, r9c4, r9c5, r9c6, r9c7, r9c9 · Delphine: r9c2, r9c6, r9c7, r9c9.",
+   "focus": [
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      5
+     ]
+    ],
+    "B": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      4
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      8
+     ]
+    ],
+    "C": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      4
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      8
+     ]
+    ],
+    "D": [
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "H",
+     "room": "DINER"
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Beatrice was exactly one row south of Imogen. Imogen can only be in rows 3, 5, 6 or 7, which leaves Beatrice rows 4, 6, 7 or 8. Eliminated → Beatrice: r2c1, r2c2, r2c3, r2c5, r2c8, r3c1, r3c2, r3c3, r3c4, r3c7, r3c8, r5c1, r5c3, r5c7, r5c8.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "B",
+        "params": {
+         "other": "I",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "I",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           2,
+           4,
+           5,
+           6
+          ]
+         }
+        },
+        "x": "B",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           3,
+           5,
+           6,
+           7
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Elliot was south of Gilbert. Elliot can reach row 4 at most, so Gilbert must be in rows 1–3; Gilbert is in row 3 at the earliest, so Elliot must be in rows 4–9. Eliminated → Elliot: r3c7 · Gilbert: r4c2, r4c3, r5c1, r5c3, r6c1, r6c2, r6c3, r7c1, r7c2, r7c3, r8c2, r8c3, r8c4, r8c5, r8c6, r8c7, r8c8, r8c9.",
+   "focus": [
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      2,
+      6
+     ]
+    ],
+    "G": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "SOUTH_OF",
+        "subject": "E",
+        "params": {
+         "other": "G"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
+       "params": {
+        "y": "E",
+        "line": 3,
+        "x": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 2
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_COMPASS_MIN.ROW",
+       "params": {
+        "x": "G",
+        "line": 2,
+        "y": "E",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 3,
+          "to": 8
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elliot — “was beside an advertising column and was south of Gilbert”. The clue fits 2 tiles; r3c7 is not south of any tile left for Gilbert. Only r4c6 is left. Place Elliot at r4c6; Elliot's sightlines now watch 1 tile.",
+   "focus": [
+    [
+     3,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      3,
+      5
+     ]
+    ],
+    "B": [
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "C": [
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "D": [
+     [
+      3,
+      6
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    3,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          2,
+          6
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_NOT_DIR_OF_ANY.S",
+         "params": {
+          "other": "G"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      3,
+      5
+     ],
+     "watch": 1
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Gilbert can only be at r3c2 or r3c3, and those tiles all lie on one sightline. Whichever one Gilbert takes, the whole stretch is watched, so nobody else can stand on r3c1, r3c2, r3c3, r3c4. Eliminated → Celeste: r3c1, r3c2, r3c3, r3c4 · Delphine: r3c1, r3c3, r3c4.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "D": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ]
+     ],
+     "coords": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Alma can only be at r6c6, r7c6 or r8c6, and those tiles all lie on one sightline. Whichever one Alma takes, the whole stretch is watched, so nobody else can stand on r6c6, r7c6, r8c6, r9c6. Eliminated → Beatrice: r6c6, r7c6, r8c6 · Celeste: r6c6, r7c6, r8c6 · Delphine: r7c6, r8c6 · Horace: r9c6.",
+   "focus": [
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     8,
+     5
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "C": [
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "D": [
+     [
+      6,
+      5
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "H": [
+     [
+      8,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       5
+      ]
+     ],
+     "coords": [
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Julian was east of Delphine. Julian can reach column 5 at most, so Delphine must be in columns 1–4. Eliminated → Delphine: r2c8, r3c7, r3c8, r5c7, r5c8, r6c8, r7c7, r7c8, r8c5, r8c7, r8c8, r8c9.",
+   "focus": [
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "J",
+       "atom": {
+        "kind": "EAST_OF",
+        "subject": "J",
+        "params": {
+         "other": "D"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "params": {
+        "y": "J",
+        "line": 4,
+        "x": "D",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 0,
+          "to": 3
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Celeste was in the same area as Elliot, so both must be in an area they can both still reach (Bus Stop). Eliminated → Celeste: r2c1, r2c2, r2c3, r2c5, r2c8, r3c8, r4c2, r4c3, r4c4, r5c1, r5c3, r5c7, r5c8, r6c1, r6c2, r6c3, r6c8, r7c1, r7c2, r7c3, r7c7, r7c8, r8c1, r8c2, r8c3, r8c4, r8c5, r8c7, r8c8, r8c9.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "C",
+     "other": "E",
+     "rooms": [
+      "BUS_STOP"
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Celeste — “was in the same area as Elliot”. The clue alone allows 64 tiles, but every one except r3c7 is already ruled out — watched or occupied by Felix, Elliot; outside every area Elliot can reach; in the Diner, where Horace is alone; watched by Felix either way; watched by Gilbert either way; beside a lamppost (only Julian may stand there); watched by Alma either way. Place Celeste at r3c7; Celeste's sightlines now watch 3 tiles.",
+   "focus": [
+    [
+     2,
+     6
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      2,
+      7
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    2,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 64,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "F",
+           "E"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_OUTSIDE_PARTNER_ZONES",
+         "params": {
+          "other": "E"
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_OWNER_ALONE",
+         "params": {
+          "room": "DINER",
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_BESIDE",
+         "params": {
+          "prop": "STREETLIGHT",
+          "owner": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      2,
+      6
+     ],
+     "watch": 3
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Imogen can only be at r5c8, r6c8 or r7c8, and those tiles all lie on one sightline. Whichever one Imogen takes, the whole stretch is watched, so nobody else can stand on r6c8, r7c8, r8c8. Eliminated → Beatrice: r6c8, r7c8, r8c8.",
+   "focus": [
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "I",
+     "options": [
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "coords": [
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       7,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Beatrice was exactly one row south of Imogen. Imogen can only be in rows 5–7, which leaves Beatrice rows 6–8. Eliminated → Beatrice: r4c2, r4c3, r4c4.",
+   "focus": [
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "B",
+        "params": {
+         "other": "I",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "I",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 4,
+          "to": 6
+         }
+        },
+        "x": "B",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 5,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 2,
+   "rule": "Someone must stand here",
+   "kind": "eliminate",
+   "text": "Exactly one person was on a chair. Someone still has to stand on r8c1 or r9c2, and every one of those tiles watches r8c2, so nobody can stand there. Eliminated → Beatrice: r8c2 · Delphine: r8c2.",
+   "focus": [
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      7,
+      1
+     ]
+    ],
+    "D": [
+     [
+      7,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_WITNESS_SET",
+    "ruleKey": "RULE_WITNESS",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "CHAIR"
+      }
+     },
+     "options": [
+      [
+       7,
+       0
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "coords": [
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r6c4 cannot be a hiding spot (Julian was the only person beside a lamppost), so someone must watch it. Only Julian can still see it, so Julian must stand on r6c4. Eliminated → Julian: r7c5.",
+   "focus": [
+    [
+     5,
+     3
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      6,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      5,
+      3
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "J",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "J",
+        "params": {
+         "prop": "STREETLIGHT"
+        }
+       }
+      }
+     },
+     "suspect": "J",
+     "coords": [
+      [
+       5,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Julian — “was the only person beside a lamppost and was east of Delphine”. The clue fits 2 tiles; r7c5 is out of sight of r6c4, which only Julian can watch. Only r6c4 is left. Place Julian at r6c4; Julian's sightlines now watch 0 tiles.",
+   "focus": [
+    [
+     5,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "J",
+   "cell": [
+    5,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          6,
+          4
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_ONLY_WATCHER",
+         "params": {
+          "coord": [
+           5,
+           3
+          ],
+          "owner": "J"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "J",
+     "clueOf": "J",
+     "coord": [
+      5,
+      3
+     ],
+     "watch": 0
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r9c1 cannot be a hiding spot (Horace was alone in the Diner), so someone must watch it. Only Horace can still see it, so Horace must stand on r9c1, r9c2, r9c3, r9c4, r9c5, r9c7. Eliminated → Horace: r9c9.",
+   "focus": [
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     6
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      8,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      8,
+      0
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "H",
+       "room": "DINER"
+      }
+     },
+     "suspect": "H",
+     "coords": [
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       6
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r9c9 cannot be a hiding spot (Horace was alone in the Diner), so someone must watch it. Only Beatrice can still see it, so Beatrice must stand on r8c9. Eliminated → Beatrice: r6c1, r6c2, r6c3, r7c1, r7c2, r7c3, r7c7, r8c1, r8c3, r8c4, r8c5, r8c7.",
+   "focus": [
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      8,
+      8
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "H",
+       "room": "DINER"
+      }
+     },
+     "suspect": "B",
+     "coords": [
+      [
+       7,
+       8
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 22,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Beatrice — “was exactly one row south of Imogen”. The clue alone allows 64 tiles, but every one except r8c9 is already ruled out — watched or occupied by Felix, Elliot; not one row south of any tile left for Imogen; out of sight of r9c9, which only Beatrice can watch; in the Diner, where Horace is alone; watched by Felix either way; in sight of every tile where someone must still stand; beside a lamppost (only Julian may stand there); watched by Alma either way; watched by Imogen either way. Place Beatrice at r8c9; Beatrice's sightlines now watch 9 tiles.",
+   "focus": [
+    [
+     7,
+     8
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      7,
+      5
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    7,
+    8
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 64,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "F",
+           "E"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
+         "params": {
+          "other": "I"
+         }
+        },
+        {
+         "templateKey": "REASON_ONLY_WATCHER",
+         "params": {
+          "coord": [
+           8,
+           8
+          ],
+          "owner": "B"
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_OWNER_ALONE",
+         "params": {
+          "room": "DINER",
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_FROM_WITNESS_SET",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_BESIDE",
+         "params": {
+          "prop": "STREETLIGHT",
+          "owner": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "A"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "I"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      7,
+      8
+     ],
+     "watch": 9
+    }
+   }
+  },
+  {
+   "n": 23,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was on a chair. Only Horace can still reach a chair, so he must be on one. Eliminated → Horace: r9c1, r9c3, r9c4, r9c5, r9c7.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      8,
+      0
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      4
+     ],
+     [
+      8,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "CHAIR"
+      }
+     },
+     "owner": "H",
+     "prop": "CHAIR"
+    }
+   }
+  },
+  {
+   "n": 24,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Horace — “was alone”. The clue alone allows 64 tiles, but every one except r9c2 is already ruled out — watched or occupied by Felix; in the Laundromat, which must hold Gilbert; in the Courtyard, which must hold Julian; not on a chair, and only Horace can be; watched by Felix either way; in the Pool Hall, which must hold Felix; at the Bus Stop, which must hold Elliot; beside a lamppost (only Julian may stand there); out of sight of r9c1, which only Horace can watch; in the Alleyway, which must hold Imogen; watched by Alma either way. Place Horace at r9c2; Horace's sightlines now watch 11 tiles.",
+   "focus": [
+    [
+     8,
+     1
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      2,
+      1
+     ]
+    ]
+   },
+   "suspect": "H",
+   "cell": [
+    8,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 64,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "F"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_MUST_HOLD",
+         "params": {
+          "room": "LAUNDROMAT",
+          "suspects": [
+           "G"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_MUST_HOLD",
+         "params": {
+          "room": "COURTYARD",
+          "suspects": [
+           "J"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_CENSUS_ONLY",
+         "params": {
+          "prop": "CHAIR",
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_MUST_HOLD",
+         "params": {
+          "room": "POOL_HALL",
+          "suspects": [
+           "F"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_MUST_HOLD",
+         "params": {
+          "room": "BUS_STOP",
+          "suspects": [
+           "E"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_BESIDE",
+         "params": {
+          "prop": "STREETLIGHT",
+          "owner": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_ONLY_WATCHER",
+         "params": {
+          "coord": [
+           8,
+           0
+          ],
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_MUST_HOLD",
+         "params": {
+          "room": "ALLEYWAY",
+          "suspects": [
+           "I"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      8,
+      1
+     ],
+     "watch": 11
+    }
+   }
+  },
+  {
+   "n": 25,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gilbert — “was in the same area as the Corpse and stood on bare pavement (no bench, chair, manhole cover, patch of broken glass, puddle, steam grate, trail of footprints or trapdoor)”. The clue alone allows 20 tiles, but every one except r3c3 is already ruled out — watched or occupied by Horace; not north of any tile left for Elliot. Place Gilbert at r3c3; Gilbert's sightlines now watch 10 tiles.",
+   "focus": [
+    [
+     2,
+     2
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    2,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 20,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "H"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_DIR_OF_ANY.N",
+         "params": {
+          "other": "E"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      2,
+      2
+     ],
+     "watch": 10
+    }
+   }
+  },
+  {
+   "n": 26,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Delphine — “was in front of a doorway”. The clue alone allows 30 tiles, but every one except r2c1 is already ruled out — watched or occupied by Gilbert, Felix, Elliot; in the Diner, where Horace is alone; not west of any tile left for Julian; beside a lamppost (only Julian may stand there); watched by Gilbert either way; in sight of every tile where someone must still stand; watched by Alma either way. Place Delphine at r2c1; Delphine's sightlines now watch 11 tiles.",
+   "focus": [
+    [
+     1,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    1,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "allows": 30,
+     "summary": {
+      "templateKey": "FRAG_SUMMARY",
+      "params": {
+       "items": [
+        {
+         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
+         "params": {
+          "suspects": [
+           "G",
+           "F",
+           "E"
+          ]
+         }
+        },
+        {
+         "templateKey": "REASON_ROOM_OWNER_ALONE",
+         "params": {
+          "room": "DINER",
+          "owner": "H"
+         }
+        },
+        {
+         "templateKey": "REASON_NOT_DIR_OF_ANY.W",
+         "params": {
+          "other": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_MONOPOLY_BESIDE",
+         "params": {
+          "prop": "STREETLIGHT",
+          "owner": "J"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "G"
+         }
+        },
+        {
+         "templateKey": "REASON_WATCHED_FROM_WITNESS_SET",
+         "params": {}
+        },
+        {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "A"
+         }
+        }
+       ]
+      }
+     },
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      1,
+      0
+     ],
+     "watch": 11
+    }
+   }
+  },
+  {
+   "n": 27,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Beatrice was exactly one row south of Imogen. Beatrice can only be in row 8, which leaves Imogen row 7. Eliminated → Imogen: r5c8, r6c8.",
+   "focus": [
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "B",
+        "params": {
+         "other": "I",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "B",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 7
+         }
+        },
+        "x": "I",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 6
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 28,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Imogen — “was in the Alleyway”. The clue fits 4 tiles; r3c8 is watched by Celeste; r5c8, r6c8 are not one row north of any tile left for Beatrice. Only r7c8 is left. Place Imogen at r7c8; Imogen's sightlines now watch 4 tiles.",
+   "focus": [
+    [
+     6,
+     7
+    ]
+   ],
+   "elims": {},
+   "suspect": "I",
+   "cell": [
+    6,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          2,
+          7
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "C"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          4,
+          7
+         ],
+         [
+          5,
+          7
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_NOT_OFFSET_OF_ANY.N",
+         "params": {
+          "other": "B"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "I",
+     "clueOf": "I",
+     "coord": [
+      6,
+      7
+     ],
+     "watch": 4
+    }
+   }
+  },
+  {
+   "n": 29,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r7c5 cannot be a hiding spot (Julian was the only person beside a lamppost), so someone must watch it. Only Alma can still see it, so Alma must stand on r7c6. Eliminated → Alma: r6c6.",
+   "focus": [
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      5,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      6,
+      4
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "J",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "J",
+        "params": {
+         "prop": "STREETLIGHT"
+        }
+       }
+      }
+     },
+     "suspect": "A",
+     "coords": [
+      [
+       6,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 30,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alma — “was in column 6 and was west of Felix”. The clue fits 6 tiles; r1c6 is watched by Felix either way; r4c6 is taken by Elliot; r6c6 is out of sight of r7c5, which only Alma can watch; r8c6 is watched by Beatrice; r9c6 is in the Diner, where Horace is alone. Only r7c6 is left. Place Alma at r7c6; Alma's sightlines now watch 5 tiles.",
+   "focus": [
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    6,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "groups": [
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          0,
+          5
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_EITHER_WAY",
+         "params": {
+          "suspect": "F"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          3,
+          5
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_TAKEN_BY",
+         "params": {
+          "suspect": "E"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          5,
+          5
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_ONLY_WATCHER",
+         "params": {
+          "coord": [
+           6,
+           4
+          ],
+          "owner": "A"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          7,
+          5
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_WATCHED_BY",
+         "params": {
+          "suspect": "B"
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_GROUP",
+       "params": {
+        "coords": [
+         [
+          8,
+          5
+         ]
+        ],
+        "reason": {
+         "templateKey": "REASON_ROOM_OWNER_ALONE",
+         "params": {
+          "room": "DINER",
+          "owner": "H"
+         }
+        }
+       }
+      }
+     ],
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      6,
+      5
+     ],
+     "watch": 5
+    }
+   }
+  },
+  {
+   "n": 31,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c4. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    3,
+    3
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      3,
+      3
+     ]
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.138,
+   "elims_before_first_place": 4,
+   "last_fifth_t1_share": 0.667,
+   "hardest_last_pos": 0.966,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.286,
+   "late_elim_gap": 3,
+   "place_push": 2.8,
+   "global_uses": 2,
+   "global_first_t2": false
+  },
+  "flow_arc_ok": false,
+  "shadow_candidates_before_last": 4,
+  "shadow_candidates_before_last_two": 6,
+  "dark_known_at": 10,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "BENCH",
+   "BILLIARD_TABLE",
+   "DISPLAY_CASE",
+   "DUMPSTER",
+   "FOUNTAIN",
+   "GRATE",
+   "JUKEBOX",
+   "MANHOLE",
+   "PHONE_BOOTH",
+   "POSTER_COLUMN",
+   "STATUE",
+   "STREETLIGHT",
+   "WASHER"
+  ],
+  "biome_props_in_clues": [
+   "POSTER_COLUMN",
+   "STREETLIGHT"
+  ],
+  "biome_props_load_bearing": [
+   "POSTER_COLUMN",
+   "STREETLIGHT"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 1795,
+  "rules_used": [
+   "alone",
+   "compass",
+   "global_prop_monopoly",
+   "monopoly",
+   "ray_block",
+   "same_room",
+   "shadow_law",
+   "witness"
+  ],
+  "steps": 30,
+  "difficulty_score": 62,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.85
+ }
+}
