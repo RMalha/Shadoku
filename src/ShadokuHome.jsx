@@ -803,7 +803,6 @@ export const SITE_PAGES = [{ to: "/", key: "pHome" }, { to: "/play", key: "pCont
  */
 export function SiteHeader({ onLogo, extra = null, style, current = "", onNav }) {
   const { t } = useLang();
-  const { user, signOut } = useAuth();
   const modals = useModals();
   const ctxNav = useNav();
   const [open, setOpen] = useState(false);
@@ -831,11 +830,6 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
           {SITE_PAGES.map((m) => (m.to === "/play" && !initiated
             ? <button key={m.to} type="button" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the contracts
             : link(m.to, t(`nav.${m.key}`))))}
-          {user && <> {/* signed out: the header's own Sign In button is enough */}
-            <span className="sh-menu-h">{t("nav.profile")}</span>
-            {PROFILE_PAGES.map((m) => link(m.to, t(`profile.tab.${m.key}`), "sub"))}
-            <button type="button" className="sub" onClick={() => { setOpen(false); signOut(); }}>{t("nav.logOut")}</button>
-          </>}
         </nav>
       )}
     </header>

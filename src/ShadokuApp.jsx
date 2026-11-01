@@ -726,19 +726,20 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const barH = desk ? 0 : short ? BAR_H_SHORT : BAR_H; // desktop: the board runs to the top of the page
   const { user, signOut } = useAuth();
   const modals = useModals();
-  const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail: the site's pages, ⚙ Settings, then Sign In or the Profile group
+  const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail (it has no site header, so no Sign In button or profile chip): Home, Contracts, the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
     { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
     initiated // before the initiation: its envelope in a pop-up, not the contracts
       ? { key: "contracts", label: t("nav.pContracts"), onSelect: enter }
       : { key: "initiation", label: t("nav.pInitiation"), onSelect: modals.openInitiation },
-    { key: "settings", label: t("settings.open"), settings: true },
-    { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
-    { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
     ...(user ? [
       { key: "profile", label: t("nav.profile"), heading: true },
       ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
       { key: "logout", label: t("nav.logOut"), sub: true, onSelect: signOut },
-    ] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
+    ] : []),
+    { key: "settings", label: t("settings.open"), settings: true },
+    { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
+    { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
+    ...(user ? [] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
   ], [t, go, user, signOut, modals, enter, initiated]);
 
   return (
