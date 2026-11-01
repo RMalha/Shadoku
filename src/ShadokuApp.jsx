@@ -55,7 +55,7 @@ import { RelicBadge, RelicModal, EvidenceBoard, FinalDossier, acceptFinale, allR
 export const TUTORIAL_KEY = "shadoku-tutorial-done";
 export const TUTORIAL_PUZZLE = "tutorial"; // "The Art of the Ghost"
 const BAR_H = 61; // px, the site header on /play (the same <SiteHeader/> as the landing page: 40px logo + 2×10px padding + 1px border)
-const BAR_H_DESK = 69; // px, the same header on a desktop: 48px logo (see SHADOKU_CSS)
+const BAR_H_DESK = 77; // px, the same header on a desktop: 56px logo (see SHADOKU_CSS)
 const DESK_MQ = "(min-width: 961px)"; // the game's desktop layout: no site header on /play, the ☰ Menu sits on the tool rail
 const BAR_H_SHORT = 44; // px, the same header on a phone held sideways (40px controls + 2×1px padding + 1px border): see APP_CSS
 const SHORT_LANDSCAPE_MQ = "(orientation: landscape) and (max-height: 520px)"; // the game's compact side-by-side layout (ShadokuGame CSS)

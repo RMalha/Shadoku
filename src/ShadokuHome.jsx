@@ -824,11 +824,11 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
       {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
           {SITE_PAGES.map((m) => link(m.to, t(`nav.${m.key}`)))}
-          {user ? <>
+          {user && <> {/* signed out: the header's own Sign In button is enough */}
             <span className="sh-menu-h">{t("nav.profile")}</span>
             {PROFILE_PAGES.map((m) => link(m.to, t(`profile.tab.${m.key}`), "sub"))}
             <button type="button" className="sub" onClick={() => { setOpen(false); signOut(); }}>{t("nav.logOut")}</button>
-          </> : <button type="button" className="sh-menu-sep" onClick={() => { setOpen(false); modals.openSignIn(); }}>{t("nav.signIn")}</button>}
+          </>}
         </nav>
       )}
     </header>
@@ -1334,7 +1334,7 @@ svg{direction:ltr}
 /* header */
 .sh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(12px,3vw,32px);background:rgba(20,20,25,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--sh-line);color:var(--sh-cream)}
 .sh-logo{display:flex;align-items:center;height:40px;border:0;background:none;padding:0;cursor:pointer;color:inherit}
-.sh-logo img{height:100%;width:auto;max-width:46vw}@media (min-width:961px){.sh-logo{height:48px}}.sh-wordmark{font-size:22px;letter-spacing:.12em;color:var(--sh-brass)}
+.sh-logo img{height:100%;width:auto;max-width:46vw}@media (min-width:961px){.sh-logo{height:56px}} /* = the logo in the puzzle's own header (.sk-head .sk-logo) */.sh-wordmark{font-size:22px;letter-spacing:.12em;color:var(--sh-brass)}
 .sh-controls,.sh-userpill{display:flex;align-items:center;gap:10px}
 .sh-header{box-sizing:border-box}.sh-header-r{display:flex;align-items:center;gap:10px}.sh-extra{display:inline-flex}
 .sh-burger{display:inline-flex;align-items:center;justify-content:center;width:40px;height:38px;padding:0;border-radius:10px;border:1px solid #34344a;background:#1c1c25;color:var(--sh-cream);cursor:pointer}

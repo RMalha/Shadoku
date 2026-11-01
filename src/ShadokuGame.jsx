@@ -2170,7 +2170,7 @@ const CSS = `
 @media (min-width:961px){ /* desktop: a bigger logo; with room for it, the contract and the timer sit beside it */
   .sk-head .sk-logo{height:56px}
   .sk-head[data-wide]{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"logo nav timer";gap:14px}
-  .sk-head[data-wide] .sk-logo{height:52px}
+  .sk-head[data-wide] .sk-logo{height:56px}
 }
 .sk-nav{grid-area:nav;display:flex;align-items:center;gap:6px;min-width:0}
 .sk-timer{grid-area:timer;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel);
@@ -2466,7 +2466,7 @@ const CSS = `
 .sk-umbra-tok{display:flex;align-items:center;gap:10px;margin-top:8px;padding:6px 10px;border-radius:12px;border:1px dashed #5a5566;background:rgba(10,10,14,.6);font:600 13.5px/1.35 'Barlow',sans-serif;color:var(--fg)}
 
 /* rail */
-.sk-rail{grid-area:rail;display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:18px 12px;background:var(--side);border-left:1px solid var(--line);min-height:0;position:relative;z-index:9}
+.sk-rail{grid-area:rail;display:flex;flex-direction:column;justify-content:space-between;gap:12px;padding:18px 12px;background:var(--side);border-left:1px solid var(--line);min-height:0;position:relative;z-index:50} /* above the Inspect panel (40): the rail's ☰ Menu opens over everything */
 .sk-rail-group{display:flex;flex-direction:column;gap:10px}
 .sk-railmenu{position:relative}
 .sk-railmenu-btn{width:100%;height:40px;display:flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-weight:700;font-size:13px;color:var(--fg)}
