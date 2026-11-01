@@ -1,0 +1,12 @@
+# Cloudflare Pages: the Vite build (dist/) is the site, functions/ is the sign-in backend.
+# Deploy:  npm run deploy        Local, with the backend:  npm run dev:cf   (reads .dev.vars)
+name = "shadoku"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-10-01"
+
+# Unique codenames + the account record. Create it once and paste the id:
+#   npx wrangler kv namespace create SHADOKU_KV
+# Without it the site still signs people in; codenames are then just not reserved.
+# [[kv_namespaces]]
+# binding = "SHADOKU_KV"
+# id = "<namespace id>"

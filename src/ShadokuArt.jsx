@@ -88,7 +88,7 @@ export const LABEL = {
   // catalog expansion (40)
   EASEL: "Easel", DISPLAY_CASE: "Display Case", CHANDELIER_FALL: "Fallen Chandelier", GRAMOPHONE: "Gramophone",
   SCARECROW: "Scarecrow", TROUGH: "Water Trough", LIFEGUARD_CHAIR: "Lifeguard Chair", TIKI_TORCH: "Tiki Torch", TOTEM: "Totem Pole",
-  WOODPILE: "Woodpile", SANDSTONE_ARCH: "Sandstone Arch", STREETLIGHT: "Streetlight", NEWSSTAND: "Newsstand",
+  WOODPILE: "Woodpile", SANDSTONE_ARCH: "Sandstone Arch", STREETLIGHT: "Lamppost", NEWSSTAND: "Newsstand",
   TRAPDOOR: "Trapdoor", FOOTPRINTS: "Footprints", BROKEN_GLASS: "Broken Glass", LANTERN: "Lantern", CUSHION: "Floor Cushion", CARPET_RUNNER: "Carpet Runner", FLOOR_GRATE: "Floor Grate",
   WHEELBARROW: "Wheelbarrow", BUCKET: "Upturned Bucket", CHICKEN_FEED: "Chicken Feed", SANDCASTLE: "Sandcastle", STARFISH: "Stranded Starfish", COOLER: "Cooler", DRIFTWOOD: "Driftwood Log",
   CAMPFIRE: "Campfire", FERN: "Fern", FALLEN_LOG: "Fallen Log", SNOWDRIFT: "Snowdrift", PICKAXE: "Dropped Pickaxe",
@@ -102,7 +102,7 @@ export const LABEL = {
   WARDROBE: "Wardrobe", TRASH_CAN: "Trash Can", BEEHIVE: "Beehive", SARCOPHAGUS: "Sarcophagus",
   BIRCH: "Birch Tree", TRAFFIC_CONE: "Traffic Cone", CLOCK: "Grandfather Clock", TEA_TROLLEY: "Tea Trolley",
   SPIRAL_STAIRS: "Spiral Staircase",
-  HAY_WAGON: "Hay Wagon", HOT_POOL: "Hot Spring Pool",
+  HAY_WAGON: "Hay Wagon", HOT_POOL: "Hot Pool",
 };
 
 /* ---- Biomes: the 7 environments (`p.theme`) ------------------------------ */
@@ -1041,21 +1041,25 @@ export function Bed({ len = 2, horizontal = false }) {
  *  side, legs splayed in dark trousers and shoes. `victim` is the target's name (the polaroid's `name`; default "Victor",
  *  the polaroid's default); `dummy` draws the tutorial's ivory crash-test dummy instead (the polaroid's `dummy`);
  *  `master` draws Master U. M. Bra (CORPSE_MASTER: MASTER_LOOK's silver hair and majestic beard, obsidian blazer over a
- *  sweater, crimson bowtie, X eyes) inside a chalk outline, his round brass spectacles knocked off and lying beside his
- *  head with one lens cracked. `master` wins over `victim`; `dummy` wins over both.
+ *  sweater, crimson bowtie, X eyes), no chalk outline, his round brass spectacles knocked off and lying beside his
+ *  head with one lens cracked. `second` draws N. O. Ir, the Master's hooded second in command (CORPSE_SECOND, the target of
+ *  "The Uninvited Guests"): a slate-black cloak fanned out under the body, the hood still up round a face lost in shadow with
+ *  two pale X eyes, dark gloves, and the brass clasp of the Master's household at the throat.
+ *  `master` wins over `second`, `second` over `victim`; `dummy` wins over all.
  *  Top-down and flush like the other floor items, inked in OS, no shadow. Drawn on every board. */
-export function Corpse({ victim = "Victor", dummy = false, master = false } = {}) {
+export function Corpse({ victim = "Victor", dummy = false, master = false, second = false } = {}) {
   const u = useUid();
   const M = !!master && !dummy;
+  const N = !!second && !dummy && !M; // N. O. Ir, hooded
   // the Master's own look, minus the glasses (they lie on the floor beside him)
   const V = M ? { ...MASTER_LOOK, glasses: false, glassesStyle: "none" } : victimLook(victim, dummy), F = fixLook(V);
   const k = .126, sw = 11.9; // the 280-unit portrait frame scaled into the tile; sw * k = 1.5, like OS
-  const skin = dummy ? V.dummyColor : M ? MASTER_LOOK.pal.skin : SKIN[F.skin % SKIN.length];
-  const bare = !dummy && (F.clothing === "shirtless" || F.clothing === "bikini");
-  const blazer = !dummy && /^blazer/.test(F.clothing);
-  const clothes = dummy ? mix(V.dummyColor, -.28) : M ? MASTER_LOOK.pal.clothes : bare ? skin : CLOTH[F.cloth % CLOTH.length];
+  const skin = dummy ? V.dummyColor : M ? MASTER_LOOK.pal.skin : N ? "#262833" /* gloves */ : SKIN[F.skin % SKIN.length];
+  const bare = !dummy && !N && (F.clothing === "shirtless" || F.clothing === "bikini");
+  const blazer = !dummy && !N && /^blazer/.test(F.clothing);
+  const clothes = dummy ? mix(V.dummyColor, -.28) : M ? MASTER_LOOK.pal.clothes : N ? SECOND_CLOAK : bare ? skin : CLOTH[F.cloth % CLOTH.length];
   const sleeve = dummy ? V.dummyColor : clothes;
-  const trousers = dummy ? V.dummyColor : M ? "#2b2932" : mix(CLOTH[F.cloth % CLOTH.length], -.4), shoe = dummy ? mix(V.dummyColor, -.45) : M ? "#4a2e22" : "#2a2220";
+  const trousers = dummy ? V.dummyColor : M ? "#2b2932" : N ? "#15161e" : mix(CLOTH[F.cloth % CLOTH.length], -.4), shoe = dummy ? mix(V.dummyColor, -.45) : M ? "#4a2e22" : N ? "#0e0f14" : "#2a2220";
   const tie = ACCENTS[(F.accent || 0) % ACCENTS.length];
   const mouth = ["smile", "twinkle", "tongue", "eating"].includes(F.mouth) ? "serious" : F.mouth;
   const bust = dummy ? dummySvg(V.dummyColor, sw) : composeLook({ ...F, eyes: "xDizzy", mouth }, sw);
@@ -1080,7 +1084,8 @@ export function Corpse({ victim = "Victor", dummy = false, master = false } = {}
         ? <><path d="M10.4 37Q11.4 44.6 17.6 48.4" fill="none" stroke={bloodL} strokeWidth="2" strokeLinecap="round" /><path d="M50.6 28.4Q53.4 32.6 52.6 38" fill="none" stroke={bloodL} strokeWidth="1.5" strokeLinecap="round" /></>
         : <path d="M45.4 4.4Q51.6 7.4 52.8 12.8" fill="none" stroke={bloodL} strokeWidth="1.8" strokeLinecap="round" />}
       <circle cx="59.6" cy="32" r="1.7" {...IS} fill={blood} /><circle cx="7.6" cy="35" r="1.2" {...IS} fill={blood} />
-      {M && <MasterChalk />}
+      {/* N. O. Ir's cloak, fanned out on the floor under the body */}
+      {N && <><path d="M18.4 27Q7 43 11 58.6Q32 65.4 53 58.6Q57 43 45.6 27Z" fill="#101119" {...OS} /><path d="M17 44Q22 52 20 60M47 44Q42 52 44 60" {...IS} stroke="#2a2e40" /></>}
       {/* legs, shoes, arms (sleeves of the outfit) and hands: an ink pass, then the colours */}
       <g fill="none" stroke={INK} strokeLinejoin="round" strokeLinecap="round">
         {legs.map((l, i) => <path key={`l${i}`} d={line(l)} strokeWidth={LW + 3} />)}
@@ -1095,40 +1100,29 @@ export function Corpse({ victim = "Victor", dummy = false, master = false } = {}
       <path d={torso} fill={clothes} {...OS} />
       {blazer && <path d="M28.6 30L32 39.8L35.4 30Z" {...IS} fill={M ? MASTER_LOOK.pal.shirt : "#e4dcc8"} />}
       {M && <path d="M25.4 30.6L30.4 40.6M38.6 30.6L33.6 40.6" {...IS} stroke="#4a4654" />}
-      {!dummy && F.tie === "necktie" && <path d="M30.2 30H33.8L34.4 36.8L32 39.2L29.6 36.8Z" {...IS} fill={tie} />}
+      {!dummy && !N && F.tie === "necktie" && <path d="M30.2 30H33.8L34.4 36.8L32 39.2L29.6 36.8Z" {...IS} fill={tie} />}
       {blazer && <><path d="M32 39.8V44.6" {...IS} /><circle cx="33.4" cy="41.8" r=".75" fill={INK} /></>}
-      {!dummy && F.clothing === "hoodie" && <path d="M25.6 38.4H38.4L37 43.6H27Z" {...IS} />}
-      {!dummy && F.clothing === "overall" && <path d={inkBox(28, 34.6, 8, 5.6, 1, .2)} {...IS} />}
+      {!dummy && !N && F.clothing === "hoodie" && <path d="M25.6 38.4H38.4L37 43.6H27Z" {...IS} />}
+      {N && <path d="M32 32V45" {...IS} stroke="#3a3f55" />}
+      {!dummy && !N && F.clothing === "overall" && <path d={inkBox(28, 34.6, 8, 5.6, 1, .2)} {...IS} />}
       {bare && <circle cx="32" cy="40.6" r=".8" fill={mix(skin, -.35)} />}
       {dummy && <><path d="M32 31V44.8" {...IS} strokeOpacity=".5" /><path d="M23.6 41.6H40.4" {...IS} strokeOpacity=".4" /></>}
       {/* the portrait itself: head and shoulders, face up (its flat bottom edge trimmed off) */}
-      <g transform={P}><g clipPath={`url(#${u}b)`} dangerouslySetInnerHTML={{ __html: bust }} /></g>
+      {N ? <SecondHood /> : <g transform={P}><g clipPath={`url(#${u}b)`} dangerouslySetInnerHTML={{ __html: bust }} /></g>}
       {M && <MasterSpecs />}
     </g>
   );
 }
-/** Closed Catmull-Rom curve through `pts` (path `d`): the chalk outline's hand-drawn line. */
-const closedCurve = (pts, t = .5) => {
-  const n = pts.length, P = (i) => pts[(i + n) % n], r2 = (v) => +v.toFixed(2); // own rounding: this runs at module load, before the shared r2
-  let d = `M${P(0).join(" ")}`;
-  for (let i = 0; i < n; i++) {
-    const [p0, p1, p2, p3] = [P(i - 1), P(i), P(i + 1), P(i + 2)];
-    const c1 = [r2(p1[0] + (p2[0] - p0[0]) * t / 3), r2(p1[1] + (p2[1] - p0[1]) * t / 3)];
-    const c2 = [r2(p2[0] - (p3[0] - p1[0]) * t / 3), r2(p2[1] - (p3[1] - p1[1]) * t / 3)];
-    d += `C${c1.join(" ")} ${c2.join(" ")} ${p2.join(" ")}`;
-  }
-  return d + "Z";
-};
-/** The chalk outline round Master U. M. Bra's body (in the Corpse body frame: head up, arm flung past the head). */
-const MASTER_CHALK = closedCurve([[32, -2.6], [39.6, -.4], [43.6, 6.4], [43.8, 14.6], [42.6, 21.6], [47.6, 27.6], [53.8, 35.6], [54.4, 46.4],
-  [52.6, 53.8], [46.6, 53.6], [46.6, 47.6], [45.6, 44.4], [49.6, 56.4], [50.6, 62.8], [45.6, 66.4], [40.8, 62.6], [36.4, 55], [32, 50.8],
-  [27.6, 55], [24.6, 63.4], [20.8, 66.6], [16.8, 62.8], [18.4, 56.4], [20.6, 49], [18.6, 41.4], [17.6, 33.4], [13.4, 31.2], [8.2, 26.2],
-  [7.8, 14.6], [9.8, 8.6], [15.2, 8.2], [17.6, 13.4], [17.6, 22.6], [21.4, 21.4], [20.6, 14.2], [21.4, 6.4], [25, -.6]]);
-function MasterChalk() {
+/** N. O. Ir's hood, seen from above with the body (head-up frame, head centre ≈ 31, 16): the hood still up, the face a void, two pale X eyes, the brass clasp. */
+const SECOND_CLOAK = "#1a1c27";
+function SecondHood() {
   return (
-    <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <path d={MASTER_CHALK} stroke={INK} strokeOpacity=".35" strokeWidth="2.6" />
-      <path d={MASTER_CHALK} stroke="#f4f1e8" strokeWidth="1.5" strokeDasharray="9 1.6 5 1.2" />
+    <g>
+      <path d="M31 .6C21.6 .6 17 8.6 17 17.4C17 24.6 20.4 29.6 24.4 31.4H37.6C41.6 29.6 45 24.6 45 17.4C45 8.6 40.4 .6 31 .6Z" fill={SECOND_CLOAK} {...OS} />
+      <path d="M31 1.4Q27.2 4.2 25.4 8M31 1.4Q34.8 4.2 36.6 8" {...IS} stroke="#3a3f55" />
+      <path d="M31 6.6C25.8 6.6 23.2 11.2 23.2 16.6C23.2 22.2 26.6 26.4 31 26.4C35.4 26.4 38.8 22.2 38.8 16.6C38.8 11.2 36.2 6.6 31 6.6Z" fill="#050508" />
+      <path d="M26.6 14.8L29 17.2M29 14.8L26.6 17.2M33 14.8L35.4 17.2M35.4 14.8L33 17.2" fill="none" stroke="#aab0c2" strokeWidth=".9" strokeLinecap="round" />
+      <circle cx="31" cy="31.4" r="1.8" {...IS} fill={BRASS} />
     </g>
   );
 }
@@ -6048,7 +6042,7 @@ export const PROP_NOTE = {
   RUG: "Persian rug, one flat top-down piece across its whole span (1x1 up to 3x2, both ways): red border, navy band, crimson field with a navy and cream lozenge at its centre and a navy triangle in each corner, cream fringe at the short ends. No shadow.",
   BED: "Bed across its span (1x2 down a column, 2x1 along a row), kept low in the sofa's camera: a blue duvet with a cream cuff, two plump pillows at the head, a walnut headboard and a lower footboard. No shadow.",
   STOOL: "Round mahogany stool, kept low: a thick seat at knee height with a hand slot, on four splayed legs joined by rungs. Someone perches on it. No shadow.",
-  CORPSE: "The case's target, the same character as on the target polaroid (hair, face, skin and outfit), seen from above lying on their back at an angle with X eyes: one arm flung past the head, legs splayed, in a dark blood pool. The tutorial's is the ivory crash-test dummy; the finale's (CORPSE_MASTER) is Master U. M. Bra in a chalk outline with his brass spectacles beside him. Fixed, never occupied; light passes over it.",
+  CORPSE: "The case's target, the same character as on the target polaroid (hair, face, skin and outfit), seen from above lying on their back at an angle with X eyes: one arm flung past the head, legs splayed, in a dark blood pool. The tutorial's is the ivory crash-test dummy; the finale's (CORPSE_MASTER) is Master U. M. Bra with his brass spectacles beside him (no chalk outline). Fixed, never occupied; light passes over it.",
   CRATE: "Pine shipping crate, knee to waist height: a lid of three boards, a framed front with a diagonal brace and nail heads, a hand hole in the darker east side. Sight passes over.",
   BARREL: "Oak barrel at waist height: the lid seen from above with two boards and a bung, bulging staves shaded on the east, two iron hoops. Sight passes over.",
   PUDDLE: "Lobed pool of rain water seen from above, a deeper shade on its far edge, a pale sky streak and a ripple ring, with a small splash puddle beside it. Flush, no shadow.",
@@ -6196,15 +6190,15 @@ export const SPAN_SPRITES = {
  * draws its single-tile sprite ONCE, centred along the span and bottom-centre anchored (scaled by the span's
  * short side, so a 2 × 2 pool fills its box while a 1 × 2 sofa keeps its single-tile size).
  */
-export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master }) {
+export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second }) {
   const Span = SPAN_SPRITES[kind];
   // `cells`: the object's tiles as offsets from its top-left cell (an L-shaped carpet runner is not its whole box)
   if (Span) return <Span cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} />;
   const S = SPRITES[kind];
   if (!S) return null;
   const f = FIT[kind];
-  // the CORPSE sprite draws the case's target: `victim` (their name), `dummy` (the tutorial) and `master` (Master U. M. Bra) pass through to it
-  const own = kind === "CORPSE" ? <S victim={victim || undefined} dummy={!!dummy} master={!!master} /> : <S />;
+  // the CORPSE sprite draws the case's target: `victim` (their name), `dummy` (the tutorial), `master` (Master U. M. Bra) and `second` (N. O. Ir) pass through to it
+  const own = kind === "CORPSE" ? <S victim={victim || undefined} dummy={!!dummy} master={!!master} second={!!second} /> : <S />;
   const sprite = f ? <g transform={`translate(32 58) scale(${f}) translate(-32 -58)`}>{own}</g> : own;
   if (cw === 1 && ch === 1) return sprite;
   const k = Math.max(1, Math.min(cw, ch)); // the 64k × 64k sprite box sits bottom-centre in the span box
@@ -6919,9 +6913,31 @@ export const ASSASSINS = {
   M: { name: "U. M. Bra", badge: "U", tie: BRASS, look: { ...ADOW_LOOK, gender: "m", hairStyle: "theCaesarAndSidePart", hairLength: "short", hairColor: "grey", glassesStyle: "round", glasses: true, hat: "none", facialHair: "beardMajestic", tie: "bowtie", eyes: "squint", brows: "raisedExcitedNatural",
     pal: { ...ADOW_LOOK.pal, tie: CRIMSON, hair: "#7b84a6", frame: "#0a0b11" } } },
   R: { name: "R. E. Aper", tie: "#f0c53a", look: assassinLook({ gender: "f", hairStyle: "curvy", hairLength: "long", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#f0c53a", hair: "#4a3558" }) },
+  // N. O. Ir: the Master's second in command, the target of "The Uninvited Guests". Hooded, face in shadow (HoodedFigure), no gender shown.
+  N: { name: "N. O. Ir", badge: "N", tie: "#9aa0b8", hooded: true },
 };
+/** N. O. Ir in the 96 × 96 photo: a slate cloak and a deep hood, the face lost in shadow but for two pale eyes, the Master's brass clasp at the throat. */
+export function HoodedFigure() {
+  const u = useUid();
+  return (
+    <g>
+      <defs><radialGradient id={`${u}f`} cx=".5" cy=".42" r=".6"><stop offset="0" stopColor="#000" /><stop offset=".7" stopColor="#05060a" /><stop offset="1" stopColor="#11131c" /></radialGradient></defs>
+      <rect width="96" height="96" fill="#12131b" />
+      <circle cx="48" cy="46" r="40" fill="#9aa0b8" fillOpacity=".1" />
+      <path d="M4 96C8 76 20 68 32 64H64C76 68 88 76 92 96Z" fill="#0b0c12" stroke="#5d6a94" strokeWidth="1.3" strokeLinejoin="round" />
+      <path d="M48 70V96M30 80Q34 88 32 96M66 80Q62 88 64 96" fill="none" stroke="#2a2e40" strokeWidth="1.1" />
+      <path d="M48 11C31 11 23 27 23 44C23 56 27 64 34 70H62C69 64 73 56 73 44C73 27 65 11 48 11Z" fill="#161822" stroke="#5d6a94" strokeWidth="1.3" strokeLinejoin="round" />
+      <path d="M48 12C42 19 38 27 36 35M48 12C54 19 58 27 60 35" fill="none" stroke="#2a2e40" strokeWidth="1.2" />
+      <path d="M48 28C38.6 28 33.4 37 33.4 47C33.4 57 39.4 64 48 64C56.6 64 62.6 57 62.6 47C62.6 37 57.4 28 48 28Z" fill={`url(#${u}f)`} />
+      <ellipse cx="42.2" cy="46.4" rx="2.7" ry="1.1" fill="#c9cdd7" />
+      <ellipse cx="53.8" cy="46.4" rx="2.7" ry="1.1" fill="#c9cdd7" />
+      <circle cx="48" cy="70" r="3.2" fill={BRASS} stroke="#1a1206" strokeWidth="1" />
+    </g>
+  );
+}
 export function AssassinFigure({ who = "S", sw = 3.2, zoom = 1, cy = 140 }) {
   const a = ASSASSINS[who] || ASSASSINS.S;
+  if (a.hooded) return <HoodedFigure />;
   return (
     <g>
       <rect width="96" height="96" fill="#171a26" />
@@ -6930,7 +6946,8 @@ export function AssassinFigure({ who = "S", sw = 3.2, zoom = 1, cy = 140 }) {
     </g>
   );
 }
-/** The dark Polaroid of any assassin: "S" (S. H. Adow, the player), "O" O. B. Scuro, "P" P. H. Obia, "Q" Q. U. Yet, "R" R. E. Aper. */
+/** The dark Polaroid of any assassin: "S" (S. H. Adow, the player), "O" O. B. Scuro, "P" P. H. Obia, "Q" Q. U. Yet, "R" R. E. Aper,
+ *  "M" Master U. M. Bra, "N" N. O. Ir (his hooded second in command). */
 export function AssassinPolaroid({ who = "S", size = 120, tilt = 3, showName = true }) {
   const a = ASSASSINS[who] || ASSASSINS.S;
   const tx = useText(), nm = lookWord(tx, `assassin.${ASSASSINS[who] ? who : "S"}`, a.name); // the name in the active language (ui.assassin.<letter>)
@@ -6967,19 +6984,14 @@ export function MasterPolaroid({ size = 120, tilt = -2, showName = true }) {
 /* ---------------------------------------------------------------------- */
 /** The ten standard cases, in order: each leaves one evidence relic (VictimRelicSvg). */
 export const RELIC_IDS = ["case1", "case2", "case3", "case4", "case5", "case6", "case7", "case8", "case9", "case10"];
-/** The numeric fragment etched on each relic (the part of its stamp after the dot: "I · 4" gives "4"). */
-export const RELIC_FRAGMENT = { case1: "4", case2: "4", case3: "4", case4: "1", case5: "0", case6: "0", case7: "0", case8: "1", case9: "4101", case10: "4101" };
 const RELIC_ROMAN = { case1: "I", case2: "II", case3: "III", case4: "IV", case5: "V", case6: "VI", case7: "VII", case8: "VIII", case9: "IX", case10: "X" };
 const RELIC_INK = { obs: "#1d1b23", obsD: "#121117", brass: BRASS, brassD: "#9c6a17", brassL: "#f6d27a", groove: "#4f3208",
   crim: CRIMSON, crimD: "#8a1c24", silver: "#c9cdd7", silverD: "#8b909e", silverL: "#eff1f5", cream: CREAM };
-/** Stroke glyphs for the numerals the relics need (I V X 0 1 4), 10 units tall: [advance, polylines] or [advance, "E"] (an oval). */
+/** Stroke glyphs for the Roman numerals stamped on the relics (I V X), 10 units tall: [advance, polylines]. */
 const RELIC_GLYPH = {
   I: [3.4, [[[0, 0], [3.4, 0]], [[1.7, 0], [1.7, 10]], [[0, 10], [3.4, 10]]]],
   V: [6, [[[0, 0], [3, 10], [6, 0]]]],
   X: [6, [[[0, 0], [6, 10]], [[6, 0], [0, 10]]]],
-  0: [5.8, "E"],
-  1: [4.8, [[[.4, 2.6], [2.6, 0], [2.6, 10]], [[.4, 10], [4.8, 10]]]],
-  4: [6.2, [[[4.4, 10], [4.4, 0], [0, 7], [6.2, 7]]]],
 };
 /** Path `d` of `str` in RELIC_GLYPH strokes, `h` tall with its top at `y`; `anchor` "middle" centres it on `x`. */
 function relicGlyphs(str, x, y, h, gap = 1.5, anchor = "middle") {
@@ -6989,15 +7001,19 @@ function relicGlyphs(str, x, y, h, gap = 1.5, anchor = "middle") {
   let d = "";
   for (const c of chars) {
     const [gw, segs] = RELIC_GLYPH[c];
-    if (segs === "E") {
-      const rx = (gw / 2) * s, ry = 5 * s, ey = y + ry;
-      d += `M${r2(cx)} ${r2(ey)}A${r2(rx)} ${r2(ry)} 0 1 0 ${r2(cx + 2 * rx)} ${r2(ey)}A${r2(rx)} ${r2(ry)} 0 1 0 ${r2(cx)} ${r2(ey)}Z`;
-    } else for (const seg of segs) d += `M${seg.map(([a, b]) => `${r2(cx + a * s)} ${r2(y + b * s)}`).join("L")}`;
+    for (const seg of segs) d += `M${seg.map(([a, b]) => `${r2(cx + a * s)} ${r2(y + b * s)}`).join("L")}`;
     cx += (gw + gap) * s;
   }
   return d;
 }
-/** The etched fragment: a dark groove under a lit inlay line, in g.relic-frag so the UI can make it glow. */
+/** Path `d` of the Syndicate's audit eye, `w` wide and centred on (cx, cy): an almond lid and a round pupil. Every relic carries one:
+ *  the mark of the auditor who hid a strip of the Master's ledger page inside it (see src/umbra.jsx). */
+function relicEye(cx, cy, w) {
+  const h = w * 0.3, r = w * 0.14;
+  return `M${r2(cx - w / 2)} ${r2(cy)}Q${r2(cx)} ${r2(cy - 2 * h)} ${r2(cx + w / 2)} ${r2(cy)}Q${r2(cx)} ${r2(cy + 2 * h)} ${r2(cx - w / 2)} ${r2(cy)}Z`
+    + `M${r2(cx - r)} ${r2(cy)}A${r2(r)} ${r2(r)} 0 1 0 ${r2(cx + r)} ${r2(cy)}A${r2(r)} ${r2(r)} 0 1 0 ${r2(cx - r)} ${r2(cy)}Z`;
+}
+/** The etched audit eye: a dark groove under a lit inlay line, in g.relic-frag so the UI can make it glow. */
 function RelicEtch({ d, lit = RELIC_INK.brassL, groove = RELIC_INK.groove, sw = 1.7, transform }) {
   const st = { fill: "none", strokeLinecap: "round", strokeLinejoin: "round" };
   return (
@@ -7018,7 +7034,7 @@ const lobedSeal = (cx, cy, r, n = 9) => {
 };
 
 /* one drawing per relic, inside the field (x 6..51 beside the notch, the Roman stamp top left) */
-/** I · Farm: rusted barn key, the 4 etched in its round bow. */
+/** I · Farm: rusted barn key, the audit eye etched in its round bow. */
 function RelicBarnKey() {
   const rust = "#a4552f", rustD = "#6e3420", rustL = "#cf8456";
   return (
@@ -7034,11 +7050,11 @@ function RelicBarnKey() {
       <path d="M14.4 33.6A11.4 11.4 0 0 0 34.6 32.6" fill="none" stroke={rustD} strokeWidth="2" strokeLinecap="round" />
       <circle cx="24" cy="27" r="9.6" {...IS} stroke={rustD} />
       <circle cx="16.6" cy="21.4" r=".8" fill={rustL} /><circle cx="31.6" cy="20.6" r=".6" fill={rustL} /><circle cx="18" cy="35" r=".7" fill={rustD} />
-      <RelicEtch d={relicGlyphs("4", 24, 20.6, 12.4)} lit="#f3c08a" groove="#3e1a0e" />
+      <RelicEtch d={relicEye(24, 26.8, 13)} lit="#f3c08a" groove="#3e1a0e" />
     </g>
   );
 }
-/** II · Beach: salt-crusted brass token, a milled rim, the 4 in its face. */
+/** II · Beach: salt-crusted brass token, a milled rim, the audit eye in its face. */
 function RelicToken() {
   const R = RELIC_INK, salt = "#eef1ec";
   const ticks = Array.from({ length: 32 }, (_, i) => {
@@ -7057,11 +7073,11 @@ function RelicToken() {
       <path d="M13.6 37.6Q13 44.6 17.6 49.2Q20.6 52 24.4 52.8L25.2 49.6Q21.6 48.4 19.4 45.6Q17.6 42.4 17.6 38.4Q15.4 36.6 13.6 37.6Z" fill={salt} {...IS} />
       <path d="M40.6 16.6Q46.4 18.2 49.6 23.4L47.4 25.4Q46.2 23.6 44.2 22.6L43.4 20.6Q41.4 20.2 40 19.4Z" fill={salt} {...IS} />
       {[[21.4, 46.6, 1], [27, 50.4, .8], [44.6, 44, .9], [41.2, 27.4, .6], [24.2, 39.6, .6], [47.4, 30.6, .8]].map(([x, y, r]) => <circle key={x} cx={x} cy={y} r={r} fill={salt} />)}
-      <RelicEtch d={relicGlyphs("4", 32, 27.2, 13.6)} sw={2} />
+      <RelicEtch d={relicEye(32, 34, 15)} sw={2} />
     </g>
   );
 }
-/** III · Forest: charred field ledger, the leather cover burnt away at one corner, the 4 tooled in brass foil. */
+/** III · Forest: charred field ledger, the leather cover burnt away at one corner, the audit eye tooled in brass foil. */
 function RelicLedger() {
   const R = RELIC_INK, hide = "#6a2b23", hideD = "#45201b", page = "#eadfc4", pageD = "#c9b98f", char = "#141217", ember = "#ee7a2c";
   return (
@@ -7078,11 +7094,11 @@ function RelicLedger() {
       <path d="M40 13H45V18Z" fill={R.brass} {...IS} />
       <path d={inkBox(23.4, 18.4, 16.4, 19.2, 1.4, .2)} {...IS} stroke={R.brass} />
       <circle cx="25" cy="44" r=".9" fill={char} /><circle cx="33.6" cy="42" r=".6" fill={ember} /><circle cx="22.6" cy="48.4" r=".7" fill={char} />
-      <RelicEtch d={relicGlyphs("4", 31.6, 21.6, 12.4)} sw={1.8} groove="#2a0e0a" />
+      <RelicEtch d={relicEye(31.6, 27.8, 13)} sw={1.8} groove="#2a0e0a" />
     </g>
   );
 }
-/** IV · Mountains: stopped silver pocket watch, hands frozen at 1:00, the 1 etched where the hour hand points. */
+/** IV · Mountains: stopped silver pocket watch, hands frozen at 1:00, the audit eye etched where the hour hand points. */
 function RelicWatch() {
   const R = RELIC_INK, face = "#f3ecdc";
   const ticks = Array.from({ length: 12 }, (_, i) => i).filter((i) => i !== 1).map((i) => {
@@ -7100,7 +7116,7 @@ function RelicWatch() {
       <circle cx="31.2" cy="36.2" r="15.6" fill={R.silver} />
       <circle cx="32" cy="37" r="13.8" fill={face} {...IS} />
       {ticks}
-      <RelicEtch d={relicGlyphs("1", 37.6, 25, 6.4)} lit={R.crim} groove="#e4d6b8" sw={1.4} />
+      <RelicEtch d={relicEye(37.6, 28.2, 7.4)} lit={R.crim} groove="#e4d6b8" sw={1.4} />
       {/* frozen at 1:00: minute hand at 12, hour hand at 1 */}
       <path d="M32 37V25.8" stroke={INK} strokeWidth="1.4" strokeLinecap="round" />
       <path d="M32 37L35.1 31.6" stroke={INK} strokeWidth="2.4" strokeLinecap="round" />
@@ -7111,7 +7127,7 @@ function RelicWatch() {
     </g>
   );
 }
-/** V · Desert: a strip of microfilm off its spool, bound by a crimson wax seal embossed 0. */
+/** V · Desert: a strip of microfilm off its spool, bound by a crimson wax seal embossed with the audit eye. */
 function RelicMicrofilm() {
   const R = RELIC_INK, film = "#a8742e", filmD = "#6e4a1c", frame = "#d3a259";
   const holes = Array.from({ length: 10 }, (_, i) => r2(17.4 + i * 3.4));
@@ -7132,11 +7148,11 @@ function RelicMicrofilm() {
       <path d={lobedSeal(32, 37, 10)} fill={R.crim} {...OSR} />
       <circle cx="32" cy="37" r="6.8" fill="none" stroke={R.crimD} strokeWidth="1.1" />
       <path d="M26.4 32.4Q28.4 29.8 31.4 29.2" fill="none" stroke="#e8807a" strokeWidth="1.2" strokeLinecap="round" />
-      <RelicEtch d={relicGlyphs("0", 32, 32.6, 8.8)} lit="#ffb4a8" groove="#5c0f16" sw={1.6} />
+      <RelicEtch d={relicEye(32, 37, 9.4)} lit="#ffb4a8" groove="#5c0f16" sw={1.6} />
     </g>
   );
 }
-/** VI · Street: a Velvet Note matchbook in crimson velvet, a brass eighth note and the 0 on its cover. */
+/** VI · Street: a Velvet Note matchbook in crimson velvet, a brass eighth note and the audit eye on its cover. */
 function RelicMatchbook() {
   const R = RELIC_INK, vel = "#a42d38", velD = "#741c27", velL = "#c9505b", strike = "#4a3528";
   return (
@@ -7154,11 +7170,11 @@ function RelicMatchbook() {
       <path d="M40.6 23.2V15.6Q41 18.6 44 19.8" fill="none" stroke={R.brass} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M21.6 39H28.6M35.4 39H42.4" stroke={R.brass} strokeWidth="1" strokeLinecap="round" />
       <path d="M32 37.2L33.8 39L32 40.8L30.2 39Z" fill={R.brass} />
-      <RelicEtch d={relicGlyphs("0", 29.4, 21.6, 12.6)} sw={2} groove="#3e0a10" />
+      <RelicEtch d={relicEye(29.4, 27.9, 12)} sw={2} groove="#3e0a10" />
     </g>
   );
 }
-/** VII · Mansion: cracked porcelain half-mask (a columbina) with brass-rimmed eyes and crimson ribbons, the 0 on its brow. */
+/** VII · Mansion: cracked porcelain half-mask (a columbina) with brass-rimmed eyes and crimson ribbons, the audit eye on its brow. */
 function RelicMask() {
   const u = useUid(), R = RELIC_INK, por = "#f1ece2", porD = "#cfc6b6", hole = R.obsD;
   const mask = "M32 22.6C27 19.2 19 18.8 13 21.4C10.6 22.4 9.4 21 8.6 18.6C7.2 24 8.4 31.6 12 36.6C15.4 41.2 22 43.6 27 41.6C29.4 40.6 30.4 39.2 32 39.2C33.6 39.2 34.6 40.6 37 41.6C42 43.6 48.6 41.2 52 36.6C55.6 31.6 56.8 24 55.4 18.6C54.6 21 53.4 22.4 51 21.4C45 18.8 37 19.2 32 22.6Z";
@@ -7178,11 +7194,11 @@ function RelicMask() {
       <path d="M40.4 20.4L38.6 24.2L41.6 26.4L40 28.6M43.4 32.4L45.6 35.6L43.8 38.2L46.4 41.4" fill="none" stroke={INK} strokeWidth="1.1" strokeLinejoin="round" strokeLinecap="round" />
       <path d="M44.8 42.2L46.4 41.4L48.4 42.6Z" fill={hole} stroke={INK} strokeWidth=".8" strokeLinejoin="round" />
       <path d="M14 24.4Q19.6 21.8 25.2 22.6" fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" />
-      <RelicEtch d={relicGlyphs("0", 32, 25.4, 9)} sw={2} />
+      <RelicEtch d={relicEye(32, 29.9, 10)} sw={2} />
     </g>
   );
 }
-/** VIII · Forest: hollow silver cartridge, its bullet pulled off and a crimson slip rolled inside, the 1 etched on the case. */
+/** VIII · Forest: hollow silver cartridge, its bullet pulled off and a crimson slip rolled inside, the audit eye etched on the case. */
 function RelicCartridge() {
   const R = RELIC_INK;
   return (
@@ -7200,11 +7216,11 @@ function RelicCartridge() {
       <path d="M50 31.6H53Q58.4 33 60 36Q58.4 39 53 40.4H50Z" fill={R.brass} {...OS} strokeWidth="1.8" />
       <path d="M53 31.6V40.4" {...IS} />
       <path d="M53.8 33.6Q56.6 34.4 57.6 35.6" fill="none" stroke={R.brassL} strokeWidth="1" strokeLinecap="round" />
-      <RelicEtch d={relicGlyphs("1", 26, 31.2, 9.4)} lit="#3d404c" groove={R.silverL} sw={1.7} />
+      <RelicEtch d={relicEye(26, 35.9, 9)} lit="#3d404c" groove={R.silverL} sw={1.7} />
     </g>
   );
 }
-/** IX · Street: pawn shop claim ticket, three brass balls on a crimson band, the number 4101 stamped below. */
+/** IX · Street: pawn shop claim ticket, three brass balls on a crimson band, the audit eye stamped below. */
 function RelicTicket() {
   const R = RELIC_INK, card = "#efe5cc", cardD = "#d3c4a0";
   return (
@@ -7220,11 +7236,11 @@ function RelicTicket() {
       {[[26.6, 29.2], [37.4, 29.2], [32, 33.2]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="2.6" fill={R.brass} {...IS} />)}
       <path d="M17.6 50.2H46.4" stroke={INK} strokeWidth=".9" strokeDasharray="1.2 1.4" />
       <circle cx="21.6" cy="53.2" r="1" fill={R.crimD} />
-      <RelicEtch d={relicGlyphs("4101", 32, 39.4, 8.6, 1.3)} lit="#2a1f26" groove={cardD} sw={1.5} />
+      <RelicEtch d={relicEye(32, 43.7, 12)} lit="#2a1f26" groove={cardD} sw={1.5} />
     </g>
   );
 }
-/** X · Beach: cracked Fresnel lens panel in a brass frame, a shard missing, 4101 etched on the brass foot. */
+/** X · Beach: cracked Fresnel lens panel in a brass frame, a shard missing, the audit eye etched on the brass foot. */
 function RelicFresnel() {
   const u = useUid(), R = RELIC_INK, glassD = "#6fb0d3", glassL = "#e4f5fc";
   const pane = "M17.6 45V22.6Q17.6 14.6 25.6 14.6H38.4Q46.4 14.6 46.4 22.6V45Z";
@@ -7244,7 +7260,7 @@ function RelicFresnel() {
       <path d={pane} fill="none" {...IS} />
       <path d="M12.6 56.4H51.4L48.6 45.4H15.4Z" fill={R.brass} {...OSR} />
       <path d="M13.6 54.6H50.4" stroke={R.brassD} strokeWidth="1.4" />
-      <RelicEtch d={relicGlyphs("4101", 32, 47.4, 5.8, 1.3)} sw={1.3} />
+      <RelicEtch d={relicEye(32, 50.3, 10)} sw={1.3} />
     </g>
   );
 }
@@ -7268,7 +7284,7 @@ const RELIC_ART = { case1: RelicBarnKey, case2: RelicToken, case3: RelicLedger, 
 /**
  * One evidence relic of "The Umbra Conspiracy" (one per standard case, RELIC_IDS), 64 × 64, drawn at `size` px: an obsidian
  * plate in a brass rim with a stepped key notch die-cut into its east edge, the case's Roman numeral stamped top left, and
- * the relic itself with its numeric fragment (RELIC_FRAGMENT) etched on it inside `<g className="relic-frag">`, so CSS can
+ * the relic itself with the Syndicate's audit eye (relicEye) etched on it inside `<g className="relic-frag">`, so CSS can
  * make it glow. Readable from 28 px (hub badge) to 120 px (modal). An unknown `caseId` gets a sealed evidence bag, no numerals.
  * `title` becomes the accessible name; without it the SVG is decorative (aria-hidden). Clip ids are unique per instance.
  * Source art: art/relics/<caseId>.svg and art/relics/UNKNOWN.svg.
@@ -7285,6 +7301,23 @@ export function VictimRelicSvg({ caseId, size = 64, title }) {
       {Art ? <Art /> : <RelicBag />}
       {roman && <path d={relicGlyphs(roman, 8.6, 8.4, 6.2, 1.4, "start")} fill="none" stroke={BRASS} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />}
     </svg>
+  );
+}
+
+/**
+ * The sigil of the Uninvited (the Syndicate assassins who watch the watchers): an eye looking out of a keyhole. Stamped into the
+ * silver seal of their black envelopes, where the Syndicate's own envelopes carry the red fedora seal. A <g> drawn in a 100 × 100
+ * box centred on (50, 50); scale it with `transform`.
+ */
+export function UninvitedSigil({ transform, ink = "#2c2f38", glint = "#eef0f5" }) {
+  return (
+    <g transform={transform}>
+      <path d="M50 26A15 15 0 0 1 58.6 53.3L63 76H37L41.4 53.3A15 15 0 0 1 50 26Z" fill={ink} stroke="#1a1c22" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M37.4 41Q50 30.6 62.6 41Q50 51.4 37.4 41Z" fill={glint} />
+      <circle cx="50" cy="41" r="4.6" fill={ink} />
+      <circle cx="48.6" cy="39.6" r="1.4" fill={glint} />
+      <path d="M45 62H55" stroke={glint} strokeWidth="1.6" strokeLinecap="round" opacity=".35" />
+    </g>
   );
 }
 

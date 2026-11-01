@@ -4,9 +4,9 @@
  *
  * Exports
  *   default  ShadokuHome            the homepage (wraps itself in providers if none exist)
- *   ShadokuProviders                language + auth + modal host (ShadokuApp wraps everything in this)
- *   LanguageSelector, UserPill, Modal, GlobalStyles
- *   useLang / useAuth / useModals   hooks
+ *   ShadokuProviders                language + auth + modal host + navigation (ShadokuApp wraps everything in this; `onNav` = its router)
+ *   LanguageSelector, UserPill, Modal, GlobalStyles, SiteHeader, SiteFooter, AuthButtons, Avatar
+ *   useLang / useAuth / useModals / useNav   hooks (useNav() → navigate(to): "/", "/play", "/about", "/contact", "/profile[/stats|/collection]")
  *   LANGUAGES, STRINGS, registerTranslations(code, dict), translate(lang, key, vars)   i18n
  *   store, pushPath                 tiny helpers shared with ShadokuApp
  *
@@ -26,7 +26,7 @@ import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
 import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL } from "./ShadokuArt.jsx";
+import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL } from "./ShadokuArt.jsx";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
 import { localizeHead, trOf } from "./caseText.js";
 
@@ -116,6 +116,8 @@ export const STRINGS = {
     "nav.menu": "Menu",
     "nav.pHome": "Home",
     "nav.pContracts": "Contracts",
+    "nav.about": "About",
+    "nav.contact": "Contact",
     "nav.home": "← Home",
     "nav.help": "Help",
 
@@ -149,6 +151,9 @@ export const STRINGS = {
     "creds.change": "Change codename",
     "creds.demo": "Demo session — no real account was created.",
     "creds.error": "Sign-in failed. Please try again.",
+    "creds.delete": "Delete account",
+    "creds.deleteConfirm": "Delete your account? Your codename and the data saved for your account are erased and this cannot be undone.",
+    "creds.deleteError": "The account could not be deleted. Please try again.",
 
     "auth.title": "Join the Syndicate",
     "auth.google": "Continue with Google",
@@ -227,6 +232,7 @@ export function translate(lang, key, vars) {
 const LangCtx = createContext(null);
 const AuthCtx = createContext(null);
 const ModalsCtx = createContext(null);
+const NavCtx = createContext(null);
 
 export const useLang = () => {
   const v = useContext(LangCtx);
@@ -298,18 +304,26 @@ function demoProfile(provider) {
  *       If the profile has no `username`, a random noir alias is assigned and the codename picker opens.
  *   onCheckUsername(name) → Promise<boolean | { ok } | { available }>   server-side uniqueness check
  *   onUsernameChange(name) → called after the player saves a codename (persist it server-side)
+ *   onSession()  → Promise<profile | null | undefined>   on load: the signed-in profile (with its `id`), null when the
+ *       backend says nobody is signed in (a stored non-demo session is dropped), undefined when there is no backend
+ *   onSignOut()  → called on log out        onDeleteAccount() → Promise<boolean>   erase the account server-side
+ *   (src/auth.js implements all of them against functions/api/*; onCheckUsername may return undefined = check locally)
  */
-function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange }) {
+function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError }) {
   const [user, setUser] = useState(() => {
     try { const raw = store.get(USER_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; }
   });
   const [busy, setBusy] = useState(null);
   const [error, setError] = useState(null);
+  const [authFailed, setAuthFailed] = useState(!!authError); // the provider sent the player back with ?auth_error=…
+  const [pendingCodename, setPendingCodename] = useState(false); // a session restored after the OAuth redirect that has no codename yet
+  const userRef = useRef(user);
+  useEffect(() => { userRef.current = user; }, [user]);
 
   const persist = useCallback((u) => { if (u) store.set(USER_KEY, JSON.stringify(u)); else store.del(USER_KEY); }, []);
 
   const signIn = useCallback(async (provider) => {
-    setBusy(provider); setError(null);
+    setBusy(provider); setError(null); setAuthFailed(false);
     try {
       let profile = typeof onSignIn === "function" ? await onSignIn(provider) : null;
       const demo = !profile;
@@ -330,15 +344,43 @@ function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange })
     } finally { setBusy(null); }
   }, [onSignIn, persist]);
 
-  const signOut = useCallback(() => { setUser(null); persist(null); }, [persist]);
+  useEffect(() => { // the OAuth redirect lands on a fresh page: the signed cookie, not localStorage, says who is signed in
+    if (typeof onSession !== "function") return undefined;
+    let alive = true;
+    onSession().then((profile) => {
+      if (!alive || profile === undefined) return; // no backend: keep what is stored
+      const cur = userRef.current;
+      if (!profile) { if (cur && !cur.demo) { setUser(null); persist(null); } return; } // the cookie is gone or expired
+      const kept = cur && cur.id === profile.id && !cur.demo ? cur.username : "";
+      const next = {
+        id: profile.id, provider: profile.provider,
+        displayName: profile.displayName || "", email: profile.email || "", avatarUrl: profile.avatarUrl || "",
+        username: profile.username || kept || randomAlias(), demo: false,
+      };
+      setUser(next); persist(next);
+      if (!profile.username && !kept) setPendingCodename(true);
+    }).catch(() => {});
+    return () => { alive = false; };
+  }, [onSession, persist]);
+
+  const signOut = useCallback(() => { setUser(null); persist(null); Promise.resolve(onSignOut?.()).catch(() => {}); }, [persist, onSignOut]);
+
+  /** → true once the server erased the account and the local session is gone (a demo session has nothing to erase). */
+  const deleteAccount = useCallback(async () => {
+    try { if (!userRef.current?.demo && typeof onDeleteAccount === "function" && !(await onDeleteAccount())) return false; } catch { return false; }
+    setUser(null); persist(null);
+    return true;
+  }, [persist, onDeleteAccount]);
 
   const checkUsername = useCallback(async (name) => {
     if (!USERNAME_RE.test(name)) return { ok: false, reason: "format" };
     if (user?.username && user.username.toLowerCase() === name.toLowerCase()) return { ok: true };
     if (typeof onCheckUsername === "function") {
       const r = await onCheckUsername(name);
-      const ok = r === true || r?.ok === true || r?.available === true;
-      return ok ? { ok: true } : { ok: false, reason: "taken" };
+      if (r !== undefined) { // undefined: no backend (or a demo session) to ask, so the local check below decides
+        const ok = r === true || r?.ok === true || r?.available === true;
+        return ok ? { ok: true } : { ok: false, reason: "taken" };
+      }
     }
     return isTakenLocal(name) ? { ok: false, reason: "taken" } : { ok: true };
   }, [onCheckUsername, user]);
@@ -351,8 +393,8 @@ function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange })
   }, [user, persist, onUsernameChange]);
 
   const value = useMemo(
-    () => ({ user, busy, error, signIn, signOut, checkUsername, setUsername }),
-    [user, busy, error, signIn, signOut, checkUsername, setUsername],
+    () => ({ user, busy, error, authFailed, signIn, signOut, deleteAccount, checkUsername, setUsername, pendingCodename, clearPendingCodename: () => setPendingCodename(false) }),
+    [user, busy, error, authFailed, signIn, signOut, deleteAccount, checkUsername, setUsername, pendingCodename],
   );
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;
 }
@@ -368,18 +410,30 @@ function useSignInFlow(onDone) {
   }, [auth, modals, onDone]);
 }
 
+/* ═════════════════════════ NAVIGATION ═════════════════════════ */
+/** Address-bar navigation without a router: pushState + a popstate the router (ShadokuApp's useRoute) listens to. */
+const navByHistory = (to) => {
+  pushPath(to);
+  try { window.dispatchEvent(new PopStateEvent("popstate")); } catch { /* noop */ }
+};
+/** → navigate(to): the router's `go` when ShadokuProviders got `onNav`, else history navigation. */
+export const useNav = () => useContext(NavCtx) || navByHistory;
+
 /* ═════════════════════════ ROOT PROVIDERS ═════════════════════════ */
-export function ShadokuProviders({ children, onSignIn, onCheckUsername, onUsernameChange }) {
+export function ShadokuProviders({ children, onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError, onNav }) {
   return (
-    <LangProvider>
-      <AuthProvider onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}>
-        <ModalHost>{children}</ModalHost>
-      </AuthProvider>
-    </LangProvider>
+    <NavCtx.Provider value={onNav || null}>
+      <LangProvider>
+        <AuthProvider onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}
+          onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError}>
+          <ModalHost authError={authError}>{children}</ModalHost>
+        </AuthProvider>
+      </LangProvider>
+    </NavCtx.Provider>
   );
 }
 
-function ModalHost({ children }) {
+function ModalHost({ children, authError }) {
   const [open, setOpen] = useState({ signIn: false, legal: false, codename: false });
   const api = useMemo(() => ({
     openSignIn: () => setOpen((s) => ({ ...s, signIn: true })),
@@ -387,7 +441,9 @@ function ModalHost({ children }) {
     openCodename: () => setOpen((s) => ({ ...s, codename: true })),
     close: (k) => setOpen((s) => ({ ...s, [k]: false })),
   }), []);
-  const { user } = useAuth();
+  const { user, pendingCodename, clearPendingCodename } = useAuth();
+  useEffect(() => { if (authError) api.openSignIn(); }, [authError, api]); // a failed or cancelled sign-in: the buttons again, with the error
+  useEffect(() => { if (pendingCodename && user) { api.openCodename(); clearPendingCodename(); } }, [pendingCodename, user, api, clearPendingCodename]);
 
   return (
     <ModalsCtx.Provider value={api}>
@@ -559,9 +615,9 @@ export function Modal({ title, onClose, children, wide }) {
 }
 
 /* ═════════════════════════ AUTH UI ═════════════════════════ */
-function AuthButtons({ onDone }) {
+export function AuthButtons({ onDone }) {
   const { t } = useLang();
-  const { busy, error } = useAuth();
+  const { busy, error, authFailed } = useAuth();
   const modals = useModals();
   const go = useSignInFlow(onDone);
   return (
@@ -572,7 +628,7 @@ function AuthButtons({ onDone }) {
       <button className="sh-oauth github" onClick={() => go("github")} disabled={!!busy}>
         <GitHubMark /><span>{busy === "github" ? t("auth.working") : t("auth.github")}</span>
       </button>
-      {error && <p className="sh-err" role="alert">{t("creds.error")}</p>}
+      {(error || authFailed) && <p className="sh-err" role="alert">{t("creds.error")}</p>}
       <p className="sh-consent">
         {t("auth.consentPre")}
         <button type="button" className="sh-link strong" onClick={modals.openLegal}>{t("auth.consentLink")}</button>
@@ -591,24 +647,51 @@ function SignInModal({ onClose }) {
   );
 }
 
-function Avatar({ user }) {
+export function Avatar({ user }) {
   const initial = (user.username || user.displayName || "?").charAt(0).toUpperCase();
   return user.avatarUrl
     ? <img className="sh-avatar" src={user.avatarUrl} alt="" referrerPolicy="no-referrer" />
     : <span className="sh-avatar">{initial}</span>;
 }
 
+/** The profile pages of the menus, in order: [{ to, key }] (labels: t(`profile.tab.${key}`)). */
+export const PROFILE_PAGES = [{ to: "/profile", key: "info" }, { to: "/profile/stats", key: "stats" }, { to: "/profile/collection", key: "collection" }];
+
+/** Closes a dropdown on a click outside `ref` or on Escape, while `open`. */
+function useDismiss(open, setOpen, ref) {
+  useEffect(() => {
+    if (!open) return undefined;
+    const away = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    const esc = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", away);
+    document.addEventListener("keydown", esc);
+    return () => { document.removeEventListener("pointerdown", away); document.removeEventListener("keydown", esc); };
+  }, [open, setOpen, ref]);
+}
+
+/** Sign In, or (signed in) the codename chip that opens the Profile menu: Info, Stats, Collection, Log Out. */
 export function UserPill() {
   const { t } = useLang();
   const { user, signOut } = useAuth();
   const modals = useModals();
+  const nav = useNav();
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useDismiss(open, setOpen, ref);
   if (!user) return <button className="sh-btn" onClick={modals.openSignIn}>{t("nav.signIn")}</button>;
+  const go = (to) => { setOpen(false); nav(to); };
   return (
-    <div className="sh-userpill">
-      <button className="sh-userchip" onClick={modals.openCodename} title={t("codename.title")} aria-label={t("codename.chipAria", { name: user.username })}>
-        <Avatar user={user} /><span>{user.username}</span>
+    <div className="sh-userpill" ref={ref}>
+      <button className="sh-userchip" onClick={() => setOpen((o) => !o)} aria-haspopup="true" aria-expanded={open} aria-label={t("codename.chipAria", { name: user.username })}>
+        <Avatar user={user} /><span className="sh-userchip-name">{user.username}</span><Caret />
       </button>
-      <button className="sh-btn ghost sm" onClick={signOut}>{t("nav.signOut")}</button>
+      {open && (
+        <nav className="sh-menu sh-usermenu" aria-label={t("nav.profile")}>
+          <span className="sh-menu-h">{t("nav.profile")}</span>
+          {PROFILE_PAGES.map((m) => <a key={m.key} href={m.to} onClick={(e) => { e.preventDefault(); go(m.to); }}>{t(`profile.tab.${m.key}`)}</a>)}
+          <button type="button" onClick={() => { setOpen(false); signOut(); }}>{t("nav.logOut")}</button>
+        </nav>
+      )}
     </div>
   );
 }
@@ -706,51 +789,67 @@ export function LanguageSelector() {
   );
 }
 
-/** The site header: the logo (goes home / to the top) and the language + sign-in controls. `extra` adds buttons next to the controls. */
+/** The site's pages, in menu order: [{ to, key }] (labels: t(`nav.${key}`)). */
+export const SITE_PAGES = [{ to: "/", key: "pHome" }, { to: "/play", key: "pContracts" }, { to: "/about", key: "about" }, { to: "/contact", key: "contact" }];
+
 /**
- * The site header shared by every page. On desktop: logo + `extra` + language + sign-in. On a phone: logo, language, sign-in and a ☰ button
- * whose dropdown lists the pages in `menu` ([{ to: "/", label: "Home" }, …]; `current` marks the page you are on).
+ * The site header shared by every page: logo + `extra` + language + sign-in (or the codename chip) + a ☰ button whose dropdown lists
+ * the pages (SITE_PAGES), then Sign In, or (signed in) the Profile group: Info, Stats, Collection, Log Out. `current` marks the page you
+ * are on; `onNav(to)` navigates (default: useNav()).
  */
-export function SiteHeader({ onLogo, extra = null, style, menu = null, current = "", onNav }) {
+export function SiteHeader({ onLogo, extra = null, style, current = "", onNav }) {
   const { t } = useLang();
+  const { user, signOut } = useAuth();
+  const modals = useModals();
+  const ctxNav = useNav();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const nav = (to) => {
-    setOpen(false);
-    if (onNav) { onNav(to); return; }
-    pushPath(to);
-    try { window.dispatchEvent(new PopStateEvent("popstate")); } catch { /* noop */ }
-  };
-  useEffect(() => {
-    if (!open) return undefined;
-    const away = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
-    const esc = (e) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("pointerdown", away);
-    document.addEventListener("keydown", esc);
-    return () => { document.removeEventListener("pointerdown", away); document.removeEventListener("keydown", esc); };
-  }, [open]);
+  useDismiss(open, setOpen, ref);
+  const nav = (to) => { setOpen(false); (onNav || ctxNav)(to); };
+  const link = (to, label, cls = "") => (
+    <a key={to} href={to} className={`${cls}${to === current ? " on" : ""}`} aria-current={to === current ? "page" : undefined} onClick={(e) => { e.preventDefault(); nav(to); }}>{label}</a>
+  );
   return (
     <header className="sh-header" style={style} ref={ref}>
-      <button className="sh-logo" onClick={onLogo} aria-label="Shadoku">
+      <button className="sh-logo" onClick={onLogo || (() => nav("/"))} aria-label="Shadoku">
         <ArtBoundary fallback={<span className="sh-type sh-wordmark">SHADOKU</span>}><ShadokuLogo /></ArtBoundary>
       </button>
       <div className="sh-header-r">
         {extra && <span className="sh-hide-m sh-extra">{extra}</span>}
         <HeaderControls />
-        {menu && menu.length > 0 && (
-          <button type="button" className="sh-burger" aria-label={t("nav.menu")} aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-          </button>
-        )}
+        <button type="button" className="sh-burger" aria-label={t("nav.menu")} aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+        </button>
       </div>
-      {open && menu && (
+      {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
-          {menu.map((m) => (
-            <a key={m.to} href={m.to} className={m.to === current ? "on" : ""} aria-current={m.to === current ? "page" : undefined} onClick={(e) => { e.preventDefault(); nav(m.to); }}>{m.label}</a>
-          ))}
+          {SITE_PAGES.map((m) => link(m.to, t(`nav.${m.key}`)))}
+          {user ? <>
+            <span className="sh-menu-h">{t("nav.profile")}</span>
+            {PROFILE_PAGES.map((m) => link(m.to, t(`profile.tab.${m.key}`), "sub"))}
+            <button type="button" className="sub" onClick={() => { setOpen(false); signOut(); }}>{t("nav.logOut")}</button>
+          </> : <button type="button" className="sh-menu-sep" onClick={() => { setOpen(false); modals.openSignIn(); }}>{t("nav.signIn")}</button>}
         </nav>
       )}
     </header>
+  );
+}
+
+/** The footer of the site's pages: © line, About, Contact, Terms & Privacy. */
+export function SiteFooter() {
+  const { t } = useLang();
+  const modals = useModals();
+  const nav = useNav();
+  const page = (to, key) => <a className="sh-link" href={to} onClick={(e) => { e.preventDefault(); nav(to); }}>{t(key)}</a>;
+  return (
+    <footer className="sh-footer">
+      <span>{t("footer.copy")}</span>
+      <nav aria-label={t("footer.aria")}>
+        {page("/about", "nav.about")}
+        {page("/contact", "nav.contact")}
+        <button className="sh-link" onClick={modals.openLegal}>{t("footer.legal")}</button>
+      </nav>
+    </footer>
   );
 }
 export function HeaderControls() {
@@ -863,8 +962,13 @@ function Lore({ id, rot = 0 }) {
 /* ═════════════════════════ CREDENTIALS CARD ═════════════════════════ */
 function CredentialsCard() {
   const { t } = useLang();
-  const { user, signOut } = useAuth();
+  const { user, signOut, deleteAccount } = useAuth();
   const modals = useModals();
+  const nav = useNav();
+  const erase = async () => {
+    if (!window.confirm(t("creds.deleteConfirm"))) return;
+    if (!(await deleteAccount())) window.alert(t("creds.deleteError"));
+  };
   return (
     <section className="sh-creds" aria-labelledby="sh-creds-h">
       <div className="sh-creds-card">
@@ -884,8 +988,10 @@ function CredentialsCard() {
             </div>
             {user.demo && <p className="sh-muted sm">{t("creds.demo")}</p>}
             <div className="sh-row">
-              <button className="sh-btn" onClick={modals.openCodename}>{t("creds.change")}</button>
-              <button className="sh-btn ghost" onClick={signOut}>{t("nav.signOut")}</button>
+              <button className="sh-btn" onClick={() => nav("/profile")}>{t("creds.profile")}</button>
+              <button className="sh-btn ghost" onClick={modals.openCodename}>{t("creds.change")}</button>
+              <button className="sh-btn ghost" onClick={signOut}>{t("nav.logOut")}</button>
+              {!user.demo && <button className="sh-btn ghost" onClick={erase}>{t("creds.delete")}</button>}
             </div>
           </div>
         ) : (
@@ -900,11 +1006,26 @@ function CredentialsCard() {
 }
 
 /* ═════════════════════════ THE ENVELOPE ═════════════════════════ */
-function WaxSeal() {
+/** The seal on an envelope: the Syndicate's crimson wax with its fedora-and-eye, or (`silver`) the Uninvited's silver seal with their keyhole eye. */
+function WaxSeal({ silver = false }) {
   const ticks = [...Array(14)].map((_, i) => {
     const a = (i * 360) / 14 * (Math.PI / 180);
     return [50 + Math.cos(a) * 27, 50 + Math.sin(a) * 27, 50 + Math.cos(a) * 32, 50 + Math.sin(a) * 32];
   });
+  if (silver) return (
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <defs>
+        <radialGradient id="shWaxSilver" cx="38%" cy="32%" r="75%">
+          <stop offset="0" stopColor="#f7f8fb" /><stop offset=".55" stopColor="#b9bdc8" /><stop offset="1" stopColor="#5f6370" />
+        </radialGradient>
+      </defs>
+      <path d="M50 3C63 2 70 8 79 12 90 17 96 28 96 41 97 53 98 62 92 72 86 83 75 92 62 95 52 98 42 98 33 94 21 90 11 82 6 69 2 58 3 46 6 36 10 24 18 13 31 8 37 5 44 3 50 3Z" fill="url(#shWaxSilver)" />
+      <circle cx="50" cy="50" r="35" fill="none" stroke="#565a66" strokeWidth="2.4" />
+      <circle cx="50" cy="50" r="33" fill="none" stroke="#ffffff" strokeWidth="1" opacity=".5" />
+      {ticks.map((t, i) => <line key={i} x1={t[0]} y1={t[1]} x2={t[2]} y2={t[3]} stroke="#565a66" strokeWidth="2" strokeLinecap="round" opacity=".8" />)}
+      <UninvitedSigil transform="translate(50 51) scale(.62) translate(-50 -50)" />
+    </svg>
+  );
   return (
     <svg viewBox="0 0 100 100" aria-hidden="true">
       <defs>
@@ -928,6 +1049,44 @@ function WaxSeal() {
   );
 }
 
+/**
+ * Dossier № 000-OMEGA as an object on the desk: a red folder, not an envelope. A burgundy cover with its tab, brass corner
+ * protectors, a leather strap with a brass stud, a label card ("000-Ω") and the CONFIDENTIAL stamp; a hint of papers shows above the cover.
+ * Sized like a "mini" envelope (it sits in the contracts grid and in the "Your next contract" pop-up) and is one button (`onPick`).
+ */
+function ContractFolder({ puzzle: rawPuzzle, label, onPick, done = false }) {
+  const { t } = useLang();
+  const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]);
+  const corners = [[14, 40, 1, 1], [466, 40, -1, 1], [14, 284, 1, -1], [466, 284, -1, -1]];
+  return (
+    <div className="sh-env-cq mini sh-folder-cq">
+      <div className="sh-folder" role="button" tabIndex={0} onClick={onPick}
+        aria-label={t(done ? "env.miniAriaDone" : "env.miniAria", { open: t("hub.open"), label, title: puzzle ? puzzle.title : "" })}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPick && onPick(); } }}>
+        <svg viewBox="0 0 480 300" aria-hidden="true">
+          <defs>
+            <linearGradient id="shFolderBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#5e1422" /><stop offset="1" stopColor="#2c0a10" /></linearGradient>
+            <linearGradient id="shFolderFront" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#8a2234" /><stop offset=".55" stopColor="#6a1727" /><stop offset="1" stopColor="#4a0f1b" /></linearGradient>
+          </defs>
+          <path d="M6 30Q6 22 14 22H150L174 6H466Q474 6 474 14V290Q474 296 468 296H12Q6 296 6 290Z" fill="url(#shFolderBack)" stroke="#2a070e" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M26 40H452V52H26Z" fill="#efe4c8" stroke="#bda677" strokeWidth="2" />
+          <path d="M34 34H440V44H34Z" fill="#e3d5b6" stroke="#bda677" strokeWidth="2" />
+          <path d="M6 54Q6 46 14 46H466Q474 46 474 54V288Q474 296 466 296H14Q6 296 6 288Z" fill="url(#shFolderFront)" stroke="#2a070e" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M12 58H468M12 286H468" stroke="#c46a78" strokeWidth="1.4" opacity=".28" />
+          {corners.map(([x, y, sx, sy], i) => <path key={i} d={`M${x} ${y + 40 * sy}V${y}H${x + 40 * sx}`} fill="none" stroke="#d99b26" strokeWidth="8" strokeLinejoin="round" strokeLinecap="round" />)}
+          <path d="M436 46V296" stroke="#2a070e" strokeWidth="26" opacity=".35" />
+          <rect x="424" y="46" width="24" height="250" fill="#3a0a14" stroke="#1c0609" strokeWidth="2" />
+          <circle cx="436" cy="171" r="13" fill="#d99b26" stroke="#7a5210" strokeWidth="2" />
+          <circle cx="436" cy="171" r="5" fill="#7a5210" />
+          <rect x="120" y="96" width="220" height="86" rx="4" fill="#f2e6cf" stroke="#d99b26" strokeWidth="3" />
+          <rect x="128" y="104" width="204" height="70" rx="2" fill="none" stroke="#7a1d2c" strokeWidth="1.2" opacity=".6" />
+          <text x="230" y="150" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="46" fill="#7a1d2c">000-Ω</text>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 /** Every contract has a target: the victim (victimNameOf lives in ShadokuArt.jsx, so the board's corpse can match the polaroid). */
 export { victimNameOf };
 
@@ -938,7 +1097,22 @@ export { victimNameOf };
  *   "mini"  a closed envelope in a grid: the whole thing is one button (`onPick`)
  * `puzzle` fills the card (title, difficulty, size, suspects); `label` is the card's header ("CONTRACT № 003").
  */
-export function ContractEnvelope({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null }) {
+/** Envelope colours: the manila contract, The Uninvited Guests' black obsidian envelope, the finale's burgundy Omega folder. */
+const ENV_TONES = {
+  manila: { a: "#e3d5b6", b: "#cdbb94", edge: "#8a7650", fold: "#a8956a", inner: "#332d26", innerLine: "#4a4237", back: "#25221e", stamp: "#C83E3B" },
+  obsidian: { a: "#2b2933", b: "#0d0c12", edge: "#5a5566", fold: "#4a4655", inner: "#1d1b24", innerLine: "#3a3644", back: "#121116", stamp: "#D99B26" },
+  omega: { a: "#7a1d2c", b: "#3f0c16", edge: "#2a070e", fold: "#5e1422", inner: "#2c0a10", innerLine: "#4a1019", back: "#1c0609", stamp: "#D99B26" },
+};
+/**
+ * `tone`: "manila" (default) | "obsidian" (the Uninvited's black envelope, silver seal) | "omega" (a mini one is drawn as the red FOLDER, ContractFolder). `target`: a polaroid node that replaces the victim's (the Umbra contracts:
+ * N. O. Ir, Master U. M. Bra). `autoOpen` false: a "modal" envelope stays sealed until clicked. `onOpen`: called when its seal breaks.
+ */
+export function ContractEnvelope(props) {
+  // the finale while sealed: the red folder (Dossier № 000-OMEGA) is a folder, never an envelope
+  return props.tone === "omega" && (props.variant || "hero") === "mini" ? <ContractFolder {...props} /> : <EnvelopeBody {...props} />;
+}
+function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null }) {
+  const pal = ENV_TONES[tone] || ENV_TONES.manila, gid = `shManila-${variant}-${tone}`;
   const { t, lang } = useLang();
   const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]); // title + difficulty in the active language
   const reduced = usePrefersReducedMotion();
@@ -952,9 +1126,11 @@ export function ContractEnvelope({ puzzle: rawPuzzle, label, onAccept, onPick, v
   const open = () => {
     if (mini || phase !== "idle") return;
     setPhase("opening");
+    if (onOpen) onOpen(); // the seal is broken (the dossier shows the Uninvited's letter)
     timer.current = setTimeout(() => setPhase("open"), reduced ? 150 : ENVELOPE_MS + 60);
   };
-  useEffect(() => { if (variant === "modal" && !staticOpen) { const w = setTimeout(open, reduced ? 0 : 280); return () => clearTimeout(w); } return undefined; }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (variant === "modal" && autoOpen && !staticOpen) { const w = setTimeout(open, reduced ? 0 : 280); return () => clearTimeout(w); } return undefined; }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const sealed = variant === "modal" && !autoOpen; // a modal envelope that waits, closed, for the player to break its seal
   const onKey = (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } };
   const opened = phase !== "idle" || (mini && staticOpen);
   const dim = puzzle ? `${puzzle.rooms.length}×${puzzle.rooms[0].length}` : "";
@@ -965,23 +1141,23 @@ export function ContractEnvelope({ puzzle: rawPuzzle, label, onAccept, onPick, v
     : phase === "idle" ? { role: "button", tabIndex: 0, "aria-label": t("env.aria"), onKeyDown: onKey, onClick: open } : { onClick: open };
 
   return (
-    <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}`}>
-      <div className={`sh-env${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}`} {...rootProps} id={variant === "hero" ? "sh-envelope" : undefined}>
+    <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}${sealed ? " sealed" : ""}`}>
+      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}`} {...rootProps} id={variant === "hero" ? "sh-envelope" : undefined}>
         <div className="sh-env-lift">
           <div className="sh-env-stage">
             {/* back / inside */}
             <div className="sh-layer sh-layer-back">
               <svg viewBox="0 0 480 420">
-                <rect x="1.5" y="151.5" width="477" height="267" rx="6" fill="#25221e" stroke="#0e0d0b" strokeWidth="3" />
+                <rect x="1.5" y="151.5" width="477" height="267" rx="6" fill={pal.back} stroke="#0e0d0b" strokeWidth="3" />
               </svg>
             </div>
 
             {/* the contract card + the target's polaroid that slides out */}
             <div className="sh-card">
               <div className="sh-card-in">
-                <div className="sh-card-pol"><ArtSafe>{isTutorial
+                <div className="sh-card-pol"><ArtSafe>{target || (isTutorial
                   ? <AdowPolaroid size={200} tilt={2} /> /* the initiation's "target" is yourself: S. H. Adow, no stamp, no X */
-                  : <VictimPolaroid name={victimNameOf(puzzle)} size={200} tilt={2} crossed={!!done} />}</ArtSafe></div>
+                  : <VictimPolaroid name={victimNameOf(puzzle)} size={200} tilt={2} crossed={!!done} />)}</ArtSafe></div>
                 <div className="sh-card-txt">
                   <div className="k sh-type">{label}</div>
                   <div className="h sh-type">{puzzle?.title || ""}</div>
@@ -1002,40 +1178,44 @@ export function ContractEnvelope({ puzzle: rawPuzzle, label, onAccept, onPick, v
             <div className="sh-layer sh-layer-front">
               <svg viewBox="0 0 480 420">
                 <defs>
-                  <linearGradient id={`shManila-${variant}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#e3d5b6" /><stop offset="1" stopColor="#cdbb94" /></linearGradient>
+                  <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={pal.a} /><stop offset="1" stopColor={pal.b} /></linearGradient>
                 </defs>
-                <path d="M2 150L240 300 478 150V414Q478 418 474 418H6Q2 418 2 414Z" fill={`url(#shManila-${variant})`} stroke="#8a7650" strokeWidth="3" strokeLinejoin="round" />
-                <path d="M3 417L196 288M477 417L284 288" stroke="#a8956a" strokeWidth="2" opacity=".7" />
-                <g transform="rotate(-5 240 368)">
-                  <rect x="100" y="338" width="280" height="60" fill="none" stroke="#C83E3B" strokeWidth="3" rx="3" opacity=".9" />
-                  <rect x="106" y="344" width="268" height="48" fill="none" stroke="#C83E3B" strokeWidth="1" rx="2" opacity=".7" />
-                  <text x="240" y="366" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="19" fill="#C83E3B" opacity=".92">{t("env.stamp1")}</text>
-                  <text x="240" y="385" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="14" fill="#C83E3B" opacity=".92">{t("env.stamp2")}</text>
-                </g>
+                <path d="M2 150L240 300 478 150V414Q478 418 474 418H6Q2 418 2 414Z" fill={`url(#${gid})`} stroke={pal.edge} strokeWidth="3" strokeLinejoin="round" />
+                <path d="M3 417L196 288M477 417L284 288" stroke={pal.fold} strokeWidth="2" opacity=".7" />
+                {tone === "omega" && [[14, 162, 1, 1], [466, 162, -1, 1], [14, 406, 1, -1], [466, 406, -1, -1]].map(([x, y, sx, sy], i) => (
+                  <path key={i} d={`M${x} ${y + 34 * sy}V${y}H${x + 34 * sx}`} fill="none" stroke="#d99b26" strokeWidth="7" strokeLinejoin="round" /> /* the folder's brass corners */
+                ))}
+                {tone === "manila" && <g transform="rotate(-5 240 368)">
+                  <rect x="100" y="338" width="280" height="60" fill="none" stroke={pal.stamp} strokeWidth="3" rx="3" opacity=".9" />
+                  <rect x="106" y="344" width="268" height="48" fill="none" stroke={pal.stamp} strokeWidth="1" rx="2" opacity=".7" />
+                  <text x="240" y="366" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="19" fill={pal.stamp} opacity=".92">{t("env.stamp1").replace(/\s*[—–-]\s*$/, "")}</text>
+                  <text x="240" y="385" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="14" fill={pal.stamp} opacity=".92">{t("env.stamp2")}</text>
+                </g>}
               </svg>
             </div>
 
             {/* the flap (two faces so it reads correctly after rotateX(180deg)) */}
             <div className="sh-flap">
               <div className="sh-flap-face">
-                <svg viewBox="0 0 480 420"><path d="M2 150H478L240 300Z" fill={`url(#shManila-${variant})`} stroke="#8a7650" strokeWidth="3" strokeLinejoin="round" /></svg>
+                <svg viewBox="0 0 480 420"><path d="M2 150H478L240 300Z" fill={`url(#${gid})`} stroke={pal.edge} strokeWidth="3" strokeLinejoin="round" /></svg>
               </div>
               <div className="sh-flap-face sh-flap-in">
-                <svg viewBox="0 0 480 420"><path d="M2 150H478L240 2Z" fill="#332d26" stroke="#0e0d0b" strokeWidth="3" strokeLinejoin="round" /><path d="M40 150L240 28 440 150" fill="none" stroke="#4a4237" strokeWidth="2" /></svg>
+                <svg viewBox="0 0 480 420"><path d="M2 150H478L240 2Z" fill={pal.inner} stroke="#0e0d0b" strokeWidth="3" strokeLinejoin="round" /><path d="M40 150L240 28 440 150" fill="none" stroke={pal.innerLine} strokeWidth="2" /></svg>
               </div>
             </div>
 
             {/* crimson wax seal — two halves so it can crack */}
             <div className="sh-seal">
-              <div className="sh-seal-half sh-seal-l"><WaxSeal /></div>
-              <div className="sh-seal-half sh-seal-r"><WaxSeal /></div>
-              <svg className="sh-crack" viewBox="0 0 100 100" aria-hidden="true"><path d="M52 4L45 24 56 38 44 56 55 72 47 96" fill="none" stroke="#2a0b0a" strokeWidth="2.2" strokeLinejoin="round" /></svg>
+              <div className="sh-seal-half sh-seal-l"><WaxSeal silver={tone === "obsidian"} /></div>
+              <div className="sh-seal-half sh-seal-r"><WaxSeal silver={tone === "obsidian"} /></div>
+              <svg className="sh-crack" viewBox="0 0 100 100" aria-hidden="true"><path d="M52 4L45 24 56 38 44 56 55 72 47 96" fill="none" stroke={tone === "obsidian" ? "#23252c" : "#2a0b0a"} strokeWidth="2.2" strokeLinejoin="round" /></svg>
             </div>
             {mini && done && <div className="sh-env-done sh-type" aria-hidden="true">✓</div>}
           </div>
         </div>
       </div>
       {variant === "hero" && <p className={`sh-env-prompt sh-type${phase === "open" ? " go" : ""}`} aria-live="polite">{phase === "open" ? (note || t("env.acceptNote")) : t("env.prompt")}</p>}
+      {sealed && phase === "idle" && <p className="sh-env-prompt sh-type">{t("env.prompt")}</p>}
     </div>
   );
 }
@@ -1054,7 +1234,6 @@ function Envelope({ onPlay, onStart }) {
 /* ═════════════════════════ PAGE ═════════════════════════ */
 function HomeInner({ onPlay, onStart, onNav, screenshots }) {
   const { t } = useLang();
-  const modals = useModals();
   const shots = Array.isArray(screenshots) ? screenshots : [];
   const [envVisible, setEnvVisible] = useState(false);
 
@@ -1077,7 +1256,7 @@ function HomeInner({ onPlay, onStart, onNav, screenshots }) {
   return (
     <div className="sh-root">
       <style data-shadoku="boards">{GAME_CSS}</style>
-      <SiteHeader onLogo={() => window.scrollTo?.({ top: 0, behavior: "smooth" })} onNav={onNav} current="/" menu={[{ to: "/", label: t("nav.pHome") }, { to: "/play", label: t("nav.pContracts") }]} />
+      <SiteHeader onLogo={() => window.scrollTo?.({ top: 0, behavior: "smooth" })} onNav={onNav} current="/" />
 
       <main>
         <section className="sh-hero">
@@ -1109,13 +1288,7 @@ function HomeInner({ onPlay, onStart, onNav, screenshots }) {
         </aside>
       </main>
 
-      <footer className="sh-footer">
-        <span>{t("footer.copy")}</span>
-        <nav aria-label={t("footer.aria")}>
-          <button className="sh-link" onClick={modals.openLegal}>{t("footer.legal")}</button>
-          <a className="sh-link" href={`mailto:${CONTACT_EMAIL}`}>{t("footer.contactEmail", { email: CONTACT_EMAIL })}</a>
-        </nav>
-      </footer>
+      <SiteFooter />
 
       {!envVisible && (
         <button className="sh-cue sh-type" onClick={toEnvelope} aria-label={t("env.cue")}>
@@ -1148,6 +1321,8 @@ export const SHADOKU_CSS = `
 :root{--sh-bg:#141419;--sh-panel:#1c1c25;--sh-line:#34344a;--sh-cream:#F5F0E6;--sh-ink:#2b2620;--sh-brass:#D99B26;--sh-crimson:#C83E3B;--sh-green:#58b784;--sh-muted:#a9a59b}
 .sh-root,.sh-backdrop,.sh-header{font-family:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif}
 .sh-root *,.sh-backdrop *,.sh-header *{box-sizing:border-box}
+/* the art is drawn left to right: in a right-to-left language an SVG <text> would run left from its x and leave its box */
+svg{direction:ltr}
 .sh-type{font-family:'Special Elite','Courier New',monospace;font-weight:400}
 .sh-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .sh-muted{color:var(--sh-muted);margin:0 0 12px}.sh-muted.sm{font-size:13px;margin:0}
@@ -1159,14 +1334,20 @@ export const SHADOKU_CSS = `
 /* header */
 .sh-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(12px,3vw,32px);background:rgba(20,20,25,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--sh-line);color:var(--sh-cream)}
 .sh-logo{display:flex;align-items:center;height:40px;border:0;background:none;padding:0;cursor:pointer;color:inherit}
-.sh-logo svg{height:100%;width:auto;max-width:46vw}.sh-wordmark{font-size:22px;letter-spacing:.12em;color:var(--sh-brass)}
+.sh-logo img{height:100%;width:auto;max-width:46vw}@media (min-width:961px){.sh-logo{height:48px}}.sh-wordmark{font-size:22px;letter-spacing:.12em;color:var(--sh-brass)}
 .sh-controls,.sh-userpill{display:flex;align-items:center;gap:10px}
 .sh-header{box-sizing:border-box}.sh-header-r{display:flex;align-items:center;gap:10px}.sh-extra{display:inline-flex}
-.sh-burger{display:none;align-items:center;justify-content:center;width:40px;height:38px;padding:0;border-radius:10px;border:1px solid #34344a;background:#1c1c25;color:var(--sh-cream);cursor:pointer}
+.sh-burger{display:inline-flex;align-items:center;justify-content:center;width:40px;height:38px;padding:0;border-radius:10px;border:1px solid #34344a;background:#1c1c25;color:var(--sh-cream);cursor:pointer}
 .sh-burger:hover,.sh-burger[aria-expanded=true]{border-color:var(--sh-brass);color:var(--sh-brass)}
+.sh-header .sh-select,.sh-header .sh-btn,.sh-header .sh-burger{min-height:40px;height:40px} /* 40px tap targets; the 40px logo sets the header height anyway */
 .sh-menu{position:absolute;top:calc(100% + 6px);right:10px;z-index:60;min-width:190px;display:flex;flex-direction:column;padding:6px;border-radius:12px;background:#1c1c25;border:1px solid #34344a;box-shadow:0 18px 40px rgba(0,0,0,.6)}
 .sh-menu a{display:block;padding:12px 14px;border-radius:8px;color:var(--sh-cream);text-decoration:none;font:600 16px 'Barlow',sans-serif}
-.sh-menu a:hover,.sh-menu a:focus-visible{background:rgba(217,155,38,.14);outline:none}.sh-menu a.on{color:var(--sh-brass)}.sh-header .sh-btn.keep{display:inline-flex}
+.sh-menu button{display:block;width:100%;padding:12px 14px;border:0;border-radius:8px;background:none;color:var(--sh-cream);text-align:start;font:600 16px 'Barlow',sans-serif;cursor:pointer}
+.sh-menu a:hover,.sh-menu a:focus-visible,.sh-menu button:hover,.sh-menu button:focus-visible{background:rgba(217,155,38,.14);outline:none}.sh-menu a.on{color:var(--sh-brass)}.sh-header .sh-btn.keep{display:inline-flex}
+.sh-menu-h{display:block;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;font:400 12px 'Special Elite',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--sh-brass)}
+.sh-menu .sub{padding-inline-start:26px}.sh-menu .sh-menu-sep{margin-top:4px;border-top:1px solid #34344a;border-radius:0 0 8px 8px}
+.sh-userpill{position:relative}.sh-userchip svg{color:var(--sh-muted);flex:none}
+.sh-usermenu{top:calc(100% + 8px);right:0;min-width:200px}.sh-usermenu .sh-menu-h{margin-top:0;border-top:0}
 .sh-select-wrap{position:relative;display:flex;align-items:center;color:var(--sh-cream)}
 .sh-select{appearance:none;-webkit-appearance:none;background:#1c1c25;color:var(--sh-cream);border:1px solid #34344a;border-radius:10px;padding:8px 30px;padding-inline:34px 30px;font:600 14px 'Barlow',sans-serif;cursor:pointer;max-width:150px;min-height:38px}
 .sh-select:hover{border-color:var(--sh-brass)}.sh-select option{background:#1c1c25;color:var(--sh-cream)}
@@ -1178,7 +1359,7 @@ export const SHADOKU_CSS = `
 .sh-btn.ghost{background:transparent;color:var(--sh-cream);border-color:var(--sh-line)}.sh-btn.ghost:hover:not(:disabled){border-color:var(--sh-brass);background:rgba(217,155,38,.08);box-shadow:none}
 .sh-btn.sm{min-height:32px;padding:4px 12px;font-size:13px}
 .sh-userchip{display:flex;align-items:center;gap:8px;background:var(--sh-panel);border:1px solid var(--sh-line);border-radius:999px;padding:3px 12px 3px 4px;padding-inline:4px 12px;color:var(--sh-cream);font:600 14px 'Barlow',sans-serif;cursor:pointer}
-.sh-userchip:hover{border-color:var(--sh-brass)}.sh-userchip span{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sh-userchip:hover{border-color:var(--sh-brass)}.sh-userchip-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sh-avatar{width:28px;height:28px;border-radius:50%;background:var(--sh-brass);color:#1a1408;display:inline-flex;align-items:center;justify-content:center;font:700 14px 'Barlow',sans-serif;object-fit:cover;flex:none}
 .sh-iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--sh-line);background:var(--sh-panel);color:var(--sh-brass);font:700 17px 'Special Elite',monospace;cursor:pointer}
 .sh-iconbtn:hover{border-color:var(--sh-brass)}
@@ -1243,8 +1424,14 @@ export const SHADOKU_CSS = `
 .sh-env-cq .sh-env-stage{margin-top:-27cqw;transition:margin-top .6s cubic-bezier(.3,.7,.3,1)} /* closed: the empty room above the flap is pulled away; it opens up again as the letter rises */
 .sh-env-cq.opened .sh-env-stage,.sh-env-cq.modal .sh-env-stage{margin-top:12cqw}
 .sh-env-cq.modal{width:min(560px,90vw);margin:0 auto}
+.sh-env-cq.modal.sealed:not(.opened) .sh-env-stage{margin-top:-27cqw} /* closed like the landing page's: no empty room above the flap until the letter rises */
+.sh-env-cq.sealed .sh-env-prompt{text-align:center}
 .sh-env-cq.mini{width:100%;margin:0;overflow:hidden;padding-bottom:12px}
 .sh-env-cq.mini .sh-env-stage{margin-top:-26cqw}
+.sh-folder-cq{padding-bottom:12px}.sh-folder{position:relative;cursor:pointer;border-radius:8px;outline:none;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 14px 14px rgba(0,0,0,.5))}
+.sh-folder svg{display:block;width:100%;height:auto}
+.sh-folder:hover,.sh-folder:focus-visible{transform:translateY(-8px);filter:drop-shadow(0 22px 20px rgba(122,29,44,.55))}
+.sh-folder:focus-visible{box-shadow:0 0 0 3px var(--sh-brass)}
 .sh-env-done{position:absolute;z-index:6;right:7%;bottom:8%;width:13cqw;height:13cqw;border-radius:50%;background:#2f9e6b;color:#fff;font-size:8.5cqw;line-height:1;display:grid;place-items:center;transform:rotate(-8deg);border:.9cqw solid #e3d5b6;box-shadow:0 .6cqw 1.6cqw rgba(0,0,0,.45);pointer-events:none}
 .sh-card-txt .m{font-size:2cqw;color:#6a1a18;letter-spacing:.05em;margin:-.6cqw 0 1cqw}
 .sh-accept{margin:26px auto 0;max-width:460px;display:flex;flex-direction:column;align-items:center;gap:14px}.sh-accept p{margin:0;color:var(--sh-cream);font-size:clamp(15px,2.4vw,19px)}.sh-btn.lg{min-height:50px;padding:10px 30px;font-size:17px;animation:shPulseBtn 1.8s ease-in-out infinite}
@@ -1262,7 +1449,7 @@ export const SHADOKU_CSS = `
 .sh-card-pol{width:21cqw;flex:none;transform:rotate(-4deg);filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto}
 .sh-env.ready .sh-card{pointer-events:auto}
 .sh-card-best{margin-top:.6cqw;font-size:2.5cqw;color:#2a6b49}.sh-card-best b{font-weight:400;color:#1d4e35;font-size:3cqw;letter-spacing:.04em}
-.sh-card-stamp{position:absolute;z-index:3;left:2%;bottom:20%;padding:.5cqw 1.6cqw;border:.5cqw solid #14683f;border-radius:.9cqw;background:#2f9e6b;color:#f7fbf3;font-size:3.9cqw;letter-spacing:.1em;line-height:1.1;transform:rotate(-11deg);pointer-events:none;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.45),inset 0 0 0 .3cqw rgba(247,251,243,.55)}
+.sh-card-stamp{position:absolute;z-index:3;left:2%;top:16%;padding:.5cqw 1.4cqw;border:.5cqw solid #14683f;border-radius:.9cqw;background:#2f9e6b;color:#f7fbf3;font-size:3.2cqw;letter-spacing:.06em;line-height:1.1;transform:rotate(-11deg);pointer-events:none;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.45),inset 0 0 0 .3cqw rgba(247,251,243,.55)}
 .sh-card-hit{position:absolute;inset:0;z-index:2;width:100%;height:100%;padding:0;border:0;border-radius:.6cqw;background:transparent;cursor:pointer;outline:none}
 .sh-card-hit:hover,.sh-card-hit:focus-visible{box-shadow:0 0 0 .7cqw var(--sh-brass),0 0 4cqw rgba(217,155,38,.55)}
 .sh-card-sign{display:inline-block;margin-top:1.6cqw;padding:1cqw 2.4cqw;border:.45cqw solid var(--sh-crimson);border-radius:.6cqw;color:var(--sh-crimson);font-size:3.1cqw;letter-spacing:.06em;transform:rotate(-3deg);background:rgba(200,62,59,.07);animation:shSign 1.8s ease-in-out infinite;white-space:nowrap}
@@ -1274,6 +1461,7 @@ export const SHADOKU_CSS = `
 .sh-flap-in{transform-origin:50% 35.714%;transform:rotateX(180deg)}
 .sh-seal{position:absolute;z-index:5;left:50%;top:71.43%;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5));transition:filter .25s}
 .sh-env:hover:not(.opening) .sh-seal,.sh-env:focus-visible .sh-seal{filter:drop-shadow(0 0 12px rgba(217,155,38,.95)) drop-shadow(0 0 26px rgba(200,62,59,.8));animation:shGlow 1.4s ease-in-out infinite}
+.sh-env.tone-obsidian:hover:not(.opening) .sh-seal,.sh-env.tone-obsidian:focus-visible .sh-seal{filter:drop-shadow(0 0 12px rgba(240,242,248,.95)) drop-shadow(0 0 26px rgba(150,160,190,.75))}
 .sh-seal-half{position:absolute;inset:0}.sh-seal-half svg{width:100%;height:100%;display:block}
 .sh-seal-l{clip-path:inset(0 50% 0 0)}.sh-seal-r{clip-path:inset(0 0 0 50%)}
 .sh-crack{position:absolute;inset:0;width:100%;height:100%;opacity:0}
@@ -1305,8 +1493,9 @@ export const SHADOKU_CSS = `
 /* homage + footer */
 .sh-homage{display:flex;gap:16px;align-items:flex-start;max-width:760px;margin:0 auto 40px;padding:20px 24px;background:rgba(217,155,38,.08);border:1px solid rgba(217,155,38,.4);border-radius:12px;margin-inline:auto;width:calc(100% - 32px)}
 .sh-homage-ico{font-size:28px}.sh-homage h2{margin:0 0 4px;font-size:20px;color:var(--sh-brass)}.sh-homage p{margin:0;color:var(--sh-cream)}
-.sh-footer{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;padding:24px clamp(14px,3vw,32px) 32px;border-top:1px solid var(--sh-line);color:var(--sh-muted);font-size:14px}
+.sh-footer{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;padding:24px clamp(14px,3vw,32px) calc(96px + env(safe-area-inset-bottom));border-top:1px solid var(--sh-line);color:var(--sh-muted);font-size:14px} /* room for the ✉ cue button, so it never covers the links */
 .sh-footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.sh-footer .sh-link{display:inline-flex;align-items:center;min-height:40px}
 
 /* modal */
 .sh-backdrop{position:fixed;inset:0;z-index:100;background:rgba(6,6,9,.78);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;color:var(--sh-cream)}
@@ -1328,13 +1517,14 @@ export const SHADOKU_CSS = `
 
 @media (max-width:760px){
   .sh-show1{grid-template-columns:1fr}.sh-split{grid-template-columns:1fr}.sh-split>div+div{border-inline-start:0;padding-inline-start:0;border-top:2px dashed var(--sh-line);padding-top:10px}
-  .sh-userchip span{display:none}.sh-userchip{padding:3px}.sh-select{max-width:144px}
+  .sh-userchip .sh-userchip-name{display:none}.sh-userchip{padding:3px 6px 3px 3px}.sh-select{max-width:144px}
   .sh-footer{flex-direction:column;align-items:flex-start}.sh-tape{width:72px;margin-left:-36px}
 }
-@media (max-width:640px){.sh-burger{display:inline-flex}.sh-hide-m{display:none!important}}
-@media (max-width:420px){.sh-header .sh-btn.ghost.sm{display:none}.sh-header{gap:6px;padding-inline:10px}.sh-header-r{gap:6px}.sh-header .sh-logo svg{max-width:30vw}.sh-header .sh-select{max-width:108px;padding-inline:10px 20px}.sh-header .sh-select-ico{display:none}.sh-header .sh-select-caret{inset-inline-end:7px}.sh-logo svg{max-width:34vw}.sh-controls{gap:6px}}
+@media (max-width:640px){.sh-hide-m{display:none!important}}
+@media (max-width:420px){.sh-header .sh-btn.ghost.sm{display:none}.sh-header{gap:6px;padding-inline:10px}.sh-header-r{gap:6px}.sh-header .sh-logo img{max-width:30vw}.sh-header .sh-select{max-width:108px;padding-inline:10px 20px}.sh-header .sh-select-ico{display:none}.sh-header .sh-select-caret{inset-inline-end:7px}.sh-logo img{max-width:34vw}.sh-controls{gap:6px}}
+@media (max-width:380px){.sh-header{gap:4px;padding-inline:8px}.sh-header-r,.sh-controls{gap:4px}.sh-header .sh-logo img{max-width:25vw}.sh-header .sh-select{max-width:92px;padding-inline:8px 18px}.sh-burger{width:38px}}
 @media (prefers-reduced-motion:reduce){
-  .sh-env-lift,.sh-btn{transition:none}.sh-cue,.sh-target::before,.sh-rec i,.sh-env:hover .sh-seal{animation:none}
+  .sh-env-lift,.sh-btn,.sh-folder{transition:none}.sh-cue,.sh-target::before,.sh-rec i,.sh-env:hover .sh-seal{animation:none}
   .sh-env.opening .sh-seal-l,.sh-env.opening .sh-seal-r{animation:none;opacity:0}
   .sh-env.opening .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}
   .sh-env.opening .sh-card{animation:none;transform:translateY(-74%)}

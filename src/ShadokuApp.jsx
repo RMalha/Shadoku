@@ -6,6 +6,10 @@
  *   /play  → the CONTRACTS page: every puzzle in an envelope, grouped by difficulty (click one to open it, click the card to accept)
  *            (before the initiation is done, /play opens the tutorial instead)
  *   /play/<puzzle-name>                            one puzzle, e.g. /play/the-art-of-the-ghost (slim top bar + <ShadokuGame />; the URL follows the contract picker)
+ *   /about  /contact                               plain pages (ShadokuPages.jsx)
+ *   /profile  /profile/stats  /profile/collection  the signed-in player's Info, Stats and relic Collection (ShadokuPages.jsx)
+ *   /test/umbra                                    not linked anywhere: opens the Evidence Board and Dossier № 000-OMEGA without the ten
+ *                                                  relics, in a test mode that never saves or unlocks anything (ShadokuPages.jsx)
  *
  * The game itself lives in ./ShadokuGame.jsx (it used to be called ShadokuApp.jsx).
  *
@@ -33,22 +37,28 @@
  *     onSignIn={(provider) => profile}        // see ShadokuHome.jsx for the auth hook contracts
  *     onCheckUsername={(name) => bool}
  *     onUsernameChange={(name) => void}
+ *     onSession onSignOut onDeleteAccount authError   // the same, for a real backend: src/auth.js
  *     screenshots={[url1, url2, url3]}        // optional: static images instead of the live showcases
  *     puzzles logoSrc lab                     // forwarded to <ShadokuGame />
  *   />
  */
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import ShadokuHome, {
-  ShadokuProviders, SiteHeader, ContractEnvelope, LanguageSelector, useLang, store, pushPath, registerTranslations, translate,
+  ShadokuProviders, SiteHeader, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES,
 } from "./ShadokuHome.jsx";
-import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { MasterPolaroid } from "./ShadokuArt.jsx";
+import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
+import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
+import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
-import { RelicBadge, RelicModal, ObsidianEnvelope, OmegaFolder, EvidenceBoard, SanctumFolder, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD } from "./umbra.jsx";
+import { RelicBadge, RelicModal, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 
 export const TUTORIAL_KEY = "shadoku-tutorial-done";
 export const TUTORIAL_PUZZLE = "tutorial"; // "The Art of the Ghost"
 const BAR_H = 61; // px, the site header on /play (the same <SiteHeader/> as the landing page: 40px logo + 2×10px padding + 1px border)
+const BAR_H_DESK = 69; // px, the same header on a desktop: 48px logo (see SHADOKU_CSS)
+const DESK_MQ = "(min-width: 961px)"; // the game's desktop layout: no site header on /play, the ☰ Menu sits on the tool rail
+const BAR_H_SHORT = 44; // px, the same header on a phone held sideways (40px controls + 2×1px padding + 1px border): see APP_CSS
+const SHORT_LANDSCAPE_MQ = "(orientation: landscape) and (max-height: 520px)"; // the game's compact side-by-side layout (ShadokuGame CSS)
 const useBrowserLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /* ═════════════════════════ STRINGS (English; other languages fall back to these) ═════════════════════════
@@ -125,11 +135,13 @@ function tutorialText(puzzle, t) {
   const K = (k, vars) => t(`ui.tutorial.${k}`, vars);
   const nameOf = (id) => (id === "S" ? K("adow") : (((puzzle && puzzle.suspects) || []).find((q) => q.id === id) || {}).name || id);
   const gender = (id) => genderOf(puzzle, id);
+  /** K for a line about suspect `id`: the locale's `<key>.m|f|n` variant when it has one (languages that inflect for gender), else the plain key. */
+  const KG = (k, id, vars) => textOr(t, `ui.tutorial.${k}.${gender(id)}`, K(k, vars), vars);
   /** A placement nudge for suspect `id`: someone else was placed, or `id` went on the wrong tile. */
   const wrongPlace = (id) => (e) => (e.type !== "place" ? null
     : e.id !== id ? K(`nudge.wrongSuspect.${gender(e.id)}`, { name: nameOf(e.id), target: nameOf(id) })
       : K("nudge.wrongTile", { name: nameOf(id) }));
-  return { K, nameOf, gender, wrongPlace };
+  return { K, KG, nameOf, gender, wrongPlace };
 }
 
 /**
@@ -290,7 +302,7 @@ function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
   const p = scriptedParts(puzzle);
   if (!p) return null;
   const { sol, safe, stools, beyond, litStool } = p;
-  const { K, nameOf, wrongPlace } = tutorialText(puzzle, t);
+  const { K, KG, nameOf, wrongPlace } = tutorialText(puzzle, t);
   const same = (e, [r, c]) => e.r === r && e.c === c;
   const k = (type, id, [r, c], d) => `${type}:${id}:${r},${c}:${d ? "d" : "t"}`;
   const isPlace = (e, id, cell) => e.type === "place" && e.id === id && same(e, cell);
@@ -308,7 +320,7 @@ function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
       task: K("scripted.clearall.task"), coach: { tool: "eraser" },
       gate: (e) => e.type === "erase" && e.all, done: K("done.spotless") },
     { key: "select-B", chapter: K("chapter.alibis"), title: K("scripted.selectPiano.title"),
-      text: K("scripted.selectPiano.text", { name: B }),
+      text: KG("scripted.selectPiano.text", "B", { name: B }),
       task: K("common.tapCard", { name: B }), coach: { card: "B" },
       gate: (e) => e.type === "select" && e.id === "B", done: K("done.isYourTool", { name: B }) },
     place("B", K("chapter.placing"), K("scripted.placeA.title", { name: B }),
@@ -332,7 +344,7 @@ function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
       gate: (e, seen) => stools.every((x) => seen.has(k("note", "A", x, true))),
       nudge: (e) => (e.type === "note" && !e.drag ? K("scripted.dragStools.nudge") : null), done: K("done.fineTrail") },
     { key: "lamp", chapter: K("chapter.light"), title: K("scripted.rayLight.title"),
-      text: K("scripted.rayLight.text", { name: A }),
+      text: KG("scripted.rayLight.text", "A", { name: A }),
       task: K("scripted.lamp.task"), coach: { tool: "light" }, gate: (e) => e.type === "tool" && e.tool === "light", done: K("done.switchReady") },
     { key: "lamp1", chapter: K("chapter.light"), title: K("scripted.rayLamp.title"),
       text: K("scripted.rayLamp.text"),
@@ -341,11 +353,11 @@ function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
     place("D", K("chapter.placing"), LC.title,
       LC.text,
       K("scripted.placeTask", { name: D })),
-    place("E", K("chapter.placing"), K("scripted.placeFoot.title", { name: E }),
-      K("scripted.placeFoot.text", { name: E, other: D }),
+    place("E", K("chapter.placing"), KG("scripted.placeFoot.title", "E", { name: E }),
+      KG("scripted.placeFoot.text", "E", { name: E, other: D }),
       K("scripted.placeTask", { name: E })),
     place("C", K("chapter.placing"), K("scripted.placeDoor.title"),
-      K("scripted.placeDoor.text", { name: C, other: E }),
+      KG("scripted.placeDoor.text", "C", { name: C, other: E }),
       K("scripted.placeTask", { name: C })),
     { key: "eraser", chapter: K("chapter.cleanup"), title: K("scripted.eraser.title"),
       text: K("scripted.eraserStool.text", { watcher: C, name: A }),
@@ -361,7 +373,7 @@ function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
       text: K("scripted.eraseStool2.text", { name: C }),
       task: K("scripted.eraseStool2.task"), coach: { cells: [litStool] },
       gate: (e) => e.type === "erase" && !e.all && same(e, litStool), nudge: wrongTile("erase", [litStool], K("scripted.eraseStool.nudge")), done: K("done.clean") },
-    place("A", K("chapter.placing"), K("scripted.placeStool.title", { name: A }),
+    place("A", K("chapter.placing"), KG("scripted.placeStool.title", "A", { name: A }),
       K("scripted.placeStool.text"),
       K("scripted.placeTask", { name: A })),
     { key: "shadow", chapter: K("chapter.sanctuary"), title: LD.title,
@@ -380,8 +392,18 @@ export function buildTutorial(puzzle, lore, t = ENGLISH) {
 }
 
 /* ═════════════════════════ ROUTER ═════════════════════════ */
-const normalise = (p) => (String(p || "/").replace(/\/+$/, "") || "/");
-export const toView = (p) => { const n = normalise(p); return n === "/play" || n.startsWith("/play/") ? "play" : "home"; };
+const normalise = (p) => (String(p || "/").replace(/\/+$/, "") || "/").replace(/^\/play(?=\/|$)/i, "/play"); // "/PLAY" is "/play" (the case slug is lower-cased by slugOfPath)
+const PAGES = { "/about": "about", "/contact": "contact", "/profile": "profile", "/test/umbra": "testUmbra" };
+/** "/profile/stats" → "stats" · "/profile" → "info" (the tab of the profile page). */
+const profileTab = (p) => (PROFILE_PAGES.find((m) => m.to === normalise(p)) || PROFILE_PAGES[0]).key;
+export const toView = (p) => {
+  const n = normalise(p);
+  if (n === "/play" || n.startsWith("/play/")) return "play";
+  if (PROFILE_PAGES.some((m) => m.to === n)) return "profile";
+  return PAGES[n] || "home";
+};
+/** The address the router shows for `p`: "/PLAY/x" → "/play/x"; anything that is not a page ("/nowhere") → "/". */
+const canonical = (p) => { const n = normalise(p); return toView(n) === "home" ? "/" : n; };
 /** The address the router follows. Opened from disk (file://, the standalone bundle) the app lives in the hash: index.html#/play/<name>. */
 const currentPath = () => {
   try {
@@ -424,9 +446,18 @@ export function useRoute() {
 }
 
 /* ═════════════════════════ THE MASTER'S DOSSIER ═════════════════════════ */
-function MasterDossier({ step, index, total, finished, skipped, canEnter, ok, nudge, onContinue, onSkip, onEnter, onHeight }) {
+const DOSSIER_MIN_KEY = "shadoku-dossier-min"; // "1" = the Master's card is folded to one line (phones need the room)
+function MasterDossier({ steps, index, total, finished, skipped, canEnter, ok, nudge, onContinue, onSkip, onEnter, onHeight }) {
   const { t } = useLang();
-  const read = !!step && !step.gate;
+  const [choice, setChoice] = useState(() => store.get(DOSSIER_MIN_KEY)); // "1" folded / "0" open, as the player chose (null: never chose)
+  const short = useMediaQuery(SHORT_LANDSCAPE_MQ);
+  const min = choice ? choice === "1" : short; // never chosen: folded on a phone held sideways, open otherwise (and it follows a rotation)
+  const toggleMin = () => { const v = min ? "0" : "1"; store.set(DOSSIER_MIN_KEY, v); setChoice(v); };
+  const [peek, setPeek] = useState(null); // ← Prev / Next →: an earlier step shown again (null = the current one)
+  useEffect(() => { setPeek(null); }, [index, finished]);
+  const at = peek === null ? index : peek, past = at < index;
+  const step = steps[at];
+  const read = !!step && !step.gate && !past;
   const ref = useRef(null);
 
   // The game is shortened by exactly this card's height, so nothing it needs is ever hidden behind it.
@@ -442,20 +473,29 @@ function MasterDossier({ step, index, total, finished, skipped, canEnter, ok, nu
   }, [onHeight]);
 
   return (
-    <aside className={`sh-dos${finished ? " fin" : ""}`} ref={ref} role="region" aria-live="polite" aria-label={t("tut.dossier")}>
+    <aside className={`sh-dos${finished ? " fin" : ""}${min ? " min" : ""}`} ref={ref} role="region" aria-live="polite" aria-label={t("tut.dossier")}>
       <div className="sh-dos-in">
-        <div className="sh-dos-photo"><MasterPolaroid size={100} /></div>
+        <div className="sh-dos-photo"><MasterPolaroid size={150} /></div>
         <div className="sh-dos-body">
-          <div className="sh-dos-top">
+          <div className={`sh-dos-top${ok && !finished && !past ? " ok" : ""}`}>
             <span className="sh-dos-badge sh-type">{t("tut.badge")}</span>
-            {!finished && step && <span className="sh-dos-step">{t("tut.chapterStep", { chapter: step.chapter, step: t("tut.step", { n: index + 1, total }) })}</span>}
+            {!finished && step && <span className="sh-dos-step">{t("tut.chapterStep", { chapter: step.chapter, step: t("tut.step", { n: at + 1, total }) })}</span>}
+            {ok && !finished && !past && <span className="sh-dos-ok" role="status">✓ {ok}</span>}
+            <span className="sh-dos-tools">
+              {!finished && index > 0 && <>
+                <button type="button" className="sh-dos-mini" onClick={() => setPeek(Math.max(0, at - 1))} disabled={at === 0}>{t("tut.prev")}</button>
+                <button type="button" className="sh-dos-mini" onClick={() => setPeek(at + 1 >= index ? null : at + 1)} disabled={!past}>{t("tut.next")}</button>
+              </>}
+              <button type="button" className="sh-dos-mini" onClick={toggleMin} aria-expanded={!min}>{t(min ? "tut.expand" : "tut.minimize")}</button>
+            </span>
           </div>
 
           {finished ? <h2 className="sh-type">{t("tut.doneTitle")}</h2> : step && <h2 className="sh-type">{step.title}</h2>}
           {!finished && step && (
-            <p className={`sh-dos-text${nudge ? " bad" : ""}`} role={nudge ? "alert" : undefined}>
-              <span className="q">{step.text}</span>{nudge || step.task ? " " : ""}
-              {(nudge || step.task) && <b className="t">{nudge || step.task}</b>}
+            <p className={`sh-dos-text${nudge && !past ? " bad" : ""}${past ? " past" : ""}${(past ? step.done : nudge || step.task) ? " has-t" : ""}`} role={nudge && !past ? "alert" : undefined}>
+              <span className="q">{step.text}</span>
+              {past ? step.done && <> <b className="t">✓ {step.done}</b></>
+                : (nudge || step.task) && <> <b className="t">{nudge || step.task}</b></>}
             </p>
           )}
 
@@ -463,7 +503,7 @@ function MasterDossier({ step, index, total, finished, skipped, canEnter, ok, nu
             {finished ? <span className="sh-dos-win">{skipped ? t("tut.skipped") : t("tut.solved")}</span>
               : <button type="button" className="sh-dos-skip" onClick={onSkip}>{t("tut.skip")}</button>}
             <div className="sh-dos-nav">
-              {!finished && !read && <span className="sh-dos-cue" aria-hidden="true">{t("tut.waiting")}</span>}
+              {!finished && !read && !past && <span className="sh-dos-cue" aria-hidden="true">{t("tut.waiting")}</span>}
               {!finished && read && <button type="button" className="sh-dos-btn go" onClick={onContinue} autoFocus>{t("tut.continue")}</button>}
               {finished && canEnter && <button type="button" className="sh-enter" onClick={onEnter}>{t("tut.enter")}</button>}
             </div>
@@ -475,19 +515,29 @@ function MasterDossier({ step, index, total, finished, skipped, canEnter, ok, nu
 }
 
 /* ═════════════════════════ /play — THE CONTRACTS PAGE ═════════════════════════ */
-const DIFF_ORDER = ["Tutorial", "Very Easy", "Easy", "Medium", "Hard", "Expert"];
+/**
+ * Envelope tone and target polaroid of a contract: the Umbra contracts have their own. The Uninvited Guests: a black envelope and
+ * N. O. Ir, the Master's hooded second in command. The finale: the burgundy Omega folder while sealed, then (accepted in Dossier № 000-OMEGA) a black envelope with the Master.
+ */
+const toneOf = (id) => (id === UMBRA_HARD ? "obsidian" : id === UMBRA_FINALE ? (isUnlocked(id) ? "obsidian" : "omega") : "manila");
+const targetOf = (id) => (id === UMBRA_HARD ? <AssassinPolaroid who="N" size={200} tilt={2} /> /* N. O. Ir, U. M. Bra's hooded second in command */
+  : id === UMBRA_FINALE ? <MasterPolaroid size={200} tilt={2} /> : null);
 const pad3 = (n) => String(n).padStart(3, "0");
 
 function ContractsScreen({ go, puzzles, logoSrc }) {
+  const hubBar = useMediaQuery(DESK_MQ) ? BAR_H_DESK : BAR_H;
   const { t } = useLang();
   const all = useMemo(() => (puzzles ? normalizePuzzles(puzzles) : PUZZLES), [puzzles]);
   const [bests] = useState(() => readBestTimes(all)); // { id: best seconds } of every fulfilled contract
   const solved = useMemo(() => new Set(Object.keys(bests)), [bests]);
   const tick = useUmbraTick(); // an Umbra lock opened: show its contract
-  const pack = useMemo(() => all.filter((q) => isUnlocked(q.id, solved)), [all, solved, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The Umbra contracts sit in their own slot, sealed: The Uninvited Guests' black envelope once the ten relics are in, the finale's
+  // Omega folder once The Uninvited Guests is fulfilled. Opening a sealed one starts its lock (cryptex / Sanctum Seal).
+  const sealedShown = (id) => (id === UMBRA_HARD && allRelics(solved)) || (id === UMBRA_FINALE && solved.has(UMBRA_HARD));
+  const pack = useMemo(() => all.filter((q) => isUnlocked(q.id, solved) || sealedShown(q.id)), [all, solved, tick]); // eslint-disable-line react-hooks/exhaustive-deps
   const [umbra, setUmbra] = useState(null); // "board" | "sanctum" | { relic: caseId } | null
-  const launch = (id) => { const q = all.find((x) => x.id === id); setUmbra(null); if (q) go(`/play/${puzzleSlug(q)}`); };
   const [picked, setPicked] = useState(null); // puzzle whose envelope is open
+  const pick = (x) => { if (isUnlocked(x.q.id, solved)) setPicked(x); else setUmbra(x.q.id === UMBRA_HARD ? "board" : "sanctum"); };
   const numbered = useMemo(() => { let n = 0; return pack.map((q) => ({ q, n: q.id === TUTORIAL_PUZZLE ? 0 : ++n })); }, [pack]);
   const groups = useMemo(() => {
     const byDiff = new Map();
@@ -498,6 +548,10 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
   const trf = useMemo(() => trOf(t), [t]);
   const diffName = (d) => localizeHead({ difficulty: d }, trf).difficulty; // "Very Easy" in the active language (the English name stays the group's id)
   const labelOf = (n) => (n === 0 ? t("env.caseFile") : t("hub.contractNo", { n: pad3(n) }));
+  const launch = (id) => { setUmbra(null); const x = numbered.find((y) => y.q.id === id); if (x) setPicked(x); }; // the lock opened: the contract shows its target
+  const finale = all.find((q) => q.id === UMBRA_FINALE) || null;
+  const finaleNo = all.filter((q) => q.id !== TUTORIAL_PUZZLE).findIndex((q) => q.id === UMBRA_FINALE) + 1;
+  const acceptAndPlay = () => { acceptFinale(); setUmbra(null); if (finale) go(`/play/${puzzleSlug(finale)}`); }; // Dossier № 000-OMEGA: the Master's contract, signed
 
   useEffect(() => {
     const prev = document.title;
@@ -513,18 +567,9 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
 
   return (
     <div className="sh-hub">
-      <SiteHeader onLogo={() => go("/")} style={{ height: BAR_H }} onNav={go} current="/play" menu={[{ to: "/", label: t("nav.pHome") }, { to: "/play", label: t("nav.pContracts") }]} />
+      <SiteHeader onLogo={() => go("/")} style={{ height: hubBar }} onNav={go} current="/play" />
       <main className="sh-hub-main">
         <h1 className="sh-type">{t("hub.title")}</h1>
-        {allRelics(solved) && (
-          <section className="sh-hub-umbra" aria-label={t("hub.umbra")}>
-            <h2 className="sh-hub-h"><span className="sh-hub-diff d-umbra">{t("hub.umbra")}</span></h2>
-            <div className="sh-hub-umbra-row">
-              <ObsidianEnvelope onOpen={() => setUmbra("board")} />
-              {solved.has(UMBRA_HARD) && <OmegaFolder onOpen={() => setUmbra("sanctum")} />}
-            </div>
-          </section>
-        )}
         {groups.map(([diff, items]) => {
           const done = items.filter((x) => solved.has(x.q.id)).length;
           return (
@@ -535,7 +580,7 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
                   const ok = solved.has(q.id);
                   return (
                     <div className="sh-hub-item" key={q.id}>
-                      <ContractEnvelope variant="mini" puzzle={q} label={labelOf(n)} done={ok} best={bests[q.id]} onPick={() => setPicked({ q, n })} />
+                      <ContractEnvelope variant="mini" puzzle={q} label={labelOf(n)} done={ok} best={bests[q.id]} onPick={() => pick({ q, n })} tone={toneOf(q.id)} target={targetOf(q.id)} />
                       {ok && <RelicBadge caseId={q.id} onOpen={(id) => setUmbra({ relic: id })} />}
                       <p className="sh-hub-cap sh-type"><b>{n === 0 ? t("hub.capInitiation") : t("hub.capNo", { n: pad3(n) })}</b>{" "}{ok ? <span className="ok">{t("hub.capDone", { title: localizeHead(q, trf).title, time: fmtTime(bests[q.id]) })}</span> : <span>{t("hub.capInfo", { size: `${q.rooms.length}×${q.rooms[0].length}`, n: q.suspects.length })}</span>}</p>
                     </div>
@@ -548,13 +593,17 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
       </main>
 
       {umbra === "board" && <EvidenceBoard onClose={() => setUmbra(null)} onLaunch={launch} />}
-      {umbra === "sanctum" && <SanctumFolder onClose={() => setUmbra(null)} onLaunch={launch} />}
+      {umbra === "sanctum" && (
+        <FinalDossier onClose={() => setUmbra(null)} onAccept={acceptAndPlay}
+          envelope={finale && ((onOpen) => <ContractEnvelope variant="modal" puzzle={finale} label={labelOf(finaleNo)} onAccept={acceptAndPlay} onOpen={onOpen} tone="obsidian" target={targetOf(UMBRA_FINALE)} autoOpen={false} />)} />
+      )}
       {umbra && umbra.relic && <RelicModal caseId={umbra.relic} onClose={() => setUmbra(null)} />}
       {picked && (
         <div className="sh-hub-modal" role="dialog" aria-modal="true" aria-label={labelOf(picked.n)} onPointerDown={(e) => e.target === e.currentTarget && setPicked(null)}>
           <div className="sh-hub-modal-in">
             <button type="button" className="sh-hub-x" onClick={() => setPicked(null)} aria-label={t("hub.close")}>×</button>
-            <ContractEnvelope key={picked.q.id} variant="modal" puzzle={picked.q} label={labelOf(picked.n)} done={solved.has(picked.q.id)} best={bests[picked.q.id]} onAccept={() => go(`/play/${puzzleSlug(picked.q)}`)} />
+            <ContractEnvelope key={picked.q.id} variant="modal" puzzle={picked.q} label={labelOf(picked.n)} done={solved.has(picked.q.id)} best={bests[picked.q.id]} onAccept={() => go(`/play/${puzzleSlug(picked.q)}`)}
+              tone={toneOf(picked.q.id)} target={targetOf(picked.q.id)} />
           </div>
         </div>
       )}
@@ -667,22 +716,41 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 
   const helpExtra = useCallback(({ close }) => (
     <div className="sh-help-extra">
+      <p className="sh-dos-note">{t(LORE_NOTE_KEY)}</p>
       <button type="button" className="sk-btn primary" onClick={() => { close(); replay(); }}>{t("help.replay")}</button>
     </div>
   ), [replay, t]);
 
   const showCard = caseId === tutorialId && view === "play"; // the Inspector gets the whole screen
+  const short = useMediaQuery(SHORT_LANDSCAPE_MQ), desk = useMediaQuery(DESK_MQ);
+  const barH = desk ? 0 : short ? BAR_H_SHORT : BAR_H; // desktop: the board runs to the top of the page
+  const { user, signOut } = useAuth();
+  const modals = useModals();
+  const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail: the site's pages, ⚙ Settings, then Sign In or the Profile group
+    { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
+    { key: "contracts", label: t("nav.pContracts"), onSelect: enter },
+    { key: "settings", label: t("settings.open"), settings: true },
+    { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
+    { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
+    ...(user ? [
+      { key: "profile", label: t("nav.profile"), heading: true },
+      ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
+      { key: "logout", label: t("nav.logOut"), sub: true, onSelect: signOut },
+    ] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
+  ], [t, go, user, signOut, modals, enter]);
 
   return (
     <div className="sh-playroot">
-      <SiteHeader onLogo={() => go("/")} style={{ height: BAR_H }} onNav={go} menu={[{ to: "/", label: t("nav.pHome") }, { to: "/play", label: t("nav.pContracts") }]}
-        extra={initiated ? <a className="sh-btn ghost sm keep" href="/play" onClick={(e) => { e.preventDefault(); go("/play"); }}>✉ {t("hub.contracts")}</a> : null} />
+      {!desk && <SiteHeader onLogo={() => go("/")} style={{ height: barH }} onNav={go}
+        extra={initiated ? <a className="sh-btn ghost sm keep" href="/play" onClick={(e) => { e.preventDefault(); go("/play"); }}>✉ {t("hub.contracts")}</a> : null} />}
 
       <ShadokuGame
         t={t}
         puzzles={shown} logoSrc={logoSrc} lab={lab}
-        insetY={BAR_H + (showCard ? cardH : 0)}
-        hideLogo fixedCase={initiated} onExit={enter}
+        insetY={barH + (showCard ? cardH : 0)}
+        hideLogo={!desk} onLogo={() => go("/")} menu={desk ? railMenu : null} fixedCase={initiated} onExit={enter}
+        renderEnvelope={({ puzzle, label, onPick, variant = "mini", onAccept, tone, onOpen }) => <ContractEnvelope variant={variant} puzzle={puzzle} label={label} onPick={onPick} onAccept={onAccept} onOpen={onOpen}
+          tone={tone || (variant === "modal" ? "obsidian" : toneOf(puzzle.id))} target={targetOf(puzzle.id)} autoOpen={variant !== "modal"} />}
         lockCaseMenu={!initiated}
         forcePuzzleId={!initiated ? tutorialId : null}
         onGameEvent={onGameEvent}
@@ -695,7 +763,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
       />
 
       {showCard && (
-        <MasterDossier step={steps[Math.min(step, steps.length - 1)]} index={Math.min(step, steps.length - 1)} total={steps.length}
+        <MasterDossier steps={steps} index={Math.min(step, steps.length - 1)} total={steps.length}
           finished={finished} skipped={skipped} canEnter ok={ok} nudge={nudge}
           onContinue={() => advance(Math.min(steps.length - 1, step + 1))} onSkip={() => complete("skip")} onEnter={enter} onHeight={setCardH} />
       )}
@@ -704,24 +772,39 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 }
 
 /* ═════════════════════════ ROOT ═════════════════════════ */
-export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange, screenshots, puzzles, logoSrc, lab }) {
+export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError, screenshots, puzzles, logoSrc, lab }) {
   const [view, go, path, sync] = useRoute();
   const startSlug = useMemo(() => puzzleSlug((puzzles ? normalizePuzzles(puzzles) : PUZZLES).find((q) => q.id === TUTORIAL_PUZZLE)) || "the-art-of-the-ghost", [puzzles]); // the home envelope opens the tutorial puzzle itself
   const initiated = !!store.get(TUTORIAL_KEY);
   const tick = useUmbraTick();
   const locked = useMemo(() => { // /play/<name> of an Umbra contract that is still locked: show the envelopes instead
     if (view !== "play" || !initiated) return false;
-    const pack = puzzles ? normalizePuzzles(puzzles) : PUZZLES, q = findPuzzleBySlug(pack, slugOfPath(path));
-    return !!q && !isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack))));
+    const slug = slugOfPath(path);
+    if (!slug) return false;
+    const pack = puzzles ? normalizePuzzles(puzzles) : PUZZLES, q = findPuzzleBySlug(pack, slug);
+    return !q || !isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack)))); // no such contract: the envelopes too
   }, [view, initiated, puzzles, path, tick]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (locked) sync("/play", true); }, [locked, sync]);
+  useEffect(() => { // an unknown or oddly cased address: the address bar shows the page that is really open
+    const fromDisk = typeof window !== "undefined" && window.location.protocol === "file:";
+    const now = currentPath(); // the live address: the game may already have replaced `path` in this commit (the tutorial's own address)
+    if (!fromDisk && canonical(now) !== now) sync(canonical(now), true);
+  }, [path, sync]);
   const contracts = view === "play" && initiated && (!slugOfPath(path) || locked); // /play after the initiation: the envelopes
+  const launchContract = useCallback((id) => { // the profile's Evidence Board: "Enter “The Uninvited Guests”"
+    const q = (puzzles ? normalizePuzzles(puzzles) : PUZZLES).find((x) => x.id === id);
+    go(q ? `/play/${puzzleSlug(q)}` : "/play");
+  }, [puzzles, go]);
   return (
-    <ShadokuProviders onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}>
+    <ShadokuProviders onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}
+      onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError} onNav={go}>
       <style data-shadoku="app">{APP_CSS}</style>
       {contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
-        : view === "play"
-        ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
+        : view === "play" ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
+        : view === "about" ? <AboutPage go={go} />
+        : view === "contact" ? <ContactPage go={go} />
+        : view === "profile" ? <ProfilePage go={go} tab={profileTab(path)} puzzles={puzzles} onLaunch={launchContract} />
+        : view === "testUmbra" ? <TestUmbraPage go={go} puzzles={puzzles} />
         : <ShadokuHome onPlay={() => go("/play")} onNav={go} onStart={() => go(`/play/${startSlug}`)} screenshots={screenshots} />}
     </ShadokuProviders>
   );
@@ -731,6 +814,7 @@ const APP_CSS = `
 .sh-playroot{height:100vh;height:100dvh;overflow:hidden;background:#141419;color:#F5F0E6;font-family:'Barlow',system-ui,sans-serif}
 .sh-playroot *{box-sizing:border-box}
 .sh-header a.sh-btn{text-decoration:none}
+@media (orientation:landscape) and (max-height:520px){.sh-playroot .sh-header{padding-block:1px}.sh-playroot .sh-header .sh-logo{height:32px}} /* BAR_H_SHORT */
 
 /* The Master's dossier card: pinned under the game, mahogany + brass like his Polaroid */
 .sh-dos{position:fixed;z-index:45;left:0;right:0;bottom:0;background:linear-gradient(180deg,#2a1d1c,#1d1615);color:#F5F0E6;border-top:2px solid #D99B26;
@@ -745,16 +829,26 @@ const APP_CSS = `
 .sh-dos-text{margin:2px 0 6px;font-size:14.5px;line-height:1.42;color:#F5F0E6}
 .sh-dos-text .q{font-style:italic;color:#e9dfc9}.sh-dos-text .t{color:#fff;font-weight:700}
 .sh-dos-text.bad .t{color:#ff9a96}
-.sh-dos-dots{display:flex;gap:2px;margin-inline-start:auto}
-.sh-dos-dots button{width:18px;height:18px;padding:0;border:0;background:none;cursor:pointer;position:relative}
-.sh-dos-dots button:after{content:"";position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#5a4a3e;transition:transform .15s,background .15s}
-.sh-dos-dots button.past:after{background:#D99B26}.sh-dos-dots button.on:after{background:#C83E3B;transform:scale(1.3)}
+.sh-dos-ok{font-size:12.5px;font-weight:700;color:#7fe0b4;animation:shOk .25s ease-out}
+@keyframes shOk{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.sh-dos-tools{display:flex;gap:4px;margin-inline-start:auto}
+.sh-dos-mini{position:relative;font:inherit;font-size:12px;font-weight:700;min-height:32px;padding:4px 10px;border-radius:8px;border:1px solid #5a4a3e;background:rgba(255,255,255,.04);color:#e9dfc9;cursor:pointer;white-space:nowrap}
+.sh-dos-mini:before{content:"";position:absolute;inset:-5px -3px} /* a 40px hit area (measured from inside the 1px border) */
+.sh-dos-mini:hover:not([disabled]){background:rgba(255,255,255,.1)}
+.sh-dos-mini[disabled]{opacity:.35;cursor:default}
+.sh-dos-text.past{opacity:.85}.sh-dos-text.past .t{color:#7fe0b4}
+/* folded: the badge row, the task and the buttons; the Master's portrait, title and words wait behind Expand */
+.sh-dos.min .sh-dos-photo,.sh-dos.min h2,.sh-dos.min .sh-dos-note,.sh-dos.min .sh-dos-text.has-t .q,.sh-dos.min .sh-dos-cue{display:none}
+.sh-dos.min .sh-dos-text:not(.has-t){display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sh-dos.min .sh-dos-text{margin:2px 0 0}
+.sh-dos.min .sh-dos-actions{margin-top:4px}
 .sh-dos h2{margin:1px 0 2px;font-size:clamp(18px,3.2vw,23px);color:#f0b94a;font-weight:400;line-height:1.15}
 .sh-dos-note{margin:0 0 6px;font-size:13px;line-height:1.4;color:#e9d9b8;padding:6px 9px;border-left:3px solid #D99B26;background:rgba(217,155,38,.1);border-radius:0 6px 6px 0}
 .sh-dos-win{font-size:13px;font-weight:700;color:#7fe0b4;line-height:1.3;flex:1 1 220px;min-width:0}
 .sh-dos-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}
 .sh-dos-skip{background:none;border:0;padding:2px 0;font:inherit;font-size:12.5px;color:#9d917c;text-decoration:underline;text-decoration-color:rgba(157,145,124,.45);text-underline-offset:3px;cursor:pointer}
 .sh-dos-skip:hover{color:#d9cdb6}
+.sh-dos-skip{position:relative}.sh-dos-skip:before{content:"";position:absolute;inset:-10px -6px} /* a 40px hit area */
 .sh-dos-nav{display:flex;align-items:center;gap:8px;margin-inline-start:auto;flex-wrap:wrap;justify-content:flex-end}
 .sh-dos-cue{font-size:12px;color:#b9ad97;font-weight:600;margin-right:2px}
 .sh-dos-btn{font:inherit;font-size:13.5px;font-weight:700;padding:6px 13px;border-radius:9px;border:1px solid #5a4a3e;background:rgba(255,255,255,.05);color:#F5F0E6;cursor:pointer}
@@ -789,7 +883,8 @@ const APP_CSS = `
 .sh-hub-modal-in{position:relative;width:min(560px,100%);padding:0 0 30px}
 .sh-hub-x{position:absolute;top:-6px;right:-4px;z-index:5;width:38px;height:38px;border-radius:50%;border:1px solid #5a4a3e;background:#1d1615;color:#F5F0E6;font-size:22px;line-height:1;cursor:pointer}
 .sh-hub-x:hover{background:#2a1d1c}
-.sh-help-extra{margin-top:12px;display:flex;justify-content:flex-end}
+.sh-help-extra{margin-top:12px;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.sh-help-extra .sh-dos-note{align-self:stretch;margin:0;color:#4a3d2c;background:rgba(217,155,38,.14)}
 .sh-help-extra .sk-btn{padding:8px 14px}
 @media (max-width:520px){.sh-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.sh-hub-cap{font-size:12px}}
 @media (max-width:640px){
@@ -797,6 +892,12 @@ const APP_CSS = `
   .sh-dos-photo{flex-basis:56px;width:56px}
   .sh-dos-text{font-size:13.5px;line-height:1.38;margin-bottom:4px}
   .sh-dos-note{font-size:12px;padding:4px 7px}
+  .sh-dos-top .sh-dos-badge{display:none} /* the step label says where we are; the top row keeps to one line */
+  .sh-dos-top{flex-wrap:nowrap}.sh-dos-step{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sh-dos-top.ok .sh-dos-step{display:none} /* the "✓ Noted." line stands in for the step label for its few seconds */
+  .sh-dos-ok{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sh-dos-mini{padding:4px 8px}
+  .sh-dos-text{max-height:calc(4 * 1.38em);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin} /* four lines, the rest scrolls */
   .sh-dos-cue{display:none}
   .sh-dos.fin .sh-dos-note{display:none}
   .sh-enter{flex:1 1 100%;padding:9px 12px;font-size:14px}
@@ -806,9 +907,9 @@ const APP_CSS = `
 .sh-dos-photo svg{width:100%!important;height:auto!important}
 /* desktop: a taller, fixed-height card (so the board does not resize from step to step) with room for the Master's whole line */
 @media (min-width:961px){
-  .sh-dos{height:clamp(210px,26vh,280px)}
+  .sh-dos:not(.min){height:clamp(210px,26vh,280px)}
   .sh-dos-in{height:100%;max-width:1120px;padding:16px 24px 16px;gap:20px}
-  .sh-dos-photo{flex-basis:96px;width:96px;margin-top:2px}
+  .sh-dos-photo{flex-basis:150px;width:150px;margin-top:0}
   .sh-dos-body{display:flex;flex-direction:column;min-height:0;height:100%}
   .sh-dos h2{font-size:clamp(21px,2.2vw,27px);margin:3px 0 4px}
   .sh-dos-text{flex:1 1 auto;min-height:0;overflow-y:auto;font-size:16.5px;line-height:1.5;margin:2px 0 8px;scrollbar-width:thin}

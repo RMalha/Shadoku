@@ -9,24 +9,37 @@
  "tier": "expert",
  "shape": "rect",
  "seed": 4201,
- "attempt": 14,
+ "attempt": 206,
  "traitMode": "any",
  "propMode": "require",
  "castKey": "MAX1111RAR5-4201",
  "puzzleId": "MAX1111RAR5-4201",
  "engine": "V10.1",
  "i18nSchema": "shadoku-i18n/1",
- "difficultyScore": 210,
+ "difficultyScore": 157,
  "zoneWord": "room",
  "size": 11,
  "rooms": [
   [
-   4,
-   4,
-   1,
-   1,
-   1,
-   1,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3,
    1,
    1,
    1,
@@ -36,10 +49,10 @@
   [
    4,
    4,
-   1,
-   1,
-   1,
-   1,
+   4,
+   4,
+   4,
+   4,
    1,
    1,
    1,
@@ -47,140 +60,127 @@
    1
   ],
   [
-   4,
-   4,
-   3,
-   3,
-   3,
-   0,
-   0,
-   0,
-   0,
    5,
-   5
+   5,
+   5,
+   5,
+   5,
+   5,
+   1,
+   1,
+   1,
+   1,
+   1
   ],
   [
-   4,
-   4,
-   3,
-   3,
-   3,
+   2,
+   2,
    0,
    0,
    0,
    0,
-   5,
-   5
+   1,
+   1,
+   1,
+   1,
+   1
   ],
   [
-   4,
-   4,
-   3,
-   3,
-   3,
+   2,
+   2,
    0,
    0,
    0,
    0,
-   5,
-   5
+   6,
+   6,
+   6,
+   6,
+   6
   ],
   [
-   4,
-   4,
-   3,
-   3,
-   3,
+   2,
+   2,
    0,
    0,
    0,
    0,
-   5,
-   5
+   6,
+   6,
+   6,
+   6,
+   6
   ],
   [
-   4,
-   4,
-   3,
-   3,
-   3,
+   2,
+   2,
    0,
    0,
    0,
    0,
-   5,
-   5
+   6,
+   6,
+   6,
+   6,
+   6
   ],
   [
+   2,
+   2,
+   0,
+   0,
+   0,
+   0,
    6,
    6,
    6,
    6,
-   6,
-   6,
+   6
+  ],
+  [
+   2,
+   2,
+   0,
+   0,
+   0,
+   0,
    7,
-   2,
-   2,
-   2,
-   2
+   7,
+   7,
+   7,
+   7
   ],
   [
-   6,
-   6,
-   6,
-   6,
-   6,
-   6,
+   2,
+   2,
+   0,
+   0,
+   0,
+   0,
    7,
-   2,
-   2,
-   2,
-   2
-  ],
-  [
-   6,
-   6,
-   6,
-   6,
-   6,
-   6,
    7,
-   2,
-   2,
-   2,
-   2
-  ],
-  [
-   6,
-   6,
-   6,
-   6,
-   6,
-   6,
    7,
-   2,
-   2,
-   2,
-   2
+   7,
+   7
   ]
  ],
  "roomNames": [
-  "Library",
+  "Music Room",
   "Gallery",
   "Orangery",
-  "Music Room",
+  "Billiards",
+  "Bedroom",
   "Parlor",
-  "Study",
   "Cellar",
   "Foyer"
  ],
  "roomIds": [
-  "LIBRARY",
+  "MUSIC_ROOM",
   "GALLERY",
   "ORANGERY",
-  "MUSIC_ROOM",
+  "BILLIARDS",
+  "BEDROOM",
   "PARLOR",
-  "STUDY",
   "CELLAR",
   "FOYER"
  ],
@@ -188,241 +188,251 @@
   [
    [
     0,
-    1
+    6
    ],
+   [
+    1,
+    6
+   ]
+  ],
+  [
    [
     0,
-    2
-   ]
-  ],
-  [
-   [
-    1,
-    1
-   ],
-   [
-    1,
-    2
-   ]
-  ],
-  [
-   [
-    1,
-    3
-   ],
-   [
-    2,
-    3
-   ]
-  ],
-  [
-   [
-    1,
-    5
-   ],
-   [
-    2,
-    5
-   ]
-  ],
-  [
-   [
-    1,
-    6
-   ],
-   [
-    2,
-    6
-   ]
-  ],
-  [
-   [
-    1,
-    7
-   ],
-   [
-    2,
-    7
-   ]
-  ],
-  [
-   [
-    1,
-    9
-   ],
-   [
-    2,
-    9
-   ]
-  ],
-  [
-   [
-    1,
-    10
-   ],
-   [
-    2,
-    10
-   ]
-  ],
-  [
-   [
-    2,
-    1
-   ],
-   [
-    2,
-    2
-   ]
-  ],
-  [
-   [
-    2,
-    4
-   ],
-   [
-    2,
-    5
-   ]
-  ],
-  [
-   [
-    3,
     8
    ],
    [
-    3,
+    1,
+    8
+   ]
+  ],
+  [
+   [
+    0,
+    9
+   ],
+   [
+    1,
     9
    ]
   ],
   [
    [
-    4,
-    4
+    1,
+    1
    ],
    [
-    4,
-    5
+    2,
+    1
    ]
   ],
   [
    [
-    5,
-    1
+    1,
+    2
    ],
    [
-    5,
+    2,
     2
    ]
   ],
   [
    [
-    5,
+    1,
     4
    ],
    [
-    5,
+    2,
+    4
+   ]
+  ],
+  [
+   [
+    1,
+    5
+   ],
+   [
+    2,
     5
    ]
   ],
   [
    [
-    6,
+    2,
     0
    ],
    [
-    7,
+    3,
     0
    ]
   ],
   [
    [
-    6,
-    1
-   ],
-   [
-    7,
-    1
-   ]
-  ],
-  [
-   [
-    6,
+    2,
     2
    ],
    [
-    7,
+    3,
     2
    ]
   ],
   [
    [
-    6,
+    2,
     3
    ],
    [
-    7,
+    3,
     3
    ]
   ],
   [
    [
-    6,
+    2,
+    4
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  [
+   [
+    2,
     5
    ],
    [
-    7,
+    2,
+    6
+   ]
+  ],
+  [
+   [
+    3,
+    0
+   ],
+   [
+    4,
+    0
+   ]
+  ],
+  [
+   [
+    3,
+    1
+   ],
+   [
+    4,
+    1
+   ]
+  ],
+  [
+   [
+    3,
+    4
+   ],
+   [
+    4,
+    4
+   ]
+  ],
+  [
+   [
+    3,
+    5
+   ],
+   [
+    3,
+    6
+   ]
+  ],
+  [
+   [
+    3,
+    5
+   ],
+   [
+    4,
     5
    ]
   ],
   [
    [
-    6,
-    7
+    4,
+    5
    ],
    [
-    7,
-    7
+    4,
+    6
    ]
   ],
   [
    [
-    6,
+    4,
+    6
+   ],
+   [
+    5,
+    6
+   ]
+  ],
+  [
+   [
+    4,
     8
    ],
    [
-    6,
-    9
+    5,
+    8
    ]
   ],
   [
    [
-    6,
-    9
+    5,
+    1
    ],
    [
-    7,
-    9
+    5,
+    2
    ]
   ],
   [
    [
-    6,
-    10
+    5,
+    5
    ],
    [
-    7,
-    10
-   ]
-  ],
-  [
-   [
-    7,
+    5,
     6
+   ]
+  ],
+  [
+   [
+    6,
+    1
+   ],
+   [
+    6,
+    2
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    6,
+    6
+   ]
+  ],
+  [
+   [
+    7,
+    1
    ],
    [
     7,
-    7
+    2
    ]
   ],
   [
@@ -441,8 +451,18 @@
     6
    ],
    [
+    9,
+    6
+   ]
+  ],
+  [
+   [
     8,
-    7
+    9
+   ],
+   [
+    9,
+    9
    ]
   ],
   [
@@ -457,169 +477,179 @@
   ],
   [
    [
-    9,
-    6
+    10,
+    1
    ],
    [
-    9,
-    7
+    10,
+    2
+   ]
+  ],
+  [
+   [
+    10,
+    5
+   ],
+   [
+    10,
+    6
    ]
   ]
  ],
  "windows": [
   [
-   6,
-   10,
-   "E"
+   4,
+   0,
+   "W"
   ],
   [
    0,
-   2,
+   7,
    "N"
   ]
  ],
  "contents": [
   [
+   "RUG",
+   "RUG",
+   "TV",
+   "BILLIARD_TABLE",
+   "SHELF",
    "",
+   "",
+   "",
+   "STOOL",
+   "",
+   ""
+  ],
+  [
+   "RUG",
    "RUG",
    "",
+   "BILLIARD_TABLE",
    "",
    "",
    "",
    "DISPLAY_CASE",
+   "",
+   "",
+   "STATUE"
+  ],
+  [
+   "BED",
+   "BED",
+   "",
+   "",
+   "CUSHION",
+   "",
+   "CARPET_RUNNER",
+   "",
+   "",
+   "CHAIR",
+   ""
+  ],
+  [
+   "",
+   "",
+   "SOFA",
+   "SOFA",
+   "",
+   "",
+   "CARPET_RUNNER",
+   "",
    "DISPLAY_CASE",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
    "PLANT",
    "",
+   "",
+   "CARPET_RUNNER",
+   "CARPET_RUNNER",
+   "CARPET_RUNNER",
+   "DISPLAY_CASE",
    ""
   ],
   [
-   "TV",
-   "RUG",
-   "CARPET_RUNNER",
-   "CARPET_RUNNER",
-   "CARPET_RUNNER",
-   "CARPET_RUNNER",
    "",
-   "",
-   "",
-   "",
-   ""
-  ],
-  [
    "",
    "FOOTPRINTS",
    "",
    "",
    "",
    "",
+   "WINE_RACK",
    "",
-   "FOOTPRINTS",
    "",
-   "BROKEN_GLASS",
-   ""
+   "CRATE"
   ],
   [
-   "SHELF",
+   "",
+   "",
    "FOOTPRINTS",
+   "",
+   "PLANT",
+   "",
+   "",
+   "",
+   "WINE_RACK",
+   "TRAPDOOR",
+   "PILLAR"
+  ],
+  [
+   "",
+   "",
+   "FOOTPRINTS",
+   "",
    "",
    "GRAMOPHONE",
+   "CORPSE",
+   "BARREL",
    "",
-   "",
-   "SHELF",
-   "FOOTPRINTS",
-   "",
-   "",
-   "SOFA"
+   "WINE_RACK",
+   ""
   ],
   [
    "",
-   "FOOTPRINTS",
+   "",
    "",
    "PIANO",
    "",
    "",
    "",
-   "FOOTPRINTS",
-   "",
-   "",
-   "SOFA"
-  ],
-  [
-   "SOFA",
-   "",
-   "RUG",
-   "RUG",
-   "RUG",
-   "",
-   "",
-   "CLOCK",
-   "",
-   "DESK",
-   ""
-  ],
-  [
-   "SOFA",
-   "",
-   "RUG",
-   "RUG",
-   "RUG",
-   "",
-   "",
-   "",
-   "",
-   "",
-   ""
-  ],
-  [
-   "",
-   "",
-   "",
-   "",
-   "",
-   "",
-   "RUG",
-   "",
-   "",
-   "",
-   ""
-  ],
-  [
-   "",
-   "WINE_RACK",
-   "",
-   "",
-   "WINE_RACK",
-   "",
-   "RUG",
-   "",
-   "PLANT",
-   "",
-   ""
-  ],
-  [
-   "",
-   "",
-   "",
-   "",
-   "TRAPDOOR",
-   "",
-   "",
-   "CORPSE",
-   "",
-   "",
-   ""
-  ],
-  [
-   "WINE_RACK",
-   "TABLE",
-   "",
    "",
    "PILLAR",
    "",
+   ""
+  ],
+  [
+   "PLANT",
+   "BROKEN_GLASS",
    "",
-   "TEA_TROLLEY",
    "",
    "",
+   "",
+   "",
+   "",
+   "RUG",
+   "RUG",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "BROKEN_GLASS",
+   "ARMOR",
+   "RUG",
+   "RUG",
    ""
   ]
  ],
@@ -629,10 +659,44 @@
    "cells": [
     [
      0,
+     0
+    ],
+    [
+     0,
      1
     ],
     [
      1,
+     0
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "kind": "BILLIARD_TABLE",
+   "cells": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     3
+    ]
+   ]
+  },
+  {
+   "kind": "BED",
+   "cells": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
      1
     ]
    ]
@@ -641,54 +705,24 @@
    "kind": "CARPET_RUNNER",
    "cells": [
     [
-     1,
-     2
-    ],
-    [
-     1,
-     3
-    ],
-    [
-     1,
-     4
-    ],
-    [
-     1,
-     5
-    ]
-   ]
-  },
-  {
-   "kind": "FOOTPRINTS",
-   "cells": [
-    [
      2,
-     1
+     6
     ],
     [
      3,
-     1
+     6
     ],
     [
      4,
-     1
-    ]
-   ]
-  },
-  {
-   "kind": "FOOTPRINTS",
-   "cells": [
-    [
-     2,
-     7
-    ],
-    [
-     3,
-     7
+     6
     ],
     [
      4,
      7
+    ],
+    [
+     4,
+     8
     ]
    ]
   },
@@ -697,78 +731,63 @@
    "cells": [
     [
      3,
-     10
+     2
     ],
     [
-     4,
-     10
+     3,
+     3
     ]
    ]
   },
   {
-   "kind": "SOFA",
-   "cells": [
-    [
-     5,
-     0
-    ],
-    [
-     6,
-     0
-    ]
-   ]
-  },
-  {
-   "kind": "RUG",
+   "kind": "FOOTPRINTS",
    "cells": [
     [
      5,
      2
     ],
     [
-     5,
-     3
-    ],
-    [
-     5,
-     4
-    ],
-    [
      6,
      2
     ],
-    [
-     6,
-     3
-    ],
-    [
-     6,
-     4
-    ]
-   ]
-  },
-  {
-   "kind": "RUG",
-   "cells": [
     [
      7,
-     6
+     2
+    ]
+   ]
+  },
+  {
+   "kind": "RUG",
+   "cells": [
+    [
+     9,
+     8
     ],
     [
-     8,
-     6
+     9,
+     9
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     10,
+     9
     ]
    ]
   }
  ],
  "corpse": [
-  9,
-  7
+  7,
+  6
  ],
  "biomeProps": [
+  "ARMOR",
+  "BED",
+  "BILLIARD_TABLE",
   "CARPET_RUNNER",
-  "CLOCK",
-  "DESK",
+  "CUSHION",
   "DISPLAY_CASE",
   "GRAMOPHONE",
   "PIANO",
@@ -777,15 +796,20 @@
   "RUG",
   "SHELF",
   "SOFA",
-  "TEA_TROLLEY",
+  "STATUE",
   "TV",
   "WINE_RACK"
  ],
  "propClasses": {
+  "ARMOR": "TALL",
+  "BARREL": "SHORT",
+  "BED": "LOW",
+  "BILLIARD_TABLE": "SHORT",
   "BROKEN_GLASS": "LOW",
   "CARPET_RUNNER": "LOW",
-  "CLOCK": "TALL",
-  "DESK": "SHORT",
+  "CHAIR": "LOW",
+  "CRATE": "SHORT",
+  "CUSHION": "LOW",
   "DISPLAY_CASE": "SHORT",
   "FOOTPRINTS": "LOW",
   "GRAMOPHONE": "SHORT",
@@ -795,149 +819,149 @@
   "RUG": "LOW",
   "SHELF": "TALL",
   "SOFA": "LOW",
-  "TABLE": "SHORT",
-  "TEA_TROLLEY": "SHORT",
+  "STATUE": "TALL",
+  "STOOL": "LOW",
   "TRAPDOOR": "LOW",
   "TV": "TALL",
   "WINE_RACK": "TALL"
  },
  "dress": "integrated",
  "dressing": {
-  "lowShare": 0.25,
+  "lowShare": 0.26,
   "lowTiles": 26,
-  "openTiles": 104,
+  "openTiles": 100,
   "lowKinds": [
+   "BED",
    "BROKEN_GLASS",
    "CARPET_RUNNER",
+   "CHAIR",
+   "CUSHION",
    "FOOTPRINTS",
    "RUG",
    "SOFA",
+   "STOOL",
    "TRAPDOOR"
   ],
   "roomProps": {
-   "PARLOR": [
-    "FOOTPRINTS",
+   "BILLIARDS": [
+    "BILLIARD_TABLE",
     "RUG",
     "SHELF",
-    "SOFA",
+    "STOOL",
     "TV"
    ],
    "GALLERY": [
     "CARPET_RUNNER",
+    "CHAIR",
     "DISPLAY_CASE",
-    "PLANT"
+    "STATUE"
    ],
-   "LIBRARY": [
-    "CLOCK",
-    "FOOTPRINTS",
-    "SHELF"
+   "BEDROOM": [
+    "BED",
+    "CUSHION"
    ],
-   "STUDY": [
-    "BROKEN_GLASS",
-    "DESK",
+   "PARLOR": [
     "SOFA"
    ],
    "MUSIC_ROOM": [
+    "FOOTPRINTS",
     "GRAMOPHONE",
     "PIANO",
-    "RUG"
-   ],
-   "FOYER": [
-    "RUG"
+    "PLANT"
    ],
    "CELLAR": [
+    "BARREL",
+    "CRATE",
     "PILLAR",
-    "TABLE",
     "TRAPDOOR",
     "WINE_RACK"
    ],
    "ORANGERY": [
-    "PLANT",
-    "TEA_TROLLEY"
+    "BROKEN_GLASS",
+    "PLANT"
+   ],
+   "FOYER": [
+    "ARMOR",
+    "BROKEN_GLASS",
+    "RUG"
    ]
   }
  },
  "suspects": [
   {
    "id": "A",
-   "name": "Alice",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Arthur",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
-    "hairStyle": "wavy",
-    "hairLength": "long",
-    "hairColor": "grey",
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "black",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "fedora",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "none",
-    "skin": 0,
-    "cloth": 4
+    "tie": "scarf",
+    "skin": 1,
+    "cloth": 1
    },
-   "look": "grey wavy hair, fedora",
-   "clue": "Alice was alone and was standing on a rug.",
-   "text": "Alice was alone and was standing on a rug.",
+   "look": "black short hair, scarf",
+   "clue": "Arthur was in the Parlor.",
+   "text": "Arthur was in the Parlor.",
    "atoms": [
     {
-     "kind": "ON",
+     "kind": "ROOM",
      "subject": "A",
      "params": {
-      "prop": "RUG"
+      "room": "PARLOR"
      }
-    },
-    {
-     "kind": "ALONE",
-     "subject": "A",
-     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "A",
     "place": [
-     1,
      0
     ],
     "people": []
    },
    "solution": [
-    8,
-    6
+    3,
+    0
    ]
   },
   {
    "id": "B",
-   "name": "Bruno",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Bridget",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "bald",
-    "hairLength": "bald",
-    "hairColor": "none",
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "black",
     "glasses": true,
-    "glassesStyle": "horn-rimmed",
-    "hat": "beret",
+    "glassesStyle": "round",
+    "hat": "cloche",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 0,
+    "tie": "none",
+    "skin": 1,
     "cloth": 5
    },
-   "look": "bald, horn-rimmed glasses, beret, necktie",
-   "clue": "Bruno was in column 4 and was east of Greta.",
-   "text": "Bruno was in column 4 and was east of Greta.",
+   "look": "black long hair, round glasses, cloche",
+   "clue": "Bridget was beside a wine rack and was beside a pillar.",
+   "text": "Bridget was beside a wine rack and was beside a pillar.",
    "atoms": [
     {
-     "kind": "COL",
+     "kind": "BESIDE",
      "subject": "B",
      "params": {
-      "index": 3
+      "prop": "WINE_RACK"
      }
     },
     {
-     "kind": "EAST_OF",
+     "kind": "BESIDE",
      "subject": "B",
      "params": {
-      "other": "G"
+      "prop": "PILLAR"
      }
     }
    ],
@@ -950,36 +974,36 @@
     "people": []
    },
    "solution": [
-    9,
-    3
+    7,
+    10
    ]
   },
   {
    "id": "C",
-   "name": "Cyril",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Clara",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "wavy",
+    "hairStyle": "ponytail",
     "hairLength": "long",
-    "hairColor": "black",
+    "hairColor": "blonde",
     "glasses": true,
     "glassesStyle": "horn-rimmed",
     "hat": "none",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 2,
-    "cloth": 0
+    "tie": "none",
+    "skin": 0,
+    "cloth": 4
    },
-   "look": "black wavy hair, horn-rimmed glasses, necktie",
-   "clue": "Cyril was beside a TV.",
-   "text": "Cyril was beside a TV.",
+   "look": "blonde ponytail hair, horn-rimmed glasses",
+   "clue": "Clara was in column 8.",
+   "text": "Clara was in column 8.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "COL",
      "subject": "C",
      "params": {
-      "prop": "TV"
+      "index": 7
      }
     }
    ],
@@ -991,91 +1015,131 @@
     "people": []
    },
    "solution": [
-    1,
-    1
+    0,
+    7
    ]
   },
   {
    "id": "D",
-   "name": "Duncan",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Diana",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "crop",
-    "hairLength": "short",
-    "hairColor": "black",
-    "glasses": true,
-    "glassesStyle": "round",
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 1,
-    "cloth": 5
+    "tie": "none",
+    "skin": 0,
+    "cloth": 2
    },
-   "look": "black crop hair, round glasses, necktie",
-   "clue": "Duncan was beside a grandfather clock.",
-   "text": "Duncan was beside a grandfather clock.",
+   "look": "brown bun hair",
+   "clue": "Diana was in a room with at least two men.",
+   "text": "Diana was in a room with at least two men.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "TWO_P_ROOM",
      "subject": "D",
      "params": {
-      "prop": "CLOCK"
+      "trait": "MALE",
+      "selfMatch": false
      }
     }
    ],
    "clueTokens": {
     "subject": "D",
+    "place": [],
+    "people": [
+     0
+    ]
+   },
+   "solution": [
+    9,
+    2
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elliot",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "goatee",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 0
+   },
+   "look": "blonde short hair, beret, goatee, scarf",
+   "clue": "Elliot was beside a wine rack.",
+   "text": "Elliot was beside a wine rack.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "E",
+     "params": {
+      "prop": "WINE_RACK"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
     "place": [
      0
     ],
     "people": []
    },
    "solution": [
-    4,
-    7
+    5,
+    8
    ]
   },
   {
-   "id": "E",
-   "name": "Ezra",
+   "id": "F",
+   "name": "Fenwick",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "bald",
-    "hairLength": "bald",
-    "hairColor": "none",
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "fedora",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "scarf",
-    "skin": 3,
+    "tie": "necktie",
+    "skin": 1,
     "cloth": 7
    },
-   "look": "bald, fedora, scarf",
-   "clue": "Ezra was exactly one row south of Bruno and was in the same room as Imogen.",
-   "text": "Ezra was exactly one row south of Bruno and was in the same room as Imogen.",
+   "look": "black curly hair, necktie",
+   "clue": "Fenwick was beside a gramophone and was west of Leopold.",
+   "text": "Fenwick was beside a gramophone and was west of Leopold.",
    "atoms": [
     {
-     "kind": "EXACT_OFFSET",
-     "subject": "E",
+     "kind": "BESIDE",
+     "subject": "F",
      "params": {
-      "other": "B",
-      "dir": "S",
-      "dist": 1
+      "prop": "GRAMOPHONE"
      }
     },
     {
-     "kind": "SAME_ROOM",
-     "subject": "E",
+     "kind": "WEST_OF",
+     "subject": "F",
      "params": {
-      "other": "I"
+      "other": "L"
      }
     }
    ],
    "clueTokens": {
-    "subject": "E",
+    "subject": "F",
     "place": [
      0,
      1
@@ -1083,79 +1147,36 @@
     "people": []
    },
    "solution": [
-    10,
-    10
-   ]
-  },
-  {
-   "id": "F",
-   "name": "Florence",
-   "gender": "f",
-   "pronoun": "she",
-   "traits": {
-    "hairStyle": "curly",
-    "hairLength": "short",
-    "hairColor": "blonde",
-    "glasses": true,
-    "glassesStyle": "horn-rimmed",
-    "hat": "none",
-    "facialHair": "none",
-    "tie": "none",
-    "skin": 2,
-    "cloth": 5
-   },
-   "look": "blonde curly hair, horn-rimmed glasses",
-   "clue": "Florence was standing on a rug.",
-   "text": "Florence was standing on a rug.",
-   "atoms": [
-    {
-     "kind": "ON",
-     "subject": "F",
-     "params": {
-      "prop": "RUG"
-     }
-    }
-   ],
-   "clueTokens": {
-    "subject": "F",
-    "place": [
-     0
-    ],
-    "people": []
-   },
-   "solution": [
-    6,
+    7,
     4
    ]
   },
   {
    "id": "G",
-   "name": "Greta",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Gregor",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
-    "hairStyle": "ponytail",
+    "hairStyle": "wavy",
     "hairLength": "long",
-    "hairColor": "red",
-    "glasses": true,
-    "glassesStyle": "horn-rimmed",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "none",
-    "skin": 3,
-    "cloth": 5
+    "tie": "bowtie",
+    "skin": 4,
+    "cloth": 3
    },
-   "look": "red ponytail hair, horn-rimmed glasses",
-   "clue": "Greta was exactly one row south of Duncan.",
-   "text": "Greta was exactly one row south of Duncan.",
+   "look": "black wavy hair, bowtie",
+   "clue": "Gregor was standing on a carpet runner.",
+   "text": "Gregor was standing on a carpet runner.",
    "atoms": [
     {
-     "kind": "EXACT_OFFSET",
+     "kind": "ON",
      "subject": "G",
      "params": {
-      "other": "D",
-      "dir": "S",
-      "dist": 1
+      "prop": "CARPET_RUNNER"
      }
     }
    ],
@@ -1167,40 +1188,40 @@
     "people": []
    },
    "solution": [
-    5,
-    2
+    4,
+    6
    ]
   },
   {
    "id": "H",
-   "name": "Horace",
+   "name": "Horatio",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
-    "hairColor": "grey",
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "black",
     "glasses": true,
     "glassesStyle": "horn-rimmed",
     "hat": "none",
-    "facialHair": "mustache",
-    "tie": "scarf",
-    "skin": 2,
-    "cloth": 5
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 3
    },
-   "look": "grey short hair, horn-rimmed glasses, mustache, scarf",
-   "clue": "Horace was in the Library and was in front of a door.",
-   "text": "Horace was in the Library and was in front of a door.",
+   "look": "black wavy hair, horn-rimmed glasses",
+   "clue": "Horatio was alone and was standing on a rug.",
+   "text": "Horatio was alone and was standing on a rug.",
    "atoms": [
     {
-     "kind": "ROOM",
+     "kind": "ON",
      "subject": "H",
      "params": {
-      "room": "LIBRARY"
+      "prop": "RUG"
      }
     },
     {
-     "kind": "DOOR",
+     "kind": "ALONE",
      "subject": "H",
      "params": {}
     }
@@ -1208,8 +1229,179 @@
    "clueTokens": {
     "subject": "H",
     "place": [
-     0,
-     1
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    10,
+    9
+   ]
+  },
+  {
+   "id": "I",
+   "name": "Isabel",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 4
+   },
+   "look": "brown short hair, round glasses",
+   "clue": "Isabel was in the Gallery or in the Billiards and was standing on a rug.",
+   "text": "Isabel was in the Gallery or in the Billiards and was standing on a rug.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "I",
+     "params": {
+      "prop": "RUG"
+     }
+    },
+    {
+     "kind": "ROOM_PAIR",
+     "subject": "I",
+     "params": {
+      "room": "GALLERY",
+      "room2": "BILLIARDS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "I",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": "J",
+   "name": "Jules",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 2
+   },
+   "look": "blonde short hair, fedora",
+   "clue": "Jules was alone.",
+   "text": "Jules was alone.",
+   "atoms": [
+    {
+     "kind": "ALONE",
+     "subject": "J",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "J",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    10,
+    1
+   ]
+  },
+  {
+   "id": "K",
+   "name": "Katherine",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 2
+   },
+   "look": "grey ponytail hair, round glasses",
+   "clue": "Katherine was in row 3.",
+   "text": "Katherine was in row 3.",
+   "atoms": [
+    {
+     "kind": "ROW",
+     "subject": "K",
+     "params": {
+      "index": 2
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "K",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    9
+   ]
+  },
+  {
+   "id": "L",
+   "name": "Leopold",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 0
+   },
+   "look": "blonde wavy hair, mustache, necktie",
+   "clue": "Leopold was beside a potted palm.",
+   "text": "Leopold was beside a potted palm.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "L",
+     "params": {
+      "prop": "PLANT"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "L",
+    "place": [
+     0
     ],
     "people": []
    },
@@ -1219,143 +1411,50 @@
    ]
   },
   {
-   "id": "I",
-   "name": "Imogen",
+   "id": "M",
+   "name": "Miriam",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "bob",
-    "hairLength": "short",
-    "hairColor": "black",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "cloche",
-    "facialHair": "none",
-    "tie": "necktie",
-    "skin": 1,
-    "cloth": 0
-   },
-   "look": "black bob hair, cloche, necktie",
-   "clue": "Imogen was west of Ezra.",
-   "text": "Imogen was west of Ezra.",
-   "atoms": [
-    {
-     "kind": "WEST_OF",
-     "subject": "I",
-     "params": {
-      "other": "E"
-     }
-    }
-   ],
-   "clueTokens": {
-    "subject": "I",
-    "place": [
-     0
-    ],
-    "people": []
-   },
-   "solution": [
-    7,
-    9
-   ]
-  },
-  {
-   "id": "J",
-   "name": "Jonah",
-   "gender": "m",
-   "pronoun": "he",
-   "traits": {
-    "hairStyle": "crop",
-    "hairLength": "short",
-    "hairColor": "blonde",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "fedora",
-    "facialHair": "none",
-    "tie": "scarf",
-    "skin": 2,
-    "cloth": 2
-   },
-   "look": "blonde crop hair, fedora, scarf",
-   "clue": "Jonah was in the Library or in the Foyer and was in a corner.",
-   "text": "Jonah was in the Library or in the Foyer and was in a corner.",
-   "atoms": [
-    {
-     "kind": "CORNER",
-     "subject": "J",
-     "params": {}
-    },
-    {
-     "kind": "ROOM_PAIR",
-     "subject": "J",
-     "params": {
-      "room": "LIBRARY",
-      "room2": "FOYER"
-     }
-    }
-   ],
-   "clueTokens": {
-    "subject": "J",
-    "place": [
-     1,
-     0
-    ],
-    "people": []
-   },
-   "solution": [
-    2,
-    8
-   ]
-  },
-  {
-   "id": "K",
-   "name": "Katherine",
-   "gender": "f",
-   "pronoun": "she",
-   "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
+    "hairStyle": "wavy",
+    "hairLength": "long",
     "hairColor": "grey",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "bowtie",
-    "skin": 1,
-    "cloth": 3
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 4
    },
-   "look": "grey short hair, bowtie",
-   "clue": "Katherine was alone and was in front of a window.",
-   "text": "Katherine was alone and was in front of a window.",
+   "look": "grey wavy hair, scarf",
+   "clue": "Miriam was beside a potted palm.",
+   "text": "Miriam was beside a potted palm.",
    "atoms": [
     {
-     "kind": "ALONE",
-     "subject": "K",
-     "params": {}
-    },
-    {
-     "kind": "WINDOW",
-     "subject": "K",
-     "params": {}
+     "kind": "BESIDE",
+     "subject": "M",
+     "params": {
+      "prop": "PLANT"
+     }
     }
    ],
    "clueTokens": {
-    "subject": "K",
+    "subject": "M",
     "place": [
-     0,
-     1
+     0
     ],
     "people": []
    },
    "solution": [
-    0,
-    2
+    6,
+    3
    ]
   }
  ],
  "shadow": [
-  4,
-  0
+  8,
+  7
  ],
  "shadowSuspect": {
   "id": "S",
@@ -1366,24 +1465,24 @@
  },
  "darkTiles": [
   [
-   4,
-   0
-  ],
-  [
-   7,
-   4
-  ],
-  [
    8,
-   0
-  ],
-  [
-   7,
-   0
+   7
   ],
   [
    6,
-   0
+   9
+  ],
+  [
+   0,
+   1
+  ],
+  [
+   5,
+   4
+  ],
+  [
+   7,
+   8
   ]
  ],
  "assassins": [
@@ -1392,14 +1491,14 @@
    "name": "O. B. Scuro",
    "gender": null,
    "traits": null,
-   "clue": "O. B. Scuro hid east of Bruno.",
-   "text": "O. B. Scuro hid east of Bruno.",
+   "clue": "O. B. Scuro hid on a trapdoor.",
+   "text": "O. B. Scuro hid on a trapdoor.",
    "atoms": [
     {
-     "kind": "EAST_OF",
+     "kind": "ON",
      "subject": "O",
      "params": {
-      "other": "B"
+      "prop": "TRAPDOOR"
      }
     }
    ],
@@ -1410,8 +1509,8 @@
     ]
    },
    "solution": [
-    7,
-    4
+    6,
+    9
    ]
   },
   {
@@ -1419,14 +1518,14 @@
    "name": "P. H. Obia",
    "gender": null,
    "traits": null,
-   "clue": "P. H. Obia hid south of Imogen.",
-   "text": "P. H. Obia hid south of Imogen.",
+   "clue": "P. H. Obia hid beside a TV.",
+   "text": "P. H. Obia hid beside a TV.",
    "atoms": [
     {
-     "kind": "SOUTH_OF",
+     "kind": "BESIDE",
      "subject": "P",
      "params": {
-      "other": "I"
+      "prop": "TV"
      }
     }
    ],
@@ -1437,8 +1536,8 @@
     ]
    },
    "solution": [
-    8,
-    0
+    0,
+    1
    ]
   },
   {
@@ -1446,32 +1545,26 @@
    "name": "Q. U. Yet",
    "gender": null,
    "traits": null,
-   "clue": "Q. U. Yet hid outside the Parlor and in front of a door.",
-   "text": "Q. U. Yet hid outside the Parlor and in front of a door.",
+   "clue": "Q. U. Yet hid beside a potted palm.",
+   "text": "Q. U. Yet hid beside a potted palm.",
    "atoms": [
     {
-     "kind": "NOT_ROOM",
+     "kind": "BESIDE",
      "subject": "Q",
      "params": {
-      "room": "PARLOR"
+      "prop": "PLANT"
      }
-    },
-    {
-     "kind": "DOOR",
-     "subject": "Q",
-     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "Q",
     "parts": [
-     0,
-     1
+     0
     ]
    },
    "solution": [
-    7,
-    0
+    5,
+    4
    ]
   },
   {
@@ -1479,46 +1572,762 @@
    "name": "R. E. Aper",
    "gender": null,
    "traits": null,
-   "clue": "R. E. Aper hid on a sofa.",
-   "text": "R. E. Aper hid on a sofa.",
+   "clue": "R. E. Aper hid beside a barrel and east of Clara.",
+   "text": "R. E. Aper hid beside a barrel and east of Clara.",
    "atoms": [
     {
-     "kind": "ON",
+     "kind": "BESIDE",
      "subject": "R",
      "params": {
-      "prop": "SOFA"
+      "prop": "BARREL"
+     }
+    },
+    {
+     "kind": "EAST_OF",
+     "subject": "R",
+     "params": {
+      "other": "C"
      }
     }
    ],
    "clueTokens": {
     "subject": "R",
     "parts": [
-     0
+     0,
+     1
     ]
    },
    "solution": [
-    6,
-    0
+    7,
+    8
    ]
   }
  ],
  "globalRules": [
   {
-   "id": "EXACTLY_ONE_ON:FOOTPRINTS",
-   "text": "Exactly one person was on a trail of footprints.",
-   "kind": "EXACTLY_ONE_ON",
+   "id": "EXACT_EMPTY:1",
+   "text": "Exactly 1 of the rooms held no suspect.",
+   "kind": "EXACT_EMPTY",
    "params": {
-    "prop": "FOOTPRINTS"
+    "count": 1
    }
   }
  ],
  "steps": [
   {
    "n": 1,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Diana was in a room with at least two men. Polaroid check — men: Arthur, Elliot, Fenwick, Gregor, Horatio, Jules and Leopold. Fewer than two of them can still reach the Bedroom, so Diana cannot be there.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_FEW_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "D",
+        "params": {
+         "trait": "MALE",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "MALE",
+       "holders": [
+        "A",
+        "E",
+        "F",
+        "G",
+        "H",
+        "J",
+        "L"
+       ]
+      }
+     },
+     "rooms": [
+      "BEDROOM"
+     ],
+     "suspect": "D"
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Arthur can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Arthur takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     3,
+     10
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      3,
+      7
+     ]
+    ],
+    "D": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      3,
+      10
+     ]
+    ],
+    "G": [
+     [
+      3,
+      6
+     ]
+    ],
+    "J": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      3,
+      10
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       3,
+       10
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Katherine can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Katherine takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     2,
+     10
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      7
+     ]
+    ],
+    "D": [
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      2,
+      9
+     ],
+     [
+      2,
+      10
+     ]
+    ],
+    "G": [
+     [
+      2,
+      6
+     ]
+    ],
+    "J": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      2,
+      9
+     ],
+     [
+      2,
+      10
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "K",
+     "options": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       2,
+       10
+      ]
+     ],
+     "coords": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       2,
+       10
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Gregor can only be at r5c7, r5c8 or r5c9, and those tiles all lie on one sightline. Whichever one Gregor takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      4,
+      7
+     ]
+    ],
+    "D": [
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      4,
+      10
+     ]
+    ],
+    "J": [
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      4,
+      10
+     ]
+    ],
+    "L": [
+     [
+      4,
+      4
+     ]
+    ],
+    "M": [
+     [
+      4,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       4,
+       8
+      ]
+     ],
+     "coords": [
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       10
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
    "tier": 2,
    "rule": "Alone in a room",
    "kind": "eliminate",
-   "text": "Alice was alone in the room, but Cyril must be in the Parlor, so Alice cannot be in it. Eliminated → Alice: r1c2, r2c2.",
+   "text": "Horatio was alone in the room, but Isabel must be in the Billiards, so Horatio cannot be in it.",
    "focus": [
     [
      0,
@@ -1529,51 +2338,63 @@
      1
     ],
     [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     10
+    ],
+    [
+     1,
+     0
+    ],
+    [
      1,
      1
     ],
     [
-     2,
-     0
+     1,
+     2
     ],
     [
-     2,
-     1
+     1,
+     4
     ],
     [
-     3,
-     1
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     5,
-     0
-    ],
-    [
-     5,
-     1
-    ],
-    [
-     6,
-     0
-    ],
-    [
-     6,
-     1
+     1,
+     5
     ]
    ],
    "elims": {
-    "A": [
+    "H": [
+     [
+      0,
+      0
+     ],
      [
       0,
       1
+     ],
+     [
+      1,
+      0
      ],
      [
       1,
@@ -1585,15 +2406,15 @@
     "templateKey": "STEP_ALONE_BLOCKED_ONE",
     "ruleKey": "RULE_ALONE",
     "params": {
-     "owner": "A",
+     "owner": "H",
      "bits": [
       {
        "templateKey": "FRAG_MUST_BE_IN",
        "params": {
         "suspects": [
-         "C"
+         "I"
         ],
-        "room": "PARLOR"
+        "room": "BILLIARDS"
        }
       }
      ]
@@ -1601,19 +2422,19 @@
    }
   },
   {
-   "n": 2,
-   "tier": 2,
-   "rule": "Compass squeeze",
+   "n": 6,
+   "tier": 1,
+   "rule": "Polaroid check",
    "kind": "eliminate",
-   "text": "Bruno was east of Greta. Bruno can reach column 4 at most, so Greta must be in columns 1–3. Eliminated → Greta: r1c4, r1c5, r1c6, r1c10, r1c11, r2c4, r2c5, r2c6, r2c7, r2c8, r2c9, r2c10, r2c11, r3c4, r3c5, r3c6, r3c7, r3c8, r3c9, r3c10, r3c11, r4c5, r4c6, r4c8, r4c9, r4c10, r4c11, r5c4, r5c5, r5c6, r5c7, r5c8, r5c9, r5c10, r5c11, r6c4, r6c5, r6c6, r6c7, r6c9, r6c11, r7c4, r7c5, r7c6, r7c7, r7c8, r7c9, r7c10, r7c11, r8c4, r8c5, r8c6, r8c7, r8c8, r8c9, r8c10, r8c11, r9c4, r9c6, r9c7, r9c8, r9c10, r9c11, r10c4, r10c5, r10c6, r10c7, r10c9, r10c10, r10c11, r11c4, r11c6, r11c7, r11c9, r11c10, r11c11.",
+   "text": "Diana was in a room with at least two men. Polaroid check — men: Arthur, Elliot, Fenwick, Gregor, Horatio, Jules and Leopold. Fewer than two of them can still reach the Billiards, so Diana cannot be there.",
    "focus": [
     [
      0,
-     3
+     0
     ],
     [
      0,
-     4
+     1
     ],
     [
      0,
@@ -1621,6 +2442,18 @@
     ],
     [
      0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
      9
     ],
     [
@@ -1629,7 +2462,171 @@
     ],
     [
      1,
-     3
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      0,
+      9
+     ],
+     [
+      0,
+      10
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_FEW_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "D",
+        "params": {
+         "trait": "MALE",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "MALE",
+       "holders": [
+        "A",
+        "E",
+        "F",
+        "G",
+        "H",
+        "J",
+        "L"
+       ]
+      }
+     },
+     "rooms": [
+      "BILLIARDS"
+     ],
+     "suspect": "D"
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Alone in a room",
+   "kind": "eliminate",
+   "text": "Jules was alone in the room, but Fenwick must be in the Music Room, Gregor must be in the Gallery, Isabel must be in the Billiards, Bridget and Elliot must be in the Cellar and Horatio must be in the Foyer, so Jules cannot be in any of them.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     10
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
     ],
     [
      1,
@@ -1645,31 +2642,11 @@
     ],
     [
      1,
-     7
-    ],
-    [
-     1,
      8
     ],
     [
      1,
      9
-    ],
-    [
-     1,
-     10
-    ],
-    [
-     2,
-     3
-    ],
-    [
-     2,
-     4
-    ],
-    [
-     2,
-     5
     ],
     [
      2,
@@ -1693,19 +2670,11 @@
     ],
     [
      3,
-     4
-    ],
-    [
-     3,
-     5
+     6
     ],
     [
      3,
      7
-    ],
-    [
-     3,
-     8
     ],
     [
      3,
@@ -1717,7 +2686,7 @@
     ],
     [
      4,
-     3
+     2
     ],
     [
      4,
@@ -1741,11 +2710,11 @@
     ],
     [
      4,
-     9
+     10
     ],
     [
-     4,
-     10
+     5,
+     2
     ],
     [
      5,
@@ -1769,15 +2738,15 @@
     ],
     [
      5,
-     10
+     9
+    ],
+    [
+     6,
+     2
     ],
     [
      6,
      3
-    ],
-    [
-     6,
-     4
     ],
     [
      6,
@@ -1793,15 +2762,11 @@
     ],
     [
      6,
-     8
-    ],
-    [
-     6,
      9
     ],
     [
-     6,
-     10
+     7,
+     2
     ],
     [
      7,
@@ -1813,23 +2778,7 @@
     ],
     [
      7,
-     5
-    ],
-    [
-     7,
-     6
-    ],
-    [
-     7,
-     7
-    ],
-    [
-     7,
      8
-    ],
-    [
-     7,
-     9
     ],
     [
      7,
@@ -1837,7 +2786,15 @@
     ],
     [
      8,
+     2
+    ],
+    [
+     8,
      3
+    ],
+    [
+     8,
+     4
     ],
     [
      8,
@@ -1861,6 +2818,10 @@
     ],
     [
      9,
+     2
+    ],
+    [
+     9,
      3
     ],
     [
@@ -1874,6 +2835,10 @@
     [
      9,
      6
+    ],
+    [
+     9,
+     7
     ],
     [
      9,
@@ -1889,7 +2854,15 @@
     ],
     [
      10,
+     2
+    ],
+    [
+     10,
      3
+    ],
+    [
+     10,
+     4
     ],
     [
      10,
@@ -1913,18 +2886,30 @@
     ]
    ],
    "elims": {
-    "G": [
+    "J": [
      [
       0,
-      3
-     ],
-     [
-      0,
-      4
+      0
      ],
      [
       0,
+      1
+     ],
+     [
+      0,
       5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
      ],
      [
       0,
@@ -1936,7 +2921,15 @@
      ],
      [
       1,
-      3
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
      ],
      [
       1,
@@ -1952,10 +2945,6 @@
      ],
      [
       1,
-      7
-     ],
-     [
-      1,
       8
      ],
      [
@@ -1963,96 +2952,12 @@
       9
      ],
      [
-      1,
-      10
-     ],
-     [
-      2,
-      3
-     ],
-     [
-      2,
-      4
-     ],
-     [
-      2,
-      5
-     ],
-     [
-      2,
-      6
-     ],
-     [
-      2,
-      7
-     ],
-     [
-      2,
-      8
-     ],
-     [
-      2,
-      9
-     ],
-     [
-      2,
-      10
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      3,
-      5
-     ],
-     [
-      3,
-      7
-     ],
-     [
-      3,
-      8
-     ],
-     [
-      3,
-      9
-     ],
-     [
-      3,
-      10
-     ],
-     [
       4,
-      3
+      2
      ],
      [
-      4,
-      4
-     ],
-     [
-      4,
-      5
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      4,
-      7
-     ],
-     [
-      4,
-      8
-     ],
-     [
-      4,
-      9
-     ],
-     [
-      4,
-      10
+      5,
+      2
      ],
      [
       5,
@@ -2076,15 +2981,15 @@
      ],
      [
       5,
-      10
+      9
+     ],
+     [
+      6,
+      2
      ],
      [
       6,
       3
-     ],
-     [
-      6,
-      4
      ],
      [
       6,
@@ -2100,15 +3005,11 @@
      ],
      [
       6,
-      8
-     ],
-     [
-      6,
       9
      ],
      [
-      6,
-      10
+      7,
+      2
      ],
      [
       7,
@@ -2120,23 +3021,7 @@
      ],
      [
       7,
-      5
-     ],
-     [
-      7,
-      6
-     ],
-     [
-      7,
-      7
-     ],
-     [
-      7,
       8
-     ],
-     [
-      7,
-      9
      ],
      [
       7,
@@ -2144,7 +3029,15 @@
      ],
      [
       8,
+      2
+     ],
+     [
+      8,
       3
+     ],
+     [
+      8,
+      4
      ],
      [
       8,
@@ -2168,6 +3061,10 @@
      ],
      [
       9,
+      2
+     ],
+     [
+      9,
       3
      ],
      [
@@ -2181,6 +3078,10 @@
      [
       9,
       6
+     ],
+     [
+      9,
+      7
      ],
      [
       9,
@@ -2196,7 +3097,15 @@
      ],
      [
       10,
+      2
+     ],
+     [
+      10,
       3
+     ],
+     [
+      10,
+      4
      ],
      [
       10,
@@ -2221,313 +3130,55 @@
     ]
    },
    "i18n": {
-    "templateKey": "STEP_COMPASS_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_ALONE_BLOCKED_MANY",
+    "ruleKey": "RULE_ALONE",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "B",
-       "atom": {
-        "kind": "EAST_OF",
-        "subject": "B",
-        "params": {
-         "other": "G"
-        }
-       }
-      }
-     },
+     "owner": "J",
      "bits": [
       {
-       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "templateKey": "FRAG_MUST_BE_IN",
        "params": {
-        "y": "B",
-        "line": 3,
-        "x": "G",
-        "span": {
-         "templateKey": "FRAG_SPAN_RANGE.COL",
-         "params": {
-          "from": 0,
-          "to": 2
-         }
-        }
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 3,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Ezra was exactly one row south of Bruno. Bruno can only be in rows 1, 2, 3, 5, 6, 7, 8, 9, 10 or 11, which leaves Ezra rows 2, 3, 4, 6, 7, 8, 9, 10 or 11; Ezra can only be in rows 2, 3, 4, 6, 7, 8, 9, 10 or 11, which leaves Bruno rows 1, 2, 3, 5, 6, 7, 8, 9 or 10. Eliminated → Bruno: r11c4 · Ezra: r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c10, r1c11, r5c1, r5c2, r5c3, r5c4, r5c5, r5c6, r5c7, r5c8, r5c9, r5c10, r5c11.",
-   "focus": [
-    [
-     0,
-     0
-    ],
-    [
-     0,
-     1
-    ],
-    [
-     0,
-     2
-    ],
-    [
-     0,
-     3
-    ],
-    [
-     0,
-     4
-    ],
-    [
-     0,
-     5
-    ],
-    [
-     0,
-     9
-    ],
-    [
-     0,
-     10
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     4,
-     3
-    ],
-    [
-     4,
-     4
-    ],
-    [
-     4,
-     5
-    ],
-    [
-     4,
-     6
-    ],
-    [
-     4,
-     7
-    ],
-    [
-     4,
-     8
-    ],
-    [
-     4,
-     9
-    ],
-    [
-     4,
-     10
-    ],
-    [
-     10,
-     3
-    ]
-   ],
-   "elims": {
-    "B": [
-     [
-      10,
-      3
-     ]
-    ],
-    "E": [
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      1
-     ],
-     [
-      0,
-      2
-     ],
-     [
-      0,
-      3
-     ],
-     [
-      0,
-      4
-     ],
-     [
-      0,
-      5
-     ],
-     [
-      0,
-      9
-     ],
-     [
-      0,
-      10
-     ],
-     [
-      4,
-      0
-     ],
-     [
-      4,
-      1
-     ],
-     [
-      4,
-      2
-     ],
-     [
-      4,
-      3
-     ],
-     [
-      4,
-      4
-     ],
-     [
-      4,
-      5
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      4,
-      7
-     ],
-     [
-      4,
-      8
-     ],
-     [
-      4,
-      9
-     ],
-     [
-      4,
-      10
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "B",
-        "src": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           0,
-           1,
-           2,
-           4,
-           5,
-           6,
-           7,
-           8,
-           9,
-           10
-          ]
-         }
-        },
-        "x": "E",
-        "left": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           1,
-           2,
-           3,
-           5,
-           6,
-           7,
-           8,
-           9,
-           10
-          ]
-         }
-        }
+        "suspects": [
+         "F"
+        ],
+        "room": "MUSIC_ROOM"
        }
       },
       {
-       "templateKey": "FRAG_OFFSET_BIT",
+       "templateKey": "FRAG_MUST_BE_IN",
        "params": {
-        "y": "E",
-        "src": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           1,
-           2,
-           3,
-           5,
-           6,
-           7,
-           8,
-           9,
-           10
-          ]
-         }
-        },
-        "x": "B",
-        "left": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           0,
-           1,
-           2,
-           4,
-           5,
-           6,
-           7,
-           8,
-           9
-          ]
-         }
-        }
+        "suspects": [
+         "G"
+        ],
+        "room": "GALLERY"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "I"
+        ],
+        "room": "BILLIARDS"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "B",
+         "E"
+        ],
+        "room": "CELLAR"
+       }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "H"
+        ],
+        "room": "FOYER"
        }
       }
      ]
@@ -2535,280 +3186,325 @@
    }
   },
   {
-   "n": 4,
-   "tier": 2,
-   "rule": "Compass squeeze",
+   "n": 8,
+   "tier": 1,
+   "rule": "Polaroid check",
    "kind": "eliminate",
-   "text": "Greta was exactly one row south of Duncan. Duncan can only be in rows 5–7, which leaves Greta rows 6–8. Eliminated → Greta: r1c1, r1c2, r1c3, r2c2, r2c3, r3c1, r3c2, r3c3, r4c2, r4c3, r5c1, r5c2, r5c3, r9c1, r9c3, r10c1, r10c2, r10c3, r11c3.",
+   "text": "Diana was in a room with at least two men. Polaroid check — men: Arthur, Elliot, Fenwick, Gregor, Horatio, Jules and Leopold. Fewer than two of them can still reach the Gallery, the Cellar or the Foyer, so Diana cannot be there.",
    "focus": [
     [
-     0,
-     0
-    ],
-    [
-     0,
-     1
-    ],
-    [
-     0,
-     2
+     1,
+     6
     ],
     [
      1,
-     1
+     8
     ],
     [
      1,
-     2
+     9
     ],
     [
      2,
-     0
+     6
     ],
     [
      2,
-     1
+     7
     ],
     [
      2,
-     2
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     2,
+     10
     ],
     [
      3,
-     1
+     6
     ],
     [
      3,
-     2
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     3,
+     10
     ],
     [
      4,
-     0
+     6
     ],
     [
      4,
-     1
+     7
     ],
     [
      4,
-     2
+     8
+    ],
+    [
+     4,
+     10
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     5,
+     9
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     10
     ],
     [
      8,
-     0
+     6
     ],
     [
      8,
-     2
+     7
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     8,
+     10
     ],
     [
      9,
-     0
+     6
     ],
     [
      9,
-     1
+     7
     ],
     [
      9,
-     2
+     8
+    ],
+    [
+     9,
+     9
+    ],
+    [
+     9,
+     10
     ],
     [
      10,
-     2
+     6
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     10,
+     9
+    ],
+    [
+     10,
+     10
     ]
    ],
    "elims": {
-    "G": [
+    "D": [
      [
-      0,
-      0
-     ],
-     [
-      0,
-      1
-     ],
-     [
-      0,
-      2
+      1,
+      6
      ],
      [
       1,
-      1
+      8
      ],
      [
       1,
-      2
+      9
      ],
      [
-      2,
-      0
+      5,
+      6
      ],
      [
-      2,
-      1
+      5,
+      8
      ],
      [
-      2,
-      2
+      5,
+      9
      ],
      [
-      3,
-      1
+      6,
+      6
      ],
      [
-      3,
-      2
+      6,
+      7
      ],
      [
-      4,
-      0
+      6,
+      9
      ],
      [
-      4,
-      1
+      7,
+      8
      ],
      [
-      4,
-      2
-     ],
-     [
-      8,
-      0
+      7,
+      10
      ],
      [
       8,
-      2
+      6
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      9
+     ],
+     [
+      8,
+      10
      ],
      [
       9,
-      0
+      6
      ],
      [
       9,
-      1
+      7
      ],
      [
       9,
-      2
+      8
+     ],
+     [
+      9,
+      9
+     ],
+     [
+      9,
+      10
      ],
      [
       10,
-      2
+      6
+     ],
+     [
+      10,
+      8
+     ],
+     [
+      10,
+      9
+     ],
+     [
+      10,
+      10
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_TRAIT_FEW_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
     "params": {
      "said": {
       "templateKey": "FRAG_SAID",
       "params": {
-       "subject": "G",
+       "subject": "D",
        "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "G",
+        "kind": "TWO_P_ROOM",
+        "subject": "D",
         "params": {
-         "other": "D",
-         "dir": "S",
-         "dist": 1
+         "trait": "MALE",
+         "selfMatch": false
         }
        }
       }
      },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "D",
-        "src": {
-         "templateKey": "FRAG_LINES_RANGE.ROW",
-         "params": {
-          "from": 4,
-          "to": 6
-         }
-        },
-        "x": "G",
-        "left": {
-         "templateKey": "FRAG_LINES_RANGE.ROW",
-         "params": {
-          "from": 5,
-          "to": 7
-         }
-        }
-       }
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "MALE",
+       "holders": [
+        "A",
+        "E",
+        "F",
+        "G",
+        "H",
+        "J",
+        "L"
+       ]
       }
-     ]
+     },
+     "rooms": [
+      "GALLERY",
+      "CELLAR",
+      "FOYER"
+     ],
+     "suspect": "D"
     }
    }
   },
   {
-   "n": 5,
+   "n": 9,
    "tier": 2,
-   "rule": "Compass squeeze",
+   "rule": "Alone in a room",
    "kind": "eliminate",
-   "text": "Imogen was west of Ezra. Ezra can reach column 11 at most, so Imogen must be in columns 1–10; Imogen is in column 1 at the earliest, so Ezra must be in columns 2–11. Eliminated → Ezra: r3c1, r6c1, r7c1, r8c1, r9c1, r10c1 · Imogen: r1c11, r2c11, r3c11, r4c11, r5c11, r6c11, r7c11, r8c11, r9c11, r10c11, r11c11.",
+   "text": "Horatio was alone and can only be in the Foyer, so nobody else can be in the Foyer.",
    "focus": [
     [
-     0,
-     10
-    ],
-    [
-     1,
-     10
-    ],
-    [
-     2,
-     0
-    ],
-    [
-     2,
-     10
-    ],
-    [
-     3,
-     10
-    ],
-    [
-     4,
-     10
-    ],
-    [
-     5,
-     0
-    ],
-    [
-     5,
-     10
-    ],
-    [
-     6,
-     0
-    ],
-    [
-     6,
-     10
-    ],
-    [
-     7,
-     0
-    ],
-    [
-     7,
-     10
-    ],
-    [
-     8,
-     0
-    ],
-    [
-     8,
-     10
+     9,
+     6
     ],
     [
      9,
-     0
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
     ],
     [
      9,
@@ -2816,80 +3512,258 @@
     ],
     [
      10,
+     6
+    ],
+    [
+     10,
+     8
+    ],
+    [
+     10,
+     9
+    ],
+    [
+     10,
      10
     ]
    ],
    "elims": {
-    "E": [
-     [
-      2,
-      0
-     ],
-     [
-      5,
-      0
-     ],
-     [
-      6,
-      0
-     ],
-     [
-      7,
-      0
-     ],
-     [
-      8,
-      0
-     ],
+    "C": [
      [
       9,
-      0
+      7
      ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "H",
+     "room": "FOYER"
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 2,
+   "rule": "Alone in a room",
+   "kind": "eliminate",
+   "text": "Jules was alone and can only be in the Orangery, so nobody else can be in the Orangery.",
+   "focus": [
+    [
+     4,
+     0
     ],
-    "I": [
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     10,
+     0
+    ],
+    [
+     10,
+     1
+    ]
+   ],
+   "elims": {
+    "D": [
      [
-      0,
-      10
-     ],
-     [
-      1,
-      10
-     ],
-     [
-      2,
-      10
-     ],
-     [
-      3,
-      10
+      4,
+      0
      ],
      [
       4,
-      10
+      1
      ],
      [
       5,
-      10
+      0
+     ],
+     [
+      5,
+      1
      ],
      [
       6,
-      10
+      0
+     ],
+     [
+      6,
+      1
      ],
      [
       7,
-      10
+      0
+     ],
+     [
+      7,
+      1
      ],
      [
       8,
-      10
+      0
+     ],
+     [
+      8,
+      1
      ],
      [
       9,
-      10
+      1
      ],
      [
       10,
-      10
+      0
+     ],
+     [
+      10,
+      1
+     ]
+    ],
+    "L": [
+     [
+      8,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      10,
+      0
+     ]
+    ],
+    "M": [
+     [
+      8,
+      0
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      10,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "J",
+     "room": "ORANGERY"
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Fenwick was west of Leopold. Leopold can reach column 6 at most, so Fenwick must be in columns 1–5; Fenwick is in column 5 at the earliest, so Leopold must be in columns 6–11.",
+   "focus": [
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      6,
+      5
+     ],
+     [
+      8,
+      5
+     ]
+    ],
+    "L": [
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      7,
+      4
      ]
     ]
    },
@@ -2900,12 +3774,12 @@
      "said": {
       "templateKey": "FRAG_SAID",
       "params": {
-       "subject": "I",
+       "subject": "F",
        "atom": {
         "kind": "WEST_OF",
-        "subject": "I",
+        "subject": "F",
         "params": {
-         "other": "E"
+         "other": "L"
         }
        }
       }
@@ -2914,14 +3788,14 @@
       {
        "templateKey": "FRAG_COMPASS_MAX.COL",
        "params": {
-        "y": "E",
-        "line": 10,
-        "x": "I",
+        "y": "L",
+        "line": 5,
+        "x": "F",
         "span": {
          "templateKey": "FRAG_SPAN_RANGE.COL",
          "params": {
           "from": 0,
-          "to": 9
+          "to": 4
          }
         }
        }
@@ -2929,13 +3803,13 @@
       {
        "templateKey": "FRAG_COMPASS_MIN.COL",
        "params": {
-        "x": "I",
-        "line": 0,
-        "y": "E",
+        "x": "F",
+        "line": 4,
+        "y": "L",
         "span": {
          "templateKey": "FRAG_SPAN_RANGE.COL",
          "params": {
-          "from": 1,
+          "from": 5,
           "to": 10
          }
         }
@@ -2946,928 +3820,180 @@
    }
   },
   {
-   "n": 6,
-   "tier": 3,
-   "rule": "Unseen partner (lookahead)",
-   "kind": "eliminate",
-   "text": "Lookahead: Ezra was exactly one row south of Bruno. From r2c4, r3c4, r6c4, r7c4, r8c4, r9c4, r10c4, r11c4, Ezra would see every tile where Bruno could still stand to make that true, and no two suspects may see each other. So Ezra cannot be there. Eliminated → Ezra: r2c4, r3c4, r6c4, r7c4, r8c4, r9c4, r10c4, r11c4.",
-   "focus": [
-    [
-     1,
-     3
-    ],
-    [
-     2,
-     3
-    ],
-    [
-     5,
-     3
-    ],
-    [
-     6,
-     3
-    ],
-    [
-     7,
-     3
-    ],
-    [
-     8,
-     3
-    ],
-    [
-     9,
-     3
-    ],
-    [
-     10,
-     3
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      1,
-      3
-     ],
-     [
-      2,
-      3
-     ],
-     [
-      5,
-      3
-     ],
-     [
-      6,
-      3
-     ],
-     [
-      7,
-      3
-     ],
-     [
-      8,
-      3
-     ],
-     [
-      9,
-      3
-     ],
-     [
-      10,
-      3
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_PARTNER_SIGHT",
-    "ruleKey": "RULE_PARTNER_SIGHT",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "coords": [
-      [
-       1,
-       3
-      ],
-      [
-       2,
-       3
-      ],
-      [
-       5,
-       3
-      ],
-      [
-       6,
-       3
-      ],
-      [
-       7,
-       3
-      ],
-      [
-       8,
-       3
-      ],
-      [
-       9,
-       3
-      ],
-      [
-       10,
-       3
-      ]
-     ],
-     "x": "E",
-     "y": "B"
-    }
-   }
-  },
-  {
-   "n": 7,
-   "tier": 3,
-   "rule": "Unseen partner (lookahead)",
-   "kind": "eliminate",
-   "text": "Lookahead: Ezra was in the same room as Imogen. From r3c10, r4c10, r7c10, r8c7, r9c7, r10c7, r11c7, Ezra would see every tile where Imogen could still stand to make that true, and no two suspects may see each other. So Ezra cannot be there. Eliminated → Ezra: r3c10, r4c10, r7c10, r8c7, r9c7, r10c7, r11c7.",
-   "focus": [
-    [
-     2,
-     9
-    ],
-    [
-     3,
-     9
-    ],
-    [
-     6,
-     9
-    ],
-    [
-     7,
-     6
-    ],
-    [
-     8,
-     6
-    ],
-    [
-     9,
-     6
-    ],
-    [
-     10,
-     6
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      2,
-      9
-     ],
-     [
-      3,
-      9
-     ],
-     [
-      6,
-      9
-     ],
-     [
-      7,
-      6
-     ],
-     [
-      8,
-      6
-     ],
-     [
-      9,
-      6
-     ],
-     [
-      10,
-      6
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_PARTNER_SIGHT",
-    "ruleKey": "RULE_PARTNER_SIGHT",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "SAME_ROOM",
-        "subject": "E",
-        "params": {
-         "other": "I"
-        }
-       }
-      }
-     },
-     "coords": [
-      [
-       2,
-       9
-      ],
-      [
-       3,
-       9
-      ],
-      [
-       6,
-       9
-      ],
-      [
-       7,
-       6
-      ],
-      [
-       8,
-       6
-      ],
-      [
-       9,
-       6
-      ],
-      [
-       10,
-       6
-      ]
-     ],
-     "x": "E",
-     "y": "I"
-    }
-   }
-  },
-  {
-   "n": 8,
-   "tier": 2,
-   "rule": "Shared room",
-   "kind": "eliminate",
-   "text": "Ezra was in the same room as Imogen, so both must be in a room they can both still reach (Cellar, Gallery, Library, Music Room, Orangery, Parlor, Study). Eliminated → Imogen: r8c7, r9c7, r10c7, r11c7.",
-   "focus": [
-    [
-     7,
-     6
-    ],
-    [
-     8,
-     6
-    ],
-    [
-     9,
-     6
-    ],
-    [
-     10,
-     6
-    ]
-   ],
-   "elims": {
-    "I": [
-     [
-      7,
-      6
-     ],
-     [
-      8,
-      6
-     ],
-     [
-      9,
-      6
-     ],
-     [
-      10,
-      6
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_SAME_ROOM",
-    "ruleKey": "RULE_SAME_ROOM",
-    "params": {
-     "owner": "E",
-     "other": "I",
-     "rooms": [
-      "CELLAR",
-      "GALLERY",
-      "LIBRARY",
-      "MUSIC_ROOM",
-      "ORANGERY",
-      "PARLOR",
-      "STUDY"
-     ]
-    }
-   }
-  },
-  {
-   "n": 9,
-   "tier": 3,
-   "rule": "Unseen partner (lookahead)",
-   "kind": "eliminate",
-   "text": "Lookahead: Ezra was in the same room as Imogen. From r1c2, r2c2, r2c3, r2c4, r2c5, r2c6, r2c7, r2c8, r2c9, r2c10, r3c2, r4c2, r5c2, r6c2, r7c2, Imogen would see every tile where Ezra could still stand to make that true, and no two suspects may see each other. So Imogen cannot be there. Eliminated → Imogen: r1c2, r2c2, r2c3, r2c4, r2c5, r2c6, r2c7, r2c8, r2c9, r2c10, r3c2, r4c2, r5c2, r6c2, r7c2.",
-   "focus": [
-    [
-     0,
-     1
-    ],
-    [
-     1,
-     1
-    ],
-    [
-     1,
-     2
-    ],
-    [
-     1,
-     3
-    ],
-    [
-     1,
-     4
-    ],
-    [
-     1,
-     5
-    ],
-    [
-     1,
-     6
-    ],
-    [
-     1,
-     7
-    ],
-    [
-     1,
-     8
-    ],
-    [
-     1,
-     9
-    ],
-    [
-     2,
-     1
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     5,
-     1
-    ],
-    [
-     6,
-     1
-    ]
-   ],
-   "elims": {
-    "I": [
-     [
-      0,
-      1
-     ],
-     [
-      1,
-      1
-     ],
-     [
-      1,
-      2
-     ],
-     [
-      1,
-      3
-     ],
-     [
-      1,
-      4
-     ],
-     [
-      1,
-      5
-     ],
-     [
-      1,
-      6
-     ],
-     [
-      1,
-      7
-     ],
-     [
-      1,
-      8
-     ],
-     [
-      1,
-      9
-     ],
-     [
-      2,
-      1
-     ],
-     [
-      3,
-      1
-     ],
-     [
-      4,
-      1
-     ],
-     [
-      5,
-      1
-     ],
-     [
-      6,
-      1
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_PARTNER_SIGHT",
-    "ruleKey": "RULE_PARTNER_SIGHT",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "SAME_ROOM",
-        "subject": "E",
-        "params": {
-         "other": "I"
-        }
-       }
-      }
-     },
-     "coords": [
-      [
-       0,
-       1
-      ],
-      [
-       1,
-       1
-      ],
-      [
-       1,
-       2
-      ],
-      [
-       1,
-       3
-      ],
-      [
-       1,
-       4
-      ],
-      [
-       1,
-       5
-      ],
-      [
-       1,
-       6
-      ],
-      [
-       1,
-       7
-      ],
-      [
-       1,
-       8
-      ],
-      [
-       1,
-       9
-      ],
-      [
-       2,
-       1
-      ],
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       1
-      ],
-      [
-       5,
-       1
-      ],
-      [
-       6,
-       1
-      ]
-     ],
-     "x": "I",
-     "y": "E"
-    }
-   }
-  },
-  {
-   "n": 10,
-   "tier": 3,
-   "rule": "Nowhere left (lookahead)",
-   "kind": "eliminate",
-   "text": "What if Imogen stood on r5c4? From there Imogen would see every tile left for Bruno. So Imogen cannot be on r5c4. Eliminated → Imogen: r5c4.",
-   "focus": [
-    [
-     4,
-     3
-    ]
-   ],
-   "elims": {
-    "I": [
-     [
-      4,
-      3
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_STARVE",
-    "ruleKey": "RULE_STARVE",
-    "params": {
-     "suspect": "I",
-     "coord": [
-      4,
-      3
-     ],
-     "other": "B"
-    }
-   }
-  },
-  {
-   "n": 11,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
-   "kind": "eliminate",
-   "text": "What if Cyril stood on r1c1? Following the clues from there, Greta's tile r7c3 would be not one row south of any tile left for Duncan. So Cyril cannot be on r1c1. Eliminated → Cyril: r1c1.",
-   "focus": [
-    [
-     0,
-     0
-    ]
-   ],
-   "elims": {
-    "C": [
-     [
-      0,
-      0
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
-    "params": {
-     "suspect": "C",
-     "coord": [
-      0,
-      0
-     ],
-     "contra": {
-      "templateKey": "CONTRA_PLACED_TILE",
-      "params": {
-       "suspect": "G",
-       "coord": [
-        6,
-        2
-       ],
-       "reason": {
-        "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
-        "params": {
-         "other": "D"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  {
    "n": 12,
-   "tier": 3,
-   "rule": "Common watched tiles (lookahead)",
-   "kind": "eliminate",
-   "text": "Lookahead: Cyril can only be at r2c2 or r3c1. the two options cross each other's sightlines, so r3c2 is watched from both — nobody else can stand on r3c2. Eliminated → Ezra: r3c2.",
-   "focus": [
-    [
-     1,
-     1
-    ],
-    [
-     2,
-     0
-    ],
-    [
-     2,
-     1
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      2,
-      1
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_LOOKAHEAD_CROSSING",
-    "ruleKey": "RULE_PAIR_WATCH",
-    "params": {
-     "suspect": "C",
-     "options": [
-      [
-       1,
-       1
-      ],
-      [
-       2,
-       0
-      ]
-     ],
-     "common": [
-      [
-       2,
-       1
-      ]
-     ],
-     "coords": [
-      [
-       2,
-       1
-      ]
-     ]
-    }
-   }
-  },
-  {
-   "n": 13,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
-   "kind": "eliminate",
-   "text": "What if Cyril stood on r3c1? Following the clues from there, r1c11 would stay dark, but Katherine was alone in the Gallery. So Cyril cannot be on r3c1. Eliminated → Cyril: r3c1.",
-   "focus": [
-    [
-     2,
-     0
-    ]
-   ],
-   "elims": {
-    "C": [
-     [
-      2,
-      0
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
-    "params": {
-     "suspect": "C",
-     "coord": [
-      2,
-      0
-     ],
-     "contra": {
-      "templateKey": "CONTRA_STAY_DARK_BANNED",
-      "params": {
-       "coord": [
-        0,
-        10
-       ],
-       "ban": {
-        "templateKey": "BAN_ALONE_IN",
-        "params": {
-         "owner": "K",
-         "room": "GALLERY"
-        }
-       }
-      }
-     }
-    }
-   }
-  },
-  {
-   "n": 14,
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Cyril — “was beside a TV”. The clue fits 3 tiles; r1c1 is trial: Greta's tile r7c3 would be not one row south of any tile left for Duncan; r3c1 is trial: r1c11 would stay dark, but Katherine was alone in the Gallery. Only r2c2 is left. Place Cyril at r2c2; Cyril's sightlines now watch 16 tiles.",
+   "text": "Fenwick “was beside a gramophone and was west of Leopold”: of the 3 tiles that fit, only r8c5 is still open. Place Fenwick there.",
    "focus": [
     [
-     1,
-     1
+     7,
+     4
     ]
    ],
    "elims": {
-    "B": [
+    "D": [
      [
-      1,
-      3
-     ]
-    ],
-    "E": [
-     [
-      1,
-      1
-     ],
-     [
-      1,
+      7,
       2
      ],
      [
-      1,
+      7,
+      3
+     ],
+     [
+      7,
       4
      ],
      [
-      1,
-      5
+      8,
+      4
      ],
      [
-      1,
-      6
+      9,
+      4
      ],
      [
-      1,
-      7
-     ],
+      10,
+      4
+     ]
+    ],
+    "J": [
      [
-      1,
-      8
-     ],
-     [
-      1,
-      9
-     ],
-     [
-      1,
-      10
-     ],
-     [
-      3,
-      1
-     ],
-     [
-      5,
-      1
-     ],
-     [
-      6,
-      1
+      7,
+      0
      ],
      [
       7,
       1
      ]
     ],
-    "F": [
-     [
-      0,
-      1
-     ],
-     [
-      1,
-      1
-     ]
-    ],
-    "G": [
-     [
-      5,
-      1
-     ],
-     [
-      6,
-      1
-     ],
+    "M": [
      [
       7,
-      1
-     ]
-    ],
-    "I": [
-     [
-      7,
-      1
+      4
      ]
     ]
    },
-   "suspect": "C",
+   "suspect": "F",
    "cell": [
-    1,
-    1
+    7,
+    4
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 3,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          0,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_PLACED_TILE",
-           "params": {
-            "suspect": "G",
-            "coord": [
-             6,
-             2
-            ],
-            "reason": {
-             "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
-             "params": {
-              "other": "D"
-             }
-            }
-           }
-          }
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          2,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_STAY_DARK_BANNED",
-           "params": {
-            "coord": [
-             0,
-             10
-            ],
-            "ban": {
-             "templateKey": "BAN_ALONE_IN",
-             "params": {
-              "owner": "K",
-              "room": "GALLERY"
-             }
-            }
-           }
-          }
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "C",
-     "clueOf": "C",
+     "suspect": "F",
+     "clueOf": "F",
      "coord": [
-      1,
-      1
-     ],
-     "watch": 16
+      7,
+      4
+     ]
     }
    }
   },
   {
-   "n": 15,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Ezra was exactly one row south of Bruno. Bruno can only be in rows 1, 3, 5, 6, 7, 8, 9 or 10, which leaves Ezra rows 4, 6, 7, 8, 9, 10 or 11; Ezra can only be in rows 4, 6, 7, 8, 9, 10 or 11, which leaves Bruno rows 3, 5, 6, 7, 8, 9 or 10. Eliminated → Bruno: r1c4 · Ezra: r3c3, r3c5, r3c6, r3c7, r3c8, r3c9, r3c11.",
+   "n": 13,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Leopold “was beside a potted palm”: every tile that fits is ruled out except r7c6. Place Leopold there.",
    "focus": [
     [
-     0,
-     3
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      3,
+      5
+     ]
+    ],
+    "C": [
+     [
+      6,
+      7
+     ]
+    ],
+    "D": [
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      10,
+      5
+     ]
+    ],
+    "E": [
+     [
+      6,
+      7
+     ]
+    ],
+    "M": [
+     [
+      6,
+      5
+     ]
+    ]
+   },
+   "suspect": "L",
+   "cell": [
+    6,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "L",
+     "clueOf": "L",
+     "coord": [
+      6,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 2,
+   "rule": "Counting rooms",
+   "kind": "eliminate",
+   "text": "Exactly 1 of the rooms held no suspect. Music Room, Gallery, Orangery, Billiards, Parlor, Cellar, Foyer will certainly hold suspects, and no other room may, so nobody can stand anywhere else.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
     ],
     [
      2,
      2
+    ],
+    [
+     2,
+     3
     ],
     [
      2,
@@ -3876,35 +4002,25 @@
     [
      2,
      5
-    ],
-    [
-     2,
-     6
-    ],
-    [
-     2,
-     7
-    ],
-    [
-     2,
-     8
-    ],
-    [
-     2,
-     10
     ]
    ],
    "elims": {
-    "B": [
+    "K": [
      [
-      0,
-      3
-     ]
-    ],
-    "E": [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
      [
       2,
       2
+     ],
+     [
+      2,
+      3
      ],
      [
       2,
@@ -3913,116 +4029,65 @@
      [
       2,
       5
-     ],
-     [
-      2,
-      6
-     ],
-     [
-      2,
-      7
-     ],
-     [
-      2,
-      8
-     ],
-     [
-      2,
-      10
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_ROOMS_FULL",
+    "ruleKey": "RULE_ROOM_COUNT",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
+     "rule": {
+      "templateKey": "GLOBAL.EXACT_EMPTY",
       "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
+       "count": 1
       }
      },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "B",
-        "src": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           0,
-           2,
-           4,
-           5,
-           6,
-           7,
-           8,
-           9
-          ]
-         }
-        },
-        "x": "E",
-        "left": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           3,
-           5,
-           6,
-           7,
-           8,
-           9,
-           10
-          ]
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "E",
-        "src": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           3,
-           5,
-           6,
-           7,
-           8,
-           9,
-           10
-          ]
-         }
-        },
-        "x": "B",
-        "left": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           2,
-           4,
-           5,
-           6,
-           7,
-           8,
-           9
-          ]
-         }
-        }
-       }
-      }
+     "rooms": [
+      "MUSIC_ROOM",
+      "GALLERY",
+      "ORANGERY",
+      "BILLIARDS",
+      "PARLOR",
+      "CELLAR",
+      "FOYER"
+     ]
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: O. B. Scuro can only be hiding on r7c10. Nobody may stand where they would see it.",
+   "focus": [
+    [
+     6,
+     9
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      6,
+      9
+     ]
+    ],
+    "E": [
+     [
+      6,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_ASSASSIN_PINNED",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "who": "O",
+     "coord": [
+      6,
+      9
      ]
     }
    }
@@ -4030,144 +4095,76 @@
   {
    "n": 16,
    "tier": 2,
-   "rule": "Shared room",
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "Ezra was in the same room as Imogen, so both must be in a room they can both still reach (Cellar, Library, Music Room, Orangery, Study). Eliminated → Imogen: r1c1, r1c3, r1c4, r1c5, r1c6, r1c10, r3c1, r5c1, r6c1, r7c1.",
+   "text": "The blindspot law: R. E. Aper can only be hiding on r8c9. Nobody may stand where they would see it.",
    "focus": [
     [
-     0,
-     0
-    ],
-    [
-     0,
-     2
-    ],
-    [
-     0,
-     3
-    ],
-    [
-     0,
-     4
-    ],
-    [
-     0,
-     5
-    ],
-    [
-     0,
-     9
-    ],
-    [
-     2,
-     0
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     5,
-     0
-    ],
-    [
-     6,
-     0
+     7,
+     8
     ]
    ],
    "elims": {
-    "I": [
+    "B": [
      [
-      0,
-      0
-     ],
+      7,
+      8
+     ]
+    ],
+    "E": [
      [
-      0,
-      2
-     ],
-     [
-      0,
-      3
-     ],
-     [
-      0,
-      4
-     ],
-     [
-      0,
-      5
-     ],
-     [
-      0,
-      9
-     ],
-     [
-      2,
-      0
-     ],
-     [
-      4,
-      0
-     ],
-     [
-      5,
-      0
-     ],
-     [
-      6,
-      0
+      7,
+      8
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_SAME_ROOM",
-    "ruleKey": "RULE_SAME_ROOM",
+    "templateKey": "STEP_SHADOW_ASSASSIN_PINNED",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "owner": "E",
-     "other": "I",
-     "rooms": [
-      "CELLAR",
-      "LIBRARY",
-      "MUSIC_ROOM",
-      "ORANGERY",
-      "STUDY"
+     "who": "R",
+     "coord": [
+      7,
+      8
      ]
     }
    }
   },
   {
    "n": 17,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
+   "tier": 2,
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "What if Katherine stood on r7c11? Following the clues from there, Greta would have no tile left. So Katherine cannot be on r7c11. Eliminated → Katherine: r7c11.",
+   "text": "The blindspot law: for Isabel, r2c2 is in sight of every tile P. H. Obia could hide on, so Isabel cannot stand there.",
    "focus": [
     [
-     6,
-     10
+     1,
+     1
     ]
    ],
    "elims": {
-    "K": [
+    "I": [
      [
-      6,
-      10
+      1,
+      1
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
+    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "suspect": "K",
-     "coord": [
-      6,
-      10
+     "suspect": "I",
+     "coords": [
+      [
+       1,
+       1
+      ]
      ],
-     "contra": {
-      "templateKey": "CONTRA_NO_TILE_LEFT",
+     "reason": {
+      "templateKey": "REASON_SEES_ALL_HIDES",
       "params": {
-       "suspect": "G"
+       "who": "P"
       }
      }
     }
@@ -4175,245 +4172,28 @@
   },
   {
    "n": 18,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Katherine — “was alone and was in front of a window”. The clue fits 2 tiles; r7c11 is trial: Greta would have no tile left. Only r1c3 is left. Place Katherine at r1c3; Katherine's sightlines now watch 6 tiles.",
-   "focus": [
-    [
-     0,
-     2
-    ]
-   ],
-   "elims": {},
-   "suspect": "K",
-   "cell": [
-    0,
-    2
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          6,
-          10
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_NO_TILE_LEFT",
-           "params": {
-            "suspect": "G"
-           }
-          }
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "K",
-     "clueOf": "K",
-     "coord": [
-      0,
-      2
-     ],
-     "watch": 6
-    }
-   }
-  },
-  {
-   "n": 19,
    "tier": 2,
    "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "The blindspot law: r1c11 cannot be a hiding spot (Katherine was alone in the Gallery), so someone must watch it. Only Ezra can still see it, so Ezra must stand on r4c11, r6c11, r7c11, r8c11, r9c11, r10c11, r11c11. Eliminated → Ezra: r4c3, r4c5, r4c6, r4c8, r4c9, r6c3, r6c5, r6c6, r6c7, r6c9, r7c3, r7c5, r7c6, r7c7, r7c8, r7c9, r8c3, r8c5, r8c6, r8c8, r8c9, r8c10, r9c3, r9c6, r9c8, r9c10, r10c2, r10c3, r10c5, r10c6, r10c9, r10c10, r11c3, r11c6, r11c9, r11c10.",
+   "text": "The blindspot law: r11c9 cannot be a hiding spot (Horatio was alone in the Foyer), so someone must watch it. Only Horatio can still see it, so Horatio must stand on r10c9, r11c9, r11c10.",
    "focus": [
     [
-     0,
-     10
-    ],
-    [
-     3,
-     10
-    ],
-    [
-     5,
-     10
-    ],
-    [
-     6,
-     10
-    ],
-    [
-     7,
-     10
-    ],
-    [
-     8,
-     10
-    ],
-    [
      9,
-     10
+     8
     ],
     [
      10,
-     10
+     8
+    ],
+    [
+     10,
+     9
     ]
    ],
    "elims": {
-    "E": [
-     [
-      3,
-      2
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      3,
-      5
-     ],
-     [
-      3,
-      7
-     ],
-     [
-      3,
-      8
-     ],
-     [
-      5,
-      2
-     ],
-     [
-      5,
-      4
-     ],
-     [
-      5,
-      5
-     ],
-     [
-      5,
-      6
-     ],
-     [
-      5,
-      8
-     ],
-     [
-      6,
-      2
-     ],
-     [
-      6,
-      4
-     ],
-     [
-      6,
-      5
-     ],
-     [
-      6,
-      6
-     ],
-     [
-      6,
-      7
-     ],
-     [
-      6,
-      8
-     ],
-     [
-      7,
-      2
-     ],
-     [
-      7,
-      4
-     ],
-     [
-      7,
-      5
-     ],
-     [
-      7,
-      7
-     ],
-     [
-      7,
-      8
-     ],
-     [
-      7,
-      9
-     ],
-     [
-      8,
-      2
-     ],
-     [
-      8,
-      5
-     ],
-     [
-      8,
-      7
-     ],
-     [
-      8,
-      9
-     ],
+    "H": [
      [
       9,
-      1
-     ],
-     [
-      9,
-      2
-     ],
-     [
-      9,
-      4
-     ],
-     [
-      9,
-      5
-     ],
-     [
-      9,
-      8
-     ],
-     [
-      9,
-      9
-     ],
-     [
-      10,
-      2
-     ],
-     [
-      10,
-      5
-     ],
-     [
-      10,
-      8
-     ],
-     [
-      10,
       9
      ]
     ]
@@ -4423,45 +4203,86 @@
     "ruleKey": "RULE_SHADOW_LAW",
     "params": {
      "coord": [
-      0,
+      10,
+      8
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "H",
+       "room": "FOYER"
+      }
+     },
+     "suspect": "H",
+     "coords": [
+      [
+       9,
+       8
+      ],
+      [
+       10,
+       8
+      ],
+      [
+       10,
+       9
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r11c11 cannot be a hiding spot (Horatio was alone in the Foyer), so someone must watch it. Only Horatio can still see it, so Horatio must stand on r11c9, r11c10.",
+   "focus": [
+    [
+     10,
+     8
+    ],
+    [
+     10,
+     9
+    ],
+    [
+     10,
+     10
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      9,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      10,
       10
      ],
      "ban": {
       "templateKey": "BAN_ALONE_IN",
       "params": {
-       "owner": "K",
-       "room": "GALLERY"
+       "owner": "H",
+       "room": "FOYER"
       }
      },
-     "suspect": "E",
+     "suspect": "H",
      "coords": [
       [
-       3,
-       10
-      ],
-      [
-       5,
-       10
-      ],
-      [
-       6,
-       10
-      ],
-      [
-       7,
-       10
-      ],
-      [
-       8,
-       10
-      ],
-      [
-       9,
-       10
+       10,
+       8
       ],
       [
        10,
-       10
+       9
       ]
      ]
     }
@@ -4470,280 +4291,28 @@
   {
    "n": 20,
    "tier": 2,
-   "rule": "Shared room",
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "Ezra was in the same room as Imogen, so both must be in a room they can both still reach (Orangery, Study). Eliminated → Imogen: r3c3, r3c4, r3c5, r3c6, r3c7, r3c8, r3c9, r4c3, r4c5, r4c6, r4c8, r4c9, r5c3, r5c5, r5c6, r5c7, r5c8, r5c9, r6c3, r6c4, r6c5, r6c6, r6c7, r6c9, r7c3, r7c4, r7c5, r7c6, r7c7, r7c8, r7c9, r8c1, r8c3, r8c4, r8c5, r8c6, r9c1, r9c3, r9c4, r9c6, r10c1, r10c2, r10c3, r10c4, r10c5, r10c6, r11c3, r11c4, r11c6.",
+   "text": "The blindspot law: r10c8 cannot be a hiding spot (Horatio was alone in the Foyer), so someone must watch it. Only Diana can still see it, so Diana must stand on r10c3, r10c4.",
    "focus": [
     [
-     2,
+     9,
      2
     ],
     [
-     2,
+     9,
      3
     ],
     [
-     2,
-     4
-    ],
-    [
-     2,
-     5
-    ],
-    [
-     2,
-     6
-    ],
-    [
-     2,
+     9,
      7
-    ],
-    [
-     2,
-     8
-    ],
-    [
-     3,
-     2
-    ],
-    [
-     3,
-     4
-    ],
-    [
-     3,
-     5
-    ],
-    [
-     3,
-     7
-    ],
-    [
-     3,
-     8
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     4,
-     4
-    ],
-    [
-     4,
-     5
-    ],
-    [
-     4,
-     6
-    ],
-    [
-     4,
-     7
-    ],
-    [
-     4,
-     8
-    ],
-    [
-     5,
-     2
-    ],
-    [
-     5,
-     3
-    ],
-    [
-     5,
-     4
-    ],
-    [
-     5,
-     5
-    ],
-    [
-     5,
-     6
-    ],
-    [
-     5,
-     8
-    ],
-    [
-     6,
-     2
-    ],
-    [
-     6,
-     3
-    ],
-    [
-     6,
-     4
-    ],
-    [
-     6,
-     5
-    ],
-    [
-     6,
-     6
-    ],
-    [
-     6,
-     7
-    ],
-    [
-     6,
-     8
-    ],
-    [
-     7,
-     0
-    ],
-    [
-     7,
-     2
-    ],
-    [
-     7,
-     3
-    ],
-    [
-     7,
-     4
-    ],
-    [
-     7,
-     5
-    ],
-    [
-     8,
-     0
-    ],
-    [
-     8,
-     2
-    ],
-    [
-     8,
-     3
-    ],
-    [
-     8,
-     5
-    ],
-    [
-     9,
-     0
-    ],
-    [
-     9,
-     1
-    ],
-    [
-     9,
-     2
-    ],
-    [
-     9,
-     3
-    ],
-    [
-     9,
-     4
-    ],
-    [
-     9,
-     5
-    ],
-    [
-     10,
-     2
-    ],
-    [
-     10,
-     3
-    ],
-    [
-     10,
-     5
     ]
    ],
    "elims": {
-    "I": [
-     [
-      2,
-      2
-     ],
-     [
-      2,
-      3
-     ],
-     [
-      2,
-      4
-     ],
-     [
-      2,
-      5
-     ],
-     [
-      2,
-      6
-     ],
-     [
-      2,
-      7
-     ],
-     [
-      2,
-      8
-     ],
-     [
-      3,
-      2
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      3,
-      5
-     ],
-     [
-      3,
-      7
-     ],
-     [
-      3,
-      8
-     ],
+    "D": [
      [
       4,
       2
-     ],
-     [
-      4,
-      4
-     ],
-     [
-      4,
-      5
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      4,
-      7
-     ],
-     [
-      4,
-      8
      ],
      [
       5,
@@ -4758,68 +4327,12 @@
       4
      ],
      [
-      5,
-      5
-     ],
-     [
-      5,
-      6
-     ],
-     [
-      5,
-      8
-     ],
-     [
       6,
       2
      ],
      [
       6,
       3
-     ],
-     [
-      6,
-      4
-     ],
-     [
-      6,
-      5
-     ],
-     [
-      6,
-      6
-     ],
-     [
-      6,
-      7
-     ],
-     [
-      6,
-      8
-     ],
-     [
-      7,
-      0
-     ],
-     [
-      7,
-      2
-     ],
-     [
-      7,
-      3
-     ],
-     [
-      7,
-      4
-     ],
-     [
-      7,
-      5
-     ],
-     [
-      8,
-      0
      ],
      [
       8,
@@ -4828,34 +4341,6 @@
      [
       8,
       3
-     ],
-     [
-      8,
-      5
-     ],
-     [
-      9,
-      0
-     ],
-     [
-      9,
-      1
-     ],
-     [
-      9,
-      2
-     ],
-     [
-      9,
-      3
-     ],
-     [
-      9,
-      4
-     ],
-     [
-      9,
-      5
      ],
      [
       10,
@@ -4864,22 +4349,34 @@
      [
       10,
       3
-     ],
-     [
-      10,
-      5
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_SAME_ROOM",
-    "ruleKey": "RULE_SAME_ROOM",
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "owner": "E",
-     "other": "I",
-     "rooms": [
-      "ORANGERY",
-      "STUDY"
+     "coord": [
+      9,
+      7
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "H",
+       "room": "FOYER"
+      }
+     },
+     "suspect": "D",
+     "coords": [
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ]
      ]
     }
    }
@@ -4889,228 +4386,54 @@
    "tier": 2,
    "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "The blindspot law: for Greta, r6c1, r7c1, r8c1 are in sight of every tile R. E. Aper could hide on, so Greta cannot stand there. Eliminated → Greta: r6c1, r7c1, r8c1.",
+   "text": "The blindspot law: r11c1 cannot be a hiding spot (Jules was alone in the Orangery), so someone must watch it. Only Jules can still see it, so Jules must stand on r11c1, r11c2.",
    "focus": [
     [
-     5,
+     10,
      0
-    ],
-    [
-     6,
-     0
-    ],
-    [
-     7,
-     0
-    ]
-   ],
-   "elims": {
-    "G": [
-     [
-      5,
-      0
-     ],
-     [
-      6,
-      0
-     ],
-     [
-      7,
-      0
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
-    "ruleKey": "RULE_SHADOW_LAW",
-    "params": {
-     "suspect": "G",
-     "coords": [
-      [
-       5,
-       0
-      ],
-      [
-       6,
-       0
-      ],
-      [
-       7,
-       0
-      ]
-     ],
-     "reason": {
-      "templateKey": "REASON_SEES_ALL_HIDES",
-      "params": {
-       "who": "R"
-      }
-     }
-    }
-   }
-  },
-  {
-   "n": 22,
-   "tier": 1,
-   "rule": "Ray block",
-   "kind": "eliminate",
-   "text": "Ray block: Greta can only be at r6c3, r7c3 or r8c3, and those tiles all lie on one sightline. Whichever one Greta takes, the whole stretch is watched, so nobody else can stand on r6c3, r7c3. Eliminated → Alice: r6c3, r7c3 · Florence: r6c3, r7c3.",
-   "focus": [
-    [
-     2,
-     2
-    ],
-    [
-     3,
-     2
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     5,
-     2
-    ],
-    [
-     6,
-     2
-    ],
-    [
-     7,
-     2
-    ],
-    [
-     8,
-     2
-    ],
-    [
-     9,
-     2
     ],
     [
      10,
-     2
+     1
     ]
    ],
    "elims": {
-    "A": [
+    "J": [
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
      [
       5,
-      2
+      0
+     ],
+     [
+      5,
+      1
      ],
      [
       6,
-      2
-     ]
-    ],
-    "F": [
-     [
-      5,
-      2
+      0
      ],
      [
       6,
-      2
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
-    "params": {
-     "suspect": "G",
-     "options": [
-      [
-       5,
-       2
-      ],
-      [
-       6,
-       2
-      ],
-      [
-       7,
-       2
-      ]
-     ],
-     "coords": [
-      [
-       5,
-       2
-      ],
-      [
-       6,
-       2
-      ]
-     ]
-    }
-   }
-  },
-  {
-   "n": 23,
-   "tier": 2,
-   "rule": "The blindspot law",
-   "kind": "eliminate",
-   "text": "The blindspot law: r1c10 cannot be a hiding spot (Katherine was alone in the Gallery), so someone must watch it. Only Imogen can still see it, so Imogen must stand on r3c10, r4c10, r5c10, r7c10, r8c10, r9c10, r10c10, r11c10. Eliminated → Imogen: r8c8, r8c9, r9c8, r10c9, r11c9.",
-   "focus": [
-    [
-     0,
-     9
-    ],
-    [
-     2,
-     9
-    ],
-    [
-     3,
-     9
-    ],
-    [
-     4,
-     9
-    ],
-    [
-     6,
-     9
-    ],
-    [
-     7,
-     9
-    ],
-    [
-     8,
-     9
-    ],
-    [
-     9,
-     9
-    ],
-    [
-     10,
-     9
-    ]
-   ],
-   "elims": {
-    "I": [
-     [
-      7,
-      7
-     ],
-     [
-      7,
-      8
+      1
      ],
      [
       8,
-      7
+      0
+     ],
+     [
+      8,
+      1
      ],
      [
       9,
-      8
-     ],
-     [
-      10,
-      8
+      1
      ]
     ]
    },
@@ -5119,175 +4442,199 @@
     "ruleKey": "RULE_SHADOW_LAW",
     "params": {
      "coord": [
-      0,
-      9
+      10,
+      0
      ],
      "ban": {
       "templateKey": "BAN_ALONE_IN",
       "params": {
-       "owner": "K",
-       "room": "GALLERY"
+       "owner": "J",
+       "room": "ORANGERY"
       }
      },
-     "suspect": "I",
+     "suspect": "J",
      "coords": [
       [
-       2,
-       9
-      ],
-      [
-       3,
-       9
-      ],
-      [
-       4,
-       9
-      ],
-      [
-       6,
-       9
-      ],
-      [
-       7,
-       9
-      ],
-      [
-       8,
-       9
-      ],
-      [
-       9,
-       9
+       10,
+       0
       ],
       [
        10,
-       9
+       1
       ]
      ]
     }
    }
   },
   {
-   "n": 24,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
+   "n": 22,
+   "tier": 2,
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "What if Greta stood on r7c3? Following the clues from there, Greta's tile r7c3 would be not one row south of any tile left for Duncan. So Greta cannot be on r7c3. Eliminated → Greta: r7c3.",
+   "text": "The blindspot law: r5c1 cannot be a hiding spot (Jules was alone in the Orangery), so someone must watch it. Only Arthur can still see it, so Arthur must stand on r4c1.",
    "focus": [
     [
-     6,
-     2
+     3,
+     0
+    ],
+    [
+     4,
+     0
     ]
    ],
    "elims": {
-    "G": [
+    "A": [
      [
-      6,
+      3,
+      1
+     ],
+     [
+      3,
       2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "suspect": "G",
      "coord": [
-      6,
-      2
+      4,
+      0
      ],
-     "contra": {
-      "templateKey": "CONTRA_PLACED_TILE",
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
       "params": {
-       "suspect": "G",
-       "coord": [
-        6,
-        2
-       ],
-       "reason": {
-        "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
-        "params": {
-         "other": "D"
-        }
-       }
+       "owner": "J",
+       "room": "ORANGERY"
       }
-     }
+     },
+     "suspect": "A",
+     "coords": [
+      [
+       3,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 23,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Arthur “was in the Parlor”: of the 6 tiles that fit, only r4c1 is still open. Place Arthur there.",
+   "focus": [
+    [
+     3,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    3,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      3,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 24,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r5c2 cannot be a hiding spot (Jules was alone in the Orangery), so someone must watch it. Only Jules can still see it, so Jules must stand on r11c2.",
+   "focus": [
+    [
+     4,
+     1
+    ],
+    [
+     10,
+     1
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      10,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      4,
+      1
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "J",
+       "room": "ORANGERY"
+      }
+     },
+     "suspect": "J",
+     "coords": [
+      [
+       10,
+       1
+      ]
+     ]
     }
    }
   },
   {
    "n": 25,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Greta was exactly one row south of Duncan. Greta can only be in rows 6 or 8, which leaves Duncan rows 5 or 7. Eliminated → Duncan: r6c7, r6c9.",
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Jules “was alone”: every tile that fits is ruled out except r11c2. Place Jules there.",
    "focus": [
     [
-     5,
-     6
-    ],
-    [
-     5,
-     8
+     10,
+     1
     ]
    ],
-   "elims": {
-    "D": [
-     [
-      5,
-      6
-     ],
-     [
-      5,
-      8
-     ]
-    ]
-   },
+   "elims": {},
+   "suspect": "J",
+   "cell": [
+    10,
+    1
+   ],
    "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "G",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "G",
-        "params": {
-         "other": "D",
-         "dir": "S",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "G",
-        "src": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           5,
-           7
-          ]
-         }
-        },
-        "x": "D",
-        "left": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           4,
-           6
-          ]
-         }
-        }
-       }
-      }
+     "suspect": "J",
+     "clueOf": "J",
+     "coord": [
+      10,
+      1
      ]
     }
    }
@@ -5297,36 +4644,73 @@
    "tier": 4,
    "rule": "What if…? (one-step trial)",
    "kind": "eliminate",
-   "text": "What if Duncan stood on r7c8? Following the clues from there, Florence would have no tile left. So Duncan cannot be on r7c8. Eliminated → Duncan: r7c8.",
+   "text": "What if Clara stood on r9c8? The clues would then put Isabel on r2c1, and the marked tiles could never be watched. So Clara cannot be on r9c8.",
    "focus": [
     [
-     6,
+     8,
      7
     ]
    ],
    "elims": {
-    "D": [
+    "C": [
      [
-      6,
+      8,
       7
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRIAL",
+    "templateKey": "STEP_TRIAL_CHAIN",
     "ruleKey": "RULE_LOOKAHEAD",
     "params": {
-     "suspect": "D",
+     "suspect": "C",
      "coord": [
-      6,
+      8,
       7
      ],
      "contra": {
-      "templateKey": "CONTRA_NO_TILE_LEFT",
+      "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
-       "suspect": "F"
+       "coords": [
+        [
+         0,
+         1
+        ],
+        [
+         0,
+         5
+        ],
+        [
+         0,
+         7
+        ],
+        [
+         0,
+         10
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ]
+       ]
       }
-     }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "I",
+        "coord": [
+         1,
+         0
+        ]
+       }
+      }
+     ]
     }
    }
   },
@@ -5335,233 +4719,156 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Duncan — “was beside a grandfather clock”. The clue fits 4 tiles; r6c7, r6c9 are not one row north of any tile left for Greta; r7c8 is trial: Florence would have no tile left. Only r5c8 is left. Place Duncan at r5c8; Duncan's sightlines now watch 8 tiles.",
+   "text": "Clara “was in column 8”: of the 7 tiles that fit, only r1c8 is still open. Place Clara there.",
    "focus": [
     [
-     4,
+     0,
      7
     ]
    ],
-   "elims": {
-    "B": [
-     [
-      4,
-      3
-     ]
-    ],
-    "H": [
-     [
-      2,
-      7
-     ],
-     [
-      4,
-      5
-     ]
-    ]
-   },
-   "suspect": "D",
+   "elims": {},
+   "suspect": "C",
    "cell": [
-    4,
+    0,
     7
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "fits": 4,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          5,
-          6
-         ],
-         [
-          5,
-          8
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_NOT_OFFSET_OF_ANY.N",
-         "params": {
-          "other": "G"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          6,
-          7
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_NO_TILE_LEFT",
-           "params": {
-            "suspect": "F"
-           }
-          }
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "D",
-     "clueOf": "D",
+     "fits": 7,
+     "suspect": "C",
+     "clueOf": "C",
      "coord": [
-      4,
+      0,
       7
-     ],
-     "watch": 8
+     ]
     }
    }
   },
   {
    "n": 28,
-   "tier": 2,
-   "rule": "Compass squeeze",
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "Ezra was exactly one row south of Bruno. Bruno can only be in rows 3, 6, 7, 8, 9 or 10, which leaves Ezra rows 4, 7, 8, 9, 10 or 11. Eliminated → Ezra: r6c11.",
+   "text": "What if Isabel stood on r1c1? Without following any clue further, the marked tiles could never be watched. So Isabel cannot be on r1c1.",
    "focus": [
     [
-     5,
-     10
+     0,
+     0
     ]
    ],
    "elims": {
-    "E": [
+    "I": [
      [
-      5,
-      10
+      0,
+      0
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
+     "suspect": "I",
+     "coord": [
+      0,
+      0
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
+       "coords": [
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ],
+        [
+         8,
+         7
+        ]
+       ]
       }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "B",
-        "src": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           2,
-           5,
-           6,
-           7,
-           8,
-           9
-          ]
-         }
-        },
-        "x": "E",
-        "left": {
-         "templateKey": "FRAG_LINES_LIST.ROW",
-         "params": {
-          "lines": [
-           3,
-           6,
-           7,
-           8,
-           9,
-           10
-          ]
-         }
-        }
-       }
-      }
-     ]
+     }
     }
    }
   },
   {
    "n": 29,
-   "tier": 2,
-   "rule": "Compass squeeze",
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "Greta was exactly one row south of Duncan. Duncan can only be in row 5, which leaves Greta row 6. Eliminated → Greta: r8c3.",
+   "text": "What if Isabel stood on r1c2? Without following any clue further, the marked tiles could never be watched. So Isabel cannot be on r1c2.",
    "focus": [
     [
-     7,
-     2
+     0,
+     1
     ]
    ],
    "elims": {
-    "G": [
+    "I": [
      [
-      7,
-      2
+      0,
+      1
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
+     "suspect": "I",
+     "coord": [
+      0,
+      1
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
-       "subject": "G",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "G",
-        "params": {
-         "other": "D",
-         "dir": "S",
-         "dist": 1
-        }
-       }
+       "coords": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ],
+        [
+         8,
+         7
+        ]
+       ]
       }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "D",
-        "src": {
-         "templateKey": "FRAG_LINES_ONE.ROW",
-         "params": {
-          "line": 4
-         }
-        },
-        "x": "G",
-        "left": {
-         "templateKey": "FRAG_LINES_ONE.ROW",
-         "params": {
-          "line": 5
-         }
-        }
-       }
-      }
-     ]
+     }
     }
    }
   },
@@ -5570,290 +4877,159 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Greta — “was exactly one row south of Duncan”. The clue alone allows 104 tiles, but every one except r6c3 is already ruled out — watched or occupied by Cyril; not one row south of any tile left for Duncan; not west of any tile left for Bruno; trial: Greta's tile r7c3 would be not one row south of any tile left for Duncan; in sight of every tile R. E. Aper could hide on. Place Greta at r6c3; Greta's sightlines now watch 14 tiles.",
+   "text": "Isabel “was in the Gallery or in the Billiards and was standing on a rug”: of the 4 tiles that fit, only r2c1 is still open. Place Isabel there.",
    "focus": [
     [
-     5,
-     2
+     1,
+     0
     ]
    ],
-   "elims": {
-    "A": [
-     [
-      5,
-      3
-     ],
-     [
-      5,
-      4
-     ]
-    ],
-    "B": [
-     [
-      5,
-      3
-     ]
-    ],
-    "F": [
-     [
-      5,
-      3
-     ],
-     [
-      5,
-      4
-     ]
-    ],
-    "H": [
-     [
-      5,
-      5
-     ]
-    ]
-   },
-   "suspect": "G",
+   "elims": {},
+   "suspect": "I",
    "cell": [
-    5,
-    2
+    1,
+    0
    ],
    "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
+    "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "allows": 104,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "C"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
-         "params": {
-          "other": "D"
-         }
-        },
-        {
-         "templateKey": "REASON_NOT_DIR_OF_ANY.W",
-         "params": {
-          "other": "B"
-         }
-        },
-        {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_PLACED_TILE",
-           "params": {
-            "suspect": "G",
-            "coord": [
-             6,
-             2
-            ],
-            "reason": {
-             "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
-             "params": {
-              "other": "D"
-             }
-            }
-           }
-          }
-         }
-        },
-        {
-         "templateKey": "REASON_SEES_ALL_HIDES",
-         "params": {
-          "who": "R"
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "G",
-     "clueOf": "G",
+     "fits": 4,
+     "suspect": "I",
+     "clueOf": "I",
      "coord": [
-      5,
-      2
-     ],
-     "watch": 14
+      1,
+      0
+     ]
     }
    }
   },
   {
    "n": 31,
    "tier": 2,
-   "rule": "Alone in a room",
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "Alice was alone in the room, but Greta must be in the Music Room, so Alice cannot be in it. Eliminated → Alice: r7c4, r7c5.",
+   "text": "The blindspot law: P. H. Obia can only be hiding on r1c2. Nobody may stand where they would see it.",
    "focus": [
     [
-     2,
-     2
-    ],
-    [
-     2,
-     3
-    ],
-    [
-     2,
-     4
-    ],
-    [
-     3,
-     2
-    ],
-    [
-     3,
-     4
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     4,
-     3
-    ],
-    [
-     4,
-     4
-    ],
-    [
-     5,
-     2
-    ],
-    [
-     5,
-     3
-    ],
-    [
-     5,
-     4
-    ],
-    [
-     6,
-     2
-    ],
-    [
-     6,
-     3
-    ],
-    [
-     6,
-     4
+     0,
+     1
     ]
    ],
-   "elims": {
-    "A": [
-     [
-      6,
-      3
-     ],
-     [
-      6,
-      4
-     ]
-    ]
-   },
+   "elims": {},
    "i18n": {
-    "templateKey": "STEP_ALONE_BLOCKED_ONE",
-    "ruleKey": "RULE_ALONE",
+    "templateKey": "STEP_SHADOW_ASSASSIN_PINNED",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "owner": "A",
-     "bits": [
-      {
-       "templateKey": "FRAG_MUST_BE_IN",
-       "params": {
-        "suspects": [
-         "G"
-        ],
-        "room": "MUSIC_ROOM"
-       }
-      }
+     "who": "P",
+     "coord": [
+      0,
+      1
      ]
     }
    }
   },
   {
    "n": 32,
-   "tier": 1,
-   "rule": "Ray block",
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
    "kind": "eliminate",
-   "text": "Ray block: Alice can only be at r8c7 or r9c7, and those tiles all lie on one sightline. Whichever one Alice takes, the whole stretch is watched, so nobody else can stand on r8c7, r9c7, r11c7. Eliminated → Florence: r8c7, r9c7 · Jonah: r8c7, r11c7.",
+   "text": "What if Bridget stood on r9c10? The clues would then put Horatio on r11c9, Diana on r10c3, Miriam on r7c4 and Elliot on r8c11, and the marked tiles could never be watched. So Bridget cannot be on r9c10.",
    "focus": [
     [
-     7,
-     6
-    ],
-    [
      8,
-     6
-    ],
-    [
-     9,
-     6
-    ],
-    [
-     10,
-     6
+     9
     ]
    ],
    "elims": {
-    "F": [
-     [
-      7,
-      6
-     ],
+    "B": [
      [
       8,
-      6
-     ]
-    ],
-    "J": [
-     [
-      7,
-      6
-     ],
-     [
-      10,
-      6
+      9
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
     "params": {
-     "suspect": "A",
-     "options": [
-      [
-       7,
-       6
-      ],
-      [
-       8,
-       6
-      ]
+     "suspect": "B",
+     "coord": [
+      8,
+      9
      ],
-     "coords": [
-      [
-       7,
-       6
-      ],
-      [
-       8,
-       6
-      ],
-      [
-       10,
-       6
-      ]
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         1
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         5,
+         9
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ],
+        [
+         8,
+         7
+        ]
+       ]
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "H",
+        "coord": [
+         10,
+         8
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "D",
+        "coord": [
+         9,
+         2
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "M",
+        "coord": [
+         6,
+         3
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "E",
+        "coord": [
+         7,
+         10
+        ]
+       }
+      }
      ]
     }
    }
@@ -5863,130 +5039,111 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Jonah — “was in the Library or in the Foyer and was in a corner”. The clue fits 3 tiles; r8c7, r11c7 are watched by Alice either way. Only r3c9 is left. Place Jonah at r3c9; Jonah's sightlines now watch 12 tiles.",
+   "text": "Bridget “was beside a wine rack and was beside a pillar”: of the 4 tiles that fit, only r8c11 is still open. Place Bridget there.",
    "focus": [
     [
-     2,
-     8
+     7,
+     10
     ]
    ],
    "elims": {
-    "B": [
+    "E": [
      [
-      2,
-      3
-     ]
-    ],
-    "H": [
-     [
-      2,
-      5
-     ],
-     [
-      2,
-      6
-     ],
-     [
-      3,
-      8
-     ],
-     [
-      6,
-      8
+      7,
+      10
      ]
     ]
    },
-   "suspect": "J",
+   "suspect": "B",
    "cell": [
-    2,
-    8
+    7,
+    10
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "fits": 3,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          7,
-          6
-         ],
-         [
-          10,
-          6
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "A"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "J",
-     "clueOf": "J",
+     "fits": 4,
+     "suspect": "B",
+     "clueOf": "B",
      "coord": [
-      2,
-      8
-     ],
-     "watch": 12
+      7,
+      10
+     ]
     }
    }
   },
   {
    "n": 34,
-   "tier": 1,
-   "rule": "Ray block",
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
    "kind": "eliminate",
-   "text": "Ray block: Florence can only be at r7c4 or r7c5, and those tiles all lie on one sightline. Whichever one Florence takes, the whole stretch is watched, so nobody else can stand on r7c4. Eliminated → Bruno: r7c4.",
+   "text": "What if Diana stood on r10c4? The clues would then put Miriam on r5c3, and the marked tiles could never be watched. So Diana cannot be on r10c4.",
    "focus": [
     [
-     6,
-     2
-    ],
-    [
-     6,
+     9,
      3
-    ],
-    [
-     6,
-     4
     ]
    ],
    "elims": {
-    "B": [
+    "D": [
      [
-      6,
+      9,
       3
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
     "params": {
-     "suspect": "F",
-     "options": [
-      [
-       6,
-       3
-      ],
-      [
-       6,
-       4
-      ]
+     "suspect": "D",
+     "coord": [
+      9,
+      3
      ],
-     "coords": [
-      [
-       6,
-       3
-      ]
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         1
+        ],
+        [
+         5,
+         3
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         6,
+         3
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ]
+       ]
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "M",
+        "coord": [
+         4,
+         2
+        ]
+       }
+      }
      ]
     }
    }
@@ -5994,285 +5151,171 @@
   {
    "n": 35,
    "tier": 1,
-   "rule": "Ray block",
-   "kind": "eliminate",
-   "text": "Ray block: Horace can only be at r7c6 or r7c8, and those tiles all lie on one sightline. Whichever one Horace takes, the whole stretch is watched, so nobody else can stand on r7c10, r7c11. Eliminated → Ezra: r7c11 · Imogen: r7c10.",
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Diana “was in a room with at least two men”: every tile that fits is ruled out except r10c3. Place Diana there.",
    "focus": [
     [
-     6,
-     5
-    ],
-    [
-     6,
-     6
-    ],
-    [
-     6,
-     7
-    ],
-    [
-     6,
-     8
-    ],
-    [
-     6,
-     9
-    ],
-    [
-     6,
-     10
+     9,
+     2
     ]
    ],
    "elims": {
-    "E": [
+    "M": [
      [
-      6,
-      10
-     ]
-    ],
-    "I": [
-     [
-      6,
-      9
+      4,
+      2
      ]
     ]
    },
+   "suspect": "D",
+   "cell": [
+    9,
+    2
+   ],
    "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
     "params": {
-     "suspect": "H",
-     "options": [
-      [
-       6,
-       5
-      ],
-      [
-       6,
-       7
-      ]
-     ],
-     "coords": [
-      [
-       6,
-       9
-      ],
-      [
-       6,
-       10
-      ]
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      9,
+      2
      ]
     }
    }
   },
   {
    "n": 36,
-   "tier": 1,
-   "rule": "Ray block",
+   "tier": 2,
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "Ray block: Bruno can only be at r8c4, r9c4 or r10c4, and those tiles all lie on one sightline. Whichever one Bruno takes, the whole stretch is watched, so nobody else can stand on r7c4. Eliminated → Florence: r7c4.",
+   "text": "The blindspot law: for Miriam, r6c4 is in sight of every tile Q. U. Yet could hide on, so Miriam cannot stand there.",
    "focus": [
     [
-     4,
-     3
-    ],
-    [
      5,
-     3
-    ],
-    [
-     6,
-     3
-    ],
-    [
-     7,
-     3
-    ],
-    [
-     8,
-     3
-    ],
-    [
-     9,
-     3
-    ],
-    [
-     10,
      3
     ]
    ],
    "elims": {
-    "F": [
+    "M": [
      [
-      6,
+      5,
       3
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
+    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "suspect": "B",
-     "options": [
+     "suspect": "M",
+     "coords": [
       [
-       7,
-       3
-      ],
-      [
-       8,
-       3
-      ],
-      [
-       9,
+       5,
        3
       ]
      ],
-     "coords": [
-      [
-       6,
-       3
-      ]
-     ]
+     "reason": {
+      "templateKey": "REASON_SEES_ALL_HIDES",
+      "params": {
+       "who": "Q"
+      }
+     }
     }
    }
   },
   {
    "n": 37,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Florence — “was standing on a rug”. The clue alone allows 10 tiles, but every one except r7c5 is already ruled out — watched or occupied by Cyril, Greta; watched by Greta either way; watched by Alice either way; watched by Bruno either way. Place Florence at r7c5; Florence's sightlines now watch 6 tiles.",
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Miriam stood on r6c5? Without following any clue further, the marked tiles could never be watched. So Miriam cannot be on r6c5.",
    "focus": [
     [
-     6,
+     5,
      4
     ]
    ],
-   "elims": {},
-   "suspect": "F",
-   "cell": [
-    6,
-    4
-   ],
+   "elims": {
+    "M": [
+     [
+      5,
+      4
+     ]
+    ]
+   },
    "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
-    "ruleKey": "RULE_SINGLE",
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "allows": 10,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "C",
-           "G"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "G"
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "A"
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "B"
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "F",
-     "clueOf": "F",
+     "suspect": "M",
      "coord": [
-      6,
+      5,
       4
      ],
-     "watch": 6
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         1
+        ],
+        [
+         6,
+         3
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ],
+        [
+         8,
+         3
+        ],
+        [
+         8,
+         7
+        ]
+       ]
+      }
+     }
     }
    }
   },
   {
    "n": 38,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Ezra was exactly one row south of Bruno. Bruno can only be in rows 8–10, which leaves Ezra rows 9–11. Eliminated → Ezra: r4c11, r8c11.",
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Miriam “was beside a potted palm”: every tile that fits is ruled out except r7c4. Place Miriam there.",
    "focus": [
     [
-     3,
-     10
-    ],
-    [
-     7,
-     10
+     6,
+     3
     ]
    ],
-   "elims": {
-    "E": [
-     [
-      3,
-      10
-     ],
-     [
-      7,
-      10
-     ]
-    ]
-   },
+   "elims": {},
+   "suspect": "M",
+   "cell": [
+    6,
+    3
+   ],
    "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "B",
-        "src": {
-         "templateKey": "FRAG_LINES_RANGE.ROW",
-         "params": {
-          "from": 7,
-          "to": 9
-         }
-        },
-        "x": "E",
-        "left": {
-         "templateKey": "FRAG_LINES_RANGE.ROW",
-         "params": {
-          "from": 8,
-          "to": 10
-         }
-        }
-       }
-      }
+     "suspect": "M",
+     "clueOf": "M",
+     "coord": [
+      6,
+      3
      ]
     }
    }
@@ -6280,84 +5323,93 @@
   {
    "n": 39,
    "tier": 2,
-   "rule": "Shared room",
+   "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "Ezra was in the same room as Imogen, so both must be in a room they can both still reach (Orangery). Eliminated → Imogen: r3c10, r4c10, r5c10.",
+   "text": "The blindspot law: Q. U. Yet can only be hiding on r6c5. Nobody may stand where they would see it.",
    "focus": [
     [
-     2,
-     9
-    ],
-    [
-     3,
-     9
-    ],
-    [
-     4,
-     9
+     5,
+     4
     ]
    ],
    "elims": {
-    "I": [
+    "E": [
      [
-      2,
-      9
-     ],
-     [
-      3,
-      9
-     ],
-     [
-      4,
-      9
+      5,
+      6
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_SAME_ROOM",
-    "ruleKey": "RULE_SAME_ROOM",
+    "templateKey": "STEP_SHADOW_ASSASSIN_PINNED",
+    "ruleKey": "RULE_SHADOW_LAW",
     "params": {
-     "owner": "E",
-     "other": "I",
-     "rooms": [
-      "ORANGERY"
+     "who": "Q",
+     "coord": [
+      5,
+      4
      ]
     }
    }
   },
   {
    "n": 40,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Alice stood on r8c7? Following the clues from there, O. B. Scuro would have nowhere to hide. So Alice cannot be on r8c7. Eliminated → Alice: r8c7.",
+   "text": "What if Elliot stood on r9c10? Without following any clue further, the marked tiles could never be watched. So Elliot cannot be on r9c10.",
    "focus": [
     [
-     7,
-     6
+     8,
+     9
     ]
    ],
    "elims": {
-    "A": [
+    "E": [
      [
-      7,
-      6
+      8,
+      9
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "suspect": "A",
+     "suspect": "E",
      "coord": [
-      7,
-      6
+      8,
+      9
      ],
      "contra": {
-      "templateKey": "CONTRA_NOWHERE_TO_HIDE",
+      "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
-       "who": "O"
+       "coords": [
+        [
+         0,
+         1
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         5,
+         9
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         8
+        ],
+        [
+         8,
+         7
+        ]
+       ]
       }
      }
     }
@@ -6368,140 +5420,102 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Alice — “was alone and was standing on a rug”. The clue alone allows 10 tiles, but every one except r9c7 is already ruled out — watched or occupied by Greta; in the Parlor, which must hold Cyril; watched by Greta either way; in the Music Room, which must hold Greta; trial: O. B. Scuro would have nowhere to hide. Place Alice at r9c7; Alice's sightlines now watch 5 tiles.",
+   "text": "Elliot “was beside a wine rack”: of the 7 tiles that fit, only r6c9 is still open. Place Elliot there.",
    "focus": [
     [
-     8,
-     6
+     5,
+     8
     ]
    ],
-   "elims": {},
-   "suspect": "A",
+   "elims": {
+    "G": [
+     [
+      4,
+      8
+     ]
+    ],
+    "K": [
+     [
+      2,
+      8
+     ]
+    ]
+   },
+   "suspect": "E",
    "cell": [
-    8,
-    6
+    5,
+    8
    ],
    "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
+    "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "allows": 10,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "G"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "PARLOR",
-          "suspects": [
-           "C"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "G"
-         }
-        },
-        {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "MUSIC_ROOM",
-          "suspects": [
-           "G"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_NOWHERE_TO_HIDE",
-           "params": {
-            "who": "O"
-           }
-          }
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "A",
-     "clueOf": "A",
+     "fits": 7,
+     "suspect": "E",
+     "clueOf": "E",
      "coord": [
-      8,
-      6
-     ],
-     "watch": 5
+      5,
+      8
+     ]
     }
    }
   },
   {
    "n": 42,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Horace stood on r7c8? Following the clues from there, r4c6, r5c1, r7c1, r9c1, r10c6, r11c6 could never be watched. So Horace cannot be on r7c8. Eliminated → Horace: r7c8.",
+   "text": "What if Horatio stood on r11c9? Without following any clue further, the marked tiles could never be watched. So Horatio cannot be on r11c9.",
    "focus": [
     [
-     6,
-     7
+     10,
+     8
     ]
    ],
    "elims": {
     "H": [
      [
-      6,
-      7
+      10,
+      8
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
     "params": {
      "suspect": "H",
      "coord": [
-      6,
-      7
+      10,
+      8
      ],
      "contra": {
       "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
        "coords": [
         [
-         3,
-         5
+         0,
+         1
         ],
         [
-         4,
-         0
+         5,
+         4
         ],
         [
          6,
-         0
+         9
+        ],
+        [
+         7,
+         8
         ],
         [
          8,
-         0
+         7
         ],
         [
-         9,
-         5
-        ],
-        [
-         10,
-         5
+         8,
+         9
         ]
        ]
       }
@@ -6514,131 +5528,81 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Horace — “was in the Library and was in front of a door”. The clue alone allows 9 tiles, but every one except r7c6 is already ruled out — watched or occupied by Jonah, Greta, Duncan; trial: r4c6, r5c1, r7c1, r9c1, r10c6, r11c6 could never be watched. Place Horace at r7c6; Horace's sightlines now watch 15 tiles.",
+   "text": "Horatio “was alone and was standing on a rug”: of the 8 tiles that fit, only r11c10 is still open. Place Horatio there.",
    "focus": [
     [
-     6,
-     5
+     10,
+     9
     ]
    ],
    "elims": {},
    "suspect": "H",
    "cell": [
-    6,
-    5
+    10,
+    9
    ],
    "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
+    "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "allows": 9,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "J",
-           "G",
-           "D"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_NEVER_WATCHED",
-           "params": {
-            "coords": [
-             [
-              3,
-              5
-             ],
-             [
-              4,
-              0
-             ],
-             [
-              6,
-              0
-             ],
-             [
-              8,
-              0
-             ],
-             [
-              9,
-              5
-             ],
-             [
-              10,
-              5
-             ]
-            ]
-           }
-          }
-         }
-        }
-       ]
-      }
-     },
+     "fits": 8,
      "suspect": "H",
      "clueOf": "H",
      "coord": [
-      6,
-      5
-     ],
-     "watch": 15
+      10,
+      9
+     ]
     }
    }
   },
   {
    "n": 44,
-   "tier": 4,
-   "rule": "What if…? (one-step trial)",
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Bruno stood on r8c4? Following the clues from there, r5c1, r7c1, r8c8, r8c9, r9c1, r11c9 could never be watched. So Bruno cannot be on r8c4. Eliminated → Bruno: r8c4.",
+   "text": "What if Katherine stood on r3c7? Without following any clue further, the marked tiles could never be watched. So Katherine cannot be on r3c7.",
    "focus": [
     [
-     7,
-     3
+     2,
+     6
     ]
    ],
    "elims": {
-    "B": [
+    "K": [
      [
-      7,
-      3
+      2,
+      6
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRIAL",
-    "ruleKey": "RULE_LOOKAHEAD",
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "suspect": "B",
+     "suspect": "K",
      "coord": [
-      7,
-      3
+      2,
+      6
      ],
      "contra": {
       "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
        "coords": [
         [
-         4,
-         0
+         0,
+         1
+        ],
+        [
+         1,
+         9
+        ],
+        [
+         5,
+         4
         ],
         [
          6,
-         0
-        ],
-        [
-         7,
-         7
+         9
         ],
         [
          7,
@@ -6646,11 +5610,7 @@
         ],
         [
          8,
-         0
-        ],
-        [
-         10,
-         8
+         7
         ]
        ]
       }
@@ -6660,86 +5620,21 @@
   },
   {
    "n": 45,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Ezra was exactly one row south of Bruno. Bruno can only be in rows 9–10, which leaves Ezra rows 10–11. Eliminated → Ezra: r9c11.",
-   "focus": [
-    [
-     8,
-     10
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      8,
-      10
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "B",
-        "src": {
-         "templateKey": "FRAG_LINES_RANGE.ROW",
-         "params": {
-          "from": 8,
-          "to": 9
-         }
-        },
-        "x": "E",
-        "left": {
-         "templateKey": "FRAG_LINES_RANGE.ROW",
-         "params": {
-          "from": 9,
-          "to": 10
-         }
-        }
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 46,
    "tier": 3,
    "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Imogen stood on r9c10? Without following any clue further, r5c1, r7c1, r8c1, r8c5, r8c8, r8c9 could never be watched. So Imogen cannot be on r9c10. Eliminated → Imogen: r9c10.",
+   "text": "What if Gregor stood on r5c8? Without following any clue further, the marked tiles could never be watched. So Gregor cannot be on r5c8.",
    "focus": [
     [
-     8,
-     9
+     4,
+     7
     ]
    ],
    "elims": {
-    "I": [
+    "G": [
      [
-      8,
-      9
+      4,
+      7
      ]
     ]
    },
@@ -6747,34 +5642,34 @@
     "templateKey": "STEP_COVER_CHECK",
     "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "suspect": "I",
+     "suspect": "G",
      "coord": [
-      8,
-      9
+      4,
+      7
      ],
      "contra": {
       "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
        "coords": [
         [
-         4,
-         0
+         0,
+         1
         ],
         [
-         6,
-         0
+         1,
+         6
         ],
         [
-         7,
-         0
-        ],
-        [
-         7,
+         5,
          4
         ],
         [
-         7,
-         7
+         5,
+         6
+        ],
+        [
+         6,
+         9
         ],
         [
          7,
@@ -6787,22 +5682,54 @@
    }
   },
   {
+   "n": 46,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gregor “was standing on a carpet runner”: of the 5 tiles that fit, only r5c7 is still open. Place Gregor there.",
+   "focus": [
+    [
+     4,
+     6
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    4,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      4,
+      6
+     ]
+    }
+   }
+  },
+  {
    "n": 47,
    "tier": 3,
    "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Imogen stood on r10c10? Without following any clue further, r5c1, r7c1, r8c1, r8c5, r8c8, r8c9 could never be watched. So Imogen cannot be on r10c10. Eliminated → Imogen: r10c10.",
+   "text": "What if Katherine stood on r3c8? Without following any clue further, the marked tiles could never be watched. So Katherine cannot be on r3c8.",
    "focus": [
     [
-     9,
-     9
+     2,
+     7
     ]
    ],
    "elims": {
-    "I": [
+    "K": [
      [
-      9,
-      9
+      2,
+      7
      ]
     ]
    },
@@ -6810,38 +5737,38 @@
     "templateKey": "STEP_COVER_CHECK",
     "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "suspect": "I",
+     "suspect": "K",
      "coord": [
-      9,
-      9
+      2,
+      7
      ],
      "contra": {
       "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
        "coords": [
         [
-         4,
-         0
+         0,
+         1
         ],
         [
-         6,
-         0
+         1,
+         9
         ],
         [
-         7,
-         0
-        ],
-        [
-         7,
+         5,
          4
         ],
         [
-         7,
-         7
+         6,
+         9
         ],
         [
          7,
          8
+        ],
+        [
+         8,
+         7
         ]
        ]
       }
@@ -6854,18 +5781,18 @@
    "tier": 3,
    "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Imogen stood on r11c10? Without following any clue further, r5c1, r7c1, r8c1, r8c5, r8c8, r8c9 could never be watched. So Imogen cannot be on r11c10. Eliminated → Imogen: r11c10.",
+   "text": "What if Katherine stood on r3c11? Without following any clue further, the marked tiles could never be watched. So Katherine cannot be on r3c11.",
    "focus": [
     [
-     10,
-     9
+     2,
+     10
     ]
    ],
    "elims": {
-    "I": [
+    "K": [
      [
-      10,
-      9
+      2,
+      10
      ]
     ]
    },
@@ -6873,38 +5800,38 @@
     "templateKey": "STEP_COVER_CHECK",
     "ruleKey": "RULE_COVER_CHECK",
     "params": {
-     "suspect": "I",
+     "suspect": "K",
      "coord": [
-      10,
-      9
+      2,
+      10
      ],
      "contra": {
       "templateKey": "CONTRA_NEVER_WATCHED",
       "params": {
        "coords": [
         [
-         4,
-         0
+         0,
+         1
         ],
         [
-         6,
-         0
+         1,
+         9
         ],
         [
-         7,
-         0
-        ],
-        [
-         7,
+         5,
          4
         ],
         [
-         7,
-         7
+         6,
+         9
         ],
         [
          7,
          8
+        ],
+        [
+         8,
+         7
         ]
        ]
       }
@@ -6917,448 +5844,64 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Imogen — “was west of Ezra”. The clue alone allows 104 tiles, but every one except r8c10 is already ruled out — watched or occupied by Cyril; outside every room Ezra can reach; in sight of every tile left for Ezra; not west of any tile left for Ezra; ruled out by a coverage check; out of sight of r1c10, which only Imogen can watch; ruled out: it would watch every tile left for Bruno; watched by Horace either way. Place Imogen at r8c10; Imogen's sightlines now watch 13 tiles.",
+   "text": "Katherine “was in row 3”: every tile that fits is ruled out except r3c10. Place Katherine there.",
    "focus": [
     [
-     7,
+     2,
      9
     ]
    ],
    "elims": {},
-   "suspect": "I",
+   "suspect": "K",
    "cell": [
-    7,
+    2,
     9
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_RULED_OUT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "allows": 104,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "C"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_OUTSIDE_PARTNER_ZONES",
-         "params": {
-          "other": "E"
-         }
-        },
-        {
-         "templateKey": "REASON_SEES_ALL_PARTNER_TILES",
-         "params": {
-          "other": "E"
-         }
-        },
-        {
-         "templateKey": "REASON_NOT_DIR_OF_ANY.W",
-         "params": {
-          "other": "E"
-         }
-        },
-        {
-         "templateKey": "REASON_COVER_CHECK",
-         "params": {}
-        },
-        {
-         "templateKey": "REASON_ONLY_WATCHER",
-         "params": {
-          "coord": [
-           0,
-           9
-          ],
-          "owner": "I"
-         }
-        },
-        {
-         "templateKey": "REASON_STARVE",
-         "params": {
-          "other": "B"
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "H"
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "I",
-     "clueOf": "I",
+     "suspect": "K",
+     "clueOf": "K",
      "coord": [
-      7,
+      2,
       9
-     ],
-     "watch": 13
+     ]
     }
    }
   },
   {
    "n": 50,
-   "tier": 3,
-   "rule": "Coverage check (lookahead)",
-   "kind": "eliminate",
-   "text": "What if Ezra stood on r10c11? Without following any clue further, r5c1, r7c1, r8c1, r8c5, r9c1, r11c9 could never be watched. So Ezra cannot be on r10c11. Eliminated → Ezra: r10c11.",
-   "focus": [
-    [
-     9,
-     10
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      9,
-      10
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_COVER_CHECK",
-    "ruleKey": "RULE_COVER_CHECK",
-    "params": {
-     "suspect": "E",
-     "coord": [
-      9,
-      10
-     ],
-     "contra": {
-      "templateKey": "CONTRA_NEVER_WATCHED",
-      "params": {
-       "coords": [
-        [
-         4,
-         0
-        ],
-        [
-         6,
-         0
-        ],
-        [
-         7,
-         0
-        ],
-        [
-         7,
-         4
-        ],
-        [
-         8,
-         0
-        ],
-        [
-         10,
-         8
-        ]
-       ]
-      }
-     }
-    }
-   }
-  },
-  {
-   "n": 51,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Ezra — “was exactly one row south of Bruno and was in the same room as Imogen”. The clue alone allows 104 tiles, but every one except r11c11 is already ruled out — watched or occupied by Cyril; not one row south of any tile left for Bruno; out of sight of r1c11, which only Ezra can watch; not east of any tile left for Imogen; in sight of every tile left for Imogen; in sight of every tile left for Bruno; ruled out by a coverage check; watched by Cyril either way; watched by Horace either way. Place Ezra at r11c11; Ezra's sightlines now watch 12 tiles.",
-   "focus": [
-    [
-     10,
-     10
-    ]
-   ],
-   "elims": {},
-   "suspect": "E",
-   "cell": [
-    10,
-    10
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "allows": 104,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "C"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_NOT_OFFSET_OF_ANY.S",
-         "params": {
-          "other": "B"
-         }
-        },
-        {
-         "templateKey": "REASON_ONLY_WATCHER",
-         "params": {
-          "coord": [
-           0,
-           10
-          ],
-          "owner": "E"
-         }
-        },
-        {
-         "templateKey": "REASON_NOT_DIR_OF_ANY.E",
-         "params": {
-          "other": "I"
-         }
-        },
-        {
-         "templateKey": "REASON_SEES_ALL_PARTNER_TILES",
-         "params": {
-          "other": "I"
-         }
-        },
-        {
-         "templateKey": "REASON_SEES_ALL_PARTNER_TILES",
-         "params": {
-          "other": "B"
-         }
-        },
-        {
-         "templateKey": "REASON_COVER_CHECK",
-         "params": {}
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "C"
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "H"
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "E",
-     "clueOf": "E",
-     "coord": [
-      10,
-      10
-     ],
-     "watch": 12
-    }
-   }
-  },
-  {
-   "n": 52,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Ezra was exactly one row south of Bruno. Ezra can only be in row 11, which leaves Bruno row 10. Eliminated → Bruno: r9c4.",
-   "focus": [
-    [
-     8,
-     3
-    ]
-   ],
-   "elims": {
-    "B": [
-     [
-      8,
-      3
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "E",
-        "params": {
-         "other": "B",
-         "dir": "S",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "E",
-        "src": {
-         "templateKey": "FRAG_LINES_ONE.ROW",
-         "params": {
-          "line": 10
-         }
-        },
-        "x": "B",
-        "left": {
-         "templateKey": "FRAG_LINES_ONE.ROW",
-         "params": {
-          "line": 9
-         }
-        }
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 53,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Bruno — “was in column 4 and was east of Greta”. The clue alone allows 10 tiles, but every one except r10c4 is already ruled out — watched or occupied by Duncan, Jonah, Greta, Cyril; not one row north of any tile left for Ezra; trial: r5c1, r7c1, r8c8, r8c9, r9c1, r11c9 could never be watched; watched by Florence either way. Place Bruno at r10c4; Bruno's sightlines now watch 15 tiles.",
-   "focus": [
-    [
-     9,
-     3
-    ]
-   ],
-   "elims": {},
-   "suspect": "B",
-   "cell": [
-    9,
-    3
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "allows": 10,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "D",
-           "J",
-           "G",
-           "C"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_NOT_OFFSET_OF_ANY.N",
-         "params": {
-          "other": "E"
-         }
-        },
-        {
-         "templateKey": "REASON_TRIAL",
-         "params": {
-          "contra": {
-           "templateKey": "CONTRA_NEVER_WATCHED",
-           "params": {
-            "coords": [
-             [
-              4,
-              0
-             ],
-             [
-              6,
-              0
-             ],
-             [
-              7,
-              7
-             ],
-             [
-              7,
-              8
-             ],
-             [
-              8,
-              0
-             ],
-             [
-              10,
-              8
-             ]
-            ]
-           }
-          }
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "F"
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "B",
-     "clueOf": "B",
-     "coord": [
-      9,
-      3
-     ],
-     "watch": 15
-    }
-   }
-  },
-  {
-   "n": 54,
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly 5 open tiles are still dark: r5c1, r7c1, r8c1, r8c5, r9c1. Their clues seat O. B. Scuro on r8c5; P. H. Obia on r9c1; Q. U. Yet on r8c1; R. E. Aper on r7c1, so S. H. Adow is hiding on r5c1!",
+   "text": "Every suspect is placed and no two of them see each other. Exactly 5 open tiles are still dark: the marked tiles. Their clues seat O. B. Scuro on r7c10; P. H. Obia on r1c2; Q. U. Yet on r6c5; R. E. Aper on r8c9, so S. H. Adow is hiding on r9c8!",
    "focus": [
     [
-     4,
-     0
-    ],
-    [
-     7,
-     4
-    ],
-    [
      8,
-     0
-    ],
-    [
-     7,
-     0
+     7
     ],
     [
      6,
-     0
+     9
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     7,
+     8
     ]
    ],
    "elims": {},
    "cell": [
-    4,
-    0
+    8,
+    7
    ],
    "suspect": "S",
    "i18n": {
@@ -7368,24 +5911,24 @@
      "count": 5,
      "coords": [
       [
-       4,
-       0
+       0,
+       1
       ],
       [
-       6,
-       0
-      ],
-      [
-       7,
-       0
-      ],
-      [
-       7,
+       5,
        4
       ],
       [
+       6,
+       9
+      ],
+      [
+       7,
+       8
+      ],
+      [
        8,
-       0
+       7
       ]
      ],
      "seats": [
@@ -7394,8 +5937,8 @@
        "params": {
         "who": "O",
         "coord": [
-         7,
-         4
+         6,
+         9
         ]
        }
       },
@@ -7404,8 +5947,8 @@
        "params": {
         "who": "P",
         "coord": [
-         8,
-         0
+         0,
+         1
         ]
        }
       },
@@ -7414,8 +5957,8 @@
        "params": {
         "who": "Q",
         "coord": [
-         7,
-         0
+         5,
+         4
         ]
        }
       },
@@ -7424,15 +5967,15 @@
        "params": {
         "who": "R",
         "coord": [
-         6,
-         0
+         7,
+         8
         ]
        }
       }
      ],
      "coord": [
-      4,
-      0
+      8,
+      7
      ]
     }
    }
@@ -7451,36 +5994,49 @@
   "init_singles": 0,
   "G4_domino_pacing": true,
   "flow": {
-   "first_place_pos": 0.25,
-   "elims_before_first_place": 13,
-   "last_fifth_t1_share": 0.364,
-   "hardest_last_pos": 0.827,
-   "trials_in_last_fifth": 1,
+   "first_place_pos": 0.229,
+   "elims_before_first_place": 11,
+   "last_fifth_t1_share": 0.4,
+   "hardest_last_pos": 0.688,
+   "trials_in_last_fifth": 0,
    "late_cascade": 0.0,
-   "late_elim_gap": 5,
-   "place_push": 3.09,
-   "global_uses": 0,
+   "late_elim_gap": 2,
+   "place_push": 1.69,
+   "global_uses": 1,
    "global_first_t2": false
   },
   "flow_arc_ok": false,
-  "shadow_candidates_before_last": 12,
+  "shadow_candidates_before_last": 13,
   "shadow_candidates_before_last_two": 20,
-  "dark_known_at": 11,
+  "dark_known_at": 13,
   "G5_late_shadow": true,
+  "assassin_known_at": [
+   0,
+   6,
+   9,
+   2
+  ],
+  "G17_assassins_early": true,
   "G6_tier": true,
   "G7_globals_true": true,
   "G13_clue_atoms_capped": true,
   "G15_clue_hygiene": true,
   "max_atoms_per_clue": 2,
   "G8_globals_needed": true,
-  "trait_clues": 0,
-  "trait_atoms": [],
-  "trait_rules_used": [],
+  "trait_clues": 1,
+  "trait_atoms": [
+   "TWO_P_ROOM"
+  ],
+  "trait_rules_used": [
+   "trait_filter"
+  ],
   "trait_load_bearing": false,
   "biome_props_on_board": [
+   "ARMOR",
+   "BED",
+   "BILLIARD_TABLE",
    "CARPET_RUNNER",
-   "CLOCK",
-   "DESK",
+   "CUSHION",
    "DISPLAY_CASE",
    "GRAMOPHONE",
    "PIANO",
@@ -7489,38 +6045,42 @@
    "RUG",
    "SHELF",
    "SOFA",
-   "TEA_TROLLEY",
+   "STATUE",
    "TV",
    "WINE_RACK"
   ],
   "biome_props_in_clues": [
-   "CLOCK",
+   "CARPET_RUNNER",
+   "GRAMOPHONE",
+   "PILLAR",
+   "PLANT",
    "RUG",
-   "TV"
+   "WINE_RACK"
   ],
   "biome_props_load_bearing": [
-   "CLOCK",
+   "CARPET_RUNNER",
+   "GRAMOPHONE",
+   "PILLAR",
+   "PLANT",
    "RUG",
-   "TV"
+   "WINE_RACK"
   ],
   "G11_biome_props_load_bearing": true,
   "G3_unique_full": true,
   "unique_without_shadow_law": false,
-  "bruteforce_nodes": 11625,
+  "bruteforce_nodes": 2189965,
   "rules_used": [
    "alone",
    "compass",
    "cover_check",
    "lookahead",
-   "pair_watch",
-   "partner_sight",
    "ray_block",
-   "same_room",
+   "room_count",
    "shadow_law",
-   "starve"
+   "trait_filter"
   ],
-  "steps": 53,
-  "difficulty_score": 210,
+  "steps": 49,
+  "difficulty_score": 157,
   "hardest_step_tier": 4,
   "tall_scale": 1.0
  }

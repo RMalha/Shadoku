@@ -42,3 +42,7 @@ murdoku_svg_catalog_complete.json
 src/extract.py
 art/STYLE.md
 src/locales/New/
+
+# Cloudflare: local secrets and wrangler state
+.dev.vars
+.wrangler

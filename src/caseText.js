@@ -11,12 +11,15 @@
  *   generated (engine): CLUE*, ATOM.*, HID.*, GLOBAL.*, RULE_*, FRAG_*, REASON_*, STEP_*, BAN_*, CONTRA_*, FUSED.*, ASSASSIN_CLUE,
  *                       PROP.<ID>.{a,noun,prep,onPhrase}, TRAIT.<ID>.<form>, SURFACE.<ID>, ZONE.<ID>, ZONE_PREP.<ID>, ZONE_WORD.<WORD>,
  *                       DIFFICULTY.<ID>, CASE.<id>.{TITLE,SUBTITLE}
+ *                       PROP.<ID>.onPhrase may also come as .m / .f / .n (a language whose verbs inflect for gender, e.g. Arabic): the variant of
+ *                       the atom's subject is read first, the plain phrase when the locale has none. Likewise a clue sentence (ATOM.<kind>…,
+ *                       FUSED.ALONE_IN_ROOM) may come as <key>.m / .f / .n for the subject's gender (Arabic "كانت" / "كان"); the plain key
+ *                       is the fallback, so a language only writes the variants that differ.
  *   hand-written (ui.fmt.*): the language-dependent words of the formatters (lists, pronouns, "the X", "r{row}c{col}", "a room" …).
  * Anything that fails to render (a missing key, a case without tokens) falls back to the English stored in the case JSON.
  */
 
 const PH = /\{(\w+)(?:\|(\w+)(?::([^}]*))?)?\}/g;
-const LETTERS = "ABCDEFGHIJKLMNOP";
 const SELF_KINDS = ["WITH_P", "TWO_P_ROOM", "NO_P_ROOM", "ALONE_WITH_P", "DIAG_P"];
 
 /** Param name → type (engine/shadoku_i18n.py PARAM_TYPES). */
@@ -29,6 +32,7 @@ typed("RoomId", "room room2");
 typed("RoomIdList", "rooms empty");
 typed("Coord", "coord");
 typed("CoordList", "coords common options");
+const MARKED_MAX = 3; // longer tile lists read "the marked tiles" (engine/shadoku_i18n.py MARKED_MAX)
 typed("PropId", "prop");
 typed("PropIdList", "lows");
 typed("TraitId", "trait");
@@ -72,6 +76,13 @@ class Ctx {
     if (!s) throw new Error(`unknown suspect ${L}`);
     return s.name;
   }
+  /** `key` with the gender suffix of suspect `who` (.m / .f; .n for assassins, S. H. Adow and unknown) when the locale has that variant, else `key`. */
+  gKey(key, who) {
+    if (who == null) return key;
+    const g = this.gender(who);
+    const k = `${key}.${g === "m" || g === "f" ? g : "n"}`;
+    return this.has(k) ? k : key;
+  }
   gender(L) { const s = this.sus.get(L); return s && !this.ass.has(L) ? s.gender : null; }
   roomName(id) {
     const v = this.tr(`ZONE.${id}`);
@@ -97,8 +108,9 @@ class Ctx {
   commaList(words) { return words.length ? this.head(words) : ""; }
   coord(c) { return this.fmt("ui.fmt.coord", { row: c[0] + 1, col: c[1] + 1 }); }
   roomIn(id) { return this.fmt("ui.fmt.roomIn", { prep: this.prep(id), room: this.roomName(id) }); }
-  propForm(id, form) {
-    const v = this.tr(`PROP.${id}.${form}`);
+  /** PROP.<id>.<form>, preferring its .m/.f/.n variant when a subject `who` is given (suspect letter; assassins and S. H. Adow are "n"). */
+  propForm(id, form, who) {
+    const v = this.tr(this.gKey(`PROP.${id}.${form}`, who));
     if (v == null) throw new Error(`no PROP.${id}.${form}`);
     return v;
   }
@@ -117,7 +129,7 @@ function pronoun(ctx, g, f) {
   return ctx.T(`${f === "Pronoun" ? "ui.fmt.pronounCap" : "ui.fmt.pronoun"}.${x}`);
 }
 
-function fmtParam(key, val, f, arg, ctx) {
+function fmtParam(key, val, f, arg, ctx, who) {
   const t = TYPE[key];
   if (t === "SuspectRef") {
     if (f == null) return ctx.name(val);
@@ -141,6 +153,7 @@ function fmtParam(key, val, f, arg, ctx) {
   } else if (t === "Coord" && f == null) {
     return ctx.coord(val);
   } else if (t === "CoordList") {
+    if ((f == null || f === "or" || f === "and") && val.length > MARKED_MAX) return ctx.T("FRAG_MARKED_TILES"); // the hint marks them on the board
     if (f == null) return ctx.commaList([...val].sort((a, b) => a[0] - b[0] || a[1] - b[1]).map((c) => ctx.coord(c)));
     if (f === "or") return ctx.orList(val.map((c) => ctx.coord(c)));
     if (f === "and") return ctx.andList(val.map((c) => ctx.coord(c)));
@@ -149,7 +162,7 @@ function fmtParam(key, val, f, arg, ctx) {
     if (f === "a") return ctx.propForm(val, "a");
     if (f === "noun") return ctx.propForm(val, "noun");
     if (f === "prep") return ctx.propForm(val, "prep");
-    if (f === "on") return ctx.propForm(val, "onPhrase");
+    if (f === "on") return ctx.propForm(val, "onPhrase", who);
   } else if (t === "PropIdList" && f === "noun_or") {
     return ctx.orList(val.map((p) => ctx.propForm(p, "noun")));
   } else if (t === "TraitId" && f) {
@@ -175,20 +188,13 @@ function fmtParam(key, val, f, arg, ctx) {
   throw new Error(`no formatter ${key}|${f} for ${t}`);
 }
 
-function elimEntries(elims) {
-  const rank = (L) => { const i = LETTERS.indexOf(L); return i < 0 ? 99 : i; };
-  return Object.keys(elims).sort((a, b) => rank(a) - rank(b)).map((L) => ({ templateKey: "FRAG_ELIM_ENTRY", params: { suspect: L, coords: elims[L] } }));
-}
-
-function fill(pattern, params, ctx, elims) {
+/** `who`: the suspect the sentence is about (an atom's subject), for the gendered word forms. */
+function fill(pattern, params, ctx, elims, who) {
   return pattern.replace(PH, (_, key, f, arg) => {
     if (key === "zone") return zoneFmt(ctx, f);
-    if (key === "elims") {
-      if (!elims || !Object.keys(elims).length) return "";
-      return fill(ctx.T("FRAG_ELIMS"), { entries: elimEntries(elims) }, ctx);
-    }
+    if (key === "elims") return ""; // the hint marks the eliminated tiles on the board
     if (!(key in params)) throw new Error(`missing param ${key}`);
-    return fmtParam(key, params[key], f, arg, ctx);
+    return fmtParam(key, params[key], f, arg, ctx, who);
   });
 }
 
@@ -206,7 +212,7 @@ function atomKey(tok, ctx, register = "ATOM") {
 }
 
 function renderAtom(tok, ctx, register = "ATOM") {
-  return fill(ctx.T(atomKey(tok, ctx, register)), tok.params || {}, ctx);
+  return fill(ctx.T(ctx.gKey(atomKey(tok, ctx, register), tok.subject)), tok.params || {}, ctx, undefined, tok.subject);
 }
 
 function globalKey(tok) {
@@ -214,14 +220,14 @@ function globalKey(tok) {
 }
 
 function render(tok, ctx, elims) {
-  if (tok.templateKey) return fill(ctx.T(tok.templateKey), tok.params || {}, ctx, elims);
+  if (tok.templateKey) return fill(ctx.T(ctx.gKey(tok.templateKey, tok.who)), tok.params || {}, ctx, elims);
   if (tok.subject) return renderAtom(tok, ctx);
   return fill(ctx.T(globalKey(tok)), tok.params || {}, ctx);
 }
 
 function part(entry, atoms) {
   if (Number.isInteger(entry)) return atoms[entry];
-  if (entry && entry.fuse === "ALONE_IN_ROOM") return { templateKey: "FUSED.ALONE_IN_ROOM", params: { room: atoms[entry.atoms[0]].params.room } };
+  if (entry && entry.fuse === "ALONE_IN_ROOM") return { templateKey: "FUSED.ALONE_IN_ROOM", who: atoms[entry.atoms[0]].subject, params: { room: atoms[entry.atoms[0]].params.room } };
   throw new Error("unknown clue part");
 }
 

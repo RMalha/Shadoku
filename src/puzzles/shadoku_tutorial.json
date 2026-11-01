@@ -216,7 +216,7 @@
  "suspects": [
   {
    "id": "A",
-   "name": "Astrid",
+   "name": "Aurora",
    "gender": "f",
    "pronoun": "she",
    "traits": {
@@ -232,8 +232,8 @@
     "cloth": 0
    },
    "look": "blonde wavy hair, horn-rimmed glasses, fedora",
-   "clue": "Astrid sat on a stool.",
-   "text": "Astrid sat on a stool.",
+   "clue": "Aurora sat on a stool.",
+   "text": "Aurora sat on a stool.",
    "atoms": [
     {
      "kind": "ON",
@@ -298,24 +298,24 @@
   },
   {
    "id": "C",
-   "name": "Cordelia",
+   "name": "Charlotte",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "curly",
-    "hairLength": "short",
-    "hairColor": "brown",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "fedora",
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "red",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "scarf",
+    "tie": "none",
     "skin": 0,
     "cloth": 2
    },
-   "look": "brown curly hair, fedora, scarf",
-   "clue": "Cordelia was in front of a door and was in row 1.",
-   "text": "Cordelia was in front of a door and was in row 1.",
+   "look": "red ponytail hair, horn-rimmed glasses",
+   "clue": "Charlotte was in front of a door and was in row 1.",
+   "text": "Charlotte was in front of a door and was in row 1.",
    "atoms": [
     {
      "kind": "DOOR",
@@ -345,24 +345,24 @@
   },
   {
    "id": "D",
-   "name": "Daphne",
+   "name": "Dinah",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "ponytail",
+    "hairStyle": "wavy",
     "hairLength": "long",
-    "hairColor": "brown",
-    "glasses": true,
-    "glassesStyle": "round",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
     "tie": "none",
     "skin": 0,
     "cloth": 2
    },
-   "look": "brown ponytail hair, round glasses",
-   "clue": "Daphne was beside a safe.",
-   "text": "Daphne was beside a safe.",
+   "look": "red wavy hair",
+   "clue": "Dinah was beside a safe.",
+   "text": "Dinah was beside a safe.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -386,24 +386,24 @@
   },
   {
    "id": "E",
-   "name": "Elliot",
+   "name": "Everett",
    "gender": "m",
    "pronoun": "he",
    "traits": {
     "hairStyle": "short",
     "hairLength": "short",
-    "hairColor": "red",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "beret",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 3,
-    "cloth": 7
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 2
    },
-   "look": "red short hair, beret, necktie",
-   "clue": "Elliot was standing on a trail of footprints.",
-   "text": "Elliot was standing on a trail of footprints.",
+   "look": "blonde short hair, horn-rimmed glasses, bowtie",
+   "clue": "Everett was standing on a trail of footprints.",
+   "text": "Everett was standing on a trail of footprints.",
    "atoms": [
     {
      "kind": "ON",
@@ -444,7 +444,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Boris — “was sitting at a piano”. The clue fits exactly one tile: r4c1. Place Boris at r4c1; Boris's sightlines now watch 3 tiles.",
+   "text": "Boris “was sitting at a piano”: only r4c1 fits. Place Boris there.",
    "focus": [
     [
      3,
@@ -466,8 +466,7 @@
      "coord": [
       3,
       0
-     ],
-     "watch": 3
+     ]
     }
    }
   },
@@ -476,7 +475,7 @@
    "tier": 1,
    "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Ray block: Astrid can only be at r5c4 or r5c5, and those tiles all lie on one sightline. Whichever one Astrid takes, the whole stretch is watched, so nobody else can stand on r5c3. Eliminated → Daphne: r5c3.",
+   "text": "Ray block: Aurora can only be at r5c4 or r5c5, and those tiles all lie on one sightline. Whichever one Aurora takes, the whole stretch is watched, so nobody else can stand on r5c3.",
    "focus": [
     [
      4,
@@ -528,7 +527,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Daphne — “was beside a safe”. The clue fits 2 tiles; r5c3 is watched by Astrid either way. Only r5c1 is left. Place Daphne at r5c1; Daphne's sightlines now watch 0 tiles.",
+   "text": "Dinah “was beside a safe”: of the 2 tiles that fit, only r5c1 is still open. Place Dinah there.",
    "focus": [
     [
      4,
@@ -553,32 +552,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          2
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "A"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "D",
      "clueOf": "D",
      "coord": [
       4,
       0
-     ],
-     "watch": 0
+     ]
     }
    }
   },
@@ -587,7 +566,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Elliot — “was standing on a trail of footprints”. The clue fits 2 tiles; r5c1 is taken by Daphne. Only r2c3 is left. Place Elliot at r2c3; Elliot's sightlines now watch 3 tiles.",
+   "text": "Everett “was standing on a trail of footprints”: of the 2 tiles that fit, only r2c3 is still open. Place Everett there.",
    "focus": [
     [
      1,
@@ -612,32 +591,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TAKEN_BY",
-         "params": {
-          "suspect": "D"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "E",
      "clueOf": "E",
      "coord": [
       1,
       2
-     ],
-     "watch": 3
+     ]
     }
    }
   },
@@ -646,7 +605,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Cordelia — “was in front of a door and was in row 1”. The clue fits 2 tiles; r1c3 is watched by Elliot. Only r1c4 is left. Place Cordelia at r1c4; Cordelia's sightlines now watch 8 tiles.",
+   "text": "Charlotte “was in front of a door and was in row 1”: of the 2 tiles that fit, only r1c4 is still open. Place Charlotte there.",
    "focus": [
     [
      0,
@@ -671,32 +630,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          0,
-          2
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "E"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "C",
      "clueOf": "C",
      "coord": [
       0,
       3
-     ],
-     "watch": 8
+     ]
     }
    }
   },
@@ -705,7 +644,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Astrid — “sat on a stool”. The clue fits 2 tiles; r5c4 is watched by Cordelia. Only r5c5 is left. Place Astrid at r5c5; Astrid's sightlines now watch 5 tiles.",
+   "text": "Aurora “sat on a stool”: of the 2 tiles that fit, only r5c5 is still open. Place Aurora there.",
    "focus": [
     [
      4,
@@ -723,32 +662,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          3
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "C"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "A",
      "clueOf": "A",
      "coord": [
       4,
       4
-     ],
-     "watch": 5
+     ]
     }
    }
   },

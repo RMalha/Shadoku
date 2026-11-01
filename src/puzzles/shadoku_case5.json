@@ -9,14 +9,14 @@
  "tier": "medium",
  "shape": "canyon",
  "seed": 1505,
- "attempt": 537,
+ "attempt": 511,
  "traitMode": "off",
  "propMode": "require",
  "castKey": "DEM0808YOR1-1505",
  "puzzleId": "DEM0808YOR1-1505",
  "engine": "V10.1",
  "i18nSchema": "shadoku-i18n/1",
- "difficultyScore": 43,
+ "difficultyScore": 40,
  "zoneWord": "area",
  "size": 8,
  "rooms": [
@@ -27,115 +27,113 @@
    -1,
    -1,
    1,
-   2,
-   2
+   1,
+   1
   ],
   [
-   3,
-   3,
-   3,
+   0,
+   0,
+   0,
    -1,
-   4,
-   1,
    2,
-   2
+   3,
+   3,
+   3
   ],
   [
-   3,
-   3,
-   3,
-   4,
-   4,
-   1,
+   0,
+   0,
+   0,
+   0,
    2,
-   2
+   3,
+   3,
+   3
   ],
   [
-   3,
-   3,
-   3,
    4,
    4,
-   1,
+   4,
+   4,
    2,
-   2
+   3,
+   3,
+   3
   ],
   [
-   3,
-   3,
-   3,
    4,
    4,
-   1,
+   4,
+   4,
    2,
-   2
+   3,
+   3,
+   3
   ],
   [
-   3,
-   3,
-   3,
    4,
    4,
-   1,
+   4,
+   4,
    2,
-   2
+   3,
+   3,
+   3
   ],
   [
-   5,
-   5,
-   5,
+   4,
+   4,
+   4,
    -1,
-   1,
-   1,
    2,
-   2
+   3,
+   3,
+   3
   ],
   [
-   5,
-   5,
+   4,
+   4,
    -1,
    -1,
-   1,
-   1,
    2,
-   2
+   3,
+   3,
+   3
   ]
  ],
  "roomNames": [
+  "Bazaar",
   "Nomad Tent",
-  "Dry River",
-  "Oasis",
-  "Canyon",
   "Sand Dunes",
-  "Caravan"
+  "Salt Flat",
+  "Dry River"
  ],
  "roomIds": [
+  "BAZAAR",
   "NOMAD_TENT",
-  "DRY_RIVER",
-  "OASIS",
-  "CANYON",
   "SAND_DUNES",
-  "CARAVAN"
+  "SALT_FLAT",
+  "DRY_RIVER"
  ],
  "doors": [
   [
    [
     0,
-    1
+    7
    ],
    [
     1,
-    1
+    7
    ]
   ],
   [
    [
-    0,
-    5
+    2,
+    3
    ],
    [
-    0,
-    6
+    2,
+    4
    ]
   ],
   [
@@ -151,102 +149,92 @@
   [
    [
     4,
-    2
+    3
    ],
    [
     4,
-    3
-   ]
-  ],
-  [
-   [
-    5,
-    0
-   ],
-   [
-    6,
-    0
+    4
    ]
   ]
  ],
  "windows": [],
  "contents": [
   [
-   "",
+   "WOVEN_MAT",
+   "CAMEL",
+   "AMPHORA",
+   "VOID",
+   "VOID",
    "",
    "WOVEN_MAT",
-   "VOID",
-   "VOID",
-   "",
-   "",
    ""
   ],
   [
+   "STOOL",
    "",
-   "",
-   "",
+   "MARKET_STALL",
    "VOID",
-   "",
-   "",
-   "OASIS_POOL",
-   "OASIS_POOL"
-  ],
-  [
-   "",
-   "",
-   "",
-   "",
-   "FOOTPRINTS",
-   "",
-   "OASIS_POOL",
-   "OASIS_POOL"
-  ],
-  [
-   "CORPSE",
-   "",
-   "",
-   "",
-   "",
-   "",
-   "",
-   "BARREL"
-  ],
-  [
-   "",
-   "CACTUS",
-   "",
-   "",
-   "",
-   "",
-   "CAMEL",
-   ""
-  ],
-  [
-   "",
-   "",
-   "",
    "CAMPFIRE",
    "",
    "",
-   "WOVEN_MAT",
-   "WOVEN_MAT"
-  ],
-  [
-   "",
-   "CAMEL",
-   "FOOTPRINTS",
-   "VOID",
-   "",
-   "",
-   "CAMPFIRE",
-   "AMPHORA"
+   "FOOTPRINTS"
   ],
   [
    "FLOOR_PILLOW",
+   "TABLE",
+   "CHAIR",
+   "WOVEN_MAT",
+   "",
+   "",
+   "",
+   "FOOTPRINTS"
+  ],
+  [
+   "",
+   "BOULDER",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "FOOTPRINTS"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "FOOTPRINTS",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "CORPSE",
+   "VOID",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
    "",
    "VOID",
    "VOID",
-   "CACTUS",
+   "",
    "",
    "",
    ""
@@ -254,168 +242,119 @@
  ],
  "multiTile": [
   {
-   "kind": "OASIS_POOL",
+   "kind": "FOOTPRINTS",
    "cells": [
-    [
-     1,
-     6
-    ],
     [
      1,
      7
     ],
     [
      2,
-     6
+     7
     ],
     [
-     2,
+     3,
      7
     ]
    ]
   }
  ],
  "corpse": [
-  3,
-  0
+  6,
+  2
  ],
  "biomeProps": [
   "AMPHORA",
-  "CACTUS",
+  "BOULDER",
   "CAMEL",
   "CAMPFIRE",
   "FLOOR_PILLOW",
-  "OASIS_POOL",
+  "MARKET_STALL",
   "WOVEN_MAT"
  ],
  "propClasses": {
   "AMPHORA": "SHORT",
-  "BARREL": "SHORT",
-  "CACTUS": "TALL",
+  "BOULDER": "TALL",
   "CAMEL": "PERCH",
   "CAMPFIRE": "SHORT",
+  "CHAIR": "LOW",
   "FLOOR_PILLOW": "LOW",
   "FOOTPRINTS": "LOW",
-  "OASIS_POOL": "LOW",
+  "MARKET_STALL": "TALL",
+  "STOOL": "LOW",
+  "TABLE": "SHORT",
   "WOVEN_MAT": "LOW"
  },
  "dress": "integrated",
  "dressing": {
-  "lowShare": 0.196,
+  "lowShare": 0.192,
   "lowTiles": 10,
-  "openTiles": 51,
+  "openTiles": 52,
   "lowKinds": [
+   "CHAIR",
    "FLOOR_PILLOW",
    "FOOTPRINTS",
-   "OASIS_POOL",
+   "STOOL",
    "WOVEN_MAT"
   ],
   "roomProps": {
-   "NOMAD_TENT": [
+   "BAZAAR": [
+    "AMPHORA",
+    "CAMEL",
+    "CHAIR",
+    "FLOOR_PILLOW",
+    "MARKET_STALL",
+    "STOOL",
+    "TABLE",
     "WOVEN_MAT"
    ],
-   "OASIS": [
-    "AMPHORA",
-    "BARREL",
-    "CAMEL",
-    "CAMPFIRE",
-    "OASIS_POOL",
+   "NOMAD_TENT": [
     "WOVEN_MAT"
    ],
    "SAND_DUNES": [
     "CAMPFIRE",
     "FOOTPRINTS"
    ],
-   "CANYON": [
-    "CACTUS"
-   ],
-   "CARAVAN": [
-    "CAMEL",
-    "FLOOR_PILLOW",
+   "SALT_FLAT": [
     "FOOTPRINTS"
    ],
    "DRY_RIVER": [
-    "CACTUS"
+    "BOULDER"
    ]
   }
  },
  "suspects": [
   {
    "id": "A",
-   "name": "Astrid",
+   "name": "Ada",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "long",
+    "hairStyle": "ponytail",
     "hairLength": "long",
-    "hairColor": "black",
+    "hairColor": "blonde",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
     "tie": "none",
-    "skin": 1,
-    "cloth": 5
+    "skin": 2,
+    "cloth": 0
    },
-   "look": "black long hair",
-   "clue": "Astrid was beside an archway and could see the Corpse.",
-   "text": "Astrid was beside an archway and could see the Corpse.",
+   "look": "blonde ponytail hair",
+   "clue": "Ada was beside a campfire.",
+   "text": "Ada was beside a campfire.",
    "atoms": [
     {
-     "kind": "DOOR",
+     "kind": "BESIDE",
      "subject": "A",
-     "params": {}
-    },
-    {
-     "kind": "SEE_CORPSE",
-     "subject": "A",
-     "params": {}
-    }
-   ],
-   "clueTokens": {
-    "subject": "A",
-    "place": [
-     0,
-     1
-    ],
-    "people": []
-   },
-   "solution": [
-    5,
-    0
-   ]
-  },
-  {
-   "id": "B",
-   "name": "Boris",
-   "gender": "m",
-   "pronoun": "he",
-   "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
-    "hairColor": "black",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "fedora",
-    "facialHair": "none",
-    "tie": "necktie",
-    "skin": 0,
-    "cloth": 5
-   },
-   "look": "black short hair, fedora, necktie",
-   "clue": "Boris was the only person on a trail of footprints.",
-   "text": "Boris was the only person on a trail of footprints.",
-   "atoms": [
-    {
-     "kind": "ONLY_ON",
-     "subject": "B",
      "params": {
-      "prop": "FOOTPRINTS"
+      "prop": "CAMPFIRE"
      }
     }
    ],
    "clueTokens": {
-    "subject": "B",
+    "subject": "A",
     "place": [
      0
     ],
@@ -427,6 +366,55 @@
    ]
   },
   {
+   "id": "B",
+   "name": "Beatrice",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 1
+   },
+   "look": "red bob hair, cloche",
+   "clue": "Beatrice was on the Salt Flat and was north of Cedric.",
+   "text": "Beatrice was on the Salt Flat and was north of Cedric.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "B",
+     "params": {
+      "room": "SALT_FLAT"
+     }
+    },
+    {
+     "kind": "NORTH_OF",
+     "subject": "B",
+     "params": {
+      "other": "C"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    6
+   ]
+  },
+  {
    "id": "C",
    "name": "Cedric",
    "gender": "m",
@@ -434,72 +422,73 @@
    "traits": {
     "hairStyle": "curly",
     "hairLength": "short",
-    "hairColor": "blonde",
+    "hairColor": "brown",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
-    "facialHair": "none",
-    "tie": "scarf",
-    "skin": 2,
-    "cloth": 2
+    "facialHair": "mustache",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 6
    },
-   "look": "blonde curly hair, scarf",
-   "clue": "Cedric was sitting on a woven mat and was beside an amphora.",
-   "text": "Cedric was sitting on a woven mat and was beside an amphora.",
+   "look": "brown curly hair, mustache",
+   "clue": "Cedric was in the Nomad Tent or on the Salt Flat and was in a corner.",
+   "text": "Cedric was in the Nomad Tent or on the Salt Flat and was in a corner.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "ROOM_PAIR",
      "subject": "C",
      "params": {
-      "prop": "AMPHORA"
+      "room": "NOMAD_TENT",
+      "room2": "SALT_FLAT"
      }
     },
     {
-     "kind": "ON",
+     "kind": "CORNER",
      "subject": "C",
-     "params": {
-      "prop": "WOVEN_MAT"
-     }
+     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "C",
     "place": [
-     1,
-     0
+     0,
+     1
     ],
     "people": []
    },
    "solution": [
-    5,
-    7
+    7,
+    5
    ]
   },
   {
    "id": "D",
-   "name": "Dorothy",
+   "name": "Diana",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "ponytail",
+    "hairStyle": "bun",
     "hairLength": "long",
-    "hairColor": "brown",
+    "hairColor": "red",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "fedora",
     "facialHair": "none",
-    "tie": "scarf",
-    "skin": 4,
-    "cloth": 2
+    "tie": "none",
+    "skin": 0,
+    "cloth": 3
    },
-   "look": "brown ponytail hair, fedora, scarf",
-   "clue": "Dorothy was alone.",
-   "text": "Dorothy was alone.",
+   "look": "red bun hair, fedora",
+   "clue": "Diana was sitting on a woven mat.",
+   "text": "Diana was sitting on a woven mat.",
    "atoms": [
     {
-     "kind": "ALONE",
+     "kind": "ON",
      "subject": "D",
-     "params": {}
+     "params": {
+      "prop": "WOVEN_MAT"
+     }
     }
    ],
    "clueTokens": {
@@ -510,36 +499,36 @@
     "people": []
    },
    "solution": [
-    6,
-    5
+    0,
+    0
    ]
   },
   {
    "id": "E",
-   "name": "Esme",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Eugene",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
-    "hairStyle": "wavy",
-    "hairLength": "long",
-    "hairColor": "blonde",
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "black",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
-    "facialHair": "none",
-    "tie": "bowtie",
-    "skin": 2,
+    "facialHair": "mustache",
+    "tie": "necktie",
+    "skin": 4,
     "cloth": 6
    },
-   "look": "blonde wavy hair, bowtie",
-   "clue": "Esme was in row 5.",
-   "text": "Esme was in row 5.",
+   "look": "black short hair, mustache, necktie",
+   "clue": "Eugene was in row 4.",
+   "text": "Eugene was in row 4.",
    "atoms": [
     {
      "kind": "ROW",
      "subject": "E",
      "params": {
-      "index": 4
+      "index": 3
      }
     }
    ],
@@ -551,36 +540,38 @@
     "people": []
    },
    "solution": [
-    4,
-    6
+    3,
+    3
    ]
   },
   {
    "id": "F",
-   "name": "Florence",
+   "name": "Freya",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "long",
-    "hairLength": "long",
-    "hairColor": "red",
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "black",
     "glasses": true,
     "glassesStyle": "horn-rimmed",
     "hat": "none",
     "facialHair": "none",
     "tie": "none",
-    "skin": 0,
-    "cloth": 3
+    "skin": 1,
+    "cloth": 7
    },
-   "look": "red long hair, horn-rimmed glasses",
-   "clue": "Florence was in the Nomad Tent.",
-   "text": "Florence was in the Nomad Tent.",
+   "look": "black bob hair, horn-rimmed glasses",
+   "clue": "Freya was exactly one row north of Beatrice.",
+   "text": "Freya was exactly one row north of Beatrice.",
    "atoms": [
     {
-     "kind": "ROOM",
+     "kind": "EXACT_OFFSET",
      "subject": "F",
      "params": {
-      "room": "NOMAD_TENT"
+      "other": "B",
+      "dir": "N",
+      "dist": 1
      }
     }
    ],
@@ -592,45 +583,43 @@
     "people": []
    },
    "solution": [
-    0,
-    1
+    5,
+    0
    ]
   },
   {
    "id": "G",
-   "name": "Gilbert",
+   "name": "Gregor",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
+    "hairStyle": "wavy",
+    "hairLength": "long",
     "hairColor": "black",
     "glasses": true,
-    "glassesStyle": "round",
-    "hat": "fedora",
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "bowtie",
-    "skin": 2,
-    "cloth": 2
+    "tie": "necktie",
+    "skin": 1,
+    "cloth": 1
    },
-   "look": "black short hair, round glasses, fedora, bowtie",
-   "clue": "Gilbert was beside a cactus and was exactly one column east of Florence.",
-   "text": "Gilbert was beside a cactus and was exactly one column east of Florence.",
+   "look": "black wavy hair, horn-rimmed glasses, necktie",
+   "clue": "Gregor was the only person beside a boulder and was east of Freya.",
+   "text": "Gregor was the only person beside a boulder and was east of Freya.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "ONLY_BESIDE",
      "subject": "G",
      "params": {
-      "prop": "CACTUS"
+      "prop": "BOULDER"
      }
     },
     {
-     "kind": "EXACT_OFFSET",
+     "kind": "EAST_OF",
      "subject": "G",
      "params": {
-      "other": "F",
-      "dir": "E",
-      "dist": 1
+      "other": "F"
      }
     }
    ],
@@ -644,7 +633,7 @@
    },
    "solution": [
     4,
-    2
+    1
    ]
   },
   {
@@ -653,53 +642,43 @@
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "crop",
-    "hairLength": "short",
-    "hairColor": "black",
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "none",
+    "hat": "fedora",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 0,
-    "cloth": 0
+    "tie": "scarf",
+    "skin": 1,
+    "cloth": 4
    },
-   "look": "black crop hair, necktie",
-   "clue": "Hector was riding a camel and was west of Gilbert.",
-   "text": "Hector was riding a camel and was west of Gilbert.",
+   "look": "brown wavy hair, fedora, scarf",
+   "clue": "Hector was beside a doorway.",
+   "text": "Hector was beside a doorway.",
    "atoms": [
     {
-     "kind": "ON",
+     "kind": "DOOR",
      "subject": "H",
-     "params": {
-      "prop": "CAMEL"
-     }
-    },
-    {
-     "kind": "WEST_OF",
-     "subject": "H",
-     "params": {
-      "other": "G"
-     }
+     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "H",
     "place": [
-     0,
-     1
+     0
     ],
     "people": []
    },
    "solution": [
-    6,
-    1
+    0,
+    7
    ]
   }
  ],
  "shadow": [
-  3,
-  3
+  1,
+  1
  ],
  "shadowSuspect": {
   "id": "S",
@@ -708,667 +687,229 @@
   "traits": null,
   "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
  },
- "globalRules": [],
+ "globalRules": [
+  {
+   "id": "EVERY_ROOM",
+   "text": "Every area holds at least one suspect.",
+   "kind": "EVERY_ROOM",
+   "params": {}
+  }
+ ],
  "steps": [
   {
    "n": 1,
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Cedric — “was sitting on a woven mat and was beside an amphora”. The clue fits exactly one tile: r6c8. Place Cedric at r6c8; Cedric's sightlines now watch 6 tiles.",
+   "text": "Ada “was beside a campfire”: only r3c5 fits. Place Ada there.",
    "focus": [
     [
-     5,
-     7
+     2,
+     4
     ]
    ],
    "elims": {
     "D": [
      [
-      0,
-      7
-     ],
-     [
-      1,
-      7
-     ],
-     [
       2,
-      7
-     ],
-     [
-      4,
-      7
-     ],
-     [
-      5,
-      6
-     ],
-     [
-      5,
-      7
-     ],
-     [
-      7,
-      7
+      3
      ]
     ],
     "E": [
      [
+      3,
+      4
+     ]
+    ],
+    "F": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
       4,
-      7
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      7,
+      4
+     ]
+    ],
+    "H": [
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      4
      ]
     ]
    },
-   "suspect": "C",
+   "suspect": "A",
    "cell": [
-    5,
-    7
+    2,
+    4
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_ONE_FIT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "suspect": "C",
-     "clueOf": "C",
+     "suspect": "A",
+     "clueOf": "A",
      "coord": [
-      5,
-      7
-     ],
-     "watch": 6
+      2,
+      4
+     ]
     }
    }
   },
   {
    "n": 2,
-   "tier": 1,
-   "rule": "Ray block",
+   "tier": 2,
+   "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Ray block: Astrid can only be at r6c1 or r7c1, and those tiles all lie on one sightline. Whichever one Astrid takes, the whole stretch is watched, so nobody else can stand on r2c1, r3c1, r5c1, r6c1, r7c1, r8c1. Eliminated → Dorothy: r2c1, r3c1, r5c1, r6c1, r7c1, r8c1 · Esme: r5c1 · Gilbert: r5c1.",
+   "text": "Gregor was the only person beside a boulder, so no other suspect (and not S. H. Adow) can be beside any boulder.",
    "focus": [
     [
-     1,
+     3,
      0
     ],
     [
-     2,
-     0
+     3,
+     2
     ],
     [
      4,
-     0
-    ],
-    [
-     5,
-     0
-    ],
-    [
-     6,
-     0
-    ],
-    [
-     7,
-     0
+     1
     ]
    ],
    "elims": {
-    "D": [
-     [
-      1,
-      0
-     ],
-     [
-      2,
-      0
-     ],
-     [
-      4,
-      0
-     ],
-     [
-      5,
-      0
-     ],
-     [
-      6,
-      0
-     ],
-     [
-      7,
-      0
-     ]
-    ],
     "E": [
      [
-      4,
+      3,
       0
+     ],
+     [
+      3,
+      2
      ]
     ],
-    "G": [
+    "F": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      2
+     ],
      [
       4,
-      0
+      1
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
     "params": {
-     "suspect": "A",
-     "options": [
-      [
-       5,
-       0
-      ],
-      [
-       6,
-       0
-      ]
-     ],
-     "coords": [
-      [
-       1,
-       0
-      ],
-      [
-       2,
-       0
-      ],
-      [
-       4,
-       0
-      ],
-      [
-       5,
-       0
-      ],
-      [
-       6,
-       0
-      ],
-      [
-       7,
-       0
-      ]
-     ]
+     "owner": "G",
+     "prop": "BOULDER"
     }
    }
   },
   {
    "n": 3,
-   "tier": 1,
-   "rule": "Ray block",
-   "kind": "eliminate",
-   "text": "Ray block: Florence can only be at r1c1, r1c2 or r1c3, and those tiles all lie on one sightline. Whichever one Florence takes, the whole stretch is watched, so nobody else can stand on r1c1, r1c2, r1c3. Eliminated → Dorothy: r1c1, r1c2, r1c3.",
-   "focus": [
-    [
-     0,
-     0
-    ],
-    [
-     0,
-     1
-    ],
-    [
-     0,
-     2
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      0,
-      0
-     ],
-     [
-      0,
-      1
-     ],
-     [
-      0,
-      2
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
-    "params": {
-     "suspect": "F",
-     "options": [
-      [
-       0,
-       0
-      ],
-      [
-       0,
-       1
-      ],
-      [
-       0,
-       2
-      ]
-     ],
-     "coords": [
-      [
-       0,
-       0
-      ],
-      [
-       0,
-       1
-      ],
-      [
-       0,
-       2
-      ]
-     ]
-    }
-   }
-  },
-  {
-   "n": 4,
-   "tier": 2,
-   "rule": "Monopoly mask",
-   "kind": "eliminate",
-   "text": "Boris was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints. Eliminated → Dorothy: r3c5, r7c3.",
-   "focus": [
-    [
-     2,
-     4
-    ],
-    [
-     6,
-     2
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      2,
-      4
-     ],
-     [
-      6,
-      2
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_MONOPOLY_ON",
-    "ruleKey": "RULE_MONOPOLY",
-    "params": {
-     "owner": "B",
-     "prop": "FOOTPRINTS"
-    }
-   }
-  },
-  {
-   "n": 5,
-   "tier": 2,
-   "rule": "Alone in an area",
-   "kind": "eliminate",
-   "text": "Dorothy was alone in the area, but Cedric must be at the Oasis, so Dorothy cannot be in it. Eliminated → Dorothy: r1c7, r2c7, r3c7, r4c7, r5c7, r8c7.",
-   "focus": [
-    [
-     0,
-     6
-    ],
-    [
-     0,
-     7
-    ],
-    [
-     1,
-     6
-    ],
-    [
-     1,
-     7
-    ],
-    [
-     2,
-     6
-    ],
-    [
-     2,
-     7
-    ],
-    [
-     3,
-     6
-    ],
-    [
-     4,
-     6
-    ],
-    [
-     4,
-     7
-    ],
-    [
-     5,
-     6
-    ],
-    [
-     5,
-     7
-    ],
-    [
-     7,
-     6
-    ],
-    [
-     7,
-     7
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      0,
-      6
-     ],
-     [
-      1,
-      6
-     ],
-     [
-      2,
-      6
-     ],
-     [
-      3,
-      6
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      7,
-      6
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_ALONE_BLOCKED_ONE",
-    "ruleKey": "RULE_ALONE",
-    "params": {
-     "owner": "D",
-     "bits": [
-      {
-       "templateKey": "FRAG_MUST_BE_IN",
-       "params": {
-        "suspects": [
-         "C"
-        ],
-        "room": "OASIS"
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 6,
    "tier": 2,
    "rule": "Compass squeeze",
    "kind": "eliminate",
-   "text": "Gilbert was exactly one column east of Florence. Florence can only be in columns 1–3, which leaves Gilbert columns 2–3; Gilbert can only be in columns 2–3, which leaves Florence columns 1–2. Eliminated → Florence: r1c3 · Gilbert: r7c5, r8c6.",
+   "text": "Beatrice was north of Cedric. Cedric can reach row 8 at most, so Beatrice must be in rows 1–7; Beatrice is in row 2 at the earliest, so Cedric must be in rows 3–8.",
    "focus": [
     [
      0,
-     2
+     5
     ],
     [
-     6,
-     4
+     0,
+     7
+    ],
+    [
+     1,
+     5
     ],
     [
      7,
      5
-    ]
-   ],
-   "elims": {
-    "F": [
-     [
-      0,
-      2
-     ]
-    ],
-    "G": [
-     [
-      6,
-      4
-     ],
-     [
-      7,
-      5
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_OFFSET_SQUEEZE",
-    "ruleKey": "RULE_COMPASS",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "G",
-       "atom": {
-        "kind": "EXACT_OFFSET",
-        "subject": "G",
-        "params": {
-         "other": "F",
-         "dir": "E",
-         "dist": 1
-        }
-       }
-      }
-     },
-     "bits": [
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "F",
-        "src": {
-         "templateKey": "FRAG_LINES_RANGE.COL",
-         "params": {
-          "from": 0,
-          "to": 2
-         }
-        },
-        "x": "G",
-        "left": {
-         "templateKey": "FRAG_LINES_RANGE.COL",
-         "params": {
-          "from": 1,
-          "to": 2
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_OFFSET_BIT",
-       "params": {
-        "y": "G",
-        "src": {
-         "templateKey": "FRAG_LINES_RANGE.COL",
-         "params": {
-          "from": 1,
-          "to": 2
-         }
-        },
-        "x": "F",
-        "left": {
-         "templateKey": "FRAG_LINES_RANGE.COL",
-         "params": {
-          "from": 0,
-          "to": 1
-         }
-        }
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 7,
-   "tier": 2,
-   "rule": "Alone in an area",
-   "kind": "eliminate",
-   "text": "Dorothy was alone in the area, but Gilbert must be in the Canyon, so Dorothy cannot be in it. Eliminated → Dorothy: r2c2, r2c3, r3c2, r3c3, r4c2, r4c3, r5c3, r6c2, r6c3.",
-   "focus": [
-    [
-     1,
-     0
     ],
     [
-     1,
-     1
-    ],
-    [
-     1,
-     2
-    ],
-    [
-     2,
-     0
-    ],
-    [
-     2,
-     1
-    ],
-    [
-     2,
-     2
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     3,
-     2
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     5,
-     0
-    ],
-    [
-     5,
-     1
-    ],
-    [
-     5,
-     2
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      1,
-      1
-     ],
-     [
-      1,
-      2
-     ],
-     [
-      2,
-      1
-     ],
-     [
-      2,
-      2
-     ],
-     [
-      3,
-      1
-     ],
-     [
-      3,
-      2
-     ],
-     [
-      4,
-      2
-     ],
-     [
-      5,
-      1
-     ],
-     [
-      5,
-      2
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_ALONE_BLOCKED_ONE",
-    "ruleKey": "RULE_ALONE",
-    "params": {
-     "owner": "D",
-     "bits": [
-      {
-       "templateKey": "FRAG_MUST_BE_IN",
-       "params": {
-        "suspects": [
-         "G"
-        ],
-        "room": "CANYON"
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 8,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Hector was west of Gilbert. Gilbert can reach column 3 at most, so Hector must be in columns 1–2; Hector is in column 2 at the earliest, so Gilbert must be in columns 3–8. Eliminated → Gilbert: r4c2, r6c2 · Hector: r5c7.",
-   "focus": [
-    [
-     3,
-     1
-    ],
-    [
-     4,
+     7,
      6
     ],
     [
-     5,
-     1
+     7,
+     7
     ]
    ],
    "elims": {
-    "G": [
+    "B": [
      [
-      3,
-      1
+      7,
+      5
      ],
      [
-      5,
-      1
+      7,
+      6
+     ],
+     [
+      7,
+      7
      ]
     ],
-    "H": [
+    "C": [
      [
-      4,
-      6
+      0,
+      5
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      5
      ]
     ]
    },
@@ -1379,40 +920,40 @@
      "said": {
       "templateKey": "FRAG_SAID",
       "params": {
-       "subject": "H",
+       "subject": "B",
        "atom": {
-        "kind": "WEST_OF",
-        "subject": "H",
+        "kind": "NORTH_OF",
+        "subject": "B",
         "params": {
-         "other": "G"
+         "other": "C"
         }
        }
       }
      },
      "bits": [
       {
-       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
        "params": {
-        "y": "G",
-        "line": 2,
-        "x": "H",
+        "y": "C",
+        "line": 7,
+        "x": "B",
         "span": {
-         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
          "params": {
           "from": 0,
-          "to": 1
+          "to": 6
          }
         }
        }
       },
       {
-       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "templateKey": "FRAG_COMPASS_MIN.ROW",
        "params": {
-        "x": "H",
+        "x": "B",
         "line": 1,
-        "y": "G",
+        "y": "C",
         "span": {
-         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
          "params": {
           "from": 2,
           "to": 7
@@ -1425,592 +966,138 @@
    }
   },
   {
-   "n": 9,
+   "n": 4,
    "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Gilbert — “was beside a cactus and was exactly one column east of Florence”. The clue fits 6 tiles; r4c2, r6c2 are not east of any tile left for Hector; r5c1 is watched by Astrid either way; r7c5, r8c6 are not one column east of any tile left for Florence. Only r5c3 is left. Place Gilbert at r5c3; Gilbert's sightlines now watch 6 tiles.",
-   "focus": [
-    [
-     4,
-     2
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      4,
-      3
-     ],
-     [
-      4,
-      4
-     ]
-    ],
-    "E": [
-     [
-      4,
-      2
-     ],
-     [
-      4,
-      3
-     ],
-     [
-      4,
-      4
-     ]
-    ]
-   },
-   "suspect": "G",
-   "cell": [
-    4,
-    2
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 6,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          3,
-          1
-         ],
-         [
-          5,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_NOT_DIR_OF_ANY.E",
-         "params": {
-          "other": "H"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "A"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          6,
-          4
-         ],
-         [
-          7,
-          5
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_NOT_OFFSET_OF_ANY.E",
-         "params": {
-          "other": "F"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "G",
-     "clueOf": "G",
-     "coord": [
-      4,
-      2
-     ],
-     "watch": 6
-    }
-   }
-  },
-  {
-   "n": 10,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Hector — “was riding a camel and was west of Gilbert”. The clue fits 2 tiles; r5c7 is not west of any tile left for Gilbert. Only r7c2 is left. Place Hector at r7c2; Hector's sightlines now watch 3 tiles.",
-   "focus": [
-    [
-     6,
-     1
-    ]
-   ],
-   "elims": {
-    "A": [
-     [
-      6,
-      0
-     ]
-    ],
-    "B": [
-     [
-      6,
-      2
-     ]
-    ],
-    "D": [
-     [
-      6,
-      1
-     ],
-     [
-      7,
-      1
-     ]
-    ]
-   },
-   "suspect": "H",
-   "cell": [
-    6,
-    1
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          6
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_NOT_DIR_OF_ANY.W",
-         "params": {
-          "other": "G"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "H",
-     "clueOf": "H",
-     "coord": [
-      6,
-      1
-     ],
-     "watch": 3
-    }
-   }
-  },
-  {
-   "n": 11,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Astrid — “was beside an archway and could see the Corpse”. The clue fits 2 tiles; r7c1 is watched by Hector. Only r6c1 is left. Place Astrid at r6c1; Astrid's sightlines now watch 7 tiles.",
-   "focus": [
-    [
-     5,
-     0
-    ]
-   ],
-   "elims": {},
-   "suspect": "A",
-   "cell": [
-    5,
-    0
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          6,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "H"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "A",
-     "clueOf": "A",
-     "coord": [
-      5,
-      0
-     ],
-     "watch": 7
-    }
-   }
-  },
-  {
-   "n": 12,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Boris — “was the only person on a trail of footprints”. The clue fits 2 tiles; r7c3 is watched by Hector. Only r3c5 is left. Place Boris at r3c5; Boris's sightlines now watch 5 tiles.",
-   "focus": [
-    [
-     2,
-     4
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      1,
-      4
-     ],
-     [
-      2,
-      3
-     ],
-     [
-      3,
-      4
-     ],
-     [
-      5,
-      4
-     ]
-    ]
-   },
-   "suspect": "B",
-   "cell": [
-    2,
-    4
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          6,
-          2
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "H"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "B",
-     "clueOf": "B",
-     "coord": [
-      2,
-      4
-     ],
-     "watch": 5
-    }
-   }
-  },
-  {
-   "n": 13,
-   "tier": 2,
-   "rule": "Alone in an area",
+   "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Dorothy was alone in the area, but Boris must be on the Sand Dunes, so Dorothy cannot be in it. Eliminated → Dorothy: r4c4.",
+   "text": "Ray block: Cedric can only be at r8c6 or r8c8, and those tiles all lie on one sightline. Whichever one Cedric takes, the whole stretch is watched, so nobody else can stand on r8c6, r8c7, r8c8.",
    "focus": [
     [
-     1,
-     4
-    ],
-    [
-     2,
-     3
-    ],
-    [
-     2,
-     4
-    ],
-    [
-     3,
-     3
-    ],
-    [
-     3,
-     4
-    ],
-    [
-     4,
-     3
-    ],
-    [
-     4,
-     4
-    ],
-    [
-     5,
-     4
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      3,
-      3
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_ALONE_BLOCKED_ONE",
-    "ruleKey": "RULE_ALONE",
-    "params": {
-     "owner": "D",
-     "bits": [
-      {
-       "templateKey": "FRAG_MUST_BE_IN",
-       "params": {
-        "suspects": [
-         "B"
-        ],
-        "room": "SAND_DUNES"
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 14,
-   "tier": 2,
-   "rule": "Alone in an area",
-   "kind": "eliminate",
-   "text": "Dorothy was alone and can only be in the Dry River, so nobody else can be in the Dry River. Eliminated → Esme: r5c6.",
-   "focus": [
-    [
-     0,
-     5
-    ],
-    [
-     1,
-     5
-    ],
-    [
-     2,
-     5
-    ],
-    [
-     3,
-     5
-    ],
-    [
-     4,
-     5
-    ],
-    [
-     5,
-     5
-    ],
-    [
-     6,
-     4
-    ],
-    [
-     6,
+     7,
      5
     ],
     [
      7,
-     5
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      4,
-      5
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
-    "ruleKey": "RULE_ALONE",
-    "params": {
-     "owner": "D",
-     "room": "DRY_RIVER"
-    }
-   }
-  },
-  {
-   "n": 15,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Esme — “was in row 5”. The clue fits 7 tiles; r5c1 is watched by Astrid either way; r5c3 is taken by Gilbert; r5c4, r5c5 are watched by Gilbert; r5c6 is in the Dry River, where Dorothy is alone; r5c8 is watched by Cedric. Only r5c7 is left. Place Esme at r5c7; Esme's sightlines now watch 7 tiles.",
-   "focus": [
-    [
-     4,
      6
-    ]
-   ],
-   "elims": {},
-   "suspect": "E",
-   "cell": [
-    4,
-    6
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 7,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "A"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          2
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TAKEN_BY",
-         "params": {
-          "suspect": "G"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          3
-         ],
-         [
-          4,
-          4
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "G"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          5
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_ROOM_OWNER_ALONE",
-         "params": {
-          "room": "DRY_RIVER",
-          "owner": "D"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          7
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "C"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "E",
-     "clueOf": "E",
-     "coord": [
-      4,
-      6
-     ],
-     "watch": 7
-    }
-   }
-  },
-  {
-   "n": 16,
-   "tier": 2,
-   "rule": "Compass squeeze",
-   "kind": "eliminate",
-   "text": "Gilbert was exactly one column east of Florence. Gilbert can only be in column 3, which leaves Florence column 2. Eliminated → Florence: r1c1.",
-   "focus": [
+    ],
     [
-     0,
-     0
+     7,
+     7
     ]
    ],
    "elims": {
     "F": [
      [
-      0,
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "C",
+     "options": [
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "coords": [
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Freya was exactly one row north of Beatrice. Beatrice can only be in rows 2–7, which leaves Freya rows 1–6.",
+   "focus": [
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      6,
       0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
      ]
     ]
    },
@@ -2021,13 +1108,13 @@
      "said": {
       "templateKey": "FRAG_SAID",
       "params": {
-       "subject": "G",
+       "subject": "F",
        "atom": {
         "kind": "EXACT_OFFSET",
-        "subject": "G",
+        "subject": "F",
         "params": {
-         "other": "F",
-         "dir": "E",
+         "other": "B",
+         "dir": "N",
          "dist": 1
         }
        }
@@ -2037,22 +1124,928 @@
       {
        "templateKey": "FRAG_OFFSET_BIT",
        "params": {
-        "y": "G",
+        "y": "B",
         "src": {
-         "templateKey": "FRAG_LINES_ONE.COL",
+         "templateKey": "FRAG_LINES_RANGE.ROW",
          "params": {
-          "line": 2
+          "from": 1,
+          "to": 6
          }
         },
         "x": "F",
         "left": {
-         "templateKey": "FRAG_LINES_ONE.COL",
+         "templateKey": "FRAG_LINES_RANGE.ROW",
          "params": {
-          "line": 1
+          "from": 0,
+          "to": 5
          }
         }
        }
       }
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gregor was east of Freya. Gregor can reach column 3 at most, so Freya must be in columns 1–2; Freya is in column 1 at the earliest, so Gregor must be in columns 2–8.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ]
+    ],
+    "G": [
+     [
+      3,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EAST_OF",
+        "subject": "G",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "params": {
+        "y": "G",
+        "line": 2,
+        "x": "F",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 0,
+          "to": 1
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "F",
+        "line": 0,
+        "y": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 1,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Freya was exactly one row north of Beatrice. Freya can only be in rows 1, 2, 5 or 6, which leaves Beatrice rows 2, 3, 6 or 7.",
+   "focus": [
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "B",
+         "dir": "N",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "F",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           0,
+           1,
+           4,
+           5
+          ]
+         }
+        },
+        "x": "B",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           1,
+           2,
+           5,
+           6
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r4c1 cannot be a hiding spot (Gregor was the only person beside a boulder), so someone must watch it. Only Freya can still see it, so Freya must stand on r5c1, r6c1.",
+   "focus": [
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      3,
+      0
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "G",
+        "params": {
+         "prop": "BOULDER"
+        }
+       }
+      }
+     },
+     "suspect": "F",
+     "coords": [
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Freya was exactly one row north of Beatrice. Freya can only be in rows 5–6, which leaves Beatrice rows 6–7.",
+   "focus": [
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "B",
+         "dir": "N",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "F",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 4,
+          "to": 5
+         }
+        },
+        "x": "B",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 5,
+          "to": 6
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 2,
+   "rule": "No empty area",
+   "kind": "eliminate",
+   "text": "Every area holds at least one suspect. Only Diana can still reach the Bazaar, so Diana must be in it.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      0,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_EVERY_ROOM",
+    "ruleKey": "RULE_EVERY_ROOM",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EVERY_ROOM",
+      "params": {}
+     },
+     "suspect": "D",
+     "room": "BAZAAR"
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Diana “was sitting on a woven mat”: of the 3 tiles that fit, only r1c1 is still open. Place Diana there.",
+   "focus": [
+    [
+     0,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    0,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 2,
+   "rule": "No empty area",
+   "kind": "eliminate",
+   "text": "Every area holds at least one suspect. Only Hector can still reach the Nomad Tent, so Hector must be in it.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      1,
+      7
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_EVERY_ROOM",
+    "ruleKey": "RULE_EVERY_ROOM",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EVERY_ROOM",
+      "params": {}
+     },
+     "suspect": "H",
+     "room": "NOMAD_TENT"
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Hector “was beside a doorway”: of the 8 tiles that fit, only r1c8 is still open. Place Hector there.",
+   "focus": [
+    [
+     0,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      7
+     ]
+    ],
+    "C": [
+     [
+      7,
+      7
+     ]
+    ],
+    "E": [
+     [
+      3,
+      7
+     ]
+    ]
+   },
+   "suspect": "H",
+   "cell": [
+    0,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 8,
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      0,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Cedric “was in the Nomad Tent or on the Salt Flat and was in a corner”: of the 5 tiles that fit, only r8c6 is still open. Place Cedric there.",
+   "focus": [
+    [
+     7,
+     5
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      5
+     ]
+    ],
+    "E": [
+     [
+      3,
+      5
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    7,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      7,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Beatrice can only be at r6c7 or r7c7, and those tiles all lie on one sightline. Whichever one Beatrice takes, the whole stretch is watched, so nobody else can stand on r4c7.",
+   "focus": [
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      3,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "B",
+     "options": [
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       6
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       6
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Eugene “was in row 4”: of the 7 tiles that fit, only r4c4 is still open. Place Eugene there.",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      3,
+      2
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    3,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      3,
+      3
      ]
     }
    }
@@ -2062,17 +2055,24 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Florence — “was in the Nomad Tent”. The clue fits 3 tiles; r1c1, r1c3 are not one column west of any tile left for Gilbert. Only r1c2 is left. Place Florence at r1c2; Florence's sightlines now watch 5 tiles.",
+   "text": "Gregor “was the only person beside a boulder and was east of Freya”: of the 3 tiles that fit, only r5c2 is still open. Place Gregor there.",
    "focus": [
     [
-     0,
+     4,
      1
     ]
    ],
-   "elims": {},
-   "suspect": "F",
+   "elims": {
+    "F": [
+     [
+      4,
+      0
+     ]
+    ]
+   },
+   "suspect": "G",
    "cell": [
-    0,
+    4,
     1
    ],
    "i18n": {
@@ -2080,237 +2080,136 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 3,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          0,
-          0
-         ],
-         [
-          0,
-          2
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_NOT_OFFSET_OF_ANY.W",
-         "params": {
-          "other": "G"
-         }
-        }
-       }
-      }
-     ],
-     "suspect": "F",
-     "clueOf": "F",
+     "suspect": "G",
+     "clueOf": "G",
      "coord": [
-      0,
+      4,
       1
-     ],
-     "watch": 5
+     ]
     }
    }
   },
   {
    "n": 18,
-   "tier": 2,
-   "rule": "The blindspot law",
-   "kind": "eliminate",
-   "text": "The blindspot law: for Dorothy, r4c6 is too exposed (S. H. Adow would have nowhere to hide), so Dorothy cannot stand there. Eliminated → Dorothy: r4c6.",
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Freya “was exactly one row north of Beatrice”: every tile that fits is ruled out except r6c1. Place Freya there.",
    "focus": [
     [
-     3,
-     5
+     5,
+     0
     ]
    ],
-   "elims": {
-    "D": [
-     [
-      3,
-      5
-     ]
-    ]
-   },
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    5,
+    0
+   ],
    "i18n": {
-    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
-    "ruleKey": "RULE_SHADOW_LAW",
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
     "params": {
-     "suspect": "D",
-     "coords": [
-      [
-       3,
-       5
-      ]
-     ],
-     "reason": {
-      "templateKey": "REASON_TOO_EXPOSED",
-      "params": {
-       "who": "S"
-      }
-     }
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      5,
+      0
+     ]
     }
    }
   },
   {
    "n": 19,
    "tier": 2,
-   "rule": "The blindspot law",
+   "rule": "Compass squeeze",
    "kind": "eliminate",
-   "text": "The blindspot law: r1c6 cannot be a hiding spot (Dorothy was alone in the Dry River), so someone must watch it. Only Dorothy can still see it, so Dorothy must stand on r1c6, r2c6, r3c6, r5c6, r6c6, r7c6, r8c6. Eliminated → Dorothy: r7c5.",
+   "text": "Freya was exactly one row north of Beatrice. Freya can only be in row 6, which leaves Beatrice row 7.",
    "focus": [
     [
-     0,
-     5
-    ],
-    [
-     1,
-     5
-    ],
-    [
-     2,
-     5
-    ],
-    [
-     4,
-     5
-    ],
-    [
      5,
-     5
-    ],
-    [
-     6,
-     5
-    ],
-    [
-     7,
-     5
+     6
     ]
    ],
    "elims": {
-    "D": [
+    "B": [
      [
-      6,
-      4
+      5,
+      6
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
-    "ruleKey": "RULE_SHADOW_LAW",
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
     "params": {
-     "coord": [
-      0,
-      5
-     ],
-     "ban": {
-      "templateKey": "BAN_ALONE_IN",
+     "said": {
+      "templateKey": "FRAG_SAID",
       "params": {
-       "owner": "D",
-       "room": "DRY_RIVER"
+       "subject": "F",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "F",
+        "params": {
+         "other": "B",
+         "dir": "N",
+         "dist": 1
+        }
+       }
       }
      },
-     "suspect": "D",
-     "coords": [
-      [
-       0,
-       5
-      ],
-      [
-       1,
-       5
-      ],
-      [
-       2,
-       5
-      ],
-      [
-       4,
-       5
-      ],
-      [
-       5,
-       5
-      ],
-      [
-       6,
-       5
-      ],
-      [
-       7,
-       5
-      ]
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "F",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 5
+         }
+        },
+        "x": "B",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 6
+         }
+        }
+       }
+      }
      ]
     }
    }
   },
   {
    "n": 20,
-   "tier": 2,
-   "rule": "The blindspot law",
-   "kind": "eliminate",
-   "text": "The blindspot law: r7c5 cannot be a hiding spot (Dorothy was alone in the Dry River), so someone must watch it. Only Dorothy can still see it, so Dorothy must stand on r7c6. Eliminated → Dorothy: r1c6, r2c6, r3c6, r5c6, r6c6, r8c6.",
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Beatrice “was on the Salt Flat and was north of Cedric”: every tile that fits is ruled out except r7c7. Place Beatrice there.",
    "focus": [
     [
      6,
-     4
-    ],
-    [
-     6,
-     5
+     6
     ]
    ],
-   "elims": {
-    "D": [
-     [
-      0,
-      5
-     ],
-     [
-      1,
-      5
-     ],
-     [
-      2,
-      5
-     ],
-     [
-      4,
-      5
-     ],
-     [
-      5,
-      5
-     ],
-     [
-      7,
-      5
-     ]
-    ]
-   },
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    6,
+    6
+   ],
    "i18n": {
-    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
-    "ruleKey": "RULE_SHADOW_LAW",
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
     "params": {
+     "suspect": "B",
+     "clueOf": "B",
      "coord": [
       6,
-      4
-     ],
-     "ban": {
-      "templateKey": "BAN_ALONE_IN",
-      "params": {
-       "owner": "D",
-       "room": "DRY_RIVER"
-      }
-     },
-     "suspect": "D",
-     "coords": [
-      [
-       6,
-       5
-      ]
+      6
      ]
     }
    }
@@ -2318,142 +2217,19 @@
   {
    "n": 21,
    "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Dorothy — “was alone”. The clue alone allows 51 tiles, but every one except r7c6 is already ruled out — watched or occupied by Boris, Gilbert, Cedric, Hector; watched by Astrid either way; in the Canyon, which must hold Gilbert; at the Oasis, which must hold Cedric; watched by Florence either way; out of sight of r7c5, which only Dorothy can watch; a trail of footprints (only Boris may be on one); on the Sand Dunes, which must hold Boris; out of sight of r1c6, which only Dorothy can watch; too exposed (S. H. Adow would have nowhere to hide). Place Dorothy at r7c6; Dorothy's sightlines now watch 8 tiles.",
-   "focus": [
-    [
-     6,
-     5
-    ]
-   ],
-   "elims": {},
-   "suspect": "D",
-   "cell": [
-    6,
-    5
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "allows": 51,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "B",
-           "G",
-           "C",
-           "H"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "A"
-         }
-        },
-        {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "CANYON",
-          "suspects": [
-           "G"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "OASIS",
-          "suspects": [
-           "C"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "F"
-         }
-        },
-        {
-         "templateKey": "REASON_ONLY_WATCHER",
-         "params": {
-          "coord": [
-           6,
-           4
-          ],
-          "owner": "D"
-         }
-        },
-        {
-         "templateKey": "REASON_MONOPOLY_ON",
-         "params": {
-          "prop": "FOOTPRINTS",
-          "owner": "B"
-         }
-        },
-        {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "SAND_DUNES",
-          "suspects": [
-           "B"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_ONLY_WATCHER",
-         "params": {
-          "coord": [
-           0,
-           5
-          ],
-          "owner": "D"
-         }
-        },
-        {
-         "templateKey": "REASON_TOO_EXPOSED",
-         "params": {
-          "who": "S"
-         }
-        }
-       ]
-      }
-     },
-     "suspect": "D",
-     "clueOf": "D",
-     "coord": [
-      6,
-      5
-     ],
-     "watch": 8
-    }
-   }
-  },
-  {
-   "n": 22,
-   "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c4. That is where S. H. Adow is hiding!",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r2c2. That is where S. H. Adow is hiding!",
    "focus": [
     [
-     3,
-     3
+     1,
+     1
     ]
    ],
    "elims": {},
    "cell": [
-    3,
-    3
+    1,
+    1
    ],
    "suspect": "S",
    "i18n": {
@@ -2461,8 +2237,8 @@
     "ruleKey": "RULE_BLINDSPOT",
     "params": {
      "coord": [
-      3,
-      3
+      1,
+      1
      ]
     }
    }
@@ -2481,18 +2257,18 @@
   "flow": {
    "first_place_pos": 0.0,
    "elims_before_first_place": 0,
-   "last_fifth_t1_share": 0.4,
-   "hardest_last_pos": 0.95,
+   "last_fifth_t1_share": 0.75,
+   "hardest_last_pos": 0.947,
    "trials_in_last_fifth": 0,
-   "late_cascade": 0.4,
-   "late_elim_gap": 3,
-   "place_push": 2.62,
-   "global_uses": 0,
+   "late_cascade": 0.429,
+   "late_elim_gap": 1,
+   "place_push": 3.0,
+   "global_uses": 2,
    "global_first_t2": false
   },
   "flow_arc_ok": false,
-  "shadow_candidates_before_last": 9,
-  "shadow_candidates_before_last_two": 14,
+  "shadow_candidates_before_last": 6,
+  "shadow_candidates_before_last_two": 10,
   "dark_known_at": 8,
   "G5_late_shadow": true,
   "G6_tier": true,
@@ -2507,38 +2283,36 @@
   "trait_load_bearing": false,
   "biome_props_on_board": [
    "AMPHORA",
-   "CACTUS",
+   "BOULDER",
    "CAMEL",
    "CAMPFIRE",
    "FLOOR_PILLOW",
-   "OASIS_POOL",
+   "MARKET_STALL",
    "WOVEN_MAT"
   ],
   "biome_props_in_clues": [
-   "AMPHORA",
-   "CACTUS",
-   "CAMEL",
+   "BOULDER",
+   "CAMPFIRE",
    "WOVEN_MAT"
   ],
   "biome_props_load_bearing": [
-   "AMPHORA",
-   "CACTUS",
-   "CAMEL",
+   "BOULDER",
+   "CAMPFIRE",
    "WOVEN_MAT"
   ],
   "G11_biome_props_load_bearing": true,
   "G3_unique_full": true,
   "unique_without_shadow_law": false,
-  "bruteforce_nodes": 114,
+  "bruteforce_nodes": 477,
   "rules_used": [
-   "alone",
    "compass",
+   "every_room",
    "monopoly",
    "ray_block",
    "shadow_law"
   ],
-  "steps": 21,
-  "difficulty_score": 43,
+  "steps": 20,
+  "difficulty_score": 40,
   "hardest_step_tier": 2,
   "tall_scale": 0.55
  }

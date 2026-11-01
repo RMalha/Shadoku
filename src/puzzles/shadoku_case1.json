@@ -213,7 +213,7 @@
  "suspects": [
   {
    "id": "A",
-   "name": "Arthur",
+   "name": "Anton",
    "gender": "m",
    "pronoun": "he",
    "traits": {
@@ -229,8 +229,8 @@
     "cloth": 1
    },
    "look": "black curly hair, goatee, bowtie",
-   "clue": "Arthur was beside a table.",
-   "text": "Arthur was beside a table.",
+   "clue": "Anton was beside a table.",
+   "text": "Anton was beside a table.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -254,7 +254,7 @@
   },
   {
    "id": "B",
-   "name": "Bruno",
+   "name": "Benedict",
    "gender": "m",
    "pronoun": "he",
    "traits": {
@@ -270,8 +270,8 @@
     "cloth": 1
    },
    "look": "brown crop hair, round glasses, mustache",
-   "clue": "Bruno was alone and was in column 2.",
-   "text": "Bruno was alone and was in column 2.",
+   "clue": "Benedict was alone and was in column 2.",
+   "text": "Benedict was alone and was in column 2.",
    "atoms": [
     {
      "kind": "COL",
@@ -301,24 +301,24 @@
   },
   {
    "id": "C",
-   "name": "Cordelia",
+   "name": "Charlotte",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
+    "hairStyle": "wavy",
+    "hairLength": "long",
     "hairColor": "brown",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "none",
+    "hat": "cloche",
     "facialHair": "none",
-    "tie": "necktie",
+    "tie": "none",
     "skin": 4,
     "cloth": 6
    },
-   "look": "brown short hair, necktie",
-   "clue": "Cordelia was beside a tractor.",
-   "text": "Cordelia was beside a tractor.",
+   "look": "brown wavy hair, cloche",
+   "clue": "Charlotte was beside a tractor.",
+   "text": "Charlotte was beside a tractor.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -342,7 +342,7 @@
   },
   {
    "id": "D",
-   "name": "Dorothy",
+   "name": "Dorothea",
    "gender": "f",
    "pronoun": "she",
    "traits": {
@@ -351,15 +351,15 @@
     "hairColor": "blonde",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "beret",
+    "hat": "none",
     "facialHair": "none",
     "tie": "scarf",
     "skin": 0,
     "cloth": 1
    },
-   "look": "blonde ponytail hair, beret, scarf",
-   "clue": "Dorothy was standing on a mud patch.",
-   "text": "Dorothy was standing on a mud patch.",
+   "look": "blonde ponytail hair, scarf",
+   "clue": "Dorothea was standing on a mud patch.",
+   "text": "Dorothea was standing on a mud patch.",
    "atoms": [
     {
      "kind": "ON",
@@ -383,7 +383,7 @@
   },
   {
    "id": "E",
-   "name": "Edith",
+   "name": "Estelle",
    "gender": "f",
    "pronoun": "she",
    "traits": {
@@ -399,8 +399,8 @@
     "cloth": 6
    },
    "look": "brown bob hair",
-   "clue": "Edith was sitting on a straw mat.",
-   "text": "Edith was sitting on a straw mat.",
+   "clue": "Estelle was sitting on a straw mat.",
+   "text": "Estelle was sitting on a straw mat.",
    "atoms": [
     {
      "kind": "ON",
@@ -441,7 +441,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Edith — “was sitting on a straw mat”. The clue fits exactly one tile: r2c4. Place Edith at r2c4; Edith's sightlines now watch 5 tiles.",
+   "text": "Estelle “was sitting on a straw mat”: only r2c4 fits. Place Estelle there.",
    "focus": [
     [
      1,
@@ -482,8 +482,7 @@
      "coord": [
       1,
       3
-     ],
-     "watch": 5
+     ]
     }
    }
   },
@@ -492,7 +491,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Arthur — “was beside a table”. The clue fits 2 tiles; r2c4 is taken by Edith. Only r1c5 is left. Place Arthur at r1c5; Arthur's sightlines now watch 4 tiles.",
+   "text": "Anton “was beside a table”: of the 2 tiles that fit, only r1c5 is still open. Place Anton there.",
    "focus": [
     [
      0,
@@ -517,32 +516,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          1,
-          3
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_TAKEN_BY",
-         "params": {
-          "suspect": "E"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "A",
      "clueOf": "A",
      "coord": [
       0,
       4
-     ],
-     "watch": 4
+     ]
     }
    }
   },
@@ -551,7 +530,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Cordelia — “was beside a tractor”. The clue fits 2 tiles; r4c4 is watched by Edith. Only r5c5 is left. Place Cordelia at r5c5; Cordelia's sightlines now watch 1 tile.",
+   "text": "Charlotte “was beside a tractor”: of the 2 tiles that fit, only r5c5 is still open. Place Charlotte there.",
    "focus": [
     [
      4,
@@ -569,32 +548,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          3,
-          3
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "E"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "C",
      "clueOf": "C",
      "coord": [
       4,
       4
-     ],
-     "watch": 1
+     ]
     }
    }
   },
@@ -603,7 +562,7 @@
    "tier": 1,
    "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Ray block: Bruno can only be at r3c2, r4c2 or r5c2, and those tiles all lie on one sightline. Whichever one Bruno takes, the whole stretch is watched, so nobody else can stand on r4c2. Eliminated → Dorothy: r4c2.",
+   "text": "Ray block: Benedict can only be at r3c2, r4c2 or r5c2, and those tiles all lie on one sightline. Whichever one Benedict takes, the whole stretch is watched, so nobody else can stand on r4c2.",
    "focus": [
     [
      2,
@@ -659,7 +618,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Dorothy — “was standing on a mud patch”. The clue fits 2 tiles; r4c2 is watched by Bruno either way. Only r5c1 is left. Place Dorothy at r5c1; Dorothy's sightlines now watch 1 tile.",
+   "text": "Dorothea “was standing on a mud patch”: of the 2 tiles that fit, only r5c1 is still open. Place Dorothea there.",
    "focus": [
     [
      4,
@@ -684,32 +643,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          3,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "B"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "D",
      "clueOf": "D",
      "coord": [
       4,
       0
-     ],
-     "watch": 1
+     ]
     }
    }
   },
@@ -718,7 +657,7 @@
    "tier": 2,
    "rule": "Alone in an area",
    "kind": "eliminate",
-   "text": "Bruno was alone in the area, but Dorothy must be in the Garden, so Bruno cannot be in it. Eliminated → Bruno: r4c2.",
+   "text": "Benedict was alone in the area, but Dorothea must be in the Garden, so Benedict cannot be in it.",
    "focus": [
     [
      3,
@@ -765,7 +704,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Bruno — “was alone and was in column 2”. The clue fits 5 tiles; r1c2 is watched by Arthur; r2c2 is watched by Edith; r4c2 is in the Garden, which must hold Dorothy; r5c2 is watched by Dorothy. Only r3c2 is left. Place Bruno at r3c2; Bruno's sightlines now watch 5 tiles.",
+   "text": "Benedict “was alone and was in column 2”: of the 5 tiles that fit, only r3c2 is still open. Place Benedict there.",
    "focus": [
     [
      2,
@@ -783,86 +722,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 5,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          0,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "A"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          1,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "E"
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          3,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "GARDEN",
-          "suspects": [
-           "D"
-          ]
-         }
-        }
-       }
-      },
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          4,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "D"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "B",
      "clueOf": "B",
      "coord": [
       2,
       1
-     ],
-     "watch": 5
+     ]
     }
    }
   },

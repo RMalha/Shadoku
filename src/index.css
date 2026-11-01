@@ -1,0 +1,2 @@
+/* The page itself: no browser margin (it framed every page in white and made the game page scroll), the site's dark background. src/bundle.py writes the same rule into the standalone bundle. */
+html, body, #root { margin: 0; padding: 0; min-height: 100vh; background: #141419; color: #F5F0E6; }

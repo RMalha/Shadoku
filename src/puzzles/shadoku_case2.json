@@ -244,7 +244,7 @@
  "suspects": [
   {
    "id": "A",
-   "name": "Alice",
+   "name": "Alma",
    "gender": "f",
    "pronoun": "she",
    "traits": {
@@ -260,8 +260,8 @@
     "cloth": 2
    },
    "look": "black short hair, horn-rimmed glasses",
-   "clue": "Alice was sitting in a boat.",
-   "text": "Alice was sitting in a boat.",
+   "clue": "Alma was sitting in a boat.",
+   "text": "Alma was sitting in a boat.",
    "atoms": [
     {
      "kind": "ON",
@@ -327,7 +327,7 @@
   },
   {
    "id": "C",
-   "name": "Clement",
+   "name": "Clifford",
    "gender": "m",
    "pronoun": "he",
    "traits": {
@@ -343,8 +343,8 @@
     "cloth": 5
    },
    "look": "brown curly hair, fedora, necktie",
-   "clue": "Clement was beside a palm tree and could not see the Corpse.",
-   "text": "Clement was beside a palm tree and could not see the Corpse.",
+   "clue": "Clifford was beside a palm tree and could not see the Corpse.",
+   "text": "Clifford was beside a palm tree and could not see the Corpse.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -464,7 +464,7 @@
   },
   {
    "id": "F",
-   "name": "Fergus",
+   "name": "Felix",
    "gender": "m",
    "pronoun": "he",
    "traits": {
@@ -480,8 +480,8 @@
     "cloth": 1
    },
    "look": "bald, round glasses, mustache, bowtie",
-   "clue": "Fergus was alone and could see into another area.",
-   "text": "Fergus was alone and could see into another area.",
+   "clue": "Felix was alone and could see into another area.",
+   "text": "Felix was alone and could see into another area.",
    "atoms": [
     {
      "kind": "SEE_OTHER_ROOM",
@@ -535,7 +535,7 @@
    "tier": 1,
    "rule": "Polaroid check",
    "kind": "eliminate",
-   "text": "Beatrice stood diagonally next to someone with black hair. Polaroid check — people with black hair: Alice. None of them can still stand on a diagonal neighbour of r1c2, r1c3, r1c4, r1c5, r1c6, r2c1, r2c2, r2c3, r2c4, r2c5, r2c6, r3c1, r3c3, r3c5, r3c6, r4c1, r4c2, r4c4, r4c5, r4c6, r5c1, r5c5, r6c1, so Beatrice cannot be there. Eliminated → Beatrice: r1c2, r1c3, r1c4, r1c5, r1c6, r2c1, r2c2, r2c3, r2c4, r2c5, r2c6, r3c1, r3c3, r3c5, r3c6, r4c1, r4c2, r4c4, r4c5, r4c6, r5c1, r5c5, r6c1.",
+   "text": "Beatrice stood diagonally next to someone with black hair. Polaroid check — people with black hair: Alma. None of them can still stand diagonally next to the marked tiles, so Beatrice cannot be there.",
    "focus": [
     [
      0,
@@ -856,7 +856,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Beatrice — “stood diagonally next to someone with black hair”. The clue alone allows 24 tiles, but every one except r5c2 is already ruled out — with none of the people with black hair able to stand diagonally next to it. Place Beatrice at r5c2; Beatrice's sightlines now watch 2 tiles.",
+   "text": "Beatrice “stood diagonally next to someone with black hair”: every tile that fits is ruled out except r5c2. Place Beatrice there.",
    "focus": [
     [
      4,
@@ -873,27 +873,12 @@
     "templateKey": "STEP_PLACE_RULED_OUT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "allows": 24,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "REASON_NO_DIAG_PARTNER",
-         "params": {
-          "trait": "HAIR_BLACK"
-         }
-        }
-       ]
-      }
-     },
      "suspect": "B",
      "clueOf": "B",
      "coord": [
       4,
       1
-     ],
-     "watch": 2
+     ]
     }
    }
   },
@@ -902,7 +887,7 @@
    "tier": 1,
    "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Ray block: Esme can only be at r2c1 or r2c3, and those tiles all lie on one sightline. Whichever one Esme takes, the whole stretch is watched, so nobody else can stand on r2c2, r2c3, r2c5. Eliminated → Clement: r2c2 · Fergus: r2c3, r2c5.",
+   "text": "Ray block: Esme can only be at r2c1 or r2c3, and those tiles all lie on one sightline. Whichever one Esme takes, the whole stretch is watched, so nobody else can stand on r2c2, r2c3, r2c5.",
    "focus": [
     [
      1,
@@ -980,7 +965,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Clement — “was beside a palm tree and could not see the Corpse”. The clue fits 2 tiles; r2c2 is watched by Esme either way. Only r3c1 is left. Place Clement at r3c1; Clement's sightlines now watch 1 tile.",
+   "text": "Clifford “was beside a palm tree and could not see the Corpse”: of the 2 tiles that fit, only r3c1 is still open. Place Clifford there.",
    "focus": [
     [
      2,
@@ -1005,32 +990,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          1,
-          1
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "E"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "C",
      "clueOf": "C",
      "coord": [
       2,
       0
-     ],
-     "watch": 1
+     ]
     }
    }
   },
@@ -1039,7 +1004,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Esme — “was standing on a trail of footprints and was not beside any tree”. The clue fits 2 tiles; r2c1 is watched by Clement. Only r2c3 is left. Place Esme at r2c3; Esme's sightlines now watch 5 tiles.",
+   "text": "Esme “was standing on a trail of footprints and was not beside any tree”: of the 2 tiles that fit, only r2c3 is still open. Place Esme there.",
    "focus": [
     [
      1,
@@ -1064,32 +1029,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          1,
-          0
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_BY",
-         "params": {
-          "suspect": "C"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "E",
      "clueOf": "E",
      "coord": [
       1,
       2
-     ],
-     "watch": 5
+     ]
     }
    }
   },
@@ -1098,7 +1043,7 @@
    "tier": 1,
    "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Ray block: Dmitri can only be at r2c6, r3c6 or r4c6, and those tiles all lie on one sightline. Whichever one Dmitri takes, the whole stretch is watched, so nobody else can stand on r1c6, r2c6, r3c6, r4c6. Eliminated → Alice: r4c6 · Fergus: r1c6, r2c6, r3c6, r4c6.",
+   "text": "Ray block: Dmitri can only be at r2c6, r3c6 or r4c6, and those tiles all lie on one sightline. Whichever one Dmitri takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
    "focus": [
     [
      0,
@@ -1188,7 +1133,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Alice — “was sitting in a boat”. The clue fits 2 tiles; r4c6 is watched by Dmitri either way. Only r4c1 is left. Place Alice at r4c1; Alice's sightlines now watch 5 tiles.",
+   "text": "Alma “was sitting in a boat”: of the 2 tiles that fit, only r4c1 is still open. Place Alma there.",
    "focus": [
     [
      3,
@@ -1206,32 +1151,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          3,
-          5
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "D"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "A",
      "clueOf": "A",
      "coord": [
       3,
       0
-     ],
-     "watch": 5
+     ]
     }
    }
   },
@@ -1240,7 +1165,7 @@
    "tier": 2,
    "rule": "Exactly-one census",
    "kind": "eliminate",
-   "text": "Exactly one person was on a stool. Only Dmitri can still reach a stool, so he must be on one. Eliminated → Dmitri: r2c6, r4c6.",
+   "text": "Exactly one person was on a stool. Only Dmitri can still reach a stool, so he must be on one.",
    "focus": [
     [
      0,
@@ -1283,7 +1208,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Dmitri — “was in the Boathouse”. The clue fits 3 tiles; r2c6, r4c6 are not on a stool, and only Dmitri can be. Only r3c6 is left. Place Dmitri at r3c6; Dmitri's sightlines now watch 3 tiles.",
+   "text": "Dmitri “was in the Boathouse”: of the 3 tiles that fit, only r3c6 is still open. Place Dmitri there.",
    "focus": [
     [
      2,
@@ -1301,37 +1226,12 @@
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 3,
-     "groups": [
-      {
-       "templateKey": "FRAG_GROUP",
-       "params": {
-        "coords": [
-         [
-          1,
-          5
-         ],
-         [
-          3,
-          5
-         ]
-        ],
-        "reason": {
-         "templateKey": "REASON_CENSUS_ONLY",
-         "params": {
-          "prop": "STOOL",
-          "owner": "D"
-         }
-        }
-       }
-      }
-     ],
      "suspect": "D",
      "clueOf": "D",
      "coord": [
       2,
       5
-     ],
-     "watch": 3
+     ]
     }
    }
   },
@@ -1340,7 +1240,7 @@
    "tier": 2,
    "rule": "Alone in an area",
    "kind": "eliminate",
-   "text": "Fergus was alone in the area, but Clement and Esme must be on the Seawall, so Fergus cannot be in it. Eliminated → Fergus: r3c5.",
+   "text": "Felix was alone in the area, but Clifford and Esme must be on the Seawall, so Felix cannot be in it.",
    "focus": [
     [
      1,
@@ -1408,7 +1308,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Fergus — “was alone and could see into another area”. The clue alone allows 9 tiles, but every one except r1c5 is already ruled out — watched or occupied by Esme; on the Seawall, which must hold Clement and Esme; watched by Esme either way; watched by Dmitri either way. Place Fergus at r1c5; Fergus's sightlines now watch 6 tiles.",
+   "text": "Felix “was alone and could see into another area”: every tile that fits is ruled out except r1c5. Place Felix there.",
    "focus": [
     [
      0,
@@ -1425,51 +1325,12 @@
     "templateKey": "STEP_PLACE_RULED_OUT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "allows": 9,
-     "summary": {
-      "templateKey": "FRAG_SUMMARY",
-      "params": {
-       "items": [
-        {
-         "templateKey": "FRAG_WATCHED_OR_OCCUPIED",
-         "params": {
-          "suspects": [
-           "E"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_ROOM_MUST_HOLD",
-         "params": {
-          "room": "SEAWALL",
-          "suspects": [
-           "C",
-           "E"
-          ]
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "E"
-         }
-        },
-        {
-         "templateKey": "REASON_WATCHED_EITHER_WAY",
-         "params": {
-          "suspect": "D"
-         }
-        }
-       ]
-      }
-     },
      "suspect": "F",
      "clueOf": "F",
      "coord": [
       0,
       4
-     ],
-     "watch": 6
+     ]
     }
    }
   },

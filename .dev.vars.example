@@ -1,0 +1,8 @@
+# Copy to .dev.vars (git-ignored) for `npm run dev:cf`. In production set the same names with
+#   npx wrangler pages secret put NAME --project-name shadoku
+SESSION_SECRET=replace-with-at-least-32-random-characters
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+# SITE_URL=https://shadoku.net
