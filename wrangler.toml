@@ -4,9 +4,8 @@ name = "shadoku"
 pages_build_output_dir = "./dist"
 compatibility_date = "2026-10-01"
 
-# Unique codenames + the account record. Create it once and paste the id:
-#   npx wrangler kv namespace create SHADOKU_KV
-# Without it the site still signs people in; codenames are then just not reserved.
-# [[kv_namespaces]]
-# binding = "SHADOKU_KV"
-# id = "<namespace id>"
+# Unique codenames + the account record (created with: npx wrangler kv namespace create SHADOKU_KV).
+# Without this binding the site still signs people in; codenames are then just not reserved.
+[[kv_namespaces]]
+binding = "SHADOKU_KV"
+id = "5dada60c1d764a75bd966fb67378b04b"
