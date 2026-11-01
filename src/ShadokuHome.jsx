@@ -1357,7 +1357,7 @@ export default function ShadokuHome({ onPlay, onStart, onSkip, onNav, screenshot
 
 /* ═════════════════════════ STYLES ═════════════════════════ */
 export const SHADOKU_CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Special+Elite&display=swap');
+/* Fonts: the <link> in index.html (see CSS in ShadokuGame.jsx) */
 :root{--sh-bg:#141419;--sh-panel:#1c1c25;--sh-line:#34344a;--sh-cream:#F5F0E6;--sh-ink:#2b2620;--sh-brass:#D99B26;--sh-crimson:#C83E3B;--sh-green:#58b784;--sh-muted:#a9a59b}
 .sh-root,.sh-backdrop,.sh-header{font-family:'Barlow',system-ui,-apple-system,'Segoe UI',sans-serif}
 .sh-root *,.sh-backdrop *,.sh-header *{box-sizing:border-box}

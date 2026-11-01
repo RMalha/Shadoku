@@ -99,10 +99,11 @@ const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : use
 /* ---------------------------------------------------------------------- */
 /*  The SHADOKU logo: art/shadoku-logo.png as a data URI (./logoImg.js)     */
 /* ---------------------------------------------------------------------- */
+/* width/height are only the size it paints at before its CSS applies (3:1 like the art): kept small so a late stylesheet never shows a huge logo. */
 /** The logo image. Pass `src` to use another file instead; if that file fails to load, the built-in logo comes back. */
 export const ShadokuLogo = React.memo(function ShadokuLogo({ src, className = "", title = "SHADOKU" }) {
   const [broken, setBroken] = useState(false);
-  return <img className={`sk-logo ${className}`} src={src && !broken ? src : LOGO_IMG} alt={title} width={900} height={300} draggable={false} onError={() => setBroken(true)} />;
+  return <img className={`sk-logo ${className}`} src={src && !broken ? src : LOGO_IMG} alt={title} width={150} height={50} draggable={false} onError={() => setBroken(true)} />;
 });
 
 /* ---- Puzzle data: steps may be full objects or compact tuples [n, tier, ruleKey, text, focus] ---- */
@@ -2148,7 +2149,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
 /*  Styles — cozy noir, viewport-locked                                    */
 /* ---------------------------------------------------------------------- */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Barlow:wght@400;500;600;700;800&display=swap');
+/* Fonts (Barlow, Special Elite) load from a <link> in index.html: an @import here would hold back this whole sheet until Google answers, and the 900x300 logo would flash unstyled. */
 .sk{--bg:#141419;--side:#18181f;--panel:#1c1c25;--panel2:#25252f;--line:#30303f;--fg:#ebe6d9;--muted:#98a0b6;--paper:#F5F0E6;--paper2:#ebe3d1;
   --ink:#1A1A22;--pink:#2a2118;--crimson:#C83E3B;--brass:#D99B26;--brass2:#f0b94a;--focus:#6fd0ff;
   color-scheme:dark;background:var(--bg);color:var(--fg);font:15px/1.45 Barlow,system-ui,sans-serif;

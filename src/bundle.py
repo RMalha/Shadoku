@@ -176,6 +176,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Shadoku — Local Test Bundle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Special+Elite&display=swap" media="print" onload="this.media='all'" />
   <style>
     html, body, #root { margin: 0; padding: 0; min-height: 100vh; background: #141419; color: #F5F0E6; }
     #sh-boot-err { padding: 24px; font-family: monospace; color: #ff8a86; white-space: pre-wrap; line-height: 1.5; }
