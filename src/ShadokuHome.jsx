@@ -197,7 +197,8 @@ export const STRINGS = {
     "homage.title": "An Homage to Murdoku",
     "homage.text": "Shadoku is an independent fan-made homage inspired by **[[murdoku]]**. Special thanks to **Manuel Garand** for creating Murdoku and inspiring detectives everywhere.",
 
-    "footer.copy": "© 2026 Shadoku · shadoku.net",
+    "footer.copyright": "© 2026 Shadoku · R.M. Malha",
+    "footer.social": "Social media",
     "footer.legal": "Terms & Privacy",
     "modal.close": "Close",
 
@@ -836,7 +837,16 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
   );
 }
 
-/** The footer of the site's pages: © line, About, Contact, Terms & Privacy. */
+/** The social pages of the footer, in order. The labels are brand names (not translated); the mail icon is labelled with the address. */
+const SOCIALS = [
+  { key: "mail", label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, d: "M3 5h18v14H3z M3.5 5.5l8.5 7 8.5-7 M3.5 18.5l6-6.5 M20.5 18.5l-6-6.5", line: true },
+  { key: "instagram", label: "Instagram", href: "https://www.instagram.com/shadoku.game/", d: "M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3z M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8z M17.2 5.8a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z", line: true },
+  { key: "facebook", label: "Facebook", href: "https://www.facebook.com/shadoku.game", d: "M13.5 21v-8h2.7l.5-3.2h-3.2V7.9c0-.9.4-1.6 1.7-1.6h1.6V3.5C16.5 3.4 15.6 3.3 14.6 3.3c-2.6 0-4.3 1.6-4.3 4.4v2.1H7.6V13h2.7v8z" },
+  { key: "youtube", label: "YouTube", href: "https://www.youtube.com/@shadokugame", d: "M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z" },
+  { key: "x", label: "X", href: "https://x.com/shadokugame", d: "M17.8 3h3L14.2 10.6 22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2.3 3h6.2l4.3 5.7zm-1 16.2h1.7L7.6 4.7H5.8z" },
+];
+
+/** The footer of the site's pages: the social icons, About, Contact, Terms & Privacy, and the © line, all centred. */
 export function SiteFooter() {
   const { t } = useLang();
   const modals = useModals();
@@ -844,12 +854,23 @@ export function SiteFooter() {
   const page = (to, key) => <a className="sh-link" href={to} onClick={(e) => { e.preventDefault(); nav(to); }}>{t(key)}</a>;
   return (
     <footer className="sh-footer">
-      <span>{t("footer.copy")}</span>
+      <ul className="sh-social" aria-label={t("footer.social")}>
+        {SOCIALS.map((s) => (
+          <li key={s.key}>
+            <a href={s.href} aria-label={s.label} title={s.label} {...(s.key === "mail" ? {} : { target: "_blank", rel: "noopener noreferrer" })}>
+              <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
+                {s.line ? <path d={s.d} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" strokeLinecap="round" /> : <path d={s.d} fill="currentColor" />}
+              </svg>
+            </a>
+          </li>
+        ))}
+      </ul>
       <nav aria-label={t("footer.aria")}>
         {page("/about", "nav.about")}
         {page("/contact", "nav.contact")}
         <button className="sh-link" onClick={modals.openLegal}>{t("footer.legal")}</button>
       </nav>
+      <span>{t("footer.copyright")}</span>
     </footer>
   );
 }
@@ -1513,9 +1534,12 @@ svg{direction:ltr}
 /* homage + footer */
 .sh-homage{display:flex;gap:16px;align-items:flex-start;max-width:760px;margin:0 auto 40px;padding:20px 24px;background:rgba(217,155,38,.08);border:1px solid rgba(217,155,38,.4);border-radius:12px;margin-inline:auto;width:calc(100% - 32px)}
 .sh-homage-ico{font-size:28px}.sh-homage h2{margin:0 0 4px;font-size:20px;color:var(--sh-brass)}.sh-homage p{margin:0;color:var(--sh-cream)}
-.sh-footer{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;padding:24px clamp(14px,3vw,32px) calc(96px + env(safe-area-inset-bottom));border-top:1px solid var(--sh-line);color:var(--sh-muted);font-size:14px} /* room for the ✉ cue button, so it never covers the links */
-.sh-footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
-.sh-footer .sh-link{display:inline-flex;align-items:center;min-height:40px}
+.sh-footer{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:22px clamp(14px,3vw,32px) calc(22px + env(safe-area-inset-bottom));border-top:1px solid var(--sh-line);color:var(--sh-muted);font-size:14px}
+.sh-footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:0 22px}
+.sh-footer .sh-link{display:inline-flex;align-items:center;min-height:36px}
+.sh-social{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin:0 0 4px;padding:0;list-style:none}
+.sh-social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:var(--sh-cream);border-radius:10px;transition:color .15s,transform .15s}
+.sh-social a:hover,.sh-social a:focus-visible{color:var(--sh-brass);transform:translateY(-2px)}
 
 /* modal */
 .sh-backdrop{position:fixed;inset:0;z-index:100;background:rgba(6,6,9,.78);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;color:var(--sh-cream)}
@@ -1538,7 +1562,7 @@ svg{direction:ltr}
 @media (max-width:760px){
   .sh-show1{grid-template-columns:1fr}.sh-split{grid-template-columns:1fr}.sh-split>div+div{border-inline-start:0;padding-inline-start:0;border-top:2px dashed var(--sh-line);padding-top:10px}
   .sh-userchip .sh-userchip-name{display:none}.sh-userchip{padding:3px 6px 3px 3px}.sh-select{max-width:144px}
-  .sh-footer{flex-direction:column;align-items:flex-start}.sh-tape{width:72px;margin-left:-36px}
+  .sh-tape{width:72px;margin-left:-36px}
 }
 @media (max-width:640px){.sh-hide-m{display:none!important}}
 @media (max-width:420px){.sh-header .sh-btn.ghost.sm{display:none}.sh-header{gap:6px;padding-inline:10px}.sh-header-r{gap:6px}.sh-header .sh-logo img{max-width:30vw}.sh-header .sh-select{max-width:108px;padding-inline:10px 20px}.sh-header .sh-select-ico{display:none}.sh-header .sh-select-caret{inset-inline-end:7px}.sh-logo img{max-width:34vw}.sh-controls{gap:6px}}
