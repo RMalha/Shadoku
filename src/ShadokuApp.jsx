@@ -44,7 +44,7 @@
  */
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import ShadokuHome, {
-  ShadokuProviders, SiteHeader, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES,
+  ShadokuProviders, SiteHeader, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
 } from "./ShadokuHome.jsx";
 import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
 import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
@@ -52,7 +52,7 @@ import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
 import { RelicBadge, RelicModal, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 
-export const TUTORIAL_KEY = "shadoku-tutorial-done";
+export { TUTORIAL_KEY };
 export const TUTORIAL_PUZZLE = "tutorial"; // "The Art of the Ghost"
 const BAR_H = 61; // px, the site header on /play (the same <SiteHeader/> as the landing page: 40px logo + 2×10px padding + 1px border)
 const BAR_H_DESK = 77; // px, the same header on a desktop: 56px logo (see SHADOKU_CSS)
@@ -728,7 +728,9 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const modals = useModals();
   const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail: the site's pages, ⚙ Settings, then Sign In or the Profile group
     { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
-    { key: "contracts", label: t("nav.pContracts"), onSelect: enter },
+    initiated // before the initiation: its envelope in a pop-up, not the contracts
+      ? { key: "contracts", label: t("nav.pContracts"), onSelect: enter }
+      : { key: "initiation", label: t("nav.pInitiation"), onSelect: modals.openInitiation },
     { key: "settings", label: t("settings.open"), settings: true },
     { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
     { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
@@ -737,7 +739,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
       ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
       { key: "logout", label: t("nav.logOut"), sub: true, onSelect: signOut },
     ] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
-  ], [t, go, user, signOut, modals, enter]);
+  ], [t, go, user, signOut, modals, enter, initiated]);
 
   return (
     <div className="sh-playroot">
@@ -791,13 +793,16 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     if (!fromDisk && canonical(now) !== now) sync(canonical(now), true);
   }, [path, sync]);
   const contracts = view === "play" && initiated && (!slugOfPath(path) || locked); // /play after the initiation: the envelopes
+  const startInitiation = useCallback(() => go(`/play/${startSlug}`), [go, startSlug]); // the home envelope (and the Menu's pop-up) open the tutorial puzzle
+  const skipInitiation = useCallback(() => { store.set(TUTORIAL_KEY, "1"); go("/play"); }, [go]); // "Skip Initiation": the case files unlock, straight to the contracts
   const launchContract = useCallback((id) => { // the profile's Evidence Board: "Enter “The Uninvited Guests”"
     const q = (puzzles ? normalizePuzzles(puzzles) : PUZZLES).find((x) => x.id === id);
     go(q ? `/play/${puzzleSlug(q)}` : "/play");
   }, [puzzles, go]);
   return (
     <ShadokuProviders onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}
-      onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError} onNav={go}>
+      onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError}
+      onStart={startInitiation} onSkip={skipInitiation} onNav={go}>
       <style data-shadoku="app">{APP_CSS}</style>
       {contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
         : view === "play" ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
@@ -805,7 +810,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
         : view === "contact" ? <ContactPage go={go} />
         : view === "profile" ? <ProfilePage go={go} tab={profileTab(path)} puzzles={puzzles} onLaunch={launchContract} />
         : view === "testUmbra" ? <TestUmbraPage go={go} puzzles={puzzles} />
-        : <ShadokuHome onPlay={() => go("/play")} onNav={go} onStart={() => go(`/play/${startSlug}`)} screenshots={screenshots} />}
+        : <ShadokuHome onPlay={() => go("/play")} onNav={go} onStart={startInitiation} onSkip={skipInitiation} screenshots={screenshots} />}
     </ShadokuProviders>
   );
 }

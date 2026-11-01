@@ -35,6 +35,7 @@ export const CONTACT_EMAIL = "shadoku.game@proton.me";
 export const MURDOKU_URL = "https://murdoku.com";
 const LANG_KEY = "shadoku-lang";
 const USER_KEY = "shadoku-user";
+export const TUTORIAL_KEY = "shadoku-tutorial-done"; // set once the initiation is solved or skipped (ShadokuApp re-exports it)
 const ENVELOPE_MS = 850;
 
 const BASE_LANGUAGES = [
@@ -116,6 +117,7 @@ export const STRINGS = {
     "nav.menu": "Menu",
     "nav.pHome": "Home",
     "nav.pContracts": "Contracts",
+    "nav.pInitiation": "Initiation",
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.home": "← Home",
@@ -420,25 +422,26 @@ const navByHistory = (to) => {
 export const useNav = () => useContext(NavCtx) || navByHistory;
 
 /* ═════════════════════════ ROOT PROVIDERS ═════════════════════════ */
-export function ShadokuProviders({ children, onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError, onNav }) {
+export function ShadokuProviders({ children, onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError, onStart, onSkip, onNav }) {
   return (
     <NavCtx.Provider value={onNav || null}>
       <LangProvider>
         <AuthProvider onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}
           onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError}>
-          <ModalHost authError={authError}>{children}</ModalHost>
+          <ModalHost authError={authError} onStart={onStart} onSkip={onSkip}>{children}</ModalHost>
         </AuthProvider>
       </LangProvider>
     </NavCtx.Provider>
   );
 }
 
-function ModalHost({ children, authError }) {
-  const [open, setOpen] = useState({ signIn: false, legal: false, codename: false });
+function ModalHost({ children, authError, onStart, onSkip }) {
+  const [open, setOpen] = useState({ signIn: false, legal: false, codename: false, initiation: false });
   const api = useMemo(() => ({
     openSignIn: () => setOpen((s) => ({ ...s, signIn: true })),
     openLegal: () => setOpen((s) => ({ ...s, legal: true })),
     openCodename: () => setOpen((s) => ({ ...s, codename: true })),
+    openInitiation: () => setOpen((s) => ({ ...s, initiation: true })),
     close: (k) => setOpen((s) => ({ ...s, [k]: false })),
   }), []);
   const { user, pendingCodename, clearPendingCodename } = useAuth();
@@ -452,6 +455,7 @@ function ModalHost({ children, authError }) {
       {open.signIn && !user && <SignInModal onClose={() => api.close("signIn")} />}
       {open.codename && user && <CodenameModal onClose={() => api.close("codename")} />}
       {open.legal && <LegalModal onClose={() => api.close("legal")} />}
+      {open.initiation && <InitiationModal onClose={() => api.close("initiation")} onStart={onStart} onSkip={onSkip} />}
     </ModalsCtx.Provider>
   );
 }
@@ -806,6 +810,7 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
   const ref = useRef(null);
   useDismiss(open, setOpen, ref);
   const nav = (to) => { setOpen(false); (onNav || ctxNav)(to); };
+  const initiated = !!store.get(TUTORIAL_KEY);
   const link = (to, label, cls = "") => (
     <a key={to} href={to} className={`${cls}${to === current ? " on" : ""}`} aria-current={to === current ? "page" : undefined} onClick={(e) => { e.preventDefault(); nav(to); }}>{label}</a>
   );
@@ -823,7 +828,9 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
       </div>
       {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
-          {SITE_PAGES.map((m) => link(m.to, t(`nav.${m.key}`)))}
+          {SITE_PAGES.map((m) => (m.to === "/play" && !initiated
+            ? <button key={m.to} type="button" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the contracts
+            : link(m.to, t(`nav.${m.key}`))))}
           {user && <> {/* signed out: the header's own Sign In button is enough */}
             <span className="sh-menu-h">{t("nav.profile")}</span>
             {PROFILE_PAGES.map((m) => link(m.to, t(`profile.tab.${m.key}`), "sub"))}
@@ -1111,7 +1118,7 @@ export function ContractEnvelope(props) {
   // the finale while sealed: the red folder (Dossier № 000-OMEGA) is a folder, never an envelope
   return props.tone === "omega" && (props.variant || "hero") === "mini" ? <ContractFolder {...props} /> : <EnvelopeBody {...props} />;
 }
-function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null }) {
+function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false }) {
   const pal = ENV_TONES[tone] || ENV_TONES.manila, gid = `shManila-${variant}-${tone}`;
   const { t, lang } = useLang();
   const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]); // title + difficulty in the active language
@@ -1142,7 +1149,7 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
 
   return (
     <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}${sealed ? " sealed" : ""}`}>
-      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}`} {...rootProps} id={variant === "hero" ? "sh-envelope" : undefined}>
+      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}`} {...rootProps} id={variant === "hero" && !noId ? "sh-envelope" : undefined}>
         <div className="sh-env-lift">
           <div className="sh-env-stage">
             {/* back / inside */}
@@ -1221,18 +1228,35 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
 }
 
 /** The landing page's invitation: the initiation contract ("The Art of the Ghost"). */
-function Envelope({ onPlay, onStart }) {
+function Envelope({ onPlay, onStart, onSkip, noId = false }) {
   const { t } = useLang();
   const q = getPuzzle("tutorial");
   const best = useMemo(() => (q ? readBestTimes([q])[q.id] || 0 : 0), [q]);
   const initiated = best > 0; // only a SOLVED initiation opens the envelope for good (skipping it does not)
+  const skippable = !store.get(TUTORIAL_KEY) && !!onSkip; // neither solved nor skipped yet
   return initiated
-    ? <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} pre done={best > 0} best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} />
-    : <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} onAccept={onStart || onPlay} />;
+    ? <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} pre done={best > 0} best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />
+    : <>
+        <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} onAccept={onStart || onPlay} noId={noId} />
+        {skippable && <p className="sh-env-skip"><button type="button" className="sh-link" onClick={onSkip}>{t("tut.skip")}</button></p>}
+      </>;
+}
+
+/** The Menu's "Initiation": the landing page's envelope (same component, same skip button) in a pop-up. */
+function InitiationModal({ onClose, onStart, onSkip }) {
+  const { t } = useLang();
+  const nav = useNav();
+  const start = () => { onClose(); (onStart || (() => nav("/play")))(); };
+  const skip = () => { onClose(); (onSkip || (() => { store.set(TUTORIAL_KEY, "1"); nav("/play"); }))(); };
+  return (
+    <Modal title={t("nav.pInitiation")} onClose={onClose} wide>
+      <Envelope onPlay={() => { onClose(); nav("/play"); }} onStart={start} onSkip={skip} noId />
+    </Modal>
+  );
 }
 
 /* ═════════════════════════ PAGE ═════════════════════════ */
-function HomeInner({ onPlay, onStart, onNav, screenshots }) {
+function HomeInner({ onPlay, onStart, onSkip, onNav, screenshots }) {
   const { t } = useLang();
   const shots = Array.isArray(screenshots) ? screenshots : [];
   const [envVisible, setEnvVisible] = useState(false);
@@ -1265,7 +1289,7 @@ function HomeInner({ onPlay, onStart, onNav, screenshots }) {
         </section>
 
         <section className="sh-env-section" aria-label={t("env.contract")}>
-          <Envelope onPlay={onPlay} onStart={onStart} />
+          <Envelope onPlay={onPlay} onStart={onStart} onSkip={onSkip} />
         </section>
 
         <div id="sh-story" className="sh-story">
@@ -1303,15 +1327,16 @@ function HomeInner({ onPlay, onStart, onNav, screenshots }) {
  * <ShadokuHome onPlay={() => …} screenshots={[url1, url2, url3]} />
  *  onPlay      the contracts page (/play): where "Pick a contract" leads once the tutorial is behind you
  *  onStart     the first visit's "Accept the contract": opens the tutorial puzzle itself (falls back to onPlay)
+ *  onSkip      "Skip Initiation" under that envelope: marks the initiation done and opens the contracts page
  *  screenshots optional static images that replace the live showcases
  */
-export default function ShadokuHome({ onPlay, onStart, onNav, screenshots, ...authHooks }) {
+export default function ShadokuHome({ onPlay, onStart, onSkip, onNav, screenshots, ...authHooks }) {
   const hasProviders = useContext(LangCtx);
   const play = onPlay || (() => {
     pushPath("/play");
     try { window.dispatchEvent(new PopStateEvent("popstate")); } catch { /* noop */ }
   });
-  const body = <HomeInner onPlay={play} onStart={onStart} onNav={onNav} screenshots={screenshots} />;
+  const body = <HomeInner onPlay={play} onStart={onStart} onSkip={onSkip} onNav={onNav} screenshots={screenshots} />;
   return hasProviders ? body : <ShadokuProviders {...authHooks}>{body}</ShadokuProviders>;
 }
 
@@ -1425,7 +1450,7 @@ svg{direction:ltr}
 .sh-env-cq.opened .sh-env-stage,.sh-env-cq.modal .sh-env-stage{margin-top:12cqw}
 .sh-env-cq.modal{width:min(560px,90vw);margin:0 auto}
 .sh-env-cq.modal.sealed:not(.opened) .sh-env-stage{margin-top:-27cqw} /* closed like the landing page's: no empty room above the flap until the letter rises */
-.sh-env-cq.sealed .sh-env-prompt{text-align:center}
+.sh-env-cq.sealed .sh-env-prompt,.sh-modal .sh-env-prompt{text-align:center}
 .sh-env-cq.mini{width:100%;margin:0;overflow:hidden;padding-bottom:12px}
 .sh-env-cq.mini .sh-env-stage{margin-top:-26cqw}
 .sh-folder-cq{padding-bottom:12px}.sh-folder{position:relative;cursor:pointer;border-radius:8px;outline:none;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 14px 14px rgba(0,0,0,.5))}
@@ -1473,6 +1498,7 @@ svg{direction:ltr}
 .sh-env.pre .sh-seal-l,.sh-env.pre .sh-seal-r{animation:none;opacity:0}.sh-env.pre .sh-crack{animation:none;opacity:0}
 .sh-env.pre .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}.sh-env.pre .sh-card{animation:none;transform:translateY(-88%)}
 .sh-env-cq.mini.opened .sh-env-stage{margin-top:9cqw}
+.sh-env-skip{margin:14px 0 0;text-align:center;font-size:14px}.sh-env-skip .sh-link{color:var(--sh-muted)}.sh-env-skip .sh-link:hover{color:var(--sh-cream)}
 .sh-env-prompt.go{opacity:1;color:var(--sh-cream);max-width:460px;margin-left:auto;margin-right:auto}
 .sh-env-prompt{margin:26px 0 0;color:var(--sh-brass);opacity:.8;transition:opacity .2s,letter-spacing .2s;font-size:clamp(14px,2.2vw,18px)}
 .sh-env-cq:hover .sh-env-prompt{opacity:1;letter-spacing:.03em}
