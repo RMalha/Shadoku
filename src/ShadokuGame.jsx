@@ -321,16 +321,19 @@ function writeTime(id, s) { try { const t = readTimes(); t[id] = s; localStorage
 function readBests() { try { return JSON.parse(localStorage.getItem(BEST_KEY) || "{}") || {}; } catch (e) { return {}; } }
 function recordBest(id, s) { try { const b = readBests(), t = Math.max(1, Math.floor(s) || 1); if (!(b[id] > 0) || t < b[id]) b[id] = t; localStorage.setItem(BEST_KEY, JSON.stringify(b)); } catch (e) { /* ignore */ } }
 /**
- * The profile's numbers, per contract: { [id]: { played, solved, best, hints } } (`played`: the board was touched or the clock ran,
+ * The profile's numbers, per contract: { [id]: { played, solved, best, hints } } (`played`: the player marked the board, took a hint or solved it,
  * `best`: best seconds when fulfilled, `hints`: hints taken on the saved board). Read from this browser's storage.
  */
 export function readPlayStats(puzzles) {
-  const all = loadAll(), times = readTimes(), bests = readBestTimes(puzzles), out = {};
+  const all = loadAll(), bests = readBestTimes(puzzles), out = {};
   (puzzles || []).forEach((q) => {
     const cs = normCase(all[q.id]);
-    const touched = Object.keys(cs.tokens).length + Object.keys(cs.notes).length + Object.keys(cs.lights).length + Object.keys(cs.crosses).length > 0;
+    const seeded = q.id === "tutorial" || !!q.dummies; // the initiation opens with the Master's pencil notes already on the board
+    const marks = Object.keys(cs.tokens).length + Object.keys(cs.lights).length + Object.keys(cs.crosses).length + (seeded ? 0 : Object.keys(cs.notes).length);
+    const hints = Math.max(0, +cs.hints || 0);
     const solved = bests[q.id] > 0;
-    out[q.id] = { played: solved || touched || +times[q.id] > 0, solved, best: solved ? bests[q.id] : 0, hints: Math.max(0, +cs.hints || 0) };
+    // played = the player did something (a mark, a hint, a solve): merely opening a contract, or its clock running, is not playing it
+    out[q.id] = { played: solved || marks > 0 || hints > 0, solved, best: solved ? bests[q.id] : 0, hints };
   });
   return out;
 }
