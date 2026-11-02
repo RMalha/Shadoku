@@ -768,8 +768,8 @@
     "cloth": 2
    },
    "look": "red curly hair, scarf",
-   "clue": "Adelaide was in the Plaza and was in front of a doorway.",
-   "text": "Adelaide was in the Plaza and was in front of a doorway.",
+   "clue": "Adelaide was in the Plaza and was in front of an opening between two areas.",
+   "text": "Adelaide was in the Plaza and was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "ROOM",
@@ -4337,7 +4337,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Adelaide “was in the Plaza and was in front of a doorway”: of the 4 tiles that fit, only r6c2 is still open. Place Adelaide there.",
+   "text": "Adelaide “was in the Plaza and was in front of an opening between two areas”: of the 4 tiles that fit, only r6c2 is still open. Place Adelaide there.",
    "focus": [
     [
      5,

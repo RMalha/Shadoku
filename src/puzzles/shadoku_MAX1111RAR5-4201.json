@@ -1280,8 +1280,8 @@
     "cloth": 7
    },
    "look": "brown wavy hair, round glasses",
-   "clue": "Julian was in front of a door.",
-   "text": "Julian was in front of a door.",
+   "clue": "Julian was in front of an opening between two areas.",
+   "text": "Julian was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "DOOR",
@@ -8594,7 +8594,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Julian “was in front of a door”: every tile that fits is ruled out except r3c7. Place Julian there.",
+   "text": "Julian “was in front of an opening between two areas”: every tile that fits is ruled out except r3c7. Place Julian there.",
    "focus": [
     [
      2,

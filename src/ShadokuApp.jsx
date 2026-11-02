@@ -92,10 +92,10 @@ registerTranslations("en", {
  * only used when no locale has the key, and these when the puzzle has neither. Line 1 matches en.json.
  */
 export const LORE_FALLBACK = [
-  { title: "The Illusion of Justice", text: "Ah, S. H. Adow, new blood. The inspector has scribbled scapegoats across the board, a parlour trick we have been feeding him for centuries." },
-  { title: "The Ray Block", text: "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat." },
-  { title: "The Geometry of Panic", text: "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other." },
-  { title: "The Sanctuary", text: "Here is the masterstroke: every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows." },
+  { title: "The Illusion of Justice", text: "Ah, S. H. Adow, new blood. The inspector scribbled scapegoats on the board, a parlour trick we feed him for centuries." },
+  { title: "The Ray Block", text: "Aurora sat on a stool, and the Kitchen has two. Whichever she took, her gaze runs through the opening: that line is lit either way." },
+  { title: "The Geometry of Panic", text: "Dinah stood beside the safe. Aurora's row lights one side of it, so she takes the other: the safe blocks their view." },
+  { title: "The Sanctuary", text: "Every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows." },
 ];
 /** The short how-to-play note of the initiation: t(LORE_NOTE_KEY). */
 export const LORE_NOTE_KEY = "ui.tutorial.loreNote";
@@ -446,7 +446,7 @@ export function useRoute() {
 
 /* ═════════════════════════ THE MASTER'S DOSSIER ═════════════════════════ */
 const DOSSIER_MIN_KEY = "shadoku-dossier-min"; // "1" = the Master's card is folded to one line (phones need the room)
-function MasterDossier({ steps, index, total, finished, skipped, canEnter, ok, nudge, onContinue, onSkip, onEnter, onHeight }) {
+function MasterDossier({ steps, index, total, finished, skipped, canEnter, ok, nudge, onContinue, onSkip, onEnter, onHeight, col = false }) {
   const { t } = useLang();
   const [choice, setChoice] = useState(() => store.get(DOSSIER_MIN_KEY)); // "1" folded / "0" open, as the player chose (null: never chose)
   const short = useMediaQuery(SHORT_LANDSCAPE_MQ);
@@ -472,7 +472,7 @@ function MasterDossier({ steps, index, total, finished, skipped, canEnter, ok, n
   }, [onHeight]);
 
   return (
-    <aside className={`sh-dos${finished ? " fin" : ""}${min ? " min" : ""}`} ref={ref} role="region" aria-live="polite" aria-label={t("tut.dossier")}>
+    <aside className={`sh-dos${finished ? " fin" : ""}${min ? " min" : ""}${col ? " col" : ""}`} ref={ref} role="region" aria-live="polite" aria-label={t("tut.dossier")}>
       <div className="sh-dos-in">
         <div className="sh-dos-photo"><MasterPolaroid size={150} /></div>
         <div className="sh-dos-body">
@@ -742,12 +742,20 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
     ...(user ? [] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
   ], [t, go, user, signOut, modals, enter, initiated]);
 
+  // a phone held sideways: the card lives in the suspects column (the game draws it there), so the board keeps the whole height
+  const card = showCard && (
+    <MasterDossier steps={steps} index={Math.min(step, steps.length - 1)} total={steps.length} col={short}
+      finished={finished} skipped={skipped} canEnter ok={ok} nudge={nudge}
+      onContinue={() => advance(Math.min(steps.length - 1, step + 1))} onSkip={() => complete("skip")} onEnter={enter} onHeight={setCardH} />
+  );
+
   return (
     <div className={`sh-playroot${showCard && desk ? " tut" : ""}`}>
       <ShadokuGame
         t={t}
         puzzles={shown} logoSrc={logoSrc} lab={lab}
-        insetY={showCard ? cardH : 0}
+        insetY={showCard && !short ? cardH : 0}
+        dossierCard={short ? card : null}
         onLogo={() => go("/")}
         headEnd={merged ? <><UserPill /><SiteMenu current="/play" onNav={go} /></> : null} menu={merged ? null : railMenu} fixedCase={initiated} onExit={enter}
         renderEnvelope={({ puzzle, label, onPick, variant = "mini", onAccept, tone, onOpen }) => <ContractEnvelope variant={variant} puzzle={puzzle} label={label} onPick={onPick} onAccept={onAccept} onOpen={onOpen}
@@ -763,11 +771,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
         coach={showCard && !finished && steps[step] ? steps[step].coach || null : null}
       />
 
-      {showCard && (
-        <MasterDossier steps={steps} index={Math.min(step, steps.length - 1)} total={steps.length}
-          finished={finished} skipped={skipped} canEnter ok={ok} nudge={nudge}
-          onContinue={() => advance(Math.min(steps.length - 1, step + 1))} onSkip={() => complete("skip")} onEnter={enter} onHeight={setCardH} />
-      )}
+      {!short && card}
     </div>
   );
 }
@@ -850,6 +854,11 @@ html:has(.sh-playroot),html:has(.sh-playroot) body{overflow:hidden;overscroll-be
 .sh-dos-mini[disabled]{opacity:.35;cursor:default}
 .sh-dos-text.past{opacity:.85}.sh-dos-text.past .t{color:#7fe0b4}
 /* folded: the badge row, the task and the buttons; the Master's portrait, title and words wait behind Expand */
+/* a phone held sideways: the card sits at the top of the suspects column (inside the game), above the cards that scroll under it */
+.sh-dos.col{position:sticky;top:0;left:auto;right:auto;bottom:auto;z-index:6;margin:0 0 2px;border:2px solid #D99B26;border-radius:12px;padding-bottom:0;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.sh-dos.col .sh-dos-in{padding:7px 9px 8px;gap:0}
+.sh-dos.col .sh-dos-photo{display:none}
+.sh-dos.col h2{font-size:17px}.sh-dos.col .sh-dos-text{font-size:13.5px;line-height:1.36}
 .sh-dos.min .sh-dos-photo,.sh-dos.min h2,.sh-dos.min .sh-dos-note,.sh-dos.min .sh-dos-text.has-t .q,.sh-dos.min .sh-dos-cue{display:none}
 .sh-dos.min .sh-dos-text:not(.has-t){display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .sh-dos.min .sh-dos-text{margin:2px 0 0}

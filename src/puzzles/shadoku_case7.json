@@ -528,8 +528,8 @@
     "cloth": 1
    },
    "look": "bald, beret, mustache",
-   "clue": "Anton was in the Library and was in front of a door.",
-   "text": "Anton was in the Library and was in front of a door.",
+   "clue": "Anton was in the Library and was in front of an opening between two areas.",
+   "text": "Anton was in the Library and was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "ROOM",
@@ -3035,7 +3035,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Anton “was in the Library and was in front of a door”: of the 4 tiles that fit, only r9c8 is still open. Place Anton there.",
+   "text": "Anton “was in the Library and was in front of an opening between two areas”: of the 4 tiles that fit, only r9c8 is still open. Place Anton there.",
    "focus": [
     [
      8,

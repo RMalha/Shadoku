@@ -93,6 +93,8 @@ const KW_WORDS = {
   north: "north|above", south: "south|under|below", east: "east|to the right of", west: "west|to the left of",
   row: "row|rows", column: "column|columns", corner: "corner", see: "see|saw",
 };
+/* The lemon of an opening between two areas: its posts and its outlined dotted line. */
+const OPENING = "#f6e27a";
 /* The shadow's rim (beside the fog), cast by the light and by the walls: [id, gradient x1 y1 x2 y2 (dark edge -> clear), neighbour dr dc]. RIM_W px deep. */
 const SHADE_RIM = [["T", 0, 0, 0, 1, -1, 0], ["B", 0, 1, 0, 0, 1, 0], ["L", 0, 0, 1, 0, 0, -1], ["R", 1, 0, 0, 0, 0, 1]];
 const RIM_W = 16;
@@ -514,7 +516,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     return d;
   };
 
-  // walls: a doorway is simply a missing wall segment with squared posts and a faint sill
+  // walls: an opening is simply a missing wall segment with squared lemon posts and a lemon dotted line (ink outline) across the gap
   const segs = [], sills = [], postAt = new Map();
   const addPost = (px, py) => { const k = `${px},${py}`; if (!postAt.has(k)) postAt.set(k, { x: px, y: py, k }); };
   real.forEach(([r, c]) => DIRS.forEach(([dr, dc], d) => {
@@ -527,7 +529,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     if (geo.isDoor([r, c], [r1, c1])) {
       addPost(e[0], e[1]); addPost(e[2], e[3]);
       const hz = e[1] === e[3];
-      sills.push({ k: `s${r}-${c}-${d}`, x1: e[0] + (hz ? 7 : 0), y1: e[1] + (hz ? 0 : 7), x2: e[2] - (hz ? 7 : 0), y2: e[3] - (hz ? 0 : 7) });
+      sills.push({ k: `s${r}-${c}-${d}`, x1: e[0] + (hz ? 4 : 0), y1: e[1] + (hz ? 0 : 4), x2: e[2] - (hz ? 4 : 0), y2: e[3] - (hz ? 0 : 4) });
     } else segs.push({ k: `w${r}-${c}-${d}`, x1: e[0], y1: e[1], x2: e[2], y2: e[3], thick: false });
   }));
 
@@ -635,10 +637,11 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         );
       })}
 
-      <g pointerEvents="none" stroke={INK} strokeOpacity=".3" strokeWidth="3" strokeLinecap="round">
-        {sills.map((q) => <line key={q.k} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} />)}
+      <g pointerEvents="none" strokeLinecap="round" strokeDasharray="0.1 7">
+        {sills.map((q) => <line key={`i${q.k}`} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} stroke={INK} strokeWidth={5.2 * (+o.walls || 1)} />)}
+        {sills.map((q) => <line key={`c${q.k}`} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} stroke={OPENING} strokeWidth={3 * (+o.walls || 1)} />)}
       </g>
-      <WallLayer segs={segs} posts={[...postAt.values()]} core={BIOME_META[theme].wall} k={+o.walls || 1} />
+      <WallLayer segs={segs} posts={[...postAt.values()]} core={BIOME_META[theme].wall} postCore={OPENING} k={+o.walls || 1} />
       {roomEdges.length > 0 && (
         <g pointerEvents="none" strokeLinecap="square" stroke="#4da3ff">
           {roomEdges.map((e) => <line key={e.k} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} strokeWidth={(e.door ? 2.4 : 5) * (+o.walls || 1)} strokeDasharray={e.door ? "5 5" : undefined} />)}
@@ -1126,6 +1129,7 @@ function SuspectSheet({ q, look, color, placed, solved, emph, beach, room, onClo
  *  - menu            [{ key, label, onSelect?, href?, settings?, heading?, sub? }] the ☰ Menu at the top of the tool rail (desktop); `settings: true` opens ⚙ Settings,
  *                    `heading: true` is a group title (not clickable), `sub: true` indents an entry under it
  *  - coach           { cells?: [[r,c]], card?: suspectId | "S", tool?: "light"|"eraser"|"undo"|"hint"|"submit" } pulses what the tutorial is pointing at
+ *  - dossierCard     node drawn first in the suspects column when the phone is held sideways (the tutorial's lesson card, so the board keeps its height)
  *  - insetY          px of page chrome the wrapper draws above/below the game (top bar, tutorial strip): the game is 100dvh - insetY
  *  - onCaseChange    (puzzleId) => void, fired when the open case changes (the wrapper shows The Master's dossier on "tutorial")
  *  - t               optional (key, vars) => string from the site's i18n; used for the Prop Inspector (prop.<KIND>, propInspector.*). English when absent
@@ -1299,7 +1303,7 @@ export default function ShadokuGame(props) {
   const ctxT = useText(), t = props.t || ctxT;
   return <TextContext.Provider value={t}><GameScreen {...props} t={t} /></TextContext.Provider>;
 }
-function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, t }) {
+function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, dossierCard = null, t }) {
   const puzzles = useMemo(() => normalizePuzzles(puzzlesProp), [puzzlesProp]);
   const heads = useMemo(() => puzzles.map((q) => localizeHead(q, trOf(t))), [puzzles, t]); // title + difficulty in the active language, for the picker / title bar
   const [caseIdx, setCaseIdx] = useState(() => {
@@ -1974,6 +1978,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       </header>
 
       <section className="sk-dossier" aria-label={t("game.dossier")}>
+        {short && dossierCard}
         {merged && <div className="sk-casebar">{caseNav}</div>}
         <div className="sk-now" role="status">{nowLabel}</div>
         {(p.globalRules || []).length > 0 && (

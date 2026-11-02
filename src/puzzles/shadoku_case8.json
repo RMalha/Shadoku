@@ -688,8 +688,8 @@
     "cloth": 5
    },
    "look": "bald, beard, necktie",
-   "clue": "Archibald was next to a path between two areas and was in row 1.",
-   "text": "Archibald was next to a path between two areas and was in row 1.",
+   "clue": "Archibald was in front of an opening between two areas and was in row 1.",
+   "text": "Archibald was in front of an opening between two areas and was in row 1.",
    "atoms": [
     {
      "kind": "ROW",
@@ -1138,8 +1138,8 @@
     "cloth": 5
    },
    "look": "blonde curly hair, horn-rimmed glasses, beret, bowtie",
-   "clue": "Kasimir was next to a path between two areas. He was in an area with at least two women.",
-   "text": "Kasimir was next to a path between two areas. He was in an area with at least two women.",
+   "clue": "Kasimir was in front of an opening between two areas. He was in an area with at least two women.",
+   "text": "Kasimir was in front of an opening between two areas. He was in an area with at least two women.",
    "atoms": [
     {
      "kind": "DOOR",
@@ -3717,7 +3717,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Archibald “was next to a path between two areas and was in row 1”: of the 4 tiles that fit, only r1c8 is still open. Place Archibald there.",
+   "text": "Archibald “was in front of an opening between two areas and was in row 1”: of the 4 tiles that fit, only r1c8 is still open. Place Archibald there.",
    "focus": [
     [
      0,
@@ -5778,7 +5778,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Kasimir “was next to a path between two areas. He was in an area with at least two women”: every tile that fits is ruled out except r6c2. Place Kasimir there.",
+   "text": "Kasimir “was in front of an opening between two areas. He was in an area with at least two women”: every tile that fits is ruled out except r6c2. Place Kasimir there.",
    "focus": [
     [
      5,

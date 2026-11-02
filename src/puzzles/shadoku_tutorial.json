@@ -314,8 +314,8 @@
     "cloth": 2
    },
    "look": "red ponytail hair, horn-rimmed glasses",
-   "clue": "Charlotte was in front of a door and was in row 1.",
-   "text": "Charlotte was in front of a door and was in row 1.",
+   "clue": "Charlotte was in front of an opening between two areas and was in row 1.",
+   "text": "Charlotte was in front of an opening between two areas and was in row 1.",
    "atoms": [
     {
      "kind": "DOOR",
@@ -605,7 +605,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Charlotte “was in front of a door and was in row 1”: of the 2 tiles that fit, only r1c4 is still open. Place Charlotte there.",
+   "text": "Charlotte “was in front of an opening between two areas and was in row 1”: of the 2 tiles that fit, only r1c4 is still open. Place Charlotte there.",
    "focus": [
     [
      0,
@@ -767,25 +767,25 @@
  "tutorialLore": [
   {
    "title": "The Illusion of Justice",
-   "text": "Ah, S. H. Adow, new blood. The inspector has scribbled scapegoats across the board, a parlour trick we have been feeding him for centuries.",
+   "text": "Ah, S. H. Adow, new blood. The inspector scribbled scapegoats on the board, a parlour trick we feed him for centuries.",
    "titleKey": "LORE.tutorial.1.TITLE",
    "textKey": "LORE.tutorial.1.TEXT"
   },
   {
    "title": "The Ray Block",
-   "text": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+   "text": "Aurora sat on a stool, and the Kitchen has two. Whichever she took, her gaze runs through the opening: that line is lit either way.",
    "titleKey": "LORE.tutorial.2.TITLE",
    "textKey": "LORE.tutorial.2.TEXT"
   },
   {
    "title": "The Geometry of Panic",
-   "text": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+   "text": "Dinah stood beside the safe. Aurora's row lights one side of it, so she takes the other: the safe blocks their view.",
    "titleKey": "LORE.tutorial.3.TITLE",
    "textKey": "LORE.tutorial.3.TEXT"
   },
   {
    "title": "The Sanctuary",
-   "text": "Here is the masterstroke: every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows.",
+   "text": "Every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows.",
    "titleKey": "LORE.tutorial.4.TITLE",
    "textKey": "LORE.tutorial.4.TEXT"
   }

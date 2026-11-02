@@ -848,8 +848,8 @@
     "cloth": 4
    },
    "look": "black wavy hair",
-   "clue": "Honora was in the Laundromat or in the Jazz Club and was in front of a doorway.",
-   "text": "Honora was in the Laundromat or in the Jazz Club and was in front of a doorway.",
+   "clue": "Honora was in the Laundromat or in the Jazz Club and was in front of an opening between two areas.",
+   "text": "Honora was in the Laundromat or in the Jazz Club and was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "ROOM_PAIR",
@@ -3788,7 +3788,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Honora “was in the Laundromat or in the Jazz Club and was in front of a doorway”: of the 7 tiles that fit, only r7c4 is still open. Place Honora there.",
+   "text": "Honora “was in the Laundromat or in the Jazz Club and was in front of an opening between two areas”: of the 7 tiles that fit, only r7c4 is still open. Place Honora there.",
    "focus": [
     [
      6,

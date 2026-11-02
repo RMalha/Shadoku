@@ -390,8 +390,8 @@
     "cloth": 6
    },
    "look": "blonde short hair, horn-rimmed glasses, bowtie",
-   "clue": "Albert was next to a doorway.",
-   "text": "Albert was next to a doorway.",
+   "clue": "Albert was in front of an opening between two areas.",
+   "text": "Albert was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "DOOR",
@@ -1204,7 +1204,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Albert “was next to a doorway”: every tile that fits is ruled out except r2c5. Place Albert there.",
+   "text": "Albert “was in front of an opening between two areas”: every tile that fits is ruled out except r2c5. Place Albert there.",
    "focus": [
     [
      1,

@@ -6223,15 +6223,15 @@ export function PropChip({ kind, x, y, cls }) {
 /**
  * All wall runs in two passes: every dark underlay first, then every cream core, so joints are clean.
  * `posts` are the squared wall-end caps at both corners of every doorway: the gap in between is simply
- * the missing wall segment. No leaf, no arc, no brass.
+ * the missing wall segment. No leaf, no arc. `postCore` tints those posts (the board uses lemon).
  */
-export function WallLayer({ segs, posts, core = WALL, k = 1 }) { // k: the player's wall thickness (settings), 1 = as drawn
+export function WallLayer({ segs, posts, core = WALL, postCore = core, k = 1 }) { // k: the player's wall thickness (settings), 1 = as drawn
   return (
     <g strokeLinecap="square" fill="none" pointerEvents="none">
       {segs.map((s) => <line key={`u${s.k}`} x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2} stroke={INK} strokeWidth={(s.thick ? 9 : 7.5) * k} />)}
       {posts.map((p) => <rect key={`pu${p.k}`} x={p.x - 5.5 * k} y={p.y - 5.5 * k} width={11 * k} height={11 * k} fill={INK} stroke="none" />)}
       {segs.map((s) => <line key={`c${s.k}`} x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2} stroke={core} strokeWidth={(s.thick ? 5.6 : 4.2) * k} />)}
-      {posts.map((p) => <rect key={`pc${p.k}`} x={p.x - 3.4 * k} y={p.y - 3.4 * k} width={6.8 * k} height={6.8 * k} fill={core} stroke="none" />)}
+      {posts.map((p) => <rect key={`pc${p.k}`} x={p.x - 3.4 * k} y={p.y - 3.4 * k} width={6.8 * k} height={6.8 * k} fill={postCore} stroke="none" />)}
     </g>
   );
 }
