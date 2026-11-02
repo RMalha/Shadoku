@@ -75,6 +75,7 @@ const CLASS_RULES = { tall: [true, false], perch: [true, true], short: [false, f
 const SETTINGS_KEY = "shadoku-settings";
 export const DEFAULT_SETTINGS = {
   kw: true, kwCore: true, kwObjects: true, kwRooms: true, kwPeople: true, kwLines: true, // clue hover: tooltips and board highlights
+  kwSelected: false, // the selected suspect's own clue keeps its board highlights lit (no hovering)
   selHi: true, coords: false, autoScale: true, roomHover: false,
   roomLabel: 14, objSize: 0, walls: 1, // px (10-20) · -0.15..+0.15 · 0.6..1.6
   timer: true, portrait: true, autoLight: true, preventLight: false, gender: false,
@@ -1251,47 +1252,71 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
       <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">{pic}</svg><span>{t(`settings.tokenStyle.${name}`)}</span>
     </button>
   );
+  const [tab, setTab] = useState("general");
+  const TABS = ["general", "clues", "board", "suspects"];
+  const onTabKey = (e) => { // arrow keys move between the tabs
+    const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    const rtl = document.dir === "rtl" ? -1 : 1, next = TABS[(TABS.indexOf(tab) + d * rtl + TABS.length) % TABS.length];
+    setTab(next);
+    const el = document.getElementById(`sk-settab-${next}`); if (el) el.focus();
+  };
   return (
     <div className="sk-modal sk-setwrap" role="dialog" aria-modal="true" aria-label={t("settings.title")} onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
       <div className="sk-set">
         <div className="sk-set-h"><h2>{t("settings.title")}</h2><button type="button" className="sk-set-x" onClick={onClose} aria-label={t("settings.close")}>×</button></div>
-        <div className="sk-set-body">
-          {langPicker && <div className="sk-set-row sk-set-lang"><b>{t("settings.language")}</b>{langPicker}</div>}
-          {hover && sw("kw", "kw", <div className="sk-set-subs">{[["kwCore", "kw.core"], ["kwObjects", "kw.objects"], ["kwRooms", "kw.rooms"], ["kwPeople", "kw.people"], ["kwLines", "kw.lines"]].map(([k, n]) => sub(k, n, !s.kw))}</div>)}
-          {sw("selHi", "selHi")}
-          {sw("coords", "coords")}
-          {sw("autoScale", "autoScale")}
-          {hover && sw("roomHover", "roomHover")}
-          {slider("roomLabel", "roomLabel", 10, 20, 1, null, null, t("settings.px", { n: s.roomLabel }))}
-          {slider("objSize", "objSize", -0.15, 0.15, 0.01, "−15%", "+15%")}
-          {slider("walls", "walls", 0.6, 1.6, 0.05, t("settings.wallsThin"), t("settings.wallsThick"))}
-          {sw("timer", "timer")}
-          {sw("portrait", "portrait")}
-          {sw("autoLight", "autoLight")}
-          {sw("preventLight", "preventLight")}
-          {hover && (
-            <div className="sk-set-row">
-              <b>{t("settings.rightClick.title")}</b>
-              <div className="sk-set-opts">
-                {[["light", "💡"], ["cross", "❌"], ["menu", "💡❌"]].map(([v, ic]) => (
-                  <button key={v} type="button" className={`sk-set-opt${s.rightClick === v ? " on" : ""}`} aria-pressed={s.rightClick === v} onClick={() => set({ rightClick: v })}>
-                    <span className="sk-set-ic" aria-hidden="true">{ic}</span><span>{t(`settings.rightClick.${v}`)}</span>
-                  </button>
-                ))}
+        <div className="sk-set-tabs" role="tablist" aria-label={t("settings.title")} onKeyDown={onTabKey}>
+          {TABS.map((k) => (
+            <button key={k} id={`sk-settab-${k}`} type="button" role="tab" aria-selected={tab === k} aria-controls="sk-setpanel" tabIndex={tab === k ? 0 : -1} onClick={() => setTab(k)}>{t(`settings.tab.${k}`)}</button>
+          ))}
+        </div>
+        <div className="sk-set-body" id="sk-setpanel" role="tabpanel" aria-labelledby={`sk-settab-${tab}`}>
+          {tab === "general" && (<>
+            {langPicker && <div className="sk-set-row sk-set-lang"><b>{t("settings.language")}</b>{langPicker}</div>}
+            {sw("timer", "timer")}
+            {sw("autoLight", "autoLight")}
+            {sw("preventLight", "preventLight")}
+            {hover && (
+              <div className="sk-set-row">
+                <b>{t("settings.rightClick.title")}</b>
+                <div className="sk-set-opts">
+                  {[["light", "💡"], ["cross", "❌"], ["menu", "💡❌"]].map(([v, ic]) => (
+                    <button key={v} type="button" className={`sk-set-opt${s.rightClick === v ? " on" : ""}`} aria-pressed={s.rightClick === v} onClick={() => set({ rightClick: v })}>
+                      <span className="sk-set-ic" aria-hidden="true">{ic}</span><span>{t(`settings.rightClick.${v}`)}</span>
+                    </button>
+                  ))}
+                </div>
+                <small>{t("settings.rightClick.desc")}</small>
               </div>
-              <small>{t("settings.rightClick.desc")}</small>
+            )}
+          </>)}
+          {tab === "clues" && (<>
+            {hover && sw("kw", "kw", <div className="sk-set-subs">{[["kwCore", "kw.core"], ["kwObjects", "kw.objects"], ["kwRooms", "kw.rooms"], ["kwPeople", "kw.people"], ["kwLines", "kw.lines"]].map(([k, n]) => sub(k, n, !s.kw))}</div>)}
+            {sw("kwSelected", "kwSelected")}
+            {sw("plain", "plain")}
+          </>)}
+          {tab === "board" && (<>
+            {sw("coords", "coords")}
+            {sw("autoScale", "autoScale")}
+            {hover && sw("roomHover", "roomHover")}
+            {slider("roomLabel", "roomLabel", 10, 20, 1, null, null, t("settings.px", { n: s.roomLabel }))}
+            {slider("objSize", "objSize", -0.15, 0.15, 0.01, "−15%", "+15%")}
+            {slider("walls", "walls", 0.6, 1.6, 0.05, t("settings.wallsThin"), t("settings.wallsThick"))}
+          </>)}
+          {tab === "suspects" && (<>
+            {sw("selHi", "selHi")}
+            {sw("portrait", "portrait")}
+            {sw("gender", "gender")}
+            <div className="sk-set-row">
+              <b>{t("settings.tokenStyle.title")}</b>
+              <div className="sk-set-opts">
+                {style("letter", "letter", <LetterToken cx={24} cy={24} id={sample.id} fill={sample.color} ink={inkOn(sample.color)} ring={INK} />)}
+                {style("portrait", "portrait", sample.look ? <TokenAvatar cx={24} cy={24} r={18} look={sample.look} id={sample.id} uid="settings" /> : null)}
+              </div>
+              <small>{t("settings.tokenStyle.desc")}</small>
             </div>
-          )}
-          {sw("gender", "gender")}
-          <div className="sk-set-row">
-            <b>{t("settings.tokenStyle.title")}</b>
-            <div className="sk-set-opts">
-              {style("letter", "letter", <LetterToken cx={24} cy={24} id={sample.id} fill={sample.color} ink={inkOn(sample.color)} ring={INK} />)}
-              {style("portrait", "portrait", sample.look ? <TokenAvatar cx={24} cy={24} r={18} look={sample.look} id={sample.id} uid="settings" /> : null)}
-            </div>
-            <small>{t("settings.tokenStyle.desc")}</small>
-          </div>
-          {sw("plain", "plain")}
+          </>)}
         </div>
         <div className="sk-set-f"><button type="button" className="sk-set-reset" onClick={reset}>{t("settings.reset")}</button><button type="button" className="sk-set-done" onClick={onClose}>{t("settings.done")}</button></div>
       </div>
@@ -1664,16 +1689,28 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     setKwTip((k) => (k && k.c === c && k.left === left && k.top === top ? k : { c, left, top }));
   };
   const clearClueHover = () => { setClueHi(null); setKwTip(null); };
+  /* "Selected character's clue" (settings.kwSelected): every board reference in the selected suspect's own clue stays lit, on touch screens too. */
+  const selClueHi = useMemo(() => {
+    if (!settings.kwSelected || tool !== "suspect") return null;
+    const who = [...suspects, ...(p.assassins || [])].find((q) => q.id === active);
+    const keys = who && who.clue ? emph(who.clue).map((el) => el && el.props && el.props["data-hi"]).filter((h) => h && h !== `nm:${active}`) : [];
+    return keys.length ? [...new Set(keys)] : null;
+  }, [settings.kwSelected, tool, active, suspects, p.assassins, emph]);
   const hiCells = useMemo(() => {
-    if (!clueHi) return null;
-    const i = clueHi.indexOf(":"), type = clueHi.slice(0, i), val = clueHi.slice(i + 1), out = [];
-    if (type === "nm") return st.tokens[val] ? [st.tokens[val]] : null;
-    for (let r = 0; r < geo.R; r++) for (let c = 0; c < geo.C; c++) {
-      if (geo.isVoid(r, c)) continue;
-      if ((type === "pr" && geo.kind(r, c) === val) || (type === "rm" && String(geo.room(r, c)) === val) || (type === "row" && r === +val - 1) || (type === "col" && c === +val - 1)) out.push([r, c]);
-    }
+    const keys = [...(selClueHi || []), ...(clueHi ? [clueHi] : [])];
+    if (!keys.length) return null;
+    const out = [], seen = new Set();
+    const add = (r, c) => { const k = key(r, c); if (!seen.has(k)) { seen.add(k); out.push([r, c]); } };
+    keys.forEach((hk) => {
+      const i = hk.indexOf(":"), type = hk.slice(0, i), val = hk.slice(i + 1);
+      if (type === "nm") { if (st.tokens[val]) add(...st.tokens[val]); return; }
+      for (let r = 0; r < geo.R; r++) for (let c = 0; c < geo.C; c++) {
+        if (geo.isVoid(r, c)) continue;
+        if ((type === "pr" && geo.kind(r, c) === val) || (type === "rm" && String(geo.room(r, c)) === val) || (type === "row" && r === +val - 1) || (type === "col" && c === +val - 1)) add(r, c);
+      }
+    });
     return out.length ? out : null;
-  }, [clueHi, geo, st.tokens]);
+  }, [clueHi, selClueHi, geo, st.tokens]);
   const hiCard = clueHi && clueHi.startsWith("nm:") ? clueHi.slice(3) : null;
   useEffect(() => { clearClueHover(); }, [p.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -2428,7 +2465,15 @@ const CSS = `
 .sk-set-h{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 12px 20px;border-bottom:1px solid var(--line)}
 .sk-modal .sk-set-h h2{margin:0;color:var(--brass2)}
 .sk-set-x{width:40px;height:40px;font-size:24px;color:var(--muted)}
-.sk-set-body{overflow-y:auto;padding:6px 20px 16px;scrollbar-width:thin;overscroll-behavior:contain}
+.sk-modal>.sk-set{height:min(88vh,640px);height:min(88dvh,640px)} /* one height for every tab: the panel does not jump when the tab changes */
+.sk-modal>.sk-set{min-width:0}
+.sk-set-tabs{display:flex;flex:none;min-width:0;max-width:100%;gap:4px;padding:8px 12px 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.sk-set-tabs::-webkit-scrollbar{display:none}
+.sk-set-tabs button{flex:1 0 auto;white-space:nowrap;padding:9px 12px;border-radius:10px 10px 0 0;border:1px solid transparent;border-bottom:0;margin-bottom:-1px;font-weight:700;font-size:14.5px;color:var(--muted)}
+.sk-set-tabs button:hover{color:var(--fg)}
+.sk-set-tabs button[aria-selected=true]{background:#1f1f2a;color:var(--brass2);border-color:var(--line);box-shadow:inset 0 2px 0 var(--brass)}
+.sk-set-tabs button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.sk-set-body{flex:1 1 auto;min-height:0;overflow-y:auto;padding:6px 20px 16px;scrollbar-width:thin;overscroll-behavior:contain}
 .sk-set-row{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .sk-set-row>b,.sk-set-txt b{display:block;font-size:15.5px;font-weight:800;color:#f3efe6}
 .sk-set-row small,.sk-set-txt small{display:block;font-size:13px;line-height:1.4;color:#a9adbd;margin-top:3px}
@@ -2466,6 +2511,7 @@ const CSS = `
   .sk-modal.sk-setwrap{padding:8px}
   .sk-modal>.sk-set{max-height:calc(100vh - 16px);max-height:calc(100dvh - 16px)}
   .sk-set-h{padding:6px 8px 6px 18px}.sk-modal .sk-set-h h2{font-size:20px}
+  .sk-set-tabs{padding:4px 12px 0}.sk-set-tabs button{padding:6px 12px}
   .sk-set-body{padding:2px 18px 10px}.sk-set-row{padding:9px 0}
   .sk-set-f{padding:6px 18px}.sk-set-done{padding:6px 16px}
 }
@@ -2649,10 +2695,10 @@ const CSS = `
   .sk-game{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"head" "stage" "dossier" "rail"}
   .sk-head{grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-rows:auto;grid-template-areas:"logo nav timer help";gap:7px;
     padding:calc(7px + env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) 7px max(10px,env(safe-area-inset-left));border-right:0;border-bottom:1px solid var(--line)}
-  .sk-head .sk-logo{height:28px;filter:none}
+  .sk-head .sk-logo{height:38px;filter:none}
   .sk-head.merged{display:flex;align-items:center;gap:6px;position:relative;z-index:20} /* position: the site menus hang from it */
   .sk-head.merged .sk-logobtn{margin-inline-end:auto;min-width:0}
-  .sk-head.merged .sk-logo{height:26px;max-width:100%}
+  .sk-head.merged .sk-logo{height:36px;max-width:100%}
   .sk-head.merged .sk-headr{gap:6px}
   .sk-head.merged .sk-gear,.sk-head.merged .sk-help{width:36px;height:36px}
   .sk-headend{display:flex;align-items:center;gap:6px}
@@ -2735,7 +2781,7 @@ const CSS = `
   .sk-head{grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"logo . timer help" "nav nav nav nav";gap:6px;padding:6px 8px 6px max(8px,env(safe-area-inset-left))}
   .sk-head[data-wide]{grid-template-areas:"logo nav timer help"}
   .sk-head>.sk-menu{grid-area:nav} /* the contract's title (once the case is fixed) */
-  .sk-head .sk-logo{height:26px;filter:none}
+  .sk-head .sk-logo{height:30px;filter:none}
   /* the ☰ Menu tops the rail (the site's pages, sign-in or the profile): an icon, its list over the rail (fixed: the rail scrolls and would clip it) */
   .sk-railmenu-btn{height:32px}.sk-railmenu-btn span{display:none}
   .sk-railmenu-list{position:fixed;top:44px;inset-inline-end:max(6px,env(safe-area-inset-right));z-index:60;max-height:calc(100vh - 52px);max-height:calc(100dvh - 52px);overflow-y:auto}
@@ -2783,8 +2829,10 @@ const CSS = `
 @media (orientation:landscape) and (max-height:520px) and (max-width:700px){.sk-menu-btn .sk-cn{display:none}}
 @media (orientation:landscape) and (max-height:520px) and (max-width:820px){.sk-headend .sh-userchip-name{display:none}}
 @media (max-width:560px){.sk-cs,.sk-caret,.sk-menu-btn .sk-diff{display:none}}
-@media (max-width:440px){.sk-head .sk-logo{height:24px}.sk-menu-btn .sk-ci{display:none}}
-@media (max-width:380px){.sk-head .sk-logo{height:21px}}
+@media (max-width:440px){.sk-head .sk-logo,.sk-head.merged .sk-logo{height:33px}.sk-menu-btn .sk-ci{display:none}}
+@media (max-width:380px){.sk-head .sk-logo,.sk-head.merged .sk-logo{height:29px}}
+/* narrow phones: tighter header controls, so the logo keeps its height */
+@media (max-width:380px){.sk-head,.sk-head.merged{gap:4px;padding-inline:max(8px,env(safe-area-inset-left)) max(8px,env(safe-area-inset-right))}.sk-head.merged .sk-headr,.sk-headend,.sk-headend .sh-controls{gap:4px}.sk-headend .sh-btn{padding:0 8px}.sk-head.merged .sk-gear,.sk-head.merged .sk-help,.sk-headend .sh-burger{width:34px}}
 @media (max-width:290px){.sk-cast{grid-template-columns:minmax(0,1fr)}}
 
 /* modal */
