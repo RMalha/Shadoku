@@ -9,117 +9,147 @@
  "tier": "easy",
  "shape": "rect",
  "seed": 1424,
- "attempt": 799,
+ "attempt": 1246,
  "traitMode": "any",
  "propMode": "require",
  "castKey": "MOE0808RAR1-1424",
  "puzzleId": "MOE0808RAR1-1424",
  "engine": "V10.1",
  "i18nSchema": "shadoku-i18n/1",
- "difficultyScore": 9,
+ "difficultyScore": 12,
  "zoneWord": "area",
  "size": 8,
  "rooms": [
   [
    2,
-   4,
-   5,
-   5,
-   3,
-   0,
-   0,
-   0
-  ],
-  [
    2,
-   4,
-   5,
-   5,
-   3,
-   0,
-   0,
-   0
-  ],
-  [
    2,
-   4,
-   5,
-   5,
-   3,
-   0,
-   0,
-   0
-  ],
-  [
    2,
-   4,
-   5,
-   5,
-   3,
-   0,
-   0,
-   0
-  ],
-  [
    2,
-   4,
-   5,
-   5,
-   3,
-   0,
-   0,
-   0
-  ],
-  [
    2,
+   2,
+   2
+  ],
+  [
+   3,
    4,
    5,
    5,
-   3,
-   0,
-   0,
-   0
-  ],
-  [
-   1,
-   1,
-   1,
-   1,
-   1,
-   1,
+   5,
+   5,
    1,
    1
   ],
   [
-   1,
-   1,
-   1,
-   1,
-   1,
-   1,
+   3,
+   4,
+   5,
+   5,
+   5,
+   5,
    1,
    1
+  ],
+  [
+   3,
+   4,
+   5,
+   5,
+   5,
+   5,
+   1,
+   1
+  ],
+  [
+   3,
+   4,
+   5,
+   5,
+   5,
+   5,
+   1,
+   1
+  ],
+  [
+   3,
+   4,
+   5,
+   5,
+   5,
+   5,
+   1,
+   1
+  ],
+  [
+   3,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   3,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
   ]
  ],
  "roomNames": [
-  "Ice Cave",
-  "Summit",
-  "Base Camp",
-  "Ski Lodge",
   "Glacier",
-  "Ski Slope"
+  "Ski Slope",
+  "Summit",
+  "Ski Lodge",
+  "Ridge",
+  "Base Camp"
  ],
  "roomIds": [
-  "ICE_CAVE",
-  "SUMMIT",
-  "BASE_CAMP",
-  "SKI_LODGE",
   "GLACIER",
-  "SKI_SLOPE"
+  "SKI_SLOPE",
+  "SUMMIT",
+  "SKI_LODGE",
+  "RIDGE",
+  "BASE_CAMP"
  ],
  "doors": [
   [
    [
+    0,
+    0
+   ],
+   [
+    1,
+    0
+   ]
+  ],
+  [
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    1
+   ]
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   [
+    1,
+    4
+   ]
+  ],
+  [
+   [
     2,
     0
    ],
@@ -130,42 +160,22 @@
   ],
   [
    [
-    2,
-    3
-   ],
-   [
-    2,
-    4
-   ]
-  ],
-  [
-   [
-    3,
+    4,
     1
    ],
    [
-    3,
+    4,
     2
    ]
   ],
   [
    [
     4,
-    4
+    5
    ],
    [
     4,
-    5
-   ]
-  ],
-  [
-   [
-    5,
-    0
-   ],
-   [
-    6,
-    0
+    6
    ]
   ],
   [
@@ -176,99 +186,84 @@
    [
     6,
     1
-   ]
-  ],
-  [
-   [
-    5,
-    2
-   ],
-   [
-    6,
-    2
-   ]
-  ],
-  [
-   [
-    5,
-    5
-   ],
-   [
-    6,
-    5
    ]
   ]
  ],
  "windows": [
   [
+   7,
    0,
-   4,
-   "N"
+   "W"
+  ],
+  [
+   1,
+   0,
+   "W"
   ]
  ],
  "contents": [
   [
-   "TENT",
+   "SNOWDRIFT",
+   "",
    "SLED",
-   "SNOW_PINE",
+   "",
+   "",
    "SLED",
    "",
-   "",
-   "",
-   "LANTERN"
+   ""
   ],
   [
-   "CAIRN",
-   "SLED",
+   "BEARSKIN",
+   "SNOWDRIFT",
    "",
-   "",
-   "SLED",
-   "CRATE",
-   "",
-   "ICE"
-  ],
-  [
    "",
    "",
    "",
    "SNOWDRIFT",
-   "BEARSKIN",
-   "FOOTPRINTS",
-   "FOOTPRINTS",
-   "FOOTPRINTS"
-  ],
-  [
-   "SLED",
-   "",
-   "",
-   "",
-   "FIREPLACE",
-   "ICE",
-   "CRATE",
    ""
   ],
   [
    "",
-   "ICE",
-   "",
+   "SLED",
+   "TENT",
    "",
    "",
    "CORPSE",
    "",
+   "SNOW_PINE"
+  ],
+  [
+   "",
+   "",
+   "",
+   "LANTERN",
+   "",
+   "SNOWMAN",
+   "SLED",
    ""
   ],
   [
-   "SLED",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
    "",
    "SNOWDRIFT",
    "",
-   "FOOTPRINTS",
-   "",
-   "",
-   "ICE_PILLAR"
+   "SLED",
+   ""
   ],
   [
-   "",
+   "FIREPLACE",
    "",
    "",
    "",
@@ -278,13 +273,13 @@
    ""
   ],
   [
+   "TRAPDOOR",
    "",
    "",
-   "",
-   "",
-   "",
-   "",
-   "",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "SNOWMAN",
    ""
   ]
  ],
@@ -293,121 +288,111 @@
    "kind": "FOOTPRINTS",
    "cells": [
     [
-     2,
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
      5
-    ],
-    [
-     2,
-     6
-    ],
-    [
-     2,
-     7
     ]
    ]
   }
  ],
  "corpse": [
-  4,
+  2,
   5
  ],
  "biomeProps": [
   "BEARSKIN",
-  "CAIRN",
   "FIREPLACE",
-  "ICE",
-  "ICE_PILLAR",
   "LANTERN",
   "SLED",
   "SNOWDRIFT",
+  "SNOWMAN",
   "SNOW_PINE",
   "TENT"
  ],
  "propClasses": {
   "BEARSKIN": "LOW",
-  "CAIRN": "SHORT",
-  "CRATE": "SHORT",
   "FIREPLACE": "TALL",
   "FOOTPRINTS": "LOW",
-  "ICE": "LOW",
-  "ICE_PILLAR": "TALL",
   "LANTERN": "SHORT",
   "SLED": "LOW",
   "SNOWDRIFT": "LOW",
+  "SNOWMAN": "SHORT",
   "SNOW_PINE": "TALL",
-  "TENT": "TALL"
+  "TENT": "TALL",
+  "TRAPDOOR": "LOW"
  },
  "dress": "integrated",
  "dressing": {
-  "lowShare": 0.291,
-  "lowTiles": 16,
-  "openTiles": 55,
+  "lowShare": 0.246,
+  "lowTiles": 14,
+  "openTiles": 57,
   "lowKinds": [
    "BEARSKIN",
    "FOOTPRINTS",
-   "ICE",
    "SLED",
-   "SNOWDRIFT"
+   "SNOWDRIFT",
+   "TRAPDOOR"
   ],
   "roomProps": {
-   "BASE_CAMP": [
-    "CAIRN",
+   "SUMMIT": [
     "SLED",
-    "TENT"
+    "SNOWDRIFT"
    ],
-   "GLACIER": [
-    "ICE",
-    "SLED"
+   "SKI_LODGE": [
+    "BEARSKIN",
+    "FIREPLACE",
+    "TRAPDOOR"
+   ],
+   "RIDGE": [
+    "SLED",
+    "SNOWDRIFT"
    ],
    "SKI_SLOPE": [
     "SLED",
     "SNOWDRIFT",
     "SNOW_PINE"
    ],
-   "ICE_CAVE": [
-    "CRATE",
-    "FOOTPRINTS",
-    "ICE",
-    "ICE_PILLAR",
-    "LANTERN"
+   "BASE_CAMP": [
+    "LANTERN",
+    "SNOWDRIFT",
+    "SNOWMAN",
+    "TENT"
    ],
-   "SKI_LODGE": [
-    "BEARSKIN",
-    "FIREPLACE",
+   "GLACIER": [
     "FOOTPRINTS",
-    "SLED"
+    "SNOWMAN"
    ]
   }
  },
  "suspects": [
   {
    "id": "A",
-   "name": "Aurora",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Albert",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
     "hairStyle": "short",
     "hairLength": "short",
-    "hairColor": "black",
-    "glasses": false,
-    "glassesStyle": "none",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
     "hat": "none",
     "facialHair": "none",
-    "tie": "none",
+    "tie": "bowtie",
     "skin": 3,
-    "cloth": 2
+    "cloth": 6
    },
-   "look": "black short hair",
-   "clue": "Aurora was on the Summit and was next to a doorway.",
-   "text": "Aurora was on the Summit and was next to a doorway.",
+   "look": "blonde short hair, horn-rimmed glasses, bowtie",
+   "clue": "Albert was next to a doorway.",
+   "text": "Albert was next to a doorway.",
    "atoms": [
-    {
-     "kind": "ROOM",
-     "subject": "A",
-     "params": {
-      "room": "SUMMIT"
-     }
-    },
     {
      "kind": "DOOR",
      "subject": "A",
@@ -417,48 +402,49 @@
    "clueTokens": {
     "subject": "A",
     "place": [
-     0,
-     1
+     0
     ],
     "people": []
    },
    "solution": [
-    6,
-    0
+    1,
+    4
    ]
   },
   {
    "id": "B",
-   "name": "Babette",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Bruno",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
-    "hairStyle": "long",
-    "hairLength": "long",
-    "hairColor": "black",
-    "glasses": false,
-    "glassesStyle": "none",
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
     "hat": "none",
     "facialHair": "none",
-    "tie": "bowtie",
-    "skin": 2,
-    "cloth": 0
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 7
    },
-   "look": "black long hair, bowtie",
-   "clue": "Babette was the only person on an ice patch and could see the Corpse.",
-   "text": "Babette was the only person on an ice patch and could see the Corpse.",
+   "look": "brown curly hair, horn-rimmed glasses, necktie",
+   "clue": "Bruno was on the Glacier and was in column 2.",
+   "text": "Bruno was on the Glacier and was in column 2.",
    "atoms": [
     {
-     "kind": "ONLY_ON",
+     "kind": "ROOM",
      "subject": "B",
      "params": {
-      "prop": "ICE"
+      "room": "GLACIER"
      }
     },
     {
-     "kind": "SEE_CORPSE",
+     "kind": "COL",
      "subject": "B",
-     "params": {}
+     "params": {
+      "index": 1
+     }
     }
    ],
    "clueTokens": {
@@ -470,81 +456,77 @@
     "people": []
    },
    "solution": [
-    3,
-    5
+    6,
+    1
    ]
   },
   {
    "id": "C",
-   "name": "Conrad",
+   "name": "Cedric",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "short",
+    "hairStyle": "crop",
     "hairLength": "short",
     "hairColor": "black",
     "glasses": true,
-    "glassesStyle": "horn-rimmed",
-    "hat": "none",
+    "glassesStyle": "round",
+    "hat": "beret",
     "facialHair": "mustache",
-    "tie": "necktie",
-    "skin": 1,
-    "cloth": 2
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 7
    },
-   "look": "black short hair, horn-rimmed glasses, mustache, necktie",
-   "clue": "Conrad was in column 2. He stood diagonally next to a woman.",
-   "text": "Conrad was in column 2. He stood diagonally next to a woman.",
+   "look": "black crop hair, round glasses, beret, mustache, scarf",
+   "clue": "Cedric was on the Ski Slope and could see into another area.",
+   "text": "Cedric was on the Ski Slope and could see into another area.",
    "atoms": [
     {
-     "kind": "DIAG_P",
+     "kind": "ROOM",
      "subject": "C",
      "params": {
-      "trait": "FEMALE",
-      "selfMatch": false
+      "room": "SKI_SLOPE"
      }
     },
     {
-     "kind": "COL",
+     "kind": "SEE_OTHER_ROOM",
      "subject": "C",
-     "params": {
-      "index": 1
-     }
+     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "C",
     "place": [
+     0,
      1
     ],
-    "people": [
-     0
-    ]
+    "people": []
    },
    "solution": [
-    7,
-    1
+    4,
+    7
    ]
   },
   {
    "id": "D",
-   "name": "Dexter",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Delphine",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "bald",
-    "hairLength": "bald",
-    "hairColor": "none",
-    "glasses": true,
-    "glassesStyle": "round",
-    "hat": "peaked",
-    "facialHair": "mustache",
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
     "tie": "none",
-    "skin": 1,
-    "cloth": 2
+    "skin": 2,
+    "cloth": 4
    },
-   "look": "bald, round glasses, peaked, mustache",
-   "clue": "Dexter was beside a fireplace.",
-   "text": "Dexter was beside a fireplace.",
+   "look": "brown bob hair, beret",
+   "clue": "Delphine was beside a fireplace.",
+   "text": "Delphine was beside a fireplace.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -562,13 +544,13 @@
     "people": []
    },
    "solution": [
-    4,
-    4
+    7,
+    0
    ]
   },
   {
    "id": "E",
-   "name": "Ernest",
+   "name": "Edgar",
    "gender": "m",
    "pronoun": "he",
    "traits": {
@@ -578,21 +560,19 @@
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
-    "facialHair": "beard",
-    "tie": "none",
-    "skin": 1,
-    "cloth": 6
+    "facialHair": "mustache",
+    "tie": "necktie",
+    "skin": 0,
+    "cloth": 3
    },
-   "look": "grey short hair, beard",
-   "clue": "Ernest was standing on a bearskin rug.",
-   "text": "Ernest was standing on a bearskin rug.",
+   "look": "grey short hair, mustache, necktie",
+   "clue": "Edgar could not see the Corpse.",
+   "text": "Edgar could not see the Corpse.",
    "atoms": [
     {
-     "kind": "ON",
+     "kind": "NO_SEE_CORPSE",
      "subject": "E",
-     "params": {
-      "prop": "BEARSKIN"
-     }
+     "params": {}
     }
    ],
    "clueTokens": {
@@ -603,139 +583,138 @@
     "people": []
    },
    "solution": [
-    2,
-    4
-   ]
-  },
-  {
-   "id": "F",
-   "name": "Felicity",
-   "gender": "f",
-   "pronoun": "she",
-   "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
-    "hairColor": "brown",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "none",
-    "facialHair": "none",
-    "tie": "bowtie",
-    "skin": 2,
-    "cloth": 1
-   },
-   "look": "brown short hair, bowtie",
-   "clue": "Felicity was beside a pine tree.",
-   "text": "Felicity was beside a pine tree.",
-   "atoms": [
-    {
-     "kind": "BESIDE",
-     "subject": "F",
-     "params": {
-      "prop": "SNOW_PINE"
-     }
-    }
-   ],
-   "clueTokens": {
-    "subject": "F",
-    "place": [
-     0
-    ],
-    "people": []
-   },
-   "solution": [
-    0,
+    5,
     3
    ]
   },
   {
-   "id": "G",
-   "name": "Gloria",
+   "id": "F",
+   "name": "Fiona",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "long",
-    "hairLength": "long",
-    "hairColor": "black",
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "red",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 1,
+    "tie": "scarf",
+    "skin": 2,
     "cloth": 1
    },
-   "look": "black long hair, necktie",
-   "clue": "Gloria was standing in a snowdrift.",
-   "text": "Gloria was standing in a snowdrift.",
+   "look": "red bob hair, scarf",
+   "clue": "Fiona was on the Summit and was standing in a snowdrift.",
+   "text": "Fiona was on the Summit and was standing in a snowdrift.",
    "atoms": [
     {
+     "kind": "ROOM",
+     "subject": "F",
+     "params": {
+      "room": "SUMMIT"
+     }
+    },
+    {
      "kind": "ON",
-     "subject": "G",
+     "subject": "F",
      "params": {
       "prop": "SNOWDRIFT"
      }
     }
    ],
    "clueTokens": {
-    "subject": "G",
+    "subject": "F",
     "place": [
-     0
+     0,
+     1
     ],
     "people": []
    },
    "solution": [
-    5,
-    2
+    0,
+    0
    ]
   },
   {
-   "id": "H",
-   "name": "Horace",
-   "gender": "m",
-   "pronoun": "he",
+   "id": "G",
+   "name": "Grace",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "short",
-    "hairLength": "short",
+    "hairStyle": "wavy",
+    "hairLength": "long",
     "hairColor": "brown",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "bowtie",
-    "skin": 0,
+    "tie": "none",
+    "skin": 3,
     "cloth": 1
    },
-   "look": "brown short hair, bowtie",
-   "clue": "Horace stood on bare ground (no bearskin rug, ice patch, sled, snowdrift or trail of footprints) and was beside a crate.",
-   "text": "Horace stood on bare ground (no bearskin rug, ice patch, sled, snowdrift or trail of footprints) and was beside a crate.",
+   "look": "brown wavy hair",
+   "clue": "Grace was beside a snowman and was in a corner.",
+   "text": "Grace was beside a snowman and was in a corner.",
    "atoms": [
     {
      "kind": "BESIDE",
-     "subject": "H",
+     "subject": "G",
      "params": {
-      "prop": "CRATE"
+      "prop": "SNOWMAN"
      }
     },
     {
-     "kind": "BARE",
+     "kind": "CORNER",
+     "subject": "G",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    7
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Hattie",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 1
+   },
+   "look": "blonde wavy hair, cloche",
+   "clue": "Hattie was standing in a snowdrift.",
+   "text": "Hattie was standing in a snowdrift.",
+   "atoms": [
+    {
+     "kind": "ON",
      "subject": "H",
      "params": {
-      "surface": "GROUND",
-      "lows": [
-       "BEARSKIN",
-       "ICE",
-       "SLED",
-       "SNOWDRIFT",
-       "FOOTPRINTS"
-      ]
+      "prop": "SNOWDRIFT"
      }
     }
    ],
    "clueTokens": {
     "subject": "H",
     "place": [
-     1,
      0
     ],
     "people": []
@@ -747,8 +726,8 @@
   }
  ],
  "shadow": [
-  2,
-  7
+  3,
+  2
  ],
  "shadowSuspect": {
   "id": "S",
@@ -757,52 +736,133 @@
   "traits": null,
   "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
  },
- "globalRules": [],
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_BESIDE:SNOWDRIFT",
+   "text": "Exactly one person was beside a snowdrift.",
+   "kind": "EXACTLY_ONE_BESIDE",
+   "params": {
+    "prop": "SNOWDRIFT"
+   }
+  }
+ ],
  "steps": [
   {
    "n": 1,
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Babette “was the only person on an ice patch and could see the Corpse”: only r4c6 fits. Place Babette there.",
+   "text": "Fiona “was on the Summit and was standing in a snowdrift”: only r1c1 fits. Place Fiona there.",
    "focus": [
     [
-     3,
-     5
+     0,
+     0
     ]
    ],
    "elims": {
     "A": [
      [
-      6,
-      5
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
      ]
     ],
-    "H": [
+    "D": [
+     [
+      5,
+      0
+     ]
+    ],
+    "E": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
      [
       0,
       5
      ],
      [
-      3,
+      0,
+      6
+     ],
+     [
+      0,
       7
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ]
+    ],
+    "H": [
+     [
+      0,
+      0
      ]
     ]
    },
-   "suspect": "B",
+   "suspect": "F",
    "cell": [
-    3,
-    5
+    0,
+    0
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_ONE_FIT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "suspect": "B",
-     "clueOf": "B",
+     "suspect": "F",
+     "clueOf": "F",
      "coord": [
-      3,
-      5
+      0,
+      0
      ]
     }
    }
@@ -812,69 +872,25 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Ernest “was standing on a bearskin rug”: only r3c5 fits. Place Ernest there.",
+   "text": "Delphine “was beside a fireplace”: of the 2 tiles that fit, only r8c1 is still open. Place Delphine there.",
    "focus": [
     [
-     2,
-     4
+     7,
+     0
     ]
    ],
    "elims": {
-    "D": [
+    "E": [
      [
-      2,
-      4
-     ]
-    ],
-    "G": [
-     [
-      2,
-      3
-     ]
-    ]
-   },
-   "suspect": "E",
-   "cell": [
-    2,
-    4
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_ONE_FIT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "suspect": "E",
-     "clueOf": "E",
-     "coord": [
-      2,
-      4
-     ]
-    }
-   }
-  },
-  {
-   "n": 3,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Dexter “was beside a fireplace”: of the 2 tiles that fit, only r5c5 is still open. Place Dexter there.",
-   "focus": [
-    [
-     4,
-     4
-    ]
-   ],
-   "elims": {
-    "H": [
-     [
-      4,
-      6
+      7,
+      0
      ]
     ]
    },
    "suspect": "D",
    "cell": [
-    4,
-    4
+    7,
+    0
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_LAST_LEFT",
@@ -884,8 +900,76 @@
      "suspect": "D",
      "clueOf": "D",
      "coord": [
-      4,
+      7,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Grace “was beside a snowman and was in a corner”: only r8c8 fits. Place Grace there.",
+   "focus": [
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      7,
+      1
+     ]
+    ],
+    "E": [
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
       4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    7,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      7,
+      7
      ]
     }
    }
@@ -895,42 +979,104 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Gloria “was standing in a snowdrift”: of the 2 tiles that fit, only r6c3 is still open. Place Gloria there.",
+   "text": "Bruno “was on the Glacier and was in column 2”: of the 2 tiles that fit, only r7c2 is still open. Place Bruno there.",
    "focus": [
     [
-     5,
-     2
+     6,
+     1
     ]
    ],
    "elims": {
     "A": [
      [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
       6,
-      2
+      1
      ]
     ],
-    "F": [
+    "E": [
      [
       1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
       2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ]
+    ],
+    "H": [
+     [
+      1,
+      1
      ]
     ]
    },
-   "suspect": "G",
+   "suspect": "B",
    "cell": [
-    5,
-    2
+    6,
+    1
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
      "fits": 2,
-     "suspect": "G",
-     "clueOf": "G",
+     "suspect": "B",
+     "clueOf": "B",
      "coord": [
-      5,
-      2
+      6,
+      1
      ]
     }
    }
@@ -938,31 +1084,117 @@
   {
    "n": 5,
    "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Felicity “was beside a pine tree”: of the 2 tiles that fit, only r1c4 is still open. Place Felicity there.",
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Cedric can only be at r5c7 or r5c8, and those tiles all lie on one sightline. Whichever one Cedric takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
    "focus": [
     [
-     0,
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
      3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
     ]
    ],
-   "elims": {},
-   "suspect": "F",
-   "cell": [
-    0,
-    3
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "suspect": "F",
-     "clueOf": "F",
-     "coord": [
-      0,
+   "elims": {
+    "A": [
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "E": [
+     [
+      4,
+      2
+     ],
+     [
+      4,
       3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "C",
+     "options": [
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ]
+     ],
+     "coords": [
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ]
      ]
     }
    }
@@ -972,14 +1204,103 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Horace “stood on bare ground (no bearskin rug, ice patch, sled, snowdrift or trail of footprints) and was beside a crate”: of the 4 tiles that fit, only r2c7 is still open. Place Horace there.",
+   "text": "Albert “was next to a doorway”: every tile that fits is ruled out except r2c5. Place Albert there.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      4
+     ]
+    ],
+    "H": [
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    1,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      1,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Hattie “was standing in a snowdrift”: of the 4 tiles that fit, only r2c7 is still open. Place Hattie there.",
    "focus": [
     [
      1,
      6
     ]
    ],
-   "elims": {},
+   "elims": {
+    "C": [
+     [
+      4,
+      6
+     ]
+    ],
+    "E": [
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      6
+     ]
+    ]
+   },
    "suspect": "H",
    "cell": [
     1,
@@ -1000,11 +1321,54 @@
    }
   },
   {
-   "n": 7,
+   "n": 8,
    "tier": 1,
-   "rule": "Polaroid check",
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Cedric “was on the Ski Slope and could see into another area”: of the 2 tiles that fit, only r5c8 is still open. Place Cedric there.",
+   "focus": [
+    [
+     4,
+     7
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      3,
+      7
+     ],
+     [
+      5,
+      7
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    4,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      4,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Exactly-one census",
    "kind": "eliminate",
-   "text": "Conrad stood diagonally next to a woman. Polaroid check — women: Aurora, Babette, Felicity and Gloria. None of them can still stand diagonally next to the marked tiles, so Conrad cannot be there.",
+   "text": "Exactly one person was beside a snowdrift. Only Edgar can still reach a tile beside a snowdrift, so he must stand beside one.",
    "focus": [
     [
      0,
@@ -1012,212 +1376,103 @@
     ],
     [
      1,
-     1
+     7
     ],
     [
      2,
      1
     ],
     [
-     3,
-     1
+     2,
+     6
     ],
     [
      4,
-     1
+     4
     ],
     [
      5,
-     1
+     3
     ],
     [
-     6,
-     1
+     5,
+     5
     ]
    ],
    "elims": {
-    "C": [
-     [
-      0,
-      1
-     ],
-     [
-      1,
-      1
-     ],
-     [
-      2,
-      1
-     ],
+    "E": [
      [
       3,
-      1
-     ],
-     [
-      4,
-      1
+      2
      ],
      [
       5,
-      1
-     ],
-     [
-      6,
-      1
+      2
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_TRAIT_NO_DIAG",
-    "ruleKey": "RULE_TRAIT_FILTER",
+    "templateKey": "STEP_CENSUS_ONLY_REACH_BESIDE",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
     "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_BESIDE",
       "params": {
-       "subject": "C",
-       "atom": {
-        "kind": "DIAG_P",
-        "subject": "C",
-        "params": {
-         "trait": "FEMALE",
-         "selfMatch": false
-        }
-       }
+       "prop": "SNOWDRIFT"
       }
      },
-     "poll": {
-      "templateKey": "FRAG_POLL",
-      "params": {
-       "trait": "FEMALE",
-       "holders": [
-        "A",
-        "B",
-        "F",
-        "G"
-       ]
-      }
-     },
-     "coords": [
-      [
-       0,
-       1
-      ],
-      [
-       1,
-       1
-      ],
-      [
-       2,
-       1
-      ],
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       1
-      ],
-      [
-       5,
-       1
-      ],
-      [
-       6,
-       1
-      ]
-     ],
-     "suspect": "C"
-    }
-   }
-  },
-  {
-   "n": 8,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Conrad “was in column 2. He stood diagonally next to a woman”: of the 8 tiles that fit, only r8c2 is still open. Place Conrad there.",
-   "focus": [
-    [
-     7,
-     1
-    ]
-   ],
-   "elims": {
-    "A": [
-     [
-      6,
-      1
-     ]
-    ]
-   },
-   "suspect": "C",
-   "cell": [
-    7,
-    1
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 8,
-     "suspect": "C",
-     "clueOf": "C",
-     "coord": [
-      7,
-      1
-     ]
-    }
-   }
-  },
-  {
-   "n": 9,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Aurora “was on the Summit and was next to a doorway”: of the 4 tiles that fit, only r7c1 is still open. Place Aurora there.",
-   "focus": [
-    [
-     6,
-     0
-    ]
-   ],
-   "elims": {},
-   "suspect": "A",
-   "cell": [
-    6,
-    0
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 4,
-     "suspect": "A",
-     "clueOf": "A",
-     "coord": [
-      6,
-      0
-     ]
+     "owner": "E",
+     "prop": "SNOWDRIFT"
     }
    }
   },
   {
    "n": 10,
    "tier": 1,
-   "rule": "The blindspot",
-   "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r3c8. That is where S. H. Adow is hiding!",
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Edgar “could not see the Corpse”: every tile that fits is ruled out except r6c4. Place Edgar there.",
    "focus": [
     [
-     2,
-     7
+     5,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "E",
+   "cell": [
+    5,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      5,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c3. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     2
     ]
    ],
    "elims": {},
    "cell": [
-    2,
-    7
+    3,
+    2
    ],
    "suspect": "S",
    "i18n": {
@@ -1225,8 +1480,8 @@
     "ruleKey": "RULE_BLINDSPOT",
     "params": {
      "coord": [
-      2,
-      7
+      3,
+      2
      ]
     }
    }
@@ -1245,18 +1500,18 @@
   "flow": {
    "first_place_pos": 0.0,
    "elims_before_first_place": 0,
-   "last_fifth_t1_share": 1.0,
-   "hardest_last_pos": 1.0,
+   "last_fifth_t1_share": 0.5,
+   "hardest_last_pos": 0.889,
    "trials_in_last_fifth": 0,
-   "late_cascade": 0.75,
+   "late_cascade": 0.5,
    "late_elim_gap": 1,
-   "place_push": 1.12,
-   "global_uses": 0,
-   "global_first_t2": false
+   "place_push": 7.5,
+   "global_uses": 1,
+   "global_first_t2": true
   },
   "flow_arc_ok": true,
-  "shadow_candidates_before_last": 9,
-  "shadow_candidates_before_last_two": 21,
+  "shadow_candidates_before_last": 4,
+  "shadow_candidates_before_last_two": 9,
   "dark_known_at": 8,
   "G5_late_shadow": true,
   "G6_tier": true,
@@ -1265,50 +1520,41 @@
   "G15_clue_hygiene": true,
   "max_atoms_per_clue": 2,
   "G8_globals_needed": true,
-  "trait_clues": 1,
-  "trait_atoms": [
-   "DIAG_P"
-  ],
-  "trait_rules_used": [
-   "trait_filter"
-  ],
-  "trait_load_bearing": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
   "biome_props_on_board": [
    "BEARSKIN",
-   "CAIRN",
    "FIREPLACE",
-   "ICE",
-   "ICE_PILLAR",
    "LANTERN",
    "SLED",
    "SNOWDRIFT",
+   "SNOWMAN",
    "SNOW_PINE",
    "TENT"
   ],
   "biome_props_in_clues": [
-   "BEARSKIN",
    "FIREPLACE",
-   "ICE",
    "SNOWDRIFT",
-   "SNOW_PINE"
+   "SNOWMAN"
   ],
   "biome_props_load_bearing": [
-   "BEARSKIN",
    "FIREPLACE",
-   "ICE",
    "SNOWDRIFT",
-   "SNOW_PINE"
+   "SNOWMAN"
   ],
   "G11_biome_props_load_bearing": true,
   "G3_unique_full": true,
   "unique_without_shadow_law": true,
-  "bruteforce_nodes": 28,
+  "bruteforce_nodes": 24,
   "rules_used": [
-   "trait_filter"
+   "global_prop_monopoly",
+   "ray_block"
   ],
-  "steps": 9,
-  "difficulty_score": 9,
-  "hardest_step_tier": 1,
+  "steps": 10,
+  "difficulty_score": 12,
+  "hardest_step_tier": 2,
   "tall_scale": 0.55
  }
 }

@@ -480,25 +480,27 @@
     "cloth": 1
    },
    "look": "bald, round glasses, mustache, bowtie",
-   "clue": "Felix was alone and could see into another area.",
-   "text": "Felix was alone and could see into another area.",
+   "clue": "Felix was alone and was in column 5.",
+   "text": "Felix was alone and was in column 5.",
    "atoms": [
-    {
-     "kind": "SEE_OTHER_ROOM",
-     "subject": "F",
-     "params": {}
-    },
     {
      "kind": "ALONE",
      "subject": "F",
      "params": {}
+    },
+    {
+     "kind": "COL",
+     "subject": "F",
+     "params": {
+      "index": 4
+     }
     }
    ],
    "clueTokens": {
     "subject": "F",
     "place": [
-     1,
-     0
+     0,
+     1
     ],
     "people": []
    },
@@ -887,7 +889,7 @@
    "tier": 1,
    "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Ray block: Esme can only be at r2c1 or r2c3, and those tiles all lie on one sightline. Whichever one Esme takes, the whole stretch is watched, so nobody else can stand on r2c2, r2c3, r2c5.",
+   "text": "Ray block: Esme can only be at r2c1 or r2c3, and those tiles all lie on one sightline. Whichever one Esme takes, the whole stretch is watched, so nobody else can stand on r2c2, r2c5.",
    "focus": [
     [
      1,
@@ -920,10 +922,6 @@
     "F": [
      [
       1,
-      2
-     ],
-     [
-      1,
       4
      ]
     ]
@@ -947,10 +945,6 @@
       [
        1,
        1
-      ],
-      [
-       1,
-       2
       ],
       [
        1,
@@ -1011,14 +1005,7 @@
      2
     ]
    ],
-   "elims": {
-    "F": [
-     [
-      2,
-      2
-     ]
-    ]
-   },
+   "elims": {},
    "suspect": "E",
    "cell": [
     1,
@@ -1043,7 +1030,7 @@
    "tier": 1,
    "rule": "Ray block",
    "kind": "eliminate",
-   "text": "Ray block: Dmitri can only be at r2c6, r3c6 or r4c6, and those tiles all lie on one sightline. Whichever one Dmitri takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "text": "Ray block: Dmitri can only be at r2c6, r3c6 or r4c6, and those tiles all lie on one sightline. Whichever one Dmitri takes, the whole stretch is watched, so nobody else can stand on r4c6.",
    "focus": [
     [
      0,
@@ -1064,24 +1051,6 @@
    ],
    "elims": {
     "A": [
-     [
-      3,
-      5
-     ]
-    ],
-    "F": [
-     [
-      0,
-      5
-     ],
-     [
-      1,
-      5
-     ],
-     [
-      2,
-      5
-     ],
      [
       3,
       5
@@ -1109,18 +1078,6 @@
      ],
      "coords": [
       [
-       0,
-       5
-      ],
-      [
-       1,
-       5
-      ],
-      [
-       2,
-       5
-      ],
-      [
        3,
        5
       ]
@@ -1140,7 +1097,14 @@
      0
     ]
    ],
-   "elims": {},
+   "elims": {
+    "F": [
+     [
+      3,
+      4
+     ]
+    ]
+   },
    "suspect": "A",
    "cell": [
     3,
@@ -1240,7 +1204,7 @@
    "tier": 2,
    "rule": "Alone in an area",
    "kind": "eliminate",
-   "text": "Felix was alone in the area, but Clifford and Esme must be on the Seawall, so Felix cannot be in it.",
+   "text": "Felix was alone in the area, but Clifford and Esme must be on the Seawall and Alma and Beatrice must be at the Tide Pools, so Felix cannot be in any of them.",
    "focus": [
     [
      1,
@@ -1273,6 +1237,38 @@
     [
      2,
      4
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     0
     ]
    ],
    "elims": {
@@ -1280,11 +1276,15 @@
      [
       2,
       4
+     ],
+     [
+      4,
+      4
      ]
     ]
    },
    "i18n": {
-    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "templateKey": "STEP_ALONE_BLOCKED_MANY",
     "ruleKey": "RULE_ALONE",
     "params": {
      "owner": "F",
@@ -1298,6 +1298,16 @@
         ],
         "room": "SEAWALL"
        }
+      },
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "A",
+         "B"
+        ],
+        "room": "TIDE_POOLS"
+       }
       }
      ]
     }
@@ -1308,7 +1318,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Felix “was alone and could see into another area”: every tile that fits is ruled out except r1c5. Place Felix there.",
+   "text": "Felix “was alone and was in column 5”: of the 5 tiles that fit, only r1c5 is still open. Place Felix there.",
    "focus": [
     [
      0,
@@ -1322,9 +1332,10 @@
     4
    ],
    "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
+    "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
+     "fits": 5,
      "suspect": "F",
      "clueOf": "F",
      "coord": [
