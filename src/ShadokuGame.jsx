@@ -1343,7 +1343,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   useIsoLayoutEffect(() => {
     const el = headRef.current;
     if (!el || typeof ResizeObserver === "undefined") return undefined;
-    const ro = new ResizeObserver(() => setHeadWide(el.clientWidth >= 520));
+    const ro = new ResizeObserver(() => setHeadWide(el.clientWidth >= (window.matchMedia && window.matchMedia(SHORT_MQ).matches ? 480 : 520)));
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
@@ -1753,7 +1753,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const railW = () => { const r = rootRef.current && rootRef.current.querySelector(".sk-rail"); return r ? r.offsetWidth : RAIL_W; };
   const splitMax = () => {
     const room = (rootRef.current ? rootRef.current.clientWidth : window.innerWidth) - railW() - dossierMin;
-    const st0 = stageEl(), full = short && st0 ? (st0.clientHeight - 16) * ar + 16 : Infinity; // sideways the board's height is the limit: no wider than the board at full height
+    const st0 = stageEl(), full = short && zoom === 1 && st0 ? (st0.clientHeight - 16) * ar + 16 : Infinity; // sideways the board's height is the limit: no wider than the board at full height (zoomed in, it fills the column)
     return Math.max(splitMin, Math.min(room, full));
   };
   const clampSplit = (w) => Math.round(Math.max(splitMin, Math.min(splitMax(), w)));
@@ -1947,9 +1947,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     </div>
   );
 
-  /* A phone with `headEnd` (the site's sign-in and ☰): one header line (logo, timer, ⚙, ?, headEnd). Upright, the contract's title opens
-     the dossier; held sideways, the line spans the screen and the title sits beside the logo. */
-  const merged = !!headEnd;
+  /* A phone with `headEnd` (the site's sign-in and ☰): one header line (logo, timer, ⚙, ?, headEnd); the contract's title opens the dossier */
+  const merged = !!headEnd && mobile;
   const caseNav = fixedCase ? <CaseTitle puzzles={heads} idx={idx} solvedOf={(q) => isSolved(q, all[q.id])} /> : (
     <nav className="sk-nav" aria-label={t("game.contracts")}>
       <button type="button" className="sk-arrow" onClick={() => go(-1)} disabled={lockCaseMenu || idx === 0} aria-label={t("game.prevContract")}>‹</button>
@@ -1958,14 +1957,14 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     </nav>
   );
   return (
-    <div className={`sk sk-game${settings.kw ? " kw-on" : ""}${dragging ? " sk-dragging" : ""}`} ref={rootRef} data-tight={+insetY > 110 ? "" : undefined} data-split={split && !mobile ? "" : undefined} data-big={Math.max(geo.R, geo.C) >= BIG_BOARD ? "" : undefined} data-merged={merged ? "" : undefined}
+    <div className={`sk sk-game${settings.kw ? " kw-on" : ""}${dragging ? " sk-dragging" : ""}`} ref={rootRef} data-tight={+insetY > 110 ? "" : undefined} data-split={split && !mobile ? "" : undefined} data-big={Math.max(geo.R, geo.C) >= BIG_BOARD ? "" : undefined} data-zoomed={zoom > 1 ? "" : undefined}
       style={{ "--ar": ar, "--bar": `${Math.max(0, +insetY || 0)}px`, ...(split && !mobile ? { "--stagew": `${split}px` } : null) }}
       onPointerOver={onClueOver} onPointerLeave={clearClueHover}>
       <style>{CSS}</style>
 
       <header className={`sk-head${merged ? " merged" : ""}`} ref={headRef} data-wide={headWide ? "" : undefined}>
         {!hideLogo && (onLogo ? <button type="button" className="sk-logobtn" onClick={onLogo} aria-label={t("nav.pHome")}><ShadokuLogo src={logoSrc} /></button> : <ShadokuLogo src={logoSrc} />)}
-        {!(merged && mobile) && caseNav}
+        {!merged && caseNav}
         <div className="sk-headr">
           <CaseTimer key={`${p.id}|${timerEpoch}`} caseId={p.id} solved={solved} paused={view !== "play"} hidden={!settings.timer} />
           <button type="button" className="sk-gear" onClick={() => setSettingsOpen(true)} aria-label={t("settings.open")} title={t("settings.open")}><GearIcon /></button>
@@ -1975,7 +1974,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       </header>
 
       <section className="sk-dossier" aria-label={t("game.dossier")}>
-        {merged && mobile && <div className="sk-casebar">{caseNav}</div>}
+        {merged && <div className="sk-casebar">{caseNav}</div>}
         <div className="sk-now" role="status">{nowLabel}</div>
         {(p.globalRules || []).length > 0 && (
           <section className="sk-rules" aria-label={t("game.houseRulesAria")}>
@@ -2000,7 +1999,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       </section>
 
       <main className="sk-stage" aria-label={t("game.board")}>
-        <div className={`sk-boardbox${gated ? " gated" : ""}${mobile && zoomBtns ? " has-zoom" : ""}`} inert={gated || undefined} style={{ "--ar": ar, maxWidth: settings.autoScale ? undefined : naturalW }}>
+        <div className={`sk-boardbox${gated ? " gated" : ""}${mobile && zoomBtns ? " has-zoom" : ""}${zoom > 1 ? " zoomed" : ""}`} inert={gated || undefined} style={{ "--ar": ar, maxWidth: settings.autoScale ? undefined : naturalW }}>
           <div className="sk-viewport" ref={vpRef} data-zoomed={zoom > 1 ? "" : undefined} style={{ "--z": zoom }} onScroll={() => { setTip(null); setHover(null); }}>
             <div className="sk-zoomer">
               <Board p={p} geo={geo} st={st} looks={looks} colorOf={colorOf} active={active} tool={tool} hover={hover}
@@ -2337,11 +2336,13 @@ const CSS = `
 .sk-card:hover{border-color:#cdbf9d}
 .sk-card.on{border-color:var(--brass);box-shadow:0 0 0 2px var(--brass),0 0 22px rgba(217,155,38,.35),0 8px 18px rgba(0,0,0,.3)}
 .sk-card.placed .sk-alibi{opacity:.7}
+.sk-card:not(.adow):not(.placed){background:#dcdde2;--ab:#cdced5} /* light grey until the suspect is placed, then the paper */
+.sk-card{transition:background-color .2s}
 .sk-card.v{display:flex;flex-direction:column;gap:6px;padding:8px 6px 7px;border-top:5px solid var(--sc)}
 .sk-photo{display:block;width:min(100%,138px);margin:0 auto}
 .sk-photo svg{width:100%!important;height:auto!important}
 .sk-alibi{display:block;font-size:13px;line-height:1.38;overflow-wrap:break-word;hyphens:auto}
-.sk-card.v .sk-alibi{flex:1;background:var(--paper2);border-radius:6px;padding:5px 6px;font-size:12.5px;line-height:1.34}
+.sk-card.v .sk-alibi{flex:1;background:var(--ab,var(--paper2));border-radius:6px;padding:5px 6px;font-size:12.5px;line-height:1.34}
 .sk-card.adow{background:#22222c;color:var(--fg)}
 .sk-card.v.adow .sk-alibi{background:rgba(0,0,0,.25)}
 .sk-nm{font-weight:800;box-shadow:inset 0 -.32em 0 color-mix(in srgb,var(--nc,var(--brass)) 55%,transparent)}
@@ -2485,6 +2486,10 @@ const CSS = `
 .sk-viewport{width:100%;aspect-ratio:var(--ar);overflow:hidden;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.5)}
 .sk-viewport[data-zoomed]{overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .sk-zoomer{width:calc(100% * var(--z,1))}
+/* zoomed in, the view fills the whole board column (the zoom stays relative to the board at its fitted size) */
+.sk-boardbox.zoomed{width:100%;align-self:stretch;display:flex;flex-direction:column}
+.sk-boardbox.zoomed .sk-viewport{flex:1 1 auto;min-height:0;aspect-ratio:auto;display:flex;container-type:size;background:#0e0f15}
+.sk-boardbox.zoomed .sk-zoomer{flex:0 0 auto;margin:auto;width:calc(min(100cqw,100cqh * var(--ar)) * var(--z,1))}
 .sk-board{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;border-radius:14px}
 .sk-viewport[data-zoomed] .sk-board{touch-action:pan-x pan-y}
 .sk-zoom{position:absolute;right:14px;bottom:calc(14px + var(--ovl,0px));z-index:4;display:flex;flex-direction:column;gap:4px;padding:4px;border-radius:12px;
@@ -2664,6 +2669,9 @@ const CSS = `
   .sk-viewport{border-radius:12px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
   /* the zoom column stands beside the board, never over its tiles */
   .sk-boardbox.has-zoom{width:min(calc(100% - 46px),calc((100vh - var(--bar)) * .46 * var(--ar)));width:min(calc(100% - 46px),calc((100dvh - var(--bar)) * .46 * var(--ar)));margin-right:46px}
+  /* zoomed in: the full width, at the height the board had */
+  .sk-boardbox.zoomed{width:100%}.sk-boardbox.zoomed.has-zoom{width:calc(100% - 46px)}
+  .sk-boardbox.zoomed .sk-viewport{flex:none;height:min(calc((100vw - 20px) / var(--ar)),calc((100vh - var(--bar)) * .46));height:min(calc((100vw - 20px) / var(--ar)),calc((100dvh - var(--bar)) * .46))}
   .sk-zoom{left:calc(100% + 6px);right:auto;bottom:0;flex-direction:column;padding:3px;gap:3px;transition:none}
   .sk-zoom button{width:36px;height:36px}
   .sk-zoom .rst{width:36px;min-width:0;padding:0;font-size:8.5px;letter-spacing:.02em;overflow:hidden}
@@ -2706,10 +2714,11 @@ const CSS = `
 }
 /* ===== a phone held sideways (short and wide): the desktop columns, compact. dossier | board | slim rail ===== */
 @media (orientation:landscape) and (max-height:520px){
-  .sk-game,.sk-game[data-split]{--stwh:calc((100vh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px);--stwh:calc((100dvh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px);--stw:min(var(--stwh),58vw);
+  .sk-game,.sk-game[data-split]{--stwh:calc((100vh - var(--bar) - 16px) * var(--ar) + 16px);--stwh:calc((100dvh - var(--bar) - 16px) * var(--ar) + 16px);--stw:min(var(--stwh),58vw);
     grid-template-columns:minmax(0,1fr) var(--stw) calc(70px + env(safe-area-inset-right));grid-template-rows:auto minmax(0,1fr);grid-template-areas:"head stage rail" "dossier stage rail"}
   /* the line between the suspects and the board: a finger (or mouse) drags it, a double tap or double-click puts it back */
   .sk-game[data-split]{--stw:min(var(--stagew),var(--stwh),calc(100vw - 270px - env(safe-area-inset-right)))} /* the board at full height · 270: the rail and the narrowest suspects (DOSSIER_MIN_SHORT) */
+  .sk-game[data-split][data-zoomed]{--stw:min(var(--stagew),calc(100vw - 270px - env(safe-area-inset-right)))} /* zoomed in, the board fills whatever the line leaves it */
   .sk-split{display:block;position:absolute;z-index:7;top:0;bottom:0;left:0;width:16px;cursor:col-resize;touch-action:none}
   [dir=rtl] .sk-split{left:auto;right:0}
   .sk-split:after{content:"";position:absolute;top:50%;left:4px;width:4px;height:48px;margin-top:-24px;border-radius:2px;background:#3a3a4c;transition:background .15s,height .15s}
@@ -2717,21 +2726,14 @@ const CSS = `
   .sk-split:focus-visible{outline:none}
   .sk-dragging{user-select:none;-webkit-user-select:none}
   .sk-dragging .sk-boardbox,.sk-dragging .sk-stage{transition:none}
-  /* the site's sign-in and ☰ in the game's header (merged): one line across the screen (logo, contract, timer, ⚙, ?, sign-in, ☰) over
-     suspects | board | rail; its height (--hh) comes off the board's. The ☰ dropdown hangs from it, above the tool rail (z-index 50). */
-  .sk-game[data-merged]{--hh:48px;grid-template-areas:"head head head" "dossier stage rail"}
-  .sk-head.merged{display:flex;align-items:center;gap:6px;height:var(--hh);position:relative;z-index:60;border-right:0;border-bottom:1px solid var(--line);
-    padding:0 max(8px,env(safe-area-inset-right)) 0 max(10px,env(safe-area-inset-left))}
-  .sk-head.merged .sk-logobtn{flex:0 0 auto}
-  .sk-head.merged .sk-logo{display:block;height:28px;filter:none}
-  .sk-head.merged .sk-nav,.sk-head.merged > .sk-menu{flex:0 1 auto;min-width:0;max-width:420px}
-  .sk-head.merged .sk-headend{display:flex;align-items:center;gap:6px;margin-inline-start:auto}
-  .sk-headend .sh-controls{gap:6px}
-  .sk-headend .sh-btn{min-height:36px;height:36px;padding:0 11px;font-size:14px}
-  .sk-headend .sh-burger{width:36px;height:36px}
-  .sk-head.merged .sh-menu{max-height:calc(100vh - var(--hh) - 16px);max-height:calc(100dvh - var(--hh) - 16px);overflow-y:auto}
-  .sk-head{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"nav timer help";gap:6px;padding:6px 8px 6px max(8px,env(safe-area-inset-left))}
-  .sk-head .sk-logo{display:none}
+  /* as on desktop: the logo, the timer, ⚙ and ? over the contract (one row when the column has room: data-wide) */
+  .sk-head{grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"logo . timer help" "nav nav nav nav";gap:6px;padding:6px 8px 6px max(8px,env(safe-area-inset-left))}
+  .sk-head[data-wide]{grid-template-areas:"logo nav timer help"}
+  .sk-head>.sk-menu{grid-area:nav} /* the contract's title (once the case is fixed) */
+  .sk-head .sk-logo{height:26px;filter:none}
+  /* the ☰ Menu tops the rail (the site's pages, sign-in or the profile): an icon, its list over the rail (fixed: the rail scrolls and would clip it) */
+  .sk-railmenu-btn{height:32px}.sk-railmenu-btn span{display:none}
+  .sk-railmenu-list{position:fixed;top:44px;inset-inline-end:max(6px,env(safe-area-inset-right));z-index:60;max-height:calc(100vh - 52px);max-height:calc(100dvh - 52px);overflow-y:auto}
   .sk-help{display:grid;width:36px;height:36px}
   .sk-arrow{width:30px;height:36px;font-size:20px}.sk-menu-btn{height:36px;padding:0 8px;gap:5px}
   .sk-headr{gap:5px}.sk-gear{width:36px;height:36px}.sk-timer{padding:3px 8px;font-size:12px;gap:4px}
@@ -2746,11 +2748,11 @@ const CSS = `
   .sk-card.v .sk-alibi{background:none;padding:0;font-size:12px;line-height:1.3;align-self:center;hyphens:auto}
   .sk-card.adow.v .sk-alibi{background:none}
   .sk-stage{padding:8px}
-  .sk-boardbox{width:min(100%,calc((100vh - var(--bar) - var(--hh,0px) - 16px) * var(--ar)));width:min(100%,calc((100dvh - var(--bar) - var(--hh,0px) - 16px) * var(--ar)))}
+  .sk-boardbox{width:min(100%,calc((100vh - var(--bar) - 16px) * var(--ar)));width:min(100%,calc((100dvh - var(--bar) - 16px) * var(--ar)))}
   .sk-viewport{border-radius:10px}
   /* the hint / verdict / win banner floats over the suspects column, so the board keeps its size */
   .sk-overlay{position:fixed;left:max(8px,env(safe-area-inset-left));right:auto;bottom:calc(8px + var(--gbot,0px));transform:none;min-width:0;
-    width:calc(100vw - var(--stw) - 70px - env(safe-area-inset-right) - 16px);max-height:calc(100vh - var(--bar) - var(--hh,0px) - 56px);max-height:calc(100dvh - var(--bar) - var(--hh,0px) - 56px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;z-index:20}
+    width:calc(100vw - var(--stw) - 70px - env(safe-area-inset-right) - 16px);max-height:calc(100vh - var(--bar) - 56px);max-height:calc(100dvh - var(--bar) - 56px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;z-index:20}
   .sk-hint-act{position:sticky;bottom:0;z-index:1;padding:4px 0 2px;background:var(--paper)}
   .sk-hint-pic{display:none}.sk-hint p{font-size:13px;margin:4px 0 6px}.sk-hint{padding:8px 10px 9px}
   .sk-solved{padding:8px 10px}.sk-solved b{font-size:16px}.sk-solved span{font-size:13px}

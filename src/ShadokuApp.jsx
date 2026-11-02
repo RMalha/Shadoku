@@ -722,11 +722,11 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   ), [replay, t]);
 
   const showCard = caseId === tutorialId && view === "play"; // the Inspector gets the whole screen
-  const desk = useMediaQuery(DESK_MQ);
-  const merged = !desk; // no site header on /play: on a phone (upright or sideways) the game's header is the only header line (logo, timer, ⚙, ?, sign-in, ☰); desktop has the rail's ☰ Menu
+  const short = useMediaQuery(SHORT_LANDSCAPE_MQ), desk = useMediaQuery(DESK_MQ);
+  const merged = !desk && !short; // no site header on /play: a phone held upright has one header line (logo, timer, ⚙, ?, sign-in, ☰); desktop and a phone held sideways have the rail's ☰ Menu (sign-in and the profile inside)
   const { user, signOut } = useAuth();
   const modals = useModals();
-  const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail (it has no site header, so no Sign In button or profile chip): Home, Contracts, the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
+  const railMenu = useMemo(() => [ // the ☰ Menu on the tool rail, desktop and a phone held sideways (it has no site header, so no Sign In button or profile chip): Home, Contracts, the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
     { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
     initiated // before the initiation: its envelope in a pop-up, not the contracts
       ? { key: "contracts", label: t("nav.pContracts"), onSelect: enter }
@@ -749,7 +749,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
         puzzles={shown} logoSrc={logoSrc} lab={lab}
         insetY={showCard ? cardH : 0}
         onLogo={() => go("/")}
-        headEnd={merged ? <><UserPill /><SiteMenu current="/play" onNav={go} /></> : null} menu={desk ? railMenu : null} fixedCase={initiated} onExit={enter}
+        headEnd={merged ? <><UserPill /><SiteMenu current="/play" onNav={go} /></> : null} menu={merged ? null : railMenu} fixedCase={initiated} onExit={enter}
         renderEnvelope={({ puzzle, label, onPick, variant = "mini", onAccept, tone, onOpen }) => <ContractEnvelope variant={variant} puzzle={puzzle} label={label} onPick={onPick} onAccept={onAccept} onOpen={onOpen}
           tone={tone || (variant === "modal" ? "obsidian" : toneOf(puzzle.id))} target={targetOf(puzzle.id)} autoOpen={variant !== "modal"} />}
         lockCaseMenu={!initiated}
