@@ -78,6 +78,7 @@ export const DEFAULT_SETTINGS = {
   roomLabel: 14, objSize: 0, walls: 1, // px (10-20) · -0.15..+0.15 · 0.6..1.6
   timer: true, portrait: true, autoLight: true, preventLight: false, gender: false,
   tokenStyle: "portrait", plain: false,
+  rightClick: "light", // a mouse right-click on a tile: "light" | "cross" (X) | "menu" (pick Light or X)
 };
 const loadSettings = () => {
   try { const v = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); return { ...DEFAULT_SETTINGS, ...(v && typeof v === "object" ? v : {}) }; } catch (e) { return { ...DEFAULT_SETTINGS }; }
@@ -553,7 +554,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
   return (
     <svg ref={svg} className="sk-board" viewBox={`${LAB - BZ - LB} ${LAB - BZ - LB} ${W + LB} ${H + LB}`} role="grid" aria-label={t("game.boardAria", { title: p.title, rows: R, cols: C })}
       onPointerDown={(e) => {
-        if (e.button !== 0) return;
+        if (e.button !== 0 && !(e.button === 2 && e.pointerType === "mouse" && onStroke)) return; // the right button: the game's right-click setting
         const c = cellAt(e); if (!c) return;
         try { svg.current.setPointerCapture(e.pointerId); } catch (_) { /* older browsers */ }
         if (onStroke) onStroke("down", c, e); else if (onCell) onCell(c[0], c[1]);
@@ -1162,6 +1163,35 @@ function RailMenu({ items, onSettings }) {
   );
 }
 
+/** The right-click menu of a tile (⚙ "Right-Click on a Tile": Menu): Light or X, at the pointer. A click elsewhere, Esc, a scroll or
+ *  a resize closes it. `lit` / `crossed`: the tile's marks now (the choice toggles them, as the tools do). */
+function TileMenu({ x, y, lit, crossed, onPick, onClose }) {
+  const t = useText();
+  const ref = useRef(null), [pos, setPos] = useState({ left: x, top: y });
+  useIsoLayoutEffect(() => { // kept inside the window
+    const el = ref.current; if (!el) return;
+    const w = el.offsetWidth, h = el.offsetHeight;
+    setPos({ left: Math.max(8, Math.min(x, window.innerWidth - w - 8)), top: Math.max(8, Math.min(y, window.innerHeight - h - 8)) });
+    const first = el.querySelector("button"); if (first) first.focus({ preventScroll: true });
+  }, [x, y]);
+  useEffect(() => {
+    const out = (e) => { if (ref.current && !ref.current.contains(e.target)) onClose(); };
+    const esc = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("pointerdown", out, true); document.addEventListener("keydown", esc);
+    window.addEventListener("resize", onClose); window.addEventListener("scroll", onClose, true);
+    return () => {
+      document.removeEventListener("pointerdown", out, true); document.removeEventListener("keydown", esc);
+      window.removeEventListener("resize", onClose); window.removeEventListener("scroll", onClose, true);
+    };
+  }, [onClose]);
+  return (
+    <div className="sk-ctx" ref={ref} role="menu" aria-label={t("game.ctx.title")} style={pos} onContextMenu={(e) => e.preventDefault()}>
+      <button type="button" role="menuitemcheckbox" aria-checked={lit} onClick={() => onPick("light")}><span aria-hidden="true">💡</span>{t("game.ctx.light")}</button>
+      <button type="button" role="menuitemcheckbox" aria-checked={crossed} onClick={() => onPick("cross")}><span aria-hidden="true">❌</span>{t("game.ctx.cross")}</button>
+    </div>
+  );
+}
+
 /** ⚙ Settings: every option is saved at once (localStorage "shadoku-settings"). `langPicker` is the site's language selector, when there is one. */
 /** The "Contract Completed!" pop-up: a modal over the game (Esc, the × or a click outside closes it; the solved banner stays behind). */
 function DoneWindow({ label, closeLabel, onClose, children }) {
@@ -1232,6 +1262,19 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
           {sw("portrait", "portrait")}
           {sw("autoLight", "autoLight")}
           {sw("preventLight", "preventLight")}
+          {hover && (
+            <div className="sk-set-row">
+              <b>{t("settings.rightClick.title")}</b>
+              <div className="sk-set-opts">
+                {[["light", "💡"], ["cross", "❌"], ["menu", "💡❌"]].map(([v, ic]) => (
+                  <button key={v} type="button" className={`sk-set-opt${s.rightClick === v ? " on" : ""}`} aria-pressed={s.rightClick === v} onClick={() => set({ rightClick: v })}>
+                    <span className="sk-set-ic" aria-hidden="true">{ic}</span><span>{t(`settings.rightClick.${v}`)}</span>
+                  </button>
+                ))}
+              </div>
+              <small>{t("settings.rightClick.desc")}</small>
+            </div>
+          )}
           {sw("gender", "gender")}
           <div className="sk-set-row">
             <b>{t("settings.tokenStyle.title")}</b>
@@ -1287,6 +1330,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const [hoverTips, setHoverTips] = useState(() => { try { return localStorage.getItem(HOVER_KEY) !== "0"; } catch (e) { return true; } }); // the prop badge on hover / tap
   const [settings, setSettings] = useState(loadSettings); // the ⚙ Settings panel's choices (DEFAULT_SETTINGS)
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [ctx, setCtx] = useState(null); // the right-click menu (⚙ "Right-Click on a Tile": Menu): { r, c, x, y }
   const headRef = useRef(null), [headWide, setHeadWide] = useState(false); // desktop: logo, contract and timer fit in one row
   useIsoLayoutEffect(() => {
     const el = headRef.current;
@@ -1326,6 +1370,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const p = useMemo(() => localizeCase(cast, trOf(tCase)), [cast, tCase]);
   const geo = useMemo(() => buildGeometry(p), [p]);
   const st = useMemo(() => cleanCase(p, geo, normCase(all[p.id])), [all, p, geo]);
+  const closeCtx = useCallback(() => setCtx(null), []);
+  useEffect(() => setCtx(null), [p.id]);
   const caseNow = () => cleanCase(p, geo, normCase(live.current[p.id]));
   const suspects = p.suspects;
   const colorOf = useCallback((id) => (id === "S" ? BRASS : ASSASSINS[id] && (p.assassins || []).some((a) => a.id === id) ? ASSASSINS[id].tie
@@ -1466,15 +1512,16 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (changed) emit(s.tool === "light" ? "light" : s.tool === "cross" ? "cross" : s.tool === "eraser" ? "erase" : "note", { id: s.id, r, c, drag: !!s.drag, on: s.mode === "on" || s.mode === "add" });
     s.pushed = s.pushed || changed;
   };
-  const beginStroke = ([r, c], e) => {
+  /** `use`: the tool for this stroke instead of the selected one (a right-click's Light or X). */
+  const beginStroke = ([r, c], e, use = tool) => {
     const cs = caseNow(), k = key(r, c);
     // zoomed in on a touch screen, a finger that moves is panning the board: nothing is marked until it lifts without moving
     const panning = zoom > 1 && !!e && !!e.pointerType && e.pointerType !== "mouse";
     stroke.current = {
-      tool, id: active, start: [r, c], last: [r, c], drag: false, pushed: false, x: e ? e.clientX : 0, y: e ? e.clientY : 0, panning, pid: e ? e.pointerId : null,
-      mode: tool === "light" ? (cs.lights[k] ? "off" : "on") : tool === "cross" ? (cs.crosses[k] ? "off" : "on") : (cs.notes[k] || "").includes(active) ? "remove" : "add",
+      tool: use, id: active, start: [r, c], last: [r, c], drag: false, pushed: false, x: e ? e.clientX : 0, y: e ? e.clientY : 0, panning, pid: e ? e.pointerId : null,
+      mode: use === "light" ? (cs.lights[k] ? "off" : "on") : use === "cross" ? (cs.crosses[k] ? "off" : "on") : (cs.notes[k] || "").includes(active) ? "remove" : "add",
     };
-    if (tool === "suspect") startHold(r, c);
+    if (use === "suspect") startHold(r, c);
     else if (!panning) paint(r, c); // light switch, X and eraser act on press
   };
   /** Inspector class of a prop id in this case: "tall" | "perch" | "short" | "low" | "corpse" (null for bare floor, VOID and unknown ids). */
@@ -1498,6 +1545,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (phase === "down") {
       const s0 = stroke.current;
       if (s0 && e && e.pointerType === "touch" && s0.pid !== e.pointerId) { pinchRef.current = { pending: true }; abortStroke(); return; }
+      setCtx(null);
+      if (e && e.button === 2) { // a mouse right-click (⚙ "Right-Click on a Tile"): light or X the tile (a drag paints on), or ask which
+        if (s0) return; // the left button is already marking
+        if (settings.rightClick === "menu") { setTip(null); setCtx({ r: cell[0], c: cell[1], x: e.clientX, y: e.clientY }); return; }
+        setPressing(true); setTip(null); beginStroke(cell, e, settings.rightClick === "cross" ? "cross" : "light"); return;
+      }
       setPressing(true); setTip(null); beginStroke(cell, e); return;
     }
     if (phase === "up" || phase === "cancel") setPressing(false);
@@ -2162,6 +2215,10 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         return <FinalDossier onClose={() => setUmbra(null)} onAccept={accept}
           envelope={finale && renderEnvelope ? (onOpen) => renderEnvelope({ puzzle: finale, label: t("hub.contractNo", { n: String(finaleNo).padStart(3, "0") }), variant: "modal", onAccept: accept, onOpen }) : null} />;
       })()}
+      {ctx && view === "play" && (
+        <TileMenu x={ctx.x} y={ctx.y} lit={!!st.lights[key(ctx.r, ctx.c)]} crossed={!!st.crosses[key(ctx.r, ctx.c)]} onClose={closeCtx}
+          onPick={(use) => { closeCtx(); beginStroke([ctx.r, ctx.c], null, use); stroke.current = null; }} />
+      )}
       {settingsOpen && (
         <SettingsPanel s={settings} set={setOpt} reset={resetOpts} onClose={() => setSettingsOpen(false)} langPicker={langPicker} hover={canHover}
           sample={{ id: suspects[0].id, look: looks[suspects[0].id], color: colorOf(suspects[0].id) }} />
@@ -2377,6 +2434,11 @@ const CSS = `
 .sk-set-opts{display:flex;gap:10px;margin:10px 0 2px}
 .sk-set-opt{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:96px;padding:10px 12px 8px;border-radius:12px;border:1.5px solid #3a3a4c;background:#17171f;font-weight:700;font-size:14px}
 .sk-set-opt.on{border-color:var(--brass2);background:rgba(217,155,38,.12);color:var(--brass2)}
+.sk-set-ic{display:grid;place-items:center;height:44px;font-size:24px;letter-spacing:-.1em}
+.sk-ctx{position:fixed;z-index:70;min-width:150px;display:flex;flex-direction:column;padding:5px;border-radius:12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.6)}
+.sk-ctx button{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-weight:700;font-size:15px;text-align:start}
+.sk-ctx button:hover,.sk-ctx button:focus-visible{background:var(--panel2);outline:none}
+.sk-ctx button[aria-checked=true]{color:var(--brass2)}
 .sk-set-f{display:flex;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid var(--line)}
 .sk-set-reset{font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 .sk-set-done{padding:8px 18px;border-radius:10px;background:var(--brass);color:#1b1305;font-weight:800}
