@@ -58,6 +58,7 @@ const clampZoom = (z) => (z < 1.04 ? 1 : Math.min(ZOOM_MAX, z));
 /* Phones and tablets upright: header | board | dossier | dock. A phone held sideways (short and wide) keeps the desktop's
    side-by-side columns in a compact form instead (the "short landscape" block of the CSS). Keep in step with that CSS. */
 const MOBILE_MQ = "(max-width: 960px) and (orientation: portrait), (max-width: 960px) and (min-height: 521px)";
+const SHORT_MQ = "(orientation: landscape) and (max-height: 520px)"; // a phone held sideways: that compact block of the CSS
 const HOVER_MQ = "(any-hover: hover)"; // a mouse or trackpad is there: the hover-only settings (keyword tooltips, room highlight) make sense
 const TOUCH_MQ = "(hover: none), (pointer: coarse)"; // touch-first devices: tapping a selected card/tool again drops to the neutral "inspect" state
 const TIP_MS = 2500; // a tap-opened Prop Inspector tooltip dismisses itself after this long
@@ -97,7 +98,9 @@ const SHADE_RIM = [["T", 0, 0, 0, 1, -1, 0], ["B", 0, 1, 0, 0, 1, 0], ["L", 0, 0
 const RIM_W = 16;
 const BIG_BOARD = 9; // desktop: from this many rows or columns the board takes the full height and the suspects' column narrows; smaller boards split the width evenly
 const SPLIT_KEY = "shadoku-split"; // desktop: the stage column's width in px, set by dragging the divider (absent = automatic)
+const SPLIT_KEY_SHORT = "shadoku-split-short"; // the same on a phone held sideways (its own width: the screens differ)
 const RAIL_W = 116, SPLIT_MIN = 300, DOSSIER_MIN = 340; // px: the tool rail, the narrowest stage, the narrowest suspects area
+const SPLIT_MIN_SHORT = 160, DOSSIER_MIN_SHORT = 200; // px: the same, a phone held sideways
 const HOVER_KEY = "shadoku-hover-tips"; // "0" = the hover / tap prop badge is switched off in the Inspect panel (on by default)
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -1320,7 +1323,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const [doneClosed, setDoneClosed] = useState(null); // …and once that window is dismissed, nothing comes back in its place
   const [shared, setShared] = useState(false); // the share link was copied (the window shows "Link copied")
   const [gateId, setGateId] = useState(null); // the case whose "already solved" gate was answered (or that was solved just now): that case is not gated
-  const [split, setSplit] = useState(() => { try { const v = +localStorage.getItem(SPLIT_KEY); return v >= SPLIT_MIN ? v : null; } catch (e) { return null; } }); // desktop stage width (px) · null = automatic
+  const short = useMediaQuery(SHORT_MQ);
+  const splitKey = short ? SPLIT_KEY_SHORT : SPLIT_KEY, splitMin = short ? SPLIT_MIN_SHORT : SPLIT_MIN, dossierMin = short ? DOSSIER_MIN_SHORT : DOSSIER_MIN;
+  const readSplit = (k, min) => { try { const v = +localStorage.getItem(k); return v >= min ? v : null; } catch (e) { return null; } };
+  const [splits, setSplits] = useState(() => ({ desk: readSplit(SPLIT_KEY, SPLIT_MIN), short: readSplit(SPLIT_KEY_SHORT, SPLIT_MIN_SHORT) })); // stage width (px) per layout · null = automatic
+  const split = short ? splits.short : splits.desk;
+  const setSplit = (w) => setSplits((o) => ({ ...o, [short ? "short" : "desk"]: w }));
   const [dragging, setDragging] = useState(false); // the divider is being dragged
   const [holdCell, setHoldCell] = useState(null); // press-and-hold in progress: { r, c, color, t }
   const [verdict, setVerdict] = useState(null); // result of a wrong Submit: { wrong, total }
@@ -1741,9 +1749,14 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     writeTime(p.id, 0); setTimerEpoch((n) => n + 1); // a fresh run restarts the clock; the best time already recorded stays
   };
 
-  /* Desktop: drag the line between the suspects and the board to resize both (double-click = automatic again). */
-  const splitMax = () => Math.max(SPLIT_MIN, (rootRef.current ? rootRef.current.clientWidth : window.innerWidth) - RAIL_W - DOSSIER_MIN);
-  const clampSplit = (w) => Math.round(Math.max(SPLIT_MIN, Math.min(splitMax(), w)));
+  /* Desktop and a phone held sideways: drag the line between the suspects and the board to resize both (double-click = automatic again). */
+  const railW = () => { const r = rootRef.current && rootRef.current.querySelector(".sk-rail"); return r ? r.offsetWidth : RAIL_W; };
+  const splitMax = () => {
+    const room = (rootRef.current ? rootRef.current.clientWidth : window.innerWidth) - railW() - dossierMin;
+    const st0 = stageEl(), full = short && st0 ? (st0.clientHeight - 16) * ar + 16 : Infinity; // sideways the board's height is the limit: no wider than the board at full height
+    return Math.max(splitMin, Math.min(room, full));
+  };
+  const clampSplit = (w) => Math.round(Math.max(splitMin, Math.min(splitMax(), w)));
   const stageEl = () => (rootRef.current ? rootRef.current.querySelector(".sk-stage") : null);
   const isRtl = () => !!rootRef.current && getComputedStyle(rootRef.current).direction === "rtl";
   const onSplitDown = (e) => {
@@ -1755,7 +1768,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const onSplitMove = (e) => {
     if (!dragging || !rootRef.current) return;
     const rb = rootRef.current.getBoundingClientRect(), x = e.clientX + grabRef.current; // the line's position
-    setSplit(clampSplit(isRtl() ? x - rb.left - RAIL_W : rb.right - RAIL_W - x)); // right to left, the rail is on the left
+    setSplit(clampSplit(isRtl() ? x - rb.left - railW() : rb.right - railW() - x)); // right to left, the rail is on the left
   };
   const onSplitEnd = () => setDragging(false);
   const onSplitKey = (e) => {
@@ -1764,12 +1777,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (!d) return;
     e.preventDefault();
     const st0 = stageEl();
-    setSplit(clampSplit((split || (st0 ? st0.offsetWidth : SPLIT_MIN)) + d));
+    setSplit(clampSplit((split || (st0 ? st0.offsetWidth : splitMin)) + d));
   };
   useEffect(() => {
     if (dragging) return;
-    try { if (split) localStorage.setItem(SPLIT_KEY, String(split)); else localStorage.removeItem(SPLIT_KEY); } catch (e) { /* ignore */ }
-  }, [split, dragging]);
+    try { if (split) localStorage.setItem(splitKey, String(split)); else localStorage.removeItem(splitKey); } catch (e) { /* ignore */ }
+  }, [split, splitKey, dragging]);
   const shadowRoom = p.shadow ? (p.roomLabels || p.roomNames)[geo.room(...p.shadow)] : null;
 
   /* Zoom: keeps the point under (px, py) of the view (default: its centre) where it was, or puts the board point `at`
@@ -2693,8 +2706,17 @@ const CSS = `
 }
 /* ===== a phone held sideways (short and wide): the desktop columns, compact. dossier | board | slim rail ===== */
 @media (orientation:landscape) and (max-height:520px){
-  .sk-game,.sk-game[data-split]{--stw:min(calc((100vh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px),58vw);--stw:min(calc((100dvh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px),58vw);
+  .sk-game,.sk-game[data-split]{--stwh:calc((100vh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px);--stwh:calc((100dvh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px);--stw:min(var(--stwh),58vw);
     grid-template-columns:minmax(0,1fr) var(--stw) calc(70px + env(safe-area-inset-right));grid-template-rows:auto minmax(0,1fr);grid-template-areas:"head stage rail" "dossier stage rail"}
+  /* the line between the suspects and the board: a finger (or mouse) drags it, a double tap or double-click puts it back */
+  .sk-game[data-split]{--stw:min(var(--stagew),var(--stwh),calc(100vw - 270px - env(safe-area-inset-right)))} /* the board at full height · 270: the rail and the narrowest suspects (DOSSIER_MIN_SHORT) */
+  .sk-split{display:block;position:absolute;z-index:7;top:0;bottom:0;left:0;width:16px;cursor:col-resize;touch-action:none}
+  [dir=rtl] .sk-split{left:auto;right:0}
+  .sk-split:after{content:"";position:absolute;top:50%;left:4px;width:4px;height:48px;margin-top:-24px;border-radius:2px;background:#3a3a4c;transition:background .15s,height .15s}
+  .sk-split:focus-visible:after,.sk-dragging .sk-split:after{background:var(--brass);height:72px;margin-top:-36px}
+  .sk-split:focus-visible{outline:none}
+  .sk-dragging{user-select:none;-webkit-user-select:none}
+  .sk-dragging .sk-boardbox,.sk-dragging .sk-stage{transition:none}
   /* the site's sign-in and ☰ in the game's header (merged): one line across the screen (logo, contract, timer, ⚙, ?, sign-in, ☰) over
      suspects | board | rail; its height (--hh) comes off the board's. The ☰ dropdown hangs from it, above the tool rail (z-index 50). */
   .sk-game[data-merged]{--hh:48px;grid-template-areas:"head head head" "dossier stage rail"}
