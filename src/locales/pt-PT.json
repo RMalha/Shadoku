@@ -154,6 +154,7 @@
   "ui.fmt.pronounObj.m": "ele",
   "ui.fmt.pronounObj.f": "ela",
   "ui.fmt.pronounObj.n": "essa pessoa",
+  "ui.fmt.contract": "de o=do|de a=da|de os=dos|de as=das|em o=no|em a=na|em os=nos|em as=nas|em um=num|em uma=numa|em uns=nuns|em umas=numas|a o=ao|a a=à|a os=aos|a as=às|por o=pelo|por a=pela|por os=pelos|por as=pelas",
   "ui.assassin.S": "S. H. Adow",
   "ui.assassin.O": "O. B. Scuro",
   "ui.assassin.P": "P. H. Obia",

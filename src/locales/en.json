@@ -154,6 +154,7 @@
   "ui.fmt.pronounObj.m": "him",
   "ui.fmt.pronounObj.f": "her",
   "ui.fmt.pronounObj.n": "them",
+  "ui.fmt.contract": "",
   "ui.assassin.S": "S. H. Adow",
   "ui.assassin.O": "O. B. Scuro",
   "ui.assassin.P": "P. H. Obia",

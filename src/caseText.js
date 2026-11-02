@@ -15,7 +15,7 @@
  *                       the atom's subject is read first, the plain phrase when the locale has none. Likewise a clue sentence (ATOM.<kind>…,
  *                       FUSED.ALONE_IN_ROOM) may come as <key>.m / .f / .n for the subject's gender (Arabic "كانت" / "كان"); the plain key
  *                       is the fallback, so a language only writes the variants that differ.
- *   hand-written (ui.fmt.*): the language-dependent words of the formatters (lists, pronouns, "the X", "r{row}c{col}", "a room" …).
+ *   hand-written (ui.fmt.*): the language-dependent words of the formatters (lists, pronouns, "the X", "r{row}c{col}", "a room", the preposition+article merges of ui.fmt.contract …).
  * Anything that fails to render (a missing key, a case without tokens) falls back to the English stored in the case JSON.
  */
 
@@ -118,6 +118,16 @@ class Ctx {
     return this.fmt("ui.fmt.list.or", { head: this.head(words.slice(0, -1)), last: words[words.length - 1] });
   }
   commaList(words) { return words.length ? this.head(words) : ""; }
+  /** A locale whose prepositions merge with the article (pt "de o" → "do") lists the pairs in ui.fmt.contract ("de o=do|em a=na|…"); every rendered phrase passes through it. */
+  contract(text) {
+    if (this.pairs === undefined) {
+      this.pairs = (this.tr("ui.fmt.contract") || "").split("|").filter(Boolean).map((p) => {
+        const [from, to] = p.split("=");
+        return [new RegExp(String.raw`(^|[^\p{L}])(${from.replace(/ /g, String.raw`\s+`)})(?![\p{L}])`, "giu"), to];
+      });
+    }
+    return this.pairs.reduce((s, [re, to]) => s.replace(re, (_, pre, hit) => pre + (hit[0] !== hit[0].toLowerCase() ? to[0].toUpperCase() + to.slice(1) : to)), text);
+  }
   coord(c) { return this.fmt("ui.fmt.coord", { row: c[0] + 1, col: c[1] + 1 }); }
   roomIn(id) { return this.fmt("ui.fmt.roomIn", { prep: this.prep(id), room: this.roomName(id) }); }
   /** PROP.<id>.<form>, preferring its .m/.f/.n variant when a subject `who` is given (suspect letter; assassins and S. H. Adow are "n"). */
@@ -202,12 +212,12 @@ function fmtParam(key, val, f, arg, ctx, who) {
 
 /** `who`: the suspect the sentence is about (an atom's subject), for the gendered word forms. */
 function fill(pattern, params, ctx, elims, who) {
-  return pattern.replace(PH, (_, key, f, arg) => {
+  return ctx.contract(pattern.replace(PH, (_, key, f, arg) => {
     if (key === "zone") return zoneFmt(ctx, f);
     if (key === "elims") return ""; // the hint marks the eliminated tiles on the board
     if (!(key in params)) throw new Error(`missing param ${key}`);
     return fmtParam(key, params[key], f, arg, ctx, who);
-  });
+  }));
 }
 
 function atomKey(tok, ctx, register = "ATOM") {
