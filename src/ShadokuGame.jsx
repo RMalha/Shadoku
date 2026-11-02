@@ -2336,7 +2336,7 @@ const CSS = `
 .sk-card:hover{border-color:#cdbf9d}
 .sk-card.on{border-color:var(--brass);box-shadow:0 0 0 2px var(--brass),0 0 22px rgba(217,155,38,.35),0 8px 18px rgba(0,0,0,.3)}
 .sk-card.placed .sk-alibi{opacity:.7}
-.sk-card:not(.adow):not(.placed){background:#dcdde2;--ab:#cdced5} /* light grey until the suspect is placed, then the paper */
+.sk-card:not(.adow):not(.placed){background:#bfc2cb;--ab:#aeb1bc} /* light grey until the suspect is placed, then the paper */
 .sk-card{transition:background-color .2s}
 .sk-card.v{display:flex;flex-direction:column;gap:6px;padding:8px 6px 7px;border-top:5px solid var(--sc)}
 .sk-photo{display:block;width:min(100%,138px);margin:0 auto}
