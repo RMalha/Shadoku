@@ -14,7 +14,7 @@
  * Every string is a ui.about.*, ui.contact.* or ui.profile.* key in src/locales/en.json.
  */
 import React, { useEffect, useMemo, useState } from "react";
-import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope } from "./ShadokuHome.jsx";
+import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope, CoffeeCard } from "./ShadokuHome.jsx";
 import { PUZZLES, normalizePuzzles, readPlayStats, fmtTime } from "./ShadokuGame.jsx";
 import { RelicCollection, EvidenceBoard, FinalDossier, ObsidianEnvelope, OmegaFolder, RELIC_CASES, UMBRA_HARD, UMBRA_FINALE, isUnlocked, resetUmbraLocks, useUmbraTick } from "./umbra.jsx";
 import { MasterPolaroid } from "./ShadokuArt.jsx";
@@ -59,6 +59,7 @@ export function AboutPage({ go }) {
           <p><Rich text={t(`about.s${n}.p`)} /></p>
         </section>
       ))}
+      <CoffeeCard />
       <div className="sh-page-cta">
         <button type="button" className="sh-btn" onClick={() => go("/play")}>{t("about.play")}</button>
         <button type="button" className="sh-btn ghost" onClick={() => go("/contact")}>{t("nav.contact")}</button>

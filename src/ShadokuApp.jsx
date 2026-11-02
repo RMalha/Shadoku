@@ -44,7 +44,7 @@
  */
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import ShadokuHome, {
-  ShadokuProviders, SiteHeader, SiteFooter, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
+  ShadokuProviders, SiteHeader, SiteMenu, UserPill, SiteFooter, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
 } from "./ShadokuHome.jsx";
 import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
 import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
@@ -94,8 +94,8 @@ registerTranslations("en", {
  */
 export const LORE_FALLBACK = [
   { title: "The Illusion of Justice", text: "Ah, S. H. Adow, new blood. The inspector has scribbled scapegoats across the board, a parlour trick we have been feeding him for centuries." },
-  { title: "The Ray Block", text: "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat." },
-  { title: "The Geometry of Panic", text: "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other." },
+  { title: "The Ray Block", text: "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat." },
+  { title: "The Geometry of Panic", text: "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other." },
   { title: "The Sanctuary", text: "Here is the masterstroke: every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows." },
 ];
 /** The short how-to-play note of the initiation: t(LORE_NOTE_KEY). */
@@ -248,7 +248,7 @@ export function buildGenericTutorial(puzzle, lore, t = ENGLISH) {
  * carries one of the Master's lines (the puzzle's own `tutorialLore` where it fits). Returns null when the puzzle is not the expected one (the
  * generic lesson takes over). The board shows every prop class: a piano (PERCH: sit on it, it blocks sight), the stools and footprints (LOW:
  * stand on them), the stove (SHORT: sight passes over), the safe and the palm (TALL), the Corpse (sight passes over it) and doors (sight
- * passes through). The walkthrough's one non-placement step is the ray block: Astrid's two stools share one row, so the tile beside the
+ * passes through). The walkthrough's one non-placement step is the ray block: A's two stools share one row, so the tile beside the
  * safe is lit whichever stool she took.
  * `seen` (3rd gate argument) is the set of "type:id:r,c:d|t" keys of every event since the step began, for steps that need several actions.
  * The board starts with the Inspector's wrong scribbles on it (see `tutorialSeed`), and step 1 is wiping them off.
@@ -266,7 +266,7 @@ function scriptedParts(puzzle) {
   const width = puzzle.contents[0].length;
   const room = ([r, c]) => puzzle.rooms[r][c];
   const free = (r, c) => r >= 0 && c >= 0 && r < puzzle.contents.length && c < width && !puzzle.contents[r][c];
-  // the two sides of the safe inside its own room: Daphne's (on the footprints) and the one Astrid's row lights (the ray block)
+  // the two sides of the safe inside its own room: D's and the one A's row lights (the ray block)
   const sides = [[safe[0], safe[1] - 1], [safe[0], safe[1] + 1]].filter(([r, c]) => c >= 0 && c < width && room([r, c]) === room(safe));
   const beyond = sides.find((x) => !same(x, sol.D));
   const litStool = stools.find((x) => !same(x, sol.A));
@@ -724,7 +724,8 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 
   const showCard = caseId === tutorialId && view === "play"; // the Inspector gets the whole screen
   const short = useMediaQuery(SHORT_LANDSCAPE_MQ), desk = useMediaQuery(DESK_MQ);
-  const barH = desk ? 0 : short ? BAR_H_SHORT : BAR_H; // desktop: the board runs to the top of the page
+  const merged = !desk && !short; // a phone held upright: the game's header is the only header line (logo, timer, ⚙, ?, sign-in, ☰)
+  const barH = desk || merged ? 0 : BAR_H_SHORT; // desktop: the board runs to the top of the page
   const { user, signOut } = useAuth();
   const modals = useModals();
   const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail (it has no site header, so no Sign In button or profile chip): Home, Contracts, the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
@@ -744,15 +745,16 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   ], [t, go, user, signOut, modals, enter, initiated]);
 
   return (
-    <div className="sh-playroot">
-      {!desk && <SiteHeader onLogo={() => go("/")} style={{ height: barH }} onNav={go}
+    <div className={`sh-playroot${showCard && desk ? " tut" : ""}`}>
+      {short && !desk && <SiteHeader onLogo={() => go("/")} style={{ height: barH }} onNav={go}
         extra={initiated ? <a className="sh-btn ghost sm keep" href="/play" onClick={(e) => { e.preventDefault(); go("/play"); }}>✉ {t("hub.contracts")}</a> : null} />}
 
       <ShadokuGame
         t={t}
         puzzles={shown} logoSrc={logoSrc} lab={lab}
         insetY={barH + (showCard ? cardH : 0)}
-        hideLogo={!desk} onLogo={() => go("/")} menu={desk ? railMenu : null} fixedCase={initiated} onExit={enter}
+        hideLogo={!desk && !merged} onLogo={() => go("/")}
+        headEnd={merged ? <><UserPill /><SiteMenu current="/play" onNav={go} /></> : null} menu={desk ? railMenu : null} fixedCase={initiated} onExit={enter}
         renderEnvelope={({ puzzle, label, onPick, variant = "mini", onAccept, tone, onOpen }) => <ContractEnvelope variant={variant} puzzle={puzzle} label={label} onPick={onPick} onAccept={onAccept} onOpen={onOpen}
           tone={tone || (variant === "modal" ? "obsidian" : toneOf(puzzle.id))} target={targetOf(puzzle.id)} autoOpen={variant !== "modal"} />}
         lockCaseMenu={!initiated}
@@ -820,6 +822,10 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
 const APP_CSS = `
 .sh-playroot{height:100vh;height:100dvh;overflow:hidden;background:#141419;color:#F5F0E6;font-family:'Barlow',system-ui,sans-serif}
 .sh-playroot *{box-sizing:border-box}
+/* the play page never scrolls or bounces as a whole (a drag outside the suspects used to pull the whole page up on phones) */
+html:has(.sh-playroot),html:has(.sh-playroot) body{overflow:hidden;overscroll-behavior:none}
+.sh-playroot{position:fixed;inset:0;overscroll-behavior:none}
+.sh-playroot .sk-dossier,.sh-playroot .sk-rail{overscroll-behavior:contain}
 .sh-header a.sh-btn{text-decoration:none}
 @media (orientation:landscape) and (max-height:520px){.sh-playroot .sh-header{padding-block:1px}.sh-playroot .sh-header .sh-logo{height:32px}} /* BAR_H_SHORT */
 
@@ -827,6 +833,11 @@ const APP_CSS = `
 .sh-dos{position:fixed;z-index:45;left:0;right:0;bottom:0;background:linear-gradient(180deg,#2a1d1c,#1d1615);color:#F5F0E6;border-top:2px solid #D99B26;
   box-shadow:0 -12px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(217,155,38,.25);padding-bottom:env(safe-area-inset-bottom);font-family:'Barlow',system-ui,sans-serif}
 .sh-dos *{box-sizing:border-box}
+/* desktop initiation: the tool rail keeps the window's full height and the dossier card stops beside it (the card never covers a tool) */
+.sh-playroot.tut .sk-rail{position:fixed;top:0;bottom:0;right:0;width:116px}
+.sh-playroot.tut .sh-dos{right:116px}
+[dir=rtl] .sh-playroot.tut .sk-rail{right:auto;left:0}
+[dir=rtl] .sh-playroot.tut .sh-dos{right:0;left:116px}
 .sh-dos-in{max-width:1040px;margin:0 auto;padding:10px 16px 11px;display:flex;gap:14px;align-items:flex-start}
 .sh-dos-photo{flex:0 0 72px;width:72px;margin-top:4px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}
 .sh-dos-body{flex:1 1 auto;min-width:0}

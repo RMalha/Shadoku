@@ -33,6 +33,7 @@ import { localizeHead, trOf } from "./caseText.js";
 /* ═════════════════════════════ CONSTANTS ═════════════════════════════ */
 export const CONTACT_EMAIL = "shadoku.game@proton.me";
 export const MURDOKU_URL = "https://murdoku.com";
+export const COFFEE_URL = "https://buymeacoffee.com/shadoku"; // also on the victory screen (ShadokuGame.jsx)
 const LANG_KEY = "shadoku-lang";
 const USER_KEY = "shadoku-user";
 export const TUTORIAL_KEY = "shadoku-tutorial-done"; // set once the initiation is solved or skipped (ShadokuApp re-exports it)
@@ -193,6 +194,10 @@ export const STRINGS = {
     "env.caseFile": "INITIATION CONTRACT № 000",
     "env.initiate": "INITIATE: S. H. ADOW",
     "env.status": "STATUS: AWAITING YOUR SIGNATURE",
+
+    "coffee.title": "Support Shadoku",
+    "coffee.text": "Shadoku is free, with no ads. If the contracts kept you up at night, you can buy me a coffee.",
+    "coffee.link": "Buy me a coffee",
 
     "homage.title": "An Homage to Murdoku",
     "homage.text": "Shadoku is an independent fan-made homage inspired by **[[murdoku]]**. Special thanks to **Manuel Garand** for creating Murdoku and inspiring detectives everywhere.",
@@ -779,6 +784,21 @@ function LegalModal({ onClose }) {
   );
 }
 
+/** Buy me a coffee: under the Murdoku homage on the landing page, and on /about. */
+export function CoffeeCard() {
+  const { t } = useLang();
+  return (
+    <aside className="sh-homage sh-coffee" aria-labelledby="sh-coffee-h">
+      <span className="sh-homage-ico" aria-hidden="true">☕</span>
+      <div>
+        <h2 id="sh-coffee-h" className="sh-type">{t("coffee.title")}</h2>
+        <p>{t("coffee.text")}</p>
+        <a className="sh-btn sh-coffee-btn" href={COFFEE_URL} target="_blank" rel="noopener noreferrer">☕ {t("coffee.link")}</a>
+      </div>
+    </aside>
+  );
+}
+
 /* ═════════════════════════ HEADER PIECES ═════════════════════════ */
 export function LanguageSelector() {
   const { lang, setLang, t } = useLang();
@@ -803,6 +823,24 @@ export const SITE_PAGES = [{ to: "/", key: "pHome" }, { to: "/play", key: "pCont
  * are on; `onNav(to)` navigates (default: useNav()).
  */
 export function SiteHeader({ onLogo, extra = null, style, current = "", onNav }) {
+  const ctxNav = useNav();
+  return (
+    <header className="sh-header" style={style}>
+      <button className="sh-logo" onClick={onLogo || (() => (onNav || ctxNav)("/"))} aria-label="Shadoku">
+        <ArtBoundary fallback={<span className="sh-type sh-wordmark">SHADOKU</span>}><ShadokuLogo /></ArtBoundary>
+      </button>
+      <div className="sh-header-r">
+        {extra && <span className="sh-hide-m sh-extra">{extra}</span>}
+        <HeaderControls />
+        <SiteMenu current={current} onNav={onNav} />
+      </div>
+    </header>
+  );
+}
+
+/** The ☰ button and its dropdown of site pages. Any tap outside the two (the codename chip too) closes it. The dropdown
+ *  hangs from the nearest positioned box: the site header, or the game's own header on a phone (ShadokuGame `headEnd`). */
+export function SiteMenu({ current = "", onNav }) {
   const { t } = useLang();
   const modals = useModals();
   const ctxNav = useNav();
@@ -815,17 +853,10 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
     <a key={to} href={to} className={`${cls}${to === current ? " on" : ""}`} aria-current={to === current ? "page" : undefined} onClick={(e) => { e.preventDefault(); nav(to); }}>{label}</a>
   );
   return (
-    <header className="sh-header" style={style} ref={ref}>
-      <button className="sh-logo" onClick={onLogo || (() => nav("/"))} aria-label="Shadoku">
-        <ArtBoundary fallback={<span className="sh-type sh-wordmark">SHADOKU</span>}><ShadokuLogo /></ArtBoundary>
+    <div className="sh-menuwrap" ref={ref}>
+      <button type="button" className="sh-burger" aria-label={t("nav.menu")} aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
       </button>
-      <div className="sh-header-r">
-        {extra && <span className="sh-hide-m sh-extra">{extra}</span>}
-        <HeaderControls />
-        <button type="button" className="sh-burger" aria-label={t("nav.menu")} aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-        </button>
-      </div>
       {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
           {SITE_PAGES.map((m) => (m.to === "/play" && !initiated
@@ -833,7 +864,7 @@ export function SiteHeader({ onLogo, extra = null, style, current = "", onNav })
             : link(m.to, t(`nav.${m.key}`))))}
         </nav>
       )}
-    </header>
+    </div>
   );
 }
 
@@ -1325,13 +1356,15 @@ function HomeInner({ onPlay, onStart, onSkip, onNav, screenshots }) {
             <p><Rich text={t("homage.text")} /></p>
           </div>
         </aside>
+
+        <CoffeeCard />
       </main>
 
       <SiteFooter />
 
       {!envVisible && (
         <button className="sh-cue sh-type" onClick={toEnvelope} aria-label={t("env.cue")}>
-          <span aria-hidden="true">✉</span> {t("env.cue")} ↑
+          <span aria-hidden="true">✉</span> <span className="sh-cue-t">{t("env.cue")}</span> ↑
         </button>
       )}
     </div>
@@ -1377,6 +1410,7 @@ svg{direction:ltr}
 .sh-logo img{height:100%;width:auto;max-width:46vw}@media (min-width:961px){.sh-logo{height:56px}} /* = the logo in the puzzle's own header (.sk-head .sk-logo) */.sh-wordmark{font-size:22px;letter-spacing:.12em;color:var(--sh-brass)}
 .sh-controls,.sh-userpill{display:flex;align-items:center;gap:10px}
 .sh-header{box-sizing:border-box}.sh-header-r{display:flex;align-items:center;gap:10px}.sh-extra{display:inline-flex}
+.sh-menuwrap{display:contents} /* the dropdown keeps hanging from the header */
 .sh-burger{display:inline-flex;align-items:center;justify-content:center;width:40px;height:38px;padding:0;border-radius:10px;border:1px solid #34344a;background:#1c1c25;color:var(--sh-cream);cursor:pointer}
 .sh-burger:hover,.sh-burger[aria-expanded=true]{border-color:var(--sh-brass);color:var(--sh-brass)}
 .sh-header .sh-select,.sh-header .sh-btn,.sh-header .sh-burger{min-height:40px;height:40px} /* 40px tap targets; the 40px logo sets the header height anyway */
@@ -1466,6 +1500,7 @@ svg{direction:ltr}
 .sh-env-cq.modal{width:min(560px,90vw);margin:0 auto}
 .sh-env-cq.modal.sealed:not(.opened) .sh-env-stage{margin-top:-27cqw} /* closed like the landing page's: no empty room above the flap until the letter rises */
 .sh-env-cq.sealed .sh-env-prompt,.sh-modal .sh-env-prompt{text-align:center}
+.sh-modal .sh-env-cq{width:min(100%,calc((100vh - 250px) * .78));width:min(100%,calc((100dvh - 250px) * .78))} /* in a pop-up: as wide as the pop-up, and short enough to show the whole envelope at once */
 .sh-env-cq.mini{width:100%;margin:0;overflow:hidden;padding-bottom:12px}
 .sh-env-cq.mini .sh-env-stage{margin-top:-26cqw}
 .sh-folder-cq{padding-bottom:12px}.sh-folder{position:relative;cursor:pointer;border-radius:8px;outline:none;transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 14px 14px rgba(0,0,0,.5))}
@@ -1529,10 +1564,12 @@ svg{direction:ltr}
 /* quick-scroll cue */
 .sh-cue{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:40;background:var(--sh-crimson);color:#fff;border:0;border-radius:999px;padding:11px 18px;font-size:15px;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.5);animation:shBob 2.4s ease-in-out infinite}
 .sh-cue:hover{background:#d84f4c}
+@media (max-width:960px){.sh-cue-t{display:none}} /* a phone: just ✉ ↑ (the label stays as aria-label) */
 @keyframes shBob{50%{transform:translateY(-4px)}}
 
 /* homage + footer */
 .sh-homage{display:flex;gap:16px;align-items:flex-start;max-width:760px;margin:0 auto 40px;padding:20px 24px;background:rgba(217,155,38,.08);border:1px solid rgba(217,155,38,.4);border-radius:12px;margin-inline:auto;width:calc(100% - 32px)}
+.sh-coffee-btn{margin-top:12px;text-decoration:none;display:inline-flex}
 .sh-homage-ico{font-size:28px}.sh-homage h2{margin:0 0 4px;font-size:20px;color:var(--sh-brass)}.sh-homage p{margin:0;color:var(--sh-cream)}
 .sh-footer{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:22px clamp(14px,3vw,32px) calc(22px + env(safe-area-inset-bottom));border-top:1px solid var(--sh-line);color:var(--sh-muted);font-size:14px}
 .sh-footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:0 22px}

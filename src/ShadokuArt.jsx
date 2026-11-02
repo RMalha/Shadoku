@@ -6839,7 +6839,7 @@ const joinTags = (t, tags) => tags.reduce((acc, w) => t("fmt.list.more", { head:
 export const TOKEN_ZOOM = 1.5, TOKEN_CY = 126, TOKEN_SW = 7;
 
 /** Murdoku-style Polaroid: tilted vintage frame, flat rich backdrop, avataaars portrait in the 96×96 photo box. */
-/** `placed` false = the backdrop is muted (cool slate); it fades into the suspect's colour once they are on the board. */
+/** `placed` false = the photo is toned down (a slate veil, the backdrop drained into cool slate); it lights up in the suspect's colours once they are on the board. */
 export function SuspectPolaroid({ name, id = "A", look, tilt, size = 120, tag = true, showName = true, placed = true, fluid = false }) {
   const lk = look || deriveLook(name, id);
   const bg = placed ? lk.back : mutedBack(lk.back);
@@ -6856,6 +6856,7 @@ export function SuspectPolaroid({ name, id = "A", look, tilt, size = 120, tag = 
           <clipPath id={pid}><rect width="96" height="96" /></clipPath>
           <circle cx="48" cy="46" r="40" fill="#fff" fillOpacity={placed ? 0.22 : 0.07} style={{ fillOpacity: placed ? 0.22 : 0.07, transition: "fill-opacity .7s ease" }} />
           <g clipPath={`url(#${pid})`}><Figure look={lk} /></g>
+          <rect width="96" height="96" fill="#565c6c" pointerEvents="none" style={{ opacity: placed ? 0 : 0.34, transition: "opacity .7s ease" }} />
           <rect width="96" height="96" fill="none" stroke="#000" strokeOpacity=".18" />
         </g>
         {showName && <text x="15" y="131" fontFamily="'Special Elite', 'Courier New', monospace" fontSize="14" fill="#3a2f24"

@@ -91,6 +91,10 @@ const KW_WORDS = {
   north: "north|above", south: "south|under|below", east: "east|to the right of", west: "west|to the left of",
   row: "row|rows", column: "column|columns", corner: "corner", see: "see|saw",
 };
+/* The shadow's rim (beside the fog), cast by the light and by the walls: [id, gradient x1 y1 x2 y2 (dark edge -> clear), neighbour dr dc]. RIM_W px deep. */
+const SHADE_RIM = [["T", 0, 0, 0, 1, -1, 0], ["B", 0, 1, 0, 0, 1, 0], ["L", 0, 0, 1, 0, 0, -1], ["R", 1, 0, 0, 0, 0, 1]];
+const RIM_W = 16;
+const BIG_BOARD = 9; // desktop: from this many rows or columns the board takes the full height and the suspects' column narrows; smaller boards split the width evenly
 const SPLIT_KEY = "shadoku-split"; // desktop: the stage column's width in px, set by dragging the divider (absent = automatic)
 const RAIL_W = 116, SPLIT_MIN = 300, DOSSIER_MIN = 340; // px: the tool rail, the narrowest stage, the narrowest suspects area
 const HOVER_KEY = "shadoku-hover-tips"; // "0" = the hover / tap prop badge is switched off in the Inspect panel (on by default)
@@ -272,8 +276,8 @@ const isSolved = (q, cs0) => {
     && q.suspects.every((s) => sameCell(cs.tokens[s.id], ...s.solution));
 };
 const snap = (cs) => ({ tokens: cs.tokens, notes: cs.notes, lights: cs.lights, crosses: cs.crosses });
-/** A tile lit by hand or crossed out keeps its notes, hidden until the light or the X comes off. */
-const notesHidden = (cs, k) => !!(cs.lights[k] || cs.crosses[k]);
+/** A crossed-out tile keeps its notes, hidden until the X comes off (a light switch leaves them showing). */
+const notesHidden = (cs, k) => !!cs.crosses[k];
 const tokenIdAt = (cs, r, c) => Object.keys(cs.tokens).find((t) => sameCell(cs.tokens[t], r, c));
 const withNote = (cs, k, id, mode) => {
   const s = cs.notes[k] || "", has = s.includes(id), want = mode === "add" ? true : mode === "remove" ? false : !has;
@@ -560,6 +564,15 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       onPointerLeave={() => onHover && onHover(null)}
       onContextMenu={(e) => e.preventDefault()}>
       <FloorDefs />
+      <defs>
+        {/* the shadow's hatching: a dark stroke and a pale one side by side, so an unlit tile reads on light and dark floors alike */}
+        {/* the shadow's rim: a soft darkening on the sides of a dark tile that face light, a wall or the floor's edge, one per side */}
+        {SHADE_RIM.map(([id, x1, y1, x2, y2]) => (
+          <linearGradient key={id} id={`skRim${id}-${uid}`} x1={x1} y1={y1} x2={x2} y2={y2}>
+            <stop offset="0" stopColor="#05070f" stopOpacity=".58" /><stop offset="1" stopColor="#05070f" stopOpacity="0" />
+          </linearGradient>
+        ))}
+      </defs>
       <rect x={LAB - BZ} y={LAB - BZ} width={W} height={H} rx="14" fill="#0e0f15" />
       {real.map(([r, c]) => <rect key={`f${r}-${c}`} x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-${floors[geo.room(r, c)] || floorOf(p.roomNames[geo.room(r, c)], geo.room(r, c), theme)})`} />)}
       {real.map(([r, c]) => <rect key={`g${r}-${c}`} x={X(c) + 0.5} y={Y(r) + 0.5} width={CELL - 1} height={CELL - 1} fill="none" stroke="#000" strokeOpacity=".16" />)}
@@ -601,13 +614,18 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         </g>
       ))}
 
-      {/* the lights: cool slate shadow that melts away (rippling out from each suspect), a warm wash on top */}
+      {/* the lights: cool slate shadow with a soft rim where it meets the light, melting away (rippling out from each suspect), a warm wash on top */}
       {real.map(([r, c]) => {
         const k = key(r, c), lit = litMap.has(k) || !!s.lights[k];
         const delay = litMap.has(k) ? `${Math.min(litMap.get(k), 9) * 55}ms` : "0ms";
         return (
           <g key={`fg${r}-${c}`} pointerEvents="none">
             <rect className="sk-fog" x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={FOG} style={{ opacity: lit ? 0 : FOG_OPACITY, transitionDelay: delay }} />
+            {SHADE_RIM.map(([id, , , , , dr, dc]) => { // a side is a rim where the neighbour is lit, behind a wall (not a door) or not floor at all
+              const nr = r + dr, nc = c + dc, nk = key(nr, nc), open = !geo.inside(nr, nc) || geo.isVoid(nr, nc) || geo.isWall([r, c], [nr, nc]) || litMap.has(nk) || !!s.lights[nk];
+              const w = dc ? RIM_W : CELL, h = dr ? RIM_W : CELL, x = dc > 0 ? X(c) + CELL - RIM_W : X(c), y = dr > 0 ? Y(r) + CELL - RIM_W : Y(r);
+              return <rect key={id} className="sk-fog" x={x} y={y} width={w} height={h} fill={`url(#skRim${id}-${uid})`} style={{ opacity: !lit && open ? 1 : 0, transitionDelay: delay }} />;
+            })}
             <rect className="sk-warm" x={X(c)} y={Y(r)} width={CELL} height={CELL} fill="#ffd9a0" style={{ opacity: lit ? 0.1 : 0, transitionDelay: delay }} />
           </g>
         );
@@ -635,8 +653,8 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         const x0 = X(c) + 17, y0 = Y(r) + 17, x1 = X(c) + CELL - 17, y1 = Y(r) + CELL - 17, d = `M${x0} ${y0}L${x1} ${y1}M${x1} ${y0}L${x0} ${y1}`;
         return (
           <g key={`x${r}-${c}`} pointerEvents="none" strokeLinecap="round">
-            <path d={d} stroke={INK} strokeOpacity=".55" strokeWidth="9" />
-            <path d={d} stroke="#9aa0ad" strokeWidth="5.5" />
+            <path d={d} stroke={CREAM} strokeOpacity=".45" strokeWidth="9" />
+            <path d={d} stroke={INK} strokeWidth="5.5" />
           </g>
         );
       })}
@@ -1235,7 +1253,7 @@ export default function ShadokuGame(props) {
   const ctxT = useText(), t = props.t || ctxT;
   return <TextContext.Provider value={t}><GameScreen {...props} t={t} /></TextContext.Provider>;
 }
-function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, t }) {
+function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, t }) {
   const puzzles = useMemo(() => normalizePuzzles(puzzlesProp), [puzzlesProp]);
   const heads = useMemo(() => puzzles.map((q) => localizeHead(q, trOf(t))), [puzzles, t]); // title + difficulty in the active language, for the picker / title bar
   const [caseIdx, setCaseIdx] = useState(() => {
@@ -1444,7 +1462,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (s.tool === "light") changed = mutate((x) => withLight(x, k, s.mode === "on"), !s.pushed);
     else if (s.tool === "cross") changed = mutate((x) => withCross(x, k, s.mode === "on"), !s.pushed);
     else if (s.tool === "eraser") changed = mutate((x) => erased(x, r, c), !s.pushed);
-    else { const cs = caseNow(); if (tokenIdAt(cs, r, c) || notesHidden(cs, k)) return; changed = mutate((x) => withNote(x, k, s.id, s.mode), !s.pushed); } // no hidden notes under a light or an X
+    else { const cs = caseNow(); if (tokenIdAt(cs, r, c) || notesHidden(cs, k)) return; changed = mutate((x) => withNote(x, k, s.id, s.mode), !s.pushed); } // no hidden notes under an X
     if (changed) emit(s.tool === "light" ? "light" : s.tool === "cross" ? "cross" : s.tool === "eraser" ? "erase" : "note", { id: s.id, r, c, drag: !!s.drag, on: s.mode === "on" || s.mode === "add" });
     s.pushed = s.pushed || changed;
   };
@@ -1619,7 +1637,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   useEffect(() => { setHintPart(-1); }, [shown, p.id]);
   const hintLine = group ? group.parts[hintPart < 0 ? group.parts.length - 1 : Math.min(hintPart, group.parts.length - 1)] : null;
   const hint = group ? { n: `${group.n}.${hintPart}`, focus: hintLine.focus, cell: hintLine.cell, tier: group.tier, rule: group.rule } : null;
-  const [whyOpen, setWhyOpen] = useState(false); // a long hint folds its reasons
+  const [whyOpen, setWhyOpen] = useState(false); // the reasoning behind the placement stays folded until the player asks for it (the lens in the hint's head)
   useEffect(() => { setWhyOpen(false); }, [shown, p.id]);
   const coordsOn = settings.coords || hintOpen; // row / column numbers: always (settings) or while a hint is open
   const LB = coordsOn ? COORD_BAND : 0;
@@ -1701,13 +1719,14 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   }, [split, dragging]);
   const shadowRoom = p.shadow ? (p.roomLabels || p.roomNames)[geo.room(...p.shadow)] : null;
 
-  /* Zoom: keeps the point under (px, py) of the view (default: its centre) where it was */
-  const setZoomTo = (z, px, py) => {
+  /* Zoom: keeps the point under (px, py) of the view (default: its centre) where it was, or puts the board point `at`
+     ({fx, fy}: fractions of the board) under (px, py) (a pinch: the point first under the fingers follows them) */
+  const setZoomTo = (z, px, py, at = null) => {
     const vp = vpRef.current;
     z = clampZoom(z);
     if (vp) {
       const ax = px == null ? vp.clientWidth / 2 : px, ay = py == null ? vp.clientHeight / 2 : py;
-      zoomAnchor.current = { fx: (vp.scrollLeft + ax) / (vp.scrollWidth || 1), fy: (vp.scrollTop + ay) / (vp.scrollHeight || 1), ax, ay };
+      zoomAnchor.current = at ? { ...at, ax, ay } : { fx: (vp.scrollLeft + ax) / (vp.scrollWidth || 1), fy: (vp.scrollTop + ay) / (vp.scrollHeight || 1), ax, ay };
     }
     zoomRef.current = z;
     setZoom(z);
@@ -1730,14 +1749,16 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       if (e.touches.length !== 2) return;
       e.preventDefault();
       if (!pinchRef.current || pinchRef.current.pending) abortRef.current && abortRef.current();
-      pinchRef.current = { ...two(e), z: zoomRef.current };
+      const g = two(e); // the board point under the fingers: it follows them, so moving both fingers pans as well as zooms
+      pinchRef.current = { ...g, z: zoomRef.current, fx: (vp.scrollLeft + g.x) / (vp.scrollWidth || 1), fy: (vp.scrollTop + g.y) / (vp.scrollHeight || 1) };
     };
     const move = (e) => {
       const g = pinchRef.current;
       if (!g || g.pending || e.touches.length !== 2) return;
       e.preventDefault();
-      const now = two(e);
-      setZoomRef.current(g.z * (now.d / g.d), now.x, now.y);
+      const now = two(e), z = clampZoom(g.z * (now.d / g.d));
+      if (z === zoomRef.current) { vp.scrollLeft = g.fx * vp.scrollWidth - now.x; vp.scrollTop = g.fy * vp.scrollHeight - now.y; } // same zoom (or at a limit): just pan
+      else setZoomRef.current(z, now.x, now.y, { fx: g.fx, fy: g.fy });
     };
     const end = (e) => { if (e.touches.length === 0) pinchRef.current = null; };
     const wheel = (e) => {
@@ -1860,27 +1881,34 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     </div>
   );
 
+  /* A phone with `headEnd` (the site's sign-in and ☰): one header line (logo, timer, ⚙, ?, headEnd); the contract's title opens the dossier */
+  const merged = !!headEnd && mobile;
+  const caseNav = fixedCase ? <CaseTitle puzzles={heads} idx={idx} solvedOf={(q) => isSolved(q, all[q.id])} /> : (
+    <nav className="sk-nav" aria-label={t("game.contracts")}>
+      <button type="button" className="sk-arrow" onClick={() => go(-1)} disabled={lockCaseMenu || idx === 0} aria-label={t("game.prevContract")}>‹</button>
+      <CaseMenu puzzles={heads} idx={idx} onPick={setCaseIdx} disabled={lockCaseMenu} solvedOf={(q) => isSolved(q, all[q.id])} />
+      <button type="button" className="sk-arrow" onClick={() => go(1)} disabled={lockCaseMenu || idx === puzzles.length - 1} aria-label={t("game.nextContractAria")}>›</button>
+    </nav>
+  );
   return (
-    <div className={`sk sk-game${settings.kw ? " kw-on" : ""}${dragging ? " sk-dragging" : ""}`} ref={rootRef} data-tight={+insetY > 110 ? "" : undefined} data-split={split && !mobile ? "" : undefined}
+    <div className={`sk sk-game${settings.kw ? " kw-on" : ""}${dragging ? " sk-dragging" : ""}`} ref={rootRef} data-tight={+insetY > 110 ? "" : undefined} data-split={split && !mobile ? "" : undefined} data-big={Math.max(geo.R, geo.C) >= BIG_BOARD ? "" : undefined}
       style={{ "--ar": ar, "--bar": `${Math.max(0, +insetY || 0)}px`, ...(split && !mobile ? { "--stagew": `${split}px` } : null) }}
       onPointerOver={onClueOver} onPointerLeave={clearClueHover}>
       <style>{CSS}</style>
 
-      <header className="sk-head" ref={headRef} data-wide={headWide ? "" : undefined}>
+      <header className={`sk-head${merged ? " merged" : ""}`} ref={headRef} data-wide={headWide ? "" : undefined}>
         {!hideLogo && (onLogo ? <button type="button" className="sk-logobtn" onClick={onLogo} aria-label={t("nav.pHome")}><ShadokuLogo src={logoSrc} /></button> : <ShadokuLogo src={logoSrc} />)}
-        {fixedCase ? <CaseTitle puzzles={heads} idx={idx} solvedOf={(q) => isSolved(q, all[q.id])} /> : <nav className="sk-nav" aria-label={t("game.contracts")}>
-          <button type="button" className="sk-arrow" onClick={() => go(-1)} disabled={lockCaseMenu || idx === 0} aria-label={t("game.prevContract")}>‹</button>
-          <CaseMenu puzzles={heads} idx={idx} onPick={setCaseIdx} disabled={lockCaseMenu} solvedOf={(q) => isSolved(q, all[q.id])} />
-          <button type="button" className="sk-arrow" onClick={() => go(1)} disabled={lockCaseMenu || idx === puzzles.length - 1} aria-label={t("game.nextContractAria")}>›</button>
-        </nav>}
+        {!merged && caseNav}
         <div className="sk-headr">
           <CaseTimer key={`${p.id}|${timerEpoch}`} caseId={p.id} solved={solved} paused={view !== "play"} hidden={!settings.timer} />
           <button type="button" className="sk-gear" onClick={() => setSettingsOpen(true)} aria-label={t("settings.open")} title={t("settings.open")}><GearIcon /></button>
         </div>
         <button type="button" className="sk-help" onClick={() => setHelp(true)} aria-label={t("howto.title")}>?</button>
+        {merged && <div className="sk-headend">{headEnd}</div>}
       </header>
 
       <section className="sk-dossier" aria-label={t("game.dossier")}>
+        {merged && <div className="sk-casebar">{caseNav}</div>}
         <div className="sk-now" role="status">{nowLabel}</div>
         {(p.globalRules || []).length > 0 && (
           <section className="sk-rules" aria-label={t("game.houseRulesAria")}>
@@ -1973,19 +2001,16 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                 <div className="sk-hint-main">
                   {hint ? (
                     <>
-                      <div className="sk-hint-head"><span className="sk-step">{t("hint.step", { shown, total: steps.length })}</span><span className={tierClass(hint.tier)}>{t("hint.tier", { tier: hint.tier || 1 })}</span>{hint.rule && <span className="sk-rname">{hint.rule}</span>}</div>
-                      {group.parts.length > 1 && (() => {
-                        const why = group.parts.slice(0, -1), fold = why.length > 3 && !whyOpen;
-                        return (
-                          <ol className="sk-hint-why">
-                            {(fold ? why.slice(-2) : why).map((x) => {
-                              const i = group.parts.indexOf(x);
-                              return <li key={i}><button type="button" aria-pressed={hintPart === i} onClick={() => setHintPart(hintPart === i ? -1 : i)}>{x.text}</button></li>;
-                            })}
-                            {fold && <li className="more"><button type="button" onClick={() => setWhyOpen(true)}>{tr("hint.moreWhy", "Show {n} earlier steps", { n: why.length - 2 })}</button></li>}
-                          </ol>
-                        );
-                      })()}
+                      <div className="sk-hint-head"><span className="sk-step">{t("hint.step", { shown, total: steps.length })}</span><span className={tierClass(hint.tier)}>{t("hint.tier", { tier: hint.tier || 1 })}</span>{hint.rule && <span className="sk-rname">{hint.rule}</span>}
+                        {group.parts.length > 1 && (() => {
+                          const label = whyOpen ? tr("hint.whyHide", "Hide the reasoning") : tr("hint.whyShow", "Show the reasoning ({n} steps)", { n: group.parts.length - 1 });
+                          return <button type="button" className="sk-hint-whybtn" aria-expanded={whyOpen} aria-label={label} title={label} onClick={() => { setWhyOpen(!whyOpen); setHintPart(-1); }}><LensIcon /></button>;
+                        })()}</div>
+                      {whyOpen && group.parts.length > 1 && (
+                        <ol className="sk-hint-why">
+                          {group.parts.slice(0, -1).map((x, i) => <li key={i}><button type="button" aria-pressed={hintPart === i} onClick={() => setHintPart(hintPart === i ? -1 : i)}>{x.text}</button></li>)}
+                        </ol>
+                      )}
                       <p className={`sk-hint-end${hintPart < 0 || hintPart === group.parts.length - 1 ? " on" : ""}`} onClick={() => setHintPart(-1)}>{group.parts[group.parts.length - 1].text}</p>
                     </>
                   ) : (
@@ -2163,10 +2188,12 @@ const CSS = `
 
 /* ===== desktop: dossier | stage | rail ===== */
 .sk-game{display:grid;
-  /* the stage is exactly as wide as the board can be at this height, so the dossier takes all the spare room */
-  grid-template-columns:minmax(340px,1fr) min(calc((100vh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 450px))) 116px;
-  grid-template-columns:minmax(340px,1fr) min(calc((100dvh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 450px))) 116px;grid-template-rows:auto minmax(0,1fr);
+  /* the suspects and the board share the width evenly */
+  grid-template-columns:minmax(340px,1fr) minmax(360px,1fr) 116px;grid-template-rows:auto minmax(0,1fr);
   grid-template-areas:"head stage rail" "dossier stage rail"}
+/* a big board (9×9 and up): the stage is as wide as the board can be at full height, the suspects make room down to 340px */
+.sk-game[data-big]{grid-template-columns:minmax(340px,1fr) min(calc((100vh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 340px))) 116px;
+  grid-template-columns:minmax(340px,1fr) min(calc((100dvh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 340px))) 116px}
 .sk-head{grid-area:head;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"logo timer" "nav nav";align-items:center;gap:12px;
   padding:18px 18px 14px;background:var(--side);border-right:1px solid var(--line);position:relative;z-index:8}
 .sk-head .sk-logo,.sk-logobtn{grid-area:logo;justify-self:start}
@@ -2417,10 +2444,11 @@ const CSS = `
 .sk-hint-main{flex:1 1 auto;min-width:0}
 .sk-hint p{margin:5px 0 9px;font-size:14px;line-height:1.48}
 .sk-hint-why{list-style:none;margin:2px 0 6px;padding:0;display:flex;flex-direction:column;gap:3px;max-height:34vh;overflow-y:auto;scrollbar-width:thin}
-.sk-hint-why button{display:block;width:100%;text-align:start;padding:4px 8px;border-radius:8px;font-size:13.5px;line-height:1.38;color:var(--muted);border-inline-start:3px solid var(--line)}
-.sk-hint-why button:hover{background:var(--panel2);color:var(--fg)}
-.sk-hint-why button[aria-pressed=true]{color:var(--fg);border-color:#6fd0ff;background:rgba(111,208,255,.08)}
-.sk-hint-why .more button{border:0;color:var(--brass2);font-weight:700;font-size:12.5px}
+.sk-hint-why button{display:block;width:100%;text-align:start;padding:4px 8px;border-radius:8px;font-size:13.5px;line-height:1.38;color:#6e6250;border-inline-start:3px solid #d8cdb4} /* ink on the hint's paper, not the dark theme's colours */
+.sk-hint-why button:hover{background:rgba(26,26,34,.06);color:var(--pink)}
+.sk-hint-why button[aria-pressed=true]{color:var(--pink);border-color:#2b8fc4;background:rgba(111,208,255,.2)}
+.sk-hint-whybtn{display:grid;place-items:center;width:28px;height:28px;padding:0;margin-inline-start:auto;border-radius:50%;border:2px solid #1A1A22;background:var(--paper2);color:#1A1A22;cursor:pointer}
+.sk-hint-whybtn[aria-expanded=true],.sk-hint-whybtn:hover{background:var(--brass)}
 .sk-hint-end{cursor:pointer}
 .sk-hint-head{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding-right:24px}
 .sk-hint-x{position:absolute;z-index:2;top:4px;right:6px;width:28px;height:28px;font-size:21px;color:#6e6250}
@@ -2535,6 +2563,18 @@ const CSS = `
   .sk-head{grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-rows:auto;grid-template-areas:"logo nav timer help";gap:7px;
     padding:calc(7px + env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) 7px max(10px,env(safe-area-inset-left));border-right:0;border-bottom:1px solid var(--line)}
   .sk-head .sk-logo{height:28px;filter:none}
+  .sk-head.merged{display:flex;align-items:center;gap:6px;position:relative;z-index:20} /* position: the site menus hang from it */
+  .sk-head.merged .sk-logobtn{margin-inline-end:auto;min-width:0}
+  .sk-head.merged .sk-logo{height:26px;max-width:100%}
+  .sk-head.merged .sk-headr{gap:6px}
+  .sk-head.merged .sk-gear,.sk-head.merged .sk-help{width:36px;height:36px}
+  .sk-headend{display:flex;align-items:center;gap:6px}
+  .sk-headend .sh-controls{gap:6px}
+  .sk-headend .sh-btn{min-height:36px;height:36px;padding:0 11px;font-size:14px}
+  .sk-headend .sh-burger{width:36px;height:36px}
+  .sk-headend .sh-userchip-name{display:none}
+  .sk-casebar{display:flex;justify-content:center;min-width:0}
+  .sk-casebar .sk-nav,.sk-casebar > *{max-width:100%}
   .sk-help{display:grid;width:40px;height:40px}
   .sk-arrow{width:34px;height:40px;font-size:20px}
   .sk-menu-btn{height:40px;padding:0 8px;gap:5px}
@@ -2568,6 +2608,7 @@ const CSS = `
   .sk-cardw{max-width:none;justify-self:stretch}
   /* phone: Polaroid on the left, the statement beside it */
   .sk-card.v{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:5px;padding:5px 6px 5px 4px;border-top:0;border-left:5px solid var(--sc)}
+  .sk-card.v .sk-gsym{top:auto;right:auto;left:auto;bottom:5px;inset-inline-start:58px} /* on the photo's corner, not over the clue */
   .sk-photo{width:100%}
   .sk-card.v .sk-alibi{background:none;padding:0;font-size:12px;line-height:1.3;align-self:center;hyphens:auto}
   .sk-card.adow.v .sk-alibi{background:none}
@@ -2601,6 +2642,7 @@ const CSS = `
   .sk-cast{gap:8px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
   .sk-cardw{max-width:none;justify-self:stretch}
   .sk-card.v{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:5px;padding:4px 6px 4px 4px;border-top:0;border-left:5px solid var(--sc)}
+  .sk-card.v .sk-gsym{top:auto;right:auto;left:auto;bottom:4px;inset-inline-start:46px}
   .sk-photo{width:100%}
   .sk-card.v .sk-alibi{background:none;padding:0;font-size:12px;line-height:1.3;align-self:center;hyphens:auto}
   .sk-card.adow.v .sk-alibi{background:none}
