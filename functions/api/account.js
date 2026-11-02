@@ -1,4 +1,4 @@
-// DELETE /api/account  →  the account's server-side record (its codename) is erased and the session ends.
+// DELETE /api/account  →  the account's server-side record (its codename and game progress) is erased and the session ends.
 // The legal page promises this: "you can delete it any time … removes your account and the game data saved for it".
 import { readSession, deleteRecord, clearCookie, json, sameOrigin } from "../_lib/auth.js";
 

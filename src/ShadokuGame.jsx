@@ -24,11 +24,12 @@
 import React, { useState, useMemo, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { useText, TextContext, tEn } from "./i18n.js";
 import { boldNodes } from "./rich.jsx";
+import { BOARDS_KEY, TIMES_KEY, BESTS_KEY, PROGRESS_EVENT, markProgress, stampBoard } from "./sync.js";
 import { localizeHead, localizeCase, trOf } from "./caseText.js";
-import { RelicCard, ObsidianEnvelope, OmegaFolder, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isRelicCase, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
+import { RelicCard, ObsidianEnvelope, OmegaFolder, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isRelicCase, isUnlocked, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 import {
   AdowPolaroid, AdowToken, ASSASSINS, AssassinPolaroid, AssassinToken, BIOME_META, BRASS, CELL, CREAM, CRIMSON, DIRS, FOG, FOG_OPACITY, FloorDefs, INK, LAB, LABEL,
-  MasterPolaroid, PropChip, PropSprite, SUSPECT_COLORS, SuspectPolaroid, TokenAvatar, WallLayer, WindowPane,
+  FACING, FLAT_FLOOR, MasterPolaroid, PropChip, PropSprite, SUSPECT_COLORS, SuspectPolaroid, TokenAvatar, WallLayer, WindowPane,
   assignFloors, classBlocksSight, classIsOccupiable, classIsSolid, propClassOf, floorOf, getCastForPuzzle, lookFacts, themeOf, windowAt, victimIsDummy, victimNameOf, victimGenderOf, inkOn,
 } from "./ShadokuArt";
 // One JSON file per puzzle (no merged shadoku_puzzles.json). Play order: the tutorial, then Very Easy → Expert.
@@ -139,7 +140,8 @@ export const normalizePuzzle = (p) => ({ ...p, steps: (p.steps || []).map(normSt
 export const normalizePuzzles = (list) => (Array.isArray(list) ? list : []).map(normalizePuzzle);
 export const PUZZLES = normalizePuzzles(DEFAULT_PUZZLES);
 
-const STORE_KEY = "shadoku-playtester-v1", CASE_KEY = "shadoku-case", TIME_KEY = "shadoku-times-v1", BEST_KEY = "shadoku-best-v1";
+const HINT_RUNGS = 3; // where to look → the key deduction → the placement
+const STORE_KEY = BOARDS_KEY, CASE_KEY = "shadoku-case", TIME_KEY = TIMES_KEY, BEST_KEY = BESTS_KEY; // the synced ones: sync.js
 const key = (r, c) => r * 100 + c;
 const DRAW_RANK = { LOW: 0, SHORT: 1, PERCH: 2, TALL: 2 }; // board draw passes: flush, waist-high, upright (CORPSE / unknown: 0)
 const cn = (cell) => `r${cell[0] + 1}c${cell[1] + 1}`;
@@ -238,15 +240,16 @@ export function buildGeometry(p) {
 function loadAll() { try { return JSON.parse(localStorage.getItem(STORE_KEY) || "{}") || {}; } catch (e) { return {}; } }
 function saveAll(v) { try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) { /* private mode */ } }
 /** Save one case into what is stored now: another tab's progress on the other cases is kept, not overwritten by this tab's older copy. */
-function saveCase(id, v) { const all = loadAll(); saveAll({ ...(isObj(all) ? all : {}), [id]: v }); }
+function saveCase(id, v) { const all = loadAll(); saveAll({ ...(isObj(all) ? all : {}), [id]: v }); stampBoard(id); }
 /** Ids of the puzzles the player has fulfilled (read from the saved boards) — the contracts page shows a green check on them. */
 export function readSolvedIds(puzzles) { return Object.keys(readBestTimes(puzzles)); }
 const isObj = (o) => !!o && typeof o === "object" && !Array.isArray(o);
 const validCell = (a) => Array.isArray(a) && a.length === 2 && Number.isInteger(a[0]) && Number.isInteger(a[1]);
 const normMemo = new WeakMap();
-/** Any saved board becomes a well-formed { tokens, notes, lights, crosses, hints, done } — old saves (pencil / marks) migrate, damaged ones are repaired instead of freezing the board. */
+/** Any saved board becomes a well-formed { tokens, notes, lights, crosses, hints, hintLog, done } — old saves (pencil / marks) migrate, damaged ones are repaired instead of freezing the board.
+ *  `hintLog` = { [hint id]: highest rung revealed (1–3) }; `hints` is the count of the old one-rung hints, kept for the stats. */
 export const normCase = (c) => {
-  if (!isObj(c)) return { tokens: {}, notes: {}, lights: {}, crosses: {}, hints: 0, done: false };
+  if (!isObj(c)) return { tokens: {}, notes: {}, lights: {}, crosses: {}, hints: 0, hintLog: {}, done: false };
   if (normMemo.has(c)) return normMemo.get(c);
   const notesSrc = isObj(c.notes) ? c.notes : Object.fromEntries(Object.entries(isObj(c.pencil) ? c.pencil : {}).map(([k, v]) => [k, String(v).toUpperCase()]));
   const tokens = {}, notes = {}, lights = {}, crosses = {};
@@ -255,7 +258,9 @@ export const normCase = (c) => {
   const lightSrc = isObj(c.lights) ? c.lights : isObj(c.marks) ? c.marks : {};
   Object.entries(lightSrc).forEach(([k, v]) => { if (/^\d+$/.test(k) && v) lights[k] = 1; });
   if (isObj(c.crosses)) Object.entries(c.crosses).forEach(([k, v]) => { if (/^\d+$/.test(k) && v) crosses[k] = 1; });
-  const out = { tokens, notes, lights, crosses, hints: Number.isFinite(c.hints) ? c.hints : 0, done: !!c.done };
+  const hintLog = {};
+  if (isObj(c.hintLog)) Object.entries(c.hintLog).forEach(([k, v]) => { if (Number.isInteger(v) && v >= 1) hintLog[k] = Math.min(HINT_RUNGS, v); });
+  const out = { tokens, notes, lights, crosses, hints: Number.isFinite(c.hints) ? c.hints : 0, hintLog, done: !!c.done };
   normMemo.set(c, out);
   return out;
 };
@@ -283,6 +288,34 @@ const isSolved = (q, cs0) => {
   return !!cs.done && !!q.shadow && hidersOf(q).every((id) => { const at = hiderCell(q, id); return !!at && sameCell(cs.tokens[id], ...at); })
     && q.suspects.every((s) => sameCell(cs.tokens[s.id], ...s.solution));
 };
+/**
+ * The hint for the board as it is now (V10.5). Each hint has HINT_RUNGS rungs: where to look → the key deduction → the placement.
+ *  - A mistake comes first: a token on a wrong tile, an X on someone's tile, a light on a hiding tile → { mistake: "token"|"cross"|"light", id?, cell }.
+ *  - Otherwise the engine's hints (p.hints) whose suspect is not yet on its tile and whose `needs` all stand on theirs; a hint the player has
+ *    already opened wins (it does not jump away when another suspect is placed), else the first in the engine's order.
+ *  - null when everyone stands right (or the case has no hints). `hid` keys the hint in the saved hintLog.
+ */
+export function boardHint(p, cs) {
+  const tiles = [...(p.suspects || []).map((q) => [q.id, q.solution]), ...hidersOf(p).map((id) => [id, hiderCell(p, id)])].filter(([, at]) => !!at);
+  for (const [id, at] of tiles) {
+    const t = cs.tokens[id];
+    if (t && !sameCell(t, ...at)) return { mistake: "token", id, cell: t, hid: `!${id}@${t[0]},${t[1]}` };
+  }
+  const hiders = new Set(hidersOf(p));
+  for (const [id, at] of tiles) {
+    const k = key(at[0], at[1]);
+    if (cs.crosses[k] && !tokenIdAt(cs, ...at)) return { mistake: "cross", cell: at, hid: `!x@${at[0]},${at[1]}` };
+    if (hiders.has(id) && cs.lights[k]) return { mistake: "light", cell: at, hid: `!l@${at[0]},${at[1]}` };
+  }
+  const right = new Set(tiles.filter(([id, at]) => sameCell(cs.tokens[id], ...at)).map(([id]) => id));
+  const done = (h) => (h.suspect === "S" ? hidersOf(p).every((id) => right.has(id)) : right.has(h.suspect));
+  const open = (p.hints || []).filter((h) => !done(h) && h.needs.every((n) => right.has(n)));
+  if (!open.length) return null;
+  const log = cs.hintLog || {}, hid = (h) => `h:${h.suspect}`;
+  const started = open.filter((h) => log[hid(h)]).sort((a, b) => log[hid(b)] - log[hid(a)])[0];
+  const h = started || open[0];
+  return { ...h, hid: hid(h) };
+}
 const snap = (cs) => ({ tokens: cs.tokens, notes: cs.notes, lights: cs.lights, crosses: cs.crosses });
 /** A crossed-out tile keeps its notes, hidden until the X comes off (a light switch leaves them showing). */
 const notesHidden = (cs, k) => !!cs.crosses[k];
@@ -332,10 +365,16 @@ const readTime = (id) => Math.max(0, Math.floor(+readTimes()[id] || 0));
 function writeTime(id, s) { try { const t = readTimes(); t[id] = s; localStorage.setItem(TIME_KEY, JSON.stringify(t)); } catch (e) { /* ignore */ } }
 /* ---- Best times: { [contract id]: seconds }. A contract is FULFILLED once it has an entry here (so wiping a solved board does not un-solve it). ---- */
 function readBests() { try { return JSON.parse(localStorage.getItem(BEST_KEY) || "{}") || {}; } catch (e) { return {}; } }
-function recordBest(id, s) { try { const b = readBests(), t = Math.max(1, Math.floor(s) || 1); if (!(b[id] > 0) || t < b[id]) b[id] = t; localStorage.setItem(BEST_KEY, JSON.stringify(b)); } catch (e) { /* ignore */ } }
+function recordBest(id, s) { try { const b = readBests(), t = Math.max(1, Math.floor(s) || 1); if (!(b[id] > 0) || t < b[id]) b[id] = t; localStorage.setItem(BEST_KEY, JSON.stringify(b)); } catch (e) { /* ignore */ } markProgress(true); }
+/** Hint rungs revealed on a saved board: { look, key, place } (each rung counts once per hint; the old one-rung hints count as placements). */
+export function hintCounts(cs) {
+  const rungs = Object.values(cs.hintLog || {});
+  const n = (r) => rungs.filter((v) => v >= r).length;
+  return { look: n(1), key: n(2), place: n(3) + Math.max(0, +cs.hints || 0) };
+}
 /**
  * The profile's numbers, per contract: { [id]: { played, solved, best, hints } } (`played`: the player marked the board, took a hint or solved it,
- * `best`: best seconds when fulfilled, `hints`: hints taken on the saved board). Read from this browser's storage.
+ * `best`: best seconds when fulfilled, `hints`: the hint rungs taken on the saved board, { look, key, place }). Read from this browser's storage.
  */
 export function readPlayStats(puzzles) {
   const all = loadAll(), bests = readBestTimes(puzzles), out = {};
@@ -343,10 +382,10 @@ export function readPlayStats(puzzles) {
     const cs = normCase(all[q.id]);
     const seeded = q.id === "tutorial" || !!q.dummies; // the initiation opens with the Master's pencil notes already on the board
     const marks = Object.keys(cs.tokens).length + Object.keys(cs.lights).length + Object.keys(cs.crosses).length + (seeded ? 0 : Object.keys(cs.notes).length);
-    const hints = Math.max(0, +cs.hints || 0);
+    const hints = hintCounts(cs);
     const solved = bests[q.id] > 0;
     // played = the player did something (a mark, a hint, a solve): merely opening a contract, or its clock running, is not playing it
-    out[q.id] = { played: solved || marks > 0 || hints > 0, solved, best: solved ? bests[q.id] : 0, hints };
+    out[q.id] = { played: solved || marks > 0 || hints.look + hints.place > 0, solved, best: solved ? bests[q.id] : 0, hints };
   });
   return out;
 }
@@ -393,6 +432,8 @@ function useElementSize(ref) {
 /* The word lists are the locale's (ui.emph.logic / ui.emph.negations, "|"-separated); these are the in-code English for a locale-less build. */
 const LOGIC_WORDS = "beside|next to|adjacent|same|different|alone|together|only|exactly|at least|at most|north|south|east|west|row|rows|column|columns|above|below|corner|edge|between|diagonal|diagonally|every|each|man|men|woman|women";
 const NEGATIONS = "not|never|no|nobody|neither|nor|none|without|nowhere|wasn't|weren't|didn't|isn't";
+/** The bare surface of each theme (engine/shadoku_i18n.py SURFACE_EN; a locale words them with SURFACE.<ID>). */
+const SURFACE_EN = { FLOOR: "bare floor", PAVEMENT: "bare pavement", SAND: "bare sand", GROUND: "bare ground" };
 const wordList = (text) => String(text || "").split("|").map((w) => w.trim()).filter(Boolean);
 const upper = (str) => { let lang; try { lang = document.documentElement.lang || undefined; } catch (e) { /* SSR */ } try { return String(str).toLocaleUpperCase(lang); } catch (e) { return String(str).toUpperCase(); } };
 const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -405,6 +446,9 @@ function buildEmphasis(p, colorOf, t = tEn) {
   hidersOf(p).forEach((id) => add(t(`assassin.${id}`), { k: "nm", id }));
   (p.assassins || []).forEach((a) => add(a.name, { k: "nm", id: a.id })); // the English name too, for a locale without ui.assassin.<letter>
   (p.roomLabels || p.roomNames || []).forEach((n, i) => add(n, { k: "rm", i }));
+  // "bare pavement": bold, its "(no bench, puddle …)" list moves into a hover tooltip (kept inline with `full`)
+  const surfaces = Object.entries(SURFACE_EN).map(([id, en]) => tx(`SURFACE.${id}`, en));
+  surfaces.forEach((n) => add(n, { k: "bare" }));
   Object.keys(LABEL).forEach((k) => add(t(`prop.${k}`), { k: "pr", kind: k }));
   Object.keys(LABEL).forEach((k) => { const n = t(`PROP.${k}.noun`); if (n && n !== `PROP.${k}.noun`) add(n, { k: "pr", kind: k }); }); // the clues' own noun ("hot pool", "trail of footprints", "lamppost")
   // "row 5" / "column 3", worded like the locale's own clues (FRAG_LINES_ONE.*: "row {line|n1}")
@@ -422,8 +466,23 @@ function buildEmphasis(p, colorOf, t = tEn) {
     const l = m.toLowerCase();
     return kinds.get(l) || kinds.get(l.replace(/es$/, "")) || kinds.get(l.replace(/s$/, ""));
   };
-  return (text) => {
-    const out = [], src = String(text || "");
+  // a surface, then (a few words on, as in Japanese) its parenthesised list of low props: "bare sand (no camel, … or woven mat)"
+  const bareRe = new RegExp(`(${surfaces.map(escRe).join("|")})([^()（）.。;:!?]{0,24}?)\\s*([(（][^()（）]*[)）])`, "gi");
+  /** → [text without the lists, Map(index of the surface in that text → its list)] */
+  const stripLists = (s) => {
+    const tips = new Map();
+    let kept = "", from = 0, m;
+    bareRe.lastIndex = 0;
+    while ((m = bareRe.exec(s))) {
+      kept += s.slice(from, m.index);
+      tips.set(kept.length, m[3]);
+      kept += m[1] + m[2];
+      from = m.index + m[0].length;
+    }
+    return [kept + s.slice(from), tips];
+  };
+  return (text, full = false) => {
+    const out = [], [src, tips] = full ? [String(text || ""), new Map()] : stripLists(String(text || ""));
     let last = 0, m, i = 0;
     re.lastIndex = 0;
     while ((m = re.exec(src))) {
@@ -436,6 +495,7 @@ function buildEmphasis(p, colorOf, t = tEn) {
       else if (v.k === "neg") out.push(<strong key={k} className="sk-neg">{word}</strong>);
       else if (v.k === "kw") out.push(<b key={k} className="sk-kw" data-kw={v.c}>{word}</b>);
       else if (v.k === "ln") out.push(<b key={k} className="sk-kw" data-hi={`${v.axis}:${v.n}`}>{word}</b>);
+      else if (v.k === "bare") out.push(tips.has(start) ? <b key={k} className="sk-kw sk-bare" data-tip={tips.get(start)}>{word}</b> : <b key={k} className="sk-kw">{word}</b>);
       else out.push(<em key={k} className={v.k === "rm" ? "sk-rm" : "sk-pr"} data-hi={v.k === "rm" ? `rm:${v.i}` : `pr:${v.kind}`}>{word}</em>);
       last = start + word.length;
     }
@@ -490,7 +550,12 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       if (!k || k === "VOID" || geo.spanAt(r, c)) return;
       out.push({ kind: k, r, c, cw: 1, ch: 1, cells: [[r, c]] });
     });
-    out.forEach((it) => { it.rank = DRAW_RANK[geo.classOfKind(it.kind)] || 0; it.bottom = it.r + it.ch - 1; it.occ = classIsOccupiable(geo.classOfKind(it.kind)); });
+    const shut = (r, c, dc) => !geo.inside(r, c + dc) || geo.isVoid(r, c + dc) || geo.isWall([r, c], [r, c + dc]);
+    out.forEach((it) => {
+      it.rank = DRAW_RANK[geo.classOfKind(it.kind)] || 0; it.bottom = it.r + it.ch - 1;
+      it.occ = classIsOccupiable(geo.classOfKind(it.kind)) && !FLAT_FLOOR.has(it.kind); // fades under a token (flat floor items never do)
+      it.flip = FACING.has(it.kind) && it.cw === 1 && it.ch === 1 && shut(it.r, it.c, 1) && !shut(it.r, it.c, -1); // face away from a wall on the east
+    });
     return out.sort((a, b) => a.rank - b.rank || a.bottom - b.bottom || a.c - b.c);
   }, [geo]); // eslint-disable-line react-hooks/exhaustive-deps
   const floors = useMemo(() => assignFloors(p, geo), [p, geo]);
@@ -618,7 +683,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
           overlap correctly. A multi-tile object is ONE item drawn across its span (box origin = its top-left cell). */}
       {props.map((it) => (
         <g key={`p${it.r}-${it.c}-${it.kind}`} transform={`translate(${X(it.c)} ${Y(it.r)})${+o.objSize ? ` translate(${it.cw * CELL / 2} ${it.ch * CELL / 2}) scale(${1 + +o.objSize}) translate(${-it.cw * CELL / 2} ${-it.ch * CELL / 2})` : ""}`} opacity={it.occ && it.cells.some(([r, c]) => tokenAt.has(key(r, c))) ? 0.6 : 1} pointerEvents="none">
-          <PropSprite kind={it.kind} cw={it.cw} ch={it.ch} len={it.len} horizontal={it.horizontal} cells={it.cells.map(([r, c]) => [r - it.r, c - it.c])} victim={victimNameOf(p)} dummy={victimIsDummy(p)} master={p.id === UMBRA_FINALE} second={p.id === UMBRA_HARD} />
+          <PropSprite kind={it.kind} cw={it.cw} ch={it.ch} len={it.len} horizontal={it.horizontal} cells={it.cells.map(([r, c]) => [r - it.r, c - it.c])} flip={it.flip} victim={victimNameOf(p)} dummy={victimIsDummy(p)} master={p.id === UMBRA_FINALE} second={p.id === UMBRA_HARD} />
         </g>
       ))}
 
@@ -1049,9 +1114,9 @@ function SuspectCard({ q, look, color, on, placed, emph, onPick, onInspect, coac
     </div>
   );
 }
-function AdowCard({ beach, on, placed, solved, room, onPick, onInspect, coach, hint, hi = false }) {
+function AdowCard({ beach, on, placed, solved, onPick, onInspect, coach, hint, hi = false }) {
   const t = useText();
-  const text = solved ? t("game.adowCaught", { room: room || t("game.dark") }) : t("game.adowHidden");
+  const text = t("game.adowHidden"); // his alibi never changes, solved or not (the solved banner says where he was)
   return (
     <div className="sk-cardw">
       <button type="button" className={`sk-card adow v${on ? " on" : ""}${placed ? " placed" : ""}${coach ? " coach" : ""}${hi ? " hi" : ""}`} style={{ "--sc": BRASS }} aria-pressed={on} onClick={onPick}>
@@ -1083,7 +1148,7 @@ function AssassinCard({ a, color, on, placed, emph, onPick, onInspect, coach, hi
  *  (S. H. Adow's crimson tie; the other assassins' colours come in as `color`). */
 const synAccent = (id, color) => (id === "S" ? ASSASSINS.S.tie : color);
 /** The Suspect card (an assassin's: the Syndicate card): the polaroid, the name, what they look like and what they said. A green check shows once they are on the board. */
-function SuspectSheet({ q, look, color, placed, solved, emph, beach, room, onClose, gender = null }) {
+function SuspectSheet({ q, look, color, placed, emph, beach, onClose, gender = null }) {
   const t = useText();
   useEffect(() => {
     const esc = (e) => { if (e.key === "Escape") onClose(); };
@@ -1109,7 +1174,7 @@ function SuspectSheet({ q, look, color, placed, solved, emph, beach, room, onClo
             <dl className="sk-facts">{facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
           </div>
         </div>
-        <div className="sk-sheet-clue"><span>{t("game.alibi")}</span>{adow ? <p><b className="sk-nm" style={{ "--nc": BRASS }}>{name}</b> {solved ? t("game.adowCaught", { room: room || t("game.dark") }) : t("game.adowAlibiHidden")}</p> : <p>{emph(q.clue)}</p>}</div>
+        <div className="sk-sheet-clue"><span>{t("game.alibi")}</span>{adow ? <p><b className="sk-nm" style={{ "--nc": BRASS }}>{name}</b> {t("game.adowAlibiHidden")}</p> : <p>{emph(q.clue, true)}</p>}</div>
       </div>
     </div>
   );
@@ -1426,10 +1491,11 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const emph = useMemo(() => buildEmphasis(p, colorOf, t), [p, colorOf, t]);
 
   useEffect(() => () => { if (holdTimer.current) clearTimeout(holdTimer.current); }, []);
-  useEffect(() => { // another tab saved: take its boards (every move here is saved at once, so nothing of this tab's is lost)
-    const h = (e) => { if (e.key === STORE_KEY) { live.current = loadAll(); setAll(live.current); } };
+  useEffect(() => { // another tab saved, or a sync brought another device's boards: take them (every move here is saved at once, so nothing of this tab's is lost)
+    const h = (e) => { if (e.type === PROGRESS_EVENT || e.key === STORE_KEY) { live.current = loadAll(); setAll(live.current); } };
     window.addEventListener("storage", h);
-    return () => window.removeEventListener("storage", h);
+    window.addEventListener(PROGRESS_EVENT, h);
+    return () => { window.removeEventListener("storage", h); window.removeEventListener(PROGRESS_EVENT, h); };
   }, []);
   const [autoPicked, setAutoPicked] = useState(true); // the first suspect is selected for the player when a case opens: tapping that card confirms it, it does not deselect
   useEffect(() => {
@@ -1700,14 +1766,17 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const KW_GATE = { nm: "kwPeople", rm: "kwRooms", pr: "kwObjects", row: "kwLines", col: "kwLines" };
   const onClueOver = (e) => {
     if (e.pointerType && e.pointerType !== "mouse") return;
-    const el = settings.kw && e.target && e.target.closest ? e.target.closest("[data-hi],[data-kw]") : null;
+    const at = e.target && e.target.closest ? e.target : null;
+    const el = settings.kw && at ? at.closest("[data-hi],[data-kw]") : null;
     const raw = el && el.getAttribute("data-hi"), hi = raw && settings[KW_GATE[raw.split(":")[0]]] ? raw : null;
     setClueHi((h) => (h === hi ? h : hi));
-    const c = el && settings.kwCore ? el.getAttribute("data-kw") : null;
-    if (!c) { setKwTip((k) => (k ? null : k)); return; }
-    const root = rootRef.current, b = el.getBoundingClientRect(), rb = root ? root.getBoundingClientRect() : { left: 0, top: 0, width: 1e4 };
+    const tipEl = at ? at.closest("[data-tip]") : null; // a bare surface's "(no …)" list is part of the clue: shown whatever the tooltip settings
+    const text = tipEl ? tipEl.getAttribute("data-tip") : null;
+    const c = !text && el && settings.kwCore ? el.getAttribute("data-kw") : null;
+    if (!c && !text) { setKwTip((k) => (k ? null : k)); return; }
+    const root = rootRef.current, b = (tipEl || el).getBoundingClientRect(), rb = root ? root.getBoundingClientRect() : { left: 0, top: 0, width: 1e4 };
     const left = Math.max(160, Math.min(rb.width - 160, b.left + b.width / 2 - rb.left)), top = b.bottom - rb.top + 6;
-    setKwTip((k) => (k && k.c === c && k.left === left && k.top === top ? k : { c, left, top }));
+    setKwTip((k) => (k && k.c === c && k.text === text && k.left === left && k.top === top ? k : { c, text, left, top }));
   };
   const clearClueHover = () => { setClueHi(null); setKwTip(null); };
   /* "Selected character's clue" (settings.kwSelected): every board reference in the selected suspect's own clue stays lit, on touch screens too. */
@@ -1742,33 +1811,69 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     return () => document.removeEventListener("keydown", esc);
   }, [inspectOpen]);
 
-  /* Hints */
-  /* Murdoku-style hints: the deductions that lead to a placement and the placement itself are ONE hint (about one hint per suspect).
-     Inside a hint the player can pick a line to see its tiles on the board; the placement is picked first. */
-  const steps = useMemo(() => {
-    const out = [];
-    let cur = [];
-    (p.steps || []).forEach((s) => { cur.push(s); if (s.kind !== "eliminate") { out.push(cur); cur = []; } });
-    if (cur.length) out.push(cur);
-    return out.map((parts, k) => {
-      const top = parts.reduce((a, b) => ((b.tier || 1) > (a.tier || 1) ? b : a), parts[0]);
-      return { n: k + 1, parts, tier: top.tier || 1, rule: top.rule };
+  /* Hints (V10.5): one hint at a time, read from the board as it is now (boardHint), opened rung by rung:
+     1 where to look (the suspect and the tiles its clue fits), 2 the key deduction (the steps that rule out its other tiles; the
+     groundwork stays folded under the lens), 3 the placement. Each rung counts once per hint (hintLog → the profile's stats). */
+  const cur = useMemo(() => boardHint(p, st), [p, st]);
+  const revealed = cur ? st.hintLog[cur.hid] || 0 : 0;
+  const [hintRung, setHintRung] = useState(0); // the rung on show (0: the board moved on to a hint not opened yet)
+  const [hintPick, setHintPick] = useState(-1); // the picked chain line of rung 2 (-1: the last key line)
+  const [whyOpen, setWhyOpen] = useState(false); // the groundwork of rung 2 stays folded until the player asks for it (the lens)
+  const [groupOpen, setGroupOpen] = useState(() => new Set()); // unfolded runs of like groundwork lines
+  useEffect(() => { setHintRung(revealed); setHintPick(-1); setWhyOpen(false); setGroupOpen(new Set()); }, [cur && cur.hid, p.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  const showRung = (r) => {
+    if (!cur) return;
+    if (r > revealed) mutate((cs) => ({ ...cs, hintLog: { ...cs.hintLog, [cur.hid]: Math.max(cs.hintLog[cur.hid] || 0, r) } }), false);
+    setHintRung(r); setHintPick(-1);
+  };
+  const keyLines = cur && cur.chain ? cur.key.map((i) => [i, cur.chain[i]]) : [];
+  // the groundwork: chain lines that are not key lines, consecutive lines with one rule about the same suspects folded into one run
+  const ground = useMemo(() => {
+    if (!cur || !cur.chain) return [];
+    const keys = new Set(cur.key), out = [];
+    cur.chain.forEach((s, i) => {
+      if (keys.has(i)) return;
+      const who = Object.keys(s.elims || {}).sort().join(""), last = out[out.length - 1];
+      if (last && last.ruleKey === (s.i18n && s.i18n.ruleKey) && last.who === who && last.end === i - 1) { last.lines.push([i, s]); last.end = i; }
+      else out.push({ ruleKey: s.i18n && s.i18n.ruleKey, rule: s.rule, who, lines: [[i, s]], end: i });
     });
-  }, [p.steps]);
-  const shown = Math.min(st.hints, steps.length), group = shown ? steps[shown - 1] : null;
-  const [hintPart, setHintPart] = useState(-1); // the picked line of the open hint (-1: its last line)
-  useEffect(() => { setHintPart(-1); }, [shown, p.id]);
-  const hintLine = group ? group.parts[hintPart < 0 ? group.parts.length - 1 : Math.min(hintPart, group.parts.length - 1)] : null;
-  const hint = group ? { n: `${group.n}.${hintPart}`, focus: hintLine.focus, cell: hintLine.cell, tier: group.tier, rule: group.rule } : null;
-  const [whyOpen, setWhyOpen] = useState(false); // the reasoning behind the placement stays folded until the player asks for it (the lens in the hint's head)
-  useEffect(() => { setWhyOpen(false); }, [shown, p.id]);
+    return out;
+  }, [cur]);
+  const zoneTiles = (cells) => {
+    const rooms = new Set(cells.map((at) => geo.room(...at))), out = [];
+    for (let r = 0; r < geo.R; r++) for (let c = 0; c < geo.C; c++) if (!geo.isVoid(r, c) && rooms.has(geo.room(r, c))) out.push([r, c]);
+    return out;
+  };
+  const hiderTiles = hidersOf(p).map((id) => hiderCell(p, id)).filter(Boolean);
+  const hint = useMemo(() => { // what the board marks for the rung on show: { n, focus, cell }
+    if (!cur || !hintRung) return null;
+    const n = `${cur.hid}.${hintRung}.${hintPick}`;
+    if (cur.mistake) {
+      if (hintRung === 3) return { n, focus: [], cell: cur.cell };
+      return { n, focus: hintRung === 2 && cur.mistake !== "token" ? zoneTiles([cur.cell]) : [] };
+    }
+    if (cur.suspect === "S") return hintRung === 3 ? { n, focus: hiderTiles, cell: cur.cell } : { n, focus: hintRung === 2 ? zoneTiles(hiderTiles) : [] };
+    if (hintRung === 1) return { n, focus: cur.fits };
+    if (hintRung === 3) return { n, focus: [], cell: cur.cell };
+    const line = hintPick >= 0 ? cur.chain[hintPick] : keyLines.length ? keyLines[keyLines.length - 1][1] : null;
+    return { n, focus: line ? line.focus : cur.fits };
+  }, [cur, hintRung, hintPick, geo]); // eslint-disable-line react-hooks/exhaustive-deps
+  const hintCard = hintOpen && cur && hintRung ? (cur.mistake ? (cur.mistake === "token" && hintRung >= 2 ? cur.id : null) : cur.suspect !== "S" ? cur.suspect : null) : null;
+  const hintAct = () => { // rung 3's button: do what the hint says
+    if (!cur) return;
+    const k = key(cur.cell[0], cur.cell[1]);
+    if (cur.mistake === "token") mutate((cs) => withoutToken(cs, cur.id));
+    else if (cur.mistake === "cross") mutate((cs) => withCross(cs, k, false));
+    else if (cur.mistake === "light") mutate((cs) => withLight(cs, k, false));
+    else if (cur.suspect === "S") mutate((cs) => hidersOf(p).reduce((a, id) => withToken(a, id, ...hiderCell(p, id)), cs));
+    else mutate((cs) => withToken(cs, cur.suspect, ...cur.cell));
+  };
   const coordsOn = settings.coords || hintOpen; // row / column numbers: always (settings) or while a hint is open
   const LB = coordsOn ? COORD_BAND : 0;
-  const setHints = (n) => mutate((cs) => ({ ...cs, hints: n }), false);
   const onHint = () => {
     if (hintOpen) { setHintOpen(false); return; }
     setHintOpen(true);
-    if (!shown && steps.length) setHints(1);
+    if (cur) showRung(Math.max(1, revealed));
   };
   useEffect(() => {
     if (!hintOpen) return undefined;
@@ -1909,7 +2014,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const showZoom = zoomBtns || zoom > 1;
   const bigBoard = Math.max(geo.R, geo.C) >= 10; // 10×10 – 12×12: Reset stays on screen so the whole grid is one tap away
   // while zoomed in, bring the tiles a hint talks about into view (the hint drawer covers the foot of the board on desktop)
-  const hintFocus = hintOpen && hint && hint.focus && hint.focus[0] ? hint.focus : null;
+  const hintTiles = hint ? [...(hint.focus || []), ...(hint.cell ? [hint.cell] : [])] : [];
+  const hintFocus = hintOpen && hintTiles.length ? hintTiles : null;
   useIsoLayoutEffect(() => {
     const vp = vpRef.current;
     if (!vp || zoom <= 1 || !hintFocus) return;
@@ -1969,6 +2075,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   };
   const solvedIds = solved ? new Set(Object.keys(readBestTimes(puzzles))) : null;
   const finaleNo = PUZZLES.filter((q) => q.id !== TUTORIAL_ID).findIndex((q) => q.id === UMBRA_FINALE) + 1; // its number in the contracts hub
+  const hardNo = PUZZLES.filter((q) => q.id !== TUTORIAL_ID).findIndex((q) => q.id === UMBRA_HARD) + 1; // The Uninvited Guests' number there
   const genderOf = (q) => { const g = String(q.gender || (looks[q.id] && looks[q.id].gender) || "").toLowerCase(); return g === "m" || g === "f" ? g : null; };
   const nameOf = (id) => (hiders.includes(id) ? t(`assassin.${id}`) : (suspects.find((q) => q.id === id) || {}).name || id);
   const tierClass = (t) => `sk-tier t${Math.min(3, Math.max(1, +t || 1))}`;
@@ -2050,12 +2157,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
           {suspects.map((q) => (
             <SuspectCard key={q.id} q={q} look={looks[q.id]} color={colorOf(q.id)} on={tool === "suspect" && active === q.id} placed={!!st.tokens[q.id]}
               emph={emph} onPick={() => pick(q.id)} onInspect={() => setSheet(q.id)} coach={coachCard === q.id} hint={tapAgain(q.id)}
-              gender={settings.gender ? genderOf(q) : null} hi={hiCard === q.id} />
+              gender={settings.gender ? genderOf(q) : null} hi={hiCard === q.id || hintCard === q.id} />
           ))}
-          <AdowCard beach={beach} on={tool === "suspect" && active === "S"} placed={!!st.tokens.S} solved={solved} room={shadowRoom} onPick={() => pick("S")} onInspect={() => setSheet("S")} coach={coachCard === "S"} hint={tapAgain("S")} hi={hiCard === "S"} />
+          <AdowCard beach={beach} on={tool === "suspect" && active === "S"} placed={!!st.tokens.S} solved={solved} onPick={() => pick("S")} onInspect={() => setSheet("S")} coach={coachCard === "S"} hint={tapAgain("S")} hi={hiCard === "S" || hintCard === "S"} />
           {extra.map((a) => (
             <AssassinCard key={a.id} a={a} color={colorOf(a.id)} on={tool === "suspect" && active === a.id} placed={!!st.tokens[a.id]} emph={emph} onPick={() => pick(a.id)} onInspect={() => setSheet(a.id)}
-              coach={coachCard === a.id} hint={tapAgain(a.id)} hi={hiCard === a.id} />
+              coach={coachCard === a.id} hint={tapAgain(a.id)} hi={hiCard === a.id || hintCard === a.id} />
           ))}
         </div>
         {Lab && mobile && <button type="button" className="sk-lablink" onClick={() => setView("lab")}>🧪 Open the SVG Asset &amp; Portrait Inspector</button>}
@@ -2128,31 +2235,66 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                 <button type="button" className="sk-hint-x" onClick={() => setHintOpen(false)} aria-label={t("hint.hideAria")}>×</button>
                 <div className="sk-hint-pic" aria-hidden="true"><MasterPolaroid size={64} /></div>
                 <div className="sk-hint-main">
-                  {hint ? (
-                    <>
-                      <div className="sk-hint-head"><span className="sk-step">{t("hint.step", { shown, total: steps.length })}</span><span className={tierClass(hint.tier)}>{t("hint.tier", { tier: hint.tier || 1 })}</span>{hint.rule && <span className="sk-rname">{hint.rule}</span>}
-                        {group.parts.length > 1 && (() => {
-                          const label = whyOpen ? tr("hint.whyHide", "Hide the reasoning") : tr("hint.whyShow", "Show the reasoning ({n} steps)", { n: group.parts.length - 1 });
-                          return <button type="button" className="sk-hint-whybtn" aria-expanded={whyOpen} aria-label={label} title={label} onClick={() => { setWhyOpen(!whyOpen); setHintPart(-1); }}><LensIcon /></button>;
-                        })()}</div>
-                      {whyOpen && group.parts.length > 1 && (
-                        <ol className="sk-hint-why">
-                          {group.parts.slice(0, -1).map((x, i) => <li key={i}><button type="button" aria-pressed={hintPart === i} onClick={() => setHintPart(hintPart === i ? -1 : i)}>{x.text}</button></li>)}
-                        </ol>
-                      )}
-                      <p className={`sk-hint-end${hintPart < 0 || hintPart === group.parts.length - 1 ? " on" : ""}`} onClick={() => setHintPart(-1)}>{group.parts[group.parts.length - 1].text}</p>
-                    </>
-                  ) : (
-                    <>
-                      <div className="sk-hint-head"><span className="sk-step">{t("hint.counsel")}</span></div>
-                      <p>{t("hint.none")}</p>
-                    </>
-                  )}
-                  <div className="sk-hint-act">
-                    <button type="button" className="sk-btn primary" onClick={() => setHints(shown + 1)} disabled={shown >= steps.length}>{t("hint.next")}</button>
-                    <button type="button" className="sk-btn" onClick={() => setHints(Math.max(1, shown - 1))} disabled={shown <= 1}>{t("hint.back")}</button>
+                  {(() => {
+                    const coord = (at) => t("fmt.coord", { row: at[0] + 1, col: at[1] + 1 });
+                    const zone = (at) => (p.roomLabels || p.roomNames)[geo.room(...at)];
+                    const head = (extra) => <div className="sk-hint-head"><span className="sk-step">{t("hint.counsel")}</span>{extra}</div>;
+                    if (!cur) return <>{head(null)}<p>{p.hints && p.hints.length ? tr("hint.allRight", "Everyone stands on the right tile. Press Submit.") : t("hint.none")}</p></>;
+                    if (!hintRung) return <>{head(null)}<p>{tr("hint.ready", "Your board has moved on. Ask for the next hint when you want it.")}</p></>;
+                    const stage = [tr("hint.stage.1", "Where to look"), tr("hint.stage.2", "The key deduction"), tr("hint.stage.3", "The placement")][hintRung - 1];
+                    const lead = cur.mistake ? null : cur.suspect === "S" ? null : keyLines.length ? keyLines.reduce((a, b) => ((b[1].tier || 1) > (a[1].tier || 1) ? b : a))[1] : cur.place;
+                    const chips = <><span className="sk-rung">{tr("hint.rung", "{n}/{total} · {stage}", { n: hintRung, total: HINT_RUNGS, stage })}</span>
+                      {lead && hintRung >= 2 && <><span className={tierClass(cur.tier)}>{t("hint.tier", { tier: cur.tier || 1 })}</span><span className="sk-rname">{lead.rule}</span></>}</>;
+                    const line = (i, s) => <li key={i}><button type="button" aria-pressed={hintPick === i} onClick={() => setHintPick(hintPick === i ? -1 : i)}>{s.text}</button></li>;
+                    let body;
+                    if (cur.mistake) {
+                      const who = cur.id && nameOf(cur.id);
+                      body = <p>{hintRung === 1 ? tr("hint.wrongLook", "Something on your board does not add up. Check your tokens and marks against the clues.")
+                        : hintRung === 2 ? (cur.mistake === "token" ? tr("hint.wrongWho", "Look again at {name}.", { name: who }) : tr("hint.wrongZone", "Look again at your marks in the {zone}.", { zone: zone(cur.cell) }))
+                          : cur.mistake === "token" ? tr("hint.wrongToken", "{name} cannot be on {coord}.", { name: who, coord: coord(cur.cell) })
+                            : cur.mistake === "cross" ? tr("hint.wrongCross", "Someone is on {coord}: the X there is wrong.", { coord: coord(cur.cell) })
+                              : tr("hint.wrongLight", "Someone hides on {coord}: the light there is wrong.", { coord: coord(cur.cell) })}</p>;
+                    } else if (cur.suspect === "S") {
+                      body = hintRung === 1 ? <p>{hiders.length > 1 ? tr("hint.shadowLookMany", "Everyone is placed. Find the {n} tiles no suspect watches: the assassins hide there.", { n: hiders.length })
+                        : tr("hint.shadowLook", "Everyone is placed. Find the one tile no suspect watches: S. H. Adow hides there.")}</p>
+                        : hintRung === 2 ? <ul className="sk-hint-why">{hiders.map((id) => <li key={id}><span>{tr("hint.hidesIn", "{name} hides in the {zone}.", { name: nameOf(id), zone: zone(hiderCell(p, id)) })}</span></li>)}</ul>
+                          : <p>{cur.place.text}</p>;
+                    } else if (hintRung === 1) {
+                      body = <p>{tr("hint.look", "Look at {name}. The tiles that fit the clue are marked on the board.", { name: nameOf(cur.suspect) })}</p>;
+                    } else if (hintRung === 2) {
+                      const n = cur.chain.length - keyLines.length;
+                      const label = whyOpen ? tr("hint.groundHide", "Hide the groundwork") : tr("hint.groundShow", "Show the groundwork ({n} steps)", { n });
+                      body = <>
+                        {keyLines.length ? <ol className="sk-hint-why key">{keyLines.map(([i, s]) => line(i, s))}</ol>
+                          : <p>{cur.fits.length === 1 ? tr("hint.oneFit", "Only one tile fits {name}'s clue.", { name: nameOf(cur.suspect) })
+                            : tr("hint.direct", "The suspects on the board already take or watch every other tile that fits {name}'s clue.", { name: nameOf(cur.suspect) })}</p>}
+                        {n > 0 && <button type="button" className="sk-hint-ground" aria-expanded={whyOpen} onClick={() => { setWhyOpen(!whyOpen); setHintPick(-1); }}><LensIcon /><span>{label}</span></button>}
+                        {whyOpen && n > 0 && (
+                          <ol className="sk-hint-why">
+                            {ground.map((g, gi) => (g.lines.length === 1 || groupOpen.has(gi) ? g.lines.map(([i, s]) => line(i, s)) : (
+                              <li key={`g${gi}`}><button type="button" className="sk-hint-run" aria-expanded={false} onClick={() => setGroupOpen(new Set([...groupOpen, gi]))}>
+                                {g.who ? tr("hint.run", "{rule} · {names} ({n} steps)", { rule: g.rule, names: [...g.who].map(nameOf).join(", "), n: g.lines.length })
+                                  : tr("hint.runBare", "{rule} ({n} steps)", { rule: g.rule, n: g.lines.length })}</button></li>
+                            )))}
+                          </ol>
+                        )}
+                      </>;
+                    } else body = <p>{cur.place.text}</p>;
+                    const act = hintRung < HINT_RUNGS ? <button type="button" className="sk-btn primary" onClick={() => showRung(hintRung + 1)}>{tr("hint.more", "Show more")}</button>
+                      : <button type="button" className="sk-btn primary" onClick={hintAct}>{cur.mistake === "token" ? tr("hint.takeOff", "Take {name} off", { name: nameOf(cur.id) })
+                        : cur.mistake === "cross" ? tr("hint.removeX", "Remove the X") : cur.mistake === "light" ? tr("hint.lightOff", "Switch the light off")
+                          : cur.suspect === "S" && hiders.length > 1 ? tr("hint.placeAll", "Place them") : tr("hint.place", "Place {name}", { name: nameOf(cur.suspect) })}</button>;
+                    return <>{head(chips)}{body}<div className="sk-hint-act">
+                      {act}
+                      {hintRung > 1 && <button type="button" className="sk-btn" onClick={() => { setHintRung(hintRung - 1); setHintPick(-1); }}>{t("hint.back")}</button>}
+                      <button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button>
+                    </div></>;
+                  })()}
+                  {cur && !hintRung && <div className="sk-hint-act">
+                    <button type="button" className="sk-btn primary" onClick={() => showRung(Math.max(1, revealed))}>{t("hint.next")}</button>
                     <button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button>
-                  </div>
+                  </div>}
+                  {!cur && <div className="sk-hint-act"><button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button></div>}
                 </div>
               </div>
             )}
@@ -2206,7 +2348,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       {sheet && (() => {
         const a = extra.find((x) => x.id === sheet);
         const q = sheet === "S" ? { id: "S", name: t("assassin.S"), clue: "" } : a ? { ...a, assassin: true } : suspects.find((x) => x.id === sheet);
-        return q ? <SuspectSheet q={q} look={looks[q.id]} color={colorOf(q.id)} placed={!!st.tokens[q.id]} solved={solved} emph={emph} beach={beach} room={shadowRoom} onClose={() => setSheet(null)} gender={settings.gender && !hiders.includes(q.id) ? genderOf(q) : null} /> : null;
+        return q ? <SuspectSheet q={q} look={looks[q.id]} color={colorOf(q.id)} placed={!!st.tokens[q.id]} emph={emph} beach={beach} onClose={() => setSheet(null)} gender={settings.gender && !hiders.includes(q.id) ? genderOf(q) : null} /> : null;
       })()}
       {inspectOpen && (
         <aside className="sk-insp" role="dialog" aria-label={tr("inspect.title", INSPECTOR_EN.title)}>
@@ -2237,14 +2379,17 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         </aside>
       )}
 
-      {kwTip && <div className="sk-kwtip" role="tooltip" style={{ left: kwTip.left, top: kwTip.top }}>{boldNodes(t(`kw.${kwTip.c}`))}</div>}
+      {kwTip && <div className="sk-kwtip" role="tooltip" style={{ left: kwTip.left, top: kwTip.top }}>{kwTip.text || boldNodes(t(`kw.${kwTip.c}`))}</div>}
       {doneOpen && (() => {
         // The Uninvited Guests' next contract is the finale in its red Omega folder: picking it opens Dossier № 000-OMEGA, not the board
         const omegaNext = p.id === UMBRA_HARD;
+        // every relic is in (whatever the order they were fulfilled in): the next contract is The Uninvited Guests' black envelope
+        const blackNext = !omegaNext && isRelicCase(p.id) && !!solvedIds && allRelics(solvedIds);
         const head = heads[idx] || {};
-        const nxt = omegaNext ? puzzles.find((q) => q.id === UMBRA_FINALE) || PUZZLES.find((q) => q.id === UMBRA_FINALE) || null
+        const umbraOf = (id) => puzzles.find((q) => q.id === id) || PUZZLES.find((q) => q.id === id) || null;
+        const nxt = omegaNext ? umbraOf(UMBRA_FINALE) : blackNext ? umbraOf(UMBRA_HARD)
           : puzzles[idx + 1] && puzzles[idx + 1].id !== TUTORIAL_ID ? puzzles[idx + 1] : null;
-        const nNo = omegaNext ? finaleNo : idx + 2 - puzzles.slice(0, idx + 1).filter((q) => q.id === TUTORIAL_ID).length; // the next contract's number (the tutorial is not numbered)
+        const nNo = omegaNext ? finaleNo : blackNext ? hardNo : idx + 2 - puzzles.slice(0, idx + 1).filter((q) => q.id === TUTORIAL_ID).length; // the next contract's number (the tutorial is not numbered)
         const close = () => setDoneClosed(p.id);
         const nxtLabel = t("hub.contractNo", { n: String(nNo).padStart(3, "0") });
         const rooms = [shadowRoom ? tr("game.shadowWasIn", `S. H. Adow was hiding in the ${shadowRoom}.`, { room: shadowRoom }) : null, ...extra.map((a) => { const at = hiderCell(p, a.id), room = at ? (p.roomLabels || p.roomNames)[geo.room(...at)] : null;
@@ -2263,7 +2408,6 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
               ? <p className="sk-done-lore"><b>{t("game.solved.umbra.title")}</b> {t("game.solved.umbra.text")}</p>
               : <>
                 {isRelicCase(p.id) && <RelicCard caseId={p.id} />}
-                {isRelicCase(p.id) && solvedIds && allRelics(solvedIds) && <div className="sk-umbra-tok"><ObsidianEnvelope small onOpen={() => { close(); setUmbra("board"); }} /><span>{t("conspiracy.envelope.caption")}</span></div>}
                 {rooms.map((r, i) => <span key={i} className="sk-done-room">{r}</span>)}
               </>}
             <div className="sk-done-act">
@@ -2275,8 +2419,10 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                 <small>{tr("game.done.next", "Your next contract")}</small>
                 <div className="sk-done-env">{omegaNext
                   ? renderEnvelope({ puzzle: nxt, label: nxtLabel, tone: "omega", onPick: () => { close(); setUmbra("sanctum"); } })
-                  : renderEnvelope({ puzzle: nxt, label: nxtLabel, onPick: () => { close(); launch(nxt.id); } })}</div>
-                <span className="sk-done-lbl">{omegaNext ? t("sanctum.folder.caption") : `${nxtLabel} · ${(heads[idx + 1] && heads[idx + 1].title) || ""}`}</span>
+                  : blackNext // sealed until the cryptex opens (the Evidence Board), like on the contracts page
+                    ? renderEnvelope({ puzzle: nxt, label: nxtLabel, tone: "obsidian", onPick: () => { close(); if (isUnlocked(UMBRA_HARD, solvedIds)) launch(UMBRA_HARD); else setUmbra("board"); } })
+                    : renderEnvelope({ puzzle: nxt, label: nxtLabel, onPick: () => { close(); launch(nxt.id); } })}</div>
+                <span className="sk-done-lbl">{omegaNext ? t("sanctum.folder.caption") : blackNext ? t("conspiracy.envelope.caption") : `${nxtLabel} · ${(heads[idx + 1] && heads[idx + 1].title) || ""}`}</span>
               </div>
             )}
             <p className="sk-done-coffee">{tr("game.done.coffee", "Enjoying Shadoku?")} <a href="https://buymeacoffee.com/shadoku" target="_blank" rel="noopener noreferrer">☕ {tr("game.done.coffeeLink", "Buy me a coffee")}</a></p>
@@ -2410,6 +2556,7 @@ const CSS = `
 .sk-card.v.adow .sk-alibi{background:rgba(0,0,0,.25)}
 .sk-nm{font-weight:800;box-shadow:inset 0 -.32em 0 color-mix(in srgb,var(--nc,var(--brass)) 55%,transparent)}
 .sk-kw{font-weight:700}
+.sk [data-tip]{cursor:help;border-radius:3px;text-decoration:underline dotted;text-underline-offset:3px;transition:background .12s}.sk [data-tip]:hover{background:rgba(217,155,38,.28)}
 .sk-neg{font-weight:800;color:#a3302d;text-transform:uppercase;font-size:.88em;letter-spacing:.04em}
 .sk-card.adow .sk-neg,.sk-rule .sk-neg{color:#ff8a86}
 .sk-rm{font-style:normal;font-weight:700;text-decoration:underline;text-decoration-color:var(--brass);text-decoration-thickness:2px;text-underline-offset:2px}
@@ -2602,9 +2749,13 @@ const CSS = `
 .sk-hint-why button{display:block;width:100%;text-align:start;padding:4px 8px;border-radius:8px;font-size:13.5px;line-height:1.38;color:#6e6250;border-inline-start:3px solid #d8cdb4} /* ink on the hint's paper, not the dark theme's colours */
 .sk-hint-why button:hover{background:rgba(26,26,34,.06);color:var(--pink)}
 .sk-hint-why button[aria-pressed=true]{color:var(--pink);border-color:#2b8fc4;background:rgba(111,208,255,.2)}
-.sk-hint-whybtn{display:grid;place-items:center;width:28px;height:28px;padding:0;margin-inline-start:auto;border-radius:50%;border:2px solid #1A1A22;background:var(--paper2);color:#1A1A22;cursor:pointer}
-.sk-hint-whybtn[aria-expanded=true],.sk-hint-whybtn:hover{background:var(--brass)}
-.sk-hint-end{cursor:pointer}
+.sk-hint-why.key{max-height:20vh}.sk-hint-why.key~.sk-hint-why{max-height:24vh} /* key lines + groundwork together keep the board in view */
+.sk-hint-why.key button{color:var(--pink);font-size:14px;border-color:var(--brass)} /* the key deduction reads first */
+.sk-hint-why span{display:block;padding:4px 8px;font-size:14px;line-height:1.4;border-inline-start:3px solid var(--brass)}
+.sk-hint-why .sk-hint-run{font-style:italic;font-weight:600}
+.sk-hint-ground{display:inline-flex;align-items:center;gap:7px;margin:0 0 6px;padding:3px 10px 3px 3px;border-radius:99px;border:2px solid #1A1A22;background:var(--paper2);color:#1A1A22;font-size:12.5px;font-weight:700;cursor:pointer}
+.sk-hint-ground[aria-expanded=true],.sk-hint-ground:hover{background:var(--brass)}
+.sk-rung{font-size:11px;font-weight:800;padding:1px 7px;border-radius:6px;background:#efe3c4;color:#6e5320}
 .sk-hint-head{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding-right:24px}
 .sk-hint-x{position:absolute;z-index:2;top:4px;right:6px;width:28px;height:28px;font-size:21px;color:#6e6250}
 .sk-step{font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6e6250}

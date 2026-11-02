@@ -1,0 +1,6 @@
+{
+  "ui.nav.pInitiation": "Iniciación",
+  "ui.creds.delete": "Eliminar cuenta",
+  "ui.creds.deleteConfirm": "¿Eliminar tu cuenta? Tu nombre en clave y los datos guardados de tu cuenta se borrarán y esto no se puede deshacer.",
+  "ui.creds.deleteError": "No se pudo eliminar la cuenta. Por favor, inténtalo de nuevo."
+}

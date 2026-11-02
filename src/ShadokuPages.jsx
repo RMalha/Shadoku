@@ -9,8 +9,8 @@
  *   /profile/collection                  Collection: the ten relics of The Umbra Conspiracy (umbra.jsx), and the Evidence Board once all are in
  *   /test/umbra            TestUmbraPage not linked: the Evidence Board and Dossier № 000-OMEGA without the ten relics (test mode: nothing is saved)
  *
- * Signed out, /profile asks you to sign in. Progress is read from this browser's storage (ShadokuGame's readPlayStats), so the
- * numbers are the same whether or not you are signed in; the profile is where a signed-in player finds them.
+ * Signed out, /profile asks you to sign in. Progress is read from this browser's storage (ShadokuGame's readPlayStats); signed in
+ * with the backend, src/sync.js merges that storage with the account's copy, so the numbers are the same on every device.
  * Every string is a ui.about.*, ui.contact.* or ui.profile.* key in src/locales/en.json.
  */
 import React, { useEffect, useMemo, useState } from "react";
@@ -19,6 +19,7 @@ import { PUZZLES, normalizePuzzles, readPlayStats, fmtTime } from "./ShadokuGame
 import { RelicCollection, EvidenceBoard, FinalDossier, ObsidianEnvelope, OmegaFolder, RELIC_CASES, UMBRA_HARD, UMBRA_FINALE, isUnlocked, resetUmbraLocks, useUmbraTick } from "./umbra.jsx";
 import { MasterPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
+import { useProgressTick } from "./sync.js";
 
 /** The difficulty groups, easiest first (the contracts page uses the same order). */
 export const DIFF_ORDER = ["Tutorial", "Very Easy", "Easy", "Medium", "Hard", "Expert"];
@@ -148,7 +149,7 @@ function ProfileInfo({ user }) {
         {rows.map(([k, v]) => <React.Fragment key={k}><dt>{t(k)}</dt><dd>{v || "—"}</dd></React.Fragment>)}
       </dl>
       {user.demo && <p className="sh-muted sm">{t("creds.demo")}</p>}
-      <p className="sh-muted sm">{t("profile.info.local")}</p>
+      <p className="sh-muted sm">{t(user && !user.demo ? "profile.info.synced" : "profile.info.local")}</p>
     </section>
   );
 }
@@ -157,14 +158,16 @@ const usePack = (puzzles) => useMemo(() => (puzzles ? normalizePuzzles(puzzles) 
 
 function ProfileStats({ puzzles }) {
   const { t } = useLang();
+  const { user } = useAuth();
   const pack = usePack(puzzles);
-  const stats = useMemo(() => readPlayStats(pack), [pack]);
+  const progressTick = useProgressTick(); // a sync brought another device's progress
+  const stats = useMemo(() => readPlayStats(pack), [pack, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps
   const trf = useMemo(() => trOf(t), [t]);
   const of = (q) => stats[q.id] || {};
   const played = pack.filter((q) => of(q).played).length;
   const solved = pack.filter((q) => of(q).solved).length;
   const relics = RELIC_CASES.filter((id) => stats[id] && stats[id].solved).length;
-  const hints = pack.reduce((n, q) => n + (of(q).hints || 0), 0);
+  const hints = (k) => pack.reduce((n, q) => n + ((of(q).hints || {})[k] || 0), 0); // hint rungs: where to look / key deduction / placement
   const byDiff = new Map();
   pack.forEach((q) => { const d = q.difficulty || "Easy"; if (!byDiff.has(d)) byDiff.set(d, []); byDiff.get(d).push(q); });
   const diffs = [...DIFF_ORDER.filter((d) => byDiff.has(d)), ...[...byDiff.keys()].filter((d) => !DIFF_ORDER.includes(d))];
@@ -172,7 +175,9 @@ function ProfileStats({ puzzles }) {
     ["profile.stats.played", played, null],
     ["profile.stats.fulfilled", solved, pack.length],
     ["profile.stats.relics", relics, RELIC_CASES.length],
-    ["profile.stats.hints", hints, null],
+    ["profile.stats.hintsLook", hints("look"), null],
+    ["profile.stats.hintsKey", hints("key"), null],
+    ["profile.stats.hintsPlace", hints("place"), null],
   ];
   return <>
     <section className="sh-tiles" aria-label={t("profile.tab.stats")}>
@@ -201,14 +206,15 @@ function ProfileStats({ puzzles }) {
           })}
         </tbody>
       </table>
-      <p className="sh-muted sm">{t("profile.info.local")}</p>
+      <p className="sh-muted sm">{t(user && !user.demo ? "profile.info.synced" : "profile.info.local")}</p>
     </section>
   </>;
 }
 
 function ProfileCollection({ puzzles, onLaunch }) {
   const pack = usePack(puzzles);
-  const solved = useMemo(() => { const s = readPlayStats(pack); return new Set(Object.keys(s).filter((id) => s[id].solved)); }, [pack]);
+  const progressTick = useProgressTick();
+  const solved = useMemo(() => { const s = readPlayStats(pack); return new Set(Object.keys(s).filter((id) => s[id].solved)); }, [pack, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps
   const [board, setBoard] = useState(false);
   return (
     <section className="sh-pcard">
@@ -288,7 +294,7 @@ const PAGES_CSS = `
 .sh-pinfo-name{font-size:clamp(22px,3.4vw,28px);color:var(--sh-brass);overflow-wrap:anywhere}
 .sh-dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:0 0 14px;padding:14px 0 0;border-top:1px solid var(--sh-line)}
 .sh-dl dt{color:var(--sh-muted);font-weight:600}.sh-dl dd{margin:0;color:var(--sh-cream);overflow-wrap:anywhere}
-.sh-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.sh-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 16px}
 .sh-tile{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-radius:14px;background:#1c1c25;border:1px solid var(--sh-line);border-top:3px solid var(--sh-brass)}
 .sh-tile b{font:400 clamp(26px,4vw,34px)/1.1 'Special Elite',monospace;color:var(--sh-cream)}.sh-tile b small{font-size:.55em;color:var(--sh-muted)}
 .sh-tile span{color:var(--sh-muted);font-size:14px;font-weight:600}

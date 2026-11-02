@@ -1,0 +1,6 @@
+{
+  "ui.nav.pInitiation": "입문",
+  "ui.creds.delete": "계정 삭제",
+  "ui.creds.deleteConfirm": "계정을 삭제하시겠습니까? 코드네임과 계정에 저장된 데이터가 지워지며 이 작업은 실행 취소할 수 없습니다.",
+  "ui.creds.deleteError": "계정을 삭제할 수 없습니다. 다시 시도해 주세요."
+}

@@ -1,0 +1,580 @@
+{
+  "_readme": "Per language: 'missing' = keys the locale lacks (value = English source to translate); 'changed' = keys whose English text changed since your translation (en = new English, was = previous English, current = your existing translation to update). Placeholders like {n} must stay as they are.",
+  "_changed_keys": [
+    "ui.howto.cross",
+    "LORE.tutorial.2.TEXT",
+    "LORE.tutorial.3.TEXT"
+  ],
+  "ar": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ علامة X** تشطب خانة لا يمكن لأحد التواجد فيها. الخانة التي تضيئها أو تشطبها تُخفي ملاحظاتها؛ وتعود الملاحظات عند إزالة الضوء أو علامة X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "جلست أستريد على مقعد بدون ظهر، وفي المطبخ مقعدان متجاوران. أياً كان الذي اختارته، تمتد نظرتها على طول الصف نفسه وعبر الباب: ذلك الخط مضاء قبل أن نعرف حتى أين تجلس."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "راقب أعينهم. وقفت دافني بجانب الخزنة، وصف أستريد يضيء أحد جانبيها بالفعل، لذا لا بد أن تأخذ دافني الجانب الآخر. الخزنة تقف بينهما، ولا ترى أيٌّ منهما الأخرى."
+      }
+    }
+  },
+  "ca": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Marca X** ratlla una casella on no hi pot haver ningú. Una casella que il·lumines o ratlles amaga les seves notes; tornen a aparèixer quan treus la llum o la X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Bianca era vora una caixa forta amb tres costats oberts, massa per signar-ne un. Un obstacle pesant divideix l'estança, així que anota cada costat amb el llapis."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Observa els seus ulls. Daphne era vora el Cadàver, i la llum d'Ambrose cobreix la casella de l'esquerra, així que ella ha de ser a sobre."
+      }
+    }
+  },
+  "cs": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Označit X** přeškrtne pole, kde nikdo nemůže být. Pole, které rozsvítíte nebo přeškrtnete, skryje své poznámky; po zhasnutí světla nebo odebrání X se opět zobrazí."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Bianca stála vedle trezoru se třemi volnými stranami, což je příliš mnoho na okamžitý podpis. Těžká překážka rozděluje místnost, takže si každou stranu poznač tužkou."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Sleduj jejich oči. Daphne stála vedle Mrtvoly a Ambrosovo světlo pokrývá políčko nalevo od ní, takže Daphne musí stát nad ní."
+      }
+    }
+  },
+  "de": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ X markieren** streicht ein Feld durch, auf dem niemand stehen kann. Ein beleuchtetes oder durchgestrichenes Feld blendet seine Notizen aus; sie erscheinen wieder, wenn du das Licht oder das X entfernst."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid saß auf einem Hocker, und die Küche hat zwei davon, Seite an Seite. Welchen sie auch nahm, ihr Blick läuft dieselbe Reihe entlang und durch die Tür: Diese Linie ist erleuchtet, bevor wir überhaupt wissen, wo sie sitzt."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Achte auf ihre Augen. Daphne stand neben dem Tresor, und Astrids Reihe erleuchtet bereits eine Seite davon, also muss sie die andere nehmen. Der Tresor steht zwischen ihnen, und keine sieht die andere."
+      }
+    }
+  },
+  "el": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Η Σημείωση X** διαγράφει ένα τετράγωνο όπου δεν μπορεί να βρίσκεται κανείς. Ένα τετράγωνο που φωτίζετε ή διαγράφετε κρύβει τις σημειώσεις του· επανέρχονται όταν αφαιρέσετε το φως ή το X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Η Astrid καθόταν σε ένα σκαμπό, και η Κουζίνα έχει δύο, το ένα δίπλα στο άλλο. Όποιο κι αν πήρε, το βλέμμα της διατρέχει την ίδια σειρά και περνά από την πόρτα: αυτή η γραμμή φωτίζεται πριν καν μάθουμε πού κάθεται."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Προσέξτε τα μάτια τους. Η Daphne στεκόταν δίπλα στο χρηματοκιβώτιο, και η σειρά της Astrid φωτίζει ήδη τη μία του πλευρά, άρα εκείνη πρέπει να πάρει την άλλη. Το χρηματοκιβώτιο στέκεται ανάμεσά τους, και καμία δεν βλέπει την άλλη."
+      }
+    }
+  },
+  "es": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Marcar X** tacha una casilla donde no puede haber nadie. Una casilla iluminada o tachada oculta sus notas; vuelven a aparecer cuando quitas la luz o la X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Bianca estaba junto a una caja fuerte con tres lados libres, demasiados para firmar. Un obstáculo pesado divide la sala, así que anota cada lado a lápiz."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Observa sus ojos. Daphne estaba junto al Cadáver, y la luz de Ambrose cubre la casilla a su izquierda, así que ella debe estar encima."
+      }
+    }
+  },
+  "fi": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Merkitse X** yliviivaa ruudun, jossa kukaan ei voi olla. Valaistu tai yliviivattu ruutu piilottaa muistiinpanonsa; ne palaavat, kun poistat valon tai X-merkin."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid istui jakkaralla, ja Keittiössä on niitä kaksi vierekkäin. Valitsipa hän kumman tahansa, hänen katseensa kulkee samaa riviä pitkin ja oven läpi: tuo linja on valaistu jo ennen kuin edes tiedämme hänen paikkansa."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Tarkkaile heidän silmiään. Daphne seisoi kassakaapin vieressä, ja Astridin rivi valaisee jo sen toisen puolen, joten Daphnen täytyy ottaa toinen. Kassakaappi seisoo heidän välissään, eikä kumpikaan näe toista."
+      }
+    }
+  },
+  "fr": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Marquer X** barre une case où personne ne peut se trouver. Une case que vous éclairez ou barrez masque ses notes ; elles réapparaissent lorsque vous retirez la lumière ou le X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid était assise sur un tabouret, et la Cuisine en compte deux, côte à côte. Quel que soit celui qu'elle a pris, son regard longe la même ligne et franchit la porte : ce rayon est éclairé avant même que nous sachions où elle s'est assise."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Observez leurs regards. Daphne se tenait à côté du coffre-fort, et la ligne d'Astrid en éclaire déjà un côté ; elle doit donc prendre l'autre. Le coffre-fort se dresse entre elles, et aucune ne voit l'autre."
+      }
+    }
+  },
+  "hu": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "Az **❌ X jelölés** áthúz egy olyan mezőt, ahol senki sem állhat. A megvilágított vagy áthúzott mező elrejti a jegyzeteit; azok visszatérnek, ha leveszed a fényt vagy az X-et."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Bianca egy széf mellett állt, amelynek három szabad oldala van — túl sok ahhoz, hogy azonnal aláírd. Egy nehéz akadály szeli ketté a szobát, ezért jegyzeteld fel mindhárom oldalt."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Figyeld a szemüket. Daphne a Holttest mellett állt, Ambrose fénye pedig lefedi a tőle balra lévő mezőt, így biztosan felette állt."
+      }
+    }
+  },
+  "it": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Segna X** barra una casella in cui non può trovarsi nessuno. Una casella illuminata o barrata nasconde i propri appunti, che ricompaiono quando rimuovi la luce o la X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Bianca stava accanto a una cassaforte con tre lati liberi, troppi per firmare subito. Un ostacolo imponente taglia la stanza, quindi annota a matita ciascun lato."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Osserva i loro occhi. Daphne stava accanto al Cadavere e la luce di Ambrose copre la casella alla sua sinistra, quindi lei deve trovarsi sopra di esso."
+      }
+    }
+  },
+  "ja": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ ×印**は、誰も立てないマスに×をつけます。明るくしたマスや×をつけたマスのメモは非表示になり、光や×を消すと元に戻ります。"
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "アストリッドはスツールに腰掛けていた。キッチンにはスツールが2つ、隣り合って並んでいる。どちらに座ったにせよ、彼女の視線は同じ行を走り、ドアを抜けていく。どの席かわかる前から、その線はすでに照らされているのだ。"
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "連中の視線を見ろ。ダフネは金庫の隣に立っていたが、アストリッドの行がすでにその片側を照らしている。だから彼女はもう片側に立つしかない。金庫が2人の間に立ちはだかり、どちらも相手を見ることはない。"
+      }
+    }
+  },
+  "ko": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ X 표시**는 아무도 설 수 없는 타일을 지워 둘 때 사용합니다. 불을 켜거나 X 표시한 타일은 메모가 숨겨지며, 불이나 X를 지우면 다시 나타납니다."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "아스트리드는 스툴에 앉아 있었고, 주방에는 스툴 두 개가 나란히 놓여 있다. 어느 쪽에 앉았든 그녀의 시선은 같은 행을 따라 문을 통과한다. 그녀의 자리를 알기도 전에 그 선은 이미 밝혀져 있지."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "그들의 눈을 봐라. 다프네는 금고 옆에 서 있었는데, 아스트리드의 행이 이미 금고 한쪽을 비추고 있으니 그녀는 반대쪽에 서야 한다. 금고가 둘 사이를 가로막고 있어 누구도 서로를 보지 못한다."
+      }
+    }
+  },
+  "nl": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Kruis aan** zet een X op een vakje waar niemand kan zijn. Een vakje dat je verlicht of doorstreept verbergt zijn notities; ze komen terug zodra je het licht of de X verwijdert."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid zat op een kruk, en de Keuken heeft er twee, naast elkaar. Welke ze ook nam, haar blik loopt over dezelfde rij en door de deur: die lijn is al verlicht voordat we zelfs maar weten waar ze zit."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Let op hun ogen. Daphne stond naast de kluis, en de rij van Astrid verlicht er al één kant van, dus zij moet de andere nemen. De kluis staat tussen hen in, en geen van beiden ziet de ander."
+      }
+    }
+  },
+  "pl": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Oznacz X** przekreśla pole, na którym nikt nie może się znajdować. Pole oświetlone lub przekreślone ukrywa swoje notatki; wracają one po usunięciu światła lub znaku X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid siedziała na stołku, a Kuchnia ma dwa, obok siebie. Niezależnie od tego, który z nich zajęła, jej wzrok biegnie wzdłuż tego samego rzędu i przez drzwi: ta linia jest oświetlona, zanim w ogóle dowiemy się, gdzie siedzi."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Obserwuj ich oczy. Daphne stała obok sejfu, a rząd Astrid już oświetla jedną jego stronę, więc ona musi zająć drugą. Sejf stoi między nimi, i żadna nie widzi drugiej."
+      }
+    }
+  },
+  "pt-PT": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Marcar X** risca uma casa onde ninguém pode estar. Uma casa que ilumines ou risques esconde as suas notas; estas voltam a aparecer quando removes a luz ou o X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "A Astrid estava sentada num banco, e a Cozinha tem dois, lado a lado. Qualquer que seja o que ela escolheu, o seu olhar percorre a mesma linha e atravessa a porta: essa linha fica iluminada antes sequer de sabermos o seu lugar."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Observe os seus olhos. Daphne encontrava-se junto ao cofre, e a linha de Astrid já ilumina um dos lados deste, pelo que ela terá de escolher o outro. O cofre ergue-se entre elas, e nenhuma das duas vê a outra."
+      }
+    }
+  },
+  "ro": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Marchează X** taie un pătrățel unde nu se poate afla nimeni. Un pătrățel pe care îl iluminezi sau îl tai își ascunde notițele; acestea revin când înlături lumina sau X-ul."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid stătea pe un scaun, iar Bucătăria are două, unul lângă altul. Indiferent pe care l-a luat, privirea ei merge de-a lungul aceluiași rând și prin ușă: acea linie este luminată chiar înainte să știm unde este locul ei."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Urmărește-le ochii. Daphne stătea lângă seif, iar rândul lui Astrid îi luminează deja o parte, așa că ea trebuie să o ia pe cealaltă. Seiful stă între ele, și niciuna nu o vede pe cealaltă."
+      }
+    }
+  },
+  "ru": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Отметка X** зачёркивает клетку, на которой никто не может стоять. Освещённая или зачёркнутая клетка скрывает свои заметки; они вернутся, когда вы уберёте свет или X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Астрид сидела на табурете, а на Кухне их два, бок о бок. Какой бы она ни заняла, её взгляд идёт по тому же ряду и сквозь дверь: эта линия освещена ещё до того, как мы узнаем, где она сидит."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Следите за их взглядами. Дафна стояла возле сейфа, а ряд Астрид уже освещает одну его сторону, значит, она должна занять другую. Сейф стоит между ними, и ни одна не видит другую."
+      }
+    }
+  },
+  "tr": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ X İşaretle**, kimsenin duramayacağı bir karenin üstünü çizer. Aydınlattığınız veya üstünü çizdiğiniz bir kare notlarını gizler; ışığı veya X işaretini kaldırdığınızda notlar geri gelir."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid bir taburede oturuyordu ve Mutfak'ta yan yana iki tabure var. Hangisini almış olursa olsun, bakışı aynı satır boyunca kapıdan geçer: nerede oturduğunu bilmeden önce bile o hat aydınlanmıştır."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Gözlerine dikkat edin. Daphne kasanın yanında duruyordu ve Astrid'in satırı kasanın bir tarafını zaten aydınlatıyor, bu yüzden diğer tarafı almalı. Kasa aralarında duruyor ve hiçbiri diğerini görmüyor."
+      }
+    }
+  },
+  "uk": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Позначка X** закреслює клітинку, де ніхто не може стояти. Освітлена або закреслена клітинка приховує свої нотатки; вони повернуться, коли ви приберете світло або X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Астрід сиділа на табуреті, а на Кухні їх два, пліч-о-пліч. Хоч би який вона зайняла, її погляд іде тим самим рядком і крізь двері: ця лінія освітлена ще до того, як ми дізнаємося, де вона сидить."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Слідкуйте за їхніми очима. Дафна стояла біля сейфа, а рядок Астрід уже освітлює один його бік, тож вона мусить зайняти інший. Сейф стоїть між ними, і жодна не бачить іншої."
+      }
+    }
+  },
+  "vi": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ Đánh dấu X** gạch chéo một ô mà không ai có thể đứng. Ô được bật sáng hoặc gạch chéo sẽ ẩn các ghi chú trên đó; ghi chú sẽ hiện lại khi bạn tắt đèn hoặc xóa dấu X."
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid đã ngồi trên một chiếc ghế đẩu, và Nhà bếp có hai chiếc, đặt cạnh nhau. Dù cô ấy chọn chiếc nào, ánh mắt cô ấy vẫn chạy dọc cùng một hàng và xuyên qua cánh cửa: đường đó đã sáng trước cả khi ta biết cô ấy ngồi ở đâu."
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "Hãy quan sát ánh mắt của họ. Daphne đã đứng cạnh két sắt, và hàng của Astrid đã chiếu sáng một bên của nó, nên Daphne buộc phải đứng ở bên kia. Két sắt nằm giữa hai người, và không ai nhìn thấy ai."
+      }
+    }
+  },
+  "zh-CN": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ 标记 X** 可在不可能有人的格子上画叉。点亮或画叉的格子会隐藏上面的笔记；移除灯光或 X 后笔记会重新显示。"
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid 坐在凳子上，而厨房里有两张凳子，并排摆放。无论她坐的是哪一张，她的目光都会沿着同一行穿过那扇门：我们甚至还不知道她坐在哪里，那条线就已经被照亮了。"
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "留意他们的视线。Daphne 站在保险箱旁，而 Astrid 所在的那一行已经照亮了保险箱的一侧，所以她只能站在另一侧。保险箱挡在两人之间，谁也看不见谁。"
+      }
+    }
+  },
+  "zh-TW": {
+    "missing": {
+      "ui.footer.copyright": "© 2026 Shadoku · R.M. Malha",
+      "ui.hint.whyShow": "Show the reasoning ({n} steps)",
+      "ui.hint.whyHide": "Hide the reasoning",
+      "ui.footer.social": "Social media",
+      "FRAG_LINES_EMPTY": ""
+    },
+    "changed": {
+      "ui.howto.cross": {
+        "en": "**❌ Mark X** crosses out a tile where nobody can be. A tile you cross out hides its notes; they come back when you remove the X.",
+        "was": "**❌ Mark X** crosses out a tile where nobody can be. A tile you light or cross out hides its notes; they come back when you remove the light or the X.",
+        "current": "**❌ 標記 X** 可在不可能有人的格子上畫叉。點亮或畫叉的格子會隱藏上面的筆記；移除燈光或 X 後筆記會重新顯示。"
+      },
+      "LORE.tutorial.2.TEXT": {
+        "en": "Aurora sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "was": "Astrid sat on a stool, and the Kitchen has two, side by side. Whichever she took, her gaze runs down the same row and through the door: that line is lit before we even know her seat.",
+        "current": "Astrid 坐在凳子上，而廚房裡有兩張並排的凳子。無論她坐的是哪一張，她的視線都會沿著同一橫列穿過那扇門：我們甚至還不知道她坐在哪裡，那條線就已經被照亮了。"
+      },
+      "LORE.tutorial.3.TEXT": {
+        "en": "Watch their eyes. Dinah stood beside the safe, and Aurora's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "was": "Watch their eyes. Daphne stood beside the safe, and Astrid's row already lights one side of it, so she must take the other. The safe stands between them, and neither sees the other.",
+        "current": "留意他們的視線。Daphne 站在保險箱旁，而 Astrid 所在的橫列已經照亮了保險箱的一側，因此她必定站在另一側。保險箱擋在兩人之間，誰也看不見誰。"
+      }
+    }
+  }
+}

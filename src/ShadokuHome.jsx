@@ -29,6 +29,7 @@ import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, GAME_CSS, readBestTimes
 import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL } from "./ShadokuArt.jsx";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
 import { localizeHead, trOf } from "./caseText.js";
+import { useProgressTick } from "./sync.js";
 
 /* ═════════════════════════════ CONSTANTS ═════════════════════════════ */
 export const CONTACT_EMAIL = "shadoku.game@proton.me";
@@ -544,7 +545,7 @@ function LiveBoard({ puzzle, count = 0, showTarget, label, id }) {
   const uid = `home-${String(id || "x").replace(/[^a-z0-9]/gi, "")}`;
   if (!cast) return <BoardPlaceholder label={label} />;
   const { geo, looks, colorOf } = cast, p = cast.puzzle;
-  const st = { tokens: solutionPlacements(cast, count), notes: {}, lights: {}, hints: 0, done: false };
+  const st = { tokens: solutionPlacements(cast, count), notes: {}, lights: {}, hints: 0, hintLog: {}, done: false };
   const W = geo.C * CELL + 2 * BZ, H = geo.R * CELL + 2 * BZ;
   const target = showTarget ? blindspotOf(cast) : null;
   return (
@@ -874,6 +875,7 @@ const SOCIALS = [
   { key: "instagram", label: "Instagram", href: "https://www.instagram.com/shadoku.game/", d: "M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3z M12 7.6a4.4 4.4 0 1 0 0 8.8 4.4 4.4 0 0 0 0-8.8z M17.2 5.8a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z", line: true },
   { key: "facebook", label: "Facebook", href: "https://www.facebook.com/shadoku.game", d: "M13.5 21v-8h2.7l.5-3.2h-3.2V7.9c0-.9.4-1.6 1.7-1.6h1.6V3.5C16.5 3.4 15.6 3.3 14.6 3.3c-2.6 0-4.3 1.6-4.3 4.4v2.1H7.6V13h2.7v8z" },
   { key: "youtube", label: "YouTube", href: "https://www.youtube.com/@shadokugame", d: "M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z" },
+  { key: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@shadoku71", d: "M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.7 5.7 0 1 0 4.9 5.7V9a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5z" },
   { key: "x", label: "X", href: "https://x.com/shadokugame", d: "M17.8 3h3L14.2 10.6 22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2.3 3h6.2l4.3 5.7zm-1 16.2h1.7L7.6 4.7H5.8z" },
 ];
 
@@ -1277,7 +1279,8 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
 function Envelope({ onPlay, onStart, onSkip, noId = false }) {
   const { t } = useLang();
   const q = getPuzzle("tutorial");
-  const best = useMemo(() => (q ? readBestTimes([q])[q.id] || 0 : 0), [q]);
+  const progressTick = useProgressTick(); // a sync brought another device's progress
+  const best = useMemo(() => (q ? readBestTimes([q])[q.id] || 0 : 0), [q, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps
   const initiated = best > 0; // a SOLVED initiation: its letter offers the contracts (the envelope still starts sealed, every visit)
   const skippable = !store.get(TUTORIAL_KEY) && !!onSkip; // neither solved nor skipped yet
   return initiated
@@ -1577,6 +1580,7 @@ svg{direction:ltr}
 .sh-social{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin:0 0 4px;padding:0;list-style:none}
 .sh-social a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:var(--sh-cream);border-radius:10px;transition:color .15s,transform .15s}
 .sh-social a:hover,.sh-social a:focus-visible{color:var(--sh-brass);transform:translateY(-2px)}
+@media (max-width:420px){.sh-social{column-gap:8px}} /* six icons stay on one row on a 360px phone */
 
 /* modal */
 .sh-backdrop{position:fixed;inset:0;z-index:100;background:rgba(6,6,9,.78);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px;color:var(--sh-cream)}

@@ -63,6 +63,12 @@ export const TALL = new Set(CLASS_IDS.TALL);
 export const PERCH = new Set(CLASS_IDS.PERCH);
 export const SHORT = new Set(CLASS_IDS.SHORT);
 export const LOW = new Set(CLASS_IDS.LOW);
+/** LOW items lying flat on the floor (rugs, runners, mats, hatches, puddles): the board never fades them under a token, so a long
+ *  runner does not turn see-through when one person stands on one of its tiles. Sit-on furniture still fades. */
+export const FLAT_FLOOR = new Set(["BEARSKIN", "BROKEN_GLASS", "CARPET_RUNNER", "FAIRY_RING", "FLOOR_GRATE", "FOOTPRINTS", "GRATE", "HOT_POOL", "ICE",
+  "MANHOLE", "MOSS", "MUD", "OASIS_POOL", "PUDDLE", "RUG", "STRAW_MAT", "TOWEL", "TRAPDOOR", "WOVEN_MAT", "GRAFFITI"]);
+/** Animals drawn in profile facing east: the board mirrors one (`flip`) when a wall is on its east side and not its west, so its head never pokes into the wall. */
+export const FACING = new Set(["CAMEL", "HORSE"]);
 /** The class of `kind` in puzzle `p`: the case's own propClasses first, then PROP_CLASS. null for floor, CORPSE, VOID and unknown ids. */
 export function propClassOf(p, kind) {
   if (!kind || kind === "CORPSE" || kind === "VOID") return null;
@@ -177,7 +183,7 @@ export const FLOOR_LABEL = {
 };
 /** Biome floors, in the order the per-biome pools below hand them out. */
 export const BIOME_FLOORS = { MANSION: INDOOR_FLOORS, FARM: ["grass", "dirt", "boardwalk", "parquet", "stone", "slate"],
-  BEACH: ["sand", "boardwalk", "stone", "slate", "grass", "terracotta"], FOREST: ["grass", "dirt", "stone", "slate", "boardwalk", "parquet"],
+  BEACH: ["sand", "boardwalk", "stone", "slate", "grass", "terracotta", "parquet"], FOREST: ["grass", "dirt", "stone", "slate", "boardwalk", "parquet"],
   MOUNTAINS: ["snow", "stone", "slate", "parquet", "boardwalk", "canyon"], DESERT: ["sand", "canyon", "stone", "terracotta", "grass", "carpet"],
   STREET: ["asphalt", "cobble", "slate", "stone", "checker", "parquet"] };
 export const FLOOR_RULES = [ // the mansion rules (unchanged)
@@ -193,10 +199,10 @@ export const INDOOR_RULES = [
 ];
 export const BIOME_RULES = {
   FARM: [[/orchard|pasture|field|meadow|garden/i, "grass"], [/yard|pen\b|barnyard|silo|paddock|mud/i, "dirt"], [/barn|shed|porch|stable|loft|coop|farmhouse|granary/i, "boardwalk"]],
-  BEACH: [[/tide|reef|rock/i, "slate"], [/cove|dune|sand|shore|beach|bay|lagoon/i, "sand"], [/lighthouse|ruin|fort/i, "stone"], [/shack|boardwalk|pier|dock|hut|cabana/i, "boardwalk"]],
+  BEACH: [[/tide|reef|rock/i, "slate"], [/cove|dune|sand|shore|beach|bay|lagoon/i, "sand"], [/lighthouse|ruin|fort/i, "stone"], [/shack|boardwalk|pier|dock|hut|cabana|boathouse/i, "boardwalk"]],
   FOREST: [[/clearing|meadow|glade/i, "grass"], [/creek|stream|river|pond|lake|brook/i, "slate"], [/grove|trail|camp|path/i, "dirt"], [/ruin|temple|tomb|fort|castle/i, "stone"]],
   MOUNTAINS: [[/ridge|summit|ledge|peak|slope|ice|cave/i, "snow"], [/cliff|trail/i, "stone"], [/station|hut|refuge|tower/i, "slate"]],
-  DESERT: [[/tent|caravan|bazaar|market/i, "carpet"], [/tomb|temple|ruin|pyramid|sphinx/i, "stone"], [/oasis|palm|garden/i, "grass"], [/dune|sand/i, "sand"], [/canyon|mesa|pass|gorge|rock|cliff/i, "canyon"]],
+  DESERT: [[/tent|caravan|bazaar|market/i, "carpet"], [/tomb|temple|ruin|pyramid|sphinx/i, "stone"], [/palm|garden/i, "grass"], [/dune|sand|oasis/i, "sand"], [/canyon|mesa|pass|gorge|rock|cliff/i, "canyon"]],
   STREET: [[/rooftop|roof|alley|crosswalk|crossing|road|street|lane|avenue|parking/i, "asphalt"], [/corner|plaza|sidewalk|square|market|newsstand|stand|courtyard/i, "cobble"], [/subway|station|metro|underpass/i, "slate"]],
 };
 export function floorOf(name, id, theme = "MANSION") {
@@ -215,7 +221,7 @@ export function floorOf(name, id, theme = "MANSION") {
 /** When two touching rooms want the same floor, the loser takes the closest-looking texture instead of an arbitrary one. */
 export const FLOOR_ALT = {
   grass: ["dirt", "stone", "slate"], dirt: ["grass", "boardwalk", "stone"], sand: ["boardwalk", "stone", "slate"], boardwalk: ["parquet", "dirt", "slate"],
-  snow: ["slate", "stone", "canyon"], canyon: ["stone", "sand", "terracotta"], asphalt: ["cobble", "slate", "stone"], cobble: ["asphalt", "stone", "slate"],
+  snow: ["slate", "stone", "canyon"], canyon: ["sand", "stone", "terracotta"], asphalt: ["cobble", "slate", "stone"], cobble: ["asphalt", "stone", "slate"],
   stone: ["slate", "cobble"], slate: ["stone", "cobble"], parquet: ["boardwalk", "carpet"], checker: ["slate", "marble"],
 };
 export function assignFloors(p, geo) {
@@ -1660,14 +1666,14 @@ export function Sarcophagus() {
       <path d={`M${x + 13} ${y + 6.6}V${y + 11}M${x + 16.4} ${y + 6.6}V${y + 11}M${x + 19.8} ${y + 7.4}Q${x + 22.4} ${y + 5.6} ${x + 24.6} ${y + 7.4}Q${x + 22.4} ${y + 9.2} ${x + 19.8} ${y + 7.4}M${x + 22.2} ${y + 9.2}V${y + 11.2}M${x + 29} ${y + 6.4}V${y + 11}L${x + 32.4} ${y + 11}M${x + 35.4} ${y + 6.6}H${x + 39.4}M${x + 37.4} ${y + 6.6}V${y + 11}`} fill="none" stroke={carve} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
       {/* lid: lit top plane with the figure in relief */}
       <path d={slabTop(x - 1.4, y, w + 2.8, dx, dy)} fill={stoneL} {...OS} />
-      <path d={fig} fill={stone} {...IS} />
+      <path d={fig} {...IS} fill={stone} />
       {/* bands across the body and crossed arms */}
       {[.55, .66, .77, .88].map((uu) => <path key={uu} d={`M${P(uu, .27).join(" ")}L${P(uu, .73).join(" ")}`} {...IS} />)}
       <path d={`M${P(.31, .62).join(" ")}L${P(.44, .4).join(" ")}M${P(.31, .4).join(" ")}L${P(.44, .62).join(" ")}`} fill="none" stroke={lapis} strokeWidth="1.4" strokeLinecap="round" />
       {/* headdress and gold mask */}
-      <path d={polyD(P(.03, .72), P(.2, .84), P(.25, .5), P(.2, .16), P(.03, .28), P(.01, .5))} fill={lapis} {...IS} />
+      <path d={polyD(P(.03, .72), P(.2, .84), P(.25, .5), P(.2, .16), P(.03, .28), P(.01, .5))} {...IS} fill={lapis} />
       <path d={`M${P(.07, .66).join(" ")}L${P(.19, .76).join(" ")}M${P(.07, .34).join(" ")}L${P(.19, .24).join(" ")}`} fill="none" stroke={gold} strokeWidth="1.1" strokeLinecap="round" />
-      <ellipse cx={hx} cy={hy} rx="2.8" ry="3.6" transform={`rotate(14 ${hx} ${hy})`} fill={gold} {...IS} />
+      <ellipse cx={hx} cy={hy} rx="2.8" ry="3.6" transform={`rotate(14 ${hx} ${hy})`} {...IS} fill={gold} />
       <path d={`M${hx - 1.6} ${hy - 1}h1M${hx + 1.2} ${hy - 1.6}h1`} stroke={carve} strokeWidth="1" strokeLinecap="round" />
       <path d={`M${hx - .4} ${hy + 1.6}h1.6`} stroke={carve} strokeWidth=".8" strokeLinecap="round" />
     </g>
@@ -3346,31 +3352,33 @@ export function Newsstand() {
 
 /* ---- UNIVERSAL (2): TRAPDOOR, FOOTPRINTS, BROKEN_GLASS, LANTERN ---- */
 
-/** LOW. Trapdoor set flush in the floor, seen from above (art/STYLE.md, LOW props): a dark sunken frame round a hatch of
- *  four oak planks (alternate planks a shade darker), two iron strap hinges running in from the north edge with rivets,
- *  and an iron ring pull near the south-east corner, where it stays clear of a token standing on the hatch. No shadow. */
+/** LOW. Trapdoor set flush in the floor, seen from above (art/STYLE.md, LOW props), at a real hatch's size: about 0.85 m
+ *  square on a 2 m tile, so its frame is 36 units square, centred, clearly smaller than the 2 m sarcophagus. A dark sunken
+ *  frame round a hatch of four oak planks (alternate planks a shade darker), two iron strap hinges running in from the
+ *  north edge with rivets, and an iron ring pull in the south-east corner lying over the frame, where part of it stays
+ *  visible round a token standing on the hatch. No shadow. */
 export function Trapdoor() {
   const frame = "#4a3423", oak = "#a07a4a", oakD = "#86643a", iron = "#4b4e58", ironL = "#a9aeb6";
-  const x0 = 10, x1 = 54, y0 = 10, y1 = 54, pw = (x1 - x0) / 4;
+  const x0 = 17, x1 = 47, y0 = 17, y1 = 47, pw = (x1 - x0) / 4;
   return (
     <g>
-      <path d={inkBox(6, 6, 52, 52, 2.6, .4)} fill={frame} {...OS} />
+      <path d={inkBox(14, 14, 36, 36, 2, .3)} fill={frame} {...OS} />
       {[0, 1, 2, 3].map((i) => <rect key={i} x={x0 + i * pw} y={y0} width={pw} height={y1 - y0} fill={i % 2 ? oakD : oak} />)}
       <path d={`M${x0 + pw} ${y0}V${y1}M${x0 + 2 * pw} ${y0}V${y1}M${x0 + 3 * pw} ${y0}V${y1}`} {...IS} />
-      <path d="M17 24.6L19.4 27.4M38.6 37L40.4 40.4M47.4 21.6L49 24.2" {...IS} strokeOpacity=".5" />
-      <path d={inkBox(x0, y0, x1 - x0, y1 - y0, 1, .2)} fill="none" {...OS} />
-      {/* two strap hinges: a knuckle on the frame, a long iron strap tapering south across the planks */}
-      {[18, 46].map((cx) => (
+      <path d="M22.4 26.6L24 28.6M35.4 33.4L36.6 35.8M44.8 23.6L45.8 25.4" {...IS} strokeOpacity=".5" />
+      <path d={inkBox(x0, y0, x1 - x0, y1 - y0, .8, .15)} fill="none" {...OS} />
+      {/* two strap hinges: a knuckle on the frame, an iron strap tapering south down the outer planks */}
+      {[20.75, 43.25].map((cx) => (
         <g key={cx}>
-          <path d={`M${cx - 2.6} 11V40.4L${cx} 43.4L${cx + 2.6} 40.4V11Z`} {...IS} fill={iron} />
-          <rect x={cx - 4.6} y="5.4" width="9.2" height="6.6" rx="1.6" {...IS} fill={iron} />
-          {[17, 27, 37].map((ry) => <circle key={ry} cx={cx} cy={ry} r=".95" fill={ironL} />)}
+          <path d={`M${cx - 1.8} 17.6V34.2L${cx} 36.4L${cx + 1.8} 34.2V17.6Z`} {...IS} fill={iron} />
+          <rect x={cx - 3.2} y="13.4" width="6.4" height="4.6" rx="1.2" {...IS} fill={iron} />
+          {[22, 26.8, 31.6].map((ry) => <circle key={ry} cx={cx} cy={ry} r=".7" fill={ironL} />)}
         </g>
       ))}
-      {/* ring pull on a plate */}
-      <circle cx="45" cy="49.6" r="2" {...IS} fill={iron} />
-      <circle cx="45" cy="53.4" r="3.2" fill="none" stroke={INK} strokeWidth="3" />
-      <circle cx="45" cy="53.4" r="3.2" fill="none" stroke={ironL} strokeWidth="1.2" />
+      {/* ring pull on a plate in the south-east corner */}
+      <circle cx="44.2" cy="44.2" r="1.3" {...IS} fill={iron} />
+      <circle cx="45.9" cy="45.9" r="2.2" fill="none" stroke={INK} strokeWidth="2.2" />
+      <circle cx="45.9" cy="45.9" r="2.2" fill="none" stroke={ironL} strokeWidth=".9" />
     </g>
   );
 }
@@ -6093,7 +6101,7 @@ export const PROP_NOTE = {
   SANDSTONE_ARCH: "Natural sandstone arch taller than a person, with volume: two rounded pillars worn in near the foot, joined by a span over a clear opening to the floor; the top of the span lit, the east faces (and the inner face of the west pillar) shaded, strata bands wrapping from the front round onto them, each pillar lit on its west edge, sand drifted at both feet. Tall.",
   STREETLIGHT: "Cast-iron lamp post reaching the top of the tile, clearly taller than a person: a stepped round foot on the floor, a fluted base column, a slim post with collars and a ladder bar, and a four-paned glass lantern under a domed cap with a finial, a pale halo round the glass, the east side a shade darker. Tall: blocks sight.",
   NEWSSTAND: "Street newsstand kiosk, clearly taller than a person: a teal cabin with a roof lintel and a cream sign strip, a crimson and cream striped scalloped awning over a window of racked magazines, a wooden counter with a stack of papers, a panelled base and a poster on the darker east side. Tall.",
-  TRAPDOOR: "Oak plank hatch set flush in a dark frame, seen from above: two iron strap hinges from the north edge and a ring pull near the south-east corner. Flush, no shadow.",
+  TRAPDOOR: "Oak plank hatch about 0.85 m square, set flush in a dark frame in the middle of the tile, seen from above: two iron strap hinges from the north edge and a ring pull in the south-east corner. Flush, no shadow.",
   FOOTPRINTS: "Trail of muddy boot prints seen from above, left and right in step, with tread bars: corner to corner on one tile, one trail along a whole span. Flush, no shadow.",
   BROKEN_GLASS: "Scatter of pale glass shards seen from above, big ones out toward the edges and corners, splinters between, glints on the largest. Flush, no shadow.",
   LANTERN: "Hurricane lantern on the ground: brass tank, glass globe with the flame, iron cap and bail handle, standing in a flat pool of warm light. Ankle-to-knee height: sight passes over.",
@@ -6190,7 +6198,9 @@ export const SPAN_SPRITES = {
  * draws its single-tile sprite ONCE, centred along the span and bottom-centre anchored (scaled by the span's
  * short side, so a 2 × 2 pool fills its box while a 1 × 2 sofa keeps its single-tile size).
  */
-export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second }) {
+export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second, flip = false }) {
+  // `flip`: mirrored to face west (FACING animals beside a wall on their east side)
+  if (flip) return <g transform={`translate(${64 * cw} 0) scale(-1 1)`}><PropSprite kind={kind} cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} victim={victim} dummy={dummy} master={master} second={second} /></g>;
   const Span = SPAN_SPRITES[kind];
   // `cells`: the object's tiles as offsets from its top-left cell (an L-shaped carpet runner is not its whole box)
   if (Span) return <Span cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} />;
@@ -6776,7 +6786,9 @@ export function getCastForPuzzle(p, seed = 0) {
   if (Object.keys(rename).length) {
     const re = new RegExp(`\\b(${Object.keys(rename).join("|")})\\b`, "g");
     const fix = (t) => (typeof t === "string" ? t.replace(re, (m) => rename[m]) : t);
-    puzzle = { ...p, suspects: sus.map((s) => ({ ...s, clue: fix(s.clue) })), steps: (p.steps || []).map((st) => ({ ...st, text: fix(st.text) })) };
+    const fixStep = (st) => ({ ...st, text: fix(st.text) });
+    puzzle = { ...p, suspects: sus.map((s) => ({ ...s, clue: fix(s.clue) })), steps: (p.steps || []).map(fixStep),
+      ...(p.hints ? { hints: p.hints.map((h) => ({ ...h, chain: h.chain.map(fixStep), place: fixStep(h.place) })) } : null) };
   } else puzzle = { ...p, suspects: sus };
 
   const locked = lockedCategories(puzzle);

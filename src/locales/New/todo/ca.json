@@ -1,0 +1,6 @@
+{
+  "ui.nav.pInitiation": "Iniciació",
+  "ui.creds.delete": "Eliminar compte",
+  "ui.creds.deleteConfirm": "Vols eliminar el teu compte? El teu nom en clau i les dades desades del teu compte s'esborraran i aquesta acció no es pot desfer.",
+  "ui.creds.deleteError": "No s'ha pogut eliminar el compte. Si us plau, torna-ho a provar."
+}

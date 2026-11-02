@@ -5920,6 +5920,12614 @@
    }
   }
  ],
+ "hints": [
+  {
+   "suspect": "A",
+   "cell": [
+    0,
+    7
+   ],
+   "needs": [],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ]
+   ],
+   "key": [
+    0,
+    4,
+    5
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        3
+       ]
+      ],
+      "C": [
+       [
+        3,
+        7
+       ]
+      ],
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "G": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        7
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "I": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        7
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        3,
+        7
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "L": [
+       [
+        8,
+        1
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        7
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone in the area, but Emil must be in the Old Ruins, Fanny and Loretta must be in the Glade, Dominic and Miles must be in the Pine Grove and Bridget must be in the Lodge, so Ingrid cannot be in any of them.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        6
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        8,
+        0
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_MANY",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "E"
+          ],
+          "room": "OLD_RUINS"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "F",
+           "L"
+          ],
+          "room": "GLADE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "D",
+           "M"
+          ],
+          "room": "PINE_GROVE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B"
+          ],
+          "room": "LODGE"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Casper was north of Ingrid. Ingrid can reach row 10 at most, so Casper must be in rows 4–9; Casper is in row 4 at the earliest, so Ingrid must be in rows 7–10.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       9,
+       1
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        9,
+        1
+       ]
+      ],
+      "I": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        7
+       ],
+       [
+        2,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "C",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "I",
+          "line": 9,
+          "x": "C",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 8
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "C",
+          "line": 3,
+          "y": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 6,
+            "to": 9
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dominic was east of Ingrid. Dominic can reach column 7 at most, so Ingrid must be in column 6; Ingrid is in column 6 at the earliest, so Dominic must be in column 7.",
+     "focus": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ],
+      "I": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        6
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EAST_OF",
+          "subject": "D",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "D",
+          "line": 6,
+          "x": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 5
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "I",
+          "line": 5,
+          "y": "D",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 6
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Dominic can only be at r1c7, r2c7 or r3c7, and those tiles all lie on one sightline. Whichever one Dominic takes, the whole stretch is watched, so nobody else can stand on r1c7, r2c7, r3c7.",
+     "focus": [
+      [
+       0,
+       6
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       6
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        6
+       ]
+      ],
+      "G": [
+       [
+        0,
+        6
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        6
+       ]
+      ],
+      "K": [
+       [
+        0,
+        6
+       ],
+       [
+        1,
+        6
+       ]
+      ],
+      "N": [
+       [
+        0,
+        6
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "D",
+       "options": [
+        [
+         0,
+         6
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         2,
+         6
+        ]
+       ],
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         2,
+         6
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Someone must stand here",
+     "kind": "eliminate",
+     "text": "Exactly one person was on the trail of footprints. r4c3 is the last trail of footprints that anyone can still reach. Only Bridget, Greta, Kasimir and Nadia can get there, so one of them takes that tile and watches its sightlines: nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       0,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        2
+       ]
+      ],
+      "B": [
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ],
+      "G": [
+       [
+        0,
+        2
+       ],
+       [
+        2,
+        2
+       ]
+      ],
+      "K": [
+       [
+        2,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ]
+      ],
+      "N": [
+       [
+        0,
+        2
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_WITNESS_PROP",
+      "ruleKey": "RULE_WITNESS",
+      "params": {
+       "prop": "FOOTPRINTS",
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "FOOTPRINTS"
+        }
+       },
+       "coord": [
+        3,
+        2
+       ],
+       "coords": [
+        [
+         0,
+         2
+        ],
+        [
+         2,
+         2
+        ],
+        [
+         4,
+         2
+        ],
+        [
+         5,
+         2
+        ],
+        [
+         6,
+         2
+        ]
+       ],
+       "suspects": [
+        "B",
+        "G",
+        "K",
+        "N"
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 7,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Archibald “was in front of an opening between two areas and was in row 1”: of the 4 tiles that fit, only r1c8 is still open. Place Archibald there.",
+    "focus": [
+     [
+      0,
+      7
+     ]
+    ],
+    "elims": {
+     "D": [
+      [
+       0,
+       6
+      ]
+     ],
+     "G": [
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       7
+      ]
+     ],
+     "J": [
+      [
+       3,
+       7
+      ]
+     ],
+     "K": [
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       7
+      ]
+     ],
+     "N": [
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       7
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     0,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       0,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    5,
+    8
+   ],
+   "needs": [
+    "A"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "key": [
+    7
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "G": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "I": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "L": [
+       [
+        8,
+        1
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone in the area, but Emil must be in the Old Ruins, Fanny and Loretta must be in the Glade, Dominic and Miles must be in the Pine Grove, Archibald must be in the Hollow and Bridget must be in the Lodge, so Ingrid cannot be in any of them.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        8,
+        0
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_MANY",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "E"
+          ],
+          "room": "OLD_RUINS"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "F",
+           "L"
+          ],
+          "room": "GLADE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "D",
+           "M"
+          ],
+          "room": "PINE_GROVE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "A"
+          ],
+          "room": "HOLLOW"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B"
+          ],
+          "room": "LODGE"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Casper was north of Ingrid. Ingrid can reach row 10 at most, so Casper must be in rows 4–9; Casper is in row 4 at the earliest, so Ingrid must be in rows 7–10.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       9,
+       1
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        9,
+        1
+       ]
+      ],
+      "I": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "C",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "I",
+          "line": 9,
+          "x": "C",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 8
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "C",
+          "line": 3,
+          "y": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 6,
+            "to": 9
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dominic was east of Ingrid. Dominic can reach column 7 at most, so Ingrid must be in column 6; Ingrid is in column 6 at the earliest, so Dominic must be in column 7.",
+     "focus": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ],
+      "I": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        6
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EAST_OF",
+          "subject": "D",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "D",
+          "line": 6,
+          "x": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 5
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "I",
+          "line": 5,
+          "y": "D",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 6
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Ingrid can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Ingrid takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        6,
+        5
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        9,
+        5
+       ]
+      ],
+      "K": [
+       [
+        6,
+        5
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        9,
+        5
+       ]
+      ],
+      "N": [
+       [
+        6,
+        5
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        9,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "I",
+       "options": [
+        [
+         6,
+         5
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         8,
+         5
+        ],
+        [
+         9,
+         5
+        ]
+       ],
+       "coords": [
+        [
+         6,
+         5
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         8,
+         5
+        ],
+        [
+         9,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone and can only be on the Log Bridge, so nobody else can be on the Log Bridge.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        9,
+        6
+       ]
+      ],
+      "K": [
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ],
+      "N": [
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        9,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "room": "LOG_BRIDGE"
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Greta was in the same area as Archibald, so both must be in an area they can both still reach (Hollow, Pine Grove).",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        0
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "G",
+       "other": "A",
+       "rooms": [
+        "HOLLOW",
+        "PINE_GROVE"
+       ]
+      }
+     }
+    },
+    {
+     "n": 8,
+     "tier": 2,
+     "rule": "Ray pair",
+     "kind": "eliminate",
+     "text": "Ray pair: every tile left for Dominic and Greta lies on the same two sightlines. They cannot share one without seeing each other, so one stands on each and both lines are watched: nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       9
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        9
+       ]
+      ],
+      "E": [
+       [
+        4,
+        9
+       ]
+      ],
+      "K": [
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        9
+       ]
+      ],
+      "N": [
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_PAIR",
+      "ruleKey": "RULE_RAY_PAIR",
+      "params": {
+       "x": "D",
+       "y": "G",
+       "coords": [
+        [
+         1,
+         9
+        ],
+        [
+         2,
+         9
+        ],
+        [
+         3,
+         9
+        ],
+        [
+         4,
+         9
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         9
+        ],
+        [
+         8,
+         9
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 9,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Emil “was beside the Corpse”: of the 2 tiles that fit, only r6c9 is still open. Place Emil there.",
+    "focus": [
+     [
+      5,
+      8
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       4,
+       8
+      ]
+     ],
+     "K": [
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ]
+     ],
+     "N": [
+      [
+       4,
+       8
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       8,
+       8
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     5,
+     8
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       5,
+       8
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    8,
+    0
+   ],
+   "needs": [
+    "A",
+    "E"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     9,
+     1
+    ]
+   ],
+   "key": [
+    2,
+    7
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "G": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "I": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        8,
+        1
+       ]
+      ],
+      "L": [
+       [
+        8,
+        1
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        8,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone in the area, but Emil must be in the Old Ruins, Fanny and Loretta must be in the Glade, Dominic and Miles must be in the Pine Grove, Archibald must be in the Hollow and Bridget must be in the Lodge, so Ingrid cannot be in any of them.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        8,
+        0
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_MANY",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "E"
+          ],
+          "room": "OLD_RUINS"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "F",
+           "L"
+          ],
+          "room": "GLADE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "D",
+           "M"
+          ],
+          "room": "PINE_GROVE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "A"
+          ],
+          "room": "HOLLOW"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B"
+          ],
+          "room": "LODGE"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Casper was north of Ingrid. Ingrid can reach row 10 at most, so Casper must be in rows 4–9; Casper is in row 4 at the earliest, so Ingrid must be in rows 7–10.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       9,
+       1
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        9,
+        1
+       ]
+      ],
+      "I": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "C",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "I",
+          "line": 9,
+          "x": "C",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 8
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "C",
+          "line": 3,
+          "y": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 6,
+            "to": 9
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dominic was east of Ingrid. Dominic can reach column 7 at most, so Ingrid must be in column 6; Ingrid is in column 6 at the earliest, so Dominic must be in column 7.",
+     "focus": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ],
+      "I": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        6
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EAST_OF",
+          "subject": "D",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "D",
+          "line": 6,
+          "x": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 5
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "I",
+          "line": 5,
+          "y": "D",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 6
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Ingrid can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Ingrid takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        6,
+        5
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        9,
+        5
+       ]
+      ],
+      "K": [
+       [
+        6,
+        5
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        9,
+        5
+       ]
+      ],
+      "N": [
+       [
+        6,
+        5
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        9,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "I",
+       "options": [
+        [
+         6,
+         5
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         8,
+         5
+        ],
+        [
+         9,
+         5
+        ]
+       ],
+       "coords": [
+        [
+         6,
+         5
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         8,
+         5
+        ],
+        [
+         9,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone and can only be on the Log Bridge, so nobody else can be on the Log Bridge.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        9,
+        6
+       ]
+      ],
+      "K": [
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ],
+      "N": [
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        9,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "room": "LOG_BRIDGE"
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Greta was in the same area as Archibald, so both must be in an area they can both still reach (Hollow, Pine Grove).",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        0
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "G",
+       "other": "A",
+       "rooms": [
+        "HOLLOW",
+        "PINE_GROVE"
+       ]
+      }
+     }
+    },
+    {
+     "n": 8,
+     "tier": 2,
+     "rule": "Ray pair",
+     "kind": "eliminate",
+     "text": "Ray pair: every tile left for Dominic and Greta lies on the same two sightlines. They cannot share one without seeing each other, so one stands on each and both lines are watched: nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       9
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        9
+       ]
+      ],
+      "K": [
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        9
+       ]
+      ],
+      "N": [
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_PAIR",
+      "ruleKey": "RULE_RAY_PAIR",
+      "params": {
+       "x": "D",
+       "y": "G",
+       "coords": [
+        [
+         1,
+         9
+        ],
+        [
+         2,
+         9
+        ],
+        [
+         3,
+         9
+        ],
+        [
+         4,
+         9
+        ],
+        [
+         6,
+         9
+        ],
+        [
+         7,
+         9
+        ],
+        [
+         8,
+         9
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 9,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Casper “was beside an oak tree and was north of Ingrid”: of the 5 tiles that fit, only r9c1 is still open. Place Casper there.",
+    "focus": [
+     [
+      8,
+      0
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       8,
+       2
+      ]
+     ],
+     "F": [
+      [
+       5,
+       0
+      ],
+      [
+       6,
+       0
+      ]
+     ],
+     "H": [
+      [
+       8,
+       2
+      ]
+     ],
+     "J": [
+      [
+       8,
+       1
+      ]
+     ],
+     "K": [
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ]
+     ],
+     "L": [
+      [
+       5,
+       0
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       0
+      ]
+     ],
+     "M": [
+      [
+       8,
+       4
+      ]
+     ],
+     "N": [
+      [
+       5,
+       0
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     8,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       8,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    6,
+    7
+   ],
+   "needs": [
+    "C"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     6,
+     7
+    ],
+    [
+     8,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Harold “was standing on a bearskin rug”: of the 2 tiles that fit, only r7c8 is still open. Place Harold there.",
+    "focus": [
+     [
+      6,
+      7
+     ]
+    ],
+    "elims": {
+     "D": [
+      [
+       6,
+       4
+      ]
+     ],
+     "G": [
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "I": [
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "K": [
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "M": [
+      [
+       6,
+       4
+      ]
+     ],
+     "N": [
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       8,
+       7
+      ]
+     ]
+    },
+    "suspect": "H",
+    "cell": [
+     6,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       6,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    3,
+    2
+   ],
+   "needs": [
+    "A",
+    "C",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ]
+   ],
+   "key": [
+    3,
+    5
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "G": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ],
+      "I": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone in the area, but Emil must be in the Old Ruins, Casper, Fanny and Loretta must be in the Glade, Dominic and Miles must be in the Pine Grove, Archibald must be in the Hollow, Bridget must be in the Lodge and Harold must be in the Cabin, so Ingrid cannot be in any of them.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_MANY",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "E"
+          ],
+          "room": "OLD_RUINS"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "C",
+           "F",
+           "L"
+          ],
+          "room": "GLADE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "D",
+           "M"
+          ],
+          "room": "PINE_GROVE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "A"
+          ],
+          "room": "HOLLOW"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B"
+          ],
+          "room": "LODGE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "H"
+          ],
+          "room": "CABIN"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Casper was north of Ingrid. Casper is in row 9 at the earliest, so Ingrid must be in row 10.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "C",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "C",
+          "line": 8,
+          "y": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.ROW",
+           "params": {
+            "from": 9
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Ingrid can only be at r10c6 or r10c7, and those tiles all lie on one sightline. Whichever one Ingrid takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        9,
+        2
+       ]
+      ],
+      "D": [
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ]
+      ],
+      "G": [
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        5
+       ],
+       [
+        9,
+        6
+       ]
+      ],
+      "K": [
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        5
+       ]
+      ],
+      "M": [
+       [
+        9,
+        4
+       ]
+      ],
+      "N": [
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        5
+       ],
+       [
+        9,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "I",
+       "options": [
+        [
+         9,
+         5
+        ],
+        [
+         9,
+         6
+        ]
+       ],
+       "coords": [
+        [
+         9,
+         2
+        ],
+        [
+         9,
+         3
+        ],
+        [
+         9,
+         4
+        ],
+        [
+         9,
+         5
+        ],
+        [
+         9,
+         6
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Bridget can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Bridget takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       0,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        2
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ],
+      "K": [
+       [
+        0,
+        2
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ]
+      ],
+      "N": [
+       [
+        0,
+        2
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "B",
+       "options": [
+        [
+         3,
+         2
+        ],
+        [
+         4,
+         2
+        ],
+        [
+         5,
+         2
+        ],
+        [
+         6,
+         2
+        ]
+       ],
+       "coords": [
+        [
+         0,
+         2
+        ],
+        [
+         2,
+         2
+        ],
+        [
+         3,
+         2
+        ],
+        [
+         4,
+         2
+        ],
+        [
+         5,
+         2
+        ],
+        [
+         6,
+         2
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was on the trail of footprints. Only Bridget can still reach the trail of footprints, so she must be on one.",
+     "focus": [
+      [
+       3,
+       2
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        2
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "FOOTPRINTS"
+        }
+       },
+       "owner": "B",
+       "prop": "FOOTPRINTS"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 7,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Bridget “was in the Lodge”: of the 6 tiles that fit, only r4c3 is still open. Place Bridget there.",
+    "focus": [
+     [
+      3,
+      2
+     ]
+    ],
+    "elims": {},
+    "suspect": "B",
+    "cell": [
+     3,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       3,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "I",
+   "cell": [
+    9,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "G": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ],
+      "I": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone in the area, but Emil must be in the Old Ruins, Casper, Fanny and Loretta must be in the Glade, Dominic and Miles must be in the Pine Grove, Archibald must be in the Hollow, Bridget must be in the Lodge and Harold must be in the Cabin, so Ingrid cannot be in any of them.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       0
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        3
+       ],
+       [
+        9,
+        4
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_MANY",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "E"
+          ],
+          "room": "OLD_RUINS"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "C",
+           "F",
+           "L"
+          ],
+          "room": "GLADE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "D",
+           "M"
+          ],
+          "room": "PINE_GROVE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "A"
+          ],
+          "room": "HOLLOW"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B"
+          ],
+          "room": "LODGE"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "H"
+          ],
+          "room": "CABIN"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Casper was north of Ingrid. Casper is in row 9 at the earliest, so Ingrid must be in row 10.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "C",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "C",
+          "line": 8,
+          "y": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.ROW",
+           "params": {
+            "from": 9
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dominic was east of Ingrid. Dominic can reach column 7 at most, so Ingrid must be in column 6; Ingrid is in column 6 at the earliest, so Dominic must be in columns 4–7.",
+     "focus": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ],
+      "I": [
+       [
+        9,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EAST_OF",
+          "subject": "D",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "D",
+          "line": 6,
+          "x": "I",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 5
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "I",
+          "line": 5,
+          "y": "D",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 3,
+            "to": 6
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Ingrid “was alone”: every tile that fits is ruled out except r10c6. Place Ingrid there.",
+    "focus": [
+     [
+      9,
+      5
+     ]
+    ],
+    "elims": {},
+    "suspect": "I",
+    "cell": [
+     9,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "I",
+      "clueOf": "I",
+      "coord": [
+       9,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    2,
+    9
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "H",
+    "I"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    5
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "G": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone and is placed on the Log Bridge, so nobody else can be on the Log Bridge.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ],
+      "K": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ],
+      "N": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "room": "LOG_BRIDGE"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Greta was in the same area as Archibald, so both must be in an area they can both still reach (Hollow).",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        9
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        1
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "G",
+       "other": "A",
+       "rooms": [
+        "HOLLOW"
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Greta can only be at r2c10 or r3c10, and those tiles all lie on one sightline. Whichever one Greta takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       9
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        9
+       ]
+      ],
+      "N": [
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        9
+       ],
+       [
+        4,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "G",
+       "options": [
+        [
+         1,
+         9
+        ],
+        [
+         2,
+         9
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         9
+        ],
+        [
+         2,
+         9
+        ],
+        [
+         3,
+         9
+        ],
+        [
+         4,
+         9
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Jemima was in the same area as someone with blonde hair. Polaroid check — people with blonde hair: Dominic, Fanny, Harold and Kasimir. None of them can still reach the Hollow, so Jemima cannot be there.",
+     "focus": [
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NONE_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WITH_P",
+          "subject": "J",
+          "params": {
+           "trait": "HAIR_BLONDE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "HAIR_BLONDE",
+         "holders": [
+          "D",
+          "F",
+          "H",
+          "K"
+         ]
+        }
+       },
+       "rooms": [
+        "HOLLOW"
+       ],
+       "suspect": "J"
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c9 cannot be a hiding spot (Jemima was the only person on a tree stump), so someone must watch it. Only Greta can still see it, so Greta must stand on r3c10.",
+     "focus": [
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        1,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        2,
+        8
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "J",
+          "params": {
+           "prop": "STUMP"
+          }
+         }
+        }
+       },
+       "suspect": "G",
+       "coords": [
+        [
+         2,
+         9
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 7,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Greta “was in the same area as Archibald”: every tile that fits is ruled out except r3c10. Place Greta there.",
+    "focus": [
+     [
+      2,
+      9
+     ]
+    ],
+    "elims": {},
+    "suspect": "G",
+    "cell": [
+     2,
+     9
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       2,
+       9
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "J",
+   "cell": [
+    0,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "G",
+    "H",
+    "I"
+   ],
+   "tier": 3,
+   "fits": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "key": [
+    0,
+    4,
+    6
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Jemima was in the same area as someone with blonde hair. Polaroid check — people with blonde hair: Dominic, Fanny, Harold and Kasimir. None of them can still reach the Hollow, so Jemima cannot be there.",
+     "focus": [
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        1,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NONE_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WITH_P",
+          "subject": "J",
+          "params": {
+           "trait": "HAIR_BLONDE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "HAIR_BLONDE",
+         "holders": [
+          "D",
+          "F",
+          "H",
+          "K"
+         ]
+        }
+       },
+       "rooms": [
+        "HOLLOW"
+       ],
+       "suspect": "J"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        0,
+        3
+       ]
+      ],
+      "K": [
+       [
+        0,
+        3
+       ],
+       [
+        2,
+        0
+       ]
+      ],
+      "N": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone and is placed on the Log Bridge, so nobody else can be on the Log Bridge.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ],
+      "N": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "room": "LOG_BRIDGE"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 3,
+     "rule": "Unseen partner (lookahead)",
+     "kind": "eliminate",
+     "text": "Lookahead: Nadia was north of Kasimir. From r6c5, Nadia would see every tile where Kasimir could still stand to make that true, and no two suspects may see each other. So Nadia cannot be there.",
+     "focus": [
+      [
+       5,
+       4
+      ]
+     ],
+     "elims": {
+      "N": [
+       [
+        5,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SIGHT",
+      "ruleKey": "RULE_PARTNER_SIGHT",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "N",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "N",
+          "params": {
+           "other": "K"
+          }
+         }
+        }
+       },
+       "coords": [
+        [
+         5,
+         4
+        ]
+       ],
+       "x": "N",
+       "y": "K"
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 3,
+     "rule": "Unseen partner (lookahead)",
+     "kind": "eliminate",
+     "text": "Lookahead: Jemima was in the same area as someone with blonde hair. From r3c1, Jemima would see every tile where people with blonde hair could still join her, and no two suspects may see each other. So Jemima cannot be there.",
+     "focus": [
+      [
+       2,
+       0
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        2,
+        0
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SIGHT_TRAIT",
+      "ruleKey": "RULE_PARTNER_SIGHT",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WITH_P",
+          "subject": "J",
+          "params": {
+           "trait": "HAIR_BLONDE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "coords": [
+        [
+         2,
+         0
+        ]
+       ],
+       "suspect": "J",
+       "trait": "HAIR_BLONDE"
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 3,
+     "rule": "Unseen partner (lookahead)",
+     "kind": "eliminate",
+     "text": "Lookahead: Kasimir was in an area with at least two women. From r3c4, r4c6, Kasimir would see every tile where women could still join him, and no two suspects may see each other. So Kasimir cannot be there.",
+     "focus": [
+      [
+       2,
+       3
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        2,
+        3
+       ],
+       [
+        3,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SIGHT_TRAIT",
+      "ruleKey": "RULE_PARTNER_SIGHT",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "K",
+         "atom": {
+          "kind": "TWO_P_ROOM",
+          "subject": "K",
+          "params": {
+           "trait": "FEMALE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "coords": [
+        [
+         2,
+         3
+        ],
+        [
+         3,
+         5
+        ]
+       ],
+       "suspect": "K",
+       "trait": "FEMALE"
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Jemima was in the same area as someone with blonde hair. Polaroid check — people with blonde hair: Dominic, Fanny, Harold and Kasimir. None of them can still reach the Old Ruins, so Jemima cannot be there.",
+     "focus": [
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       9
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       4,
+       9
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       8
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NONE_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WITH_P",
+          "subject": "J",
+          "params": {
+           "trait": "HAIR_BLONDE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "HAIR_BLONDE",
+         "holders": [
+          "D",
+          "F",
+          "H",
+          "K"
+         ]
+        }
+       },
+       "rooms": [
+        "OLD_RUINS"
+       ],
+       "suspect": "J"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 8,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Jemima “was the only person on a tree stump. She was in the same area as someone with blonde hair”: of the 7 tiles that fit, only r1c4 is still open. Place Jemima there.",
+    "focus": [
+     [
+      0,
+      3
+     ]
+    ],
+    "elims": {
+     "N": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       2,
+       3
+      ]
+     ]
+    },
+    "suspect": "J",
+    "cell": [
+     0,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "J",
+      "clueOf": "J",
+      "coord": [
+       0,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "N",
+   "cell": [
+    3,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "G",
+    "H",
+    "I",
+    "J"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Miles can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Miles takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ],
+      "K": [
+       [
+        3,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ],
+      "N": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "M",
+       "options": [
+        [
+         3,
+         4
+        ],
+        [
+         4,
+         4
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         7,
+         4
+        ]
+       ],
+       "coords": [
+        [
+         3,
+         4
+        ],
+        [
+         4,
+         4
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         7,
+         4
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "N": [
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "J",
+       "prop": "STUMP"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Ingrid was alone and is placed on the Log Bridge, so nobody else can be on the Log Bridge.",
+     "focus": [
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ],
+      "N": [
+       [
+        7,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "I",
+       "room": "LOG_BRIDGE"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Nadia was north of Kasimir. Kasimir can reach row 6 at most, so Nadia must be in rows 2–5; Nadia is in row 2 at the earliest, so Kasimir must be in rows 3–6.",
+     "focus": [
+      [
+       1,
+       6
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       9,
+       1
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        1,
+        6
+       ]
+      ],
+      "N": [
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        9,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "N",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "N",
+          "params": {
+           "other": "K"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "K",
+          "line": 5,
+          "x": "N",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 1,
+            "to": 4
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "N",
+          "line": 1,
+          "y": "K",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 2,
+            "to": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r5c7 cannot be a hiding spot (Jemima was the only person on a tree stump), so someone must watch it. Only Nadia can still see it, so Nadia must stand on r4c7.",
+     "focus": [
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       6
+      ]
+     ],
+     "elims": {
+      "N": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        4,
+        6
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "J",
+          "params": {
+           "prop": "STUMP"
+          }
+         }
+        }
+       },
+       "suspect": "N",
+       "coords": [
+        [
+         3,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 6,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Nadia “was north of Kasimir”: every tile that fits is ruled out except r4c7. Place Nadia there.",
+    "focus": [
+     [
+      3,
+      6
+     ]
+    ],
+    "elims": {},
+    "suspect": "N",
+    "cell": [
+     3,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "N",
+      "clueOf": "N",
+      "coord": [
+       3,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    3,
+    0
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "G",
+    "H",
+    "I",
+    "J",
+    "N"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "key": [
+    1,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Kasimir was in an area with at least two women. Polaroid check — women: Bridget, Fanny, Greta, Ingrid, Jemima, Loretta and Nadia. Fewer than two of them can still reach the Pine Grove or the Clearing, so Kasimir cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_FEW_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "K",
+         "atom": {
+          "kind": "TWO_P_ROOM",
+          "subject": "K",
+          "params": {
+           "trait": "FEMALE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "FEMALE",
+         "holders": [
+          "B",
+          "F",
+          "G",
+          "I",
+          "J",
+          "L",
+          "N"
+         ]
+        }
+       },
+       "rooms": [
+        "PINE_GROVE",
+        "CLEARING"
+       ],
+       "suspect": "K"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Fanny was exactly one row north of Miles. Miles can only be in rows 5, 6 or 8, which leaves Fanny rows 4–5; Fanny can only be in rows 4–5, which leaves Miles rows 5–6.",
+     "focus": [
+      [
+       5,
+       1
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       4
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        5,
+        1
+       ],
+       [
+        7,
+        1
+       ]
+      ],
+      "M": [
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "F",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "F",
+          "params": {
+           "other": "M",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "M",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             4,
+             5,
+             7
+            ]
+           }
+          },
+          "x": "F",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 4
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "F",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 4
+           }
+          },
+          "x": "M",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 4,
+            "to": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Nadia was north of Kasimir. Nadia is in row 4 at the earliest, so Kasimir must be in rows 5–6.",
+     "focus": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "N",
+         "atom": {
+          "kind": "NORTH_OF",
+          "subject": "N",
+          "params": {
+           "other": "K"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "N",
+          "line": 3,
+          "y": "K",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 4,
+            "to": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Kasimir can only be at r5c2 or r6c2, and those tiles all lie on one sightline. Whichever one Kasimir takes, the whole stretch is watched, so nobody else can stand on r4c2, r5c2, r6c2.",
+     "focus": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        4,
+        1
+       ]
+      ],
+      "L": [
+       [
+        3,
+        1
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        5,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "K",
+       "options": [
+        [
+         4,
+         1
+        ],
+        [
+         5,
+         1
+        ]
+       ],
+       "coords": [
+        [
+         3,
+         1
+        ],
+        [
+         4,
+         1
+        ],
+        [
+         5,
+         1
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Fanny “was beside a shrub and was exactly one row north of Miles”: of the 6 tiles that fit, only r4c1 is still open. Place Fanny there.",
+    "focus": [
+     [
+      3,
+      0
+     ]
+    ],
+    "elims": {
+     "L": [
+      [
+       3,
+       0
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     3,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       3,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "L",
+   "cell": [
+    7,
+    1
+   ],
+   "needs": [
+    "A",
+    "C",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "N"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "key": [
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Kasimir was in an area with at least two women. Polaroid check — women: Bridget, Fanny, Greta, Ingrid, Jemima, Loretta and Nadia. Fewer than two of them can still reach the Pine Grove, the Clearing or the Lodge, so Kasimir cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        1,
+        6
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_FEW_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "K",
+         "atom": {
+          "kind": "TWO_P_ROOM",
+          "subject": "K",
+          "params": {
+           "trait": "FEMALE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "FEMALE",
+         "holders": [
+          "B",
+          "F",
+          "G",
+          "I",
+          "J",
+          "L",
+          "N"
+         ]
+        }
+       },
+       "rooms": [
+        "PINE_GROVE",
+        "CLEARING",
+        "LODGE"
+       ],
+       "suspect": "K"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Kasimir can only be at r5c2 or r6c2, and those tiles all lie on one sightline. Whichever one Kasimir takes, the whole stretch is watched, so nobody else can stand on r5c2, r6c2.",
+     "focus": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ]
+     ],
+     "elims": {
+      "L": [
+       [
+        4,
+        1
+       ],
+       [
+        5,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "K",
+       "options": [
+        [
+         4,
+         1
+        ],
+        [
+         5,
+         1
+        ]
+       ],
+       "coords": [
+        [
+         4,
+         1
+        ],
+        [
+         5,
+         1
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Loretta “was in the Glade and was not beside any tree”: every tile that fits is ruled out except r8c2. Place Loretta there.",
+    "focus": [
+     [
+      7,
+      1
+     ]
+    ],
+    "elims": {},
+    "suspect": "L",
+    "cell": [
+     7,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "L",
+      "clueOf": "L",
+      "coord": [
+       7,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "M",
+   "cell": [
+    4,
+    4
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "N"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     9,
+     4
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Fanny was exactly one row north of Miles. Fanny can only be in row 4, which leaves Miles row 5.",
+     "focus": [
+      [
+       5,
+       4
+      ],
+      [
+       7,
+       4
+      ]
+     ],
+     "elims": {
+      "M": [
+       [
+        5,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "F",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "F",
+          "params": {
+           "other": "M",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "F",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 3
+           }
+          },
+          "x": "M",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 4
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Miles “was in column 5”: of the 8 tiles that fit, only r5c5 is still open. Place Miles there.",
+    "focus": [
+     [
+      4,
+      4
+     ]
+    ],
+    "elims": {
+     "K": [
+      [
+       4,
+       1
+      ]
+     ],
+     "L": [
+      [
+       4,
+       1
+      ]
+     ]
+    },
+    "suspect": "M",
+    "cell": [
+     4,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 8,
+      "suspect": "M",
+      "clueOf": "M",
+      "coord": [
+       4,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "K",
+   "cell": [
+    5,
+    1
+   ],
+   "needs": [
+    "C",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "M",
+    "N"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     9
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Kasimir was in an area with at least two women. Polaroid check — women: Bridget, Fanny, Greta, Ingrid, Jemima, Loretta and Nadia. Fewer than two of them can still reach the Pine Grove, the Hollow, the Clearing or the Lodge, so Kasimir cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_FEW_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "K",
+         "atom": {
+          "kind": "TWO_P_ROOM",
+          "subject": "K",
+          "params": {
+           "trait": "FEMALE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "FEMALE",
+         "holders": [
+          "B",
+          "F",
+          "G",
+          "I",
+          "J",
+          "L",
+          "N"
+         ]
+        }
+       },
+       "rooms": [
+        "PINE_GROVE",
+        "HOLLOW",
+        "CLEARING",
+        "LODGE"
+       ],
+       "suspect": "K"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Kasimir “was in front of an opening between two areas. He was in an area with at least two women”: every tile that fits is ruled out except r6c2. Place Kasimir there.",
+    "focus": [
+     [
+      5,
+      1
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       5,
+       2
+      ]
+     ],
+     "D": [
+      [
+       5,
+       3
+      ]
+     ],
+     "L": [
+      [
+       5,
+       1
+      ]
+     ]
+    },
+    "suspect": "K",
+    "cell": [
+     5,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "K",
+      "clueOf": "K",
+      "coord": [
+       5,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    1,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ]
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dominic was east of Ingrid. Ingrid is in column 6 at the earliest, so Dominic must be in column 7.",
+     "focus": [
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EAST_OF",
+          "subject": "D",
+          "params": {
+           "other": "I"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "I",
+          "line": 5,
+          "y": "D",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 6
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r2c9 cannot be a hiding spot (Jemima was the only person on a tree stump), so someone must watch it. Only Dominic can still see it, so Dominic must stand on r2c7.",
+     "focus": [
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       8
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        2,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        1,
+        8
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "J",
+          "params": {
+           "prop": "STUMP"
+          }
+         }
+        }
+       },
+       "suspect": "D",
+       "coords": [
+        [
+         1,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dominic “was in the Pine Grove and was east of Ingrid”: every tile that fits is ruled out except r2c7. Place Dominic there.",
+    "focus": [
+     [
+      1,
+      6
+     ]
+    ],
+    "elims": {},
+    "suspect": "D",
+    "cell": [
+     1,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       1,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    2,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      2,
+      5
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     2,
+     5
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       2,
+       5
+      ]
+     }
+    }
+   }
+  }
+ ],
  "gates": {
   "G12_floorplan_theme_legal": true,
   "human_solved": true,

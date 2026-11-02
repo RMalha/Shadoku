@@ -1487,6 +1487,1257 @@
    }
   }
  ],
+ "hints": [
+  {
+   "suspect": "F",
+   "cell": [
+    0,
+    0
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     0
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Fiona “was on the Summit and was standing in a snowdrift”: only r1c1 fits. Place Fiona there.",
+    "focus": [
+     [
+      0,
+      0
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ]
+     ],
+     "D": [
+      [
+       5,
+       0
+      ]
+     ],
+     "E": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       0
+      ]
+     ],
+     "H": [
+      [
+       0,
+       0
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     0,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    7,
+    0
+   ],
+   "needs": [
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     5,
+     0
+    ],
+    [
+     7,
+     0
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Delphine “was beside the fireplace”: of the 2 tiles that fit, only r8c1 is still open. Place Delphine there.",
+    "focus": [
+     [
+      7,
+      0
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       7,
+       0
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     7,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       7,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    7,
+    7
+   ],
+   "needs": [
+    "D",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     7,
+     7
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Grace “was beside a snowman and was in a corner”: only r8c8 fits. Place Grace there.",
+    "focus": [
+     [
+      7,
+      7
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       7,
+       1
+      ]
+     ],
+     "E": [
+      [
+       6,
+       7
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       7
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     7,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       7,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    6,
+    1
+   ],
+   "needs": [
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Bruno “was on the Glacier and was in column 2”: of the 2 tiles that fit, only r7c2 is still open. Place Bruno there.",
+    "focus": [
+     [
+      6,
+      1
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ]
+     ],
+     "E": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ]
+     ],
+     "H": [
+      [
+       1,
+       1
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     6,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       6,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    1,
+    4
+   ],
+   "needs": [
+    "B",
+    "D",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Cedric can only be at r5c7 or r5c8, and those tiles all lie on one sightline. Whichever one Cedric takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        6
+       ]
+      ],
+      "E": [
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "C",
+       "options": [
+        [
+         4,
+         6
+        ],
+        [
+         4,
+         7
+        ]
+       ],
+       "coords": [
+        [
+         4,
+         2
+        ],
+        [
+         4,
+         3
+        ],
+        [
+         4,
+         4
+        ],
+        [
+         4,
+         5
+        ],
+        [
+         4,
+         6
+        ],
+        [
+         4,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Albert “was in front of an opening between two areas”: every tile that fits is ruled out except r2c5. Place Albert there.",
+    "focus": [
+     [
+      1,
+      4
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       5,
+       4
+      ]
+     ],
+     "H": [
+      [
+       5,
+       4
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     1,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       1,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    1,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Hattie “was standing in a snowdrift”: of the 4 tiles that fit, only r2c7 is still open. Place Hattie there.",
+    "focus": [
+     [
+      1,
+      6
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       4,
+       6
+      ]
+     ],
+     "E": [
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       6
+      ]
+     ]
+    },
+    "suspect": "H",
+    "cell": [
+     1,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       1,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    4,
+    7
+   ],
+   "needs": [
+    "B",
+    "H"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Cedric “was on the Ski Slope and could see into another area”: of the 2 tiles that fit, only r5c8 is still open. Place Cedric there.",
+    "focus": [
+     [
+      4,
+      7
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       5
+      ]
+     ],
+     "E": [
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       7
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     4,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       4,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    5,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was beside a snowdrift. Only Edgar can still reach a tile beside a snowdrift, so he must stand beside one.",
+     "focus": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       5
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        3,
+        2
+       ],
+       [
+        5,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH_BESIDE",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_BESIDE",
+        "params": {
+         "prop": "SNOWDRIFT"
+        }
+       },
+       "owner": "E",
+       "prop": "SNOWDRIFT"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Edgar “could not see the Corpse”: every tile that fits is ruled out except r6c4. Place Edgar there.",
+    "focus": [
+     [
+      5,
+      3
+     ]
+    ],
+    "elims": {},
+    "suspect": "E",
+    "cell": [
+     5,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       5,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    3,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c3. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      3,
+      2
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     3,
+     2
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       3,
+       2
+      ]
+     }
+    }
+   }
+  }
+ ],
  "gates": {
   "G12_floorplan_theme_legal": true,
   "human_solved": true,

@@ -4,6 +4,8 @@
  * Every hook returns `undefined` when there is no backend (npm run dev, a file:// bundle, a static host): the site then
  * keeps its local DEMO sign-in, so the game never depends on the server.
  */
+import { startSync, stopSync } from "./sync.js";
+
 const JSON_HEADERS = { Accept: "application/json" };
 
 async function call(path, init) {
@@ -22,6 +24,7 @@ async function session() {
 
 export async function onSession() {
   const s = await session();
+  if (s && s.user) startSync(); // the progress follows the account (src/sync.js)
   return s ? s.user : undefined; // user | null (not signed in) | undefined (no backend)
 }
 
@@ -35,6 +38,7 @@ export async function onSignIn(provider) {
 }
 
 export async function onSignOut() {
+  stopSync();
   await call("/api/auth/logout", { method: "POST" });
 }
 
@@ -50,6 +54,7 @@ export async function onUsernameChange(name) {
 
 /** → true when the server erased the account (or there is none to erase). */
 export async function onDeleteAccount() {
+  stopSync();
   const r = await call("/api/account", { method: "DELETE" });
   return !r || r.status === 200 || r.status === 401;
 }

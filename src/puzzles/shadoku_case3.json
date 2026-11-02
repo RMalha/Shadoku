@@ -1358,6 +1358,1120 @@
    }
   }
  ],
+ "hints": [
+  {
+   "suspect": "A",
+   "cell": [
+    0,
+    2
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Alfred “was beside the fern and was in row 1”: only r1c3 fits. Place Alfred there.",
+    "focus": [
+     [
+      0,
+      2
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ]
+     ],
+     "F": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     0,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       0,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    1,
+    4
+   ],
+   "needs": [
+    "A"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Benedict “was the only person on the fallen log”: only r2c5 fits. Place Benedict there.",
+    "focus": [
+     [
+      1,
+      4
+     ]
+    ],
+    "elims": {
+     "D": [
+      [
+       3,
+       4
+      ]
+     ],
+     "F": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       4
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     1,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       1,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    5,
+    3
+   ],
+   "needs": [
+    "A",
+    "B"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     3,
+     4
+    ],
+    [
+     5,
+     3
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dmitri “was sitting on a tree stump”: of the 2 tiles that fit, only r6c4 is still open. Place Dmitri there.",
+    "focus": [
+     [
+      5,
+      3
+     ]
+    ],
+    "elims": {
+     "F": [
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       3
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     5,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       5,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    1,
+    1
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Eugene stood diagonally next to another man. Polaroid check — other men: Alfred, Benedict and Dmitri. None of them can still stand diagonally next to the marked tiles, so Eugene cannot be there.",
+     "focus": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        1,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NO_DIAG",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "DIAG_P",
+          "subject": "E",
+          "params": {
+           "trait": "MALE",
+           "selfMatch": true
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL.SELF",
+        "params": {
+         "trait": "MALE",
+         "holders": [
+          "A",
+          "B",
+          "D"
+         ]
+        }
+       },
+       "coords": [
+        [
+         1,
+         0
+        ],
+        [
+         2,
+         1
+        ],
+        [
+         3,
+         0
+        ],
+        [
+         3,
+         1
+        ],
+        [
+         4,
+         0
+        ],
+        [
+         4,
+         1
+        ]
+       ],
+       "suspect": "E"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Eugene “was by the Creek. He stood diagonally next to another man”: every tile that fits is ruled out except r2c2. Place Eugene there.",
+    "focus": [
+     [
+      1,
+      1
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       1
+      ]
+     ],
+     "F": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     1,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       1,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    3,
+    0
+   ],
+   "needs": [
+    "A",
+    "B",
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Celeste “was beside the oak tree”: of the 3 tiles that fit, only r4c1 is still open. Place Celeste there.",
+    "focus": [
+     [
+      3,
+      0
+     ]
+    ],
+    "elims": {
+     "F": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       0
+      ]
+     ],
+     "G": [
+      [
+       3,
+       5
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     3,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       3,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    2,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gilda “was beside the Corpse”: of the 2 tiles that fit, only r3c7 is still open. Place Gilda there.",
+    "focus": [
+     [
+      2,
+      6
+     ]
+    ],
+    "elims": {
+     "F": [
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       6,
+       6
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     2,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       2,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    6,
+    4
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Fleur stood diagonally next to a man. Polaroid check — men: Alfred, Benedict, Dmitri and Eugene. None of them can still stand diagonally next to the marked tiles, so Fleur cannot be there.",
+     "focus": [
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NO_DIAG",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "F",
+         "atom": {
+          "kind": "DIAG_P",
+          "subject": "F",
+          "params": {
+           "trait": "MALE",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "MALE",
+         "holders": [
+          "A",
+          "B",
+          "D",
+          "E"
+         ]
+        }
+       },
+       "coords": [
+        [
+         6,
+         0
+        ],
+        [
+         6,
+         1
+        ],
+        [
+         6,
+         2
+        ],
+        [
+         6,
+         5
+        ]
+       ],
+       "suspect": "F"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was on a trail of footprints. Only Fleur can still reach a trail of footprints, so she must be on one.",
+     "focus": [
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        3
+       ],
+       [
+        4,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "FOOTPRINTS"
+        }
+       },
+       "owner": "F",
+       "prop": "FOOTPRINTS"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Fleur “stood diagonally next to a man”: every tile that fits is ruled out except r7c5. Place Fleur there.",
+    "focus": [
+     [
+      6,
+      4
+     ]
+    ],
+    "elims": {},
+    "suspect": "F",
+    "cell": [
+     6,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       6,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    0,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      0,
+      3
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     0,
+     3
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       0,
+       3
+      ]
+     }
+    }
+   }
+  }
+ ],
  "gates": {
   "G12_floorplan_theme_legal": true,
   "human_solved": true,

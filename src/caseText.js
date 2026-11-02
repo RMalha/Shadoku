@@ -326,13 +326,15 @@ export function localizeCase(p, tr) {
   if (!p) return p;
   const R = caseRenderer(p, tr);
   const head = localizeHead(p, tr);
+  const step = (st) => (st.i18n ? { ...st, text: R.step(st, st.text), rule: R.stepRule(st, st.rule) } : st);
   return {
     ...head,
     roomLabels: (p.roomNames || []).map((n, i) => (p.roomIds && p.roomIds[i] ? R.roomName(p.roomIds[i], n) : n)),
     suspects: (p.suspects || []).map((s) => (s.atoms && s.clueTokens ? { ...s, clue: R.clue(s.id, s.clue) } : s)),
     ...(p.assassins ? { assassins: p.assassins.map((a) => (a.atoms && a.clueTokens ? { ...a, clue: R.assassinClue(a, a.clue) } : a)) } : null),
     globalRules: (p.globalRules || []).map((g) => (g.kind ? { ...g, text: R.globalRule(g, g.text) } : g)),
-    steps: (p.steps || []).map((st) => (st.i18n ? { ...st, text: R.step(st, st.text), rule: R.stepRule(st, st.rule) }
+    steps: (p.steps || []).map((st) => (st.i18n ? step(st)
       : st.ruleKey ? { ...st, rule: R.ruleByKey(st.ruleKey, st.rule) } : st)), // old compact steps: only the rule name can be rebuilt
+    ...(p.hints ? { hints: p.hints.map((h) => ({ ...h, chain: h.chain.map(step), place: step(h.place) })) } : null),
   };
 }

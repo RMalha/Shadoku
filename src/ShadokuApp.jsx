@@ -50,6 +50,7 @@ import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "
 import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
+import { useProgressTick } from "./sync.js";
 import { RelicBadge, RelicModal, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 
 export { TUTORIAL_KEY };
@@ -527,7 +528,8 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
   const hubBar = useMediaQuery(DESK_MQ) ? BAR_H_DESK : BAR_H;
   const { t } = useLang();
   const all = useMemo(() => (puzzles ? normalizePuzzles(puzzles) : PUZZLES), [puzzles]);
-  const [bests] = useState(() => readBestTimes(all)); // { id: best seconds } of every fulfilled contract
+  const progressTick = useProgressTick(); // a sync brought another device's progress
+  const bests = useMemo(() => readBestTimes(all), [all, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps -- { id: best seconds } of every fulfilled contract
   const solved = useMemo(() => new Set(Object.keys(bests)), [bests]);
   const tick = useUmbraTick(); // an Umbra lock opened: show its contract
   // The Umbra contracts sit in their own slot, sealed: The Uninvited Guests' black envelope once the ten relics are in, the finale's
@@ -625,6 +627,8 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   stepsRef.current = steps;
 
   const [initiated, setInitiated] = useState(() => !!store.get(TUTORIAL_KEY)); // "shadoku-tutorial-done"
+  const progressTick = useProgressTick();
+  useEffect(() => { if (progressTick && store.get(TUTORIAL_KEY)) setInitiated(true); }, [progressTick]); // initiated on another device (a sync)
   const [caseId, setCaseId] = useState(() => (store.get(TUTORIAL_KEY) ? null : tutorialId));
   const [step, setStep] = useState(0);   // index into `steps`: the lesson only moves on when the player has done the step
   const [ok, setOk] = useState("");       // the little "✓ Noted." after a step

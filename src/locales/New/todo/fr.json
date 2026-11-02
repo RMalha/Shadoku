@@ -1,0 +1,6 @@
+{
+  "ui.nav.pInitiation": "Initiation",
+  "ui.creds.delete": "Supprimer le compte",
+  "ui.creds.deleteConfirm": "Supprimer votre compte ? Votre nom de code et les données enregistrées pour votre compte seront effacés et cette action est irréversible.",
+  "ui.creds.deleteError": "Le compte n'a pas pu être supprimé. Veuillez réessayer."
+}

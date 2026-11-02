@@ -7,9 +7,9 @@
  *   GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET
  * Optional:
  *   SITE_URL      the public origin (https://shadoku.net); default: the origin of the request
- *   SHADOKU_KV    a KV namespace binding: unique codenames and the account's server-side record
+ *   SHADOKU_KV    a KV namespace binding: unique codenames, the account's server-side record and its game progress
  *
- * The session is a stateless HMAC-signed cookie (HttpOnly, SameSite=Lax); nothing but the codename is stored server-side.
+ * The session is a stateless HMAC-signed cookie (HttpOnly, SameSite=Lax); the codename and the game progress are stored server-side.
  */
 
 const enc = new TextEncoder();
@@ -147,6 +147,7 @@ export async function readSession(request, env) {
 
 const userKey = (id) => `user:${id}`;
 const nameKey = (name) => `name:${name.toLowerCase()}`;
+const progressKey = (id) => `progress:${id}`;
 
 export const getCodename = async (env, id) => {
   if (!env.SHADOKU_KV) return "";
@@ -175,4 +176,11 @@ export async function deleteRecord(env, id) {
   const prev = await getCodename(env, id);
   if (prev) await env.SHADOKU_KV.delete(nameKey(prev));
   await env.SHADOKU_KV.delete(userKey(id));
+  await env.SHADOKU_KV.delete(progressKey(id));
+}
+
+/** The account's game progress (src/sync.js decides its shape), or null. */
+export const getProgress = async (env, id) => (env.SHADOKU_KV ? env.SHADOKU_KV.get(progressKey(id), "json") : null);
+export async function setProgress(env, id, progress) {
+  if (env.SHADOKU_KV) await env.SHADOKU_KV.put(progressKey(id), JSON.stringify(progress));
 }
