@@ -57,7 +57,6 @@ export const TUTORIAL_PUZZLE = "tutorial"; // "The Art of the Ghost"
 const BAR_H = 61; // px, the site header on /play (the same <SiteHeader/> as the landing page: 40px logo + 2×10px padding + 1px border)
 const BAR_H_DESK = 77; // px, the same header on a desktop: 56px logo (see SHADOKU_CSS)
 const DESK_MQ = "(min-width: 961px)"; // the game's desktop layout: no site header on /play, the ☰ Menu sits on the tool rail
-const BAR_H_SHORT = 44; // px, the same header on a phone held sideways (40px controls + 2×1px padding + 1px border): see APP_CSS
 const SHORT_LANDSCAPE_MQ = "(orientation: landscape) and (max-height: 520px)"; // the game's compact side-by-side layout (ShadokuGame CSS)
 const useBrowserLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -723,9 +722,8 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   ), [replay, t]);
 
   const showCard = caseId === tutorialId && view === "play"; // the Inspector gets the whole screen
-  const short = useMediaQuery(SHORT_LANDSCAPE_MQ), desk = useMediaQuery(DESK_MQ);
-  const merged = !desk && !short; // a phone held upright: the game's header is the only header line (logo, timer, ⚙, ?, sign-in, ☰)
-  const barH = desk || merged ? 0 : BAR_H_SHORT; // desktop: the board runs to the top of the page
+  const desk = useMediaQuery(DESK_MQ);
+  const merged = !desk; // no site header on /play: on a phone (upright or sideways) the game's header is the only header line (logo, timer, ⚙, ?, sign-in, ☰); desktop has the rail's ☰ Menu
   const { user, signOut } = useAuth();
   const modals = useModals();
   const railMenu = useMemo(() => [ // the ☰ Menu on the desktop tool rail (it has no site header, so no Sign In button or profile chip): Home, Contracts, the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
@@ -746,14 +744,11 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 
   return (
     <div className={`sh-playroot${showCard && desk ? " tut" : ""}`}>
-      {short && !desk && <SiteHeader onLogo={() => go("/")} style={{ height: barH }} onNav={go}
-        extra={initiated ? <a className="sh-btn ghost sm keep" href="/play" onClick={(e) => { e.preventDefault(); go("/play"); }}>✉ {t("hub.contracts")}</a> : null} />}
-
       <ShadokuGame
         t={t}
         puzzles={shown} logoSrc={logoSrc} lab={lab}
-        insetY={barH + (showCard ? cardH : 0)}
-        hideLogo={!desk && !merged} onLogo={() => go("/")}
+        insetY={showCard ? cardH : 0}
+        onLogo={() => go("/")}
         headEnd={merged ? <><UserPill /><SiteMenu current="/play" onNav={go} /></> : null} menu={desk ? railMenu : null} fixedCase={initiated} onExit={enter}
         renderEnvelope={({ puzzle, label, onPick, variant = "mini", onAccept, tone, onOpen }) => <ContractEnvelope variant={variant} puzzle={puzzle} label={label} onPick={onPick} onAccept={onAccept} onOpen={onOpen}
           tone={tone || (variant === "modal" ? "obsidian" : toneOf(puzzle.id))} target={targetOf(puzzle.id)} autoOpen={variant !== "modal"} />}
@@ -827,7 +822,6 @@ html:has(.sh-playroot),html:has(.sh-playroot) body{overflow:hidden;overscroll-be
 .sh-playroot{position:fixed;inset:0;overscroll-behavior:none}
 .sh-playroot .sk-dossier,.sh-playroot .sk-rail{overscroll-behavior:contain}
 .sh-header a.sh-btn{text-decoration:none}
-@media (orientation:landscape) and (max-height:520px){.sh-playroot .sh-header{padding-block:1px}.sh-playroot .sh-header .sh-logo{height:32px}} /* BAR_H_SHORT */
 
 /* The Master's dossier card: pinned under the game, mahogany + brass like his Polaroid */
 .sh-dos{position:fixed;z-index:45;left:0;right:0;bottom:0;background:linear-gradient(180deg,#2a1d1c,#1d1615);color:#F5F0E6;border-top:2px solid #D99B26;

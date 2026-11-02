@@ -1881,8 +1881,9 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     </div>
   );
 
-  /* A phone with `headEnd` (the site's sign-in and ☰): one header line (logo, timer, ⚙, ?, headEnd); the contract's title opens the dossier */
-  const merged = !!headEnd && mobile;
+  /* A phone with `headEnd` (the site's sign-in and ☰): one header line (logo, timer, ⚙, ?, headEnd). Upright, the contract's title opens
+     the dossier; held sideways, the line spans the screen and the title sits beside the logo. */
+  const merged = !!headEnd;
   const caseNav = fixedCase ? <CaseTitle puzzles={heads} idx={idx} solvedOf={(q) => isSolved(q, all[q.id])} /> : (
     <nav className="sk-nav" aria-label={t("game.contracts")}>
       <button type="button" className="sk-arrow" onClick={() => go(-1)} disabled={lockCaseMenu || idx === 0} aria-label={t("game.prevContract")}>‹</button>
@@ -1891,14 +1892,14 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     </nav>
   );
   return (
-    <div className={`sk sk-game${settings.kw ? " kw-on" : ""}${dragging ? " sk-dragging" : ""}`} ref={rootRef} data-tight={+insetY > 110 ? "" : undefined} data-split={split && !mobile ? "" : undefined} data-big={Math.max(geo.R, geo.C) >= BIG_BOARD ? "" : undefined}
+    <div className={`sk sk-game${settings.kw ? " kw-on" : ""}${dragging ? " sk-dragging" : ""}`} ref={rootRef} data-tight={+insetY > 110 ? "" : undefined} data-split={split && !mobile ? "" : undefined} data-big={Math.max(geo.R, geo.C) >= BIG_BOARD ? "" : undefined} data-merged={merged ? "" : undefined}
       style={{ "--ar": ar, "--bar": `${Math.max(0, +insetY || 0)}px`, ...(split && !mobile ? { "--stagew": `${split}px` } : null) }}
       onPointerOver={onClueOver} onPointerLeave={clearClueHover}>
       <style>{CSS}</style>
 
       <header className={`sk-head${merged ? " merged" : ""}`} ref={headRef} data-wide={headWide ? "" : undefined}>
         {!hideLogo && (onLogo ? <button type="button" className="sk-logobtn" onClick={onLogo} aria-label={t("nav.pHome")}><ShadokuLogo src={logoSrc} /></button> : <ShadokuLogo src={logoSrc} />)}
-        {!merged && caseNav}
+        {!(merged && mobile) && caseNav}
         <div className="sk-headr">
           <CaseTimer key={`${p.id}|${timerEpoch}`} caseId={p.id} solved={solved} paused={view !== "play"} hidden={!settings.timer} />
           <button type="button" className="sk-gear" onClick={() => setSettingsOpen(true)} aria-label={t("settings.open")} title={t("settings.open")}><GearIcon /></button>
@@ -1908,7 +1909,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       </header>
 
       <section className="sk-dossier" aria-label={t("game.dossier")}>
-        {merged && <div className="sk-casebar">{caseNav}</div>}
+        {merged && mobile && <div className="sk-casebar">{caseNav}</div>}
         <div className="sk-now" role="status">{nowLabel}</div>
         {(p.globalRules || []).length > 0 && (
           <section className="sk-rules" aria-label={t("game.houseRulesAria")}>
@@ -2191,9 +2192,10 @@ const CSS = `
   /* the suspects and the board share the width evenly */
   grid-template-columns:minmax(340px,1fr) minmax(360px,1fr) 116px;grid-template-rows:auto minmax(0,1fr);
   grid-template-areas:"head stage rail" "dossier stage rail"}
-/* a big board (9×9 and up): the stage is as wide as the board can be at full height, the suspects make room down to 340px */
-.sk-game[data-big]{grid-template-columns:minmax(340px,1fr) min(calc((100vh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 340px))) 116px;
-  grid-template-columns:minmax(340px,1fr) min(calc((100dvh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 340px))) 116px}
+/* a big board (9×9 and up): the stage is as wide as the board can be at full height, the suspects make room down to 340px
+   (desktop only: unscoped, it outranked the phone grid and pushed a big board's page off the screen) */
+@media (min-width:961px){.sk-game[data-big]{grid-template-columns:minmax(340px,1fr) min(calc((100vh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 340px))) 116px;
+  grid-template-columns:minmax(340px,1fr) min(calc((100dvh - var(--bar) - 32px) * var(--ar) + 32px),max(360px,calc(100vw - 116px - 340px))) 116px}}
 .sk-head{grid-area:head;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"logo timer" "nav nav";align-items:center;gap:12px;
   padding:18px 18px 14px;background:var(--side);border-right:1px solid var(--line);position:relative;z-index:8}
 .sk-head .sk-logo,.sk-logobtn{grid-area:logo;justify-self:start}
@@ -2629,8 +2631,21 @@ const CSS = `
 }
 /* ===== a phone held sideways (short and wide): the desktop columns, compact. dossier | board | slim rail ===== */
 @media (orientation:landscape) and (max-height:520px){
-  .sk-game,.sk-game[data-split]{--stw:min(calc((100vh - var(--bar) - 16px) * var(--ar) + 16px),58vw);--stw:min(calc((100dvh - var(--bar) - 16px) * var(--ar) + 16px),58vw);
+  .sk-game,.sk-game[data-split]{--stw:min(calc((100vh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px),58vw);--stw:min(calc((100dvh - var(--bar) - var(--hh,0px) - 16px) * var(--ar) + 16px),58vw);
     grid-template-columns:minmax(0,1fr) var(--stw) calc(70px + env(safe-area-inset-right));grid-template-rows:auto minmax(0,1fr);grid-template-areas:"head stage rail" "dossier stage rail"}
+  /* the site's sign-in and ☰ in the game's header (merged): one line across the screen (logo, contract, timer, ⚙, ?, sign-in, ☰) over
+     suspects | board | rail; its height (--hh) comes off the board's. The ☰ dropdown hangs from it, above the tool rail (z-index 50). */
+  .sk-game[data-merged]{--hh:48px;grid-template-areas:"head head head" "dossier stage rail"}
+  .sk-head.merged{display:flex;align-items:center;gap:6px;height:var(--hh);position:relative;z-index:60;border-right:0;border-bottom:1px solid var(--line);
+    padding:0 max(8px,env(safe-area-inset-right)) 0 max(10px,env(safe-area-inset-left))}
+  .sk-head.merged .sk-logobtn{flex:0 0 auto}
+  .sk-head.merged .sk-logo{display:block;height:28px;filter:none}
+  .sk-head.merged .sk-nav,.sk-head.merged > .sk-menu{flex:0 1 auto;min-width:0;max-width:420px}
+  .sk-head.merged .sk-headend{display:flex;align-items:center;gap:6px;margin-inline-start:auto}
+  .sk-headend .sh-controls{gap:6px}
+  .sk-headend .sh-btn{min-height:36px;height:36px;padding:0 11px;font-size:14px}
+  .sk-headend .sh-burger{width:36px;height:36px}
+  .sk-head.merged .sh-menu{max-height:calc(100vh - var(--hh) - 16px);max-height:calc(100dvh - var(--hh) - 16px);overflow-y:auto}
   .sk-head{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"nav timer help";gap:6px;padding:6px 8px 6px max(8px,env(safe-area-inset-left))}
   .sk-head .sk-logo{display:none}
   .sk-help{display:grid;width:36px;height:36px}
@@ -2647,11 +2662,11 @@ const CSS = `
   .sk-card.v .sk-alibi{background:none;padding:0;font-size:12px;line-height:1.3;align-self:center;hyphens:auto}
   .sk-card.adow.v .sk-alibi{background:none}
   .sk-stage{padding:8px}
-  .sk-boardbox{width:min(100%,calc((100vh - var(--bar) - 16px) * var(--ar)));width:min(100%,calc((100dvh - var(--bar) - 16px) * var(--ar)))}
+  .sk-boardbox{width:min(100%,calc((100vh - var(--bar) - var(--hh,0px) - 16px) * var(--ar)));width:min(100%,calc((100dvh - var(--bar) - var(--hh,0px) - 16px) * var(--ar)))}
   .sk-viewport{border-radius:10px}
   /* the hint / verdict / win banner floats over the suspects column, so the board keeps its size */
   .sk-overlay{position:fixed;left:max(8px,env(safe-area-inset-left));right:auto;bottom:calc(8px + var(--gbot,0px));transform:none;min-width:0;
-    width:calc(100vw - var(--stw) - 70px - env(safe-area-inset-right) - 16px);max-height:calc(100vh - var(--bar) - 56px);max-height:calc(100dvh - var(--bar) - 56px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;z-index:20}
+    width:calc(100vw - var(--stw) - 70px - env(safe-area-inset-right) - 16px);max-height:calc(100vh - var(--bar) - var(--hh,0px) - 56px);max-height:calc(100dvh - var(--bar) - var(--hh,0px) - 56px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;z-index:20}
   .sk-hint-act{position:sticky;bottom:0;z-index:1;padding:4px 0 2px;background:var(--paper)}
   .sk-hint-pic{display:none}.sk-hint p{font-size:13px;margin:4px 0 6px}.sk-hint{padding:8px 10px 9px}
   .sk-solved{padding:8px 10px}.sk-solved b{font-size:16px}.sk-solved span{font-size:13px}
@@ -2675,6 +2690,7 @@ const CSS = `
   .sk-replay-card{padding:12px 14px;gap:6px}.sk-replay-card b{font-size:17px}.sk-replay-card span{display:none}
 }
 @media (orientation:landscape) and (max-height:520px) and (max-width:700px){.sk-menu-btn .sk-cn{display:none}}
+@media (orientation:landscape) and (max-height:520px) and (max-width:820px){.sk-headend .sh-userchip-name{display:none}}
 @media (max-width:560px){.sk-cs,.sk-caret,.sk-menu-btn .sk-diff{display:none}}
 @media (max-width:440px){.sk-head .sk-logo{height:24px}.sk-menu-btn .sk-ci{display:none}}
 @media (max-width:380px){.sk-head .sk-logo{height:21px}}
