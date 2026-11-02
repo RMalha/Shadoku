@@ -229,8 +229,8 @@
     "cloth": 1
    },
    "look": "black curly hair, goatee, bowtie",
-   "clue": "Anton was beside a table.",
-   "text": "Anton was beside a table.",
+   "clue": "Anton was beside the table.",
+   "text": "Anton was beside the table.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -317,8 +317,8 @@
     "cloth": 6
    },
    "look": "brown wavy hair, cloche",
-   "clue": "Charlotte was beside a tractor.",
-   "text": "Charlotte was beside a tractor.",
+   "clue": "Charlotte was beside the tractor.",
+   "text": "Charlotte was beside the tractor.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -491,7 +491,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Anton “was beside a table”: of the 2 tiles that fit, only r1c5 is still open. Place Anton there.",
+   "text": "Anton “was beside the table”: of the 2 tiles that fit, only r1c5 is still open. Place Anton there.",
    "focus": [
     [
      0,
@@ -530,7 +530,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Charlotte “was beside a tractor”: of the 2 tiles that fit, only r5c5 is still open. Place Charlotte there.",
+   "text": "Charlotte “was beside the tractor”: of the 2 tiles that fit, only r5c5 is still open. Place Charlotte there.",
    "focus": [
     [
      4,

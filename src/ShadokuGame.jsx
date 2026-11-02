@@ -62,6 +62,7 @@ const SHORT_MQ = "(orientation: landscape) and (max-height: 520px)"; // a phone 
 const HOVER_MQ = "(any-hover: hover)"; // a mouse or trackpad is there: the hover-only settings (keyword tooltips, room highlight) make sense
 const TOUCH_MQ = "(hover: none), (pointer: coarse)"; // touch-first devices: tapping a selected card/tool again drops to the neutral "inspect" state
 const TIP_MS = 2500; // a tap-opened Prop Inspector tooltip dismisses itself after this long
+const DBL_RIGHT_MS = 400; // ⚙ right-click "Light, double: X": a second right-click on the same tile within this long is a double
 /** Prop Inspector copy: the in-code English fallback. The site wrapper's t() reads ui.propInspector.<cls>Tag / <cls>Rule from
  *  src/locales/<lang>.json (then en.json, then its own in-code English), and prop.<KIND> for the names. */
 export const INSPECTOR_EN = {
@@ -80,7 +81,7 @@ export const DEFAULT_SETTINGS = {
   roomLabel: 14, objSize: 0, walls: 1, // px (10-20) · -0.15..+0.15 · 0.6..1.6
   timer: true, portrait: true, autoLight: true, preventLight: false, gender: false,
   tokenStyle: "portrait", plain: false,
-  rightClick: "light", // a mouse right-click on a tile: "light" | "cross" (X) | "menu" (pick Light or X)
+  rightClick: "light", // a mouse right-click on a tile: "light" | "cross" (X) | "menu" (pick Light or X) | "double" (Light; a double right-click: X)
 };
 const loadSettings = () => {
   try { const v = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); return { ...DEFAULT_SETTINGS, ...(v && typeof v === "object" ? v : {}) }; } catch (e) { return { ...DEFAULT_SETTINGS }; }
@@ -1058,7 +1059,7 @@ function AdowCard({ beach, on, placed, solved, room, onPick, onInspect, coach, h
         <span className="sk-alibi"><b className="sk-nm" style={{ "--nc": BRASS }}>{t("assassin.S")}</b> {text}</span>
         {placed && <span className="sk-stamp" aria-label={t(solved ? "game.caught" : "game.placed")}>✓</span>}
       </button>
-      <button type="button" className="sk-lens" onClick={onInspect} aria-label={t("game.openCard", { name: t("assassin.S") })} title={t("game.suspectCard")}><LensIcon /></button>
+      <button type="button" className="sk-lens" onClick={onInspect} aria-label={t("game.openSyndicateCard", { name: t("assassin.S") })} title={t("game.syndicateCard")}><LensIcon /></button>
     </div>
   );
 }
@@ -1073,12 +1074,15 @@ function AssassinCard({ a, color, on, placed, emph, onPick, onInspect, coach, hi
         <span className="sk-alibi">{emph(a.clue)}</span>
         {placed && <span className="sk-stamp" aria-label={t("game.placed")}>✓</span>}
       </button>
-      <button type="button" className="sk-lens" onClick={onInspect} aria-label={t("game.openCard", { name })} title={t("game.suspectCard")}><LensIcon /></button>
+      <button type="button" className="sk-lens" onClick={onInspect} aria-label={t("game.openSyndicateCard", { name })} title={t("game.syndicateCard")}><LensIcon /></button>
     </div>
   );
 }
 
-/** The Suspect card: the polaroid, the name, what they look like and what they said. A green check shows once they are on the board. */
+/** The assassins are no suspects: their sheet is the Syndicate card, in their own dark blue-grey, with their tie's colour as its accent
+ *  (S. H. Adow's crimson tie; the other assassins' colours come in as `color`). */
+const synAccent = (id, color) => (id === "S" ? ASSASSINS.S.tie : color);
+/** The Suspect card (an assassin's: the Syndicate card): the polaroid, the name, what they look like and what they said. A green check shows once they are on the board. */
 function SuspectSheet({ q, look, color, placed, solved, emph, beach, room, onClose, gender = null }) {
   const t = useText();
   useEffect(() => {
@@ -1091,16 +1095,16 @@ function SuspectSheet({ q, look, color, placed, solved, emph, beach, room, onClo
   const name = hider ? t(`assassin.${q.id}`) : q.name;
   return (
     <div className="sk-modal sk-sheetwrap" role="dialog" aria-modal="true" aria-label={t("game.sheetAria", { name })} onPointerDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="sk-sheet" style={{ "--sc": color }}>
+      <div className={`sk-sheet${hider ? " syn" : ""}`} style={hider ? { "--sc": synAccent(q.id, color), "--sci": inkOn(synAccent(q.id, color)) } : { "--sc": color }}>
         <button type="button" className="sk-x" onClick={onClose} aria-label={t("modal.close")}>×</button>
-        <div className="sk-sheet-eyebrow">{t("game.suspectCard")}</div>
+        <div className="sk-sheet-eyebrow">{t(hider ? "game.syndicateCard" : "game.suspectCard")}</div>
         <div className="sk-sheet-body">
           <div className="sk-sheet-pic">
             {adow ? <AdowPolaroid size={168} beach={beach} /> : hider ? <AssassinPolaroid who={q.id} size={168} /> : <SuspectPolaroid name={q.name} id={q.id} look={look} size={168} placed />}
             {placed && <span className="sk-sheet-ok" role="img" aria-label={t("game.placedOnBoard")}>✓</span>}
           </div>
           <div className="sk-sheet-info">
-            <h2><span className="sk-letter" style={{ "--sc": color }}>{q.id}</span> {name}{gender && <GenderMark g={gender} inline />}</h2>
+            <h2><span className="sk-letter" style={hider ? undefined : { "--sc": color }}>{q.id}</span> {name}{gender && <GenderMark g={gender} inline />}</h2>
             <p className={`sk-sheet-state${placed ? " ok" : ""}`}>{t(placed ? "game.statePlaced" : "game.stateNotPlaced")}</p>
             <dl className="sk-facts">{facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
           </div>
@@ -1281,7 +1285,7 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
               <div className="sk-set-row">
                 <b>{t("settings.rightClick.title")}</b>
                 <div className="sk-set-opts">
-                  {[["light", "💡"], ["cross", "❌"], ["menu", "💡❌"]].map(([v, ic]) => (
+                  {[["light", "💡"], ["cross", "❌"], ["double", <>💡<sub>1</sub>❌<sub>2</sub></>], ["menu", "💡❌"]].map(([v, ic]) => (
                     <button key={v} type="button" className={`sk-set-opt${s.rightClick === v ? " on" : ""}`} aria-pressed={s.rightClick === v} onClick={() => set({ rightClick: v })}>
                       <span className="sk-set-ic" aria-hidden="true">{ic}</span><span>{t(`settings.rightClick.${v}`)}</span>
                     </button>
@@ -1387,6 +1391,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const pinchRef = useRef(null), abortRef = useRef(null), zoomRef = useRef(1); // a two-finger pinch on the board · its stroke breaker · the zoom, for the native listeners
   const live = useRef(all), stroke = useRef(null), holdTimer = useRef(null), showTimer = useRef(null), undoRef = useRef(null), redoRef = useRef(null);
   const rootRef = useRef(null), ovlRef = useRef(null), vpRef = useRef(null), zoomAnchor = useRef(null), grabRef = useRef(0);
+  const lastRight = useRef(null); // ⚙ right-click "Light, double: X": the last right-click's tile, time and stroke
 
   const forcedIdx = forcePuzzleId ? puzzles.findIndex((q) => q.id === forcePuzzleId) : -1;
   const idx = forcedIdx >= 0 ? forcedIdx : Math.max(0, Math.min(caseIdx, puzzles.length - 1));
@@ -1404,7 +1409,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     const untranslated = x === tEn(pk, v) && base !== tEn(k, v);
     return x && x !== pk && !untranslated ? x : base;
   } : t), [t, settings.plain]);
-  const p = useMemo(() => localizeCase(cast, trOf(tCase)), [cast, tCase]);
+  /* "the fireplace" (PROP.<ID>.the) only from a locale that has it: one that still falls back to the English "the" keeps its own "a" form */
+  const tClue = useMemo(() => (k, v) => {
+    if (/^PROP\.\w+\.the$/.test(k)) { const a = k.slice(0, -3) + "a"; if (tCase(k) === tEn(k) && tCase(a) !== tEn(a)) return k; }
+    return tCase(k, v);
+  }, [tCase]);
+  const p = useMemo(() => localizeCase(cast, trOf(tClue)), [cast, tClue]);
   const geo = useMemo(() => buildGeometry(p), [p]);
   const st = useMemo(() => cleanCase(p, geo, normCase(all[p.id])), [all, p, geo]);
   const closeCtx = useCallback(() => setCtx(null), []);
@@ -1586,7 +1596,18 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       if (e && e.button === 2) { // a mouse right-click (⚙ "Right-Click on a Tile"): light or X the tile (a drag paints on), or ask which
         if (s0) return; // the left button is already marking
         if (settings.rightClick === "menu") { setTip(null); setCtx({ r: cell[0], c: cell[1], x: e.clientX, y: e.clientY }); return; }
-        setPressing(true); setTip(null); beginStroke(cell, e, settings.rightClick === "cross" ? "cross" : "light"); return;
+        let use = settings.rightClick === "cross" ? "cross" : "light";
+        if (settings.rightClick === "double") { // a right-click lights the tile at once; a second one on the same tile soon after takes that back and marks an X
+          const lr = lastRight.current, now = Date.now();
+          lastRight.current = null;
+          if (lr && lr.k === key(...cell) && now - lr.t < DBL_RIGHT_MS && !lr.s.drag) {
+            if (lr.s.pushed) { undoRef.current(); setRedo((u) => (u[p.id] && u[p.id].length ? { ...u, [p.id]: u[p.id].slice(0, -1) } : u)); }
+            use = "cross";
+          }
+        }
+        setPressing(true); setTip(null); beginStroke(cell, e, use);
+        if (settings.rightClick === "double" && use === "light") lastRight.current = { k: key(...cell), t: Date.now(), s: stroke.current };
+        return;
       }
       setPressing(true); setTip(null); beginStroke(cell, e); return;
     }
@@ -2495,10 +2516,11 @@ const CSS = `
 .sk-set-sl input{flex:1 1 auto;min-width:0;accent-color:var(--brass)}
 .sk-set-sl small{margin:0!important;white-space:nowrap}.sk-set-sl .v{min-width:3.2em;text-align:right;color:#f3efe6!important;font-weight:700}
 .sk-set-lang .sh-select-wrap{margin-top:8px;width:100%}.sk-set-lang .sh-select{max-width:none!important;width:100%}
-.sk-set-opts{display:flex;gap:10px;margin:10px 0 2px}
+.sk-set-opts{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 2px}
 .sk-set-opt{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:96px;padding:10px 12px 8px;border-radius:12px;border:1.5px solid #3a3a4c;background:#17171f;font-weight:700;font-size:14px}
 .sk-set-opt.on{border-color:var(--brass2);background:rgba(217,155,38,.12);color:var(--brass2)}
-.sk-set-ic{display:grid;place-items:center;height:44px;font-size:24px;letter-spacing:-.1em}
+.sk-set-ic{display:grid;grid-auto-flow:column;place-content:center;align-items:center;height:44px;font-size:24px;letter-spacing:-.1em}
+.sk-set-ic sub{font-size:12px;font-weight:800;letter-spacing:0;margin:10px 4px 0 1px;color:#a9adbd} /* "Light, double: X": 1 click, 2 clicks */
 .sk-ctx{position:fixed;z-index:70;min-width:150px;display:flex;flex-direction:column;padding:5px;border-radius:12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.6)}
 .sk-ctx button{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-weight:700;font-size:15px;text-align:start}
 .sk-ctx button:hover,.sk-ctx button:focus-visible{background:var(--panel2);outline:none}
@@ -2853,6 +2875,17 @@ const CSS = `
 .sk-sheet-clue{margin-top:14px;background:var(--paper2);border-radius:10px;padding:9px 12px}
 .sk-sheet-clue>span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#6e6250}.sk-sheet-clue p{margin:3px 0 0;font-size:16px;line-height:1.4}
 @media (max-width:480px){.sk-sheet-body{flex-direction:column;align-items:center}.sk-sheet-info{width:100%}}
+/* an assassin's Syndicate card: the dark blue-grey of their shadowed look, their tie's colour (--sc) as the accent */
+.sk-sheet.syn{background:linear-gradient(180deg,#252a3d 0,#1c1f2e 55%,#15171f 100%);color:var(--fg);border:1px solid #33384d;border-top:7px solid var(--sc);box-shadow:0 24px 60px rgba(0,0,0,.65)}
+.sk-sheet.syn .sk-sheet-eyebrow,.sk-sheet.syn .sk-sheet-clue>span{color:color-mix(in srgb,var(--sc) 75%,#fff)}
+.sk-sheet.syn .sk-x{color:#a9adbd}
+.sk-sheet.syn .sk-sheet-info h2{color:#f3efe6}
+.sk-sheet.syn .sk-sheet-info .sk-letter{background:var(--sc);color:var(--sci,#fff)}
+.sk-sheet.syn .sk-sheet-state{color:#98a0b6}.sk-sheet.syn .sk-sheet-state.ok{color:#7fd6a8}
+.sk-sheet.syn .sk-facts>div{border-bottom-color:#3a4058}
+.sk-sheet.syn .sk-facts dt{color:#8f98b8}
+.sk-sheet.syn .sk-sheet-clue{background:#151823;border:1px solid #33384d;border-inline-start:4px solid var(--sc)}
+.sk-sheet.syn .sk-sheet-ok{border-color:#1c1f2e}
 .sk-modal h2{margin:0 0 8px;font:400 24px/1.1 'Special Elite',monospace}
 .sk-modal ul{padding-left:18px;margin:8px 0 0;display:flex;flex-direction:column;gap:6px}
 .sk-x{position:absolute;top:6px;right:8px;width:40px;height:40px;font-size:22px;color:#6e6250}

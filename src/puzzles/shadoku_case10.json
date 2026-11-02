@@ -1160,8 +1160,8 @@
     "cloth": 7
    },
    "look": "black crop hair, bowtie",
-   "clue": "Ingram was beside an anchor.",
-   "text": "Ingram was beside an anchor.",
+   "clue": "Ingram was beside the anchor.",
+   "text": "Ingram was beside the anchor.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -8509,7 +8509,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Ingram “was beside an anchor”: of the 4 tiles that fit, only r7c9 is still open. Place Ingram there.",
+   "text": "Ingram “was beside the anchor”: of the 4 tiles that fit, only r7c9 is still open. Place Ingram there.",
    "focus": [
     [
      6,

@@ -967,8 +967,8 @@
     "cloth": 7
    },
    "look": "bald, horn-rimmed glasses, beret, scarf",
-   "clue": "Floyd was beside a billiard table and was exactly one column west of Clara.",
-   "text": "Floyd was beside a billiard table and was exactly one column west of Clara.",
+   "clue": "Floyd was beside the billiard table and was exactly one column west of Clara.",
+   "text": "Floyd was beside the billiard table and was exactly one column west of Clara.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -1108,8 +1108,8 @@
     "cloth": 1
    },
    "look": "blonde short hair, beret, necktie",
-   "clue": "Isadora was beside an easel.",
-   "text": "Isadora was beside an easel.",
+   "clue": "Isadora was beside the easel.",
+   "text": "Isadora was beside the easel.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -1281,8 +1281,8 @@
    "name": "P. H. Obia",
    "gender": null,
    "traits": null,
-   "clue": "P. H. Obia hid beside a billiard table.",
-   "text": "P. H. Obia hid beside a billiard table.",
+   "clue": "P. H. Obia hid beside the billiard table.",
+   "text": "P. H. Obia hid beside the billiard table.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -4026,7 +4026,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Floyd “was beside a billiard table and was exactly one column west of Clara”: of the 4 tiles that fit, only r8c6 is still open. Place Floyd there.",
+   "text": "Floyd “was beside the billiard table and was exactly one column west of Clara”: of the 4 tiles that fit, only r8c6 is still open. Place Floyd there.",
    "focus": [
     [
      7,
@@ -4470,7 +4470,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Isadora “was beside an easel”: of the 3 tiles that fit, only r1c5 is still open. Place Isadora there.",
+   "text": "Isadora “was beside the easel”: of the 3 tiles that fit, only r1c5 is still open. Place Isadora there.",
    "focus": [
     [
      0,

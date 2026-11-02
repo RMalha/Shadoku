@@ -541,8 +541,8 @@
     "cloth": 4
    },
    "look": "black bob hair, horn-rimmed glasses",
-   "clue": "Adelaide was beside an advertising column and was west of Duncan.",
-   "text": "Adelaide was beside an advertising column and was west of Duncan.",
+   "clue": "Adelaide was beside the advertising column and was west of Duncan.",
+   "text": "Adelaide was beside the advertising column and was west of Duncan.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -799,8 +799,8 @@
     "cloth": 0
    },
    "look": "black wavy hair, horn-rimmed glasses, bowtie",
-   "clue": "Gwendolyn was beside a newsstand and was north of Felicity.",
-   "text": "Gwendolyn was beside a newsstand and was north of Felicity.",
+   "clue": "Gwendolyn was beside the newsstand and was north of Felicity.",
+   "text": "Gwendolyn was beside the newsstand and was north of Felicity.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -2524,7 +2524,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Adelaide “was beside an advertising column and was west of Duncan”: of the 2 tiles that fit, only r6c8 is still open. Place Adelaide there.",
+   "text": "Adelaide “was beside the advertising column and was west of Duncan”: of the 2 tiles that fit, only r6c8 is still open. Place Adelaide there.",
    "focus": [
     [
      5,
@@ -3544,7 +3544,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Gwendolyn “was beside a newsstand and was north of Felicity”: of the 3 tiles that fit, only r8c8 is still open. Place Gwendolyn there.",
+   "text": "Gwendolyn “was beside the newsstand and was north of Felicity”: of the 3 tiles that fit, only r8c8 is still open. Place Gwendolyn there.",
    "focus": [
     [
      7,

@@ -361,8 +361,8 @@
     "cloth": 2
    },
    "look": "red wavy hair",
-   "clue": "Dinah was beside a safe.",
-   "text": "Dinah was beside a safe.",
+   "clue": "Dinah was beside the safe.",
+   "text": "Dinah was beside the safe.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -527,7 +527,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Dinah “was beside a safe”: of the 2 tiles that fit, only r5c1 is still open. Place Dinah there.",
+   "text": "Dinah “was beside the safe”: of the 2 tiles that fit, only r5c1 is still open. Place Dinah there.",
    "focus": [
     [
      4,

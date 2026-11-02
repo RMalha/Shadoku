@@ -1315,7 +1315,7 @@
  "globalRules": [
   {
    "id": "EXACTLY_ONE_ON:FOOTPRINTS",
-   "text": "Exactly one person was on a trail of footprints.",
+   "text": "Exactly one person was on the trail of footprints.",
    "kind": "EXACTLY_ONE_ON",
    "params": {
     "prop": "FOOTPRINTS"
@@ -3572,7 +3572,7 @@
    "tier": 2,
    "rule": "Someone must stand here",
    "kind": "eliminate",
-   "text": "Exactly one person was on a trail of footprints. r4c3 is the last trail of footprints that anyone can still reach. Only Bridget, Kasimir and Nadia can get there, so one of them takes that tile and watches its sightlines: nobody else can stand on the marked tiles.",
+   "text": "Exactly one person was on the trail of footprints. r4c3 is the last trail of footprints that anyone can still reach. Only Bridget, Kasimir and Nadia can get there, so one of them takes that tile and watches its sightlines: nobody else can stand on the marked tiles.",
    "focus": [
     [
      0,

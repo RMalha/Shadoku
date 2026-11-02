@@ -906,8 +906,8 @@
     "cloth": 1
    },
    "look": "blonde short hair, round glasses, beard, necktie",
-   "clue": "Dashiell was sitting on a bench and was beside a water tower.",
-   "text": "Dashiell was sitting on a bench and was beside a water tower.",
+   "clue": "Dashiell was sitting on a bench and was beside the water tower.",
+   "text": "Dashiell was sitting on a bench and was beside the water tower.",
    "atoms": [
     {
      "kind": "ON",
@@ -955,8 +955,8 @@
     "cloth": 5
    },
    "look": "blonde short hair, round glasses, peaked, bowtie",
-   "clue": "Ezra was the only person beside a fountain.",
-   "text": "Ezra was the only person beside a fountain.",
+   "clue": "Ezra was the only person beside the fountain.",
+   "text": "Ezra was the only person beside the fountain.",
    "atoms": [
     {
      "kind": "ONLY_BESIDE",
@@ -1371,7 +1371,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Dashiell “was sitting on a bench and was beside a water tower”: only r8c4 fits. Place Dashiell there.",
+   "text": "Dashiell “was sitting on a bench and was beside the water tower”: only r8c4 fits. Place Dashiell there.",
    "focus": [
     [
      7,
@@ -1491,7 +1491,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Ezra was the only person beside a fountain, so no other suspect (and not S. H. Adow) can be beside any fountain.",
+   "text": "Ezra was the only person beside the fountain, so no other suspect (and not S. H. Adow) can be beside any fountain.",
    "focus": [
     [
      7,
@@ -2684,7 +2684,7 @@
    "tier": 2,
    "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "The blindspot law: r8c1 cannot be a hiding spot (Ezra was the only person beside a fountain), so someone must watch it. Only Ezra can still see it, so Ezra must stand on r8c1.",
+   "text": "The blindspot law: r8c1 cannot be a hiding spot (Ezra was the only person beside the fountain), so someone must watch it. Only Ezra can still see it, so Ezra must stand on r8c1.",
    "focus": [
     [
      7,
@@ -2739,7 +2739,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Ezra “was the only person beside a fountain”: of the 3 tiles that fit, only r8c1 is still open. Place Ezra there.",
+   "text": "Ezra “was the only person beside the fountain”: of the 3 tiles that fit, only r8c1 is still open. Place Ezra there.",
    "focus": [
     [
      7,
@@ -2895,7 +2895,7 @@
    "tier": 3,
    "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Adelaide stood on r11c2? Without following any clue further, r10c1 would stay dark, but Ezra was the only person beside a fountain. So Adelaide cannot be on r11c2.",
+   "text": "What if Adelaide stood on r11c2? Without following any clue further, r10c1 would stay dark, but Ezra was the only person beside the fountain. So Adelaide cannot be on r11c2.",
    "focus": [
     [
      10,
@@ -3364,7 +3364,7 @@
    "tier": 3,
    "rule": "Coverage check (lookahead)",
    "kind": "eliminate",
-   "text": "What if Godfrey stood on r11c2? Without following any clue further, r10c1 would stay dark, but Ezra was the only person beside a fountain. So Godfrey cannot be on r11c2.",
+   "text": "What if Godfrey stood on r11c2? Without following any clue further, r10c1 would stay dark, but Ezra was the only person beside the fountain. So Godfrey cannot be on r11c2.",
    "focus": [
     [
      10,

@@ -1164,14 +1164,14 @@ export function ContractEnvelope(props) {
   // the finale while sealed: the red folder (Dossier № 000-OMEGA) is a folder, never an envelope
   return props.tone === "omega" && (props.variant || "hero") === "mini" ? <ContractFolder {...props} /> : <EnvelopeBody {...props} />;
 }
-function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false }) {
+function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false }) {
   const pal = ENV_TONES[tone] || ENV_TONES.manila, gid = `shManila-${variant}-${tone}`;
   const { t, lang } = useLang();
   const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]); // title + difficulty in the active language
   const reduced = usePrefersReducedMotion();
   const mini = variant === "mini";
   const isTutorial = !!(puzzle && (puzzle.id === "tutorial" || puzzle.dummies));
-  const staticOpen = !!(pre || done); // a fulfilled contract (or one the caller says is already open) shows its envelope open from the start
+  const staticOpen = !!(pre || done) && !closed; // a fulfilled contract (or one the caller says is already open) shows its envelope open from the start; `closed`: it stays sealed until clicked all the same
   const [phase, setPhase] = useState(staticOpen && !mini ? "open" : "idle");
   const timer = useRef(null);
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -1278,10 +1278,10 @@ function Envelope({ onPlay, onStart, onSkip, noId = false }) {
   const { t } = useLang();
   const q = getPuzzle("tutorial");
   const best = useMemo(() => (q ? readBestTimes([q])[q.id] || 0 : 0), [q]);
-  const initiated = best > 0; // only a SOLVED initiation opens the envelope for good (skipping it does not)
+  const initiated = best > 0; // a SOLVED initiation: its letter offers the contracts (the envelope still starts sealed, every visit)
   const skippable = !store.get(TUTORIAL_KEY) && !!onSkip; // neither solved nor skipped yet
   return initiated
-    ? <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} pre done={best > 0} best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />
+    ? <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} closed done={best > 0} best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />
     : <>
         <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} onAccept={onStart || onPlay} noId={noId} />
         {skippable && <p className="sh-env-skip"><button type="button" className="sh-link" onClick={onSkip}>{t("tut.skip")}</button></p>}

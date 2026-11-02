@@ -325,8 +325,8 @@
     "cloth": 5
    },
    "look": "blonde curly hair, goatee, bowtie",
-   "clue": "Alfred was beside a fern and was in row 1.",
-   "text": "Alfred was beside a fern and was in row 1.",
+   "clue": "Alfred was beside the fern and was in row 1.",
+   "text": "Alfred was beside the fern and was in row 1.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -374,8 +374,8 @@
     "cloth": 6
    },
    "look": "brown wavy hair, goatee",
-   "clue": "Benedict was the only person on a fallen log.",
-   "text": "Benedict was the only person on a fallen log.",
+   "clue": "Benedict was the only person on the fallen log.",
+   "text": "Benedict was the only person on the fallen log.",
    "atoms": [
     {
      "kind": "ONLY_ON",
@@ -415,8 +415,8 @@
     "cloth": 4
    },
    "look": "black bob hair, cloche",
-   "clue": "Celeste was beside an oak tree.",
-   "text": "Celeste was beside an oak tree.",
+   "clue": "Celeste was beside the oak tree.",
+   "text": "Celeste was beside the oak tree.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -641,7 +641,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Alfred “was beside a fern and was in row 1”: only r1c3 fits. Place Alfred there.",
+   "text": "Alfred “was beside the fern and was in row 1”: only r1c3 fits. Place Alfred there.",
    "focus": [
     [
      0,
@@ -725,7 +725,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Benedict “was the only person on a fallen log”: only r2c5 fits. Place Benedict there.",
+   "text": "Benedict “was the only person on the fallen log”: only r2c5 fits. Place Benedict there.",
    "focus": [
     [
      1,
@@ -1039,7 +1039,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Celeste “was beside an oak tree”: of the 3 tiles that fit, only r4c1 is still open. Place Celeste there.",
+   "text": "Celeste “was beside the oak tree”: of the 3 tiles that fit, only r4c1 is still open. Place Celeste there.",
    "focus": [
     [
      3,

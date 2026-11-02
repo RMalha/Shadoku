@@ -614,8 +614,8 @@
     "cloth": 6
    },
    "look": "brown short hair, beret, beard, scarf",
-   "clue": "Casper was beside a tea trolley.",
-   "text": "Casper was beside a tea trolley.",
+   "clue": "Casper was beside the tea trolley.",
+   "text": "Casper was beside the tea trolley.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -972,8 +972,8 @@
     "cloth": 3
    },
    "look": "black wavy hair, cloche",
-   "clue": "Kitty was beside a display case.",
-   "text": "Kitty was beside a display case.",
+   "clue": "Kitty was beside the display case.",
+   "text": "Kitty was beside the display case.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -4453,7 +4453,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Casper “was beside a tea trolley”: of the 2 tiles that fit, only r6c2 is still open. Place Casper there.",
+   "text": "Casper “was beside the tea trolley”: of the 2 tiles that fit, only r6c2 is still open. Place Casper there.",
    "focus": [
     [
      5,
@@ -4547,7 +4547,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Kitty “was beside a display case”: of the 2 tiles that fit, only r9c1 is still open. Place Kitty there.",
+   "text": "Kitty “was beside the display case”: of the 2 tiles that fit, only r9c1 is still open. Place Kitty there.",
    "focus": [
     [
      8,

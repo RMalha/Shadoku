@@ -525,8 +525,8 @@
     "cloth": 4
    },
    "look": "brown bob hair, beret",
-   "clue": "Delphine was beside a fireplace.",
-   "text": "Delphine was beside a fireplace.",
+   "clue": "Delphine was beside the fireplace.",
+   "text": "Delphine was beside the fireplace.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -872,7 +872,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Delphine “was beside a fireplace”: of the 2 tiles that fit, only r8c1 is still open. Place Delphine there.",
+   "text": "Delphine “was beside the fireplace”: of the 2 tiles that fit, only r8c1 is still open. Place Delphine there.",
    "focus": [
     [
      7,

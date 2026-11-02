@@ -447,8 +447,8 @@
     "cloth": 5
    },
    "look": "red curly hair, peaked, beard, bowtie",
-   "clue": "Byron was beside an obelisk and was in front of an opening between two areas.",
-   "text": "Byron was beside an obelisk and was in front of an opening between two areas.",
+   "clue": "Byron was beside the obelisk and was in front of an opening between two areas.",
+   "text": "Byron was beside the obelisk and was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -773,7 +773,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Byron “was beside an obelisk and was in front of an opening between two areas”: only r4c7 fits. Place Byron there.",
+   "text": "Byron “was beside the obelisk and was in front of an opening between two areas”: only r4c7 fits. Place Byron there.",
    "focus": [
     [
      3,

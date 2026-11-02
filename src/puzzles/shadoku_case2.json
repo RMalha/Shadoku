@@ -343,8 +343,8 @@
     "cloth": 5
    },
    "look": "brown curly hair, fedora, necktie",
-   "clue": "Clifford was beside a palm tree and could not see the Corpse.",
-   "text": "Clifford was beside a palm tree and could not see the Corpse.",
+   "clue": "Clifford was beside the palm tree and could not see the Corpse.",
+   "text": "Clifford was beside the palm tree and could not see the Corpse.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -959,7 +959,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Clifford “was beside a palm tree and could not see the Corpse”: of the 2 tiles that fit, only r3c1 is still open. Place Clifford there.",
+   "text": "Clifford “was beside the palm tree and could not see the Corpse”: of the 2 tiles that fit, only r3c1 is still open. Place Clifford there.",
    "focus": [
     [
      2,

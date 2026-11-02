@@ -9,7 +9,7 @@
  *
  * Keys read through `tr(key)` (→ string, or undefined when the locale has no such key):
  *   generated (engine): CLUE*, ATOM.*, HID.*, GLOBAL.*, RULE_*, FRAG_*, REASON_*, STEP_*, BAN_*, CONTRA_*, FUSED.*, ASSASSIN_CLUE,
- *                       PROP.<ID>.{a,noun,prep,onPhrase}, TRAIT.<ID>.<form>, SURFACE.<ID>, ZONE.<ID>, ZONE_PREP.<ID>, ZONE_WORD.<WORD>,
+ *                       PROP.<ID>.{a,the,noun,prep,onPhrase}, TRAIT.<ID>.<form>, SURFACE.<ID>, ZONE.<ID>, ZONE_PREP.<ID>, ZONE_WORD.<WORD>,
  *                       DIFFICULTY.<ID>, CASE.<id>.{TITLE,SUBTITLE}
  *                       PROP.<ID>.onPhrase may also come as .m / .f / .n (a language whose verbs inflect for gender, e.g. Arabic): the variant of
  *                       the atom's subject is read first, the plain phrase when the locale has none. Likewise a clue sentence (ATOM.<kind>…,
@@ -33,6 +33,15 @@ typed("RoomIdList", "rooms empty");
 typed("Coord", "coord");
 typed("CoordList", "coords common options");
 const MARKED_MAX = 3; // longer tile lists read "the marked tiles" (engine/shadoku_i18n.py MARKED_MAX)
+/** Prop groups a clue may name (engine/shadoku_catalog.py PROP_GROUPS): "a tree" is any of these kinds. */
+const PROP_GROUPS = { ANY_TREE: ["TREE", "OAK", "BIRCH", "PINE", "SNOW_PINE", "PALM"] };
+/** Prop kind → how many separate objects of it the board holds (a multi-tile rug is ONE rug; engine/shadoku_i18n.py prop_objects). */
+function propObjects(d) {
+  const multi = d.multiTile || [], grouped = new Set(multi.flatMap((g) => g.cells.map(([r, c]) => `${r},${c}`))), n = {};
+  multi.forEach((g) => { n[g.kind] = (n[g.kind] || 0) + 1; });
+  (d.contents || []).forEach((row, r) => row.forEach((k, c) => { if (k && !grouped.has(`${r},${c}`)) n[k] = (n[k] || 0) + 1; }));
+  return n;
+}
 typed("PropId", "prop");
 typed("PropIdList", "lows");
 typed("TraitId", "trait");
@@ -58,7 +67,10 @@ class Ctx {
     this.sus = new Map((d.suspects || []).map((s) => [s.id, s]));
     this.ass = new Map((d.assassins || []).map((a) => [a.id, a]));
     this.rooms = new Map((d.roomIds || []).map((id, i) => [id, (d.roomNames || [])[i]]));
+    this.objects = propObjects(d);
   }
+  /** The board holds exactly one object of prop `k` (a prop group: of all its kinds together): its clue reads "the fireplace". */
+  onlyOne(k) { return (PROP_GROUPS[k] || [k]).reduce((s, x) => s + (this.objects[x] || 0), 0) === 1; }
   /** The template/word of `key`; throws when the locale lacks it (the caller falls back to the English in the JSON). */
   T(key) {
     const v = this.tr(key);
@@ -159,7 +171,7 @@ function fmtParam(key, val, f, arg, ctx, who) {
     if (f === "and") return ctx.andList(val.map((c) => ctx.coord(c)));
     if (f === "isare") return ctx.T(val.length === 1 ? "ui.fmt.is" : "ui.fmt.are");
   } else if (t === "PropId") {
-    if (f === "a") return ctx.propForm(val, "a");
+    if (f === "a") return ctx.onlyOne(val) && ctx.has(`PROP.${val}.the`) ? ctx.propForm(val, "the") : ctx.propForm(val, "a"); // a locale without .the keeps its "a" form
     if (f === "noun") return ctx.propForm(val, "noun");
     if (f === "prep") return ctx.propForm(val, "prep");
     if (f === "on") return ctx.propForm(val, "onPhrase", who);

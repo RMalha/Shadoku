@@ -891,8 +891,8 @@
     "cloth": 6
    },
    "look": "black crop hair, horn-rimmed glasses, beret, necktie",
-   "clue": "Archibald was beside a writing desk and was east of Hester.",
-   "text": "Archibald was beside a writing desk and was east of Hester.",
+   "clue": "Archibald was beside the writing desk and was east of Hester.",
+   "text": "Archibald was beside the writing desk and was east of Hester.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -991,8 +991,8 @@
     "cloth": 4
    },
    "look": "brown short hair, round glasses",
-   "clue": "Conrad was the only person on a carpet runner.",
-   "text": "Conrad was the only person on a carpet runner.",
+   "clue": "Conrad was the only person on the carpet runner.",
+   "text": "Conrad was the only person on the carpet runner.",
    "atoms": [
     {
      "kind": "ONLY_ON",
@@ -1319,8 +1319,8 @@
     "cloth": 4
    },
    "look": "blonde curly hair",
-   "clue": "Kathleen stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside a TV.",
-   "text": "Kathleen stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside a TV.",
+   "clue": "Kathleen stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV.",
+   "text": "Kathleen stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -1534,8 +1534,8 @@
    "name": "O. B. Scuro",
    "gender": null,
    "traits": null,
-   "clue": "O. B. Scuro hid beside a billiard table.",
-   "text": "O. B. Scuro hid beside a billiard table.",
+   "clue": "O. B. Scuro hid beside the billiard table.",
+   "text": "O. B. Scuro hid beside the billiard table.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -1615,8 +1615,8 @@
    "name": "R. E. Aper",
    "gender": null,
    "traits": null,
-   "clue": "R. E. Aper hid on a trapdoor.",
-   "text": "R. E. Aper hid on a trapdoor.",
+   "clue": "R. E. Aper hid on the trapdoor.",
+   "text": "R. E. Aper hid on the trapdoor.",
    "atoms": [
     {
      "kind": "ON",
@@ -2290,7 +2290,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Kathleen “stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside a TV”: of the 2 tiles that fit, only r7c9 is still open. Place Kathleen there.",
+   "text": "Kathleen “stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV”: of the 2 tiles that fit, only r7c9 is still open. Place Kathleen there.",
    "focus": [
     [
      6,
@@ -2733,7 +2733,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Conrad was the only person on a carpet runner, so no other suspect (and not S. H. Adow) can be on any carpet runner.",
+   "text": "Conrad was the only person on the carpet runner, so no other suspect (and not S. H. Adow) can be on any carpet runner.",
    "focus": [
     [
      8,
@@ -7600,7 +7600,7 @@
    "tier": 2,
    "rule": "The blindspot law",
    "kind": "eliminate",
-   "text": "The blindspot law: r10c5 cannot be a hiding spot (Conrad was the only person on a carpet runner), so someone must watch it. Only Conrad can still see it, so Conrad must stand on r9c5, r10c5.",
+   "text": "The blindspot law: r10c5 cannot be a hiding spot (Conrad was the only person on the carpet runner), so someone must watch it. Only Conrad can still see it, so Conrad must stand on r9c5, r10c5.",
    "focus": [
     [
      8,
@@ -7863,7 +7863,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Archibald “was beside a writing desk and was east of Hester”: of the 2 tiles that fit, only r1c3 is still open. Place Archibald there.",
+   "text": "Archibald “was beside the writing desk and was east of Hester”: of the 2 tiles that fit, only r1c3 is still open. Place Archibald there.",
    "focus": [
     [
      0,
@@ -8413,7 +8413,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Conrad “was the only person on a carpet runner”: of the 5 tiles that fit, only r9c5 is still open. Place Conrad there.",
+   "text": "Conrad “was the only person on the carpet runner”: of the 5 tiles that fit, only r9c5 is still open. Place Conrad there.",
    "focus": [
     [
      8,
