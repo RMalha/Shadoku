@@ -107,7 +107,7 @@ registerTranslations("en", {
  * only used when no locale has the key, and these when the puzzle has neither. Line 1 matches en.json.
  */
 export const LORE_FALLBACK = [
-  { title: "The Illusion of Justice", text: "Ah, S. H. Adow, new blood. The inspector scribbled scapegoats on the board, a parlour trick we feed him for centuries." },
+  { title: "The Illusion of Justice", text: "The inspector scribbled scapegoats on the board, a parlour trick we feed him for centuries." },
   { title: "The Ray Block", text: "Aurora sat on a stool, and the Kitchen has two. Whichever she took, her gaze runs through the opening: that line is lit either way." },
   { title: "The Geometry of Panic", text: "Dinah stood beside the safe. Aurora's row lights one side of it, so she takes the other: the safe blocks their view." },
   { title: "The Sanctuary", text: "Every tile is lit but one. That single void in their vision is your sanctuary. Step into the shadows." },
