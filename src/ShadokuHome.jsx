@@ -1587,9 +1587,9 @@ svg{direction:ltr}
 .sh-env:hover:not(.opening) .sh-env-lift,.sh-env:focus-visible .sh-env-lift{transform:translateY(-10px);filter:drop-shadow(0 28px 24px rgba(0,0,0,.55))}
 .sh-env-stage{position:relative;width:100%;aspect-ratio:480/420;perspective:1200px}
 /* the landing page's envelope while its contract is not fulfilled: a slow brass glow behind the usual shadow */
-.sh-env.glow .sh-env-lift{animation:shEnvGlow 2.8s ease-in-out infinite}
-@keyframes shEnvGlow{0%,100%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 10px rgba(217,155,38,.28))}50%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(240,185,74,.6))}}
-@media (prefers-reduced-motion:reduce){.sh-env.glow .sh-env-lift{animation:none;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 18px rgba(217,155,38,.45))}}
+.sh-env.glow .sh-env-lift{animation:shEnvGlow 2.4s ease-in-out infinite}
+@keyframes shEnvGlow{0%,100%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 14px rgba(240,185,74,.55)) drop-shadow(0 0 38px rgba(217,155,38,.4))}50%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(255,205,96,.95)) drop-shadow(0 0 70px rgba(240,170,50,.75))}}
+@media (prefers-reduced-motion:reduce){.sh-env.glow .sh-env-lift{animation:none;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(255,205,96,.8)) drop-shadow(0 0 56px rgba(240,170,50,.6))}}
 .sh-layer{position:absolute;inset:0;pointer-events:none}.sh-layer svg,.sh-flap-face svg{width:100%;height:100%;display:block;overflow:visible}
 .sh-layer-back{z-index:0}.sh-layer-front{z-index:3}
 .sh-card{position:absolute;z-index:2;left:12.5%;top:39.3%;width:75%;height:54.8%;pointer-events:none;background:var(--sh-cream);border:.6cqw solid #bda677;border-radius:.8cqw;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.45)}

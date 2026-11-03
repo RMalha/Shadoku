@@ -93,7 +93,7 @@ const SYM_IDS = Object.keys(NOTE_SYMBOLS);
 const isSym = (id) => !!NOTE_SYMBOLS[id];
 /** A tile's notes for a screen reader: the letters, then the note symbols by name ("A B Circle", "Star (mark)"). */
 const tileNoteText = (s, k, t) => {
-  const n = s.notes[k] || "", nm = (ch) => t(`game.sym.${NOTE_SYMBOLS[ch].shape}`);
+  const n = s.syms[k] ? "" : s.notes[k] || "", nm = (ch) => t(`game.sym.${NOTE_SYMBOLS[ch].shape}`); // notes are hidden under a held symbol
   return [...[...n].filter((ch) => !isSym(ch)), ...[...n].filter(isSym).map(nm), ...(s.syms[k] ? [t("game.symMark", { name: nm(s.syms[k]) })] : [])].join(" ");
 };
 /** A note symbol centred on (cx, cy), `r` its outer radius. */
@@ -359,8 +359,8 @@ export function boardHint(p, cs) {
   return { ...h, hid: hid(h) };
 }
 const snap = (cs) => ({ tokens: cs.tokens, notes: cs.notes, lights: cs.lights, crosses: cs.crosses, syms: cs.syms || {} });
-/** A crossed-out tile keeps its notes, hidden until the X comes off (a light switch leaves them showing). */
-const notesHidden = (cs, k) => !!cs.crosses[k];
+/** A crossed-out tile keeps its notes, hidden until the X comes off (a light switch leaves them showing); so does a tile with a note symbol held on it. */
+const notesHidden = (cs, k) => !!cs.crosses[k] || !!(cs.syms || {})[k];
 const tokenIdAt = (cs, r, c) => Object.keys(cs.tokens).find((t) => sameCell(cs.tokens[t], r, c));
 const withNote = (cs, k, id, mode) => {
   const s = cs.notes[k] || "", has = s.includes(id), want = mode === "add" ? true : mode === "remove" ? false : !has;
@@ -383,7 +383,10 @@ const withToken = (cs, id, r, c) => { // moves `id` here, bumping whoever stood 
   const tokens = {};
   Object.entries(cs.tokens).forEach(([t, at]) => { if (t !== id && !sameCell(at, r, c)) tokens[t] = at; });
   tokens[id] = [r, c];
-  return { ...cs, tokens };
+  const sy = cs.syms || {}, k = key(r, c); // a symbol held on this tile gives way to the scapegoat
+  if (!sy[k]) return { ...cs, tokens };
+  const syms = { ...sy }; delete syms[k];
+  return { ...cs, tokens, syms };
 };
 /** Hold-to-mark with a note symbol: the tile shows it in big (the same symbol again takes it off). Never part of the solution. */
 const withSym = (cs, k, id) => { const syms = { ...(cs.syms || {}) }; if (syms[k] === id) delete syms[k]; else syms[k] = id; return { ...cs, syms }; };
@@ -601,13 +604,17 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
   const placed = p.suspects.filter((q) => tokens[q.id]).map((q) => ({ id: q.id, cell: tokens[q.id] }));
   const litMap = new Map(), setMin = (k, d) => { if (!litMap.has(k) || litMap.get(k) > d) litMap.set(k, d); };
   const seen = new Set(); // every tile a placed suspect sees (S. H. Adow there is a mistake, lit or not)
-  placed.forEach(({ cell: [r, c] }) => {
-    geo.rays(r, c).forEach((ray) => ray.forEach(([rr, cc]) => seen.add(key(rr, cc))));
-    if (!o.autoLight) return; // "Auto Light on Place" off: only the Light Switch lifts the shadow
+  const shine = (r, c) => {
     setMin(key(r, c), 0);
     geo.rays(r, c).forEach((ray) => ray.forEach(([rr, cc], i) => setMin(key(rr, cc), i + 1)));
     geo.blockers(r, c).forEach(([rr, cc, d]) => setMin(key(rr, cc), d));
+  };
+  placed.forEach(({ cell: [r, c] }) => {
+    geo.rays(r, c).forEach((ray) => ray.forEach(([rr, cc]) => seen.add(key(rr, cc))));
+    if (o.autoLight) shine(r, c); // "Auto Light on Place" off: only the Light Switch lifts the shadow
   });
+  // a note symbol held on a tile lights its row and column like a scapegoat, but it is only a mark: it never counts as someone seeing (no conflicts, no mistake for S. H. Adow)
+  if (o.autoLight) Object.keys(s.syms).forEach((k) => { if (!tokenAt.has(+k) && !s.crosses[k]) shine(Math.floor(+k / 100), +k % 100); });
   const conflicts = new Set();
   placed.forEach((a) => placed.forEach((b) => { if (a.id !== b.id && geo.visible(...a.cell).has(key(...b.cell))) { conflicts.add(a.id); conflicts.add(b.id); } }));
   const hiders = hidersOf(p);
@@ -920,7 +927,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         const k = key(r, c), kind = geo.kind(r, c);
         return (
           <rect key={`h${r}-${c}`} className="hit" x={X(c)} y={Y(r)} width={CELL} height={CELL} fill="transparent" tabIndex={0} role="gridcell"
-            aria-label={t("game.tileAria", { coord: t("fmt.coord", { row: r + 1, col: c + 1 }), room: (p.roomLabels || p.roomNames)[geo.room(r, c)], prop: kind ? t("game.tileProp", { prop: describe ? describe(kind) : (LABEL[kind] || kind) }) : "", token: tokenAt.has(k) ? t("game.tileToken", { token: tokenAt.get(k) }) : "", notes: (s.notes[k] || s.syms[k]) && !tokenAt.has(k) && !notesHidden(s, k) ? t("game.tileNotes", { notes: tileNoteText(s, k, t) }) : "", lit: s.lights[k] ? t("game.tileLit") : s.crosses[k] ? t("game.tileCrossed") : "" })}
+            aria-label={t("game.tileAria", { coord: t("fmt.coord", { row: r + 1, col: c + 1 }), room: (p.roomLabels || p.roomNames)[geo.room(r, c)], prop: kind ? t("game.tileProp", { prop: describe ? describe(kind) : (LABEL[kind] || kind) }) : "", token: tokenAt.has(k) ? t("game.tileToken", { token: tokenAt.get(k) }) : "", notes: (s.notes[k] || s.syms[k]) && !tokenAt.has(k) && !s.crosses[k] ? t("game.tileNotes", { notes: tileNoteText(s, k, t) }) : "", lit: s.lights[k] ? t("game.tileLit") : s.crosses[k] ? t("game.tileCrossed") : "" })}
             style={{ cursor: geo.occupiable(r, c) ? "pointer" : "default" }}
             onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && onKey) { e.preventDefault(); onKey(r, c, e); } }} />
         );
@@ -1779,7 +1786,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const tap = (r, c) => {
     if (!geo.occupiable(r, c)) return;
     const k = key(r, c), id = active, cs = caseNow(), other = tokenIdAt(cs, r, c);
-    if (other) return; // a placed suspect is not touched by a tap: only the Eraser takes them off the board
+    if (other || cs.syms[k]) return; // a placed scapegoat or note symbol is not touched by a tap: only the Eraser (or holding the same symbol) takes it off
     if (mutate((x) => withNote(x, k, id, "toggle"))) emit("note", { id, r, c, drag: false });
   };
   /** Put the active suspect on a tile (their note there is cleared). */
@@ -1817,7 +1824,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (s.tool === "light") changed = mutate((x) => withLight(x, k, s.mode === "on"), !s.pushed);
     else if (s.tool === "cross") changed = mutate((x) => withCross(x, k, s.mode === "on"), !s.pushed);
     else if (s.tool === "eraser") changed = mutate((x) => erased(x, r, c), !s.pushed);
-    else { const cs = caseNow(); if (tokenIdAt(cs, r, c) || notesHidden(cs, k)) return; changed = mutate((x) => withNote(x, k, s.id, s.mode), !s.pushed); } // no hidden notes under an X
+    else { const cs = caseNow(); if (tokenIdAt(cs, r, c) || notesHidden(cs, k)) return; changed = mutate((x) => withNote(x, k, s.id, s.mode), !s.pushed); } // no hidden notes under an X or a symbol
     if (changed) emit(s.tool === "light" ? "light" : s.tool === "cross" ? "cross" : s.tool === "eraser" ? "erase" : "note", { id: s.id, r, c, drag: !!s.drag, on: s.mode === "on" || s.mode === "add" });
     s.pushed = s.pushed || changed;
   };
@@ -2881,8 +2888,8 @@ const CSS = `
 .sk-ctx button:hover,.sk-ctx button:focus-visible{background:var(--panel2);outline:none}
 .sk-ctx button[aria-checked=true]{color:var(--brass2)}
 .sk-set-tint{min-width:68px;padding:9px 8px 7px;font-size:13px}
-.sk-syms{display:flex;flex-direction:column;gap:8px}
-.sk-syms-row{display:flex;flex-wrap:wrap;gap:10px}
+.sk-syms{display:flex;flex-direction:column;align-items:center;gap:8px}
+.sk-syms-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .sk-sym{width:56px;height:56px;display:grid;place-items:center;border-radius:12px;background:var(--panel2);border:2px solid var(--line);transition:transform .08s,border-color .15s,box-shadow .15s}
 .sk-sym svg{width:34px;height:34px}
 .sk-sym:hover{border-color:#55556e}
