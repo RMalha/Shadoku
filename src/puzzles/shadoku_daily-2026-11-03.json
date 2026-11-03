@@ -1,0 +1,2347 @@
+{
+ "id": "daily-2026-11-03",
+ "title": "Daily Contract, Tuesday 3 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Easy · Mansion",
+ "theme": "MANSION",
+ "difficulty": "Easy",
+ "tier": "easy",
+ "shape": "rect",
+ "seed": 261103,
+ "attempt": 2143,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "MAE0707RAR1-261103",
+ "puzzleId": "MAE0707RAR1-261103",
+ "engine": "V10.1",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 14,
+ "zoneWord": "room",
+ "size": 7,
+ "rooms": [
+  [
+   0,
+   0,
+   3,
+   3,
+   3,
+   3,
+   4
+  ],
+  [
+   0,
+   0,
+   3,
+   3,
+   3,
+   3,
+   4
+  ],
+  [
+   0,
+   0,
+   3,
+   3,
+   3,
+   3,
+   4
+  ],
+  [
+   0,
+   0,
+   3,
+   3,
+   3,
+   3,
+   4
+  ],
+  [
+   0,
+   0,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   0,
+   0,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ]
+ ],
+ "roomNames": [
+  "Ballroom",
+  "Cellar",
+  "Orangery",
+  "Library",
+  "Pantry"
+ ],
+ "roomIds": [
+  "BALLROOM",
+  "CELLAR",
+  "ORANGERY",
+  "LIBRARY",
+  "PANTRY"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    5
+   ],
+   [
+    0,
+    6
+   ]
+  ],
+  [
+   [
+    1,
+    1
+   ],
+   [
+    1,
+    2
+   ]
+  ],
+  [
+   [
+    3,
+    3
+   ],
+   [
+    4,
+    3
+   ]
+  ],
+  [
+   [
+    3,
+    6
+   ],
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   [
+    4,
+    2
+   ]
+  ],
+  [
+   [
+    5,
+    6
+   ],
+   [
+    6,
+    6
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   6,
+   2,
+   "S"
+  ],
+  [
+   3,
+   6,
+   "E"
+  ],
+  [
+   1,
+   6,
+   "E"
+  ],
+  [
+   6,
+   6,
+   "E"
+  ]
+ ],
+ "contents": [
+  [
+   "CORPSE",
+   "",
+   "",
+   "SHELF",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "CUSHION",
+   "",
+   "CARPET_RUNNER",
+   "SOFA",
+   "DISPLAY_CASE",
+   ""
+  ],
+  [
+   "TABLE",
+   "",
+   "CHAIR",
+   "CARPET_RUNNER",
+   "SOFA",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "CARPET_RUNNER",
+   "CARPET_RUNNER",
+   "CARPET_RUNNER",
+   "FOOTPRINTS"
+  ],
+  [
+   "CUSHION",
+   "",
+   "",
+   "",
+   "BROKEN_GLASS",
+   "",
+   "CHAIR"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "WINE_RACK",
+   ""
+  ],
+  [
+   "",
+   "TABLE",
+   "",
+   "PLANT",
+   "",
+   "",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "CARPET_RUNNER",
+   "cells": [
+    [
+     1,
+     3
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ]
+  },
+  {
+   "kind": "SOFA",
+   "cells": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  0,
+  0
+ ],
+ "biomeProps": [
+  "CARPET_RUNNER",
+  "CUSHION",
+  "DISPLAY_CASE",
+  "PLANT",
+  "SHELF",
+  "SOFA",
+  "WINE_RACK"
+ ],
+ "propClasses": {
+  "BROKEN_GLASS": "LOW",
+  "CARPET_RUNNER": "LOW",
+  "CHAIR": "LOW",
+  "CUSHION": "LOW",
+  "DISPLAY_CASE": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "PLANT": "TALL",
+  "SHELF": "TALL",
+  "SOFA": "LOW",
+  "TABLE": "SHORT",
+  "WINE_RACK": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.31,
+  "lowTiles": 13,
+  "openTiles": 42,
+  "lowKinds": [
+   "BROKEN_GLASS",
+   "CARPET_RUNNER",
+   "CHAIR",
+   "CUSHION",
+   "FOOTPRINTS",
+   "SOFA"
+  ],
+  "roomProps": {
+   "LIBRARY": [
+    "CARPET_RUNNER",
+    "CHAIR",
+    "DISPLAY_CASE",
+    "SHELF",
+    "SOFA"
+   ],
+   "BALLROOM": [
+    "CUSHION",
+    "TABLE"
+   ],
+   "PANTRY": [
+    "FOOTPRINTS"
+   ],
+   "CELLAR": [
+    "BROKEN_GLASS",
+    "CHAIR",
+    "WINE_RACK"
+   ],
+   "ORANGERY": [
+    "PLANT",
+    "TABLE"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alice",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 1
+   },
+   "look": "blonde ponytail hair",
+   "clue": "Alice was in the Ballroom and could see into another room.",
+   "text": "Alice was in the Ballroom and could see into another room.",
+   "atoms": [
+    {
+     "kind": "SEE_OTHER_ROOM",
+     "subject": "A",
+     "params": {}
+    },
+    {
+     "kind": "ROOM",
+     "subject": "A",
+     "params": {
+      "room": "BALLROOM"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    1
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Boris",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 3
+   },
+   "look": "brown short hair, mustache, bowtie",
+   "clue": "Boris was sitting on a floor cushion and could see the Corpse.",
+   "text": "Boris was sitting on a floor cushion and could see the Corpse.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "B",
+     "params": {
+      "prop": "CUSHION"
+     }
+    },
+    {
+     "kind": "SEE_CORPSE",
+     "subject": "B",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    0
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Celeste",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 4
+   },
+   "look": "blonde long hair",
+   "clue": "Celeste was in the Orangery and was in front of a window.",
+   "text": "Celeste was in the Orangery and was in front of a window.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "C",
+     "params": {
+      "room": "ORANGERY"
+     }
+    },
+    {
+     "kind": "WINDOW",
+     "subject": "C",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    6
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dashiell",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 7
+   },
+   "look": "blonde short hair, horn-rimmed glasses, scarf",
+   "clue": "Dashiell was beside a table and was in a corner.",
+   "text": "Dashiell was beside a table and was in a corner.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "TABLE"
+     }
+    },
+    {
+     "kind": "CORNER",
+     "subject": "D",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    0
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elspeth",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 3
+   },
+   "look": "brown bob hair, scarf",
+   "clue": "Elspeth was beside the display case.",
+   "text": "Elspeth was beside the display case.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "E",
+     "params": {
+      "prop": "DISPLAY_CASE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    5
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Floyd",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 0
+   },
+   "look": "bald, peaked, scarf",
+   "clue": "Floyd was in the Library.",
+   "text": "Floyd was in the Library.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "F",
+     "params": {
+      "room": "LIBRARY"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    2
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gideon",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 6
+   },
+   "look": "blonde curly hair, mustache, bowtie",
+   "clue": "Gideon was alone and could see into another room.",
+   "text": "Gideon was alone and could see into another room.",
+   "atoms": [
+    {
+     "kind": "SEE_OTHER_ROOM",
+     "subject": "G",
+     "params": {}
+    },
+    {
+     "kind": "ALONE",
+     "subject": "G",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    3
+   ]
+  }
+ ],
+ "shadow": [
+  3,
+  4
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_ON:CHAIR",
+   "text": "Exactly one person was on a chair.",
+   "kind": "EXACTLY_ONE_ON",
+   "params": {
+    "prop": "CHAIR"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Boris “was sitting on a floor cushion and could see the Corpse”: only r5c1 fits. Place Boris there.",
+   "focus": [
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ]
+    ],
+    "G": [
+     [
+      1,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    4,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      4,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alice “was in the Ballroom and could see into another room”: of the 4 tiles that fit, only r2c2 is still open. Place Alice there.",
+   "focus": [
+    [
+     1,
+     1
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      1,
+      4
+     ]
+    ],
+    "F": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "G": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    1,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dashiell “was beside a table and was in a corner”: only r7c1 fits. Place Dashiell there.",
+   "focus": [
+    [
+     6,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      6,
+      2
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    6,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      6,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Celeste “was in the Orangery and was in front of a window”: of the 2 tiles that fit, only r7c7 is still open. Place Celeste there.",
+   "focus": [
+    [
+     6,
+     6
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      6
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    6,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      6,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Elspeth can only be at r1c6 or r3c6, and those tiles all lie on one sightline. Whichever one Elspeth takes, the whole stretch is watched, so nobody else can stand on r1c6, r3c6, r4c6.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      5
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      5
+     ]
+    ],
+    "G": [
+     [
+      0,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "E",
+     "options": [
+      [
+       0,
+       5
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "coords": [
+      [
+       0,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was on a chair. Only Floyd can still reach a chair, so he must be on one.",
+   "focus": [
+    [
+     2,
+     2
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "CHAIR"
+      }
+     },
+     "owner": "F",
+     "prop": "CHAIR"
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Floyd “was in the Library”: every tile that fits is ruled out except r3c3. Place Floyd there.",
+   "focus": [
+    [
+     2,
+     2
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      2,
+      5
+     ]
+    ],
+    "G": [
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "suspect": "F",
+   "cell": [
+    2,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      2,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elspeth “was beside the display case”: of the 3 tiles that fit, only r1c6 is still open. Place Elspeth there.",
+   "focus": [
+    [
+     0,
+     5
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      0,
+      4
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    0,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      0,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Alone in a room",
+   "kind": "eliminate",
+   "text": "Gideon was alone in the room, but Elspeth and Floyd must be in the Library, so Gideon cannot be in it.",
+   "focus": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "G",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "E",
+         "F"
+        ],
+        "room": "LIBRARY"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gideon “was alone and could see into another room”: every tile that fits is ruled out except r6c4. Place Gideon there.",
+   "focus": [
+    [
+     5,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    5,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      5,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c5. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     4
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    3,
+    4
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      3,
+      4
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "B",
+   "cell": [
+    4,
+    0
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     4,
+     0
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Boris “was sitting on a floor cushion and could see the Corpse”: only r5c1 fits. Place Boris there.",
+    "focus": [
+     [
+      4,
+      0
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       1,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ]
+     ],
+     "G": [
+      [
+       1,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     4,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       4,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    1,
+    1
+   ],
+   "needs": [
+    "B"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Alice “was in the Ballroom and could see into another room”: of the 4 tiles that fit, only r2c2 is still open. Place Alice there.",
+    "focus": [
+     [
+      1,
+      1
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       1,
+       4
+      ]
+     ],
+     "F": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ]
+     ],
+     "G": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     1,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       1,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    6,
+    0
+   ],
+   "needs": [
+    "A",
+    "B"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     6,
+     0
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dashiell “was beside a table and was in a corner”: only r7c1 fits. Place Dashiell there.",
+    "focus": [
+     [
+      6,
+      0
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       6,
+       2
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     6,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       6,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    6,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Celeste “was in the Orangery and was in front of a window”: of the 2 tiles that fit, only r7c7 is still open. Place Celeste there.",
+    "focus": [
+     [
+      6,
+      6
+     ]
+    ],
+    "elims": {
+     "G": [
+      [
+       0,
+       6
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       6
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     6,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       6,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    2,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Elspeth can only be at r1c6 or r3c6, and those tiles all lie on one sightline. Whichever one Elspeth takes, the whole stretch is watched, so nobody else can stand on r1c6, r3c6, r4c6.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        5
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        5
+       ]
+      ],
+      "G": [
+       [
+        0,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "E",
+       "options": [
+        [
+         0,
+         5
+        ],
+        [
+         2,
+         5
+        ]
+       ],
+       "coords": [
+        [
+         0,
+         5
+        ],
+        [
+         2,
+         5
+        ],
+        [
+         3,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was on a chair. Only Floyd can still reach a chair, so he must be on one.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       4,
+       6
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        3,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "CHAIR"
+        }
+       },
+       "owner": "F",
+       "prop": "CHAIR"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Floyd “was in the Library”: every tile that fits is ruled out except r3c3. Place Floyd there.",
+    "focus": [
+     [
+      2,
+      2
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       2,
+       5
+      ]
+     ],
+     "G": [
+      [
+       2,
+       3
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     2,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       2,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    0,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Elspeth “was beside the display case”: of the 3 tiles that fit, only r1c6 is still open. Place Elspeth there.",
+    "focus": [
+     [
+      0,
+      5
+     ]
+    ],
+    "elims": {
+     "G": [
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     0,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       0,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    5,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Gideon was alone in the room, but Elspeth and Floyd must be in the Library, so Gideon cannot be in it.",
+     "focus": [
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        3,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "E",
+           "F"
+          ],
+          "room": "LIBRARY"
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gideon “was alone and could see into another room”: every tile that fits is ruled out except r6c4. Place Gideon there.",
+    "focus": [
+     [
+      5,
+      3
+     ]
+    ],
+    "elims": {},
+    "suspect": "G",
+    "cell": [
+     5,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       5,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    3,
+    4
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r4c5. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      3,
+      4
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     3,
+     4
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       3,
+       4
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 2,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 0.5,
+   "hardest_last_pos": 0.889,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.333,
+   "late_elim_gap": 1,
+   "place_push": 4.14,
+   "global_uses": 1,
+   "global_first_t2": true
+  },
+  "flow_arc_ok": true,
+  "shadow_candidates_before_last": 4,
+  "shadow_candidates_before_last_two": 6,
+  "dark_known_at": 7,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "CARPET_RUNNER",
+   "CUSHION",
+   "DISPLAY_CASE",
+   "PLANT",
+   "SHELF",
+   "SOFA",
+   "WINE_RACK"
+  ],
+  "biome_props_in_clues": [
+   "CUSHION",
+   "DISPLAY_CASE"
+  ],
+  "biome_props_load_bearing": [
+   "CUSHION",
+   "DISPLAY_CASE"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 36,
+  "rules_used": [
+   "alone",
+   "global_prop_monopoly",
+   "ray_block"
+  ],
+  "steps": 10,
+  "difficulty_score": 14,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.55
+ },
+ "daily": "2026-11-03"
+}
