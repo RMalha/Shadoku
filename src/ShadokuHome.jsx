@@ -25,10 +25,10 @@
 import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
-import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
+import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, DAILIES, dailyShelves, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
 import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL } from "./ShadokuArt.jsx";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
-import { localizeHead, trOf } from "./caseText.js";
+import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
 
 /* ═════════════════════════════ CONSTANTS ═════════════════════════════ */
@@ -129,6 +129,7 @@ export const STRINGS = {
 
     "hero.eyebrow": "Shadoku · The Blindspot Murder Mystery",
     "hero.title": "The Inspectors Had It All Wrong",
+    "hero.daily": "A new puzzle every day",
     "hero.read": "Read the briefing",
     "hero.skip": "Skip to the envelope",
 
@@ -195,6 +196,7 @@ export const STRINGS = {
     "env.pickNote": "Your contracts are waiting. Tap the card to choose one.",
     "env.acceptNote": "Master U. M. Bra is waiting. Tap the contract to begin your initiation.",
     "env.caseFile": "INITIATION CONTRACT № 000",
+    "env.lockedStamp": "Unlocked after Initiation",
     "env.initiate": "INITIATE: S. H. ADOW",
     "env.status": "STATUS: AWAITING YOUR SIGNATURE",
 
@@ -1170,7 +1172,7 @@ export function ContractEnvelope(props) {
   // the finale while sealed: the red folder (Dossier № 000-OMEGA) is a folder, never an envelope
   return props.tone === "omega" && (props.variant || "hero") === "mini" ? <ContractFolder {...props} /> : <EnvelopeBody {...props} />;
 }
-function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false }) {
+function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false, second = null }) {
   const pal = ENV_TONES[tone] || ENV_TONES.manila, gid = `shManila-${variant}-${tone}`;
   const { t, lang } = useLang();
   const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]); // title + difficulty in the active language
@@ -1195,12 +1197,14 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
   const dim = puzzle ? `${puzzle.rooms.length}×${puzzle.rooms[0].length}` : "";
   const upper = (x) => { try { return String(x).toLocaleUpperCase(lang); } catch { return String(x).toUpperCase(); } };
   const meta = puzzle ? t("env.meta", { difficulty: upper(puzzle.difficulty || ""), size: dim, n: (puzzle.suspects || []).length }) : "";
+  const p2 = useMemo(() => (second ? localizeHead(second.puzzle, trOf(t)) : null), [second, t]); // the second card (the locked daily contract)
+  const meta2 = p2 ? t("env.meta", { difficulty: upper(p2.difficulty || ""), size: `${p2.rooms.length}×${p2.rooms[0].length}`, n: (p2.suspects || []).length }) : "";
   const rootProps = mini
     ? { role: "button", tabIndex: 0, "aria-label": done && puzzle ? t("env.miniAriaDone", { open: t("hub.open"), label, title: puzzle.title }) : t("env.miniAria", { open: t("hub.open"), label }), onClick: onPick, onKeyDown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPick && onPick(); } } }
     : phase === "idle" ? { role: "button", tabIndex: 0, "aria-label": t("env.aria"), onKeyDown: onKey, onClick: open } : { onClick: open };
 
   return (
-    <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}${sealed ? " sealed" : ""}`}>
+    <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}${sealed ? " sealed" : ""}${p2 ? " two" : ""}`}>
       <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}`} {...rootProps} id={variant === "hero" && !noId ? "sh-envelope" : undefined}>
         <div className="sh-env-lift">
           <div className="sh-env-stage">
@@ -1210,6 +1214,21 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
                 <rect x="1.5" y="151.5" width="477" height="267" rx="6" fill={pal.back} stroke="#0e0d0b" strokeWidth="3" />
               </svg>
             </div>
+
+            {/* a second card behind the first, fanned out higher (the daily contract, locked until the initiation is done) */}
+            {p2 && (
+              <div className="sh-card sh-card-2" role="img" aria-label={`${p2.title}: ${second.stamp}`}>
+                <div className="sh-card-in" aria-hidden="true">
+                  <div className="sh-card-pol"><ArtSafe><VictimPolaroid name={victimNameOf(p2)} size={200} tilt={3} /></ArtSafe></div>
+                  <div className="sh-card-txt">
+                    <div className="k sh-type">{second.label}</div>
+                    <div className="h sh-type">{p2.title}</div>
+                    <div className="m sh-type">{meta2}</div>
+                  </div>
+                </div>
+                <div className="sh-card-lock sh-type" aria-hidden="true">{second.stamp}</div>
+              </div>
+            )}
 
             {/* the contract card + the target's polaroid that slides out */}
             <div className="sh-card">
@@ -1280,19 +1299,37 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
 }
 
 /** The landing page's invitation: the initiation contract ("The Art of the Ghost"). */
+/** A daily contract's card header: "TUESDAY · MANSION" (its title carries the date). */
+export function dailyLabel(q, t, lang) {
+  const s = t("daily.label", { weekday: dailyDate(q.daily, { weekday: "long" }), theme: trOf(t)(`THEME.${q.theme}`) || q.theme });
+  try { return s.toLocaleUpperCase(lang); } catch { return s.toUpperCase(); }
+}
+
+/**
+ * The landing page's envelope. Once the initiation is behind the player (solved or skipped) it is today's daily contract. Before that it
+ * is the initiation contract, and today's daily comes out of it too, as a second card stamped "Unlocked after Initiation".
+ */
 function Envelope({ onPlay, onStart, onSkip, noId = false }) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const nav = useNav();
   const q = getPuzzle("tutorial");
   const progressTick = useProgressTick(); // a sync brought another device's progress
-  const best = useMemo(() => (q ? readBestTimes([q])[q.id] || 0 : 0), [q, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps
-  const initiated = best > 0; // a SOLVED initiation: its letter offers the contracts (the envelope still starts sealed, every visit)
-  const skippable = !store.get(TUTORIAL_KEY) && !!onSkip; // neither solved nor skipped yet
-  return initiated
-    ? <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} closed done={best > 0} best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />
-    : <>
-        <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} onAccept={onStart || onPlay} noId={noId} />
-        {skippable && <p className="sh-env-skip"><button type="button" className="sh-link" onClick={onSkip}>{t("tut.skip")}</button></p>}
-      </>;
+  const bests = useMemo(() => readBestTimes([q, ...DAILIES].filter(Boolean)), [q, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps
+  const best = (q && bests[q.id]) || 0;
+  const daily = useMemo(() => dailyShelves().today, []);
+  const initiated = !!store.get(TUTORIAL_KEY) || best > 0; // solved or skipped
+  if (initiated && daily) {
+    return <ContractEnvelope key={daily.id} variant="hero" puzzle={daily} label={dailyLabel(daily, t, lang)} closed done={bests[daily.id] > 0} best={bests[daily.id]}
+      note={t("daily.intro")} onAccept={() => nav(`/play/${daily.id}`)} noId={noId} />;
+  }
+  if (best > 0) { // no daily contract shipped: the solved initiation's letter offers the contracts (the envelope still starts sealed, every visit)
+    return <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} closed done best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />;
+  }
+  const second = daily && !initiated ? { puzzle: daily, label: dailyLabel(daily, t, lang), stamp: t("env.lockedStamp") } : null;
+  return <>
+    <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} onAccept={onStart || onPlay} noId={noId} second={second} />
+    {!initiated && onSkip && <p className="sh-env-skip"><button type="button" className="sh-link" onClick={onSkip}>{t("tut.skip")}</button></p>}
+  </>;
 }
 
 /** The Menu's "Initiation": the landing page's envelope (same component, same skip button) in a pop-up. */
@@ -1339,6 +1376,7 @@ function HomeInner({ onPlay, onStart, onSkip, onNav, screenshots }) {
         <section className="sh-hero">
           <p className="sh-eyebrow sh-type">{t("hero.eyebrow")}</p>
           <h1 className="sh-type">{t("hero.title")}</h1>
+          <p className="sh-hero-daily sh-type">{t("hero.daily")}</p>
         </section>
 
         <section className="sh-env-section" aria-label={t("env.contract")}>
@@ -1450,6 +1488,7 @@ svg{direction:ltr}
 .sh-eyebrow{color:var(--sh-brass);letter-spacing:.18em;text-transform:uppercase;font-size:clamp(11px,1.6vw,14px);margin:0 0 18px}
 .sh-hero h1{font-size:clamp(32px,6vw,60px);line-height:1.05;margin:0 0 4px;color:var(--sh-cream);text-shadow:0 0 40px rgba(217,155,38,.25),3px 3px 0 rgba(200,62,59,.35)}
 .sh-hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.sh-hero-daily{margin:10px 0 0;color:var(--sh-brass);font-size:clamp(16px,2.6vw,22px);letter-spacing:.04em}
 
 /* story */
 .sh-story{max-width:1080px;margin:0 auto;padding:0 clamp(14px,3vw,28px) 0}.sh-story>.sh-show:last-child{margin-bottom:0}
@@ -1530,6 +1569,13 @@ svg{direction:ltr}
 .sh-card-in{display:flex;gap:3cqw;align-items:center;height:100%;padding:2.2cqw 3cqw;color:var(--sh-ink);font-size:2.5cqw;line-height:1.35}
 .sh-card-pol{width:21cqw;flex:none;transform:rotate(-4deg);filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto}
 .sh-env.ready .sh-card{pointer-events:auto}
+/* two cards: the second (locked) one rises higher behind the first and fans out to the right, so its header and stamp show */
+.sh-env-cq.two.opened .sh-env-stage{margin-top:44cqw}
+.sh-env.ready .sh-card.sh-card-2{pointer-events:none}
+.sh-card-2{filter:saturate(.55) brightness(.93)}
+.sh-env.opening .sh-card.sh-card-2{animation:shCard2 520ms 470ms cubic-bezier(.2,.8,.2,1) forwards}
+.sh-env.pre .sh-card.sh-card-2{animation:none;transform:translate(8%,-152%) rotate(3deg)}
+.sh-card-lock{position:absolute;z-index:3;right:5%;top:7%;padding:.5cqw 1.4cqw;border:.5cqw solid #8f2a27;border-radius:.9cqw;background:rgba(245,240,230,.9);color:#a3302c;font-size:3cqw;letter-spacing:.06em;line-height:1.15;max-width:46%;text-align:center;transform:rotate(7deg);box-shadow:inset 0 0 0 .3cqw rgba(200,62,59,.35)}
 .sh-card-best{margin-top:.6cqw;font-size:2.5cqw;color:#2a6b49}.sh-card-best b{font-weight:400;color:#1d4e35;font-size:3cqw;letter-spacing:.04em}
 .sh-card-stamp{position:absolute;z-index:3;left:2%;top:16%;padding:.5cqw 1.4cqw;border:.5cqw solid #14683f;border-radius:.9cqw;background:#2f9e6b;color:#f7fbf3;font-size:3.2cqw;letter-spacing:.06em;line-height:1.1;transform:rotate(-11deg);pointer-events:none;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.45),inset 0 0 0 .3cqw rgba(247,251,243,.55)}
 .sh-card-hit{position:absolute;inset:0;z-index:2;width:100%;height:100%;padding:0;border:0;border-radius:.6cqw;background:transparent;cursor:pointer;outline:none}
@@ -1564,6 +1610,7 @@ svg{direction:ltr}
 @keyframes shSealR{0%{transform:none;opacity:1}35%{transform:translateX(5%) rotate(5deg);opacity:1}100%{transform:translate(45%,170%) rotate(38deg);opacity:0}}
 @keyframes shFlap{0%{transform:rotateX(0);z-index:4}49%{z-index:4}50%{z-index:1}100%{transform:rotateX(180deg);z-index:1}}
 @keyframes shCard{0%{transform:translateY(0)}100%{transform:translateY(-88%)}}
+@keyframes shCard2{0%{transform:translateY(0)}100%{transform:translate(8%,-152%) rotate(3deg)}}
 @keyframes shGlow{0%,100%{opacity:1}50%{opacity:.82}}
 @keyframes shPulse{0%,100%{transform:scale(.86);opacity:.75}50%{transform:scale(1.12);opacity:1}}
 @keyframes shBlink{50%{opacity:.15}}
@@ -1617,6 +1664,7 @@ svg{direction:ltr}
   .sh-env.opening .sh-seal-l,.sh-env.opening .sh-seal-r{animation:none;opacity:0}
   .sh-env.opening .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}
   .sh-env.opening .sh-card{animation:none;transform:translateY(-74%)}
+  .sh-env.opening .sh-card.sh-card-2{animation:none;transform:translate(8%,-152%) rotate(3deg)}
 }
 `;
 

@@ -400,6 +400,35 @@ export function readBestTimes(puzzles) {
   (puzzles || []).forEach((q) => { if (b[q.id] > 0) out[q.id] = b[q.id]; else if (isSolved(q, all[q.id])) out[q.id] = readTime(q.id) || 1; });
   return out;
 }
+const DAILY_KEEP = 14; // days of archive before today's contract (engine DAILY_KEEP: the release job deletes older ones)
+const isLocalHost = () => { try { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname); } catch { return false; } };
+const isoToday = () => { const d = new Date(), p2 = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`; };
+const dayNo = (iso) => { const [y, m, d] = String(iso).split("-").map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
+
+/** -> { today, archive (newest first), queue } of the daily contracts (the Daily Contract page, the home envelope). On the site the deploy is the clock: the newest shipped daily is today's. On localhost
+ *  (npm run dev also mirrors engine/daily_queue) the ones dated after today wait in the queue, for testing. */
+export function dailyShelves(list = DAILIES, local = isLocalHost(), now = isoToday()) {
+  const shipped = local ? list.filter((q) => q.daily <= now) : list;
+  const today = shipped[shipped.length - 1] || null;
+  const archive = today ? shipped.filter((q) => q !== today && dayNo(today.daily) - dayNo(q.daily) <= DAILY_KEEP).reverse() : [];
+  return { today, archive, queue: local ? list.filter((q) => q.daily > now) : [] };
+}
+
+/** Difficulty of a daily contract by weekday, Monday first (engine DAILY_PLAN): rebuilds the ones rotated out of DAILIES. */
+const DAILY_PLAN = ["Very Easy", "Easy", "Easy", "Medium", "Medium", "Hard", "Expert"];
+/**
+ * Every daily contract the stats count, oldest first: the shipped ones (DAILIES) and the rotated-out ones this player still has a best
+ * time or a board for (storage outlives the two-week archive), rebuilt from their id ("daily-2026-11-03") as { id, daily, difficulty }.
+ */
+export function dailyRecords() {
+  const now = isoToday(), shipped = isLocalHost() ? DAILIES.filter((q) => q.daily <= now) : DAILIES; // npm run dev: the queue is not played yet
+  const have = new Set(DAILIES.map((q) => q.id));
+  const gone = [...new Set([...Object.keys(readBests()), ...Object.keys(loadAll())])].filter((id) => /^daily-\d{4}-\d{2}-\d{2}$/.test(id) && !have.has(id)).map((id) => {
+    const daily = id.slice(6), [y, m, d] = daily.split("-").map(Number);
+    return { id, daily, title: id, titleKey: "ui.daily.title", difficulty: DAILY_PLAN[(new Date(Date.UTC(y, m - 1, d)).getUTCDay() + 6) % 7] };
+  });
+  return [...gone, ...shipped].sort((a, b) => (a.daily < b.daily ? -1 : 1));
+}
 export const fmtTime = (sec) => {
   const s = Math.max(0, Math.floor(sec)), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, pad = (n) => String(n).padStart(2, "0");
   return h ? `${h}:${pad(m)}:${pad(s % 60)}` : `${pad(m)}:${pad(s % 60)}`;

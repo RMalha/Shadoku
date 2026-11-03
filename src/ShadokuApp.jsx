@@ -47,10 +47,10 @@
  */
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import ShadokuHome, {
-  ShadokuProviders, SiteHeader, SiteMenu, UserPill, SiteFooter, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
+  ShadokuProviders, SiteHeader, SiteMenu, UserPill, SiteFooter, ContractEnvelope, dailyLabel, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
 } from "./ShadokuHome.jsx";
 import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
-import ShadokuGame, { PUZZLES, DAILIES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
+import ShadokuGame, { PUZZLES, DAILIES, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
@@ -78,12 +78,11 @@ registerTranslations("en", {
   "hub.act": "Act {n}",
   "daily.title": "Daily Contract · {date}",
   "daily.subtitle": "{difficulty} · {theme}",
-  "daily.intro": "A new contract every day at midnight: Monday Very Easy, Tuesday and Wednesday Easy, Thursday and Friday Medium, Saturday Hard, Sunday Expert.",
-  "daily.today": "Today's contract",
+  "daily.intro": "A new contract every day at midnight.",
   "daily.none": "No daily contract yet. Come back at midnight.",
   "daily.label": "{weekday} · {theme}",
   "daily.archive": "Archive",
-  "daily.archiveNote": "The two weeks before today. Older contracts are rotated out.",
+  "daily.archiveNote": "Older contracts are rotated out.",
   "daily.archiveEmpty": "Nothing here yet: the archive fills up day by day.",
   "daily.queue": "Queue (local testing only)",
   "daily.cap": "{date} · {difficulty}",
@@ -631,20 +630,6 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
 }
 
 /* ═════════════════════════ /daily — THE DAILY CONTRACT ═════════════════════════ */
-const DAILY_KEEP = 14; // days of archive before today's contract (engine DAILY_KEEP: the release job deletes older ones)
-const isLocalHost = () => { try { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname); } catch { return false; } };
-const isoToday = () => { const d = new Date(), p2 = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`; };
-const dayNo = (iso) => { const [y, m, d] = String(iso).split("-").map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
-
-/** -> { today, archive (newest first), queue }. On the site the deploy is the clock: the newest shipped daily is today's. On localhost
- *  (npm run dev also mirrors engine/daily_queue) the ones dated after today wait in the queue, for testing. */
-function dailyShelves(list, local = isLocalHost(), now = isoToday()) {
-  const shipped = local ? list.filter((q) => q.daily <= now) : list;
-  const today = shipped[shipped.length - 1] || null;
-  const archive = today ? shipped.filter((q) => q !== today && dayNo(today.daily) - dayNo(q.daily) <= DAILY_KEEP).reverse() : [];
-  return { today, archive, queue: local ? list.filter((q) => q.daily > now) : [] };
-}
-
 function DailyScreen({ go }) {
   const hubBar = useMediaQuery(DESK_MQ) ? BAR_H_DESK : BAR_H;
   const { t, lang } = useLang();
@@ -655,9 +640,8 @@ function DailyScreen({ go }) {
   const [picked, setPicked] = useState(null); // an archived (or queued) daily whose envelope is open
   const trf = useMemo(() => trOf(t), [t]);
   const diffName = (q) => localizeHead(q, trf).difficulty;
-  const upper = (x) => { try { return String(x).toLocaleUpperCase(lang); } catch { return String(x).toUpperCase(); } };
   const shortDate = (q) => dailyDate(q.daily, { weekday: "short", day: "numeric", month: "short" });
-  const labelOf = (q) => upper(t("daily.label", { weekday: dailyDate(q.daily, { weekday: "long" }), theme: trf(`THEME.${q.theme}`) || q.theme })); // the card's header: "TUESDAY · MANSION" (the title carries the date)
+  const labelOf = (q) => dailyLabel(q, t, lang); // the card's header: "TUESDAY · MANSION" (the title carries the date)
   const accept = (q) => { setPicked(null); if (store.get(TUTORIAL_KEY)) go(`/play/${puzzleSlug(q)}`); else modals.openInitiation(); }; // like the story: the initiation comes first
 
   useEffect(() => {
@@ -693,8 +677,8 @@ function DailyScreen({ go }) {
         <h1 className="sh-type">{t("nav.pDaily")}</h1>
         <p className="sh-daily-intro">{t("daily.intro")}</p>
         {today ? (
-          <section className="sh-hub-group" aria-label={t("daily.today")}>
-            <h2 className="sh-hub-h"><span className={`sh-hub-diff d-${diffClass(today.difficulty)}`}>{diffName(today)}</span><small>{t("daily.today")} · {dailyDate(today.daily, { weekday: "long", day: "numeric", month: "long" })}</small></h2>
+          <section className="sh-hub-group" aria-label={localizeHead(today, trf).title}>
+            <h2 className="sh-hub-h"><span className={`sh-hub-diff d-${diffClass(today.difficulty)}`}>{diffName(today)}</span><small>{dailyDate(today.daily, { weekday: "long", day: "numeric", month: "long" })}</small></h2>
             <div className="sh-daily-env">
               <ContractEnvelope key={today.id} variant="modal" autoOpen={false} puzzle={today} label={labelOf(today)} done={bests[today.id] > 0} best={bests[today.id]} onAccept={() => accept(today)} />
             </div>

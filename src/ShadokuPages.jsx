@@ -15,7 +15,7 @@
  */
 import React, { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope, CoffeeCard } from "./ShadokuHome.jsx";
-import { PUZZLES, normalizePuzzles, readPlayStats, fmtTime } from "./ShadokuGame.jsx";
+import { PUZZLES, normalizePuzzles, readPlayStats, fmtTime, dailyRecords } from "./ShadokuGame.jsx";
 import { RelicCollection, EvidenceBoard, FinalDossier, ObsidianEnvelope, OmegaFolder, RELIC_CASES, UMBRA_HARD, UMBRA_FINALE, isUnlocked, resetUmbraLocks, useUmbraTick } from "./umbra.jsx";
 import { MasterPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
@@ -159,13 +159,15 @@ const usePack = (puzzles) => useMemo(() => (puzzles ? normalizePuzzles(puzzles) 
 function ProfileStats({ puzzles }) {
   const { t } = useLang();
   const { user } = useAuth();
-  const pack = usePack(puzzles);
+  const story = usePack(puzzles);
   const progressTick = useProgressTick(); // a sync brought another device's progress
-  const stats = useMemo(() => readPlayStats(pack), [pack, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps
+  const pack = useMemo(() => [...story, ...dailyRecords()], [story, progressTick]); // eslint-disable-line react-hooks/exhaustive-deps -- the daily contracts count too, rotated-out ones included
+  const stats = useMemo(() => readPlayStats(pack), [pack]);
   const trf = useMemo(() => trOf(t), [t]);
   const of = (q) => stats[q.id] || {};
   const played = pack.filter((q) => of(q).played).length;
   const solved = pack.filter((q) => of(q).solved).length;
+  const daily = pack.filter((q) => q.daily && of(q).solved).length;
   const relics = RELIC_CASES.filter((id) => stats[id] && stats[id].solved).length;
   const hints = (k) => pack.reduce((n, q) => n + ((of(q).hints || {})[k] || 0), 0); // hint rungs: where to look / key deduction / placement
   const byDiff = new Map();
@@ -174,6 +176,7 @@ function ProfileStats({ puzzles }) {
   const tiles = [
     ["profile.stats.played", played, null],
     ["profile.stats.fulfilled", solved, pack.length],
+    ["profile.stats.daily", daily, null],
     ["profile.stats.relics", relics, RELIC_CASES.length],
     ["profile.stats.hintsLook", hints("look"), null],
     ["profile.stats.hintsKey", hints("key"), null],
