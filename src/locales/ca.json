@@ -241,6 +241,8 @@
   "ui.env.best": "MILLOR TEMPS",
   "ui.env.pickNote": "Els teus contractes t'esperen. Toca la targeta per triar-ne un.",
   "ui.env.acceptNote": "El Mestre U. M. Bra t'espera. Toca el contracte per començar la teva iniciació.",
+  "ui.env.dailyNote": "El contracte d'avui t'espera. Toca'l per acceptar-lo.",
+  "ui.env.dailyNoteDone": "El contracte d'avui està complert. Toca'l per tornar-lo a obrir.",
   "ui.env.caseFile": "CONTRACTE D'INICIACIÓ NÚM. 000",
   "ui.env.lockedStamp": "Desbloquejat després de la Iniciació",
   "ui.env.initiate": "INICIAT: S. H. ADOW",

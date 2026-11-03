@@ -241,6 +241,8 @@
   "ui.env.best": "BESTZEIT",
   "ui.env.pickNote": "Deine Aufträge warten. Tippe auf die Karte, um einen auszuwählen.",
   "ui.env.acceptNote": "Meister U. M. Bra wartet. Tippe auf den Auftrag, um deine Initiation zu beginnen.",
+  "ui.env.dailyNote": "Der Auftrag des Tages wartet. Tippe darauf, um ihn anzunehmen.",
+  "ui.env.dailyNoteDone": "Der Auftrag des Tages ist erfüllt. Tippe darauf, um ihn erneut zu öffnen.",
   "ui.env.caseFile": "INITIATIONSAUFTRAG NR. 000",
   "ui.env.lockedStamp": "Nach der Initiierung freigeschaltet",
   "ui.env.initiate": "NOVIZE: S. H. ADOW",

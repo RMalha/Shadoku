@@ -241,6 +241,8 @@
   "ui.env.best": "LEGJOBB IDŐ",
   "ui.env.pickNote": "A megbízásaid várnak. Koppints a kártyára a választáshoz.",
   "ui.env.acceptNote": "U. M. Bra mester vár. Koppints a megbízásra a beavatásod megkezdéséhez.",
+  "ui.env.dailyNote": "A mai megbízás vár rád. Koppints rá az elfogadásához.",
+  "ui.env.dailyNoteDone": "A mai megbízás teljesítve. Koppints rá, hogy újra megnyisd.",
   "ui.env.caseFile": "000. SZ. BEAVATÁSI MEGBÍZÁS",
   "ui.env.lockedStamp": "A Beavatás után nyílik meg",
   "ui.env.initiate": "BEAVATOTT: S. H. ADOW",

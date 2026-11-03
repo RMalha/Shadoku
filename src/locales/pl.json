@@ -241,6 +241,8 @@
   "ui.env.best": "NAJLEPSZY CZAS",
   "ui.env.pickNote": "Twoje kontrakty czekają. Stuknij kartę, aby wybrać jeden z nich.",
   "ui.env.acceptNote": "Mistrz U. M. Bra czeka. Stuknij kontrakt, aby rozpocząć inicjację.",
+  "ui.env.dailyNote": "Dzisiejszy kontrakt czeka. Stuknij go, aby go przyjąć.",
+  "ui.env.dailyNoteDone": "Dzisiejszy kontrakt jest wykonany. Stuknij go, aby otworzyć go ponownie.",
   "ui.env.caseFile": "KONTRAKT INICJACYJNY NR 000",
   "ui.env.lockedStamp": "Odblokowane po Inicjacji",
   "ui.env.initiate": "NOWICJUSZ: S. H. ADOW",

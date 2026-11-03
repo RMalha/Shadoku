@@ -241,6 +241,8 @@
   "ui.env.best": "NEJLEPŠÍ ČAS",
   "ui.env.pickNote": "Tvé kontrakty čekají. Klepnutím na kartu si jeden vyber.",
   "ui.env.acceptNote": "Mistr U. M. Bra čeká. Klepnutím na kontrakt zahájíš své zasvěcení.",
+  "ui.env.dailyNote": "Dnešní kontrakt čeká. Klepnutím ho přijmeš.",
+  "ui.env.dailyNoteDone": "Dnešní kontrakt je splněn. Klepnutím ho znovu otevřeš.",
   "ui.env.caseFile": "ZASVĚCOVACÍ KONTRAKT Č. 000",
   "ui.env.lockedStamp": "Odemkne se po Zasvěcení",
   "ui.env.initiate": "ZASVĚCENEC: S. H. ADOW",

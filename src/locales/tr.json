@@ -241,6 +241,8 @@
   "ui.env.best": "EN İYİ SÜRE",
   "ui.env.pickNote": "Sözleşmeleriniz bekliyor. Birini seçmek için karta dokunun.",
   "ui.env.acceptNote": "Üstat U. M. Bra bekliyor. Kabul töreninize başlamak için sözleşmeye dokunun.",
+  "ui.env.dailyNote": "Bugünün sözleşmesi sizi bekliyor. Kabul etmek için dokunun.",
+  "ui.env.dailyNoteDone": "Bugünün sözleşmesi tamamlandı. Yeniden açmak için dokunun.",
   "ui.env.caseFile": "KABUL SÖZLEŞMESİ № 000",
   "ui.env.lockedStamp": "İnisiyasyondan sonra açılır",
   "ui.env.initiate": "ÇIRAK: S. H. ADOW",

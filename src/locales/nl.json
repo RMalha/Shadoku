@@ -241,6 +241,8 @@
   "ui.env.best": "BESTE TIJD",
   "ui.env.pickNote": "Je contracten liggen klaar. Tik op de kaart om er een te kiezen.",
   "ui.env.acceptNote": "Meester U. M. Bra wacht. Tik op het contract om aan je inwijding te beginnen.",
+  "ui.env.dailyNote": "Het contract van vandaag wacht. Tik erop om het aan te nemen.",
+  "ui.env.dailyNoteDone": "Het contract van vandaag is vervuld. Tik erop om het opnieuw te openen.",
   "ui.env.caseFile": "INWIJDINGSCONTRACT NR. 000",
   "ui.env.lockedStamp": "Ontgrendeld na de Inwijding",
   "ui.env.initiate": "INGEWIJDE: S. H. ADOW",

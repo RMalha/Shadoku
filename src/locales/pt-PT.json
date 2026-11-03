@@ -243,6 +243,8 @@
   "ui.env.best": "MELHOR TEMPO",
   "ui.env.pickNote": "Os teus contratos estão à espera. Toca no cartão para escolheres um.",
   "ui.env.acceptNote": "O Mestre U. M. Bra está à espera. Toca no contrato para começares a tua iniciação.",
+  "ui.env.dailyNote": "O contrato de hoje está à tua espera. Toca nele para o aceitar.",
+  "ui.env.dailyNoteDone": "O contrato de hoje está cumprido. Toca nele para o voltar a abrir.",
   "ui.env.caseFile": "CONTRATO DE INICIAÇÃO N.º 000",
   "ui.env.lockedStamp": "Desbloqueado após a Iniciação",
   "ui.env.initiate": "INICIADO: S. H. ADOW",

@@ -241,6 +241,8 @@
   "ui.env.best": "最佳用时",
   "ui.env.pickNote": "你的契约正在等待。点击卡片选择一份契约。",
   "ui.env.acceptNote": "U. M. Bra 大师正在等待。点击契约开始你的入盟仪式。",
+  "ui.env.dailyNote": "今天的契约在等你。点击即可接受。",
+  "ui.env.dailyNoteDone": "今天的契约已完成。点击可再次打开。",
   "ui.env.caseFile": "入盟契约 № 000",
   "ui.env.lockedStamp": "入会仪式后解锁",
   "ui.env.initiate": "见习生：S. H. ADOW",

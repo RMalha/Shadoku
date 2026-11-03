@@ -242,6 +242,8 @@
   "ui.env.best": "BEST TIME",
   "ui.env.pickNote": "Your contracts are waiting. Tap the card to choose one.",
   "ui.env.acceptNote": "Master U. M. Bra is waiting. Tap the contract to begin your initiation.",
+  "ui.env.dailyNote": "Today's contract is waiting. Tap it to accept.",
+  "ui.env.dailyNoteDone": "Today's contract is fulfilled. Tap it to open it again.",
   "ui.env.caseFile": "INITIATION CONTRACT № 000",
   "ui.env.lockedStamp": "Unlocked after Initiation",
   "ui.env.initiate": "INITIATE: S. H. ADOW",

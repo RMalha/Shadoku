@@ -241,6 +241,8 @@
   "ui.env.best": "ベストタイム",
   "ui.env.pickNote": "契約書が待っています。カードをタップして選択してください。",
   "ui.env.acceptNote": "マスター U. M. Braが待っています。契約書をタップしてイニシエーションを始めましょう。",
+  "ui.env.dailyNote": "今日の契約が待っています。タップして受けてください。",
+  "ui.env.dailyNoteDone": "今日の契約は完了しました。タップするともう一度開けます。",
   "ui.env.caseFile": "イニシエーション契約書 № 000",
   "ui.env.lockedStamp": "イニシエーション後に解放",
   "ui.env.initiate": "イニシエイト: S. H. ADOW",

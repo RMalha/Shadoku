@@ -241,6 +241,8 @@
   "ui.env.best": "최고 기록",
   "ui.env.pickNote": "계약들이 기다리고 있습니다. 카드를 탭해 하나를 선택하세요.",
   "ui.env.acceptNote": "마스터 U. M. Bra가 기다리고 있습니다. 계약서를 탭해 입문을 시작하세요.",
+  "ui.env.dailyNote": "오늘의 계약이 기다리고 있습니다. 탭하여 수락하세요.",
+  "ui.env.dailyNoteDone": "오늘의 계약을 완수했습니다. 탭하여 다시 여세요.",
   "ui.env.caseFile": "입문 계약서 № 000",
   "ui.env.lockedStamp": "입문 후 잠금 해제",
   "ui.env.initiate": "신입 요원: S. H. ADOW",

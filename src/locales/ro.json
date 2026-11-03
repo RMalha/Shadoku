@@ -241,6 +241,8 @@
   "ui.env.best": "CEL MAI BUN TIMP",
   "ui.env.pickNote": "Contractele tale te așteaptă. Atinge cartonașul pentru a alege unul.",
   "ui.env.acceptNote": "Maestrul U. M. Bra așteaptă. Atinge contractul pentru a-ți începe inițierea.",
+  "ui.env.dailyNote": "Contractul de azi te așteaptă. Atinge-l ca să-l accepți.",
+  "ui.env.dailyNoteDone": "Contractul de azi este îndeplinit. Atinge-l ca să-l deschizi din nou.",
   "ui.env.caseFile": "CONTRACT DE INIȚIERE NR. 000",
   "ui.env.lockedStamp": "Se deblochează după Inițiere",
   "ui.env.initiate": "INIȚIAT: S. H. ADOW",

@@ -241,6 +241,8 @@
   "ui.env.best": "PARAS AIKA",
   "ui.env.pickNote": "Toimeksiantosi odottavat. Valitse napauttamalla korttia.",
   "ui.env.acceptNote": "Mestari U. M. Bra odottaa. Aloita vihkimyksesi napauttamalla toimeksiantoa.",
+  "ui.env.dailyNote": "Päivän toimeksianto odottaa. Napauta sitä hyväksyäksesi sen.",
+  "ui.env.dailyNoteDone": "Päivän toimeksianto on täytetty. Napauta sitä avataksesi sen uudelleen.",
   "ui.env.caseFile": "VIHKIMYSTOIMEKSIANTO NRO 000",
   "ui.env.lockedStamp": "Avautuu Initiaation jälkeen",
   "ui.env.initiate": "KOKELAS: S. H. ADOW",

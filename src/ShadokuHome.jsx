@@ -194,6 +194,8 @@ export const STRINGS = {
     "env.best": "BEST TIME",
     "env.pickNote": "Your contracts are waiting. Tap the card to choose one.",
     "env.acceptNote": "Master U. M. Bra is waiting. Tap the contract to begin your initiation.",
+    "env.dailyNote": "Today's contract is waiting. Tap it to accept.",
+    "env.dailyNoteDone": "Today's contract is fulfilled. Tap it to open it again.",
     "env.caseFile": "INITIATION CONTRACT № 000",
     "env.lockedStamp": "Unlocked after Initiation",
     "env.initiate": "INITIATE: S. H. ADOW",
@@ -1227,7 +1229,7 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
 
   return (
     <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}${sealed ? " sealed" : ""}${p2 ? " two" : ""}`}>
-      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}`} {...rootProps} id={variant === "hero" && !noId ? "sh-envelope" : undefined}>
+      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}${variant === "hero" && !done ? " glow" : ""}`} {...rootProps} id={variant === "hero" && !noId ? "sh-envelope" : undefined}>
         <div className="sh-env-lift">
           <div className="sh-env-stage">
             {/* back / inside */}
@@ -1343,7 +1345,7 @@ function Envelope({ onPlay, onStart, onSkip, noId = false }) {
   const initiated = !!store.get(TUTORIAL_KEY) || best > 0; // solved or skipped
   if (initiated && daily) {
     return <ContractEnvelope key={daily.id} variant="hero" puzzle={daily} label={dailyLabel(daily, t, lang)} closed done={bests[daily.id] > 0} best={bests[daily.id]}
-      lead={t("daily.intro")} onAccept={() => nav(`/play/${daily.id}`)} noId={noId} />;
+      lead={t("daily.intro")} note={t(bests[daily.id] > 0 ? "env.dailyNoteDone" : "env.dailyNote")} onAccept={() => nav(`/play/${daily.id}`)} noId={noId} />;
   }
   if (best > 0) { // no daily contract shipped: the solved initiation's letter offers the contracts (the envelope still starts sealed, every visit)
     return <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} closed done best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />;
@@ -1584,6 +1586,10 @@ svg{direction:ltr}
 .sh-env-lift{transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5))}
 .sh-env:hover:not(.opening) .sh-env-lift,.sh-env:focus-visible .sh-env-lift{transform:translateY(-10px);filter:drop-shadow(0 28px 24px rgba(0,0,0,.55))}
 .sh-env-stage{position:relative;width:100%;aspect-ratio:480/420;perspective:1200px}
+/* the landing page's envelope while its contract is not fulfilled: a slow brass glow behind the usual shadow */
+.sh-env.glow .sh-env-lift{animation:shEnvGlow 2.8s ease-in-out infinite}
+@keyframes shEnvGlow{0%,100%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 10px rgba(217,155,38,.28))}50%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(240,185,74,.6))}}
+@media (prefers-reduced-motion:reduce){.sh-env.glow .sh-env-lift{animation:none;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 18px rgba(217,155,38,.45))}}
 .sh-layer{position:absolute;inset:0;pointer-events:none}.sh-layer svg,.sh-flap-face svg{width:100%;height:100%;display:block;overflow:visible}
 .sh-layer-back{z-index:0}.sh-layer-front{z-index:3}
 .sh-card{position:absolute;z-index:2;left:12.5%;top:39.3%;width:75%;height:54.8%;pointer-events:none;background:var(--sh-cream);border:.6cqw solid #bda677;border-radius:.8cqw;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.45)}

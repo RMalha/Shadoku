@@ -241,6 +241,8 @@
   "ui.env.best": "最佳時間",
   "ui.env.pickNote": "你的契約正在等待。點選卡片以選擇一份契約。",
   "ui.env.acceptNote": "U. M. Bra 大師正在等待。點選契約以開始你的入會試煉。",
+  "ui.env.dailyNote": "今天的契約正在等你。點選即可接受。",
+  "ui.env.dailyNoteDone": "今天的契約已完成。點選可再次開啟。",
   "ui.env.caseFile": "入會試煉契約 № 000",
   "ui.env.lockedStamp": "入會儀式後解鎖",
   "ui.env.initiate": "新血：S. H. ADOW",

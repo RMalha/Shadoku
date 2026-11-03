@@ -241,6 +241,8 @@
   "ui.env.best": "THỜI GIAN TỐT NHẤT",
   "ui.env.pickNote": "Các hợp đồng của bạn đang chờ. Chạm vào thẻ để chọn một hợp đồng.",
   "ui.env.acceptNote": "Sư phụ U. M. Bra đang chờ. Chạm vào hợp đồng để bắt đầu lễ nhập môn.",
+  "ui.env.dailyNote": "Hợp đồng hôm nay đang chờ bạn. Chạm vào để nhận.",
+  "ui.env.dailyNoteDone": "Hợp đồng hôm nay đã hoàn thành. Chạm vào để mở lại.",
   "ui.env.caseFile": "HỢP ĐỒNG NHẬP MÔN SỐ 000",
   "ui.env.lockedStamp": "Mở khóa sau phần Bắt đầu",
   "ui.env.initiate": "TÂN BINH: S. H. ADOW",

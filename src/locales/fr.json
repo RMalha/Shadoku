@@ -241,6 +241,8 @@
   "ui.env.best": "MEILLEUR TEMPS",
   "ui.env.pickNote": "Vos contrats vous attendent. Touchez la carte pour en choisir un.",
   "ui.env.acceptNote": "Maître U. M. Bra vous attend. Touchez le contrat pour commencer votre initiation.",
+  "ui.env.dailyNote": "Le contrat du jour vous attend. Touchez-le pour l'accepter.",
+  "ui.env.dailyNoteDone": "Le contrat du jour est rempli. Touchez-le pour le rouvrir.",
   "ui.env.caseFile": "CONTRAT D'INITIATION № 000",
   "ui.env.lockedStamp": "Débloqué après l'Initiation",
   "ui.env.initiate": "INITIÉ : S. H. ADOW",
