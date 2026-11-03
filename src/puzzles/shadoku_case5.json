@@ -1165,7 +1165,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Aurora was the only person beside an amphora, so no other suspect (and not S. H. Adow) can be beside any amphora.",
+   "text": "Aurora was the only person beside an amphora, so no other person (S. H. Adow included) can be beside any amphora.",
    "focus": [
     [
      2,
@@ -3218,7 +3218,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r1c3. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c3. That is where S. H. Adow is hiding!",
    "focus": [
     [
      0,
@@ -4494,7 +4494,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Aurora was the only person beside an amphora, so no other suspect (and not S. H. Adow) can be beside any amphora.",
+     "text": "Aurora was the only person beside an amphora, so no other person (S. H. Adow included) can be beside any amphora.",
      "focus": [
       [
        2,
@@ -7808,7 +7808,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r1c3. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c3. That is where S. H. Adow is hiding!",
     "focus": [
      [
       0,

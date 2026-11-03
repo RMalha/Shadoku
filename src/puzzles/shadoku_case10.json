@@ -1442,7 +1442,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+   "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
    "focus": [
     [
      3,
@@ -1651,7 +1651,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+   "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
    "focus": [
     [
      1,
@@ -9477,7 +9477,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r12c12. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r12c12. That is where S. H. Adow is hiding!",
    "focus": [
     [
      11,
@@ -9554,7 +9554,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -9763,7 +9763,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+     "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
      "focus": [
       [
        1,
@@ -13574,7 +13574,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -13705,7 +13705,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+     "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
      "focus": [
       [
        1,
@@ -17246,7 +17246,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+     "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
      "focus": [
       [
        1,
@@ -21123,7 +21123,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -21238,7 +21238,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+     "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
      "focus": [
       [
        1,
@@ -25741,7 +25741,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+     "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
      "focus": [
       [
        1,
@@ -28720,7 +28720,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -28835,7 +28835,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Nora was the only person on a trail of footprints, so no other suspect (and not S. H. Adow) can be on any trail of footprints.",
+     "text": "Nora was the only person on a trail of footprints, so no other person (S. H. Adow included) can be on any trail of footprints.",
      "focus": [
       [
        1,
@@ -31755,7 +31755,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -34896,7 +34896,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -35790,7 +35790,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Douglas was the only person beside a tiki torch, so no other suspect (and not S. H. Adow) can be beside any tiki torch.",
+     "text": "Douglas was the only person beside a tiki torch, so no other person (S. H. Adow included) can be beside any tiki torch.",
      "focus": [
       [
        3,
@@ -36194,7 +36194,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r12c12. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r12c12. That is where S. H. Adow is hiding!",
     "focus": [
      [
       11,

@@ -1566,7 +1566,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Dashiell was the only person beside a TV, so no other suspect (and not S. H. Adow) can be beside any TV.",
+   "text": "Dashiell was the only person beside a TV, so no other person (S. H. Adow included) can be beside any TV.",
    "focus": [
     [
      5,
@@ -3921,7 +3921,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Ernest was exactly one row south of Jerome. From r5c3, Ernest would see every tile where Jerome could still stand to make that true, and no two suspects may see each other. So Ernest cannot be there.",
+   "text": "Lookahead: Ernest was exactly one row south of Jerome. From r5c3, Ernest would see every tile where Jerome could still stand to make that true, and no two scapegoats may see each other. So Ernest cannot be there.",
    "focus": [
     [
      4,
@@ -4871,7 +4871,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly 3 open tiles are still dark: r3c8, r6c9, r7c4. Their clues seat O. B. Scuro on r6c9; P. H. Obia on r7c4, so S. H. Adow is hiding on r3c8!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly 3 open tiles are still dark: r3c8, r6c9, r7c4. Their clues seat O. B. Scuro on r6c9; P. H. Obia on r7c4, so S. H. Adow is hiding on r3c8!",
    "focus": [
     [
      2,
@@ -5528,7 +5528,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Dashiell was the only person beside a TV, so no other suspect (and not S. H. Adow) can be beside any TV.",
+     "text": "Dashiell was the only person beside a TV, so no other person (S. H. Adow included) can be beside any TV.",
      "focus": [
       [
        5,
@@ -7212,7 +7212,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Dashiell was the only person beside a TV, so no other suspect (and not S. H. Adow) can be beside any TV.",
+     "text": "Dashiell was the only person beside a TV, so no other person (S. H. Adow included) can be beside any TV.",
      "focus": [
       [
        5,
@@ -8274,7 +8274,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Dashiell was the only person beside a TV, so no other suspect (and not S. H. Adow) can be beside any TV.",
+     "text": "Dashiell was the only person beside a TV, so no other person (S. H. Adow included) can be beside any TV.",
      "focus": [
       [
        5,
@@ -8811,7 +8811,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Dashiell was the only person beside a TV, so no other suspect (and not S. H. Adow) can be beside any TV.",
+     "text": "Dashiell was the only person beside a TV, so no other person (S. H. Adow included) can be beside any TV.",
      "focus": [
       [
        5,
@@ -9819,7 +9819,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Ernest was exactly one row south of Jerome. From r5c3, Ernest would see every tile where Jerome could still stand to make that true, and no two suspects may see each other. So Ernest cannot be there.",
+     "text": "Lookahead: Ernest was exactly one row south of Jerome. From r5c3, Ernest would see every tile where Jerome could still stand to make that true, and no two scapegoats may see each other. So Ernest cannot be there.",
      "focus": [
       [
        4,
@@ -10210,7 +10210,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Dashiell was the only person beside a TV, so no other suspect (and not S. H. Adow) can be beside any TV.",
+     "text": "Dashiell was the only person beside a TV, so no other person (S. H. Adow included) can be beside any TV.",
      "focus": [
       [
        5,
@@ -11064,7 +11064,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Ernest was exactly one row south of Jerome. From r5c3, Ernest would see every tile where Jerome could still stand to make that true, and no two suspects may see each other. So Ernest cannot be there.",
+     "text": "Lookahead: Ernest was exactly one row south of Jerome. From r5c3, Ernest would see every tile where Jerome could still stand to make that true, and no two scapegoats may see each other. So Ernest cannot be there.",
      "focus": [
       [
        4,
@@ -13722,7 +13722,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly 3 open tiles are still dark: r3c8, r6c9, r7c4. Their clues seat O. B. Scuro on r6c9; P. H. Obia on r7c4, so S. H. Adow is hiding on r3c8!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly 3 open tiles are still dark: r3c8, r6c9, r7c4. Their clues seat O. B. Scuro on r6c9; P. H. Obia on r7c4, so S. H. Adow is hiding on r3c8!",
     "focus": [
      [
       2,

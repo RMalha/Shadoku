@@ -78,7 +78,7 @@ registerTranslations("en", {
   "hub.act": "Act {n}",
   "daily.title": "Daily Contract · {date}",
   "daily.subtitle": "{difficulty} · {theme}",
-  "daily.intro": "A new contract every day at midnight.",
+  "daily.intro": "A new contract every day",
   "daily.none": "No daily contract yet. Come back at midnight.",
   "daily.label": "{weekday} · {theme}",
   "daily.archive": "Archive",
@@ -305,6 +305,21 @@ export function tutorialSeed(puzzle) {
   return out;
 }
 
+/** Where S. H. Adow stands when the tutorial opens (the first lesson: he casts no light; clearing the board takes him off): the open,
+ *  prop-free tile nearest the middle that is nobody's solution, not his hiding tile and not under a scribble. null unless the scripted lesson applies. */
+export function tutorialAdowSeed(puzzle) {
+  const p = scriptedParts(puzzle);
+  if (!p) return null;
+  const taken = new Set([...Object.values(p.sol), puzzle.shadow, ...tutorialSeed(puzzle)].map(([r, c]) => `${r},${c}`));
+  const R = puzzle.contents.length, C = puzzle.contents[0].length;
+  let best = null, bd = Infinity;
+  for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) {
+    const d = Math.abs(r - (R - 1) / 2) + Math.abs(c - (C - 1) / 2);
+    if (p.free(r, c) && !taken.has(`${r},${c}`) && d < bd) { best = [r, c]; bd = d; }
+  }
+  return best;
+}
+
 /** Where `cell` is next to `ref`: "above" | "below" | "left" | "right" (the ui.tutorial.lightTile.<side> sentence names the tile by what it touches). */
 const sideOf = (cell, ref) => {
   const dr = cell[0] - ref[0], dc = cell[1] - ref[1];
@@ -329,6 +344,10 @@ function buildScriptedTutorial(puzzle, lore, t = ENGLISH) {
   const [LA, LB, LC, LD] = lore; // the four lore beats (title + the Master's line): the steps below read both, so the lines live in one place
   const A = nameOf("A"), B = nameOf("B"), C = nameOf("C"), D = nameOf("D"), E = nameOf("E");
   return [
+    { key: "adow-dark", chapter: K("chapter.shadow"), title: K("scripted.adowDark.title"),
+      text: K("scripted.adowDark.text"),
+      task: K("scripted.adowDark.task"), coach: { card: "S" },
+      gate: (e) => e.type === "select" && e.id === "S", done: K("done.noLight") },
     { key: "clearall", chapter: K("chapter.cleanup"), title: LA.title,
       text: LA.text,
       task: K("scripted.clearall.task"), coach: { tool: "eraser" },
@@ -719,6 +738,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const lore = useMemo(() => loreOf(tutorial, t), [tutorial, t]); // the Master's lines, from the locale (LORE.tutorial.N.*)
   const steps = useMemo(() => buildTutorial(tutorial || pack.find((q) => q.id === tutorialId) || null, lore, t), [tutorial, pack, tutorialId, lore, t]);
   const seedOf = useMemo(() => tutorialSeed(tutorial || pack.find((q) => q.id === tutorialId) || null), [tutorial, pack, tutorialId]); // the Inspector's scribbles
+  const seedToks = useMemo(() => { const at = tutorialAdowSeed(tutorial || pack.find((q) => q.id === tutorialId) || null); return at ? { S: at } : null; }, [tutorial, pack, tutorialId]); // S. H. Adow, already on the board
   const stepRef = useRef(0), stepsRef = useRef(steps), finRef = useRef(false), okTimer = useRef(null), seenRef = useRef(new Set());
   stepsRef.current = steps;
 
@@ -733,7 +753,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const [finished, setFinished] = useState(false); // solved (or skipped) during this visit to the tutorial
   const [skipped, setSkipped] = useState(false);
   const slug = slugOfPath(path);
-  const jumpFor = (q, n) => (q.id === tutorialId ? { id: q.id, n, fresh: true, seedNotes: seedOf } : { id: q.id, n }); // the tutorial always opens on a clean, scribbled board
+  const jumpFor = (q, n) => (q.id === tutorialId ? { id: q.id, n, fresh: true, seedNotes: seedOf, seedTokens: seedToks } : { id: q.id, n }); // the tutorial always opens on a clean, scribbled board
   const openable = (q) => q && isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack)))); // The Umbra Conspiracy's locked contracts stay closed
   const umbraTick = useUmbraTick();
   const [solvedTick, setSolvedTick] = useState(0); // a contract was fulfilled: the conspiracy's locks are re-read
@@ -741,7 +761,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const [jump, setJump] = useState(() => {
     const q0 = !store.get(TUTORIAL_KEY) ? null : findPuzzleBySlug(pack, slug); // a deep link; before the initiation everyone starts on the tutorial
     const q = openable(q0) ? q0 : null;
-    return q ? jumpFor(q, 0) : (store.get(TUTORIAL_KEY) ? null : { id: tutorialId, n: 0, fresh: true, seedNotes: seedOf });
+    return q ? jumpFor(q, 0) : (store.get(TUTORIAL_KEY) ? null : { id: tutorialId, n: 0, fresh: true, seedNotes: seedOf, seedTokens: seedToks });
   });
   const caseRef = useRef(null), urlSynced = useRef(false);
   const [cardH, setCardH] = useState(0);
@@ -789,7 +809,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
     const prev = caseRef.current;
     caseRef.current = id;
     setCaseId(id);
-    if (id === tutorialId && prev && prev !== tutorialId) { advance(0); setOk(""); setJump({ id, n: Date.now(), fresh: true, seedNotes: seedOf }); } // back to the tutorial from the picker: a clean lesson
+    if (id === tutorialId && prev && prev !== tutorialId) { advance(0); setOk(""); setJump({ id, n: Date.now(), fresh: true, seedNotes: seedOf, seedTokens: seedToks }); } // back to the tutorial from the picker: a clean lesson
     const q = pack.find((x) => x.id === id);
     if (q) { // the address bar follows the case picker: /play/<puzzle-name>
       const want = `/play/${puzzleSlug(q)}`;
@@ -797,7 +817,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
       urlSynced.current = true;
     }
     if (id !== tutorialId) { setFinished(false); setSkipped(false); finRef.current = false; }
-  }, [tutorialId, pack, sync, advance, seedOf]);
+  }, [tutorialId, pack, sync, advance, seedOf, seedToks]);
 
   // Back / Forward (or a pasted link) to another /play/<name>: open that puzzle
   useEffect(() => {
@@ -811,8 +831,8 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 
   const replay = useCallback(() => {
     advance(0); setOk(""); setFinished(false); setSkipped(false); finRef.current = false;
-    setJump({ id: tutorialId, n: Date.now(), fresh: true, seedNotes: seedOf });
-  }, [tutorialId, advance, seedOf]);
+    setJump({ id: tutorialId, n: Date.now(), fresh: true, seedNotes: seedOf, seedTokens: seedToks });
+  }, [tutorialId, advance, seedOf, seedToks]);
 
   const helpExtra = useCallback(({ close }) => (
     <div className="sh-help-extra">

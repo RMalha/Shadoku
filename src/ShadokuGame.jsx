@@ -83,12 +83,47 @@ export const DEFAULT_SETTINGS = {
   timer: true, portrait: true, autoLight: true, preventLight: false, gender: false,
   tokenStyle: "portrait", plain: false,
   rightClick: "light", // a mouse right-click on a tile: "light" | "cross" (X) | "menu" (pick Light or X) | "double" (Light; a double right-click: X)
+  lightTint: "warm", myTint: "warm", // light colours (LIGHT_TINTS): the scapegoats' sightlines · the tiles lit with the Light Switch
+  symbols: false, // the Note Symbols palette under the scapegoats (NOTE_SYMBOLS)
 };
+/** ⚙ Note Symbols: pencil marks that stand for nobody. A tap notes one in a tile beside the scapegoats' letters (in `notes`), a hold marks the
+ *  tile with it in big (`syms`); neither ever counts toward the solution. The ids are lowercase so they never clash with the letters. */
+export const NOTE_SYMBOLS = { o: { shape: "circle", color: "#2ad4c4" }, t: { shape: "triangle", color: "#b48cff" }, q: { shape: "square", color: "#ffb02e" }, x: { shape: "star", color: "#f4efe2" } };
+const SYM_IDS = Object.keys(NOTE_SYMBOLS);
+const isSym = (id) => !!NOTE_SYMBOLS[id];
+/** A tile's notes for a screen reader: the letters, then the note symbols by name ("A B Circle", "Star (mark)"). */
+const tileNoteText = (s, k, t) => {
+  const n = s.notes[k] || "", nm = (ch) => t(`game.sym.${NOTE_SYMBOLS[ch].shape}`);
+  return [...[...n].filter((ch) => !isSym(ch)), ...[...n].filter(isSym).map(nm), ...(s.syms[k] ? [t("game.symMark", { name: nm(s.syms[k]) })] : [])].join(" ");
+};
+/** A note symbol centred on (cx, cy), `r` its outer radius. */
+const SymShape = ({ id, cx, cy, r, ...rest }) => {
+  const shape = (NOTE_SYMBOLS[id] || NOTE_SYMBOLS.o).shape, f = (n) => n.toFixed(2);
+  if (shape === "circle") return <circle cx={cx} cy={cy} r={r * 0.86} {...rest} />;
+  if (shape === "square") return <rect x={cx - r * 0.76} y={cy - r * 0.76} width={r * 1.52} height={r * 1.52} rx={r * 0.12} {...rest} />;
+  if (shape === "triangle") return <path d={`M${f(cx)} ${f(cy - r)}L${f(cx + r * 0.98)} ${f(cy + r * 0.72)}H${f(cx - r * 0.98)}Z`} strokeLinejoin="round" {...rest} />;
+  const pts = Array.from({ length: 10 }, (_, i) => { const a = -Math.PI / 2 + (i * Math.PI) / 5, q = i % 2 ? r * 0.45 : r; return `${f(cx + q * Math.cos(a))} ${f(cy + q * Math.sin(a) + r * 0.08)}`; });
+  return <path d={`M${pts.join("L")}Z`} strokeLinejoin="round" {...rest} />;
+};
+/** Light colours: `wash` at `op` over a lit tile, `bulb` for the Light Switch bulbs and swatches, `hue` turns the 💡 emoji (a yellow bulb).
+ *  "warm" is the classic faint glow; the others are stronger so the colour reads. */
+export const LIGHT_TINTS = {
+  warm: { wash: "#ffd9a0", op: 0.1, bulb: "#ffd27a", hue: 0 },
+  red: { wash: "#ff4d4d", op: 0.26, bulb: "#ff6b6b", hue: -45 },
+  orange: { wash: "#ff9a2e", op: 0.26, bulb: "#ffa64d", hue: -20 },
+  pink: { wash: "#ff6fc0", op: 0.26, bulb: "#ff8fd0", hue: -80 },
+  green: { wash: "#3ddc84", op: 0.24, bulb: "#5ee89a", hue: 100 },
+  blue: { wash: "#4da3ff", op: 0.26, bulb: "#7cbcff", hue: 165 },
+};
+const TINT_IDS = Object.keys(LIGHT_TINTS);
+const tintOf = (id) => LIGHT_TINTS[id] || LIGHT_TINTS.warm;
+const bulbFilter = (id) => { const k = tintOf(id); return k.hue ? `hue-rotate(${k.hue}deg) saturate(1.6) drop-shadow(0 0 5px ${k.bulb})` : undefined; };
+const TINT_HOLD_MS = 400; // touch: hold the Light button this long for the colour strip
 const loadSettings = () => {
   try { const v = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); return { ...DEFAULT_SETTINGS, ...(v && typeof v === "object" ? v : {}) }; } catch (e) { return { ...DEFAULT_SETTINGS }; }
 };
 /** Board drawing options (the Board's `opts`); the showcase boards on the home page use these defaults. */
-const BOARD_OPTS = { coords: false, roomHover: false, roomLabel: 14, objSize: 0, walls: 1, autoLight: true, tokenStyle: "portrait", selHi: true };
+const BOARD_OPTS = { coords: false, roomHover: false, roomLabel: 14, objSize: 0, walls: 1, autoLight: true, tokenStyle: "portrait", selHi: true, lightTint: "warm", myTint: "warm" };
 const COORD_BAND = 20; // board units: the R1..Rn / C1..Cn band added left of and above the floorplan
 /** The core clue words with a tooltip: concept → English trigger words (a locale overrides them with ui.kw.<concept>.words, its definition is ui.kw.<concept>). */
 const KW_WORDS = {
@@ -254,18 +289,19 @@ const normMemo = new WeakMap();
 /** Any saved board becomes a well-formed { tokens, notes, lights, crosses, hints, hintLog, done } — old saves (pencil / marks) migrate, damaged ones are repaired instead of freezing the board.
  *  `hintLog` = { [hint id]: highest rung revealed (1–3) }; `hints` is the count of the old one-rung hints, kept for the stats. */
 export const normCase = (c) => {
-  if (!isObj(c)) return { tokens: {}, notes: {}, lights: {}, crosses: {}, hints: 0, hintLog: {}, done: false };
+  if (!isObj(c)) return { tokens: {}, notes: {}, lights: {}, crosses: {}, syms: {}, hints: 0, hintLog: {}, done: false };
   if (normMemo.has(c)) return normMemo.get(c);
   const notesSrc = isObj(c.notes) ? c.notes : Object.fromEntries(Object.entries(isObj(c.pencil) ? c.pencil : {}).map(([k, v]) => [k, String(v).toUpperCase()]));
-  const tokens = {}, notes = {}, lights = {}, crosses = {};
+  const tokens = {}, notes = {}, lights = {}, crosses = {}, syms = {};
   if (isObj(c.tokens)) Object.entries(c.tokens).forEach(([id, v]) => { if (validCell(v)) tokens[id] = v; });
-  Object.entries(notesSrc).forEach(([k, v]) => { const t = String(v == null ? "" : v).toUpperCase().replace(/[^A-Z]/g, ""); if (/^\d+$/.test(k) && t) notes[k] = t; });
+  Object.entries(notesSrc).forEach(([k, v]) => { const t = [...String(v == null ? "" : v)].map((ch) => (isSym(ch) ? ch : ch.toUpperCase())).filter((ch) => isSym(ch) || /[A-Z]/.test(ch)).join(""); if (/^\d+$/.test(k) && t) notes[k] = t; }); // letters, and the note symbols (lowercase)
   const lightSrc = isObj(c.lights) ? c.lights : isObj(c.marks) ? c.marks : {};
   Object.entries(lightSrc).forEach(([k, v]) => { if (/^\d+$/.test(k) && v) lights[k] = 1; });
   if (isObj(c.crosses)) Object.entries(c.crosses).forEach(([k, v]) => { if (/^\d+$/.test(k) && v) crosses[k] = 1; });
+  if (isObj(c.syms)) Object.entries(c.syms).forEach(([k, v]) => { if (/^\d+$/.test(k) && isSym(v)) syms[k] = v; });
   const hintLog = {};
   if (isObj(c.hintLog)) Object.entries(c.hintLog).forEach(([k, v]) => { if (Number.isInteger(v) && v >= 1) hintLog[k] = Math.min(HINT_RUNGS, v); });
-  const out = { tokens, notes, lights, crosses, hints: Number.isFinite(c.hints) ? c.hints : 0, hintLog, done: !!c.done };
+  const out = { tokens, notes, lights, crosses, syms, hints: Number.isFinite(c.hints) ? c.hints : 0, hintLog, done: !!c.done };
   normMemo.set(c, out);
   return out;
 };
@@ -277,15 +313,16 @@ const cleanCase = (p, geo, cs) => {
   const ids = new Set([...p.suspects.map((q) => q.id), ...hidersOf(p)]);
   const okCell = (k) => { const r = Math.floor(Number(k) / 100), c = Number(k) % 100; return geo.inside(r, c) && !geo.isVoid(r, c); };
   const badTok = Object.entries(cs.tokens).some(([id, v]) => !ids.has(id) || !geo.inside(v[0], v[1]) || geo.isVoid(v[0], v[1]));
-  const badNote = Object.keys(cs.notes).some((k) => !okCell(k) || [...cs.notes[k]].some((ch) => !ids.has(ch)));
-  const badLight = Object.keys(cs.lights).some((k) => !okCell(k)) || Object.keys(cs.crosses).some((k) => !okCell(k));
+  const badNote = Object.keys(cs.notes).some((k) => !okCell(k) || [...cs.notes[k]].some((ch) => !ids.has(ch) && !isSym(ch)));
+  const badLight = Object.keys(cs.lights).some((k) => !okCell(k)) || Object.keys(cs.crosses).some((k) => !okCell(k)) || Object.keys(cs.syms).some((k) => !okCell(k));
   if (!badTok && !badNote && !badLight) return cs;
-  const tokens = {}, notes = {}, lights = {}, crosses = {};
+  const tokens = {}, notes = {}, lights = {}, crosses = {}, syms = {};
   Object.entries(cs.tokens).forEach(([id, v]) => { if (ids.has(id) && geo.inside(v[0], v[1]) && !geo.isVoid(v[0], v[1])) tokens[id] = v; });
-  Object.entries(cs.notes).forEach(([k, v]) => { const t = [...v].filter((ch) => ids.has(ch)).join(""); if (okCell(k) && t) notes[k] = t; });
+  Object.entries(cs.notes).forEach(([k, v]) => { const t = [...v].filter((ch) => ids.has(ch) || isSym(ch)).join(""); if (okCell(k) && t) notes[k] = t; });
   Object.keys(cs.lights).forEach((k) => { if (okCell(k)) lights[k] = cs.lights[k]; });
   Object.keys(cs.crosses).forEach((k) => { if (okCell(k)) crosses[k] = cs.crosses[k]; });
-  return { ...cs, tokens, notes, lights, crosses };
+  Object.keys(cs.syms).forEach((k) => { if (okCell(k)) syms[k] = cs.syms[k]; });
+  return { ...cs, tokens, notes, lights, crosses, syms };
 };
 /** Solved = Submit was pressed on a board where every suspect, S. H. Adow and every extra assassin stand on their tiles. */
 const isSolved = (q, cs0) => {
@@ -321,7 +358,7 @@ export function boardHint(p, cs) {
   const h = started || open[0];
   return { ...h, hid: hid(h) };
 }
-const snap = (cs) => ({ tokens: cs.tokens, notes: cs.notes, lights: cs.lights, crosses: cs.crosses });
+const snap = (cs) => ({ tokens: cs.tokens, notes: cs.notes, lights: cs.lights, crosses: cs.crosses, syms: cs.syms || {} });
 /** A crossed-out tile keeps its notes, hidden until the X comes off (a light switch leaves them showing). */
 const notesHidden = (cs, k) => !!cs.crosses[k];
 const tokenIdAt = (cs, r, c) => Object.keys(cs.tokens).find((t) => sameCell(cs.tokens[t], r, c));
@@ -348,16 +385,19 @@ const withToken = (cs, id, r, c) => { // moves `id` here, bumping whoever stood 
   tokens[id] = [r, c];
   return { ...cs, tokens };
 };
+/** Hold-to-mark with a note symbol: the tile shows it in big (the same symbol again takes it off). Never part of the solution. */
+const withSym = (cs, k, id) => { const syms = { ...(cs.syms || {}) }; if (syms[k] === id) delete syms[k]; else syms[k] = id; return { ...cs, syms }; };
 const withoutToken = (cs, id) => { if (!cs.tokens[id]) return cs; const tokens = { ...cs.tokens }; delete tokens[id]; return { ...cs, tokens }; };
 const erased = (cs, r, c) => {
   const k = key(r, c), tid = tokenIdAt(cs, r, c);
-  if (!tid && !cs.notes[k] && !cs.lights[k] && !cs.crosses[k]) return cs;
-  const tokens = { ...cs.tokens }, notes = { ...cs.notes }, lights = { ...cs.lights }, crosses = { ...cs.crosses };
-  if (tid) delete tokens[tid]; delete notes[k]; delete lights[k]; delete crosses[k];
-  return { ...cs, tokens, notes, lights, crosses };
+  const sy = cs.syms || {};
+  if (!tid && !cs.notes[k] && !cs.lights[k] && !cs.crosses[k] && !sy[k]) return cs;
+  const tokens = { ...cs.tokens }, notes = { ...cs.notes }, lights = { ...cs.lights }, crosses = { ...cs.crosses }, syms = { ...sy };
+  if (tid) delete tokens[tid]; delete notes[k]; delete lights[k]; delete crosses[k]; delete syms[k];
+  return { ...cs, tokens, notes, lights, crosses, syms };
 };
-const cleared = (cs) => (Object.keys(cs.tokens).length || Object.keys(cs.notes).length || Object.keys(cs.lights).length || Object.keys(cs.crosses).length
-  ? { ...cs, tokens: {}, notes: {}, lights: {}, crosses: {} } : cs);
+const cleared = (cs) => (Object.keys(cs.tokens).length || Object.keys(cs.notes).length || Object.keys(cs.lights).length || Object.keys(cs.crosses).length || Object.keys(cs.syms || {}).length
+  ? { ...cs, tokens: {}, notes: {}, lights: {}, crosses: {}, syms: {} } : cs);
 const lineCells = ([r0, c0], [r1, c1]) => { // every tile a fast drag skipped over
   const out = [], n = Math.max(Math.abs(r1 - r0), Math.abs(c1 - c0));
   for (let i = 1; i <= n; i++) out.push([Math.round(r0 + ((r1 - r0) * i) / n), Math.round(c0 + ((c1 - c0) * i) / n)]);
@@ -643,8 +683,8 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     return { k: `re${r}-${c}-${d}`, door: open && geo.isDoor([r, c], [r1, c1]), x1: e[0], y1: e[1], x2: e[2], y2: e[3] };
   }).filter(Boolean));
   const focusSet = new Set((focus?.focus || []).map(([r, c]) => key(r, c)));
-  const showHover = hover && tool === "suspect" && active && !hiders.includes(active) && geo.occupiable(hover[0], hover[1]) && !tokenAt.has(key(...hover));
-  const order = [...p.suspects.map((q) => q.id), ...hiders];
+  const showHover = hover && tool === "suspect" && active && !hiders.includes(active) && !isSym(active) && geo.occupiable(hover[0], hover[1]) && !tokenAt.has(key(...hover));
+  const order = [...p.suspects.map((q) => q.id), ...hiders, ...SYM_IDS];
   const cellAt = (e) => {
     // maps the pointer through the drawn box and the viewBox (no getScreenCTM, which some mobile WebKit builds get wrong under CSS transforms)
     const el = svg.current; if (!el) return null;
@@ -721,9 +761,10 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         </g>
       ))}
 
-      {/* the lights: cool slate shadow with a soft rim where it meets the light, melting away (rippling out from each suspect), a warm wash on top */}
+      {/* the lights: cool slate shadow with a soft rim where it meets the light, melting away (rippling out from each scapegoat), a tinted wash on top
+          (⚙ light colours: the scapegoats' sightlines, else the player's own Light Switch) */}
       {real.map(([r, c]) => {
-        const k = key(r, c), lit = litMap.has(k) || !!s.lights[k];
+        const k = key(r, c), lit = litMap.has(k) || !!s.lights[k], tint = tintOf(litMap.has(k) ? o.lightTint : o.myTint);
         const delay = litMap.has(k) ? `${Math.min(litMap.get(k), 9) * 55}ms` : "0ms";
         return (
           <g key={`fg${r}-${c}`} pointerEvents="none">
@@ -733,7 +774,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
               const w = dc ? RIM_W : CELL, h = dr ? RIM_W : CELL, x = dc > 0 ? X(c) + CELL - RIM_W : X(c), y = dr > 0 ? Y(r) + CELL - RIM_W : Y(r);
               return <rect key={id} className="sk-fog" x={x} y={y} width={w} height={h} fill={`url(#skRim${id}-${uid})`} style={{ opacity: !lit && open ? 1 : 0, transitionDelay: delay }} />;
             })}
-            <rect className="sk-warm" x={X(c)} y={Y(r)} width={CELL} height={CELL} fill="#ffd9a0" style={{ opacity: lit ? 0.1 : 0, transitionDelay: delay }} />
+            <rect className="sk-warm" x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={tint.wash} style={{ opacity: lit ? tint.op : 0, transitionDelay: delay }} />
           </g>
         );
       })}
@@ -750,10 +791,10 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       )}
       {(p.windows || []).map((w, i) => <WindowPane key={`win${i}`} {...windowAt(w)} />)}
 
-      {/* the player's own light switches: a small brass bulb in the corner */}
+      {/* the player's own light switches: a small bulb in the corner, in the player's light colour */}
       {real.filter(([r, c]) => s.lights[key(r, c)] && !tokenAt.has(key(r, c))).map(([r, c]) => (
         <g key={`lb${r}-${c}`} transform={`translate(${X(c) + CELL - 10} ${Y(r) + 10})`} pointerEvents="none">
-          <circle r="7.5" fill={BRASS} fillOpacity=".22" /><circle r="3.8" fill="#ffd27a" stroke={INK} strokeWidth="1.3" />
+          <circle r="7.5" fill={o.myTint === "warm" ? BRASS : tintOf(o.myTint).bulb} fillOpacity=".22" /><circle r="3.8" fill={tintOf(o.myTint).bulb} stroke={INK} strokeWidth="1.3" />
         </g>
       ))}
       {/* the player's X marks: nobody can be here */}
@@ -799,10 +840,23 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
               return (
                 <g key={id} opacity={o.selHi && tool === "suspect" && !hot ? 0.55 : 1}>
                   {hot && <circle cx={x} cy={y - (g4 ? 4.2 : 5)} r={g4 ? 7.2 : cols === 4 ? 8.5 : 10} fill={colorOf(id)} fillOpacity=".3" stroke={colorOf(id)} strokeWidth={g4 ? 1.6 : 2} />}
-                  <text x={x} y={y} fill={hot ? CREAM : colorOf(id)} stroke={INK} strokeWidth={g4 ? 2.6 : 3} strokeLinejoin="round" style={{ paintOrder: "stroke", fontSize: hot ? (g4 ? 11.5 : cols === 4 ? 13 : 16) : undefined }}>{id.toUpperCase()}</text>
+                  {isSym(id) /* a note symbol: the shape in its colour, the size of a letter */
+                    ? <SymShape id={id} cx={x} cy={y - (g4 ? 4.2 : 5)} r={(g4 ? 5.2 : cols === 4 ? 6 : 7) * (hot ? 1.12 : 1)} fill={NOTE_SYMBOLS[id].color} stroke={INK} strokeWidth={g4 ? 1.8 : 2.2} style={{ paintOrder: "stroke" }} />
+                    : <text x={x} y={y} fill={hot ? CREAM : colorOf(id)} stroke={INK} strokeWidth={g4 ? 2.6 : 3} strokeLinejoin="round" style={{ paintOrder: "stroke", fontSize: hot ? (g4 ? 11.5 : cols === 4 ? 13 : 16) : undefined }}>{id.toUpperCase()}</text>}
                 </g>
               );
             })}
+          </g>
+        );
+      })}
+
+      {/* ⚙ Note Symbols held onto a tile: the symbol in big (an X or a token on the tile hides it) */}
+      {real.filter(([r, c]) => s.syms[key(r, c)] && !tokenAt.has(key(r, c)) && !s.crosses[key(r, c)]).map(([r, c]) => {
+        const id = s.syms[key(r, c)], col = NOTE_SYMBOLS[id].color, cx = X(c) + CELL / 2, cy = Y(r) + CELL / 2 + 1;
+        return (
+          <g key={`sy${r}-${c}`} pointerEvents="none">
+            <SymShape id={id} cx={cx} cy={cy} r={19} fill="none" stroke={INK} strokeWidth="9" />
+            <SymShape id={id} cx={cx} cy={cy} r={19} fill={col} fillOpacity=".28" stroke={col} strokeWidth="4.5" />
           </g>
         );
       })}
@@ -866,7 +920,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         const k = key(r, c), kind = geo.kind(r, c);
         return (
           <rect key={`h${r}-${c}`} className="hit" x={X(c)} y={Y(r)} width={CELL} height={CELL} fill="transparent" tabIndex={0} role="gridcell"
-            aria-label={t("game.tileAria", { coord: t("fmt.coord", { row: r + 1, col: c + 1 }), room: (p.roomLabels || p.roomNames)[geo.room(r, c)], prop: kind ? t("game.tileProp", { prop: describe ? describe(kind) : (LABEL[kind] || kind) }) : "", token: tokenAt.has(k) ? t("game.tileToken", { token: tokenAt.get(k) }) : "", notes: s.notes[k] && !tokenAt.has(k) && !notesHidden(s, k) ? t("game.tileNotes", { notes: s.notes[k] }) : "", lit: s.lights[k] ? t("game.tileLit") : s.crosses[k] ? t("game.tileCrossed") : "" })}
+            aria-label={t("game.tileAria", { coord: t("fmt.coord", { row: r + 1, col: c + 1 }), room: (p.roomLabels || p.roomNames)[geo.room(r, c)], prop: kind ? t("game.tileProp", { prop: describe ? describe(kind) : (LABEL[kind] || kind) }) : "", token: tokenAt.has(k) ? t("game.tileToken", { token: tokenAt.get(k) }) : "", notes: (s.notes[k] || s.syms[k]) && !tokenAt.has(k) && !notesHidden(s, k) ? t("game.tileNotes", { notes: tileNoteText(s, k, t) }) : "", lit: s.lights[k] ? t("game.tileLit") : s.crosses[k] ? t("game.tileCrossed") : "" })}
             style={{ cursor: geo.occupiable(r, c) ? "pointer" : "default" }}
             onKeyDown={(e) => { if ((e.key === "Enter" || e.key === " ") && onKey) { e.preventDefault(); onKey(r, c, e); } }} />
         );
@@ -1116,9 +1170,94 @@ function EraserButton({ active, onSelect, onClearAll, coach }) {
         </svg>
       )}
       <span className="ic" aria-hidden="true">🧹</span><small>{t("tools.erase")}</small>
-      <span className="sub keep">{t("tools.eraseSub")}</span>
       {hold > 0 && <span className="sk-tip" role="status">{t("tools.eraseHold")}</span>}
     </button>
+  );
+}
+
+/** 💡 Tap = pick the Light Switch. Right-click (mouse) = the colour strip; tap a colour. Touch: hold until the strip opens and slide
+ *  along it, the colour follows the finger (lifting there keeps it; lifting without touching a colour leaves the strip open for a tap).
+ *  The bulb on the button takes the player's light colour (`tint`). */
+function LightButton({ active, onSelect, tint, onTint, coach }) {
+  const t = useText();
+  const ref = useRef(null), press = useRef(null), quietUntil = useRef(0);
+  const [menu, setMenu] = useState(null); // null | { rect, drag }
+  useEffect(() => () => { if (press.current) clearTimeout(press.current.timer); }, []);
+  const open = (drag) => setMenu({ rect: ref.current.getBoundingClientRect(), drag });
+  const down = (e) => {
+    if (e.button !== 0 || e.pointerType === "mouse") return;
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+    const p = { open: false, moved: false };
+    p.timer = setTimeout(() => { p.open = true; open(true); }, TINT_HOLD_MS);
+    press.current = p;
+  };
+  const move = (e) => {
+    const p = press.current; if (!p || !p.open) return;
+    const el = document.elementFromPoint(e.clientX, e.clientY), sw = el && el.closest("[data-tint]");
+    if (sw) { p.moved = true; if (sw.dataset.tint !== tint) onTint(sw.dataset.tint); }
+  };
+  const up = (cancel) => () => {
+    const p = press.current; press.current = null;
+    if (!p) return;
+    clearTimeout(p.timer);
+    if (!p.open) return;
+    quietUntil.current = performance.now() + 250; // the click that follows this pointerup does not toggle the tool
+    setMenu(p.moved && !cancel ? null : (m) => (m ? { ...m, drag: false } : m));
+  };
+  const closeMenu = useCallback(() => setMenu(null), []);
+  return (
+    <>
+      <button type="button" ref={ref} className={`sk-tool sk-light${coach ? " coach" : ""}`} aria-pressed={active} aria-haspopup="menu" aria-expanded={!!menu} title={t("tools.lightTip")}
+        onClick={() => { if (performance.now() > quietUntil.current) onSelect(); quietUntil.current = 0; }}
+        onPointerDown={down} onPointerMove={move} onPointerUp={up(false)} onPointerCancel={up(true)}
+        onContextMenu={(e) => { e.preventDefault(); if (!press.current) open(false); }}>
+        <span className="ic" aria-hidden="true" style={{ filter: bulbFilter(tint) }}>💡</span><small>{t("tools.light1")}<span className="lb2">{t("tools.light2")}</span></small>
+      </button>
+      {menu && <TintMenu anchor={menu.rect} drag={menu.drag} value={tint} onPick={(v) => { onTint(v); setMenu(null); }} onClose={closeMenu} owner={ref} />}
+    </>
+  );
+}
+
+/** The Light Switch's colour strip, beside the tool rail (above it when the tools sit at the bottom of the screen). */
+function TintMenu({ anchor, drag, value, onPick, onClose, owner }) {
+  const t = useText();
+  const ref = useRef(null), [pos, setPos] = useState({ left: -999, top: -999 });
+  useIsoLayoutEffect(() => {
+    const el = ref.current; if (!el) return;
+    const w = el.offsetWidth, h = el.offsetHeight, a = anchor;
+    let left, top;
+    if (a.top > window.innerHeight * 0.55) { left = a.left + a.width / 2 - w / 2; top = a.top - h - 10; } // tools at the bottom: above
+    else { left = a.left - w - 12; top = a.top + a.height / 2 - h / 2; if (left < 8) left = a.right + 12; } // the side rail: beside it
+    setPos({ left: Math.max(8, Math.min(left, window.innerWidth - w - 8)), top: Math.max(8, Math.min(top, window.innerHeight - h - 8)) });
+    if (!drag) { const b = el.querySelector("[aria-checked=true]") || el.querySelector("button"); if (b) b.focus({ preventScroll: true }); }
+  }, [anchor, drag]);
+  useEffect(() => {
+    const out = (e) => { if (ref.current && !ref.current.contains(e.target) && !(owner.current && owner.current.contains(e.target))) onClose(); };
+    const esc = (e) => { if (e.key === "Escape") { onClose(); if (owner.current) owner.current.focus(); } };
+    document.addEventListener("pointerdown", out, true); document.addEventListener("keydown", esc);
+    window.addEventListener("resize", onClose); window.addEventListener("scroll", onClose, true);
+    return () => {
+      document.removeEventListener("pointerdown", out, true); document.removeEventListener("keydown", esc);
+      window.removeEventListener("resize", onClose); window.removeEventListener("scroll", onClose, true);
+    };
+  }, [onClose, owner]);
+  const onKey = (e) => { // arrow keys move along the strip
+    const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    const bs = [...ref.current.querySelectorAll("button")], i = bs.indexOf(document.activeElement);
+    bs[(i + d + bs.length) % bs.length].focus();
+  };
+  return (
+    <div className="sk-tints" ref={ref} role="menu" aria-label={t("tools.tintMenu")} style={pos} onKeyDown={onKey} onContextMenu={(e) => e.preventDefault()}>
+      <div className="sk-tints-row">
+        {TINT_IDS.map((id) => (
+          <button key={id} type="button" role="menuitemradio" aria-checked={value === id} data-tint={id} className="sk-tint" style={{ "--tc": LIGHT_TINTS[id].bulb }}
+            aria-label={t(`settings.tint.${id}`)} title={t(`settings.tint.${id}`)} onClick={() => onPick(id)} />
+        ))}
+      </div>
+      <span className="sk-tints-cap" aria-hidden="true">{t(`settings.tint.${value in LIGHT_TINTS ? value : "warm"}`)}</span>
+    </div>
   );
 }
 
@@ -1355,6 +1494,19 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
       <svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true">{pic}</svg><span>{t(`settings.tokenStyle.${name}`)}</span>
     </button>
   );
+  const tints = (k, name) => (
+    <div className="sk-set-row" key={k}>
+      <b>{t(`settings.${name}.title`)}</b>
+      <div className="sk-set-opts" role="radiogroup" aria-label={t(`settings.${name}.title`)}>
+        {TINT_IDS.map((v) => (
+          <button key={v} type="button" role="radio" aria-checked={s[k] === v} className={`sk-set-opt sk-set-tint${s[k] === v ? " on" : ""}`} onClick={() => set({ [k]: v })}>
+            <span className="sk-set-dot" style={{ "--tc": LIGHT_TINTS[v].bulb }} aria-hidden="true" /><span>{t(`settings.tint.${v}`)}</span>
+          </button>
+        ))}
+      </div>
+      <small>{t(`settings.${name}.desc`)}</small>
+    </div>
+  );
   const [tab, setTab] = useState("general");
   const TABS = ["general", "clues", "board", "suspects"];
   const onTabKey = (e) => { // arrow keys move between the tabs
@@ -1400,6 +1552,8 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
             {sw("plain", "plain")}
           </>)}
           {tab === "board" && (<>
+            {tints("lightTint", "lightTint")}
+            {tints("myTint", "myTint")}
             {sw("coords", "coords")}
             {sw("autoScale", "autoScale")}
             {hover && sw("roomHover", "roomHover")}
@@ -1411,6 +1565,7 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
             {sw("selHi", "selHi")}
             {sw("portrait", "portrait")}
             {sw("gender", "gender")}
+            {sw("symbols", "symbols")}
             <div className="sk-set-row">
               <b>{t("settings.tokenStyle.title")}</b>
               <div className="sk-set-opts">
@@ -1520,7 +1675,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   useEffect(() => setCtx(null), [p.id]);
   const caseNow = () => cleanCase(p, geo, normCase(live.current[p.id]));
   const suspects = p.suspects;
-  const colorOf = useCallback((id) => (id === "S" ? BRASS : ASSASSINS[id] && (p.assassins || []).some((a) => a.id === id) ? ASSASSINS[id].tie
+  const colorOf = useCallback((id) => (id === "S" ? BRASS : isSym(id) ? NOTE_SYMBOLS[id].color : ASSASSINS[id] && (p.assassins || []).some((a) => a.id === id) ? ASSASSINS[id].tie
     : (looks[id] && looks[id].back) || SUSPECT_COLORS[Math.max(0, suspects.findIndex((q) => q.id === id)) % SUSPECT_COLORS.length]), [looks, suspects, p.assassins]);
   const emph = useMemo(() => buildEmphasis(p, colorOf, t), [p, colorOf, t]);
 
@@ -1547,6 +1702,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (j >= 0 && jumpTo.fresh) { // the tutorial always starts on a clean board
       const seeded = normCase(undefined);
       (jumpTo.seedNotes || []).forEach(([r, c, letters]) => { seeded.notes[key(r, c)] = letters; }); // e.g. the inspector's scribbles on the tutorial board
+      Object.entries(jumpTo.seedTokens || {}).forEach(([id, at]) => { seeded.tokens[id] = at; }); // e.g. S. H. Adow, standing in the dark when the tutorial opens
       live.current = { ...live.current, [jumpTo.id]: seeded };
       setAll(live.current); saveCase(jumpTo.id, seeded);
       setUndo((u) => ({ ...u, [jumpTo.id]: [] })); setRedo((u) => ({ ...u, [jumpTo.id]: [] }));
@@ -1615,6 +1771,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     setActive(id); setTool("suspect"); cancelHold(); emit("select", { id });
   };
   useEffect(() => { if (tool !== "suspect") setAutoPicked(false); }, [tool]);
+  useEffect(() => { if (!settings.symbols && isSym(active)) setActive(p.suspects[0].id); }, [settings.symbols]); // eslint-disable-line react-hooks/exhaustive-deps -- the palette was switched off
   const tapAgain = (id) => (!legacy && tool === "suspect" && active === id && !autoPicked ? t("game.tapAgain") : undefined); // the card's "Tap again to deselect"
 
   /** One tap with a suspect: a tile that has a token is left alone (use the Eraser) · otherwise toggle this suspect's note.
@@ -1629,6 +1786,11 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const place = (r, c) => {
     if (!geo.occupiable(r, c)) return;
     const k = key(r, c), id = active, other = tokenIdAt(caseNow(), r, c);
+    if (isSym(id)) { // a note symbol is held onto the tile (or off it again): a mark for the player, never a placement
+      if (!other && mutate((x) => withSym(x, k, id))) emit("mark", { id, r, c });
+      try { if (navigator.vibrate) navigator.vibrate(18); } catch (e) { /* ignore */ }
+      return;
+    }
     if (other === id) return;
     if (mutate((x) => withToken(x, id, r, c))) emit("place", { id, r, c }); // notes stay stored (hidden while placed) and come back if the suspect is lifted
     try { if (navigator.vibrate) navigator.vibrate(18); } catch (e) { /* ignore */ }
@@ -2095,7 +2257,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
 
   const ar = (geo.C * CELL + 2 * BZ + LB) / (geo.R * CELL + 2 * BZ + LB);
   const autoLight = settings.autoLight || legacy; // the tutorial's lessons rely on the automatic lights
-  const boardOpts = { coords: coordsOn, roomHover: settings.roomHover, roomLabel: settings.roomLabel, objSize: settings.objSize, walls: settings.walls, autoLight, tokenStyle: settings.tokenStyle, selHi: settings.selHi };
+  const boardOpts = { coords: coordsOn, roomHover: settings.roomHover, roomLabel: settings.roomLabel, objSize: settings.objSize, walls: settings.walls, autoLight, tokenStyle: settings.tokenStyle, selHi: settings.selHi, lightTint: settings.lightTint, myTint: settings.myTint };
   const naturalW = Math.round(geo.C * CELL + 2 * BZ + LB); // "Auto-Scale Board" off: one board unit = one pixel at most
   const victimG = !settings.gender || victimIsDummy(p) || p.id === UMBRA_HARD ? null : p.id === UMBRA_FINALE ? "m" : victimGenderOf(victimNameOf(p)); // the finale's corpse is Master U. M. Bra; The Uninvited Guests' is hooded N. O. Ir (no gender shown)
   /* The Umbra Conspiracy (umbra.jsx): the relic of a solved standard contract, the black envelope once all ten are solved, the
@@ -2136,6 +2298,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     : tool === "cross" ? <>{boldNodes(t("game.now.cross"))}</>
     : tool === "eraser" ? <>{boldNodes(t("game.now.eraser"))}</>
       : tool === "none" ? <>{boldNodes(t("game.now.inspect"))}</>
+      : isSym(active) ? <><svg className="sk-symic" viewBox="0 0 24 24" aria-hidden="true"><SymShape id={active} cx={12} cy={12} r={9} fill={colorOf(active)} stroke={INK} strokeWidth="2" /></svg>{boldNodes(t("game.now.symbol", { name: t(`game.sym.${NOTE_SYMBOLS[active].shape}`) }))}</>
       : <><span className="sk-letter" style={{ "--sc": colorOf(active) }}>{active}</span>{boldNodes(t("game.now.suspect", { name: nameOf(active) }))}</>;
 
   /* Zoom / reset: under Undo in the tool rail on desktop; on phones and tablets a slim column beside the board (never over its tiles). */
@@ -2199,6 +2362,18 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
               coach={coachCard === a.id} hint={tapAgain(a.id)} hi={hiCard === a.id || hintCard === a.id} />
           ))}
         </div>
+        {settings.symbols && (
+          <section className="sk-syms" aria-label={t("game.symbols")}>
+            <div className="sk-eyebrow">{t("game.symbols")}</div>
+            <div className="sk-syms-row">
+              {SYM_IDS.map((id) => (
+                <button key={id} type="button" className="sk-sym" aria-pressed={tool === "suspect" && active === id} onClick={() => pick(id)} title={t(`game.sym.${NOTE_SYMBOLS[id].shape}`)} aria-label={t(`game.sym.${NOTE_SYMBOLS[id].shape}`)}>
+                  <svg viewBox="0 0 40 40" aria-hidden="true"><SymShape id={id} cx={20} cy={20} r={13} fill={NOTE_SYMBOLS[id].color} stroke={INK} strokeWidth="2.6" /></svg>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
         {Lab && mobile && <button type="button" className="sk-lablink" onClick={() => setView("lab")}>🧪 Open the SVG Asset &amp; Portrait Inspector</button>}
       </section>
 
@@ -2237,7 +2412,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
           </div>
         )}
 
-        <div className="sk-split" role="separator" aria-orientation="vertical" tabIndex={0} aria-label={tr("game.resize", "Drag to resize the suspects and the board")} title={tr("game.resize", "Drag to resize the suspects and the board")}
+        <div className="sk-split" role="separator" aria-orientation="vertical" tabIndex={0} aria-label={tr("game.resize", "Drag to resize the scapegoats and the board")} title={tr("game.resize", "Drag to resize the scapegoats and the board")}
           onPointerDown={onSplitDown} onPointerMove={onSplitMove} onPointerUp={onSplitEnd} onPointerCancel={onSplitEnd} onLostPointerCapture={onSplitEnd} onDoubleClick={() => setSplit(null)} onKeyDown={onSplitKey} />
 
         {overlayOpen && (
@@ -2289,8 +2464,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                             : cur.mistake === "cross" ? tr("hint.wrongCross", "Someone is on {coord}: the X there is wrong.", { coord: coord(cur.cell) })
                               : tr("hint.wrongLight", "Someone hides on {coord}: the light there is wrong.", { coord: coord(cur.cell) })}</p>;
                     } else if (cur.suspect === "S") {
-                      body = hintRung === 1 ? <p>{hiders.length > 1 ? tr("hint.shadowLookMany", "Everyone is placed. Find the {n} tiles no suspect watches: the assassins hide there.", { n: hiders.length })
-                        : tr("hint.shadowLook", "Everyone is placed. Find the one tile no suspect watches: S. H. Adow hides there.")}</p>
+                      body = hintRung === 1 ? <p>{hiders.length > 1 ? tr("hint.shadowLookMany", "Everyone is placed. Find the {n} tiles no scapegoat watches: the assassins hide there.", { n: hiders.length })
+                        : tr("hint.shadowLook", "Everyone is placed. Find the one tile no scapegoat watches: S. H. Adow hides there.")}</p>
                         : hintRung === 2 ? <ul className="sk-hint-why">{hiders.map((id) => <li key={id}><span>{tr("hint.hidesIn", "{name} hides in the {zone}.", { name: nameOf(id), zone: zone(hiderCell(p, id)) })}</span></li>)}</ul>
                           : <p>{cur.place.text}</p>;
                     } else if (hintRung === 1) {
@@ -2301,7 +2476,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                       body = <>
                         {keyLines.length ? <ol className="sk-hint-why key">{keyLines.map(([i, s]) => line(i, s))}</ol>
                           : <p>{cur.fits.length === 1 ? tr("hint.oneFit", "Only one tile fits {name}'s clue.", { name: nameOf(cur.suspect) })
-                            : tr("hint.direct", "The suspects on the board already take or watch every other tile that fits {name}'s clue.", { name: nameOf(cur.suspect) })}</p>}
+                            : tr("hint.direct", "The scapegoats on the board already take or watch every other tile that fits {name}'s clue.", { name: nameOf(cur.suspect) })}</p>}
                         {n > 0 && <button type="button" className="sk-hint-ground" aria-expanded={whyOpen} onClick={() => { setWhyOpen(!whyOpen); setHintPick(-1); }}><LensIcon /><span>{label}</span></button>}
                         {whyOpen && n > 0 && (
                           <ol className="sk-hint-why">
@@ -2340,9 +2515,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         <div className="sk-rail-group" role="toolbar" aria-label={t("tools.group")}>
           {menu && menu.length > 0 && !mobile && <RailMenu items={menu} onSettings={() => setSettingsOpen(true)} />}
           <span className="sk-rail-cap" aria-hidden="true">{t("tools.cap")}</span>
-          <button type="button" className={`sk-tool${coachTool === "light" ? " coach" : ""}`} aria-pressed={tool === "light"} onClick={() => setTool(tool === "light" ? offTool : "light")} title={t("tools.lightTip")}>
-            <span className="ic" aria-hidden="true">💡</span><small>{t("tools.light1")}<span className="lb2">{t("tools.light2")}</span></small>
-          </button>
+          <LightButton coach={coachTool === "light"} active={tool === "light"} onSelect={() => setTool(tool === "light" ? offTool : "light")}
+            tint={settings.myTint} onTint={(v) => setOpt({ myTint: v })} />
           <button type="button" className={`sk-tool${coachTool === "cross" ? " coach" : ""}`} aria-pressed={tool === "cross"} onClick={() => setTool(tool === "cross" ? offTool : "cross")} title={t("tools.crossTip")}>
             <span className="ic" aria-hidden="true">❌</span><small>{t("tools.cross1")}<span className="lb2">{t("tools.cross2")}</span></small>
           </button>
@@ -2706,6 +2880,25 @@ const CSS = `
 .sk-ctx button{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;font-weight:700;font-size:15px;text-align:start}
 .sk-ctx button:hover,.sk-ctx button:focus-visible{background:var(--panel2);outline:none}
 .sk-ctx button[aria-checked=true]{color:var(--brass2)}
+.sk-set-tint{min-width:68px;padding:9px 8px 7px;font-size:13px}
+.sk-syms{display:flex;flex-direction:column;gap:8px}
+.sk-syms-row{display:flex;flex-wrap:wrap;gap:10px}
+.sk-sym{width:56px;height:56px;display:grid;place-items:center;border-radius:12px;background:var(--panel2);border:2px solid var(--line);transition:transform .08s,border-color .15s,box-shadow .15s}
+.sk-sym svg{width:34px;height:34px}
+.sk-sym:hover{border-color:#55556e}
+.sk-sym:active{transform:scale(.95)}
+.sk-sym[aria-pressed=true]{border-color:var(--brass);box-shadow:0 0 0 3px rgba(217,155,38,.18)}
+.sk-sym:focus-visible{outline:2px solid #6fd0ff;outline-offset:2px}
+.sk-symic{width:18px;height:18px;vertical-align:-3px;margin-inline-end:6px}
+.sk-set-dot{width:22px;height:22px;border-radius:50%;background:var(--tc);border:2px solid rgba(0,0,0,.45);box-shadow:0 0 10px var(--tc)}
+.sk-tool.sk-light{touch-action:none;-webkit-touch-callout:none} /* touch: holding it opens the colour strip */
+.sk-tints{position:fixed;z-index:70;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 10px 6px;border-radius:16px;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.6)}
+.sk-tints-row{display:flex;gap:8px}
+.sk-tint{width:38px;height:38px;border-radius:50%;background:var(--tc);border:2px solid rgba(0,0,0,.45);box-shadow:0 0 12px -2px var(--tc);transition:transform .12s}
+.sk-tint:hover,.sk-tint:focus-visible{transform:scale(1.1);outline:none}
+.sk-tint[aria-checked=true]{transform:scale(1.15);box-shadow:0 0 0 3px var(--panel),0 0 0 5px var(--brass2),0 0 14px var(--tc)}
+.sk-tints-cap{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.sk-tint{transition:none}}
 .sk-set-f{display:flex;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid var(--line)}
 .sk-set-reset{font-size:13.5px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 .sk-set-done{padding:8px 18px;border-radius:10px;background:var(--brass);color:#1b1305;font-weight:800}

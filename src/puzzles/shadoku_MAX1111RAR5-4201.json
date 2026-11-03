@@ -2733,7 +2733,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Conrad was the only person on the carpet runner, so no other suspect (and not S. H. Adow) can be on any carpet runner.",
+   "text": "Conrad was the only person on the carpet runner, so no other person (S. H. Adow included) can be on any carpet runner.",
    "focus": [
     [
      8,
@@ -5239,7 +5239,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Dorian was north of Ira. From r10c6, Dorian would see every tile where Ira could still stand to make that true, and no two suspects may see each other. So Dorian cannot be there.",
+   "text": "Lookahead: Dorian was north of Ira. From r10c6, Dorian would see every tile where Ira could still stand to make that true, and no two scapegoats may see each other. So Dorian cannot be there.",
    "focus": [
     [
      9,
@@ -5287,7 +5287,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Nerissa was exactly one row north of Maude. From r2c8, Nerissa would see every tile where Maude could still stand to make that true, and no two suspects may see each other. So Nerissa cannot be there.",
+   "text": "Lookahead: Nerissa was exactly one row north of Maude. From r2c8, Nerissa would see every tile where Maude could still stand to make that true, and no two scapegoats may see each other. So Nerissa cannot be there.",
    "focus": [
     [
      1,
@@ -5337,7 +5337,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Nerissa was exactly one row north of Maude. From r4c8, r7c6, Maude would see every tile where Nerissa could still stand to make that true, and no two suspects may see each other. So Maude cannot be there.",
+   "text": "Lookahead: Nerissa was exactly one row north of Maude. From r4c8, r7c6, Maude would see every tile where Nerissa could still stand to make that true, and no two scapegoats may see each other. So Maude cannot be there.",
    "focus": [
     [
      3,
@@ -5399,7 +5399,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Maude was alone with a man with a mustache. From r2c1, r4c1, r5c1, Maude would see every tile where men with mustaches could still join her, and no two suspects may see each other. So Maude cannot be there.",
+   "text": "Lookahead: Maude was alone with a man with a mustache. From r2c1, r4c1, r5c1, Maude would see every tile where men with mustaches could still join her, and no two scapegoats may see each other. So Maude cannot be there.",
    "focus": [
     [
      1,
@@ -5549,7 +5549,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Nerissa was exactly one row north of Maude. From r1c8, r4c8, Nerissa would see every tile where Maude could still stand to make that true, and no two suspects may see each other. So Nerissa cannot be there.",
+   "text": "Lookahead: Nerissa was exactly one row north of Maude. From r1c8, r4c8, Nerissa would see every tile where Maude could still stand to make that true, and no two scapegoats may see each other. So Nerissa cannot be there.",
    "focus": [
     [
      0,
@@ -6182,7 +6182,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Maude was alone with a man with a mustache. From r6c6, Maude would see every tile where men with mustaches could still join her, and no two suspects may see each other. So Maude cannot be there.",
+   "text": "Lookahead: Maude was alone with a man with a mustache. From r6c6, Maude would see every tile where men with mustaches could still join her, and no two scapegoats may see each other. So Maude cannot be there.",
    "focus": [
     [
      5,
@@ -8901,7 +8901,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly 5 open tiles are still dark: the marked tiles. Their clues seat O. B. Scuro on r5c10; P. H. Obia on r2c5; Q. U. Yet on r6c6; R. E. Aper on r9c7, so S. H. Adow is hiding on r10c3!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly 5 open tiles are still dark: the marked tiles. Their clues seat O. B. Scuro on r5c10; P. H. Obia on r2c5; Q. U. Yet on r6c6; R. E. Aper on r9c7, so S. H. Adow is hiding on r10c3!",
    "focus": [
     [
      9,
@@ -11412,7 +11412,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Conrad was the only person on the carpet runner, so no other suspect (and not S. H. Adow) can be on any carpet runner.",
+     "text": "Conrad was the only person on the carpet runner, so no other person (S. H. Adow included) can be on any carpet runner.",
      "focus": [
       [
        8,
@@ -13177,7 +13177,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Dorian was north of Ira. From r10c6, Dorian would see every tile where Ira could still stand to make that true, and no two suspects may see each other. So Dorian cannot be there.",
+     "text": "Lookahead: Dorian was north of Ira. From r10c6, Dorian would see every tile where Ira could still stand to make that true, and no two scapegoats may see each other. So Dorian cannot be there.",
      "focus": [
       [
        9,
@@ -13225,7 +13225,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Nerissa was exactly one row north of Maude. From r2c8, Nerissa would see every tile where Maude could still stand to make that true, and no two suspects may see each other. So Nerissa cannot be there.",
+     "text": "Lookahead: Nerissa was exactly one row north of Maude. From r2c8, Nerissa would see every tile where Maude could still stand to make that true, and no two scapegoats may see each other. So Nerissa cannot be there.",
      "focus": [
       [
        1,
@@ -13275,7 +13275,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Nerissa was exactly one row north of Maude. From r4c8, r7c6, Maude would see every tile where Nerissa could still stand to make that true, and no two suspects may see each other. So Maude cannot be there.",
+     "text": "Lookahead: Nerissa was exactly one row north of Maude. From r4c8, r7c6, Maude would see every tile where Nerissa could still stand to make that true, and no two scapegoats may see each other. So Maude cannot be there.",
      "focus": [
       [
        3,
@@ -13337,7 +13337,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Maude was alone with a man with a mustache. From r2c1, r4c1, r5c1, Maude would see every tile where men with mustaches could still join her, and no two suspects may see each other. So Maude cannot be there.",
+     "text": "Lookahead: Maude was alone with a man with a mustache. From r2c1, r4c1, r5c1, Maude would see every tile where men with mustaches could still join her, and no two scapegoats may see each other. So Maude cannot be there.",
      "focus": [
       [
        1,
@@ -13410,7 +13410,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Nerissa was exactly one row north of Maude. From r1c8, r4c8, Nerissa would see every tile where Maude could still stand to make that true, and no two suspects may see each other. So Nerissa cannot be there.",
+     "text": "Lookahead: Nerissa was exactly one row north of Maude. From r1c8, r4c8, Nerissa would see every tile where Maude could still stand to make that true, and no two scapegoats may see each other. So Nerissa cannot be there.",
      "focus": [
       [
        0,
@@ -13979,7 +13979,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Maude was alone with a man with a mustache. From r6c6, Maude would see every tile where men with mustaches could still join her, and no two suspects may see each other. So Maude cannot be there.",
+     "text": "Lookahead: Maude was alone with a man with a mustache. From r6c6, Maude would see every tile where men with mustaches could still join her, and no two scapegoats may see each other. So Maude cannot be there.",
      "focus": [
       [
        5,
@@ -23430,7 +23430,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly 5 open tiles are still dark: the marked tiles. Their clues seat O. B. Scuro on r5c10; P. H. Obia on r2c5; Q. U. Yet on r6c6; R. E. Aper on r9c7, so S. H. Adow is hiding on r10c3!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly 5 open tiles are still dark: the marked tiles. Their clues seat O. B. Scuro on r5c10; P. H. Obia on r2c5; Q. U. Yet on r6c6; R. E. Aper on r9c7, so S. H. Adow is hiding on r10c3!",
     "focus": [
      [
       9,

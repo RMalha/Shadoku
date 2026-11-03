@@ -1358,7 +1358,7 @@
  "globalRules": [
   {
    "id": "EXACT_EMPTY:1",
-   "text": "Exactly 1 of the areas held no suspect.",
+   "text": "Exactly 1 of the areas held no scapegoat.",
    "kind": "EXACT_EMPTY",
    "params": {
     "count": 1
@@ -1491,7 +1491,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Ezra was the only person beside the fountain, so no other suspect (and not S. H. Adow) can be beside any fountain.",
+   "text": "Ezra was the only person beside the fountain, so no other person (S. H. Adow included) can be beside any fountain.",
    "focus": [
     [
      7,
@@ -3064,7 +3064,7 @@
    "tier": 2,
    "rule": "Counting areas",
    "kind": "eliminate",
-   "text": "Exactly 1 of the areas held no suspect. Nobody can reach Barbershop any more, so every other area needs a suspect. Only Bertram can reach Bus Stop, so he must be there.",
+   "text": "Exactly 1 of the areas held no scapegoat. Nobody can reach Barbershop any more, so every other area needs a scapegoat. Only Bertram can reach Bus Stop, so he must be there.",
    "focus": [
     [
      1,
@@ -4678,7 +4678,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r8c11. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r8c11. That is where S. H. Adow is hiding!",
    "focus": [
     [
      7,
@@ -4883,7 +4883,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Ezra was the only person beside the fountain, so no other suspect (and not S. H. Adow) can be beside any fountain.",
+     "text": "Ezra was the only person beside the fountain, so no other person (S. H. Adow included) can be beside any fountain.",
      "focus": [
       [
        7,
@@ -5166,7 +5166,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Ezra was the only person beside the fountain, so no other suspect (and not S. H. Adow) can be beside any fountain.",
+     "text": "Ezra was the only person beside the fountain, so no other person (S. H. Adow included) can be beside any fountain.",
      "focus": [
       [
        7,
@@ -5857,7 +5857,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Ezra was the only person beside the fountain, so no other suspect (and not S. H. Adow) can be beside any fountain.",
+     "text": "Ezra was the only person beside the fountain, so no other person (S. H. Adow included) can be beside any fountain.",
      "focus": [
       [
        7,
@@ -7930,7 +7930,7 @@
      "tier": 2,
      "rule": "Counting areas",
      "kind": "eliminate",
-     "text": "Exactly 1 of the areas held no suspect. Nobody can reach Barbershop any more, so every other area needs a suspect. Only Bertram can reach Bus Stop, so he must be there.",
+     "text": "Exactly 1 of the areas held no scapegoat. Nobody can reach Barbershop any more, so every other area needs a scapegoat. Only Bertram can reach Bus Stop, so he must be there.",
      "focus": [
       [
        1,
@@ -8519,7 +8519,7 @@
      "tier": 2,
      "rule": "Counting areas",
      "kind": "eliminate",
-     "text": "Exactly 1 of the areas held no suspect. Nobody can reach Barbershop any more, so every other area needs a suspect. Only Bertram can reach Bus Stop, so he must be there.",
+     "text": "Exactly 1 of the areas held no scapegoat. Nobody can reach Barbershop any more, so every other area needs a scapegoat. Only Bertram can reach Bus Stop, so he must be there.",
      "focus": [
       [
        1,
@@ -9362,7 +9362,7 @@
      "tier": 2,
      "rule": "Counting areas",
      "kind": "eliminate",
-     "text": "Exactly 1 of the areas held no suspect. Nobody can reach Barbershop any more, so every other area needs a suspect. Only Bertram can reach Bus Stop, so he must be there.",
+     "text": "Exactly 1 of the areas held no scapegoat. Nobody can reach Barbershop any more, so every other area needs a scapegoat. Only Bertram can reach Bus Stop, so he must be there.",
      "focus": [
       [
        1,
@@ -10270,7 +10270,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r8c11. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r8c11. That is where S. H. Adow is hiding!",
     "focus": [
      [
       7,

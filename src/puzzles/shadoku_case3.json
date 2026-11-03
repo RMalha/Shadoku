@@ -1333,7 +1333,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
    "focus": [
     [
      0,
@@ -2446,7 +2446,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
     "focus": [
      [
       0,

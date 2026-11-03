@@ -1328,7 +1328,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+   "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
    "focus": [
     [
      0,
@@ -4863,7 +4863,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Jemima was in the same area as someone with blonde hair. From r3c1, Jemima would see every tile where people with blonde hair could still join her, and no two suspects may see each other. So Jemima cannot be there.",
+   "text": "Lookahead: Jemima was in the same area as someone with blonde hair. From r3c1, Jemima would see every tile where people with blonde hair could still join her, and no two scapegoats may see each other. So Jemima cannot be there.",
    "focus": [
     [
      2,
@@ -5000,7 +5000,7 @@
    "tier": 3,
    "rule": "Unseen partner (lookahead)",
    "kind": "eliminate",
-   "text": "Lookahead: Kasimir was in an area with at least two women. From r3c4, r4c6, Kasimir would see every tile where women could still join him, and no two suspects may see each other. So Kasimir cannot be there.",
+   "text": "Lookahead: Kasimir was in an area with at least two women. From r3c4, r4c6, Kasimir would see every tile where women could still join him, and no two scapegoats may see each other. So Kasimir cannot be there.",
    "focus": [
     [
      2,
@@ -5895,7 +5895,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
    "focus": [
     [
      2,
@@ -5958,7 +5958,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -7412,7 +7412,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -9420,7 +9420,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -11597,7 +11597,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -13098,7 +13098,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -14372,7 +14372,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -15264,7 +15264,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -15416,7 +15416,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Nadia was north of Kasimir. From r6c5, Nadia would see every tile where Kasimir could still stand to make that true, and no two suspects may see each other. So Nadia cannot be there.",
+     "text": "Lookahead: Nadia was north of Kasimir. From r6c5, Nadia would see every tile where Kasimir could still stand to make that true, and no two scapegoats may see each other. So Nadia cannot be there.",
      "focus": [
       [
        5,
@@ -15464,7 +15464,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Jemima was in the same area as someone with blonde hair. From r3c1, Jemima would see every tile where people with blonde hair could still join her, and no two suspects may see each other. So Jemima cannot be there.",
+     "text": "Lookahead: Jemima was in the same area as someone with blonde hair. From r3c1, Jemima would see every tile where people with blonde hair could still join her, and no two scapegoats may see each other. So Jemima cannot be there.",
      "focus": [
       [
        2,
@@ -15513,7 +15513,7 @@
      "tier": 3,
      "rule": "Unseen partner (lookahead)",
      "kind": "eliminate",
-     "text": "Lookahead: Kasimir was in an area with at least two women. From r3c4, r4c6, Kasimir would see every tile where women could still join him, and no two suspects may see each other. So Kasimir cannot be there.",
+     "text": "Lookahead: Kasimir was in an area with at least two women. From r3c4, r4c6, Kasimir would see every tile where women could still join him, and no two scapegoats may see each other. So Kasimir cannot be there.",
      "focus": [
       [
        2,
@@ -16203,7 +16203,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Jemima was the only person on a tree stump, so no other suspect (and not S. H. Adow) can be on any tree stump.",
+     "text": "Jemima was the only person on a tree stump, so no other person (S. H. Adow included) can be on any tree stump.",
      "focus": [
       [
        0,
@@ -18502,7 +18502,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
     "focus": [
      [
       2,

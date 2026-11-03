@@ -1024,7 +1024,7 @@
    "tier": 2,
    "rule": "Monopoly mask",
    "kind": "eliminate",
-   "text": "Edith was the only person beside a lamppost, so no other suspect (and not S. H. Adow) can be beside any lamppost.",
+   "text": "Edith was the only person beside a lamppost, so no other person (S. H. Adow included) can be beside any lamppost.",
    "focus": [
     [
      0,
@@ -4487,7 +4487,7 @@
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r9c6. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r9c6. That is where S. H. Adow is hiding!",
    "focus": [
     [
      8,
@@ -4540,7 +4540,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Edith was the only person beside a lamppost, so no other suspect (and not S. H. Adow) can be beside any lamppost.",
+     "text": "Edith was the only person beside a lamppost, so no other person (S. H. Adow included) can be beside any lamppost.",
      "focus": [
       [
        0,
@@ -5772,7 +5772,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Edith was the only person beside a lamppost, so no other suspect (and not S. H. Adow) can be beside any lamppost.",
+     "text": "Edith was the only person beside a lamppost, so no other person (S. H. Adow included) can be beside any lamppost.",
      "focus": [
       [
        0,
@@ -7229,7 +7229,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Edith was the only person beside a lamppost, so no other suspect (and not S. H. Adow) can be beside any lamppost.",
+     "text": "Edith was the only person beside a lamppost, so no other person (S. H. Adow included) can be beside any lamppost.",
      "focus": [
       [
        0,
@@ -9245,7 +9245,7 @@
      "tier": 2,
      "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Edith was the only person beside a lamppost, so no other suspect (and not S. H. Adow) can be beside any lamppost.",
+     "text": "Edith was the only person beside a lamppost, so no other person (S. H. Adow included) can be beside any lamppost.",
      "focus": [
       [
        0,
@@ -12746,7 +12746,7 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every suspect is placed and no two of them see each other. Exactly one open tile is still dark: r9c6. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r9c6. That is where S. H. Adow is hiding!",
     "focus": [
      [
       8,

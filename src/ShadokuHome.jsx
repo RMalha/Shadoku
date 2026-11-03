@@ -129,18 +129,17 @@ export const STRINGS = {
 
     "hero.eyebrow": "Shadoku · The Blindspot Murder Mystery",
     "hero.title": "The Inspectors Had It All Wrong",
-    "hero.daily": "A new puzzle every day",
     "hero.read": "Read the briefing",
     "hero.skip": "Skip to the envelope",
 
     "lore.s1.1": "You played the detective. You analyzed the grid. You cornered the suspects, presented your flawless logic, and patted yourself on the back when the authorities hauled them away. But did you ever wonder why the evidence always felt a little too perfect?",
     "lore.s1.2": "Those bumbling fools you locked up in [[murdoku]] weren't the masterminds. They were scapegoats. The real architects of demise were never on the grid at all—they were standing right in the cracks of your logic, watching you from the dark.",
     "lore.s1.3": "**Welcome to Shadoku.**",
-    "lore.s2.1": "You are S. H. Adow, a promising initiate in the world's most elite, unseen syndicate. The deed is already done, the corpse is growing cold, and the panicked suspects are frantically scanning the room. Your task is not to solve the murder. Your task is to vanish.",
-    "lore.s3.1": "Forget the old rules. There is no neat and tidy law dictating a single suspect per row or column. This is a real crime scene, bounded by rigid walls, openings between areas, and towering obstacles. The suspects are looking everywhere—their gazes sweeping relentlessly in straight lines, passing over rugs, beds, and even the body of the victim itself. But they are flawed, and their panic creates a singular, mathematical inevitability: a blind spot.",
-    "lore.s3.2": "When every suspect is placed, one single tile remains unseen by every eye in the room. Find it, step into the shadows, and leave the scapegoats to the inspectors.",
+    "lore.s2.1": "You are S. H. Adow, a promising initiate in the world's most elite, unseen syndicate. The deed is already done, the corpse is growing cold, and the panicked scapegoats are frantically scanning the room. Your task is not to solve the murder. Your task is to vanish.",
+    "lore.s3.1": "Forget the old rules. There is no neat and tidy law dictating a single scapegoat per row or column. This is a real crime scene, bounded by rigid walls, openings between areas, and towering obstacles. The scapegoats are looking everywhere—their gazes sweeping relentlessly in straight lines, passing over rugs, beds, and even the body of the victim itself. But they are flawed, and their panic creates a singular, mathematical inevitability: a blind spot.",
+    "lore.s3.2": "When every scapegoat is placed, one single tile remains unseen by every eye in the room. Find it, step into the shadows, and leave the scapegoats to the inspectors.",
 
-    "show1.caption": "Every suspect has an alibi. S. H. Adow only needs a blind spot.",
+    "show1.caption": "Every scapegoat has an alibi. S. H. Adow only needs a blind spot.",
     "show1.tag": "Exhibit A · The Study",
     "show2.caption": "Orthogonal sightlines sweep across 7 biomes—blocked by walls and tall obstacles, passing through openings between areas.",
     "show2.tag": "Exhibit B · Sightlines",
@@ -524,10 +523,30 @@ function castFor(p) {
   castCache.set(p.id, out);
   return out;
 }
-/** → { [suspectId]: [r, c] } the solved positions of the first `n` suspects */
-const solutionPlacements = (cast, n = Infinity) =>
-  Object.fromEntries(cast.puzzle.suspects.filter((q) => Array.isArray(q.solution)).slice(0, n).map((q) => [q.id, q.solution]));
-const blindspotOf = (cast) => (Array.isArray(cast.puzzle.shadow) ? cast.puzzle.shadow : null);
+/** → { tokens: { [scapegoatId]: [r, c] }, dark } random, legal-looking spots for the first `n` scapegoats: open tiles, nobody in anybody's sight.
+ *  The home page shows no clues, so the spots never follow the real solution (that would spoil the contract). With `wantDark` it retries
+ *  until exactly one open tile stays unseen, which `dark` returns (the blindspot showcase; null if none turned up). */
+function randomPlacements(cast, n = Infinity, wantDark = false) {
+  const { geo, puzzle } = cast, ids = puzzle.suspects.slice(0, n).map((q) => q.id), k = (r, c) => r * 100 + c;
+  let fallback = { tokens: {}, dark: null };
+  for (let tries = 0; tries < 400; tries++) {
+    const pool = geo.occCells.slice();
+    for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    const tokens = {}, taken = new Set(), seen = new Set();
+    ids.forEach((id) => {
+      const at = pool.find(([r, c]) => !taken.has(k(r, c)) && !seen.has(k(r, c)));
+      if (!at) return;
+      tokens[id] = at; taken.add(k(...at)); geo.visible(...at).forEach((x) => seen.add(x));
+    });
+    const dark = geo.occCells.filter(([r, c]) => !taken.has(k(r, c)) && !seen.has(k(r, c)));
+    const full = Object.keys(tokens).length === ids.length;
+    if (!wantDark) { if (full) return { tokens, dark: null }; }
+    else if (full && dark.length === 1) return { tokens, dark: dark[0] };
+    else if (full && dark.length && !fallback.dark) fallback = { tokens, dark: dark[0] };
+    if (!Object.keys(fallback.tokens).length) fallback = { tokens, dark: null };
+  }
+  return fallback;
+}
 
 function BoardPlaceholder({ label }) {
   const { t } = useLang();
@@ -547,11 +566,12 @@ const inertRef = (el) => { if (el) el.setAttribute("inert", ""); };
 function LiveBoard({ puzzle, count = 0, showTarget, label, id }) {
   const cast = castFor(puzzle);
   const uid = `home-${String(id || "x").replace(/[^a-z0-9]/gi, "")}`;
+  const spots = useMemo(() => (cast ? randomPlacements(cast, count, !!showTarget) : null), [cast, count, showTarget]); // new spots on every visit, steady while the page stays
   if (!cast) return <BoardPlaceholder label={label} />;
   const { geo, looks, colorOf } = cast, p = cast.puzzle;
-  const st = { tokens: solutionPlacements(cast, count), notes: {}, lights: {}, hints: 0, hintLog: {}, done: false };
+  const st = { tokens: spots.tokens, notes: {}, lights: {}, hints: 0, hintLog: {}, done: false };
   const W = geo.C * CELL + 2 * BZ, H = geo.R * CELL + 2 * BZ;
-  const target = showTarget ? blindspotOf(cast) : null;
+  const target = showTarget ? spots.dark : null;
   return (
     <ArtBoundary fallback={<BoardPlaceholder label={label} />}>
       <div className="sk sk-embed sh-board-box" ref={inertRef} style={{ aspectRatio: `${W} / ${H}` }}>
@@ -1174,7 +1194,7 @@ export function ContractEnvelope(props) {
   // the finale while sealed: the red folder (Dossier № 000-OMEGA) is a folder, never an envelope
   return props.tone === "omega" && (props.variant || "hero") === "mini" ? <ContractFolder {...props} /> : <EnvelopeBody {...props} />;
 }
-function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false, second = null }) {
+function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, lead = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false, second = null }) {
   const pal = ENV_TONES[tone] || ENV_TONES.manila, gid = `shManila-${variant}-${tone}`;
   const { t, lang } = useLang();
   const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]); // title + difficulty in the active language
@@ -1294,7 +1314,8 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
           </div>
         </div>
       </div>
-      {variant === "hero" && <p className={`sh-env-prompt sh-type${phase === "open" ? " go" : ""}`} aria-live="polite">{phase === "open" ? (note || t("env.acceptNote")) : t("env.prompt")}</p>}
+      {variant === "hero" && lead && <p className="sh-env-prompt sh-env-lead sh-type">{lead}</p>}
+      {variant === "hero" && <p className={`sh-env-prompt sh-type${phase === "open" ? " go" : ""}${lead ? " under" : ""}`} aria-live="polite">{phase === "open" ? (note || t("env.acceptNote")) : t("env.prompt")}</p>}
       {sealed && phase === "idle" && <p className="sh-env-prompt sh-type">{t("env.prompt")}</p>}
     </div>
   );
@@ -1322,7 +1343,7 @@ function Envelope({ onPlay, onStart, onSkip, noId = false }) {
   const initiated = !!store.get(TUTORIAL_KEY) || best > 0; // solved or skipped
   if (initiated && daily) {
     return <ContractEnvelope key={daily.id} variant="hero" puzzle={daily} label={dailyLabel(daily, t, lang)} closed done={bests[daily.id] > 0} best={bests[daily.id]}
-      note={t("daily.intro")} onAccept={() => nav(`/play/${daily.id}`)} noId={noId} />;
+      lead={t("daily.intro")} onAccept={() => nav(`/play/${daily.id}`)} noId={noId} />;
   }
   if (best > 0) { // no daily contract shipped: the solved initiation's letter offers the contracts (the envelope still starts sealed, every visit)
     return <ContractEnvelope variant="hero" puzzle={q} label={t("env.caseFile")} closed done best={best} acceptLabel={t("env.pick")} note={t("env.pickNote")} onAccept={onPlay} noId={noId} />;
@@ -1378,7 +1399,6 @@ function HomeInner({ onPlay, onStart, onSkip, onNav, screenshots }) {
         <section className="sh-hero">
           <p className="sh-eyebrow sh-type">{t("hero.eyebrow")}</p>
           <h1 className="sh-type">{t("hero.title")}</h1>
-          <p className="sh-hero-daily sh-type">{t("hero.daily")}</p>
         </section>
 
         <section className="sh-env-section" aria-label={t("env.contract")}>
@@ -1490,7 +1510,6 @@ svg{direction:ltr}
 .sh-eyebrow{color:var(--sh-brass);letter-spacing:.18em;text-transform:uppercase;font-size:clamp(11px,1.6vw,14px);margin:0 0 18px}
 .sh-hero h1{font-size:clamp(32px,6vw,60px);line-height:1.05;margin:0 0 4px;color:var(--sh-cream);text-shadow:0 0 40px rgba(217,155,38,.25),3px 3px 0 rgba(200,62,59,.35)}
 .sh-hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.sh-hero-daily{margin:10px 0 0;color:var(--sh-brass);font-size:clamp(16px,2.6vw,22px);letter-spacing:.04em}
 
 /* story */
 .sh-story{max-width:1080px;margin:0 auto;padding:0 clamp(14px,3vw,28px) 0}.sh-story>.sh-show:last-child{margin-bottom:0}
@@ -1607,6 +1626,8 @@ svg{direction:ltr}
 .sh-env-prompt.go{opacity:1;color:var(--sh-cream);max-width:460px;margin-left:auto;margin-right:auto}
 .sh-env-prompt{margin:26px 0 0;color:var(--sh-brass);opacity:.8;transition:opacity .2s,letter-spacing .2s;font-size:clamp(14px,2.2vw,18px)}
 .sh-env-cq:hover .sh-env-prompt{opacity:1;letter-spacing:.03em}
+.sh-env-lead{color:var(--sh-cream);font-size:clamp(16px,2.6vw,22px)} /* the daily envelope's line, shown sealed and open */
+.sh-env-prompt.under{margin-top:8px}
 @keyframes shCrack{0%{opacity:0}100%{opacity:1}}
 @keyframes shSealL{0%{transform:none;opacity:1}35%{transform:translateX(-5%) rotate(-5deg);opacity:1}100%{transform:translate(-45%,170%) rotate(-38deg);opacity:0}}
 @keyframes shSealR{0%{transform:none;opacity:1}35%{transform:translateX(5%) rotate(5deg);opacity:1}100%{transform:translate(45%,170%) rotate(38deg);opacity:0}}
