@@ -832,7 +832,9 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
     initiated // before the initiation: its envelope in a pop-up, not the story
       ? { key: "story", label: t("nav.pStory"), sub: true, onSelect: () => go("/play") }
       : { key: "initiation", label: t("nav.pInitiation"), sub: true, onSelect: modals.openInitiation },
-    { key: "daily", label: t("nav.pDaily"), sub: true, onSelect: () => go("/daily") },
+    initiated // the daily contracts open after the initiation too: locked, it offers the initiation
+      ? { key: "daily", label: t("nav.pDaily"), sub: true, onSelect: () => go("/daily") }
+      : { key: "daily", label: `${t("nav.pDaily")} 🔒`, sub: true, onSelect: modals.openInitiation },
     ...(user ? [
       { key: "profile", label: t("nav.profile"), heading: true },
       ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
@@ -892,6 +894,8 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     return !q || !isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack)))); // no such contract: the envelopes too
   }, [view, initiated, puzzles, path, tick]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (locked) sync("/play", true); }, [locked, sync]);
+  const dailyLocked = view === "daily" && !initiated; // /daily before the initiation: the initiation (like a story deep link)
+  useEffect(() => { if (dailyLocked) sync("/play", true); }, [dailyLocked, sync]);
   useEffect(() => { // an unknown or oddly cased address: the address bar shows the page that is really open
     const fromDisk = typeof window !== "undefined" && window.location.protocol === "file:";
     const now = currentPath(); // the live address: the game may already have replaced `path` in this commit (the tutorial's own address)
@@ -910,7 +914,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
       onStart={startInitiation} onSkip={skipInitiation} onNav={go}>
       <style data-shadoku="app">{APP_CSS}</style>
       {contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
-        : view === "play" ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
+        : view === "play" || dailyLocked ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
         : view === "daily" ? <DailyScreen go={go} />
         : view === "about" ? <AboutPage go={go} />
         : view === "contact" ? <ContactPage go={go} />

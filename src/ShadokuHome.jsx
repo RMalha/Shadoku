@@ -868,7 +868,9 @@ export function SiteMenu({ current = "", onNav }) {
           {SITE_PAGES.map((m) => (m.heading ? <span key={m.key} className="sh-menu-h">{t(`nav.${m.key}`)}</span>
             : m.to === "/play" && !initiated
               ? <button key={m.to} type="button" className="sub" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the story
-              : link(m.to, t(`nav.${m.key}`), m.sub ? "sub" : m.sep ? "sh-menu-sep" : "")))}
+              : m.to === "/daily" && !initiated // the daily contracts open after the initiation too: locked, it offers the initiation
+                ? <button key={m.to} type="button" className="sub" title={t("game.lockTip")} onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pDaily")} <span aria-hidden="true">🔒</span></button>
+                : link(m.to, t(`nav.${m.key}`), m.sub ? "sub" : m.sep ? "sh-menu-sep" : "")))}
         </nav>
       )}
     </div>
