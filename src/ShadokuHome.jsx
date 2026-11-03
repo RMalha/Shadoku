@@ -120,6 +120,8 @@ export const STRINGS = {
     "nav.pHome": "Home",
     "nav.pContracts": "Contracts",
     "nav.pInitiation": "Initiation",
+    "nav.pStory": "Story",
+    "nav.pDaily": "Daily Contract",
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.home": "← Home",
@@ -815,8 +817,9 @@ export function LanguageSelector() {
   );
 }
 
-/** The site's pages, in menu order: [{ to, key }] (labels: t(`nav.${key}`)). */
-export const SITE_PAGES = [{ to: "/", key: "pHome" }, { to: "/play", key: "pContracts" }, { to: "/about", key: "about" }, { to: "/contact", key: "contact" }];
+/** The site's pages, in menu order: [{ to, key }] (labels: t(`nav.${key}`)); a `heading` has no page and heads the `sub` pages after it. */
+export const SITE_PAGES = [{ to: "/", key: "pHome" }, { key: "pContracts", heading: true }, { to: "/play", key: "pStory", sub: true }, { to: "/daily", key: "pDaily", sub: true },
+  { to: "/about", key: "about", sep: true }, { to: "/contact", key: "contact" }];
 
 /**
  * The site header shared by every page: logo + `extra` + language + sign-in (or the codename chip) + a ☰ button whose dropdown lists
@@ -860,9 +863,10 @@ export function SiteMenu({ current = "", onNav }) {
       </button>
       {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
-          {SITE_PAGES.map((m) => (m.to === "/play" && !initiated
-            ? <button key={m.to} type="button" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the contracts
-            : link(m.to, t(`nav.${m.key}`))))}
+          {SITE_PAGES.map((m) => (m.heading ? <span key={m.key} className="sh-menu-h">{t(`nav.${m.key}`)}</span>
+            : m.to === "/play" && !initiated
+              ? <button key={m.to} type="button" className="sub" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the story
+              : link(m.to, t(`nav.${m.key}`), m.sub ? "sub" : m.sep ? "sh-menu-sep" : "")))}
         </nav>
       )}
     </div>

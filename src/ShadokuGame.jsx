@@ -139,6 +139,11 @@ const normStep = (s) => {
 export const normalizePuzzle = (p) => ({ ...p, steps: (p.steps || []).map(normStep) });
 export const normalizePuzzles = (list) => (Array.isArray(list) ? list : []).map(normalizePuzzle);
 export const PUZZLES = normalizePuzzles(DEFAULT_PUZZLES);
+/* The daily contracts, oldest first: engine/puzzles_daily (the released ones; `npm run dev` adds the coming week's
+   engine/daily_queue). Read as raw text so src/bundle.py can inline them; the release job rotates them out after two weeks. */
+const DAILY_RAW = import.meta.glob("./puzzles/shadoku_daily-*.json", { query: "?raw", import: "default", eager: true });
+const parseCase = (s) => { try { return JSON.parse(s); } catch (e) { return null; } };
+export const DAILIES = normalizePuzzles(Object.values(DAILY_RAW).map(parseCase).filter((d) => d && d.daily).sort((a, b) => (a.daily < b.daily ? -1 : 1)));
 
 const HINT_RUNGS = 3; // where to look → the key deduction → the placement
 const STORE_KEY = BOARDS_KEY, CASE_KEY = "shadoku-case", TIME_KEY = TIMES_KEY, BEST_KEY = BESTS_KEY; // the synced ones: sync.js
@@ -852,7 +857,7 @@ export const TUTORIAL_ID = "tutorial";
 export const caseLabel = (puzzles, i, t = tEn) => (puzzles[i] && puzzles[i].id === TUTORIAL_ID ? t("game.caseTutorial") : t("game.caseNumber", { n: i + 1 - puzzles.slice(0, i).filter((q) => q.id === TUTORIAL_ID).length }));
 export const LOCK_TIP = "Complete Master U. M. Bra's initiation first";
 const caseRow = (puzzles, q, i, solvedOf, t) => (
-  <><span className="sk-cn">{caseLabel(puzzles, i, t)}</span><span className="sk-ci" aria-hidden="true">{BIOME_META[themeOf(q)].icon}</span><span className="sk-ct">{q.title}</span>
+  <>{!q.daily && <span className="sk-cn">{caseLabel(puzzles, i, t)}</span> /* a daily contract has no story number: its title carries the date */}<span className="sk-ci" aria-hidden="true">{BIOME_META[themeOf(q)].icon}</span><span className="sk-ct">{q.title}</span>
     <span className="sk-cs">{dims(q)}</span><Diff d={q.difficulty} id={q.diffId} />{solvedOf(q) && <span className="sk-ok" aria-label={t("game.solved")}>✓</span>}</>
 );
 /** The open contract's name, difficulty and size, as plain text: contracts are only picked on the wrapper's contracts page. */
@@ -2388,7 +2393,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         const head = heads[idx] || {};
         const umbraOf = (id) => puzzles.find((q) => q.id === id) || PUZZLES.find((q) => q.id === id) || null;
         const nxt = omegaNext ? umbraOf(UMBRA_FINALE) : blackNext ? umbraOf(UMBRA_HARD)
-          : puzzles[idx + 1] && puzzles[idx + 1].id !== TUTORIAL_ID ? puzzles[idx + 1] : null;
+          : puzzles[idx + 1] && puzzles[idx + 1].id !== TUTORIAL_ID && !p.daily && !puzzles[idx + 1].daily ? puzzles[idx + 1] : null; // a daily contract has no "next": the Daily Contract page holds the others
         const nNo = omegaNext ? finaleNo : blackNext ? hardNo : idx + 2 - puzzles.slice(0, idx + 1).filter((q) => q.id === TUTORIAL_ID).length; // the next contract's number (the tutorial is not numbered)
         const close = () => setDoneClosed(p.id);
         const nxtLabel = t("hub.contractNo", { n: String(nNo).padStart(3, "0") });

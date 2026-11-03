@@ -3,8 +3,11 @@
  * ShadokuApp.jsx — shadoku.net shell (router + site chrome around the game)
  * ------------------------------------------------------------------------------------------
  *   /      → <ShadokuHome />                      landing page; the envelope opens into /play
- *   /play  → the CONTRACTS page: every puzzle in an envelope, grouped by difficulty (click one to open it, click the card to accept)
+ *   /play  → Contracts › STORY: Act 1, every story puzzle in an envelope, grouped by difficulty (click one to open it, click the card to accept)
  *            (before the initiation is done, /play opens the tutorial instead)
+ *   /daily → Contracts › DAILY CONTRACT: today's contract in its envelope, then the archive of the two weeks before it (DailyScreen).
+ *            The release job (tools/release_daily.py) ships one a day at midnight and rotates out the older ones; the newest shipped
+ *            one is "today's". On localhost the coming week's queue (npm run dev) is listed under it, for testing.
  *   /play/<puzzle-name>                            one puzzle, e.g. /play/the-art-of-the-ghost (slim top bar + <ShadokuGame />; the URL follows the contract picker)
  *   /about  /contact                               plain pages (ShadokuPages.jsx)
  *   /profile  /profile/stats  /profile/collection  the signed-in player's Info, Stats and relic Collection (ShadokuPages.jsx)
@@ -47,9 +50,9 @@ import ShadokuHome, {
   ShadokuProviders, SiteHeader, SiteMenu, UserPill, SiteFooter, ContractEnvelope, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
 } from "./ShadokuHome.jsx";
 import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
-import ShadokuGame, { PUZZLES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
+import ShadokuGame, { PUZZLES, DAILIES, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
-import { localizeHead, trOf } from "./caseText.js";
+import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
 import { RelicBadge, RelicModal, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 
@@ -71,7 +74,19 @@ registerTranslations("en", {
   "tut.stage": "Stage {n} of {total}",
   "tut.step": "Step {n} of {total}",
   "hub.title": "Your contracts",
-    "hub.contracts": "Contracts",
+  "hub.contracts": "Contracts",
+  "hub.act": "Act {n}",
+  "daily.title": "Daily Contract · {date}",
+  "daily.subtitle": "{difficulty} · {theme}",
+  "daily.intro": "A new contract every day at midnight: Monday Very Easy, Tuesday and Wednesday Easy, Thursday and Friday Medium, Saturday Hard, Sunday Expert.",
+  "daily.today": "Today's contract",
+  "daily.none": "No daily contract yet. Come back at midnight.",
+  "daily.label": "{weekday} · {theme}",
+  "daily.archive": "Archive",
+  "daily.archiveNote": "The two weeks before today. Older contracts are rotated out.",
+  "daily.archiveEmpty": "Nothing here yet: the archive fills up day by day.",
+  "daily.queue": "Queue (local testing only)",
+  "daily.cap": "{date} · {difficulty}",
   "hub.open": "Open the envelope",
   "hub.close": "Close",
   "tut.continue": "Continue →",
@@ -393,7 +408,7 @@ export function buildTutorial(puzzle, lore, t = ENGLISH) {
 
 /* ═════════════════════════ ROUTER ═════════════════════════ */
 const normalise = (p) => (String(p || "/").replace(/\/+$/, "") || "/").replace(/^\/play(?=\/|$)/i, "/play"); // "/PLAY" is "/play" (the case slug is lower-cased by slugOfPath)
-const PAGES = { "/about": "about", "/contact": "contact", "/profile": "profile", "/test/umbra": "testUmbra" };
+const PAGES = { "/daily": "daily", "/about": "about", "/contact": "contact", "/profile": "profile", "/test/umbra": "testUmbra" };
 /** "/profile/stats" → "stats" · "/profile" → "info" (the tab of the profile page). */
 const profileTab = (p) => (PROFILE_PAGES.find((m) => m.to === normalise(p)) || PROFILE_PAGES[0]).key;
 export const toView = (p) => {
@@ -415,8 +430,8 @@ const currentPath = () => {
 
 /** "The Art of the Ghost" → "the-art-of-the-ghost" (accents folded, apostrophes dropped, anything else becomes a dash). */
 export const slugify = (s) => String(s || "").normalize("NFD").replace(/\p{M}+/gu, "").replace(/['’]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-/** The puzzle's address name: its title slug (the id is accepted too when reading a URL). */
-export const puzzleSlug = (q) => (q ? slugify(q.title) || q.id : "");
+/** The puzzle's address name: its title slug, or a daily contract's id (/play/daily-2026-11-03); the id is accepted too when reading a URL. */
+export const puzzleSlug = (q) => (q ? (q.daily ? q.id : slugify(q.title) || q.id) : "");
 /** /play/the-art-of-the-ghost → "the-art-of-the-ghost" · /play → "" */
 export const slugOfPath = (p) => {
   const m = /^\/play\/([^/]+)/.exec(normalise(p));
@@ -523,6 +538,7 @@ const toneOf = (id) => (id === UMBRA_HARD ? "obsidian" : id === UMBRA_FINALE ? (
 const targetOf = (id) => (id === UMBRA_HARD ? <AssassinPolaroid who="N" size={200} tilt={2} /> /* N. O. Ir, U. M. Bra's hooded second in command */
   : id === UMBRA_FINALE ? <MasterPolaroid size={200} tilt={2} /> : null);
 const pad3 = (n) => String(n).padStart(3, "0");
+const diffClass = (d) => String(d).toLowerCase().replace(/[^a-z0-9]+/g, "-"); // "Very Easy" -> "very-easy" (the .sh-hub-diff colour)
 
 function ContractsScreen({ go, puzzles, logoSrc }) {
   const hubBar = useMediaQuery(DESK_MQ) ? BAR_H_DESK : BAR_H;
@@ -570,12 +586,13 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
     <div className="sh-hub">
       <SiteHeader onLogo={() => go("/")} style={{ height: hubBar }} onNav={go} current="/play" />
       <main className="sh-hub-main">
-        <h1 className="sh-type">{t("hub.title")}</h1>
+        <h1 className="sh-type">{t("nav.pStory")}</h1>
+        <h2 className="sh-hub-act sh-type">{t("hub.act", { n: 1 })}</h2>
         {groups.map(([diff, items]) => {
           const done = items.filter((x) => solved.has(x.q.id)).length;
           return (
             <section key={diff} className="sh-hub-group" aria-label={diffName(diff)}>
-              <h2 className="sh-hub-h"><span className={`sh-hub-diff d-${String(diff).toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>{diffName(diff)}</span><small>{t("hub.progress", { done, total: items.length })}</small></h2>
+              <h3 className="sh-hub-h"><span className={`sh-hub-diff d-${diffClass(diff)}`}>{diffName(diff)}</span><small>{t("hub.progress", { done, total: items.length })}</small></h3>
               <div className="sh-hub-grid">
                 {items.map(({ q, n }) => {
                   const ok = solved.has(q.id);
@@ -613,10 +630,105 @@ function ContractsScreen({ go, puzzles, logoSrc }) {
   );
 }
 
+/* ═════════════════════════ /daily — THE DAILY CONTRACT ═════════════════════════ */
+const DAILY_KEEP = 14; // days of archive before today's contract (engine DAILY_KEEP: the release job deletes older ones)
+const isLocalHost = () => { try { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname); } catch { return false; } };
+const isoToday = () => { const d = new Date(), p2 = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`; };
+const dayNo = (iso) => { const [y, m, d] = String(iso).split("-").map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
+
+/** -> { today, archive (newest first), queue }. On the site the deploy is the clock: the newest shipped daily is today's. On localhost
+ *  (npm run dev also mirrors engine/daily_queue) the ones dated after today wait in the queue, for testing. */
+function dailyShelves(list, local = isLocalHost(), now = isoToday()) {
+  const shipped = local ? list.filter((q) => q.daily <= now) : list;
+  const today = shipped[shipped.length - 1] || null;
+  const archive = today ? shipped.filter((q) => q !== today && dayNo(today.daily) - dayNo(q.daily) <= DAILY_KEEP).reverse() : [];
+  return { today, archive, queue: local ? list.filter((q) => q.daily > now) : [] };
+}
+
+function DailyScreen({ go }) {
+  const hubBar = useMediaQuery(DESK_MQ) ? BAR_H_DESK : BAR_H;
+  const { t, lang } = useLang();
+  const modals = useModals();
+  const progressTick = useProgressTick(); // a sync brought another device's progress
+  const bests = useMemo(() => readBestTimes(DAILIES), [progressTick]); // eslint-disable-line react-hooks/exhaustive-deps -- { id: best seconds } of every fulfilled daily
+  const { today, archive, queue } = useMemo(() => dailyShelves(DAILIES), []);
+  const [picked, setPicked] = useState(null); // an archived (or queued) daily whose envelope is open
+  const trf = useMemo(() => trOf(t), [t]);
+  const diffName = (q) => localizeHead(q, trf).difficulty;
+  const upper = (x) => { try { return String(x).toLocaleUpperCase(lang); } catch { return String(x).toUpperCase(); } };
+  const shortDate = (q) => dailyDate(q.daily, { weekday: "short", day: "numeric", month: "short" });
+  const labelOf = (q) => upper(t("daily.label", { weekday: dailyDate(q.daily, { weekday: "long" }), theme: trf(`THEME.${q.theme}`) || q.theme })); // the card's header: "TUESDAY · MANSION" (the title carries the date)
+  const accept = (q) => { setPicked(null); if (store.get(TUTORIAL_KEY)) go(`/play/${puzzleSlug(q)}`); else modals.openInitiation(); }; // like the story: the initiation comes first
+
+  useEffect(() => {
+    const prev = document.title;
+    document.title = t("page.daily");
+    return () => { document.title = prev; };
+  }, [t]);
+  useEffect(() => {
+    if (!picked) return undefined;
+    const esc = (e) => { if (e.key === "Escape") setPicked(null); };
+    document.addEventListener("keydown", esc);
+    return () => document.removeEventListener("keydown", esc);
+  }, [picked]);
+
+  const shelf = (items) => (
+    <div className="sh-hub-grid">
+      {items.map((q) => {
+        const ok = bests[q.id] > 0;
+        return (
+          <div className="sh-hub-item" key={q.id}>
+            <ContractEnvelope variant="mini" puzzle={q} label={labelOf(q)} done={ok} best={bests[q.id]} onPick={() => setPicked(q)} />
+            <p className="sh-hub-cap sh-type"><b>{t("daily.cap", { date: shortDate(q), difficulty: diffName(q) })}</b>{ok && <> <span className="ok">✓ ⏱ {fmtTime(bests[q.id])}</span></>}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    <div className="sh-hub">
+      <SiteHeader onLogo={() => go("/")} style={{ height: hubBar }} onNav={go} current="/daily" />
+      <main className="sh-hub-main">
+        <h1 className="sh-type">{t("nav.pDaily")}</h1>
+        <p className="sh-daily-intro">{t("daily.intro")}</p>
+        {today ? (
+          <section className="sh-hub-group" aria-label={t("daily.today")}>
+            <h2 className="sh-hub-h"><span className={`sh-hub-diff d-${diffClass(today.difficulty)}`}>{diffName(today)}</span><small>{t("daily.today")} · {dailyDate(today.daily, { weekday: "long", day: "numeric", month: "long" })}</small></h2>
+            <div className="sh-daily-env">
+              <ContractEnvelope key={today.id} variant="modal" autoOpen={false} puzzle={today} label={labelOf(today)} done={bests[today.id] > 0} best={bests[today.id]} onAccept={() => accept(today)} />
+            </div>
+          </section>
+        ) : <p className="sh-daily-none sh-type">{t("daily.none")}</p>}
+        <section className="sh-hub-group" aria-label={t("daily.archive")}>
+          <h2 className="sh-hub-h"><span className="sh-hub-diff">{t("daily.archive")}</span><small>{t("daily.archiveNote")}</small></h2>
+          {archive.length ? shelf(archive) : <p className="sh-daily-none">{t("daily.archiveEmpty")}</p>}
+        </section>
+        {queue.length > 0 && (
+          <section className="sh-hub-group" aria-label={t("daily.queue")}>
+            <h2 className="sh-hub-h"><span className="sh-hub-diff d-queue">{t("daily.queue")}</span></h2>
+            {shelf(queue)}
+          </section>
+        )}
+      </main>
+      <SiteFooter />
+
+      {picked && (
+        <div className="sh-hub-modal" role="dialog" aria-modal="true" aria-label={labelOf(picked)} onPointerDown={(e) => e.target === e.currentTarget && setPicked(null)}>
+          <div className="sh-hub-modal-in">
+            <button type="button" className="sh-hub-x" onClick={() => setPicked(null)} aria-label={t("hub.close")}>×</button>
+            <ContractEnvelope key={picked.id} variant="modal" puzzle={picked} label={labelOf(picked)} done={bests[picked.id] > 0} best={bests[picked.id]} onAccept={() => accept(picked)} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ═════════════════════════ /play ═════════════════════════ */
 function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const { t } = useLang();
-  const pack = useMemo(() => (puzzles ? normalizePuzzles(puzzles) : PUZZLES), [puzzles]);
+  const pack = useMemo(() => [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES], [puzzles]); // the story, then the daily contracts (no picker after the initiation: fixedCase)
   const tutorial = pack.find((q) => q.id === TUTORIAL_PUZZLE) || null;
   const tutorialId = tutorial ? tutorial.id : (pack[0] && pack[0].id) || TUTORIAL_PUZZLE; // a pack without the tutorial: teach on its first case
   const firstCase = pack.find((q) => q.id !== tutorialId) || null; // "Case #1"
@@ -711,7 +823,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
     setJump(jumpFor(q, Date.now()));
   }, [slug]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const enter = useCallback(() => go("/play"), [go]); // the contracts page
+  const enter = useCallback(() => { const q = pack.find((x) => x.id === caseRef.current); go(q && q.daily ? "/daily" : "/play"); }, [go, pack]); // back to its contracts page: the story's, or the Daily Contract
 
   const replay = useCallback(() => {
     advance(0); setOk(""); setFinished(false); setSkipped(false); finRef.current = false;
@@ -730,11 +842,13 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const merged = !desk && !short; // no site header on /play: a phone held upright has one header line (logo, timer, ⚙, ?, sign-in, ☰); desktop and a phone held sideways have the rail's ☰ Menu (sign-in and the profile inside)
   const { user, signOut } = useAuth();
   const modals = useModals();
-  const railMenu = useMemo(() => [ // the ☰ Menu on the tool rail, desktop and a phone held sideways (it has no site header, so no Sign In button or profile chip): Home, Contracts, the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
+  const railMenu = useMemo(() => [ // the ☰ Menu on the tool rail, desktop and a phone held sideways (it has no site header, so no Sign In button or profile chip): Home, the Contracts group (Story, Daily Contract), the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
     { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
-    initiated // before the initiation: its envelope in a pop-up, not the contracts
-      ? { key: "contracts", label: t("nav.pContracts"), onSelect: enter }
-      : { key: "initiation", label: t("nav.pInitiation"), onSelect: modals.openInitiation },
+    { key: "contracts", label: t("nav.pContracts"), heading: true },
+    initiated // before the initiation: its envelope in a pop-up, not the story
+      ? { key: "story", label: t("nav.pStory"), sub: true, onSelect: () => go("/play") }
+      : { key: "initiation", label: t("nav.pInitiation"), sub: true, onSelect: modals.openInitiation },
+    { key: "daily", label: t("nav.pDaily"), sub: true, onSelect: () => go("/daily") },
     ...(user ? [
       { key: "profile", label: t("nav.profile"), heading: true },
       ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
@@ -744,7 +858,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
     { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
     { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
     ...(user ? [] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
-  ], [t, go, user, signOut, modals, enter, initiated]);
+  ], [t, go, user, signOut, modals, initiated]);
 
   // a phone held sideways: the card lives in the suspects column (the game draws it there), so the board keeps the whole height
   const card = showCard && (
@@ -790,7 +904,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     if (view !== "play" || !initiated) return false;
     const slug = slugOfPath(path);
     if (!slug) return false;
-    const pack = puzzles ? normalizePuzzles(puzzles) : PUZZLES, q = findPuzzleBySlug(pack, slug);
+    const pack = [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES], q = findPuzzleBySlug(pack, slug);
     return !q || !isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack)))); // no such contract: the envelopes too
   }, [view, initiated, puzzles, path, tick]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (locked) sync("/play", true); }, [locked, sync]);
@@ -813,6 +927,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
       <style data-shadoku="app">{APP_CSS}</style>
       {contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
         : view === "play" ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
+        : view === "daily" ? <DailyScreen go={go} />
         : view === "about" ? <AboutPage go={go} />
         : view === "contact" ? <ContactPage go={go} />
         : view === "profile" ? <ProfilePage go={go} tab={profileTab(path)} puzzles={puzzles} onLaunch={launchContract} />
@@ -892,6 +1007,11 @@ html:has(.sh-playroot),html:has(.sh-playroot) body{overflow:hidden;overscroll-be
 .sh-hub-main{max-width:1100px;margin:0 auto;padding:clamp(22px,4vw,44px) clamp(14px,3vw,28px) 70px}
 .sh-hub-main h1{margin:0 0 clamp(18px,3vw,34px);font-size:clamp(28px,5vw,44px);font-weight:400;text-align:center;line-height:1.1}
 .sh-hub-group{margin-top:clamp(22px,4vw,40px)}
+.sh-hub-act{margin:0 0 4px;text-align:center;font-size:clamp(17px,2.4vw,21px);font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:#D99B26}
+.sh-daily-intro{max-width:640px;margin:-6px auto 0;text-align:center;font-size:15px;line-height:1.5;color:#cfc8b6}
+.sh-daily-env{width:min(560px,100%);margin:0 auto}
+.sh-daily-none{margin:8px 0 0;color:#8d8a80;font-size:14.5px}
+.sh-hub-diff.d-queue{border-color:#6fd0ff}
 .sh-hub-h{display:flex;align-items:center;gap:12px;margin:0 0 clamp(8px,2vw,16px);padding-bottom:8px;border-bottom:1px solid #30303f;font-size:16px;font-weight:400}
 .sh-hub-h small{color:#8d8a80;font-size:13px;font-weight:600;letter-spacing:.04em}
 .sh-hub-diff{font-family:'Special Elite','Courier New',monospace;font-size:clamp(17px,2.4vw,21px);padding:3px 14px;border-radius:4px;background:#2a2a36;color:#F5F0E6;border-left:4px solid #D99B26}

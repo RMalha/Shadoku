@@ -303,17 +303,39 @@ export function caseRenderer(d, tr) {
 export const difficultyKey = (d) => `DIFFICULTY.${String(d || "").trim().toUpperCase().replace(/[^A-Z0-9]+/g, "_").replace(/^_|_$/g, "")}`;
 
 /**
+ * A daily contract's date ("2026-11-03") in the page's language: "3 November" by default. Read as a calendar day, so no time zone
+ * moves it to the day before.
+ */
+export function dailyDate(iso, opts = { day: "numeric", month: "long" }) {
+  const [y, m, d] = String(iso || "").split("-").map(Number);
+  let lang;
+  try { lang = document.documentElement.lang || undefined; } catch (e) { /* no DOM (scripts/test-case-text.mjs) */ }
+  try { return new Intl.DateTimeFormat(lang, opts).format(new Date(y, m - 1, d)); } catch (e) { return String(iso || ""); }
+}
+const fillIn = (s, vars) => String(s).replace(/\{(\w+)\}/g, (_, k) => (vars[k] == null ? "" : vars[k]));
+
+/**
  * Title, subtitle and difficulty only (cheap; used by lists and envelopes). The English `difficulty` stays in `diffId`
- * (CSS classes and grouping use it); `difficulty` becomes the display name.
+ * (CSS classes and grouping use it); `difficulty` becomes the display name. A daily contract (`daily`: its date) shares one title
+ * and subtitle for every day (ui.daily.title "Daily Contract · {date}", ui.daily.subtitle "{difficulty} · {theme}").
  */
 export function localizeHead(p, tr) {
   if (!p) return p;
+  const difficulty = tr(difficultyKey(p.diffId || p.difficulty)) || p.difficulty;
+  if (p.daily) {
+    const title = p.titleKey && tr(p.titleKey), subtitle = p.subtitleKey && tr(p.subtitleKey);
+    return {
+      ...p, diffId: p.diffId || p.difficulty, difficulty,
+      title: title ? fillIn(title, { date: dailyDate(p.daily) }) : p.title,
+      subtitle: subtitle ? fillIn(subtitle, { difficulty, theme: tr(`THEME.${p.theme}`) || p.theme }) : p.subtitle,
+    };
+  }
   return {
     ...p,
     diffId: p.diffId || p.difficulty,
     title: (p.titleKey && tr(p.titleKey)) || p.title,
     subtitle: (p.subtitleKey && tr(p.subtitleKey)) || p.subtitle,
-    difficulty: tr(difficultyKey(p.diffId || p.difficulty)) || p.difficulty,
+    difficulty,
   };
 }
 

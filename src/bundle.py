@@ -1,4 +1,5 @@
 import argparse
+import fnmatch
 import functools
 import http.server
 import json
@@ -18,7 +19,7 @@ REQUIRED_JSX = [
 ]
 # The engine's output is the only source of case JSONs; the app imports them as ./puzzles/<file>.
 ENGINE_DIR = Path(__file__).resolve().parent.parent / "engine"
-PUZZLE_DIRS = [ENGINE_DIR / "puzzles", ENGINE_DIR / "puzzles_multi"]
+PUZZLE_DIRS = [ENGINE_DIR / "puzzles", ENGINE_DIR / "puzzles_multi", ENGINE_DIR / "puzzles_daily"]  # never daily_queue: unreleased
 JSON_PUZZLES = ["shadoku_tutorial.json"] + [f"shadoku_case{i}.json" for i in range(1, 11)] + ["shadoku_MAH1010QAR3-4101.json", "shadoku_MAX1111RAR5-4201.json"]
 CODE_EXTS = {".jsx", ".js", ".ts", ".tsx", ".mjs", ".cjs"}
 DATA_EXTS = {".json"}
@@ -80,6 +81,11 @@ def inline_raw_globs(src_dir: Path, modules: dict):
             continue
         base = (src_dir / key).parent
         def repl(m):
+            if base == src_dir and m.group(2).startswith("./puzzles/"):  # case JSONs: the engine's copies (PUZZLE_DIRS)
+                hits = {k: json.dumps(v, ensure_ascii=False) for k, v in sorted(modules.items())
+                        if isinstance(v, dict) and fnmatch.fnmatch(k, m.group(2))}
+                print(f"[+] Inlined {len(hits)} engine case(s) for import.meta.glob('{m.group(2)}') in {key}")
+                return json.dumps(hits, ensure_ascii=False)
             files = sorted(base.glob(m.group(2)))
             print(f"[+] Inlined {len(files)} file(s) for import.meta.glob('{m.group(2)}') in {key}")
             return json.dumps({"./" + f.relative_to(base).as_posix(): f.read_text(encoding="utf-8") for f in files},
@@ -111,6 +117,8 @@ def collect_modules(src_dir: Path):
                     modules[rel] = fpath.read_text(encoding="utf-8")
                 except Exception as e:
                     print(f"[!] Could not read {rel}: {e}", file=sys.stderr)
+            elif ext in DATA_EXTS and rel.startswith("./puzzles/"):
+                continue  # Vite's synced copy (it may hold the dev-only daily queue): the engine folders are read below
             elif ext in DATA_EXTS and rel.startswith("./locales/"):
                 continue  # read as raw text by inline_raw_globs (an empty, new locale is not valid JSON)
             elif ext in DATA_EXTS and fname != "package.json" and fname != "package-lock.json":
