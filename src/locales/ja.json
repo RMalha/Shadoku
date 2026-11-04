@@ -232,7 +232,7 @@
   "ui.env.stamp2": "イニシエイト閲覧限定",
   "ui.env.cue": "封筒",
   "ui.env.aria": "封を切り、契約書を開く",
-  "ui.env.accept": "契約を受諾する",
+  "ui.env.accept": "受諾する",
   "ui.env.pick": "契約を選ぶ",
   "ui.env.start": "イニシエーションを開始",
   "ui.env.replay": "イニシエーションを再プレイ",

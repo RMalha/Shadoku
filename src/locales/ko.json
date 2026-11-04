@@ -232,7 +232,7 @@
   "ui.env.stamp2": "신입 요원 열람 전용",
   "ui.env.cue": "봉투",
   "ui.env.aria": "봉인을 뜯고 계약서 열기",
-  "ui.env.accept": "계약 수락",
+  "ui.env.accept": "수락",
   "ui.env.pick": "계약 선택",
   "ui.env.start": "입문 시작",
   "ui.env.replay": "입문 다시 플레이",

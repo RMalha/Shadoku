@@ -1612,21 +1612,21 @@ svg{direction:ltr}
 @media (prefers-reduced-motion:reduce){.sh-env.glow .sh-env-lift{animation:none;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(255,205,96,.8)) drop-shadow(0 0 56px rgba(240,170,50,.6))}}
 .sh-layer{position:absolute;inset:0;pointer-events:none}.sh-layer svg,.sh-flap-face svg{width:100%;height:100%;display:block;overflow:visible}
 .sh-layer-back{z-index:0}.sh-layer-front{z-index:3}
-.sh-card{position:absolute;z-index:2;left:12.5%;top:39.3%;width:75%;height:54.8%;pointer-events:none;background:var(--sh-cream);border:.6cqw solid #bda677;border-radius:.8cqw;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.45)}
-.sh-card-in{display:flex;flex-direction:column;height:100%;padding:1.6cqw 3cqw 2.4cqw;color:var(--sh-ink);font-size:2.5cqw;line-height:1.35}
+.sh-card{position:absolute;z-index:2;left:12.5%;top:39.3%;width:75%;height:50%;pointer-events:none;background:var(--sh-cream);border:.6cqw solid #bda677;border-radius:.8cqw;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.45)}
+.sh-card-in{display:flex;flex-direction:column;height:100%;padding:2.8cqw 3cqw 2cqw;color:var(--sh-ink);font-size:2.5cqw;line-height:1.35}
 /* the header line: the case label, the wax seal, the initiate line; under it the target's polaroid and the contract's text */
-.sh-card-head{display:flex;align-items:center;justify-content:space-between;gap:2cqw;flex:none;height:6.4cqw;font-size:2.3cqw;letter-spacing:.08em;white-space:nowrap}
-.sh-card-head .k{color:var(--sh-crimson);flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis}.sh-card-head .i{flex:1 1 0;min-width:0;text-align:right;overflow:hidden;text-overflow:ellipsis}
-.sh-card-seal{flex:none;width:8.6cqw;height:8.6cqw;margin-top:-.4cqw;filter:drop-shadow(0 .3cqw .5cqw rgba(0,0,0,.4))}.sh-card-seal>*{display:block;width:100%;height:100%}
+.sh-card-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2cqw;flex:none;height:7.4cqw;font-size:2.3cqw;line-height:1.15;letter-spacing:.08em}
+.sh-card-head .k{color:var(--sh-crimson);min-width:0;text-align:start;overflow-wrap:anywhere}.sh-card-head .i{min-width:0;text-align:end;overflow-wrap:anywhere}
+.sh-card-seal{width:7.4cqw;height:7.4cqw;filter:drop-shadow(0 .3cqw .5cqw rgba(0,0,0,.4))}.sh-card-seal>*{display:block;width:100%;height:100%}
 .sh-card-body{display:flex;gap:3cqw;align-items:center;flex:1;min-height:0}
-.sh-card-pol{width:21cqw;flex:none;transform:rotate(-4deg);filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto}
+.sh-card-pol{width:19cqw;flex:none;transform:rotate(-4deg);filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto}
 .sh-env.ready .sh-card{pointer-events:auto}
 /* two cards: the second (locked) one rises higher behind the first and fans out to the right, so its header and stamp show */
 .sh-env-cq.two.opened .sh-env-stage{margin-top:44cqw}
 .sh-env.ready .sh-card.sh-card-2{pointer-events:none}
 .sh-card-2{filter:saturate(.55) brightness(.93)}
 .sh-env.opening .sh-card.sh-card-2{animation:shCard2 520ms 470ms cubic-bezier(.2,.8,.2,1) forwards}
-.sh-env.pre .sh-card.sh-card-2{animation:none;transform:translate(8%,-152%) rotate(3deg)}
+.sh-env.pre .sh-card.sh-card-2{animation:none;transform:translate(8%,-167%) rotate(3deg)}
 .sh-card-lock{position:absolute;z-index:3;right:5%;top:7%;padding:.5cqw 1.4cqw;border:.5cqw solid #8f2a27;border-radius:.9cqw;background:rgba(245,240,230,.9);color:#a3302c;font-size:3cqw;letter-spacing:.06em;line-height:1.15;max-width:46%;text-align:center;transform:rotate(7deg);box-shadow:inset 0 0 0 .3cqw rgba(200,62,59,.35)}
 .sh-card-best{margin-top:.6cqw;font-size:2.5cqw;color:#2a6b49}.sh-card-best b{font-weight:400;color:#1d4e35;font-size:3cqw;letter-spacing:.04em}
 .sh-card-stamp{position:absolute;z-index:3;left:2%;top:16%;padding:.5cqw 1.4cqw;border:.5cqw solid #14683f;border-radius:.9cqw;background:#2f9e6b;color:#f7fbf3;font-size:3.2cqw;letter-spacing:.06em;line-height:1.1;transform:rotate(-11deg);pointer-events:none;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.45),inset 0 0 0 .3cqw rgba(247,251,243,.55)}
@@ -1651,7 +1651,7 @@ svg{direction:ltr}
 .sh-env.opening .sh-flap{animation:shFlap 520ms 180ms cubic-bezier(.3,.7,.3,1) forwards}
 .sh-env.opening .sh-card{animation:shCard 420ms 430ms cubic-bezier(.2,.8,.2,1) forwards}
 .sh-env.pre .sh-seal-l,.sh-env.pre .sh-seal-r{animation:none;opacity:0}.sh-env.pre .sh-crack{animation:none;opacity:0}
-.sh-env.pre .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}.sh-env.pre .sh-card{animation:none;transform:translateY(-88%)}
+.sh-env.pre .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}.sh-env.pre .sh-card{animation:none;transform:translateY(-93%)}
 .sh-env-cq.mini.opened .sh-env-stage{margin-top:9cqw}
 .sh-env-skip{margin:14px 0 0;text-align:center;font-size:14px}.sh-env-skip .sh-link{color:var(--sh-muted)}.sh-env-skip .sh-link:hover{color:var(--sh-cream)}
 .sh-env-prompt.go{opacity:1;color:var(--sh-cream);max-width:460px;margin-left:auto;margin-right:auto}
@@ -1663,8 +1663,8 @@ svg{direction:ltr}
 @keyframes shSealL{0%{transform:none;opacity:1}35%{transform:translateX(-5%) rotate(-5deg);opacity:1}100%{transform:translate(-45%,170%) rotate(-38deg);opacity:0}}
 @keyframes shSealR{0%{transform:none;opacity:1}35%{transform:translateX(5%) rotate(5deg);opacity:1}100%{transform:translate(45%,170%) rotate(38deg);opacity:0}}
 @keyframes shFlap{0%{transform:rotateX(0);z-index:4}49%{z-index:4}50%{z-index:1}100%{transform:rotateX(180deg);z-index:1}}
-@keyframes shCard{0%{transform:translateY(0)}100%{transform:translateY(-88%)}}
-@keyframes shCard2{0%{transform:translateY(0)}100%{transform:translate(8%,-152%) rotate(3deg)}}
+@keyframes shCard{0%{transform:translateY(0)}100%{transform:translateY(-93%)}}
+@keyframes shCard2{0%{transform:translateY(0)}100%{transform:translate(8%,-167%) rotate(3deg)}}
 @keyframes shGlow{0%,100%{opacity:1}50%{opacity:.82}}
 @keyframes shPulse{0%,100%{transform:scale(.86);opacity:.75}50%{transform:scale(1.12);opacity:1}}
 @keyframes shBlink{50%{opacity:.15}}
@@ -1717,8 +1717,8 @@ svg{direction:ltr}
   .sh-env-lift,.sh-btn,.sh-folder{transition:none}.sh-cue,.sh-target::before,.sh-rec i,.sh-env:hover .sh-seal{animation:none}
   .sh-env.opening .sh-seal-l,.sh-env.opening .sh-seal-r{animation:none;opacity:0}
   .sh-env.opening .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}
-  .sh-env.opening .sh-card{animation:none;transform:translateY(-74%)}
-  .sh-env.opening .sh-card.sh-card-2{animation:none;transform:translate(8%,-152%) rotate(3deg)}
+  .sh-env.opening .sh-card{animation:none;transform:translateY(-81%)}
+  .sh-env.opening .sh-card.sh-card-2{animation:none;transform:translate(8%,-167%) rotate(3deg)}
 }
 `;
 
