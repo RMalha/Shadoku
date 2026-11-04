@@ -1043,14 +1043,16 @@ export function Bed({ len = 2, horizontal = false }) {
  *  character on the case's target polaroid (VictimPolaroid: the same look from the same name, so the same hair, face,
  *  skin and outfit), seen from above lying on their back on the floor, turned at an angle, in a dark pool of blood: the
  *  portrait's own head and shoulders, the face looking straight up with crossed-out X eyes, carry on into a torso in the
- *  same outfit (the blazer's shirt and tie, a hoodie's pouch...), one arm flung up past the head, the other bent at the
- *  side, legs splayed in dark trousers and shoes. `victim` is the target's name (the polaroid's `name`; default "Victor",
+ *  same outfit (the blazer's shirt and tie, a hoodie's pouch...), in the chalk-outline pose: one arm flung up past the
+ *  head, the other bent at the side, the knee on the raised-arm side bent out (thigh and shin, a crease at the knee), the
+ *  other leg straight, in dark trousers and shoes. `victim` is the target's name (the polaroid's `name`; default "Victor",
  *  the polaroid's default); `dummy` draws the tutorial's ivory crash-test dummy instead (the polaroid's `dummy`);
  *  `master` draws Master U. M. Bra (CORPSE_MASTER: MASTER_LOOK's silver hair and majestic beard, obsidian blazer over a
  *  sweater, crimson bowtie, X eyes), no chalk outline, his round brass spectacles knocked off and lying beside his
  *  head with one lens cracked. `second` draws N. O. Ir, the Master's hooded second in command (CORPSE_SECOND, the target of
- *  "The Uninvited Guests"): a slate-black cloak fanned out under the body, the hood still up round a face lost in shadow with
- *  two pale X eyes, dark gloves, and the brass clasp of the Master's household at the throat.
+ *  "The Uninvited Guests"): a cloak fanned out under the body (its inside a lighter slate than the trousers, so the legs
+ *  read on it), the hood still up round a face lost in shadow with two pale X eyes, dark gloves, and the brass clasp of
+ *  the Master's household at the throat.
  *  `master` wins over `second`, `second` over `victim`; `dummy` wins over all.
  *  Top-down and flush like the other floor items, inked in OS, no shadow. Drawn on every board. */
 export function Corpse({ victim = "Victor", dummy = false, master = false, second = false } = {}) {
@@ -1072,35 +1074,38 @@ export function Corpse({ victim = "Victor", dummy = false, master = false, secon
   // a crash-test dummy is not a person: its pool is dark oil (near-black blue-brown, glossy highlight), not blood
   const blood = dummy ? "#2d2c38" : "#8a1c24", bloodL = dummy ? "#98a0b6" : "#bb4650";
   // the real victim's pool spreads out round the head; the dummy's oil has leaked from its chest, so its head stays clear of the dark (no black "hair" halo)
-  const pool = dummy ? [[6, 33], [9, 24], [19, 21.4], [33, 20], [47, 22], [56, 30], [55, 42], [45, 50], [30, 52.4], [15, 50], [7, 42]] : [[11, 24], [10.6, 11], [19.6, 1.4], [32, -2], [45, 1], [54, 10], [56, 23], [51.4, 34], [40, 39.6], [25, 39.4], [15, 33]];
+  const pool = dummy ? [[6, 33], [9, 24], [19, 21.4], [33, 20], [47, 22], [56, 30], [55, 42], [45, 50], [30, 52.4], [15, 50], [7, 42]] : [[11, 24], [10.6, 11], [19.6, 1.4], [32, -1.4], [43.6, 2.6], [52.4, 11.4], [55.4, 23.6], [51.4, 34], [40, 39.6], [25, 39.4], [15, 33]];
   // the body is laid out head-up in its own frame (portrait centre x 140 -> 32, its top at y 0), then turned onto the tile
   const P = `translate(32 0) scale(${k}) translate(-140 0)`, yH = 45; // yH: hem of the torso
-  const legs = [[[28.4, 44], [25.4, 52.4], [22.6, 59.4]], [[35.6, 44], [40, 52], [44.4, 58.6]]];
+  // chalk-outline pose: the knee on the raised-arm side bent out (hip, knee, ankle), the other leg straight
+  const legs = [[[28.4, 44], [15.6, 52.4], [21.4, 64.6]], [[35.6, 44], [37.6, 56], [39.2, 67]]];
   const arms = [[[22.4, 32], [13, 26.4], [12.6, 15]], [[41.6, 32], [49.6, 38.6], [49.6, 47]]];
-  const LW = 7.6, AW = 6;
+  const LW = 6.4, AW = 5.2;
   const line = (pts) => `M${pts.map((q) => q.join(" ")).join("L")}`;
-  const shoes = [[21.8, 61.6, -18], [45.4, 60.6, 30]], hands = [[12.8, 12.8], [49.6, 49]];
+  const shoes = [[20.6, 68.2, 26], [40.4, 70.4, -32]], hands = [[12.8, 12.8], [49.6, 49]];
+  const lining = "#2a2d40"; // N. O. Ir's cloak inside: a step lighter than the trousers, so the legs read on it
   const torso = `M19.8 30V37Q20.6 43.4 22.8 ${yH + .4}Q32 ${yH + 2.4} 41.2 ${yH + .4}Q43.4 43.4 44.2 37V30Z`;
   return (
-    <g transform="translate(32 32.6) rotate(-34) scale(.82) translate(-32 -33)">
+    <g transform="translate(32.4 32) rotate(-34) scale(.77) translate(-32 -37.4)">
       <defs><clipPath id={`${u}b`}><rect x="0" y="-40" width="280" height="313" /></clipPath></defs>
       {/* blood pool spreading out from under the head and shoulders, one wet sheen and two drops */}
       <path d={lobed(pool, .62)} fill={blood} {...OS} />
       {dummy
         ? <><path d="M10.4 37Q11.4 44.6 17.6 48.4" fill="none" stroke={bloodL} strokeWidth="2" strokeLinecap="round" /><path d="M50.6 28.4Q53.4 32.6 52.6 38" fill="none" stroke={bloodL} strokeWidth="1.5" strokeLinecap="round" /></>
-        : <path d="M45.4 4.4Q51.6 7.4 52.8 12.8" fill="none" stroke={bloodL} strokeWidth="1.8" strokeLinecap="round" />}
-      <circle cx="59.6" cy="32" r="1.7" {...IS} fill={blood} /><circle cx="7.6" cy="35" r="1.2" {...IS} fill={blood} />
-      {/* N. O. Ir's cloak, fanned out on the floor under the body */}
-      {N && <><path d="M18.4 27Q7 43 11 58.6Q32 65.4 53 58.6Q57 43 45.6 27Z" fill="#101119" {...OS} /><path d="M17 44Q22 52 20 60M47 44Q42 52 44 60" {...IS} stroke="#2a2e40" /></>}
+        : <path d="M44 5.4Q50 8.4 51.2 13.6" fill="none" stroke={bloodL} strokeWidth="1.8" strokeLinecap="round" />}
+      <circle cx="59.6" cy="32" r="1.7" {...IS} fill={blood} /><circle cx="6.4" cy="33.4" r="1.2" {...IS} fill={blood} />
+      {/* N. O. Ir's cloak, fanned out on the floor under the body (wide on the bent knee's side) */}
+      {N && <><path d="M18.4 27Q4 42 9.4 61Q30 72 50.4 68Q56.4 46 45.6 27Z" fill={lining} {...OS} /><path d="M15.6 44Q19.4 53 16.6 61.6M47 44Q42 56 43.6 67" {...IS} stroke={mix(lining, .16)} /></>}
       {/* legs, shoes, arms (sleeves of the outfit) and hands: an ink pass, then the colours */}
       <g fill="none" stroke={INK} strokeLinejoin="round" strokeLinecap="round">
         {legs.map((l, i) => <path key={`l${i}`} d={line(l)} strokeWidth={LW + 3} />)}
         {arms.map((a, i) => <path key={`a${i}`} d={line(a)} strokeWidth={AW + 3} />)}
       </g>
-      {shoes.map(([x, y, r]) => <ellipse key={x} cx={x} cy={y} rx="3.4" ry="4.3" transform={`rotate(${r} ${x} ${y})`} fill={shoe} {...OS} />)}
+      {shoes.map(([x, y, r]) => <ellipse key={x} cx={x} cy={y} rx="3.2" ry="4.7" transform={`rotate(${r} ${x} ${y})`} fill={shoe} {...OS} />)}
       {legs.map((l, i) => <path key={`l${i}`} d={line(l)} fill="none" stroke={trousers} strokeWidth={LW} strokeLinejoin="round" strokeLinecap="round" />)}
+      <path d="M20.6 51.4Q18.4 53.4 19.6 55.8" {...IS} stroke={mix(trousers, -.45)} />{/* the crease inside the bent knee */}
       {arms.map((a, i) => <path key={`a${i}`} d={line(a)} fill="none" stroke={sleeve} strokeWidth={AW} strokeLinejoin="round" strokeLinecap="round" />)}
-      {hands.map(([x, y]) => <circle key={x} cx={x} cy={y} r="2.8" fill={skin} {...OS} />)}
+      {hands.map(([x, y]) => <circle key={x} cx={x} cy={y} r="2.6" fill={skin} {...OS} />)}
       {/* trousers at the hips, then the torso in the outfit's colour, carrying on from the portrait's shoulders */}
       <path d={inkBox(22.6, yH - 4, 18.8, 6.6, 2.6, .3)} fill={trousers} {...OS} />
       <path d={torso} fill={clothes} {...OS} />
