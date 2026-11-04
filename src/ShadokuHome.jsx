@@ -706,17 +706,18 @@ function useDismiss(open, setOpen, ref) {
   }, [open, setOpen, ref]);
 }
 
-/** The menu groups (Contracts, Profile) the player folded, kept in this browser: a Set of group keys + a toggle. */
-const MENU_FOLD_KEY = "shadoku-menu-fold";
+/** The menu groups (Contracts, Profile) the player opened, kept in this browser: every group starts folded. Returns `folded` (has(key): is the
+ *  group shut) and a toggle. Shared with the game's rail menu (ShadokuGame RailMenu) through the same storage key. */
+const MENU_OPEN_KEY = "shadoku-menu-open";
 export function useMenuFold() {
-  const [folded, setFolded] = useState(() => { try { return new Set(JSON.parse(store.get(MENU_FOLD_KEY) || "[]")); } catch { return new Set(); } });
-  const toggle = useCallback((k) => setFolded((f) => {
+  const [opened, setOpened] = useState(() => { try { return new Set(JSON.parse(store.get(MENU_OPEN_KEY) || "[]")); } catch { return new Set(); } });
+  const toggle = useCallback((k) => setOpened((f) => {
     const n = new Set(f);
     if (n.has(k)) n.delete(k); else n.add(k);
-    store.set(MENU_FOLD_KEY, JSON.stringify([...n]));
+    store.set(MENU_OPEN_KEY, JSON.stringify([...n]));
     return n;
   }), []);
-  return [folded, toggle];
+  return [{ has: (k) => !opened.has(k) }, toggle];
 }
 
 /** Sign In, or (signed in) the codename chip that opens the Profile menu: Info, Stats, Collection, Log Out. */
@@ -1505,8 +1506,8 @@ svg{direction:ltr}
 .sh-menu a{display:block;padding:12px 14px;border-radius:8px;color:var(--sh-cream);text-decoration:none;font:600 16px 'Barlow',sans-serif}
 .sh-menu button{display:block;width:100%;padding:12px 14px;border:0;border-radius:8px;background:none;color:var(--sh-cream);text-align:start;font:600 16px 'Barlow',sans-serif;cursor:pointer}
 .sh-menu a:hover,.sh-menu a:focus-visible,.sh-menu button:hover,.sh-menu button:focus-visible{background:rgba(217,155,38,.14);outline:none}.sh-menu a.on{color:var(--sh-brass)}.sh-header .sh-btn.keep{display:inline-flex}
-.sh-menu-h{display:block;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;font:400 12px 'Special Elite',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--sh-brass)}
-.sh-menu button.sh-menu-h{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;border-radius:0;font:400 12px 'Special Elite',monospace;cursor:pointer}
+.sh-menu-h{display:block;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;font:600 13px 'Barlow',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--sh-brass)}
+.sh-menu button.sh-menu-h{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;border-radius:0;font:600 13px 'Barlow',sans-serif;cursor:pointer}
 .sh-menu-h .fold{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}.sh-menu-h[aria-expanded=false] .fold{transform:rotate(-45deg)}
 .sh-menu .sub{padding-inline-start:26px}.sh-menu .sh-menu-sep{margin-top:4px;border-top:1px solid #34344a;border-radius:0 0 8px 8px}
 .sh-userpill{position:relative}.sh-userchip svg{color:var(--sh-muted);flex:none}

@@ -85,12 +85,15 @@ export const DEFAULT_SETTINGS = {
   rightClick: "light", // a mouse right-click on a tile: "light" | "cross" (X) | "menu" (pick Light or X) | "double" (Light; a double right-click: X)
   lightTint: "warm", myTint: "warm", // light colours (LIGHT_TINTS): the scapegoats' sightlines · the tiles lit with the Light Switch
   symbols: false, // the Note Symbols palette under the scapegoats (NOTE_SYMBOLS)
+  symbolSet: "otqx", // …and which of its symbols are offered: their ids (NOTE_SYMBOLS keys), all of them by default
 };
 /** ⚙ Note Symbols: pencil marks that stand for nobody. A tap notes one in a tile beside the scapegoats' letters (in `notes`), a hold marks the
  *  tile with it in big (`syms`); neither ever counts toward the solution. The ids are lowercase so they never clash with the letters. */
 export const NOTE_SYMBOLS = { o: { shape: "circle", color: "#2ad4c4" }, t: { shape: "triangle", color: "#b48cff" }, q: { shape: "square", color: "#ffb02e" }, x: { shape: "star", color: "#f4efe2" } };
 const SYM_IDS = Object.keys(NOTE_SYMBOLS);
 const isSym = (id) => !!NOTE_SYMBOLS[id];
+/** The note symbols the player chose in ⚙ (settings.symbolSet), in palette order. */
+const chosenSyms = (s) => SYM_IDS.filter((id) => String(s.symbolSet == null ? SYM_IDS.join("") : s.symbolSet).includes(id));
 /** A tile's notes for a screen reader: the letters, then the note symbols by name ("A B Circle", "Star (mark)"). */
 const tileNoteText = (s, k, t) => {
   const n = s.syms[k] ? "" : s.notes[k] || "", nm = (ch) => t(`game.sym.${NOTE_SYMBOLS[ch].shape}`); // notes are hidden under a held symbol
@@ -1446,11 +1449,12 @@ function RailMenu({ items, onSettings }) {
     return () => { document.removeEventListener("pointerdown", out); document.removeEventListener("keydown", esc); };
   }, [open]);
   const pick = (it) => { setOpen(false); if (it.settings) onSettings(); else if (it.onSelect) it.onSelect(); };
-  const [folded, setFolded] = useState(() => { try { return new Set(JSON.parse(window.localStorage.getItem("shadoku-menu-fold") || "[]")); } catch { return new Set(); } }); // the groups folded shut (shared with the site's ☰ menu)
-  const fold = (k) => setFolded((f) => {
+  const [opened, setOpened] = useState(() => { try { return new Set(JSON.parse(window.localStorage.getItem("shadoku-menu-open") || "[]")); } catch { return new Set(); } }); // the groups the player opened: all start folded (shared with the site's ☰ menu)
+  const folded = { has: (k) => !opened.has(k) };
+  const fold = (k) => setOpened((f) => {
     const n = new Set(f);
     if (n.has(k)) n.delete(k); else n.add(k);
-    try { window.localStorage.setItem("shadoku-menu-fold", JSON.stringify([...n])); } catch { /* private mode */ }
+    try { window.localStorage.setItem("shadoku-menu-open", JSON.stringify([...n])); } catch { /* private mode */ }
     return n;
   });
   const foldKey = (it) => (it.key === "contracts" ? "pContracts" : it.key); // the site menu calls the Contracts group "pContracts"
@@ -1467,7 +1471,7 @@ function RailMenu({ items, onSettings }) {
             if (it.heading) group = foldKey(it); else if (!it.sub) group = null;
             return (it.heading
             ? <button key={it.key} type="button" className="sk-railmenu-h" aria-expanded={!folded.has(group)} onClick={() => fold(foldKey(it))}>{it.label}<span className="fold" aria-hidden="true" /></button>
-            : it.sub && folded.has(group) ? null // its group is folded shut
+            : it.sub && group && folded.has(group) ? null // its group is folded shut
             : it.href
               ? <a key={it.key} role="menuitem" className={it.sub ? "sub" : undefined} href={it.href} onClick={() => setOpen(false)}>{it.label}</a>
               : <button key={it.key} type="button" role="menuitem" className={it.sub ? "sub" : undefined} onClick={() => pick(it)}>{it.label}</button>);
@@ -1630,7 +1634,19 @@ function SettingsPanel({ s, set, reset, onClose, langPicker = null, sample, hove
             {sw("selHi", "selHi")}
             {sw("portrait", "portrait")}
             {sw("gender", "gender")}
-            {sw("symbols", "symbols")}
+            {sw("symbols", "symbols", s.symbols && (
+              <div className="sk-set-symrow" role="group" aria-label={t("game.symbols")}>
+                {SYM_IDS.map((id) => {
+                  const on = chosenSyms(s).includes(id), nm = t(`game.sym.${NOTE_SYMBOLS[id].shape}`);
+                  return (
+                    <button key={id} type="button" className={`sk-set-sym${on ? " on" : ""}`} aria-pressed={on} title={nm} aria-label={nm}
+                      onClick={() => set({ symbolSet: SYM_IDS.filter((x) => (x === id ? !on : chosenSyms(s).includes(x))).join("") })}>
+                      <svg viewBox="0 0 40 40" aria-hidden="true"><SymShape id={id} cx={20} cy={20} r={13} fill={NOTE_SYMBOLS[id].color} stroke={INK} strokeWidth="2.6" /></svg>
+                    </button>
+                  );
+                })}
+              </div>
+            ))}
             <div className="sk-set-row">
               <b>{t("settings.tokenStyle.title")}</b>
               <div className="sk-set-opts">
@@ -1836,7 +1852,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     setActive(id); setTool("suspect"); cancelHold(); emit("select", { id });
   };
   useEffect(() => { if (tool !== "suspect") setAutoPicked(false); }, [tool]);
-  useEffect(() => { if (!settings.symbols && isSym(active)) setActive(p.suspects[0].id); }, [settings.symbols]); // eslint-disable-line react-hooks/exhaustive-deps -- the palette was switched off
+  useEffect(() => { if (isSym(active) && (!settings.symbols || !chosenSyms(settings).includes(active))) setActive(p.suspects[0].id); }, [settings.symbols, settings.symbolSet]); // eslint-disable-line react-hooks/exhaustive-deps -- the palette was switched off, or that symbol dropped from it
   const tapAgain = (id) => (!legacy && tool === "suspect" && active === id && !autoPicked ? t("game.tapAgain") : undefined); // the card's "Tap again to deselect"
 
   /** One tap with a suspect: a tile that has a token is left alone (use the Eraser) · otherwise toggle this suspect's note.
@@ -2441,11 +2457,11 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
               coach={coachCard === a.id} hint={tapAgain(a.id)} hi={hiCard === a.id || hintCard === a.id} />
           ))}
         </div>
-        {settings.symbols && (
+        {settings.symbols && chosenSyms(settings).length > 0 && (
           <section className="sk-syms" aria-label={t("game.symbols")}>
             <div className="sk-eyebrow">{t("game.symbols")}</div>
             <div className="sk-syms-row">
-              {SYM_IDS.map((id) => (
+              {chosenSyms(settings).map((id) => (
                 <button key={id} type="button" className="sk-sym" aria-pressed={tool === "suspect" && active === id} onClick={() => pick(id)} title={t(`game.sym.${NOTE_SYMBOLS[id].shape}`)} aria-label={t(`game.sym.${NOTE_SYMBOLS[id].shape}`)}>
                   <svg viewBox="0 0 40 40" aria-hidden="true"><SymShape id={id} cx={20} cy={20} r={13} fill={NOTE_SYMBOLS[id].color} stroke={INK} strokeWidth="2.6" /></svg>
                 </button>
@@ -2705,6 +2721,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         return (
           <DoneWindow label={tr("game.done.title", "Contract Completed!")} closeLabel={tr("game.dismiss", "Dismiss")} onClose={close}>
             <b className="sk-done-t">{tr("game.done.title", "Contract Completed!")}</b>
+            <span className="sk-done-time">⏱ {tr("game.timerSolved", `Solved in ${time}`, { time })}</span>
             {p.id === UMBRA_FINALE
               ? <p className="sk-done-lore"><b>{t("game.solved.umbra.title")}</b> {t("game.solved.umbra.text")}</p>
               : <>
@@ -2983,6 +3000,11 @@ const CSS = `
 .sk-sym[aria-pressed=true]{border-color:var(--brass);box-shadow:0 0 0 3px rgba(217,155,38,.18)}
 .sk-sym:focus-visible{outline:2px solid #6fd0ff;outline-offset:2px}
 .sk-symic{width:18px;height:18px;vertical-align:-3px;margin-inline-end:6px}
+.sk-set-symrow{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 2px}
+.sk-set-sym{width:48px;height:48px;display:grid;place-items:center;border-radius:12px;border:1.5px solid #3a3a4c;background:#17171f;opacity:.45;transition:opacity .12s,border-color .12s}
+.sk-set-sym svg{width:30px;height:30px}
+.sk-set-sym.on{opacity:1;border-color:var(--brass2);background:rgba(217,155,38,.12)}
+.sk-set-sym:focus-visible{outline:2px solid #6fd0ff;outline-offset:2px}
 .sk-set-dot{width:22px;height:22px;border-radius:50%;background:var(--tc);border:2px solid rgba(0,0,0,.45);box-shadow:0 0 10px var(--tc)}
 .sk-tool.sk-light{touch-action:none;-webkit-touch-callout:none} /* touch: holding it opens the colour strip */
 .sk-tints{position:fixed;z-index:70;display:flex;flex-direction:column;align-items:center;gap:5px;padding:8px 10px 6px;border-radius:16px;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.6)}
@@ -3110,6 +3132,7 @@ const CSS = `
 .sk-done-x{position:absolute;top:6px;inset-inline-end:8px;width:32px;height:32px;font-size:24px;line-height:1;color:var(--muted)}
 .sk-done-t{font:400 25px/1.1 'Special Elite',monospace;letter-spacing:.1em;color:var(--brass2);padding:0 14px}
 .sk-done-lore{margin:0;font-size:14px}
+.sk-done-time{font:600 16px Barlow,system-ui,sans-serif;color:var(--fg);font-variant-numeric:tabular-nums}
 .sk-done-room{font-size:13.5px;color:var(--muted)}
 .sk-done-card .um-relic,.sk-done-card .sk-umbra-tok{text-align:start;width:100%;margin-top:0}
 .sk-done-act{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:2px}
@@ -3132,7 +3155,7 @@ const CSS = `
 .sk-railmenu-list{position:absolute;top:calc(100% + 6px);inset-inline-end:0;z-index:40;min-width:200px;display:flex;flex-direction:column;padding:6px;border-radius:12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,.6)}
 .sk-railmenu-list>*{display:block;width:100%;padding:11px 14px;border-radius:8px;text-align:start;color:var(--fg);text-decoration:none;font:600 15px Barlow,system-ui,sans-serif}
 .sk-railmenu-list>*:hover,.sk-railmenu-list>*:focus-visible{background:rgba(217,155,38,.14);outline:none}
-.sk-railmenu-list>.sk-railmenu-h{margin-top:4px;padding:8px 14px 4px;border-top:1px solid var(--line);border-radius:0;font:400 12px 'Special Elite',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--brass2);cursor:default}
+.sk-railmenu-list>.sk-railmenu-h{margin-top:4px;padding:8px 14px 4px;border-top:1px solid var(--line);border-radius:0;font:600 13px Barlow,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--brass2);cursor:default}
 .sk-railmenu-list>.sk-railmenu-h{display:flex;align-items:center;justify-content:space-between;gap:10px;border-inline:0;border-bottom:0;cursor:pointer}
 .sk-railmenu-h .fold{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}.sk-railmenu-h[aria-expanded=false] .fold{transform:rotate(-45deg)}
 .sk-railmenu-list>.sub{padding-inline-start:26px}
