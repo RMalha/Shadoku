@@ -52,6 +52,12 @@ export async function onUsernameChange(name) {
   if (r && r.status === 409) throw new Error("taken");
 }
 
+/** → true saved, false refused, undefined no backend (the avatar stays in this browser). */
+export async function onAvatarChange(avatar) {
+  const r = await call("/api/avatar", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ avatar }) });
+  return r ? r.status === 200 : undefined;
+}
+
 /** → true when the server erased the account (or there is none to erase). */
 export async function onDeleteAccount() {
   stopSync();

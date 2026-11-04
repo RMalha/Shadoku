@@ -9,3 +9,11 @@ compatibility_date = "2026-10-01"
 [[kv_namespaces]]
 binding = "SHADOKU_KV"
 id = "5dada60c1d764a75bd966fb67378b04b"
+
+# The Syndicate ranking and the community puzzles (functions/_lib/db.js; tables are created on first use).
+# Created with: npx wrangler d1 create shadoku. Without this binding those endpoints answer 503 and the pages say the feature is unavailable.
+# Locally, wrangler pages dev uses its own local copy of this database (tables are created on first use there too).
+[[d1_databases]]
+binding = "SHADOKU_DB"
+database_name = "shadoku"
+database_id = "256df518-c797-4a52-8683-3bf3b19d9220"

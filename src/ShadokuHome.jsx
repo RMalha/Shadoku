@@ -26,7 +26,8 @@ import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
 import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, DAILIES, dailyShelves, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL } from "./ShadokuArt.jsx";
+import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, Figure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
+import { avatarOf, decodeLook } from "./avatarLook.js";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
@@ -318,12 +319,14 @@ function demoProfile(provider) {
  *       If the profile has no `username`, a random noir alias is assigned and the codename picker opens.
  *   onCheckUsername(name) → Promise<boolean | { ok } | { available }>   server-side uniqueness check
  *   onUsernameChange(name) → called after the player saves a codename (persist it server-side)
+ *   onAvatarChange(avatar) → Promise<boolean | undefined>   the profile's avatar ("" = S. H. Adow, "photo", "L:…": src/avatarLook.js);
+ *       false = the server refused it, undefined = no backend (kept in this browser)
  *   onSession()  → Promise<profile | null | undefined>   on load: the signed-in profile (with its `id`), null when the
  *       backend says nobody is signed in (a stored non-demo session is dropped), undefined when there is no backend
  *   onSignOut()  → called on log out        onDeleteAccount() → Promise<boolean>   erase the account server-side
  *   (src/auth.js implements all of them against functions/api/*; onCheckUsername may return undefined = check locally)
  */
-function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError }) {
+function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange, onAvatarChange, onSession, onSignOut, onDeleteAccount, authError }) {
   const [user, setUser] = useState(() => {
     try { const raw = store.get(USER_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; }
   });
@@ -346,7 +349,7 @@ function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange, o
         provider,
         displayName: profile.displayName || "",
         email: profile.email || "",
-        avatarUrl: profile.avatarUrl || "",
+        avatarUrl: profile.avatarUrl || "", avatar: profile.avatar || "",
         username: profile.username || randomAlias(),
         demo,
       };
@@ -368,7 +371,7 @@ function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange, o
       const kept = cur && cur.id === profile.id && !cur.demo ? cur.username : "";
       const next = {
         id: profile.id, provider: profile.provider,
-        displayName: profile.displayName || "", email: profile.email || "", avatarUrl: profile.avatarUrl || "",
+        displayName: profile.displayName || "", email: profile.email || "", avatarUrl: profile.avatarUrl || "", avatar: profile.avatar || "",
         username: profile.username || kept || randomAlias(), demo: false,
       };
       setUser(next); persist(next);
@@ -406,9 +409,21 @@ function AuthProvider({ children, onSignIn, onCheckUsername, onUsernameChange, o
     try { await onUsernameChange?.(name); } catch { /* backend errors surface in your hook */ }
   }, [user, persist, onUsernameChange]);
 
+  /** → true once saved (on the server when there is one). */
+  const setAvatar = useCallback(async (avatar) => {
+    const cur = userRef.current;
+    if (!cur) return false;
+    if (!cur.demo && typeof onAvatarChange === "function") {
+      try { if ((await onAvatarChange(avatar)) === false) return false; } catch { return false; }
+    }
+    const next = { ...userRef.current, avatar };
+    setUser(next); persist(next);
+    return true;
+  }, [persist, onAvatarChange]);
+
   const value = useMemo(
-    () => ({ user, busy, error, authFailed, signIn, signOut, deleteAccount, checkUsername, setUsername, pendingCodename, clearPendingCodename: () => setPendingCodename(false) }),
-    [user, busy, error, authFailed, signIn, signOut, deleteAccount, checkUsername, setUsername, pendingCodename],
+    () => ({ user, busy, error, authFailed, signIn, signOut, deleteAccount, checkUsername, setUsername, setAvatar, pendingCodename, clearPendingCodename: () => setPendingCodename(false) }),
+    [user, busy, error, authFailed, signIn, signOut, deleteAccount, checkUsername, setUsername, setAvatar, pendingCodename],
   );
   return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;
 }
@@ -434,11 +449,11 @@ const navByHistory = (to) => {
 export const useNav = () => useContext(NavCtx) || navByHistory;
 
 /* ═════════════════════════ ROOT PROVIDERS ═════════════════════════ */
-export function ShadokuProviders({ children, onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError, onStart, onSkip, onNav }) {
+export function ShadokuProviders({ children, onSignIn, onCheckUsername, onUsernameChange, onAvatarChange, onSession, onSignOut, onDeleteAccount, authError, onStart, onSkip, onNav }) {
   return (
     <NavCtx.Provider value={onNav || null}>
       <LangProvider>
-        <AuthProvider onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}
+        <AuthProvider onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange} onAvatarChange={onAvatarChange}
           onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError}>
           <ModalHost authError={authError} onStart={onStart} onSkip={onSkip}>{children}</ModalHost>
         </AuthProvider>
@@ -684,15 +699,24 @@ function SignInModal({ onClose }) {
   );
 }
 
+/** A player's avatar disc: S. H. Adow unless they chose their account picture or built a portrait (src/avatarLook.js). `user`: { avatar, avatarUrl }. */
 export function Avatar({ user }) {
-  const initial = (user.username || user.displayName || "?").charAt(0).toUpperCase();
-  return user.avatarUrl
-    ? <img className="sh-avatar" src={user.avatarUrl} alt="" referrerPolicy="no-referrer" />
-    : <span className="sh-avatar">{initial}</span>;
+  const a = avatarOf(user);
+  if (a.startsWith("https://")) return <img className="sh-avatar" src={a} alt="" referrerPolicy="no-referrer" />;
+  return <span className="sh-avatar sh-avatar-art" aria-hidden="true"><AvatarArt code={a} /></span>;
+}
+/** The avatar's drawing in a 96×96 SVG: the portrait's face crop on its backdrop, or S. H. Adow. */
+export function AvatarArt({ code, look = null }) {
+  const L = look || decodeLook(code);
+  return (
+    <svg viewBox="0 0 96 96" width="100%" height="100%" focusable="false">
+      {L ? <><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={TOKEN_ZOOM} cy={TOKEN_CY} sw={TOKEN_SW} /></> : <AdowFigure zoom={TOKEN_ZOOM} cy={TOKEN_CY} sw={5.6} />}
+    </svg>
+  );
 }
 
 /** The profile pages of the menus, in order: [{ to, key }] (labels: t(`profile.tab.${key}`)). */
-export const PROFILE_PAGES = [{ to: "/profile", key: "info" }, { to: "/profile/stats", key: "stats" }, { to: "/profile/collection", key: "collection" }];
+export const PROFILE_PAGES = [{ to: "/profile", key: "info" }, { to: "/profile/stats", key: "stats" }, { to: "/profile/collection", key: "collection" }, { to: "/profile/ranking", key: "ranking" }];
 
 /** Closes a dropdown on a click outside `ref` or on Escape, while `open`. */
 function useDismiss(open, setOpen, ref) {
@@ -857,6 +881,7 @@ export function LanguageSelector() {
 
 /** The site's pages, in menu order: [{ to, key }] (labels: t(`nav.${key}`)); a `heading` has no page and heads the `sub` pages after it. */
 export const SITE_PAGES = [{ to: "/", key: "pHome" }, { key: "pContracts", heading: true }, { to: "/play", key: "pStory", sub: true }, { to: "/daily", key: "pDaily", sub: true },
+  { key: "pCommunity", heading: true }, { to: "/community/create", key: "pCreate", sub: true }, { to: "/community", key: "pCommunityPuzzles", sub: true },
   { to: "/about", key: "about", sep: true }, { to: "/contact", key: "contact" }];
 
 /**
@@ -902,8 +927,8 @@ export function SiteMenu({ current = "", onNav }) {
       </button>
       {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
-          {SITE_PAGES.map((m) => (m.heading ? <button key={m.key} type="button" className="sh-menu-h" aria-expanded={!folded.has(m.key)} onClick={() => toggle(m.key)}>{t(`nav.${m.key}`)}<span className="fold" aria-hidden="true" /></button>
-            : m.sub && folded.has("pContracts") ? null // the Contracts group is folded
+          {SITE_PAGES.map((m, i) => (m.heading ? <button key={m.key} type="button" className="sh-menu-h" aria-expanded={!folded.has(m.key)} onClick={() => toggle(m.key)}>{t(`nav.${m.key}`)}<span className="fold" aria-hidden="true" /></button>
+            : m.sub && folded.has(SITE_PAGES.slice(0, i).reverse().find((x) => x.heading).key) ? null // its group (Contracts, Community) is folded
             : m.to === "/play" && !initiated
               ? <button key={m.to} type="button" className="sub" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the story
               : m.to === "/daily" && !initiated // the daily contracts open after the initiation too: locked, it offers the initiation
@@ -1525,6 +1550,7 @@ svg{direction:ltr}
 .sh-userchip{display:flex;align-items:center;gap:8px;background:var(--sh-panel);border:1px solid var(--sh-line);border-radius:999px;padding:3px 12px 3px 4px;padding-inline:4px 12px;color:var(--sh-cream);font:600 14px 'Barlow',sans-serif;cursor:pointer}
 .sh-userchip:hover{border-color:var(--sh-brass)}.sh-userchip-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sh-avatar{width:28px;height:28px;border-radius:50%;background:var(--sh-brass);color:#1a1408;display:inline-flex;align-items:center;justify-content:center;font:700 14px 'Barlow',sans-serif;object-fit:cover;flex:none}
+.sh-avatar-art{background:#171a26;overflow:hidden;box-shadow:inset 0 0 0 1.5px rgba(245,240,230,.55)}.sh-avatar-art svg{display:block}
 .sh-iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--sh-line);background:var(--sh-panel);color:var(--sh-brass);font:700 17px 'Special Elite',monospace;cursor:pointer}
 .sh-iconbtn:hover{border-color:var(--sh-brass)}
 

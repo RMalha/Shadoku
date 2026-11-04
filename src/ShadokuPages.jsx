@@ -4,9 +4,10 @@
  *
  *   /about                 AboutPage     what Shadoku is, how a puzzle is made, the homage
  *   /contact               ContactPage   the e-mail, and what to put in a report
- *   /profile               ProfilePage   (signed in) Info: avatar, codename, name, e-mail, sign-in provider
+ *   /profile               ProfilePage   (signed in) Info: avatar, codename, name, e-mail, sign-in provider; the avatar maker (ShadokuAvatar.jsx)
  *   /profile/stats                       Stats: contracts played and fulfilled, relics, hints, fastest time per difficulty
  *   /profile/collection                  Collection: the ten relics of The Umbra Conspiracy (umbra.jsx), and the Evidence Board once all are in
+ *   /profile/ranking                     Ranking: every signed-in player (ShadokuCommunity.jsx RankingPanel, passed in by ShadokuApp)
  *   /test/umbra            TestUmbraPage not linked: the Evidence Board and Dossier № 000-OMEGA without the ten relics (test mode: nothing is saved)
  *
  * Signed out, /profile asks you to sign in. Progress is read from this browser's storage (ShadokuGame's readPlayStats); signed in
@@ -15,6 +16,7 @@
  */
 import React, { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope, CoffeeCard } from "./ShadokuHome.jsx";
+import { AvatarMaker } from "./ShadokuAvatar.jsx";
 import { PUZZLES, normalizePuzzles, readPlayStats, fmtTime, dailyRecords } from "./ShadokuGame.jsx";
 import { RelicCollection, EvidenceBoard, FinalDossier, ObsidianEnvelope, OmegaFolder, RELIC_CASES, UMBRA_HARD, UMBRA_FINALE, isUnlocked, resetUmbraLocks, useUmbraTick } from "./umbra.jsx";
 import { MasterPolaroid } from "./ShadokuArt.jsx";
@@ -25,7 +27,7 @@ import { useProgressTick } from "./sync.js";
 export const DIFF_ORDER = ["Tutorial", "Very Easy", "Easy", "Medium", "Hard", "Expert"];
 
 /** Sets document.title to t(key) while the page is open. */
-function usePageTitle(key) {
+export function usePageTitle(key) {
   const { t } = useLang();
   useEffect(() => {
     const prev = document.title;
@@ -35,7 +37,7 @@ function usePageTitle(key) {
 }
 
 /** Header + a centred column + footer. `current` marks the page in the ☰ menu. */
-function Page({ go, current, children, wide = false }) {
+export function Page({ go, current, children, wide = false }) {
   return (
     <div className="sh-root sh-pageroot">
       <style data-shadoku="pages">{PAGES_CSS}</style>
@@ -97,8 +99,8 @@ export function ContactPage({ go }) {
 }
 
 /* ═════════════════════════ /profile ═════════════════════════ */
-/** `tab`: "info" | "stats" | "collection". `onLaunch(id)` opens a contract (the Evidence Board's "Enter …" button). */
-export function ProfilePage({ go, tab = "info", puzzles, onLaunch }) {
+/** `tab`: "info" | "stats" | "collection" | "ranking". `onLaunch(id)` opens a contract (the Evidence Board's "Enter …" button). `ranking`: the Ranking tab's content. */
+export function ProfilePage({ go, tab = "info", puzzles, onLaunch, ranking = null }) {
   const { t } = useLang();
   const { user, signOut } = useAuth();
   const page = PROFILE_PAGES.find((m) => m.key === tab) || PROFILE_PAGES[0];
@@ -122,6 +124,7 @@ export function ProfilePage({ go, tab = "info", puzzles, onLaunch }) {
         {page.key === "info" && <ProfileInfo user={user} />}
         {page.key === "stats" && <ProfileStats puzzles={puzzles} />}
         {page.key === "collection" && <ProfileCollection puzzles={puzzles} onLaunch={onLaunch} />}
+        {page.key === "ranking" && ranking}
       </>}
     </Page>
   );
@@ -135,7 +138,7 @@ function ProfileInfo({ user }) {
     ["profile.info.email", user.email],
     ["profile.info.provider", user.provider === "github" ? "GitHub" : user.provider === "google" ? "Google" : user.provider],
   ];
-  return (
+  return <>
     <section className="sh-pcard sh-pinfo">
       <div className="sh-pinfo-top">
         <Avatar user={user} />
@@ -151,7 +154,8 @@ function ProfileInfo({ user }) {
       {user.demo && <p className="sh-muted sm">{t("creds.demo")}</p>}
       <p className="sh-muted sm">{t(user && !user.demo ? "profile.info.synced" : "profile.info.local")}</p>
     </section>
-  );
+    <AvatarMaker />
+  </>;
 }
 
 const usePack = (puzzles) => useMemo(() => (puzzles ? normalizePuzzles(puzzles) : PUZZLES), [puzzles]);

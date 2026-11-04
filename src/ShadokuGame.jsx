@@ -1419,6 +1419,8 @@ function SuspectSheet({ q, look, color, placed, emph, beach, onClose, gender = n
  *  - helpExtra       node, or ({ close }) => node, appended to the "How to play" dialog (e.g. a "Replay tutorial" button)
  *  - fixedCase      the contract cannot be changed from here (no picker, no arrows): the wrapper's contracts page is the only way
  *  - onExit          () => void, the "Back to Contracts" button of the solved banner (with fixedCase)
+ *  - exitLabel       that button's text instead of "Back to Contracts →" (a community puzzle goes back to the community list)
+ *  - doneExtra       ({ id, close }) => node, drawn under the time in the "Contract Completed!" window (a community puzzle's star rating)
  *  - renderEnvelope  ({ puzzle, label, onPick, variant?, onAccept?, tone? }) => node: the closed envelope of the next contract in the "Contract Completed!" window
  *                    (tone "omega": the finale's red folder after The Uninvited Guests), and (variant "modal", onAccept, onOpen) the Uninvited's
  *                    sealed black envelope in Dossier № 000-OMEGA (the site passes ContractEnvelope; absent = no envelope)
@@ -1667,7 +1669,7 @@ export default function ShadokuGame(props) {
   const ctxT = useText(), t = props.t || ctxT;
   return <TextContext.Provider value={t}><GameScreen {...props} t={t} /></TextContext.Provider>;
 }
-function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, dossierCard = null, t }) {
+function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, dossierCard = null, doneExtra = null, exitLabel = null, t }) {
   const puzzles = useMemo(() => normalizePuzzles(puzzlesProp), [puzzlesProp]);
   const heads = useMemo(() => puzzles.map((q) => localizeHead(q, trOf(t))), [puzzles, t]); // title + difficulty in the active language, for the picker / title bar
   const [caseIdx, setCaseIdx] = useState(() => {
@@ -2520,7 +2522,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                     : <div><b>{t("game.contractFulfilled")}</b><span>{t("game.shadowWasIn", { room: shadowRoom || t("game.dark") })}</span>
                       {extra.map((a) => { const at = hiderCell(p, a.id), room = at ? (p.roomLabels || p.roomNames)[geo.room(...at)] : null; // the other assassins' hiding places too
                         return room ? <span key={a.id} className="sk-solved-more">{tr("game.assassinWasIn", `${nameOf(a.id)} was hiding in the ${room}.`, { name: nameOf(a.id), room })}</span> : null; })}</div>}
-                  {fixedCase ? (onExit && <button type="button" onClick={onExit}>{t("game.backToContracts")}</button>)
+                  {fixedCase ? (onExit && <button type="button" onClick={onExit}>{exitLabel || t("game.backToContracts")}</button>)
                     : !lockCaseMenu && <button type="button" onClick={() => (idx < puzzles.length - 1 ? go(1) : setCaseIdx(0))}>{t(idx < puzzles.length - 1 ? "game.nextContract" : "game.backToFirst")}</button>}
                 </div>
                 {isRelicCase(p.id) && <RelicCard caseId={p.id} compact />}
@@ -2722,6 +2724,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
           <DoneWindow label={tr("game.done.title", "Contract Completed!")} closeLabel={tr("game.dismiss", "Dismiss")} onClose={close}>
             <b className="sk-done-t">{tr("game.done.title", "Contract Completed!")}</b>
             <span className="sk-done-time">⏱ {tr("game.timerSolved", `Solved in ${time}`, { time })}</span>
+            {typeof doneExtra === "function" && doneExtra({ id: p.id, close })}
             {p.id === UMBRA_FINALE
               ? <p className="sk-done-lore"><b>{t("game.solved.umbra.title")}</b> {t("game.solved.umbra.text")}</p>
               : <>
@@ -2729,7 +2732,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                 {rooms.map((r, i) => <span key={i} className="sk-done-room">{r}</span>)}
               </>}
             <div className="sk-done-act">
-              {onExit && <button type="button" className="sk-btn primary" onClick={onExit}>{t("game.backToContracts")}</button>}
+              {onExit && <button type="button" className="sk-btn primary" onClick={onExit}>{exitLabel || t("game.backToContracts")}</button>}
               <button type="button" className="sk-btn" onClick={share}>{shared ? tr("game.done.copied", "Link copied ✓") : `${tr("game.done.share", "Share")} ↗`}</button>
             </div>
             {nxt && renderEnvelope && (

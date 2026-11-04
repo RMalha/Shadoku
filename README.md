@@ -42,4 +42,15 @@ The backend needs two OAuth apps and a session secret. Redirect URIs are `https:
 
 4. **Unique codenames** (optional): `npx wrangler kv namespace create SHADOKU_KV`, then uncomment `[[kv_namespaces]]` in `wrangler.toml` with the printed id and redeploy. Without it, people can sign in but codenames are not reserved.
 
+5. **Ranking and community puzzles** (D1): the database `shadoku` (`npx wrangler d1 create shadoku`) is bound as `SHADOKU_DB` in `wrangler.toml`; a new account would create its own and paste its `database_id` there. The tables are created on first use (`functions/_lib/db.js`). Without it, sign-in and the game work as before; the Ranking tab and the community pages say they are unavailable.
+
+Testing the ranking and the community puzzles locally, with several players and no OAuth apps:
+
+```
+npm run build
+npx wrangler pages dev dist --d1 SHADOKU_DB --binding DEV_LOGIN=1 --binding SESSION_SECRET=<32+ random characters>
+```
+
+Then open `http://localhost:8788/api/auth/dev/login` to sign in as a test player (a private window = a second player; the page can also add six sample players to the ranking). That test sign-in answers 404 unless `DEV_LOGIN=1` is set and the page is served from localhost, so it never works in production.
+
 How it works: `/api/auth/<provider>/login` sends the player to the provider (state + PKCE), `/callback` exchanges the code and sets an HttpOnly, SameSite=Lax cookie signed with `SESSION_SECRET`; `/api/auth/session` tells the page who is signed in. The server stores only the codename (KV). `DELETE /api/account` erases it, as the legal page promises. A provider whose secrets are not set is simply refused, and without any backend the site keeps its local demo sign-in.

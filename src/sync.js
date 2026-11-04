@@ -17,6 +17,7 @@ export const BOARDS_KEY = "shadoku-playtester-v1", TIMES_KEY = "shadoku-times-v1
 const BOARD_AT = "shadoku-board-at"; // { [contract id]: ms of the board's last save }
 const FLAG_KEYS = ["shadoku-tutorial-done", "shadoku-unlocked-4101", "shadoku-unlocked-4201"]; // "1" once set (ShadokuHome TUTORIAL_KEY, umbra.jsx UNLOCK_KEY)
 export const PROGRESS_EVENT = "shadoku-progress";
+export const SYNCED_EVENT = "shadoku-synced"; // after every sync with the account (src/community.js sends the ranking numbers then)
 const UMBRA_EVENT = "shadoku-umbra";
 const PUSH_MS = 30000, PUSH_SOON_MS = 2000; // KV has a daily write budget: a push per change would spend it
 
@@ -88,6 +89,7 @@ function syncNow(keepalive = false) {
       try { window.dispatchEvent(new Event(PROGRESS_EVENT)); window.dispatchEvent(new Event(UMBRA_EVENT)); } catch { /* noop */ }
     }
     if (!same(merged, remote)) await put(merged, keepalive);
+    try { window.dispatchEvent(new Event(SYNCED_EVENT)); } catch { /* noop */ }
   })().finally(() => { busy = null; });
   return busy;
 }

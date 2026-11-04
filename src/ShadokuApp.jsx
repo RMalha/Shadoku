@@ -11,6 +11,10 @@
  *   /play/<puzzle-name>                            one puzzle, e.g. /play/the-art-of-the-ghost (slim top bar + <ShadokuGame />; the URL follows the contract picker)
  *   /about  /contact                               plain pages (ShadokuPages.jsx)
  *   /profile  /profile/stats  /profile/collection  the signed-in player's Info, Stats and relic Collection (ShadokuPages.jsx)
+ *   /profile/ranking                               every signed-in player, ranked (ShadokuCommunity.jsx RankingPanel)
+ *   /community                                     Community › COMMUNITY PUZZLES: the published puzzles by board size (ShadokuCommunity.jsx)
+ *   /community/create                              Community › CREATE: the Guide and the Workshop (ShadokuCommunity.jsx)
+ *   /community/play/<id>                           one community puzzle in the game (CommunityPlayScreen; "draft-test" = the Workshop's play-test)
  *   /test/umbra                                    not linked anywhere: opens the Evidence Board and Dossier № 000-OMEGA without the ten
  *                                                  relics, in a test mode that never saves or unlocks anything (ShadokuPages.jsx)
  *
@@ -40,6 +44,7 @@
  *     onSignIn={(provider) => profile}        // see ShadokuHome.jsx for the auth hook contracts
  *     onCheckUsername={(name) => bool}
  *     onUsernameChange={(name) => void}
+ *     onAvatarChange={(avatar) => bool}
  *     onSession onSignOut onDeleteAccount authError   // the same, for a real backend: src/auth.js
  *     screenshots={[url1, url2, url3]}        // optional: static images instead of the live showcases
  *     puzzles logoSrc lab                     // forwarded to <ShadokuGame />
@@ -55,6 +60,8 @@ import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
 import { RelicBadge, RelicModal, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isUnlocked, useUmbraTick, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
+import { CommunityPage, CreatePage, RankingPanel, RateBox } from "./ShadokuCommunity.jsx";
+import { getCommunity, reportPlay } from "./community.js";
 
 export { TUTORIAL_KEY };
 export const TUTORIAL_PUZZLE = "tutorial"; // "The Art of the Ghost"
@@ -426,13 +433,16 @@ export function buildTutorial(puzzle, lore, t = ENGLISH) {
 
 /* ═════════════════════════ ROUTER ═════════════════════════ */
 const normalise = (p) => (String(p || "/").replace(/\/+$/, "") || "/").replace(/^\/play(?=\/|$)/i, "/play"); // "/PLAY" is "/play" (the case slug is lower-cased by slugOfPath)
-const PAGES = { "/daily": "daily", "/about": "about", "/contact": "contact", "/profile": "profile", "/test/umbra": "testUmbra" };
+const PAGES = { "/daily": "daily", "/about": "about", "/contact": "contact", "/profile": "profile", "/test/umbra": "testUmbra", "/community": "community", "/community/create": "create" };
+/** /community/play/c1a2b3c4d5 → "c1a2b3c4d5" · anything else → "" */
+const communityIdOf = (p) => { const m = /^\/community\/play\/([A-Za-z0-9_-]{1,40})$/.exec(normalise(p)); return m ? m[1] : ""; };
 /** "/profile/stats" → "stats" · "/profile" → "info" (the tab of the profile page). */
 const profileTab = (p) => (PROFILE_PAGES.find((m) => m.to === normalise(p)) || PROFILE_PAGES[0]).key;
 export const toView = (p) => {
   const n = normalise(p);
   if (n === "/play" || n.startsWith("/play/")) return "play";
   if (PROFILE_PAGES.some((m) => m.to === n)) return "profile";
+  if (communityIdOf(n)) return "communityPlay";
   return PAGES[n] || "home";
 };
 /** The address the router shows for `p`: "/PLAY/x" → "/play/x"; anything that is not a page ("/nowhere") → "/". */
@@ -729,6 +739,100 @@ function DailyScreen({ go }) {
 }
 
 /* ═════════════════════════ /play ═════════════════════════ */
+/** The ☰ Menu on the tool rail, desktop and a phone held sideways (it has no site header, so no Sign In button or profile chip): Home, the
+ *  Contracts group (Story, Daily Contract), the Community group (Create, Community Puzzles), the Profile group (signed in), ⚙ Settings, About,
+ *  Contact, Sign In (signed out). */
+function useRailMenu(go, initiated) {
+  const { t } = useLang();
+  const { user, signOut } = useAuth();
+  const modals = useModals();
+  return useMemo(() => [
+    { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
+    { key: "contracts", label: t("nav.pContracts"), heading: true },
+    initiated // before the initiation: its envelope in a pop-up, not the story
+      ? { key: "story", label: t("nav.pStory"), sub: true, onSelect: () => go("/play") }
+      : { key: "initiation", label: t("nav.pInitiation"), sub: true, onSelect: modals.openInitiation },
+    initiated // the daily contracts open after the initiation too: locked, it offers the initiation
+      ? { key: "daily", label: t("nav.pDaily"), sub: true, onSelect: () => go("/daily") }
+      : { key: "daily", label: `${t("nav.pDaily")} 🔒`, sub: true, onSelect: modals.openInitiation },
+    { key: "pCommunity", label: t("nav.pCommunity"), heading: true }, // the site menu's fold key, so both menus fold it together
+    { key: "create", label: t("nav.pCreate"), sub: true, onSelect: () => go("/community/create") },
+    { key: "community", label: t("nav.pCommunityPuzzles"), sub: true, onSelect: () => go("/community") },
+    ...(user ? [
+      { key: "profile", label: t("nav.profile"), heading: true },
+      ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
+      { key: "logout", label: t("nav.logOut"), sub: true, onSelect: signOut },
+    ] : []),
+    { key: "settings", label: t("settings.open"), settings: true },
+    { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
+    { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
+    ...(user ? [] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
+  ], [t, go, user, signOut, modals, initiated]);
+}
+
+/* ═════════════════════════ /community/play/<id> ═════════════════════════ */
+const CREATE_TEST_KEY = "shadoku-create-test"; // the Workshop's play-test case (ShadokuCommunity.jsx CreatePage)
+/** A community puzzle in the game, without a contract picker. Opening it counts a play, fulfilling it a solve, and the
+ *  "Contract Completed!" window asks for 1–5 stars. "draft-test" plays the Workshop's draft on a fresh board (nothing is counted). */
+function CommunityPlayScreen({ go, id, logoSrc }) {
+  const { t } = useLang();
+  const [res, setRes] = useState(null);
+  const test = id === "draft-test";
+  useEffect(() => {
+    let alive = true;
+    setRes(null);
+    if (test) {
+      let d = null;
+      try { d = JSON.parse(store.get(CREATE_TEST_KEY) || "null"); } catch { /* a damaged copy */ }
+      setRes(d && d.rooms ? { ok: true, puzzle: d, meta: null, myRating: 0 } : { error: "not_found" });
+      return undefined;
+    }
+    getCommunity(id).then((r) => { if (alive) setRes(r); });
+    return () => { alive = false; };
+  }, [id, test]);
+  useEffect(() => { if (res && res.ok && !test) reportPlay(id, false).catch(() => {}); }, [res, id, test]);
+  useEffect(() => {
+    const prev = document.title;
+    document.title = t("page.community");
+    return () => { document.title = prev; };
+  }, [t]);
+  const puzzle = useMemo(() => {
+    if (!res || !res.ok) return null;
+    const p = res.puzzle, theme = t(`THEME.${p.theme}`);
+    const difficulty = localizeHead({ difficulty: p.difficulty }, trOf(t)).difficulty;
+    return { ...p, subtitle: test ? t("community.testSubtitle") : t("community.subtitle", { difficulty, theme, author: (res.meta && res.meta.author) || "?" }) };
+  }, [res, t, test]);
+  const [jump] = useState(() => (test ? { id: "draft-test", n: Date.now(), fresh: true } : null)); // a play-test starts on a clean board every time
+  const desk = useMediaQuery(DESK_MQ), short = useMediaQuery(SHORT_LANDSCAPE_MQ);
+  const merged = !desk && !short;
+  const railMenu = useRailMenu(go, !!store.get(TUTORIAL_KEY));
+  const back = () => go(test ? "/community/create" : "/community");
+  const onGameEvent = useCallback((e) => { if (e && e.type === "solved" && !test) reportPlay(id, true).catch(() => {}); }, [id, test]);
+  if (!puzzle) {
+    return (
+      <div className="sh-hub">
+        <SiteHeader onLogo={() => go("/")} style={{ height: desk ? BAR_H_DESK : BAR_H }} onNav={go} current="/community" />
+        <main className="sh-hub-main">
+          <p className="sh-daily-none sh-type">{!res ? t("community.opening") : res.error === "storage" ? t("community.unavailable") : t("community.notFound")}</p>
+          {res && <p style={{ textAlign: "center" }}><button type="button" className="sh-btn" onClick={back}>{t("community.back")}</button></p>}
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
+  return (
+    <div className="sh-playroot">
+      <ShadokuGame
+        t={t} puzzles={[puzzle]} logoSrc={logoSrc} forcePuzzleId={puzzle.id} jumpTo={jump} fixedCase onExit={back}
+        exitLabel={t(test ? "community.backToWorkshop" : "community.back")} onLogo={() => go("/")}
+        headEnd={merged ? <><UserPill /><SiteMenu current="/community" onNav={go} /></> : null} menu={merged ? null : railMenu}
+        langPicker={<LanguageSelector />} onGameEvent={onGameEvent}
+        doneExtra={test ? () => <p className="sk-done-lore">{t("community.testDone")}</p> : ({ id: pid }) => <RateBox id={pid} meta={res.meta} initial={res.myRating || 0} />}
+      />
+    </div>
+  );
+}
+
 function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const { t } = useLang();
   const pack = useMemo(() => [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES], [puzzles]); // the story, then the daily contracts (no picker after the initiation: fixedCase)
@@ -844,27 +948,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const showCard = caseId === tutorialId && view === "play"; // the Inspector gets the whole screen
   const short = useMediaQuery(SHORT_LANDSCAPE_MQ), desk = useMediaQuery(DESK_MQ);
   const merged = !desk && !short; // no site header on /play: a phone held upright has one header line (logo, timer, ⚙, ?, sign-in, ☰); desktop and a phone held sideways have the rail's ☰ Menu (sign-in and the profile inside)
-  const { user, signOut } = useAuth();
-  const modals = useModals();
-  const railMenu = useMemo(() => [ // the ☰ Menu on the tool rail, desktop and a phone held sideways (it has no site header, so no Sign In button or profile chip): Home, the Contracts group (Story, Daily Contract), the Profile group (signed in), ⚙ Settings, About, Contact, Sign In (signed out)
-    { key: "home", label: t("nav.pHome"), onSelect: () => go("/") },
-    { key: "contracts", label: t("nav.pContracts"), heading: true },
-    initiated // before the initiation: its envelope in a pop-up, not the story
-      ? { key: "story", label: t("nav.pStory"), sub: true, onSelect: () => go("/play") }
-      : { key: "initiation", label: t("nav.pInitiation"), sub: true, onSelect: modals.openInitiation },
-    initiated // the daily contracts open after the initiation too: locked, it offers the initiation
-      ? { key: "daily", label: t("nav.pDaily"), sub: true, onSelect: () => go("/daily") }
-      : { key: "daily", label: `${t("nav.pDaily")} 🔒`, sub: true, onSelect: modals.openInitiation },
-    ...(user ? [
-      { key: "profile", label: t("nav.profile"), heading: true },
-      ...PROFILE_PAGES.map((m) => ({ key: `profile-${m.key}`, label: t(`profile.tab.${m.key}`), sub: true, onSelect: () => go(m.to) })),
-      { key: "logout", label: t("nav.logOut"), sub: true, onSelect: signOut },
-    ] : []),
-    { key: "settings", label: t("settings.open"), settings: true },
-    { key: "about", label: t("nav.about"), onSelect: () => go("/about") },
-    { key: "contact", label: t("nav.contact"), onSelect: () => go("/contact") },
-    ...(user ? [] : [{ key: "auth", label: t("nav.signIn"), onSelect: modals.openSignIn }]),
-  ], [t, go, user, signOut, modals, initiated]);
+  const railMenu = useRailMenu(go, initiated);
 
   // a phone held sideways: the card lives in the suspects column (the game draws it there), so the board keeps the whole height
   const card = showCard && (
@@ -901,7 +985,7 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 }
 
 /* ═════════════════════════ ROOT ═════════════════════════ */
-export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange, onSession, onSignOut, onDeleteAccount, authError, screenshots, puzzles, logoSrc, lab }) {
+export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange, onAvatarChange, onSession, onSignOut, onDeleteAccount, authError, screenshots, puzzles, logoSrc, lab }) {
   const [view, go, path, sync] = useRoute();
   const startSlug = useMemo(() => puzzleSlug((puzzles ? normalizePuzzles(puzzles) : PUZZLES).find((q) => q.id === TUTORIAL_PUZZLE)) || "the-art-of-the-ghost", [puzzles]); // the home envelope opens the tutorial puzzle itself
   const initiated = !!store.get(TUTORIAL_KEY);
@@ -929,7 +1013,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     go(q ? `/play/${puzzleSlug(q)}` : "/play");
   }, [puzzles, go]);
   return (
-    <ShadokuProviders onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange}
+    <ShadokuProviders onSignIn={onSignIn} onCheckUsername={onCheckUsername} onUsernameChange={onUsernameChange} onAvatarChange={onAvatarChange}
       onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError}
       onStart={startInitiation} onSkip={skipInitiation} onNav={go}>
       <style data-shadoku="app">{APP_CSS}</style>
@@ -938,7 +1022,10 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
         : view === "daily" ? <DailyScreen go={go} />
         : view === "about" ? <AboutPage go={go} />
         : view === "contact" ? <ContactPage go={go} />
-        : view === "profile" ? <ProfilePage go={go} tab={profileTab(path)} puzzles={puzzles} onLaunch={launchContract} />
+        : view === "profile" ? <ProfilePage go={go} tab={profileTab(path)} puzzles={puzzles} onLaunch={launchContract} ranking={<RankingPanel />} />
+        : view === "community" ? <CommunityPage go={go} />
+        : view === "create" ? <CreatePage go={go} />
+        : view === "communityPlay" ? <CommunityPlayScreen key={communityIdOf(path)} go={go} id={communityIdOf(path)} logoSrc={logoSrc} />
         : view === "testUmbra" ? <TestUmbraPage go={go} puzzles={puzzles} />
         : <ShadokuHome onPlay={() => go("/play")} onNav={go} onStart={startInitiation} onSkip={skipInitiation} screenshots={screenshots} />}
     </ShadokuProviders>

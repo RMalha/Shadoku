@@ -149,11 +149,12 @@ const userKey = (id) => `user:${id}`;
 const nameKey = (name) => `name:${name.toLowerCase()}`;
 const progressKey = (id) => `progress:${id}`;
 
-export const getCodename = async (env, id) => {
-  if (!env.SHADOKU_KV) return "";
-  const rec = await env.SHADOKU_KV.get(userKey(id), "json");
-  return rec?.username || "";
+/** The account's record: { username, avatar } ("" when unset; avatar: src/avatarLook.js). */
+export const getRecord = async (env, id) => {
+  const rec = env.SHADOKU_KV ? await env.SHADOKU_KV.get(userKey(id), "json") : null;
+  return { username: rec?.username || "", avatar: typeof rec?.avatar === "string" ? rec.avatar : "" };
 };
+export const getCodename = async (env, id) => (await getRecord(env, id)).username;
 
 /** → true when the name is free (or already this account's). Without a KV namespace nothing is reserved. */
 export async function codenameFree(env, name, id) {
@@ -165,10 +166,17 @@ export async function codenameFree(env, name, id) {
 /** Reserves `name` for `id` and releases the account's previous one. KV is not transactional: a same-instant race on one name is possible and harmless. */
 export async function setCodename(env, id, name) {
   if (!env.SHADOKU_KV) return;
-  const prev = await getCodename(env, id);
+  const rec = await getRecord(env, id), prev = rec.username;
   await env.SHADOKU_KV.put(nameKey(name), id);
-  await env.SHADOKU_KV.put(userKey(id), JSON.stringify({ username: name }));
+  await env.SHADOKU_KV.put(userKey(id), JSON.stringify({ ...rec, username: name }));
   if (prev && prev.toLowerCase() !== name.toLowerCase()) await env.SHADOKU_KV.delete(nameKey(prev));
+}
+
+/** Saves the avatar choice ("" = S. H. Adow, "photo", "L:…") in the account's record. */
+export async function setAvatar(env, id, avatar) {
+  if (!env.SHADOKU_KV) return;
+  const rec = await getRecord(env, id);
+  await env.SHADOKU_KV.put(userKey(id), JSON.stringify({ ...rec, avatar }));
 }
 
 export async function deleteRecord(env, id) {
