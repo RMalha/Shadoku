@@ -679,16 +679,25 @@ export function Pillar() {
     <g>
       <defs>
         <clipPath id={`${u}s`}><path d={shaft} /></clipPath>
-        <clipPath id={`${u}b`}><path d={band(15.6, 3.2, 48.4, 51.8)} /><path d={capital} /><path d={band(rt + .6, 2.4, 12, 14.4)} /></clipPath>
+        <clipPath id={`${u}r`}><path d={band(15.6, 3.2, 48.4, 51.8)} /></clipPath>
+        <clipPath id={`${u}n`}><path d={band(rt + .6, 2.4, 12, 14.4)} /></clipPath>
+        <clipPath id={`${u}b`}><path d={capital} /></clipPath>
       </defs>
       <GroundShadow cx={33} cy={57.4} rx={25} ry={3.6} />
       {/* square plinth */}
       <path d={slabSide(14, 52, 36, 5, 4, 4)} fill={stD} {...OS} />
       <path d={slabTop(14, 52, 36, 4, 4)} fill={stL} {...OS} />
       <path d={inkBox(14, 52, 36, 5, .8, .2)} fill={st} {...OS} />
-      {/* round torus base: its side band, then its elliptical top */}
+      {/* round torus base: its side band, its elliptical top, its light and shade, its outline, all finished BEFORE the
+          shaft, so the shaft stands on it and hides its back rim (re-inking the rim after the shaft made the stone look see-through) */}
       <path d={band(15.6, 3.2, 48.4, 51.8)} fill={st} {...OS} />
       <ellipse cx={cx} cy="48.4" rx="15.6" ry="3.2" fill={stL} {...OS} />
+      <g clipPath={`url(#${u}r)`}>
+        <path d={`M${cx - 13} 0H${cx - 8.6}V60H${cx - 13}Z`} fill={stL} fillOpacity=".8" />
+        <path d={`M${cx + 7} 0H64V60H${cx + 7}Z`} fill={stS} />
+      </g>
+      <path d={band(15.6, 3.2, 48.4, 51.8)} fill="none" {...OS} />
+      <ellipse cx={cx} cy="48.4" rx="15.6" ry="3.2" fill="none" {...OS} />
       {/* shaft: mid-tone, a lit band on the left, shade on the right with a darker edge, the flutes, a crack */}
       <path d={shaft} fill={st} />
       <g clipPath={`url(#${u}s)`}>
@@ -699,17 +708,18 @@ export function Pillar() {
         <path d="M27.4 26L29.4 30.4L27 33.8L28.8 38.6" {...IS} />
       </g>
       <path d={shaft} fill="none" {...OS} />
-      {/* necking ring, the round flared capital, the square slab on top */}
-      <path d={band(rt + .6, 2.4, 12, 14.4)} fill={st} {...OS} />
-      <path d={capital} fill={st} {...OS} />
-      <g clipPath={`url(#${u}b)`}>
-        <path d={`M${cx - 13} 0H${cx - 8.6}V60H${cx - 13}Z`} fill={stL} fillOpacity=".8" />
-        <path d={`M${cx + 7} 0H64V60H${cx + 7}Z`} fill={stS} />
-      </g>
-      <path d={band(15.6, 3.2, 48.4, 51.8)} fill="none" {...OS} />
-      <ellipse cx={cx} cy="48.4" rx="15.6" ry="3.2" fill="none" {...OS} />
-      <path d={band(rt + .6, 2.4, 12, 14.4)} fill="none" {...OS} />
-      <path d={capital} fill="none" {...OS} />
+      {/* necking ring, then the round flared capital over it (each lit, shaded and inked in turn, so the ring's back rim
+          stays hidden under the capital), the square slab on top */}
+      {[[band(rt + .6, 2.4, 12, 14.4), "n"], [capital, "b"]].map(([d, id]) => (
+        <g key={id}>
+          <path d={d} fill={st} {...OS} />
+          <g clipPath={`url(#${u}${id})`}>
+            <path d={`M${cx - 13} 0H${cx - 8.6}V60H${cx - 13}Z`} fill={stL} fillOpacity=".8" />
+            <path d={`M${cx + 7} 0H64V60H${cx + 7}Z`} fill={stS} />
+          </g>
+          <path d={d} fill="none" {...OS} />
+        </g>
+      ))}
       <path d={slabSide(12, 4.8, 40, 3.4, 3.4, 3.4)} fill={stD} {...OS} />
       <path d={slabTop(12, 4.8, 40, 3.4, 3.4)} fill={stL} {...OS} />
       <path d={inkBox(12, 4.8, 40, 3.4, .8, .2)} fill={st} {...OS} />
@@ -4344,7 +4354,9 @@ export function Graffiti() {
 
 /** PERCH. Saddled dun horse in profile, facing east (designed with Brush; source art/props/HORSE.svg). Long legs and a
  *  short arched neck keep the head clear of the tile centre, where the saddle sits on the middle of the back, so a
- *  placed token rides it; head and ears, tail and hooves stay visible round the token. Hoof line at y 58. */
+ *  placed token rides it; head and ears, tail and hooves stay visible round the token. Hoof line at y 58. Drawn at .88
+ *  round the hoof line so the muzzle (x ≈ 58.5) and the tail (x ≈ 6) stay clear of a wall on either side: in a
+ *  corridor one tile wide there is a wall at both ends and no way to face away from it. */
 export function Horse() {
   const coat = "#b08d63", coatD = "#86684a", mane = "#3b2f27", hoof = "#5b4a3e";
   const cloth = "#c45970", clothD = "#93404f", leather = "#5a3a2a", leatherL = "#8a5f45", metal = "#9a9ca0";
@@ -4359,7 +4371,7 @@ export function Horse() {
     );
   };
   return (
-    <g>
+    <g transform="translate(31 58) scale(.88) translate(-32 -58)">
       <ellipse cx="32" cy="58" rx="21" ry="3" fill="#000" fillOpacity=".34" />
       {/* far legs one shade down, the tail, then the near legs */}
       {[22.4, 44.2].map((x) => leg(x, coatD))}
@@ -6204,7 +6216,7 @@ export const SPAN_SPRITES = {
  * short side, so a 2 × 2 pool fills its box while a 1 × 2 sofa keeps its single-tile size).
  */
 export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second, flip = false }) {
-  // `flip`: mirrored to face west (FACING animals beside a wall on their east side)
+  // `flip`: mirrored to face west (FACING animals beside a wall on their east side; a sofa down a column against its room's east wall)
   if (flip) return <g transform={`translate(${64 * cw} 0) scale(-1 1)`}><PropSprite kind={kind} cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} victim={victim} dummy={dummy} master={master} second={second} /></g>;
   const Span = SPAN_SPRITES[kind];
   // `cells`: the object's tiles as offsets from its top-left cell (an L-shaped carpet runner is not its whole box)

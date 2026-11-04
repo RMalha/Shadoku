@@ -680,10 +680,14 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       out.push({ kind: k, r, c, cw: 1, ch: 1, cells: [[r, c]] });
     });
     const shut = (r, c, dc) => !geo.inside(r, c + dc) || geo.isVoid(r, c + dc) || geo.isWall([r, c], [r, c + dc]);
+    // the room's edge on that side (a door in it still counts: furniture stands against the wall either side of a door)
+    const edge = (r, c, dc) => !geo.inside(r, c + dc) || geo.isVoid(r, c + dc) || geo.room(r, c) !== geo.room(r, c + dc);
     out.forEach((it) => {
       it.rank = DRAW_RANK[geo.classOfKind(it.kind)] || 0; it.bottom = it.r + it.ch - 1;
       it.occ = classIsOccupiable(geo.classOfKind(it.kind)) && !FLAT_FLOOR.has(it.kind); // fades under a token (flat floor items never do)
       it.flip = FACING.has(it.kind) && it.cw === 1 && it.ch === 1 && shut(it.r, it.c, 1) && !shut(it.r, it.c, -1); // face away from a wall on the east
+      // a sofa down a column has its back on the west: mirror it when the room's wall runs along its east side instead, so it faces into the room
+      if (it.kind === "SOFA" && it.ch > it.cw) it.flip = it.cells.every(([r, c]) => edge(r, c, 1)) && !it.cells.every(([r, c]) => edge(r, c, -1));
     });
     return out.sort((a, b) => a.rank - b.rank || a.bottom - b.bottom || a.c - b.c);
   }, [geo]); // eslint-disable-line react-hooks/exhaustive-deps
