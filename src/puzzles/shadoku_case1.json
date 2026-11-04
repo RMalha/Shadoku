@@ -9,17 +9,31 @@
  "tier": "easy",
  "shape": "rect",
  "seed": 1101,
- "attempt": 4,
+ "attempt": 577,
  "traitMode": "off",
  "propMode": "require",
  "castKey": "FAV0505ROR1-1101",
  "puzzleId": "FAV0505ROR1-1101",
- "engine": "V10.1",
+ "engine": "V10.6",
  "i18nSchema": "shadoku-i18n/1",
- "difficultyScore": 9,
+ "difficultyScore": 5,
  "zoneWord": "area",
  "size": 5,
  "rooms": [
+  [
+   0,
+   2,
+   2,
+   2,
+   2
+  ],
+  [
+   0,
+   3,
+   3,
+   3,
+   3
+  ],
   [
    0,
    0,
@@ -40,203 +54,190 @@
    1,
    1,
    1
-  ],
-  [
-   2,
-   2,
-   3,
-   3,
-   3
-  ],
-  [
-   2,
-   2,
-   3,
-   3,
-   3
   ]
  ],
  "roomNames": [
-  "Tool Shed",
-  "Greenhouse",
+  "Stable",
   "Garden",
-  "Silo Yard"
+  "Hayloft",
+  "Tool Shed"
  ],
  "roomIds": [
-  "TOOL_SHED",
-  "GREENHOUSE",
+  "STABLE",
   "GARDEN",
-  "SILO_YARD"
+  "HAYLOFT",
+  "TOOL_SHED"
  ],
  "doors": [
   [
    [
+    0,
+    0
+   ],
+   [
+    0,
+    1
+   ]
+  ],
+  [
+   [
+    0,
+    4
+   ],
+   [
     1,
-    3
-   ],
-   [
-    2,
-    3
+    4
    ]
   ],
   [
    [
-    2,
-    1
+    1,
+    4
    ],
    [
-    3,
-    1
-   ]
-  ],
-  [
-   [
     2,
-    3
-   ],
-   [
-    3,
-    3
+    4
    ]
   ],
   [
    [
     3,
-    1
+    3
    ],
    [
-    3,
-    2
+    4,
+    3
    ]
   ]
  ],
  "windows": [
   [
+   1,
    0,
-   2,
+   "W"
+  ],
+  [
+   0,
+   0,
    "N"
   ]
  ],
  "contents": [
   [
    "",
-   "CHAIR",
-   "",
-   "",
-   ""
-  ],
-  [
-   "WHEELBARROW",
-   "",
-   "",
-   "STRAW_MAT",
-   "TABLE"
-  ],
-  [
-   "",
-   "",
-   "STOOL",
-   "CORPSE",
-   "CHAIR"
-  ],
-  [
-   "TREE",
-   "MUD",
-   "",
-   "",
-   "TRACTOR"
-  ],
-  [
-   "MUD",
    "",
    "HAYBALE",
    "",
+   "FOOTPRINTS"
+  ],
+  [
+   "HORSE",
+   "STRAW_MAT",
+   "FOOTPRINTS",
+   "WHEELBARROW",
    ""
+  ],
+  [
+   "",
+   "HAYBALE",
+   "BARREL",
+   "STRAW_MAT",
+   "CORPSE"
+  ],
+  [
+   "",
+   "",
+   "",
+   "STRAW_MAT",
+   "HORSE"
+  ],
+  [
+   "",
+   "",
+   "",
+   "MUD",
+   "MUD"
   ]
  ],
  "multiTile": [],
  "corpse": [
   2,
-  3
+  4
  ],
  "biomeProps": [
   "HAYBALE",
+  "HORSE",
   "MUD",
   "STRAW_MAT",
-  "TRACTOR",
-  "TREE",
   "WHEELBARROW"
  ],
  "propClasses": {
-  "CHAIR": "LOW",
+  "BARREL": "SHORT",
+  "FOOTPRINTS": "LOW",
   "HAYBALE": "TALL",
+  "HORSE": "PERCH",
   "MUD": "LOW",
-  "STOOL": "LOW",
   "STRAW_MAT": "LOW",
-  "TABLE": "SHORT",
-  "TRACTOR": "TALL",
-  "TREE": "TALL",
   "WHEELBARROW": "SHORT"
  },
  "dress": "integrated",
  "dressing": {
-  "lowShare": 0.316,
-  "lowTiles": 6,
-  "openTiles": 19,
+  "lowShare": 0.35,
+  "lowTiles": 7,
+  "openTiles": 20,
   "lowKinds": [
-   "CHAIR",
+   "FOOTPRINTS",
    "MUD",
-   "STOOL",
    "STRAW_MAT"
   ],
   "roomProps": {
+   "HAYLOFT": [
+    "FOOTPRINTS",
+    "HAYBALE"
+   ],
+   "STABLE": [
+    "BARREL",
+    "HAYBALE",
+    "HORSE",
+    "STRAW_MAT"
+   ],
    "TOOL_SHED": [
-    "CHAIR",
+    "FOOTPRINTS",
     "STRAW_MAT",
-    "TABLE",
     "WHEELBARROW"
    ],
-   "GREENHOUSE": [
-    "CHAIR",
-    "STOOL"
-   ],
    "GARDEN": [
-    "MUD",
-    "TREE"
-   ],
-   "SILO_YARD": [
-    "HAYBALE",
-    "TRACTOR"
+    "MUD"
    ]
   }
  },
  "suspects": [
   {
    "id": "A",
-   "name": "Anton",
+   "name": "Archibald",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "curly",
+    "hairStyle": "crop",
     "hairLength": "short",
-    "hairColor": "black",
+    "hairColor": "grey",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "none",
-    "facialHair": "goatee",
-    "tie": "bowtie",
-    "skin": 0,
-    "cloth": 1
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 7
    },
-   "look": "black curly hair, goatee, bowtie",
-   "clue": "Anton was beside the table.",
-   "text": "Anton was beside the table.",
+   "look": "grey crop hair, beret, scarf",
+   "clue": "Archibald was standing on a trail of footprints.",
+   "text": "Archibald was standing on a trail of footprints.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "ON",
      "subject": "A",
      "params": {
-      "prop": "TABLE"
+      "prop": "FOOTPRINTS"
      }
     }
    ],
@@ -254,48 +255,42 @@
   },
   {
    "id": "B",
-   "name": "Benedict",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Bernadette",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "crop",
-    "hairLength": "short",
-    "hairColor": "brown",
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
     "glasses": true,
     "glassesStyle": "round",
     "hat": "none",
-    "facialHair": "mustache",
-    "tie": "none",
-    "skin": 3,
-    "cloth": 1
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 4
    },
-   "look": "brown crop hair, round glasses, mustache",
-   "clue": "Benedict was alone and was in column 2.",
-   "text": "Benedict was alone and was in column 2.",
+   "look": "blonde ponytail hair, round glasses, scarf",
+   "clue": "Bernadette was the only person on a straw mat.",
+   "text": "Bernadette was the only person on a straw mat.",
    "atoms": [
     {
-     "kind": "COL",
+     "kind": "ONLY_ON",
      "subject": "B",
      "params": {
-      "index": 1
+      "prop": "STRAW_MAT"
      }
-    },
-    {
-     "kind": "ALONE",
-     "subject": "B",
-     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "B",
     "place": [
-     1,
      0
     ],
     "people": []
    },
    "solution": [
-    2,
+    1,
     1
    ]
   },
@@ -305,26 +300,26 @@
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "wavy",
-    "hairLength": "long",
-    "hairColor": "brown",
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
     "glasses": false,
     "glassesStyle": "none",
-    "hat": "cloche",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "none",
-    "skin": 4,
-    "cloth": 6
+    "tie": "scarf",
+    "skin": 1,
+    "cloth": 5
    },
-   "look": "brown wavy hair, cloche",
-   "clue": "Charlotte was beside the tractor.",
-   "text": "Charlotte was beside the tractor.",
+   "look": "black curly hair, scarf",
+   "clue": "Charlotte was not beside any stack of hay bales.",
+   "text": "Charlotte was not beside any stack of hay bales.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "NOT_BESIDE",
      "subject": "C",
      "params": {
-      "prop": "TRACTOR"
+      "prop": "HAYBALE"
      }
     }
    ],
@@ -336,36 +331,36 @@
     "people": []
    },
    "solution": [
-    4,
-    4
+    3,
+    2
    ]
   },
   {
    "id": "D",
-   "name": "Dorothea",
+   "name": "Daphne",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "ponytail",
+    "hairStyle": "wavy",
     "hairLength": "long",
-    "hairColor": "blonde",
+    "hairColor": "brown",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "scarf",
-    "skin": 0,
-    "cloth": 1
+    "tie": "none",
+    "skin": 4,
+    "cloth": 0
    },
-   "look": "blonde ponytail hair, scarf",
-   "clue": "Dorothea was standing on a mud patch.",
-   "text": "Dorothea was standing on a mud patch.",
+   "look": "brown wavy hair",
+   "clue": "Daphne was riding a horse.",
+   "text": "Daphne was riding a horse.",
    "atoms": [
     {
      "kind": "ON",
      "subject": "D",
      "params": {
-      "prop": "MUD"
+      "prop": "HORSE"
      }
     }
    ],
@@ -377,55 +372,61 @@
     "people": []
    },
    "solution": [
-    4,
+    1,
     0
    ]
   },
   {
    "id": "E",
-   "name": "Estelle",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Edmund",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
-    "hairStyle": "bob",
-    "hairLength": "short",
-    "hairColor": "brown",
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "red",
     "glasses": false,
     "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "none",
-    "skin": 0,
-    "cloth": 6
+    "tie": "necktie",
+    "skin": 3,
+    "cloth": 1
    },
-   "look": "brown bob hair",
-   "clue": "Estelle was sitting on a straw mat.",
-   "text": "Estelle was sitting on a straw mat.",
+   "look": "red wavy hair, necktie",
+   "clue": "Edmund was standing on a mud patch and was in front of an opening between two areas.",
+   "text": "Edmund was standing on a mud patch and was in front of an opening between two areas.",
    "atoms": [
     {
      "kind": "ON",
      "subject": "E",
      "params": {
-      "prop": "STRAW_MAT"
+      "prop": "MUD"
      }
+    },
+    {
+     "kind": "DOOR",
+     "subject": "E",
+     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "E",
     "place": [
-     0
+     0,
+     1
     ],
     "people": []
    },
    "solution": [
-    1,
+    4,
     3
    ]
   }
  ],
  "shadow": [
-  3,
-  2
+  0,
+  1
  ],
  "shadowSuspect": {
   "id": "S",
@@ -441,36 +442,58 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Estelle “was sitting on a straw mat”: only r2c4 fits. Place Estelle there.",
+   "text": "Edmund “was standing on a mud patch and was in front of an opening between two areas”: only r5c4 fits. Place Edmund there.",
    "focus": [
     [
-     1,
+     4,
      3
     ]
    ],
    "elims": {
-    "A": [
-     [
-      1,
-      3
-     ]
-    ],
     "B": [
      [
-      1,
-      1
+      2,
+      3
+     ],
+     [
+      3,
+      3
      ]
     ],
     "C": [
      [
+      2,
+      3
+     ],
+     [
       3,
       3
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
      ]
     ]
    },
    "suspect": "E",
    "cell": [
-    1,
+    4,
     3
    ],
    "i18n": {
@@ -480,7 +503,7 @@
      "suspect": "E",
      "clueOf": "E",
      "coord": [
-      1,
+      4,
       3
      ]
     }
@@ -491,7 +514,60 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Anton “was beside the table”: of the 2 tiles that fit, only r1c5 is still open. Place Anton there.",
+   "text": "Bernadette “was the only person on a straw mat”: of the 3 tiles that fit, only r2c2 is still open. Place Bernadette there.",
+   "focus": [
+    [
+     1,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      2
+     ]
+    ],
+    "C": [
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    1,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      1,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Archibald “was standing on a trail of footprints”: of the 2 tiles that fit, only r1c5 is still open. Place Archibald there.",
    "focus": [
     [
      0,
@@ -499,10 +575,20 @@
     ]
    ],
    "elims": {
-    "B": [
+    "C": [
      [
       0,
-      1
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "D": [
+     [
+      3,
+      4
      ]
     ]
    },
@@ -526,116 +612,36 @@
    }
   },
   {
-   "n": 3,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Charlotte “was beside the tractor”: of the 2 tiles that fit, only r5c5 is still open. Place Charlotte there.",
-   "focus": [
-    [
-     4,
-     4
-    ]
-   ],
-   "elims": {},
-   "suspect": "C",
-   "cell": [
-    4,
-    4
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "suspect": "C",
-     "clueOf": "C",
-     "coord": [
-      4,
-      4
-     ]
-    }
-   }
-  },
-  {
    "n": 4,
    "tier": 1,
-   "rule": "Ray block",
-   "kind": "eliminate",
-   "text": "Ray block: Benedict can only be at r3c2, r4c2 or r5c2, and those tiles all lie on one sightline. Whichever one Benedict takes, the whole stretch is watched, so nobody else can stand on r4c2.",
-   "focus": [
-    [
-     2,
-     1
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     4,
-     1
-    ]
-   ],
-   "elims": {
-    "D": [
-     [
-      3,
-      1
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_RAY_BLOCK",
-    "ruleKey": "RULE_RAY_BLOCK",
-    "params": {
-     "suspect": "B",
-     "options": [
-      [
-       2,
-       1
-      ],
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       1
-      ]
-     ],
-     "coords": [
-      [
-       3,
-       1
-      ]
-     ]
-    }
-   }
-  },
-  {
-   "n": 5,
-   "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Dorothea “was standing on a mud patch”: of the 2 tiles that fit, only r5c1 is still open. Place Dorothea there.",
+   "text": "Daphne “was riding a horse”: of the 2 tiles that fit, only r2c1 is still open. Place Daphne there.",
    "focus": [
     [
-     4,
+     1,
      0
     ]
    ],
    "elims": {
-    "B": [
+    "C": [
      [
-      4,
-      1
+      0,
+      0
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      3,
+      0
      ]
     ]
    },
    "suspect": "D",
    "cell": [
-    4,
+    1,
     0
    ],
    "i18n": {
@@ -646,97 +652,18 @@
      "suspect": "D",
      "clueOf": "D",
      "coord": [
-      4,
+      1,
       0
      ]
     }
    }
   },
   {
-   "n": 6,
-   "tier": 2,
-   "rule": "Alone in an area",
-   "kind": "eliminate",
-   "text": "Benedict was alone in the area, but Dorothea must be in the Garden, so Benedict cannot be in it.",
-   "focus": [
-    [
-     3,
-     1
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ]
-   ],
-   "elims": {
-    "B": [
-     [
-      3,
-      1
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_ALONE_BLOCKED_ONE",
-    "ruleKey": "RULE_ALONE",
-    "params": {
-     "owner": "B",
-     "bits": [
-      {
-       "templateKey": "FRAG_MUST_BE_IN",
-       "params": {
-        "suspects": [
-         "D"
-        ],
-        "room": "GARDEN"
-       }
-      }
-     ]
-    }
-   }
-  },
-  {
-   "n": 7,
+   "n": 5,
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Benedict “was alone and was in column 2”: of the 5 tiles that fit, only r3c2 is still open. Place Benedict there.",
-   "focus": [
-    [
-     2,
-     1
-    ]
-   ],
-   "elims": {},
-   "suspect": "B",
-   "cell": [
-    2,
-    1
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 5,
-     "suspect": "B",
-     "clueOf": "B",
-     "coord": [
-      2,
-      1
-     ]
-    }
-   }
-  },
-  {
-   "n": 8,
-   "tier": 1,
-   "rule": "The blindspot",
-   "kind": "shadow",
-   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r4c3. That is where S. H. Adow is hiding!",
+   "text": "Charlotte “was not beside any stack of hay bales”: every tile that fits is ruled out except r4c3. Place Charlotte there.",
    "focus": [
     [
      3,
@@ -744,9 +671,40 @@
     ]
    ],
    "elims": {},
+   "suspect": "C",
    "cell": [
     3,
     2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      3,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c2. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     0,
+     1
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    0,
+    1
    ],
    "suspect": "S",
    "i18n": {
@@ -754,8 +712,8 @@
     "ruleKey": "RULE_BLINDSPOT",
     "params": {
      "coord": [
-      3,
-      2
+      0,
+      1
      ]
     }
    }
@@ -765,14 +723,14 @@
   {
    "suspect": "E",
    "cell": [
-    1,
+    4,
     3
    ],
    "needs": [],
    "tier": 1,
    "fits": [
     [
-     1,
+     4,
      3
     ]
    ],
@@ -783,36 +741,58 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Estelle “was sitting on a straw mat”: only r2c4 fits. Place Estelle there.",
+    "text": "Edmund “was standing on a mud patch and was in front of an opening between two areas”: only r5c4 fits. Place Edmund there.",
     "focus": [
      [
-      1,
+      4,
       3
      ]
     ],
     "elims": {
-     "A": [
-      [
-       1,
-       3
-      ]
-     ],
      "B": [
       [
-       1,
-       1
+       2,
+       3
+      ],
+      [
+       3,
+       3
       ]
      ],
      "C": [
       [
+       2,
+       3
+      ],
+      [
        3,
        3
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
       ]
      ]
     },
     "suspect": "E",
     "cell": [
-     1,
+     4,
      3
     ],
     "i18n": {
@@ -822,8 +802,88 @@
       "suspect": "E",
       "clueOf": "E",
       "coord": [
-       1,
+       4,
        3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    1,
+    1
+   ],
+   "needs": [
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Bernadette “was the only person on a straw mat”: of the 3 tiles that fit, only r2c2 is still open. Place Bernadette there.",
+    "focus": [
+     [
+      1,
+      1
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       1,
+       2
+      ]
+     ],
+     "C": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     1,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       1,
+       1
       ]
      }
     }
@@ -836,7 +896,7 @@
     4
    ],
    "needs": [
-    "E"
+    "B"
    ],
    "tier": 1,
    "fits": [
@@ -846,7 +906,7 @@
     ],
     [
      1,
-     3
+     2
     ]
    ],
    "key": [],
@@ -856,7 +916,7 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Anton “was beside the table”: of the 2 tiles that fit, only r1c5 is still open. Place Anton there.",
+    "text": "Archibald “was standing on a trail of footprints”: of the 2 tiles that fit, only r1c5 is still open. Place Archibald there.",
     "focus": [
      [
       0,
@@ -864,10 +924,20 @@
      ]
     ],
     "elims": {
-     "B": [
+     "C": [
       [
        0,
-       1
+       4
+      ],
+      [
+       3,
+       4
+      ]
+     ],
+     "D": [
+      [
+       3,
+       4
       ]
      ]
     },
@@ -892,19 +962,148 @@
    }
   },
   {
-   "suspect": "C",
+   "suspect": "D",
    "cell": [
-    4,
-    4
+    1,
+    0
    ],
    "needs": [
     "A",
+    "B"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Daphne “was riding a horse”: of the 2 tiles that fit, only r2c1 is still open. Place Daphne there.",
+    "focus": [
+     [
+      1,
+      0
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       0,
+       0
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       3,
+       0
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     1,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       1,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    3,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D",
     "E"
    ],
    "tier": 1,
    "fits": [
     [
+     0,
+     0
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     3
+    ],
+    [
      3,
+     0
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
      3
     ],
     [
@@ -919,272 +1118,28 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Charlotte “was beside the tractor”: of the 2 tiles that fit, only r5c5 is still open. Place Charlotte there.",
+    "text": "Charlotte “was not beside any stack of hay bales”: every tile that fits is ruled out except r4c3. Place Charlotte there.",
     "focus": [
      [
-      4,
-      4
+      3,
+      2
      ]
     ],
     "elims": {},
     "suspect": "C",
     "cell": [
-     4,
-     4
+     3,
+     2
     ],
     "i18n": {
-     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "templateKey": "STEP_PLACE_RULED_OUT",
      "ruleKey": "RULE_SINGLE",
      "params": {
-      "fits": 2,
       "suspect": "C",
       "clueOf": "C",
       "coord": [
-       4,
-       4
-      ]
-     }
-    }
-   }
-  },
-  {
-   "suspect": "D",
-   "cell": [
-    4,
-    0
-   ],
-   "needs": [
-    "A",
-    "C",
-    "E"
-   ],
-   "tier": 1,
-   "fits": [
-    [
-     3,
-     1
-    ],
-    [
-     4,
-     0
-    ]
-   ],
-   "key": [
-    0
-   ],
-   "chain": [
-    {
-     "n": 1,
-     "tier": 1,
-     "rule": "Ray block",
-     "kind": "eliminate",
-     "text": "Ray block: Benedict can only be at r3c2, r4c2 or r5c2, and those tiles all lie on one sightline. Whichever one Benedict takes, the whole stretch is watched, so nobody else can stand on r4c2.",
-     "focus": [
-      [
-       2,
-       1
-      ],
-      [
        3,
-       1
-      ],
-      [
-       4,
-       1
-      ]
-     ],
-     "elims": {
-      "D": [
-       [
-        3,
-        1
-       ]
-      ]
-     },
-     "i18n": {
-      "templateKey": "STEP_RAY_BLOCK",
-      "ruleKey": "RULE_RAY_BLOCK",
-      "params": {
-       "suspect": "B",
-       "options": [
-        [
-         2,
-         1
-        ],
-        [
-         3,
-         1
-        ],
-        [
-         4,
-         1
-        ]
-       ],
-       "coords": [
-        [
-         3,
-         1
-        ]
-       ]
-      }
-     }
-    }
-   ],
-   "place": {
-    "n": 2,
-    "tier": 1,
-    "rule": "Sightline domino",
-    "kind": "place",
-    "text": "Dorothea “was standing on a mud patch”: of the 2 tiles that fit, only r5c1 is still open. Place Dorothea there.",
-    "focus": [
-     [
-      4,
-      0
-     ]
-    ],
-    "elims": {
-     "B": [
-      [
-       4,
-       1
-      ]
-     ]
-    },
-    "suspect": "D",
-    "cell": [
-     4,
-     0
-    ],
-    "i18n": {
-     "templateKey": "STEP_PLACE_LAST_LEFT",
-     "ruleKey": "RULE_SINGLE",
-     "params": {
-      "fits": 2,
-      "suspect": "D",
-      "clueOf": "D",
-      "coord": [
-       4,
-       0
-      ]
-     }
-    }
-   }
-  },
-  {
-   "suspect": "B",
-   "cell": [
-    2,
-    1
-   ],
-   "needs": [
-    "A",
-    "C",
-    "D",
-    "E"
-   ],
-   "tier": 2,
-   "fits": [
-    [
-     0,
-     1
-    ],
-    [
-     1,
-     1
-    ],
-    [
-     2,
-     1
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     4,
-     1
-    ]
-   ],
-   "key": [
-    0
-   ],
-   "chain": [
-    {
-     "n": 1,
-     "tier": 2,
-     "rule": "Alone in an area",
-     "kind": "eliminate",
-     "text": "Benedict was alone in the area, but Dorothea must be in the Garden, so Benedict cannot be in it.",
-     "focus": [
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       0
-      ],
-      [
-       4,
-       1
-      ]
-     ],
-     "elims": {
-      "B": [
-       [
-        3,
-        1
-       ]
-      ]
-     },
-     "i18n": {
-      "templateKey": "STEP_ALONE_BLOCKED_ONE",
-      "ruleKey": "RULE_ALONE",
-      "params": {
-       "owner": "B",
-       "bits": [
-        {
-         "templateKey": "FRAG_MUST_BE_IN",
-         "params": {
-          "suspects": [
-           "D"
-          ],
-          "room": "GARDEN"
-         }
-        }
-       ]
-      }
-     }
-    }
-   ],
-   "place": {
-    "n": 2,
-    "tier": 1,
-    "rule": "Sightline domino",
-    "kind": "place",
-    "text": "Benedict “was alone and was in column 2”: of the 5 tiles that fit, only r3c2 is still open. Place Benedict there.",
-    "focus": [
-     [
-      2,
-      1
-     ]
-    ],
-    "elims": {},
-    "suspect": "B",
-    "cell": [
-     2,
-     1
-    ],
-    "i18n": {
-     "templateKey": "STEP_PLACE_LAST_LEFT",
-     "ruleKey": "RULE_SINGLE",
-     "params": {
-      "fits": 5,
-      "suspect": "B",
-      "clueOf": "B",
-      "coord": [
-       2,
-       1
+       2
       ]
      }
     }
@@ -1193,8 +1148,8 @@
   {
    "suspect": "S",
    "cell": [
-    3,
-    2
+    0,
+    1
    ],
    "needs": [
     "A",
@@ -1212,17 +1167,17 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r4c3. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c2. That is where S. H. Adow is hiding!",
     "focus": [
      [
-      3,
-      2
+      0,
+      1
      ]
     ],
     "elims": {},
     "cell": [
-     3,
-     2
+     0,
+     1
     ],
     "suspect": "S",
     "i18n": {
@@ -1230,8 +1185,8 @@
      "ruleKey": "RULE_BLINDSPOT",
      "params": {
       "coord": [
-       3,
-       2
+       0,
+       1
       ]
      }
     }
@@ -1251,18 +1206,29 @@
   "flow": {
    "first_place_pos": 0.0,
    "elims_before_first_place": 0,
-   "last_fifth_t1_share": 0.5,
-   "hardest_last_pos": 0.833,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 1.0,
    "trials_in_last_fifth": 0,
-   "late_cascade": 0.0,
-   "late_elim_gap": 1,
-   "place_push": 1.0,
+   "late_cascade": 1.0,
+   "late_elim_gap": 0,
+   "place_push": 3.8,
    "global_uses": 0,
-   "global_first_t2": false
+   "global_first_t2": false,
+   "unlock_by_place": 1.0,
+   "star_opener": false
   },
   "flow_arc_ok": true,
-  "shadow_candidates_before_last": 5,
-  "shadow_candidates_before_last_two": 6,
+  "clue_fits": [
+   1,
+   2,
+   2,
+   3,
+   16
+  ],
+  "entry": 1,
+  "G18_one_entry": true,
+  "shadow_candidates_before_last": 2,
+  "shadow_candidates_before_last_two": 5,
   "dark_known_at": 5,
   "G5_late_shadow": true,
   "G6_tier": true,
@@ -1277,33 +1243,29 @@
   "trait_load_bearing": false,
   "biome_props_on_board": [
    "HAYBALE",
+   "HORSE",
    "MUD",
    "STRAW_MAT",
-   "TRACTOR",
-   "TREE",
    "WHEELBARROW"
   ],
   "biome_props_in_clues": [
+   "HORSE",
    "MUD",
-   "STRAW_MAT",
-   "TRACTOR"
+   "STRAW_MAT"
   ],
   "biome_props_load_bearing": [
+   "HORSE",
    "MUD",
-   "STRAW_MAT",
-   "TRACTOR"
+   "STRAW_MAT"
   ],
   "G11_biome_props_load_bearing": true,
   "G3_unique_full": true,
   "unique_without_shadow_law": true,
   "bruteforce_nodes": 12,
-  "rules_used": [
-   "alone",
-   "ray_block"
-  ],
-  "steps": 7,
-  "difficulty_score": 9,
-  "hardest_step_tier": 2,
-  "tall_scale": 1.0
+  "rules_used": [],
+  "steps": 5,
+  "difficulty_score": 5,
+  "hardest_step_tier": 1,
+  "tall_scale": 1.6
  }
 }

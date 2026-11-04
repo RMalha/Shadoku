@@ -9,39 +9,21 @@
  "tier": "easy",
  "shape": "lwing",
  "seed": 1303,
- "attempt": 1270,
+ "attempt": 34415,
  "traitMode": "require",
  "propMode": "require",
  "castKey": "FOE0707LRR1-1303",
  "puzzleId": "FOE0707LRR1-1303",
- "engine": "V10.1",
+ "engine": "V10.6",
  "i18nSchema": "shadoku-i18n/1",
- "difficultyScore": 12,
+ "difficultyScore": 11,
  "zoneWord": "area",
  "size": 7,
  "rooms": [
   [
    0,
    0,
-   0,
    1,
-   1,
-   -1,
-   -1
-  ],
-  [
-   0,
-   0,
-   0,
-   1,
-   1,
-   -1,
-   -1
-  ],
-  [
-   0,
-   0,
-   0,
    1,
    1,
    1,
@@ -50,296 +32,299 @@
   [
    0,
    0,
-   0,
-   1,
-   1,
-   1,
-   1
-  ],
-  [
-   0,
-   0,
-   0,
+   2,
    2,
    2,
    2,
    2
   ],
   [
-   3,
-   3,
-   3,
+   0,
+   0,
+   2,
    2,
    2,
    2,
    2
   ],
   [
-   4,
-   4,
-   4,
+   0,
+   0,
+   2,
    2,
    2,
    2,
    2
+  ],
+  [
+   0,
+   0,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  [
+   0,
+   0,
+   3,
+   3,
+   3,
+   -1,
+   -1
+  ],
+  [
+   4,
+   4,
+   4,
+   4,
+   4,
+   -1,
+   -1
   ]
  ],
  "roomNames": [
-  "Creek",
-  "Clearing",
   "Campsite",
-  "Log Bridge",
-  "Cabin"
+  "Creek",
+  "Waterfall",
+  "Birch Wood",
+  "Old Ruins"
  ],
  "roomIds": [
-  "CREEK",
-  "CLEARING",
   "CAMPSITE",
-  "LOG_BRIDGE",
-  "CABIN"
+  "CREEK",
+  "WATERFALL",
+  "BIRCH_WOOD",
+  "OLD_RUINS"
  ],
  "doors": [
   [
    [
-    3,
-    2
+    0,
+    6
    ],
    [
-    3,
-    3
+    1,
+    6
+   ]
+  ],
+  [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    2
    ]
   ],
   [
    [
     3,
-    6
+    3
    ],
    [
     4,
-    6
-   ]
-  ],
-  [
-   [
-    5,
-    2
-   ],
-   [
-    5,
     3
    ]
   ],
   [
    [
-    6,
-    2
+    5,
+    0
    ],
    [
     6,
-    3
+    0
+   ]
+  ],
+  [
+   [
+    5,
+    1
+   ],
+   [
+    5,
+    2
+   ]
+  ],
+  [
+   [
+    5,
+    4
+   ],
+   [
+    6,
+    4
    ]
   ]
  ],
- "windows": [
-  [
-   6,
-   1,
-   "S"
-  ]
- ],
+ "windows": [],
  "contents": [
   [
-   "",
-   "",
-   "",
-   "",
-   "",
-   "VOID",
-   "VOID"
+   "SHRUB",
+   "FOOTPRINTS",
+   "SHRUB",
+   "PUDDLE",
+   "SHRUB",
+   "CORPSE",
+   ""
   ],
   [
+   "PUDDLE",
    "",
    "",
    "FERN",
    "",
-   "FALLEN_LOG",
+   "",
+   ""
+  ],
+  [
+   "CHAIR",
+   "CHAIR",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "LANTERN",
+   "CHAIR",
+   "",
+   "",
+   "FERN",
+   "FERN",
+   "SHRUB"
+  ],
+  [
+   "LANTERN",
+   "TENT",
+   "",
+   "",
+   "BIRCH",
+   "",
+   ""
+  ],
+  [
+   "",
+   "CHAIR",
+   "",
+   "MOSS",
+   "MOSS",
    "VOID",
    "VOID"
   ],
   [
-   "OAK",
    "",
+   "RUINED_WALL",
    "",
-   "CAMPFIRE",
-   "",
-   "",
-   ""
-  ],
-  [
-   "",
-   "",
-   "",
-   "",
-   "STUMP",
-   "",
-   "CORPSE"
-  ],
-  [
    "FOOTPRINTS",
-   "FOOTPRINTS",
-   "FOOTPRINTS",
-   "",
-   "",
-   "TENT",
-   "PUDDLE"
-  ],
-  [
-   "",
    "MOSS",
-   "",
-   "STUMP",
-   "",
-   "",
-   ""
-  ],
-  [
-   "",
-   "",
-   "",
-   "",
-   "FOOTPRINTS",
-   "FOOTPRINTS",
-   "FOOTPRINTS"
+   "VOID",
+   "VOID"
   ]
  ],
- "multiTile": [
-  {
-   "kind": "FOOTPRINTS",
-   "cells": [
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     4,
-     2
-    ]
-   ]
-  },
-  {
-   "kind": "FOOTPRINTS",
-   "cells": [
-    [
-     6,
-     4
-    ],
-    [
-     6,
-     5
-    ],
-    [
-     6,
-     6
-    ]
-   ]
-  }
- ],
+ "multiTile": [],
  "corpse": [
-  3,
-  6
+  0,
+  5
  ],
  "biomeProps": [
-  "CAMPFIRE",
-  "FALLEN_LOG",
+  "BIRCH",
   "FERN",
+  "LANTERN",
   "MOSS",
-  "OAK",
-  "STUMP",
+  "RUINED_WALL",
+  "SHRUB",
   "TENT"
  ],
  "propClasses": {
-  "CAMPFIRE": "SHORT",
-  "FALLEN_LOG": "LOW",
+  "BIRCH": "TALL",
+  "CHAIR": "LOW",
   "FERN": "SHORT",
   "FOOTPRINTS": "LOW",
+  "LANTERN": "SHORT",
   "MOSS": "LOW",
-  "OAK": "TALL",
   "PUDDLE": "LOW",
-  "STUMP": "LOW",
+  "RUINED_WALL": "TALL",
+  "SHRUB": "TALL",
   "TENT": "TALL"
  },
  "dress": "integrated",
  "dressing": {
-  "lowShare": 0.275,
+  "lowShare": 0.344,
   "lowTiles": 11,
-  "openTiles": 40,
+  "openTiles": 32,
   "lowKinds": [
-   "FALLEN_LOG",
+   "CHAIR",
    "FOOTPRINTS",
    "MOSS",
-   "PUDDLE",
-   "STUMP"
+   "PUDDLE"
   ],
   "roomProps": {
-   "CREEK": [
-    "FERN",
-    "FOOTPRINTS",
-    "OAK"
-   ],
-   "CLEARING": [
-    "CAMPFIRE",
-    "FALLEN_LOG",
-    "STUMP"
-   ],
    "CAMPSITE": [
+    "CHAIR",
     "FOOTPRINTS",
+    "LANTERN",
     "PUDDLE",
-    "STUMP",
+    "SHRUB",
     "TENT"
    ],
-   "LOG_BRIDGE": [
+   "CREEK": [
+    "PUDDLE",
+    "SHRUB"
+   ],
+   "WATERFALL": [
+    "FERN",
+    "SHRUB"
+   ],
+   "BIRCH_WOOD": [
+    "BIRCH",
     "MOSS"
+   ],
+   "OLD_RUINS": [
+    "FOOTPRINTS",
+    "MOSS",
+    "RUINED_WALL"
    ]
   }
  },
  "suspects": [
   {
    "id": "A",
-   "name": "Alfred",
+   "name": "Augustin",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "curly",
+    "hairStyle": "short",
     "hairLength": "short",
     "hairColor": "blonde",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "none",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "beret",
     "facialHair": "goatee",
-    "tie": "bowtie",
+    "tie": "none",
     "skin": 0,
-    "cloth": 5
+    "cloth": 1
    },
-   "look": "blonde curly hair, goatee, bowtie",
-   "clue": "Alfred was beside the fern and was in row 1.",
-   "text": "Alfred was beside the fern and was in row 1.",
+   "look": "blonde short hair, round glasses, beret, goatee",
+   "clue": "Augustin was sitting on a chair and was not beside any lantern.",
+   "text": "Augustin was sitting on a chair and was not beside any lantern.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "ON",
      "subject": "A",
      "params": {
-      "prop": "FERN"
+      "prop": "CHAIR"
      }
     },
     {
-     "kind": "ROW",
+     "kind": "NOT_BESIDE",
      "subject": "A",
      "params": {
-      "index": 0
+      "prop": "LANTERN"
      }
     }
    ],
@@ -352,77 +337,83 @@
     "people": []
    },
    "solution": [
-    0,
-    2
+    2,
+    1
    ]
   },
   {
    "id": "B",
-   "name": "Benedict",
+   "name": "Barnaby",
    "gender": "m",
    "pronoun": "he",
    "traits": {
-    "hairStyle": "wavy",
-    "hairLength": "long",
-    "hairColor": "brown",
-    "glasses": false,
-    "glassesStyle": "none",
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": true,
+    "glassesStyle": "round",
     "hat": "none",
-    "facialHair": "goatee",
+    "facialHair": "mustache",
     "tie": "none",
-    "skin": 4,
-    "cloth": 6
+    "skin": 0,
+    "cloth": 2
    },
-   "look": "brown wavy hair, goatee",
-   "clue": "Benedict was the only person on the fallen log.",
-   "text": "Benedict was the only person on the fallen log.",
+   "look": "bald, round glasses, mustache",
+   "clue": "Barnaby was beside a lantern and was in front of an opening between two areas.",
+   "text": "Barnaby was beside a lantern and was in front of an opening between two areas.",
    "atoms": [
     {
-     "kind": "ONLY_ON",
+     "kind": "BESIDE",
      "subject": "B",
      "params": {
-      "prop": "FALLEN_LOG"
+      "prop": "LANTERN"
      }
+    },
+    {
+     "kind": "DOOR",
+     "subject": "B",
+     "params": {}
     }
    ],
    "clueTokens": {
     "subject": "B",
     "place": [
-     0
+     0,
+     1
     ],
     "people": []
    },
    "solution": [
-    1,
-    4
+    5,
+    0
    ]
   },
   {
    "id": "C",
-   "name": "Celeste",
-   "gender": "f",
-   "pronoun": "she",
+   "name": "Cornelius",
+   "gender": "m",
+   "pronoun": "he",
    "traits": {
-    "hairStyle": "bob",
+    "hairStyle": "crop",
     "hairLength": "short",
-    "hairColor": "black",
-    "glasses": false,
-    "glassesStyle": "none",
-    "hat": "cloche",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
     "facialHair": "none",
-    "tie": "none",
-    "skin": 3,
-    "cloth": 4
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 6
    },
-   "look": "black bob hair, cloche",
-   "clue": "Celeste was beside the oak tree.",
-   "text": "Celeste was beside the oak tree.",
+   "look": "blonde crop hair, round glasses, bowtie",
+   "clue": "Cornelius was standing on a moss patch.",
+   "text": "Cornelius was standing on a moss patch.",
    "atoms": [
     {
-     "kind": "BESIDE",
+     "kind": "ON",
      "subject": "C",
      "params": {
-      "prop": "OAK"
+      "prop": "MOSS"
      }
     }
    ],
@@ -434,36 +425,36 @@
     "people": []
    },
    "solution": [
-    3,
-    0
+    6,
+    4
    ]
   },
   {
    "id": "D",
-   "name": "Dmitri",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Daphne",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "curly",
-    "hairLength": "short",
-    "hairColor": "brown",
-    "glasses": true,
-    "glassesStyle": "round",
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "scarf",
-    "skin": 3,
-    "cloth": 5
+    "tie": "none",
+    "skin": 1,
+    "cloth": 1
    },
-   "look": "brown curly hair, round glasses, scarf",
-   "clue": "Dmitri was sitting on a tree stump.",
-   "text": "Dmitri was sitting on a tree stump.",
+   "look": "black long hair",
+   "clue": "Daphne was the only person beside a fern.",
+   "text": "Daphne was the only person beside a fern.",
    "atoms": [
     {
-     "kind": "ON",
+     "kind": "ONLY_BESIDE",
      "subject": "D",
      "params": {
-      "prop": "STUMP"
+      "prop": "FERN"
      }
     }
    ],
@@ -475,49 +466,88 @@
     "people": []
    },
    "solution": [
-    5,
+    3,
     3
    ]
   },
   {
    "id": "E",
-   "name": "Eugene",
-   "gender": "m",
-   "pronoun": "he",
+   "name": "Eleanor",
+   "gender": "f",
+   "pronoun": "she",
    "traits": {
-    "hairStyle": "short",
+    "hairStyle": "bob",
     "hairLength": "short",
     "hairColor": "brown",
-    "glasses": false,
-    "glassesStyle": "none",
+    "glasses": true,
+    "glassesStyle": "round",
     "hat": "none",
-    "facialHair": "beard",
-    "tie": "none",
-    "skin": 3,
-    "cloth": 5
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 7
    },
-   "look": "brown short hair, beard",
-   "clue": "Eugene was by the Creek. He stood diagonally next to another man.",
-   "text": "Eugene was by the Creek. He stood diagonally next to another man.",
+   "look": "brown bob hair, round glasses, bowtie",
+   "clue": "Eleanor was beside the birch tree.",
+   "text": "Eleanor was beside the birch tree.",
    "atoms": [
     {
-     "kind": "DIAG_P",
+     "kind": "BESIDE",
      "subject": "E",
      "params": {
-      "trait": "MALE",
-      "selfMatch": true
-     }
-    },
-    {
-     "kind": "ROOM",
-     "subject": "E",
-     "params": {
-      "room": "CREEK"
+      "prop": "BIRCH"
      }
     }
    ],
    "clueTokens": {
     "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    5
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Fleur",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 5
+   },
+   "look": "black bun hair",
+   "clue": "Fleur could see into another area. She was in the same area as someone else with black hair.",
+   "text": "Fleur could see into another area. She was in the same area as someone else with black hair.",
+   "atoms": [
+    {
+     "kind": "WITH_P",
+     "subject": "F",
+     "params": {
+      "trait": "HAIR_BLACK",
+      "selfMatch": true
+     }
+    },
+    {
+     "kind": "SEE_OTHER_ROOM",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
     "place": [
      1
     ],
@@ -527,77 +557,35 @@
    },
    "solution": [
     1,
-    1
-   ]
-  },
-  {
-   "id": "F",
-   "name": "Fleur",
-   "gender": "f",
-   "pronoun": "she",
-   "traits": {
-    "hairStyle": "curly",
-    "hairLength": "short",
-    "hairColor": "black",
-    "glasses": true,
-    "glassesStyle": "horn-rimmed",
-    "hat": "cloche",
-    "facialHair": "none",
-    "tie": "none",
-    "skin": 0,
-    "cloth": 2
-   },
-   "look": "black curly hair, horn-rimmed glasses, cloche",
-   "clue": "Fleur stood diagonally next to a man.",
-   "text": "Fleur stood diagonally next to a man.",
-   "atoms": [
-    {
-     "kind": "DIAG_P",
-     "subject": "F",
-     "params": {
-      "trait": "MALE",
-      "selfMatch": false
-     }
-    }
-   ],
-   "clueTokens": {
-    "subject": "F",
-    "place": [],
-    "people": [
-     0
-    ]
-   },
-   "solution": [
-    6,
-    4
+    6
    ]
   },
   {
    "id": "G",
-   "name": "Gilda",
+   "name": "Gloria",
    "gender": "f",
    "pronoun": "she",
    "traits": {
-    "hairStyle": "curly",
+    "hairStyle": "bob",
     "hairLength": "short",
-    "hairColor": "red",
-    "glasses": true,
-    "glassesStyle": "horn-rimmed",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
     "hat": "none",
     "facialHair": "none",
-    "tie": "necktie",
-    "skin": 4,
-    "cloth": 6
+    "tie": "none",
+    "skin": 0,
+    "cloth": 4
    },
-   "look": "red curly hair, horn-rimmed glasses, necktie",
-   "clue": "Gilda was beside the Corpse.",
-   "text": "Gilda was beside the Corpse.",
+   "look": "grey bob hair",
+   "clue": "Gloria was beside a shrub.",
+   "text": "Gloria was beside a shrub.",
    "atoms": [
     {
      "kind": "BESIDE",
      "subject": "G",
      "params": {
-      "prop": "CORPSE"
+      "prop": "SHRUB"
      }
     }
    ],
@@ -609,14 +597,14 @@
     "people": []
    },
    "solution": [
-    2,
-    6
+    0,
+    3
    ]
   }
  ],
  "shadow": [
-  0,
-  3
+  4,
+  2
  ],
  "shadowSuspect": {
   "id": "S",
@@ -625,97 +613,98 @@
   "traits": null,
   "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
  },
- "globalRules": [
-  {
-   "id": "EXACTLY_ONE_ON:FOOTPRINTS",
-   "text": "Exactly one person was on a trail of footprints.",
-   "kind": "EXACTLY_ONE_ON",
-   "params": {
-    "prop": "FOOTPRINTS"
-   }
-  }
- ],
+ "globalRules": [],
  "steps": [
   {
    "n": 1,
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Alfred “was beside the fern and was in row 1”: only r1c3 fits. Place Alfred there.",
+   "text": "Barnaby “was beside a lantern and was in front of an opening between two areas”: only r6c1 fits. Place Barnaby there.",
    "focus": [
     [
-     0,
-     2
+     5,
+     0
     ]
    ],
    "elims": {
+    "A": [
+     [
+      5,
+      1
+     ]
+    ],
+    "C": [
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ]
+    ],
     "E": [
      [
-      0,
-      0
-     ],
-     [
-      0,
-      1
-     ],
-     [
-      0,
-      2
-     ],
-     [
-      2,
-      2
-     ],
-     [
-      3,
-      2
-     ],
-     [
-      4,
-      2
+      5,
+      4
      ]
     ],
     "F": [
      [
-      0,
+      1,
       0
      ],
      [
-      0,
+      2,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
       1
      ],
      [
-      0,
+      5,
       2
      ],
      [
-      2,
-      2
+      5,
+      3
      ],
      [
-      3,
-      2
+      5,
+      4
      ],
      [
-      4,
-      2
+      6,
+      0
+     ]
+    ],
+    "G": [
+     [
+      1,
+      0
      ]
     ]
    },
-   "suspect": "A",
+   "suspect": "B",
    "cell": [
-    0,
-    2
+    5,
+    0
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_ONE_FIT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "suspect": "A",
-     "clueOf": "A",
+     "suspect": "B",
+     "clueOf": "B",
      "coord": [
-      0,
-      2
+      5,
+      0
      ]
     }
    }
@@ -725,57 +714,80 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Benedict “was the only person on the fallen log”: only r2c5 fits. Place Benedict there.",
+   "text": "Augustin “was sitting on a chair and was not beside any lantern”: of the 2 tiles that fit, only r3c2 is still open. Place Augustin there.",
    "focus": [
     [
-     1,
-     4
+     2,
+     1
     ]
    ],
    "elims": {
     "D": [
      [
-      3,
-      4
-     ]
-    ],
-    "F": [
-     [
-      0,
-      4
-     ],
-     [
-      1,
+      2,
       3
-     ],
-     [
-      1,
-      4
      ],
      [
       2,
       4
      ],
      [
-      3,
+      2,
+      5
+     ]
+    ],
+    "F": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
       4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ]
+    ],
+    "G": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      6
      ]
     ]
    },
-   "suspect": "B",
+   "suspect": "A",
    "cell": [
-    1,
-    4
+    2,
+    1
    ],
    "i18n": {
-    "templateKey": "STEP_PLACE_ONE_FIT",
+    "templateKey": "STEP_PLACE_LAST_LEFT",
     "ruleKey": "RULE_SINGLE",
     "params": {
-     "suspect": "B",
-     "clueOf": "B",
+     "fits": 2,
+     "suspect": "A",
+     "clueOf": "A",
      "coord": [
-      1,
-      4
+      2,
+      1
      ]
     }
    }
@@ -785,297 +797,25 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Dmitri “was sitting on a tree stump”: of the 2 tiles that fit, only r6c4 is still open. Place Dmitri there.",
+   "text": "Cornelius “was standing on a moss patch”: of the 3 tiles that fit, only r7c5 is still open. Place Cornelius there.",
    "focus": [
     [
-     5,
-     3
+     6,
+     4
     ]
    ],
    "elims": {
     "F": [
-     [
-      4,
-      3
-     ],
-     [
-      5,
-      0
-     ],
-     [
-      5,
-      1
-     ],
-     [
-      5,
-      2
-     ],
-     [
-      5,
-      3
-     ],
-     [
-      5,
-      4
-     ],
-     [
-      5,
-      5
-     ],
-     [
-      5,
-      6
-     ],
      [
       6,
-      3
-     ]
-    ]
-   },
-   "suspect": "D",
-   "cell": [
-    5,
-    3
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "suspect": "D",
-     "clueOf": "D",
-     "coord": [
-      5,
-      3
-     ]
-    }
-   }
-  },
-  {
-   "n": 4,
-   "tier": 1,
-   "rule": "Polaroid check",
-   "kind": "eliminate",
-   "text": "Eugene stood diagonally next to another man. Polaroid check — other men: Alfred, Benedict and Dmitri. None of them can still stand diagonally next to the marked tiles, so Eugene cannot be there.",
-   "focus": [
-    [
-     1,
-     0
-    ],
-    [
-     2,
-     1
-    ],
-    [
-     3,
-     0
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ]
-   ],
-   "elims": {
-    "E": [
-     [
-      1,
-      0
-     ],
-     [
-      2,
-      1
-     ],
-     [
-      3,
-      0
-     ],
-     [
-      3,
-      1
-     ],
-     [
-      4,
-      0
-     ],
-     [
-      4,
-      1
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_TRAIT_NO_DIAG",
-    "ruleKey": "RULE_TRAIT_FILTER",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "E",
-       "atom": {
-        "kind": "DIAG_P",
-        "subject": "E",
-        "params": {
-         "trait": "MALE",
-         "selfMatch": true
-        }
-       }
-      }
-     },
-     "poll": {
-      "templateKey": "FRAG_POLL.SELF",
-      "params": {
-       "trait": "MALE",
-       "holders": [
-        "A",
-        "B",
-        "D"
-       ]
-      }
-     },
-     "coords": [
-      [
-       1,
-       0
-      ],
-      [
-       2,
-       1
-      ],
-      [
-       3,
-       0
-      ],
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       0
-      ],
-      [
-       4,
-       1
-      ]
-     ],
-     "suspect": "E"
-    }
-   }
-  },
-  {
-   "n": 5,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Eugene “was by the Creek. He stood diagonally next to another man”: every tile that fits is ruled out except r2c2. Place Eugene there.",
-   "focus": [
-    [
-     1,
-     1
-    ]
-   ],
-   "elims": {
-    "C": [
-     [
-      1,
-      0
-     ],
-     [
-      2,
-      1
-     ]
-    ],
-    "F": [
-     [
-      1,
-      0
-     ],
-     [
-      1,
-      1
-     ],
-     [
-      2,
-      1
-     ],
-     [
-      3,
-      1
-     ],
-     [
-      4,
-      1
-     ]
-    ]
-   },
-   "suspect": "E",
-   "cell": [
-    1,
-    1
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_RULED_OUT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "suspect": "E",
-     "clueOf": "E",
-     "coord": [
-      1,
-      1
-     ]
-    }
-   }
-  },
-  {
-   "n": 6,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Celeste “was beside the oak tree”: of the 3 tiles that fit, only r4c1 is still open. Place Celeste there.",
-   "focus": [
-    [
-     3,
-     0
-    ]
-   ],
-   "elims": {
-    "F": [
-     [
-      3,
-      0
-     ],
-     [
-      3,
-      3
-     ],
-     [
-      3,
-      5
-     ],
-     [
-      4,
-      0
-     ]
-    ],
-    "G": [
-     [
-      3,
-      5
+      4
      ]
     ]
    },
    "suspect": "C",
    "cell": [
-    3,
-    0
+    6,
+    4
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_LAST_LEFT",
@@ -1085,9 +825,181 @@
      "suspect": "C",
      "clueOf": "C",
      "coord": [
-      3,
-      0
+      6,
+      4
      ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gloria “was beside a shrub”: of the 4 tiles that fit, only r1c4 is still open. Place Gloria there.",
+   "focus": [
+    [
+     0,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    0,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      0,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Fleur was in the same area as someone else with black hair. Polaroid check — other people with black hair: Daphne. None of them can still reach the Creek or the Birch Wood, so Fleur cannot be there.",
+   "focus": [
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      6
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_NONE_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "WITH_P",
+        "subject": "F",
+        "params": {
+         "trait": "HAIR_BLACK",
+         "selfMatch": true
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL.SELF",
+      "params": {
+       "trait": "HAIR_BLACK",
+       "holders": [
+        "D"
+       ]
+      }
+     },
+     "rooms": [
+      "CREEK",
+      "BIRCH_WOOD"
+     ],
+     "suspect": "F"
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Daphne was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
+   "focus": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "D",
+     "prop": "FERN"
     }
    }
   },
@@ -1096,224 +1008,29 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Gilda “was beside the Corpse”: of the 2 tiles that fit, only r3c7 is still open. Place Gilda there.",
+   "text": "Fleur “could see into another area. She was in the same area as someone else with black hair”: every tile that fits is ruled out except r2c7. Place Fleur there.",
    "focus": [
     [
-     2,
+     1,
      6
     ]
    ],
    "elims": {
-    "F": [
+    "D": [
      [
-      2,
-      5
-     ],
-     [
-      2,
-      6
-     ],
-     [
-      4,
-      6
-     ],
-     [
-      6,
-      6
-     ]
-    ]
-   },
-   "suspect": "G",
-   "cell": [
-    2,
-    6
-   ],
-   "i18n": {
-    "templateKey": "STEP_PLACE_LAST_LEFT",
-    "ruleKey": "RULE_SINGLE",
-    "params": {
-     "fits": 2,
-     "suspect": "G",
-     "clueOf": "G",
-     "coord": [
-      2,
-      6
-     ]
-    }
-   }
-  },
-  {
-   "n": 8,
-   "tier": 1,
-   "rule": "Polaroid check",
-   "kind": "eliminate",
-   "text": "Fleur stood diagonally next to a man. Polaroid check — men: Alfred, Benedict, Dmitri and Eugene. None of them can still stand diagonally next to the marked tiles, so Fleur cannot be there.",
-   "focus": [
-    [
-     6,
-     0
-    ],
-    [
-     6,
-     1
-    ],
-    [
-     6,
-     2
-    ],
-    [
-     6,
-     5
-    ]
-   ],
-   "elims": {
-    "F": [
-     [
-      6,
-      0
-     ],
-     [
-      6,
-      1
-     ],
-     [
-      6,
+      1,
       2
      ],
      [
-      6,
-      5
-     ]
-    ]
-   },
-   "i18n": {
-    "templateKey": "STEP_TRAIT_NO_DIAG",
-    "ruleKey": "RULE_TRAIT_FILTER",
-    "params": {
-     "said": {
-      "templateKey": "FRAG_SAID",
-      "params": {
-       "subject": "F",
-       "atom": {
-        "kind": "DIAG_P",
-        "subject": "F",
-        "params": {
-         "trait": "MALE",
-         "selfMatch": false
-        }
-       }
-      }
-     },
-     "poll": {
-      "templateKey": "FRAG_POLL",
-      "params": {
-       "trait": "MALE",
-       "holders": [
-        "A",
-        "B",
-        "D",
-        "E"
-       ]
-      }
-     },
-     "coords": [
-      [
-       6,
-       0
-      ],
-      [
-       6,
-       1
-      ],
-      [
-       6,
-       2
-      ],
-      [
-       6,
-       5
-      ]
-     ],
-     "suspect": "F"
-    }
-   }
-  },
-  {
-   "n": 9,
-   "tier": 2,
-   "rule": "Exactly-one census",
-   "kind": "eliminate",
-   "text": "Exactly one person was on a trail of footprints. Only Fleur can still reach a trail of footprints, so she must be on one.",
-   "focus": [
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     6,
-     4
-    ],
-    [
-     6,
-     5
-    ],
-    [
-     6,
-     6
-    ]
-   ],
-   "elims": {
-    "F": [
-     [
-      0,
-      3
-     ],
-     [
-      4,
+      1,
       4
      ]
     ]
    },
-   "i18n": {
-    "templateKey": "STEP_CENSUS_ONLY_REACH",
-    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
-    "params": {
-     "rule": {
-      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
-      "params": {
-       "prop": "FOOTPRINTS"
-      }
-     },
-     "owner": "F",
-     "prop": "FOOTPRINTS"
-    }
-   }
-  },
-  {
-   "n": 10,
-   "tier": 1,
-   "rule": "Sightline domino",
-   "kind": "place",
-   "text": "Fleur “stood diagonally next to a man”: every tile that fits is ruled out except r7c5. Place Fleur there.",
-   "focus": [
-    [
-     6,
-     4
-    ]
-   ],
-   "elims": {},
    "suspect": "F",
    "cell": [
-    6,
-    4
+    1,
+    6
    ],
    "i18n": {
     "templateKey": "STEP_PLACE_RULED_OUT",
@@ -1322,28 +1039,99 @@
      "suspect": "F",
      "clueOf": "F",
      "coord": [
-      6,
-      4
+      1,
+      6
      ]
     }
    }
   },
   {
-   "n": 11,
+   "n": 8,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Daphne “was the only person beside a fern”: of the 6 tiles that fit, only r4c4 is still open. Place Daphne there.",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    3,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      3,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Eleanor “was beside the birch tree”: of the 3 tiles that fit, only r5c6 is still open. Place Eleanor there.",
+   "focus": [
+    [
+     4,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "E",
+   "cell": [
+    4,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      4,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
    "tier": 1,
    "rule": "The blindspot",
    "kind": "shadow",
-   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r5c3. That is where S. H. Adow is hiding!",
    "focus": [
     [
-     0,
-     3
+     4,
+     2
     ]
    ],
    "elims": {},
    "cell": [
-    0,
-    3
+    4,
+    2
    ],
    "suspect": "S",
    "i18n": {
@@ -1351,8 +1139,8 @@
     "ruleKey": "RULE_BLINDSPOT",
     "params": {
      "coord": [
-      0,
-      3
+      4,
+      2
      ]
     }
    }
@@ -1360,17 +1148,17 @@
  ],
  "hints": [
   {
-   "suspect": "A",
+   "suspect": "B",
    "cell": [
-    0,
-    2
+    5,
+    0
    ],
    "needs": [],
    "tier": 1,
    "fits": [
     [
-     0,
-     2
+     5,
+     0
     ]
    ],
    "key": [],
@@ -1380,150 +1168,81 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Alfred “was beside the fern and was in row 1”: only r1c3 fits. Place Alfred there.",
+    "text": "Barnaby “was beside a lantern and was in front of an opening between two areas”: only r6c1 fits. Place Barnaby there.",
     "focus": [
      [
-      0,
-      2
+      5,
+      0
      ]
     ],
     "elims": {
-     "E": [
+     "A": [
       [
-       0,
-       0
-      ],
-      [
-       0,
+       5,
        1
-      ],
-      [
-       0,
-       2
-      ],
-      [
-       2,
-       2
-      ],
-      [
-       3,
-       2
-      ],
-      [
-       4,
-       2
       ]
      ],
-     "F": [
+     "C": [
       [
-       0,
-       0
-      ],
-      [
-       0,
-       1
-      ],
-      [
-       0,
-       2
-      ],
-      [
-       2,
-       2
-      ],
-      [
-       3,
-       2
-      ],
-      [
-       4,
-       2
-      ]
-     ]
-    },
-    "suspect": "A",
-    "cell": [
-     0,
-     2
-    ],
-    "i18n": {
-     "templateKey": "STEP_PLACE_ONE_FIT",
-     "ruleKey": "RULE_SINGLE",
-     "params": {
-      "suspect": "A",
-      "clueOf": "A",
-      "coord": [
-       0,
-       2
-      ]
-     }
-    }
-   }
-  },
-  {
-   "suspect": "B",
-   "cell": [
-    1,
-    4
-   ],
-   "needs": [
-    "A"
-   ],
-   "tier": 1,
-   "fits": [
-    [
-     1,
-     4
-    ]
-   ],
-   "key": [],
-   "chain": [],
-   "place": {
-    "n": 1,
-    "tier": 1,
-    "rule": "Sightline domino",
-    "kind": "place",
-    "text": "Benedict “was the only person on the fallen log”: only r2c5 fits. Place Benedict there.",
-    "focus": [
-     [
-      1,
-      4
-     ]
-    ],
-    "elims": {
-     "D": [
-      [
-       3,
-       4
-      ]
-     ],
-     "F": [
-      [
-       0,
-       4
-      ],
-      [
-       1,
+       5,
        3
       ],
       [
-       1,
+       5,
        4
+      ]
+     ],
+     "E": [
+      [
+       5,
+       4
+      ]
+     ],
+     "F": [
+      [
+       1,
+       0
       ],
       [
        2,
+       0
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
        4
       ],
       [
-       3,
-       4
+       6,
+       0
+      ]
+     ],
+     "G": [
+      [
+       1,
+       0
       ]
      ]
     },
     "suspect": "B",
     "cell": [
-     1,
-     4
+     5,
+     0
     ],
     "i18n": {
      "templateKey": "STEP_PLACE_ONE_FIT",
@@ -1532,32 +1251,31 @@
       "suspect": "B",
       "clueOf": "B",
       "coord": [
-       1,
-       4
+       5,
+       0
       ]
      }
     }
    }
   },
   {
-   "suspect": "D",
+   "suspect": "A",
    "cell": [
-    5,
-    3
+    2,
+    1
    ],
    "needs": [
-    "A",
     "B"
    ],
    "tier": 1,
    "fits": [
     [
-     3,
-     4
+     2,
+     1
     ],
     [
      5,
-     3
+     1
     ]
    ],
    "key": [],
@@ -1567,322 +1285,79 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Dmitri “was sitting on a tree stump”: of the 2 tiles that fit, only r6c4 is still open. Place Dmitri there.",
+    "text": "Augustin “was sitting on a chair and was not beside any lantern”: of the 2 tiles that fit, only r3c2 is still open. Place Augustin there.",
     "focus": [
      [
-      5,
-      3
+      2,
+      1
      ]
     ],
     "elims": {
-     "F": [
+     "D": [
       [
-       4,
+       2,
        3
       ],
       [
-       5,
-       0
-      ],
-      [
-       5,
-       1
-      ],
-      [
-       5,
-       2
-      ],
-      [
-       5,
-       3
-      ],
-      [
-       5,
+       2,
        4
       ],
       [
-       5,
+       2,
+       5
+      ]
+     ],
+     "F": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
        5
       ],
       [
-       5,
+       2,
        6
+      ]
+     ],
+     "G": [
+      [
+       0,
+       1
       ],
       [
-       6,
-       3
+       2,
+       6
       ]
      ]
     },
-    "suspect": "D",
+    "suspect": "A",
     "cell": [
-     5,
-     3
+     2,
+     1
     ],
     "i18n": {
      "templateKey": "STEP_PLACE_LAST_LEFT",
      "ruleKey": "RULE_SINGLE",
      "params": {
       "fits": 2,
-      "suspect": "D",
-      "clueOf": "D",
+      "suspect": "A",
+      "clueOf": "A",
       "coord": [
-       5,
-       3
-      ]
-     }
-    }
-   }
-  },
-  {
-   "suspect": "E",
-   "cell": [
-    1,
-    1
-   ],
-   "needs": [
-    "A",
-    "B",
-    "D"
-   ],
-   "tier": 1,
-   "fits": [
-    [
-     0,
-     0
-    ],
-    [
-     0,
-     1
-    ],
-    [
-     0,
-     2
-    ],
-    [
-     1,
-     0
-    ],
-    [
-     1,
-     1
-    ],
-    [
-     2,
-     1
-    ],
-    [
-     2,
-     2
-    ],
-    [
-     3,
-     0
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     3,
-     2
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     4,
-     2
-    ]
-   ],
-   "key": [
-    0
-   ],
-   "chain": [
-    {
-     "n": 1,
-     "tier": 1,
-     "rule": "Polaroid check",
-     "kind": "eliminate",
-     "text": "Eugene stood diagonally next to another man. Polaroid check — other men: Alfred, Benedict and Dmitri. None of them can still stand diagonally next to the marked tiles, so Eugene cannot be there.",
-     "focus": [
-      [
-       1,
-       0
-      ],
-      [
        2,
-       1
-      ],
-      [
-       3,
-       0
-      ],
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       0
-      ],
-      [
-       4,
-       1
-      ]
-     ],
-     "elims": {
-      "E": [
-       [
-        1,
-        0
-       ],
-       [
-        2,
-        1
-       ],
-       [
-        3,
-        0
-       ],
-       [
-        3,
-        1
-       ],
-       [
-        4,
-        0
-       ],
-       [
-        4,
-        1
-       ]
-      ]
-     },
-     "i18n": {
-      "templateKey": "STEP_TRAIT_NO_DIAG",
-      "ruleKey": "RULE_TRAIT_FILTER",
-      "params": {
-       "said": {
-        "templateKey": "FRAG_SAID",
-        "params": {
-         "subject": "E",
-         "atom": {
-          "kind": "DIAG_P",
-          "subject": "E",
-          "params": {
-           "trait": "MALE",
-           "selfMatch": true
-          }
-         }
-        }
-       },
-       "poll": {
-        "templateKey": "FRAG_POLL.SELF",
-        "params": {
-         "trait": "MALE",
-         "holders": [
-          "A",
-          "B",
-          "D"
-         ]
-        }
-       },
-       "coords": [
-        [
-         1,
-         0
-        ],
-        [
-         2,
-         1
-        ],
-        [
-         3,
-         0
-        ],
-        [
-         3,
-         1
-        ],
-        [
-         4,
-         0
-        ],
-        [
-         4,
-         1
-        ]
-       ],
-       "suspect": "E"
-      }
-     }
-    }
-   ],
-   "place": {
-    "n": 2,
-    "tier": 1,
-    "rule": "Sightline domino",
-    "kind": "place",
-    "text": "Eugene “was by the Creek. He stood diagonally next to another man”: every tile that fits is ruled out except r2c2. Place Eugene there.",
-    "focus": [
-     [
-      1,
-      1
-     ]
-    ],
-    "elims": {
-     "C": [
-      [
-       1,
-       0
-      ],
-      [
-       2,
-       1
-      ]
-     ],
-     "F": [
-      [
-       1,
-       0
-      ],
-      [
-       1,
-       1
-      ],
-      [
-       2,
-       1
-      ],
-      [
-       3,
-       1
-      ],
-      [
-       4,
-       1
-      ]
-     ]
-    },
-    "suspect": "E",
-    "cell": [
-     1,
-     1
-    ],
-    "i18n": {
-     "templateKey": "STEP_PLACE_RULED_OUT",
-     "ruleKey": "RULE_SINGLE",
-     "params": {
-      "suspect": "E",
-      "clueOf": "E",
-      "coord": [
-       1,
        1
       ]
      }
@@ -1892,27 +1367,26 @@
   {
    "suspect": "C",
    "cell": [
-    3,
-    0
+    6,
+    4
    ],
    "needs": [
     "A",
-    "B",
-    "E"
+    "B"
    ],
    "tier": 1,
    "fits": [
     [
-     1,
-     0
+     5,
+     3
     ],
     [
-     2,
-     1
+     5,
+     4
     ],
     [
-     3,
-     0
+     6,
+     4
     ]
    ],
    "key": [],
@@ -1922,43 +1396,25 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Celeste “was beside the oak tree”: of the 3 tiles that fit, only r4c1 is still open. Place Celeste there.",
+    "text": "Cornelius “was standing on a moss patch”: of the 3 tiles that fit, only r7c5 is still open. Place Cornelius there.",
     "focus": [
      [
-      3,
-      0
+      6,
+      4
      ]
     ],
     "elims": {
      "F": [
       [
-       3,
-       0
-      ],
-      [
-       3,
-       3
-      ],
-      [
-       3,
-       5
-      ],
-      [
-       4,
-       0
-      ]
-     ],
-     "G": [
-      [
-       3,
-       5
+       6,
+       4
       ]
      ]
     },
     "suspect": "C",
     "cell": [
-     3,
-     0
+     6,
+     4
     ],
     "i18n": {
      "templateKey": "STEP_PLACE_LAST_LEFT",
@@ -1968,8 +1424,8 @@
       "suspect": "C",
       "clueOf": "C",
       "coord": [
-       3,
-       0
+       6,
+       4
       ]
      }
     }
@@ -1978,24 +1434,31 @@
   {
    "suspect": "G",
    "cell": [
-    2,
-    6
+    0,
+    3
    ],
    "needs": [
     "A",
     "B",
-    "C",
-    "D"
+    "C"
    ],
    "tier": 1,
    "fits": [
     [
-     2,
-     6
+     0,
+     1
     ],
     [
-     3,
-     5
+     0,
+     3
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     6
     ]
    ],
    "key": [],
@@ -2005,48 +1468,29 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Gilda “was beside the Corpse”: of the 2 tiles that fit, only r3c7 is still open. Place Gilda there.",
+    "text": "Gloria “was beside a shrub”: of the 4 tiles that fit, only r1c4 is still open. Place Gloria there.",
     "focus": [
      [
-      2,
-      6
+      0,
+      3
      ]
     ],
-    "elims": {
-     "F": [
-      [
-       2,
-       5
-      ],
-      [
-       2,
-       6
-      ],
-      [
-       4,
-       6
-      ],
-      [
-       6,
-       6
-      ]
-     ]
-    },
+    "elims": {},
     "suspect": "G",
     "cell": [
-     2,
-     6
+     0,
+     3
     ],
     "i18n": {
      "templateKey": "STEP_PLACE_LAST_LEFT",
      "ruleKey": "RULE_SINGLE",
      "params": {
-      "fits": 2,
+      "fits": 4,
       "suspect": "G",
       "clueOf": "G",
       "coord": [
-       2,
-       6
+       0,
+       3
       ]
      }
     }
@@ -2055,38 +1499,20 @@
   {
    "suspect": "F",
    "cell": [
-    6,
-    4
+    1,
+    6
    ],
    "needs": [
     "A",
     "B",
     "C",
-    "D",
-    "E",
     "G"
    ],
    "tier": 2,
    "fits": [
     [
      0,
-     0
-    ],
-    [
-     0,
-     1
-    ],
-    [
-     0,
-     2
-    ],
-    [
-     0,
-     3
-    ],
-    [
-     0,
-     4
+     6
     ],
     [
      1,
@@ -2094,15 +1520,11 @@
     ],
     [
      1,
-     1
+     6
     ],
     [
-     1,
-     3
-    ],
-    [
-     1,
-     4
+     2,
+     0
     ],
     [
      2,
@@ -2111,6 +1533,10 @@
     [
      2,
      2
+    ],
+    [
+     2,
+     3
     ],
     [
      2,
@@ -2126,51 +1552,11 @@
     ],
     [
      3,
-     0
-    ],
-    [
-     3,
-     1
-    ],
-    [
-     3,
-     2
-    ],
-    [
-     3,
-     3
-    ],
-    [
-     3,
-     4
-    ],
-    [
-     3,
-     5
-    ],
-    [
-     4,
-     0
-    ],
-    [
-     4,
-     1
-    ],
-    [
-     4,
-     2
-    ],
-    [
-     4,
      3
     ],
     [
      4,
-     4
-    ],
-    [
-     4,
-     6
+     3
     ],
     [
      5,
@@ -2193,40 +1579,12 @@
      4
     ],
     [
-     5,
-     5
-    ],
-    [
-     5,
-     6
-    ],
-    [
      6,
      0
     ],
     [
      6,
-     1
-    ],
-    [
-     6,
-     2
-    ],
-    [
-     6,
-     3
-    ],
-    [
-     6,
      4
-    ],
-    [
-     6,
-     5
-    ],
-    [
-     6,
-     6
     ]
    ],
    "key": [
@@ -2239,47 +1597,59 @@
      "tier": 1,
      "rule": "Polaroid check",
      "kind": "eliminate",
-     "text": "Fleur stood diagonally next to a man. Polaroid check — men: Alfred, Benedict, Dmitri and Eugene. None of them can still stand diagonally next to the marked tiles, so Fleur cannot be there.",
+     "text": "Fleur was in the same area as someone else with black hair. Polaroid check — other people with black hair: Daphne. None of them can still reach the Creek or the Birch Wood, so Fleur cannot be there.",
      "focus": [
       [
-       6,
-       0
+       0,
+       3
       ],
       [
-       6,
-       1
+       0,
+       6
       ],
       [
-       6,
+       4,
        2
       ],
       [
-       6,
+       4,
+       3
+      ],
+      [
+       4,
        5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
       ]
      ],
      "elims": {
       "F": [
        [
-        6,
-        0
+        0,
+        6
        ],
        [
-        6,
-        1
-       ],
-       [
-        6,
-        2
-       ],
-       [
-        6,
-        5
+        4,
+        3
        ]
       ]
      },
      "i18n": {
-      "templateKey": "STEP_TRAIT_NO_DIAG",
+      "templateKey": "STEP_TRAIT_NONE_REACH",
       "ruleKey": "RULE_TRAIT_FILTER",
       "params": {
        "said": {
@@ -2287,44 +1657,27 @@
         "params": {
          "subject": "F",
          "atom": {
-          "kind": "DIAG_P",
+          "kind": "WITH_P",
           "subject": "F",
           "params": {
-           "trait": "MALE",
-           "selfMatch": false
+           "trait": "HAIR_BLACK",
+           "selfMatch": true
           }
          }
         }
        },
        "poll": {
-        "templateKey": "FRAG_POLL",
+        "templateKey": "FRAG_POLL.SELF",
         "params": {
-         "trait": "MALE",
+         "trait": "HAIR_BLACK",
          "holders": [
-          "A",
-          "B",
-          "D",
-          "E"
+          "D"
          ]
         }
        },
-       "coords": [
-        [
-         6,
-         0
-        ],
-        [
-         6,
-         1
-        ],
-        [
-         6,
-         2
-        ],
-        [
-         6,
-         5
-        ]
+       "rooms": [
+        "CREEK",
+        "BIRCH_WOOD"
        ],
        "suspect": "F"
       }
@@ -2333,59 +1686,49 @@
     {
      "n": 2,
      "tier": 2,
-     "rule": "Exactly-one census",
+     "rule": "Monopoly mask",
      "kind": "eliminate",
-     "text": "Exactly one person was on a trail of footprints. Only Fleur can still reach a trail of footprints, so she must be on one.",
+     "text": "Daphne was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
      "focus": [
       [
-       4,
-       0
-      ],
-      [
-       4,
-       1
-      ],
-      [
-       4,
+       1,
        2
       ],
       [
-       6,
+       1,
        4
       ],
       [
-       6,
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
        5
       ],
       [
-       6,
-       6
+       3,
+       3
       ]
      ],
      "elims": {
       "F": [
        [
-        0,
+        3,
         3
-       ],
-       [
-        4,
-        4
        ]
       ]
      },
      "i18n": {
-      "templateKey": "STEP_CENSUS_ONLY_REACH",
-      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
       "params": {
-       "rule": {
-        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
-        "params": {
-         "prop": "FOOTPRINTS"
-        }
-       },
-       "owner": "F",
-       "prop": "FOOTPRINTS"
+       "owner": "D",
+       "prop": "FERN"
       }
      }
     }
@@ -2395,18 +1738,29 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Fleur “stood diagonally next to a man”: every tile that fits is ruled out except r7c5. Place Fleur there.",
+    "text": "Fleur “could see into another area. She was in the same area as someone else with black hair”: every tile that fits is ruled out except r2c7. Place Fleur there.",
     "focus": [
      [
-      6,
-      4
+      1,
+      6
      ]
     ],
-    "elims": {},
+    "elims": {
+     "D": [
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ]
+     ]
+    },
     "suspect": "F",
     "cell": [
-     6,
-     4
+     1,
+     6
     ],
     "i18n": {
      "templateKey": "STEP_PLACE_RULED_OUT",
@@ -2415,8 +1769,151 @@
       "suspect": "F",
       "clueOf": "F",
       "coord": [
-       6,
-       4
+       1,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    3,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Daphne “was the only person beside a fern”: of the 6 tiles that fit, only r4c4 is still open. Place Daphne there.",
+    "focus": [
+     [
+      3,
+      3
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       4,
+       3
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     3,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       3,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    4,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Eleanor “was beside the birch tree”: of the 3 tiles that fit, only r5c6 is still open. Place Eleanor there.",
+    "focus": [
+     [
+      4,
+      5
+     ]
+    ],
+    "elims": {},
+    "suspect": "E",
+    "cell": [
+     4,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       4,
+       5
       ]
      }
     }
@@ -2425,8 +1922,8 @@
   {
    "suspect": "S",
    "cell": [
-    0,
-    3
+    4,
+    2
    ],
    "needs": [
     "A",
@@ -2446,17 +1943,17 @@
     "tier": 1,
     "rule": "The blindspot",
     "kind": "shadow",
-    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r1c4. That is where S. H. Adow is hiding!",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r5c3. That is where S. H. Adow is hiding!",
     "focus": [
      [
-      0,
-      3
+      4,
+      2
      ]
     ],
     "elims": {},
     "cell": [
-     0,
-     3
+     4,
+     2
     ],
     "suspect": "S",
     "i18n": {
@@ -2464,8 +1961,8 @@
      "ruleKey": "RULE_BLINDSPOT",
      "params": {
       "coord": [
-       0,
-       3
+       4,
+       2
       ]
      }
     }
@@ -2480,23 +1977,36 @@
   "G10_cast_valid": true,
   "G1_no_mutual_sight": true,
   "G2_single_shadow": true,
-  "init_singles": 2,
+  "init_singles": 1,
   "G4_domino_pacing": true,
   "flow": {
    "first_place_pos": 0.0,
    "elims_before_first_place": 0,
-   "last_fifth_t1_share": 0.5,
-   "hardest_last_pos": 0.889,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 0.625,
    "trials_in_last_fifth": 0,
    "late_cascade": 0.667,
    "late_elim_gap": 2,
-   "place_push": 6.14,
-   "global_uses": 1,
-   "global_first_t2": true
+   "place_push": 4.0,
+   "global_uses": 0,
+   "global_first_t2": false,
+   "unlock_by_place": 0.833,
+   "star_opener": false
   },
   "flow_arc_ok": true,
-  "shadow_candidates_before_last": 6,
-  "shadow_candidates_before_last_two": 9,
+  "clue_fits": [
+   1,
+   2,
+   3,
+   3,
+   4,
+   6,
+   19
+  ],
+  "entry": 1,
+  "G18_one_entry": true,
+  "shadow_candidates_before_last": 2,
+  "shadow_candidates_before_last_two": 4,
   "dark_known_at": 7,
   "G5_late_shadow": true,
   "G6_tier": true,
@@ -2505,9 +2015,9 @@
   "G15_clue_hygiene": true,
   "max_atoms_per_clue": 2,
   "G8_globals_needed": true,
-  "trait_clues": 2,
+  "trait_clues": 1,
   "trait_atoms": [
-   "DIAG_P"
+   "WITH_P"
   ],
   "trait_rules_used": [
    "trait_filter"
@@ -2515,37 +2025,39 @@
   "trait_load_bearing": true,
   "G9_trait_load_bearing": true,
   "biome_props_on_board": [
-   "CAMPFIRE",
-   "FALLEN_LOG",
+   "BIRCH",
    "FERN",
+   "LANTERN",
    "MOSS",
-   "OAK",
-   "STUMP",
+   "RUINED_WALL",
+   "SHRUB",
    "TENT"
   ],
   "biome_props_in_clues": [
-   "FALLEN_LOG",
+   "BIRCH",
    "FERN",
-   "OAK",
-   "STUMP"
+   "LANTERN",
+   "MOSS",
+   "SHRUB"
   ],
   "biome_props_load_bearing": [
-   "FALLEN_LOG",
+   "BIRCH",
    "FERN",
-   "OAK",
-   "STUMP"
+   "LANTERN",
+   "MOSS",
+   "SHRUB"
   ],
   "G11_biome_props_load_bearing": true,
   "G3_unique_full": true,
   "unique_without_shadow_law": true,
-  "bruteforce_nodes": 350,
+  "bruteforce_nodes": 40,
   "rules_used": [
-   "global_prop_monopoly",
+   "monopoly",
    "trait_filter"
   ],
-  "steps": 10,
-  "difficulty_score": 12,
+  "steps": 9,
+  "difficulty_score": 11,
   "hardest_step_tier": 2,
-  "tall_scale": 0.55
+  "tall_scale": 1.3
  }
 }
