@@ -22,6 +22,7 @@ import { RelicCollection, EvidenceBoard, FinalDossier, ObsidianEnvelope, OmegaFo
 import { MasterPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
+import { fetchRanking, RANKED_EVENT } from "./community.js";
 
 /** The difficulty groups, easiest first (the contracts page uses the same order). */
 export const DIFF_ORDER = ["Tutorial", "Very Easy", "Easy", "Medium", "Hard", "Expert"];
@@ -132,7 +133,20 @@ export function ProfilePage({ go, tab = "info", puzzles, onLaunch, ranking = nul
 
 function ProfileInfo({ user }) {
   const { t } = useLang();
+  const { deleteAccount } = useAuth();
   const modals = useModals();
+  const [rank, setRank] = useState(null); // the Syndicate ranking answer ({ me, total } | { error })
+  useEffect(() => {
+    let alive = true;
+    const load = () => fetchRanking(user).then((r) => { if (alive) setRank(r); });
+    load();
+    window.addEventListener(RANKED_EVENT, load); // the first sync after signing in sends this player's numbers
+    return () => { alive = false; window.removeEventListener(RANKED_EVENT, load); };
+  }, [user]);
+  const erase = async () => {
+    if (!window.confirm(t("creds.deleteConfirm"))) return;
+    if (!(await deleteAccount())) window.alert(t("creds.deleteError"));
+  };
   const rows = [
     ["profile.info.name", user.displayName],
     ["profile.info.email", user.email],
@@ -151,8 +165,15 @@ function ProfileInfo({ user }) {
       <dl className="sh-dl">
         {rows.map(([k, v]) => <React.Fragment key={k}><dt>{t(k)}</dt><dd>{v || "—"}</dd></React.Fragment>)}
       </dl>
+      {rank && !rank.error && (
+        <p className="sh-pinfo-rank sh-type">
+          {rank.me ? <>{t("ranking.yourRank", { rank: rank.me.rank, total: rank.total })} · <b>{rank.me.score}</b> {t("ranking.points")}</>
+            : <span className="sh-muted sm">{t("ranking.notListed")}</span>}
+        </p>
+      )}
       {user.demo && <p className="sh-muted sm">{t("creds.demo")}</p>}
       <p className="sh-muted sm">{t(user && !user.demo ? "profile.info.synced" : "profile.info.local")}</p>
+      {!user.demo && <div className="sh-pinfo-danger"><button type="button" className="sh-btn ghost sm" onClick={erase}>{t("creds.delete")}</button></div>}
     </section>
     <AvatarMaker />
   </>;
@@ -300,6 +321,8 @@ const PAGES_CSS = `
 .sh-pinfo .sh-avatar{width:72px;height:72px;font-size:30px}
 .sh-pinfo-who{display:flex;flex-direction:column;flex:1 1 160px;min-width:0}
 .sh-pinfo-name{font-size:clamp(22px,3.4vw,28px);color:var(--sh-brass);overflow-wrap:anywhere}
+.sh-pinfo-rank{margin:0 0 14px;font-size:clamp(17px,2.6vw,20px);color:var(--sh-cream)}.sh-pinfo-rank b{color:var(--sh-brass)}
+.sh-pinfo-danger{margin-top:14px;padding-top:14px;border-top:1px solid var(--sh-line)}
 .sh-dl{display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;margin:0 0 14px;padding:14px 0 0;border-top:1px solid var(--sh-line)}
 .sh-dl dt{color:var(--sh-muted);font-weight:600}.sh-dl dd{margin:0;color:var(--sh-cream);overflow-wrap:anywhere}
 .sh-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 16px}

@@ -3,7 +3,8 @@
  * Without the binding these endpoints answer 503 "storage" and the pages say the feature is unavailable; sign-in and the
  * game are not affected. The tables are created on first use, so a new database needs no migration step.
  *
- *   players   one row per signed-in player who synced progress: codename, avatar (resolved: "", an https URL or an "L:" portrait), the ranking numbers
+ *   players   one row per signed-in player who synced progress: codename, avatar (resolved: "", an https URL or an "L:" portrait), the ranking numbers;
+ *             `reset` 1 = reset by tools/reset_ranking.py and not synced since, `excluded` = JSON list of the contract ids that no longer count
  *   puzzles   community puzzles: the case JSON (`data`), its search fields and its counters
  *   ratings   one row per player and puzzle (1–5 stars; a new rating replaces the old one)
  *   plays     one row per player (an account id, or "anon:<browser id>") and puzzle; `solved` once they fulfilled it
@@ -15,7 +16,8 @@ export const AVATAR_RE = /^(|photo|L:[A-Za-z0-9.]{1,200})$/;
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS players (id TEXT PRIMARY KEY, codename TEXT NOT NULL, avatar TEXT NOT NULL DEFAULT '', solved INTEGER NOT NULL DEFAULT 0,
-    hints INTEGER NOT NULL DEFAULT 0, seconds INTEGER NOT NULL DEFAULT 0, speed INTEGER NOT NULL DEFAULT 0, score INTEGER NOT NULL DEFAULT 0, updated INTEGER NOT NULL)`,
+    hints INTEGER NOT NULL DEFAULT 0, seconds INTEGER NOT NULL DEFAULT 0, speed INTEGER NOT NULL DEFAULT 0, score INTEGER NOT NULL DEFAULT 0, updated INTEGER NOT NULL,
+    reset INTEGER NOT NULL DEFAULT 0, excluded TEXT NOT NULL DEFAULT '[]')`,
   "CREATE INDEX IF NOT EXISTS players_rank ON players (score DESC, solved DESC, seconds ASC)",
   `CREATE TABLE IF NOT EXISTS puzzles (id TEXT PRIMARY KEY, author_id TEXT NOT NULL, author TEXT NOT NULL, author_avatar TEXT NOT NULL DEFAULT '',
     title TEXT NOT NULL, theme TEXT NOT NULL, size INTEGER NOT NULL, difficulty TEXT NOT NULL, diff_rank INTEGER NOT NULL, suspects INTEGER NOT NULL,
@@ -28,13 +30,28 @@ const SCHEMA = [
   "CREATE INDEX IF NOT EXISTS plays_player ON plays (player)",
 ];
 
+/** Columns added after the first release: a database made before them gets them on first use (CREATE TABLE IF NOT EXISTS skips an existing table). */
+const ADDED = { players: { reset: "INTEGER NOT NULL DEFAULT 0", excluded: "TEXT NOT NULL DEFAULT '[]'" } };
+
+async function migrate(d) {
+  await d.batch(SCHEMA.map((q) => d.prepare(q)));
+  for (const [table, cols] of Object.entries(ADDED)) {
+    const have = new Set((await d.prepare(`PRAGMA table_info(${table})`).all()).results.map((r) => r.name));
+    for (const [col, type] of Object.entries(cols)) {
+      if (have.has(col)) continue;
+      // two isolates can race to add the same column: the loser's "duplicate column" is fine
+      await d.prepare(`ALTER TABLE ${table} ADD COLUMN ${col} ${type}`).run().catch((e) => { if (!/duplicate column/i.test(String(e && e.message))) throw e; });
+    }
+  }
+}
+
 let ready = null; // one schema check per isolate
 
 /** → the D1 database with its tables, or null when the binding is missing. */
 export async function db(env) {
   const d = env.SHADOKU_DB;
   if (!d) return null;
-  if (!ready) ready = d.batch(SCHEMA.map((q) => d.prepare(q))).catch((e) => { ready = null; throw e; });
+  if (!ready) ready = migrate(d).catch((e) => { ready = null; throw e; });
   await ready;
   return d;
 }

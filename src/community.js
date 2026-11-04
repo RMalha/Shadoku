@@ -30,12 +30,12 @@ const readJson = (k) => { try { const v = JSON.parse(window.localStorage.getItem
 const writeJson = (k, v) => { try { window.localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
 /* ───────────── ranking ───────────── */
-/** This browser's fulfilled story and daily contracts as ranking entries ({ d, t, l, k, p, n }: src/ranking.js). */
+/** This browser's fulfilled story and daily contracts as ranking entries ({ c: contract id, d, t, l, k, p, n }: src/ranking.js). */
 export function rankEntries() {
   const pack = [...PUZZLES, ...dailyRecords()], stats = readPlayStats(pack);
   return pack.filter((q) => stats[q.id] && stats[q.id].solved).map((q) => {
     const s = stats[q.id], h = s.hints || {};
-    return { d: q.difficulty || "Easy", t: s.best, l: h.look || 0, k: h.key || 0, p: h.place || 0, n: h.note || 0 };
+    return { c: String(q.id), d: q.difficulty || "Easy", t: s.best, l: h.look || 0, k: h.key || 0, p: h.place || 0, n: h.note || 0 };
   });
 }
 
