@@ -1,0 +1,1614 @@
+{
+ "id": "daily-2026-11-04",
+ "title": "Daily Contract, Wednesday 4 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Easy · Farm",
+ "theme": "FARM",
+ "difficulty": "Easy",
+ "tier": "easy",
+ "shape": "rect",
+ "seed": 261104,
+ "attempt": 5079,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "FAE0707RAR1-261104",
+ "puzzleId": "FAE0707RAR1-261104",
+ "engine": "V10.6",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 7,
+ "zoneWord": "area",
+ "size": 7,
+ "rooms": [
+  [
+   3,
+   3,
+   3,
+   2,
+   2,
+   2,
+   2
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   4,
+   4,
+   4,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   4,
+   4,
+   4,
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "roomNames": [
+  "Silo Yard",
+  "Garden",
+  "Greenhouse",
+  "Hayloft",
+  "Stable"
+ ],
+ "roomIds": [
+  "SILO_YARD",
+  "GARDEN",
+  "GREENHOUSE",
+  "HAYLOFT",
+  "STABLE"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   [
+    5,
+    1
+   ]
+  ],
+  [
+   [
+    5,
+    2
+   ],
+   [
+    5,
+    3
+   ]
+  ],
+  [
+   [
+    5,
+    5
+   ],
+   [
+    6,
+    5
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   0,
+   0,
+   "W"
+  ]
+ ],
+ "contents": [
+  [
+   "STRAW_MAT",
+   "STRAW_MAT",
+   "HAYBALE",
+   "STOOL",
+   "FOOTPRINTS",
+   "",
+   ""
+  ],
+  [
+   "STRAW_MAT",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "BARREL"
+  ],
+  [
+   "",
+   "",
+   "",
+   "MUD",
+   "",
+   "",
+   "PUDDLE"
+  ],
+  [
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "",
+   "",
+   "",
+   "WELL"
+  ],
+  [
+   "",
+   "",
+   "",
+   "WHEELBARROW",
+   "",
+   "",
+   "MUD"
+  ],
+  [
+   "HORSE",
+   "STOOL",
+   "",
+   "CORPSE",
+   "",
+   "",
+   "MUD"
+  ],
+  [
+   "",
+   "STOOL",
+   "",
+   "WHEELBARROW",
+   "",
+   "MUD",
+   "MUD"
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  5,
+  3
+ ],
+ "biomeProps": [
+  "HAYBALE",
+  "HORSE",
+  "MUD",
+  "STRAW_MAT",
+  "WELL",
+  "WHEELBARROW"
+ ],
+ "propClasses": {
+  "BARREL": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "HAYBALE": "TALL",
+  "HORSE": "PERCH",
+  "MUD": "LOW",
+  "PUDDLE": "LOW",
+  "STOOL": "LOW",
+  "STRAW_MAT": "LOW",
+  "WELL": "SHORT",
+  "WHEELBARROW": "SHORT"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.372,
+  "lowTiles": 16,
+  "openTiles": 43,
+  "lowKinds": [
+   "FOOTPRINTS",
+   "MUD",
+   "PUDDLE",
+   "STOOL",
+   "STRAW_MAT"
+  ],
+  "roomProps": {
+   "HAYLOFT": [
+    "FOOTPRINTS",
+    "HAYBALE",
+    "STRAW_MAT"
+   ],
+   "GREENHOUSE": [
+    "FOOTPRINTS",
+    "STOOL"
+   ],
+   "SILO_YARD": [
+    "BARREL",
+    "MUD",
+    "PUDDLE",
+    "WELL",
+    "WHEELBARROW"
+   ],
+   "STABLE": [
+    "HORSE",
+    "STOOL"
+   ],
+   "GARDEN": [
+    "MUD",
+    "WHEELBARROW"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Adelaide",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 2
+   },
+   "look": "brown short hair, necktie",
+   "clue": "Adelaide was standing on a mud patch.",
+   "text": "Adelaide was standing on a mud patch.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "A",
+     "params": {
+      "prop": "MUD"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    6
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Belinda",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 0,
+    "cloth": 5
+   },
+   "look": "black short hair, round glasses, fedora, necktie",
+   "clue": "Belinda was standing on a trail of footprints.",
+   "text": "Belinda was standing on a trail of footprints.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "B",
+     "params": {
+      "prop": "FOOTPRINTS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    0
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Clement",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 2
+   },
+   "look": "bald, scarf",
+   "clue": "Clement was not beside any stone well and was in row 5.",
+   "text": "Clement was not beside any stone well and was in row 5.",
+   "atoms": [
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "WELL"
+     }
+    },
+    {
+     "kind": "ROW",
+     "subject": "C",
+     "params": {
+      "index": 4
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    5
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Duncan",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 1
+   },
+   "look": "brown wavy hair, horn-rimmed glasses, mustache",
+   "clue": "Duncan was beside the stack of hay bales.",
+   "text": "Duncan was beside the stack of hay bales.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "HAYBALE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    2
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Eloise",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 1
+   },
+   "look": "blonde bob hair, horn-rimmed glasses, fedora",
+   "clue": "Eloise sat on a stool.",
+   "text": "Eloise sat on a stool.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "E",
+     "params": {
+      "prop": "STOOL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    1
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Fenwick",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "peaked",
+    "facialHair": "beard",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 7
+   },
+   "look": "brown curly hair, round glasses, peaked, beard",
+   "clue": "Fenwick was beside the Corpse.",
+   "text": "Fenwick was beside the Corpse.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "F",
+     "params": {
+      "prop": "CORPSE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    4
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Greta",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 6
+   },
+   "look": "black short hair",
+   "clue": "Greta was in a corner and could see into another area.",
+   "text": "Greta was in a corner and could see into another area.",
+   "atoms": [
+    {
+     "kind": "SEE_OTHER_ROOM",
+     "subject": "G",
+     "params": {}
+    },
+    {
+     "kind": "CORNER",
+     "subject": "G",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    3
+   ]
+  }
+ ],
+ "shadow": [
+  2,
+  6
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Fenwick “was beside the Corpse”: only r6c5 fits. Place Fenwick there.",
+   "focus": [
+    [
+     5,
+     4
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      5,
+      6
+     ]
+    ],
+    "C": [
+     [
+      4,
+      4
+     ]
+    ],
+    "E": [
+     [
+      5,
+      1
+     ]
+    ],
+    "G": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      6
+     ]
+    ]
+   },
+   "suspect": "F",
+   "cell": [
+    5,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      5,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Greta “was in a corner and could see into another area”: of the 3 tiles that fit, only r1c4 is still open. Place Greta there.",
+   "focus": [
+    [
+     0,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      2,
+      3
+     ]
+    ],
+    "B": [
+     [
+      0,
+      4
+     ]
+    ],
+    "E": [
+     [
+      0,
+      3
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    0,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      0,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Eloise “sat on a stool”: of the 3 tiles that fit, only r7c2 is still open. Place Eloise there.",
+   "focus": [
+    [
+     6,
+     1
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      1
+     ]
+    ],
+    "C": [
+     [
+      4,
+      1
+     ]
+    ],
+    "D": [
+     [
+      0,
+      1
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    6,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      6,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Duncan “was beside the stack of hay bales”: of the 2 tiles that fit, only r2c3 is still open. Place Duncan there.",
+   "focus": [
+    [
+     1,
+     2
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      2
+     ]
+    ],
+    "C": [
+     [
+      4,
+      2
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    1,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      1,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Belinda “was standing on a trail of footprints”: of the 4 tiles that fit, only r4c1 is still open. Place Belinda there.",
+   "focus": [
+    [
+     3,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      4,
+      0
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    3,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      3,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Clement “was not beside any stone well and was in row 5”: of the 5 tiles that fit, only r5c6 is still open. Place Clement there.",
+   "focus": [
+    [
+     4,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      6
+     ],
+     [
+      6,
+      5
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    4,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      4,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Adelaide “was standing on a mud patch”: of the 5 tiles that fit, only r7c7 is still open. Place Adelaide there.",
+   "focus": [
+    [
+     6,
+     6
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    6,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      6,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r3c7. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     2,
+     6
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    2,
+    6
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      2,
+      6
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "F",
+   "cell": [
+    5,
+    4
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     5,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Fenwick “was beside the Corpse”: only r6c5 fits. Place Fenwick there.",
+    "focus": [
+     [
+      5,
+      4
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       5,
+       6
+      ]
+     ],
+     "C": [
+      [
+       4,
+       4
+      ]
+     ],
+     "E": [
+      [
+       5,
+       1
+      ]
+     ],
+     "G": [
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       6
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     5,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       5,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    0,
+    3
+   ],
+   "needs": [
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     3
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Greta “was in a corner and could see into another area”: of the 3 tiles that fit, only r1c4 is still open. Place Greta there.",
+    "focus": [
+     [
+      0,
+      3
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       2,
+       3
+      ]
+     ],
+     "B": [
+      [
+       0,
+       4
+      ]
+     ],
+     "E": [
+      [
+       0,
+       3
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     0,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       0,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    6,
+    1
+   ],
+   "needs": [
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     3
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Eloise “sat on a stool”: of the 3 tiles that fit, only r7c2 is still open. Place Eloise there.",
+    "focus": [
+     [
+      6,
+      1
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       3,
+       1
+      ]
+     ],
+     "C": [
+      [
+       4,
+       1
+      ]
+     ],
+     "D": [
+      [
+       0,
+       1
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     6,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       6,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    1,
+    2
+   ],
+   "needs": [
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Duncan “was beside the stack of hay bales”: of the 2 tiles that fit, only r2c3 is still open. Place Duncan there.",
+    "focus": [
+     [
+      1,
+      2
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       3,
+       2
+      ]
+     ],
+     "C": [
+      [
+       4,
+       2
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     1,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       1,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    3,
+    0
+   ],
+   "needs": [
+    "D",
+    "E",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     4
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Belinda “was standing on a trail of footprints”: of the 4 tiles that fit, only r4c1 is still open. Place Belinda there.",
+    "focus": [
+     [
+      3,
+      0
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       4,
+       0
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     3,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       3,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    4,
+    5
+   ],
+   "needs": [
+    "B",
+    "D",
+    "E",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Clement “was not beside any stone well and was in row 5”: of the 5 tiles that fit, only r5c6 is still open. Place Clement there.",
+    "focus": [
+     [
+      4,
+      5
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       4,
+       6
+      ],
+      [
+       6,
+       5
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     4,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       4,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    6,
+    6
+   ],
+   "needs": [
+    "C",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Adelaide “was standing on a mud patch”: of the 5 tiles that fit, only r7c7 is still open. Place Adelaide there.",
+    "focus": [
+     [
+      6,
+      6
+     ]
+    ],
+    "elims": {},
+    "suspect": "A",
+    "cell": [
+     6,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       6,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    2,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r3c7. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      2,
+      6
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     2,
+     6
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       2,
+       6
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 1.0,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 1.0,
+   "late_elim_gap": 0,
+   "place_push": 2.29,
+   "global_uses": 0,
+   "global_first_t2": false,
+   "unlock_by_place": 1.0,
+   "star_opener": false
+  },
+  "flow_arc_ok": true,
+  "clue_fits": [
+   1,
+   2,
+   3,
+   3,
+   4,
+   5,
+   5
+  ],
+  "entry": 1,
+  "G18_one_entry": true,
+  "shadow_candidates_before_last": 2,
+  "shadow_candidates_before_last_two": 7,
+  "dark_known_at": 7,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "HAYBALE",
+   "HORSE",
+   "MUD",
+   "STRAW_MAT",
+   "WELL",
+   "WHEELBARROW"
+  ],
+  "biome_props_in_clues": [
+   "HAYBALE",
+   "MUD"
+  ],
+  "biome_props_load_bearing": [
+   "HAYBALE",
+   "MUD"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 16,
+  "rules_used": [],
+  "steps": 7,
+  "difficulty_score": 7,
+  "hardest_step_tier": 1,
+  "tall_scale": 0.55
+ },
+ "daily": "2026-11-04"
+}
