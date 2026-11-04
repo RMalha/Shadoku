@@ -169,7 +169,7 @@ function ProfileStats({ puzzles }) {
   const solved = pack.filter((q) => of(q).solved).length;
   const daily = pack.filter((q) => q.daily && of(q).solved).length;
   const relics = RELIC_CASES.filter((id) => stats[id] && stats[id].solved).length;
-  const hints = (k) => pack.reduce((n, q) => n + ((of(q).hints || {})[k] || 0), 0); // hint rungs: where to look / key deduction / placement
+  const hints = (k) => pack.reduce((n, q) => n + ((of(q).hints || {})[k] || 0), 0); // note cards / hint rungs: where to look / key deduction / placement
   const byDiff = new Map();
   pack.forEach((q) => { const d = q.difficulty || "Easy"; if (!byDiff.has(d)) byDiff.set(d, []); byDiff.get(d).push(q); });
   const diffs = [...DIFF_ORDER.filter((d) => byDiff.has(d)), ...[...byDiff.keys()].filter((d) => !DIFF_ORDER.includes(d))];
@@ -178,6 +178,7 @@ function ProfileStats({ puzzles }) {
     ["profile.stats.fulfilled", solved, pack.length],
     ["profile.stats.daily", daily, null],
     ["profile.stats.relics", relics, RELIC_CASES.length],
+    ["profile.stats.hintsNote", hints("note"), null],
     ["profile.stats.hintsLook", hints("look"), null],
     ["profile.stats.hintsKey", hints("key"), null],
     ["profile.stats.hintsPlace", hints("place"), null],

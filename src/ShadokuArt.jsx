@@ -6623,6 +6623,7 @@ export const LEGACY_HAIR = {
   bob: ["bob", "miaWallace", "longButNotTooLong"], bun: ["bun", "straight02", "curvy"],
   ponytail: ["straightAndStrand", "straight02", "straight01"], long: ["straight01", "straight02", "curvy", "bigHair"],
 };
+const WINTER_HATS = new Set(["winterHat02", "winterHat03", "winterHat04", "winterHat1"]);
 export const LEGACY_HAT = { fedora: ["hat"], beret: ["winterHat03"], cloche: ["winterHat04", "winterHat03"], peaked: ["winterHat1", "winterHat02"] };
 export const LEGACY_BEARD = { mustache: "moustacheMagnum", moustache: "moustacheMagnum", goatee: "beardLight", beard: "beardMedium" };
 export const LEGACY_GLASSES = { "horn-rimmed": "prescription02", square: "prescription02", round: "round" };
@@ -6822,6 +6823,8 @@ export function getCastForPuzzle(p, seed = 0) {
     }
     // Beach biome: bare chests and bikini tops, unless a clue talks about neckwear (then the tie stays)
     if (themeOf(puzzle) === "BEACH" && !(locked.tie && look.tie !== "none")) look = fixLook({ ...look, tie: "none", clothing: s.gender === "m" ? "shirtless" : "bikini" });
+    // and nobody wears a winter hat at the beach: a beanie, flap or aviator cap becomes the wide-brim sun hat (still "a hat" for the clues)
+    if (themeOf(puzzle) === "BEACH" && WINTER_HATS.has(look.hat)) look = fixLook({ ...look, hat: "hat" });
     seen.add(sig(look));
     if (p.dummies || p.id === "tutorial") look = { ...look, dummy: true, dummyColor: mix(back, -0.16), dummyName: SUSPECT_COLOR_NAMES[i % SUSPECT_COLOR_NAMES.length] }; // the initiation is rehearsed with crash-test dummies
     looks[s.id] = look;

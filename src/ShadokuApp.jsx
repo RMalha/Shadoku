@@ -699,7 +699,7 @@ function DailyScreen({ go }) {
           <section className="sh-hub-group" aria-label={localizeHead(today, trf).title}>
             <h2 className="sh-hub-h"><span className={`sh-hub-diff d-${diffClass(today.difficulty)}`}>{diffName(today)}</span><small>{dailyDate(today.daily, { weekday: "long", day: "numeric", month: "long" })}</small></h2>
             <div className="sh-daily-env">
-              <ContractEnvelope key={today.id} variant="modal" autoOpen={false} puzzle={today} label={labelOf(today)} done={bests[today.id] > 0} best={bests[today.id]} onAccept={() => accept(today)} />
+              <ContractEnvelope key={today.id} variant="modal" autoOpen={false} glow puzzle={today} label={labelOf(today)} done={bests[today.id] > 0} best={bests[today.id]} onAccept={() => accept(today)} />
             </div>
           </section>
         ) : <p className="sh-daily-none sh-type">{t("daily.none")}</p>}

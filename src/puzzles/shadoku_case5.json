@@ -667,8 +667,8 @@
     "cloth": 5
    },
    "look": "grey bun hair",
-   "clue": "Gwendolyn stood on bare sand (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1.",
-   "text": "Gwendolyn stood on bare sand (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1.",
+   "clue": "Gwendolyn stood on bare ground (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1.",
+   "text": "Gwendolyn stood on bare ground (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1.",
    "atoms": [
     {
      "kind": "BARE",
@@ -2994,7 +2994,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Gwendolyn “stood on bare sand (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1”: of the 2 tiles that fit, only r2c1 is still open. Place Gwendolyn there.",
+   "text": "Gwendolyn “stood on bare ground (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1”: of the 2 tiles that fit, only r2c1 is still open. Place Gwendolyn there.",
    "focus": [
     [
      1,
@@ -6773,7 +6773,7 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Gwendolyn “stood on bare sand (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1”: of the 2 tiles that fit, only r2c1 is still open. Place Gwendolyn there.",
+    "text": "Gwendolyn “stood on bare ground (no camel, oasis pool, stool, trail of footprints, trapdoor or woven mat) and was in column 1”: of the 2 tiles that fit, only r2c1 is still open. Place Gwendolyn there.",
     "focus": [
      [
       1,
@@ -7854,7 +7854,9 @@
    "late_elim_gap": 3,
    "place_push": 5.62,
    "global_uses": 1,
-   "global_first_t2": false
+   "global_first_t2": false,
+   "unlock_by_place": 0.286,
+   "star_opener": false
   },
   "flow_arc_ok": false,
   "shadow_candidates_before_last": 3,

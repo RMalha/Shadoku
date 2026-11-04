@@ -1037,8 +1037,8 @@
     "cloth": 2
    },
    "look": "black curly hair, mustache, scarf",
-   "clue": "Godfrey was in the Plaza and stood on bare pavement (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor).",
-   "text": "Godfrey was in the Plaza and stood on bare pavement (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor).",
+   "clue": "Godfrey was in the Plaza and stood on bare ground (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor).",
+   "text": "Godfrey was in the Plaza and stood on bare ground (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor).",
    "atoms": [
     {
      "kind": "ROOM",
@@ -3556,7 +3556,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Godfrey “was in the Plaza and stood on bare pavement (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor)”: of the 8 tiles that fit, only r10c2 is still open. Place Godfrey there.",
+   "text": "Godfrey “was in the Plaza and stood on bare ground (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor)”: of the 8 tiles that fit, only r10c2 is still open. Place Godfrey there.",
    "focus": [
     [
      9,
@@ -6231,7 +6231,7 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Godfrey “was in the Plaza and stood on bare pavement (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor)”: of the 8 tiles that fit, only r10c2 is still open. Place Godfrey there.",
+    "text": "Godfrey “was in the Plaza and stood on bare ground (no barber chair, bench, chair, manhole cover, patch of broken glass, puddle, steam grate, stool, trail of footprints or trapdoor)”: of the 8 tiles that fit, only r10c2 is still open. Place Godfrey there.",
     "focus": [
      [
       9,
@@ -10316,7 +10316,9 @@
    "late_elim_gap": 4,
    "place_push": 2.23,
    "global_uses": 1,
-   "global_first_t2": false
+   "global_first_t2": false,
+   "unlock_by_place": 0.0,
+   "star_opener": false
   },
   "flow_arc_ok": false,
   "shadow_candidates_before_last": 4,

@@ -181,6 +181,9 @@ const parseCase = (s) => { try { return JSON.parse(s); } catch (e) { return null
 export const DAILIES = normalizePuzzles(Object.values(DAILY_RAW).map(parseCase).filter((d) => d && d.daily).sort((a, b) => (a.daily < b.daily ? -1 : 1)));
 
 const HINT_RUNGS = 3; // where to look → the key deduction → the placement
+// Note cards (V10.6, Murdoku's first hints): a hint whose groundwork has NOTES_MIN lines or more opens with up to NOTES_MAX cards of
+// deductions for the player's notes, before the rungs name the scapegoat. Opened cards are saved as hintLog["n:<letter>"] = how many.
+const NOTES_MIN = 3, NOTES_MAX = 6, NOTE_LOG = (h) => `n:${h.suspect}`;
 const STORE_KEY = BOARDS_KEY, CASE_KEY = "shadoku-case", TIME_KEY = TIMES_KEY, BEST_KEY = BESTS_KEY; // the synced ones: sync.js
 const key = (r, c) => r * 100 + c;
 const DRAW_RANK = { LOW: 0, SHORT: 1, PERCH: 2, TALL: 2 }; // board draw passes: flush, waist-high, upright (CORPSE / unknown: 0)
@@ -300,7 +303,7 @@ export const normCase = (c) => {
   if (isObj(c.crosses)) Object.entries(c.crosses).forEach(([k, v]) => { if (/^\d+$/.test(k) && v) crosses[k] = 1; });
   if (isObj(c.syms)) Object.entries(c.syms).forEach(([k, v]) => { if (/^\d+$/.test(k) && isSym(v)) syms[k] = v; });
   const hintLog = {};
-  if (isObj(c.hintLog)) Object.entries(c.hintLog).forEach(([k, v]) => { if (Number.isInteger(v) && v >= 1) hintLog[k] = Math.min(HINT_RUNGS, v); });
+  if (isObj(c.hintLog)) Object.entries(c.hintLog).forEach(([k, v]) => { if (Number.isInteger(v) && v >= 1) hintLog[k] = Math.min(k.startsWith("n:") ? NOTES_MAX : HINT_RUNGS, v); });
   const out = { tokens, notes, lights, crosses, syms, hints: Number.isFinite(c.hints) ? c.hints : 0, hintLog, done: !!c.done };
   normMemo.set(c, out);
   return out;
@@ -358,6 +361,33 @@ export function boardHint(p, cs) {
   const h = started || open[0];
   return { ...h, hid: hid(h) };
 }
+/**
+ * The note cards of a placement hint (V10.6): its groundwork (the chain lines that are not key lines) in order, a run of lines with one
+ * rule about the same scapegoats as one card, the smallest neighbours merged down to NOTES_MAX. [] for a mistake, the hiders' hint
+ * or a short groundwork. Each card: { lines: [[chain index, step]], rule, tier, focus }.
+ */
+export function hintNotes(h) {
+  if (!h || h.mistake || h.suspect === "S" || !h.chain) return [];
+  const keys = new Set(h.key || []), out = [];
+  h.chain.forEach((s, i) => {
+    if (keys.has(i)) return;
+    const who = Object.keys(s.elims || {}).sort().join(""), rk = s.i18n && s.i18n.ruleKey, last = out[out.length - 1];
+    if (last && last.rk === rk && last.who === who) last.lines.push([i, s]);
+    else out.push({ rk, who, lines: [[i, s]] });
+  });
+  if (out.reduce((n, g) => n + g.lines.length, 0) < NOTES_MIN) return [];
+  while (out.length > NOTES_MAX) {
+    let j = 0;
+    for (let k = 1; k < out.length - 1; k++) if (out[k].lines.length + out[k + 1].lines.length < out[j].lines.length + out[j + 1].lines.length) j = k;
+    out.splice(j, 2, { ...out[j], lines: [...out[j].lines, ...out[j + 1].lines] });
+  }
+  return out.map((g) => {
+    const top = g.lines.reduce((a, b) => ((b[1].tier || 1) > (a[1].tier || 1) ? b : a))[1];
+    const focus = new Map();
+    g.lines.forEach(([, s]) => (s.focus || []).forEach((c) => focus.set(`${c[0]},${c[1]}`, c)));
+    return { lines: g.lines, rule: top.rule, tier: top.tier || 1, focus: [...focus.values()] };
+  });
+}
 const snap = (cs) => ({ tokens: cs.tokens, notes: cs.notes, lights: cs.lights, crosses: cs.crosses, syms: cs.syms || {} });
 /** A crossed-out tile keeps its notes, hidden until the X comes off (a light switch leaves them showing); so does a tile with a note symbol held on it. */
 const notesHidden = (cs, k) => !!cs.crosses[k] || !!(cs.syms || {})[k];
@@ -388,6 +418,20 @@ const withToken = (cs, id, r, c) => { // moves `id` here, bumping whoever stood 
   const syms = { ...sy }; delete syms[k];
   return { ...cs, tokens, syms };
 };
+/** A scapegoat just placed watches its sightlines, so nobody can stand there: the scapegoat letters noted on those tiles go, and so do
+ *  the Light Switch marks when `lights` (the auto light now shows those tiles). Note symbols stay: they are the player's own marks. */
+const withSightCleared = (cs, geo, r, c, lights) => {
+  let notes = cs.notes, lit = cs.lights;
+  geo.rays(r, c).flat().forEach(([rr, cc]) => {
+    const k = key(rr, cc), n = notes[k];
+    if (n) {
+      const t = [...n].filter(isSym).join("");
+      if (t !== n) { if (notes === cs.notes) notes = { ...notes }; if (t) notes[k] = t; else delete notes[k]; }
+    }
+    if (lights && lit[k]) { if (lit === cs.lights) lit = { ...lit }; delete lit[k]; }
+  });
+  return notes === cs.notes && lit === cs.lights ? cs : { ...cs, notes, lights: lit };
+};
 /** Hold-to-mark with a note symbol: the tile shows it in big (the same symbol again takes it off). Never part of the solution. */
 const withSym = (cs, k, id) => { const syms = { ...(cs.syms || {}) }; if (syms[k] === id) delete syms[k]; else syms[k] = id; return { ...cs, syms }; };
 const withoutToken = (cs, id) => { if (!cs.tokens[id]) return cs; const tokens = { ...cs.tokens }; delete tokens[id]; return { ...cs, tokens }; };
@@ -414,11 +458,12 @@ function writeTime(id, s) { try { const t = readTimes(); t[id] = s; localStorage
 /* ---- Best times: { [contract id]: seconds }. A contract is FULFILLED once it has an entry here (so wiping a solved board does not un-solve it). ---- */
 function readBests() { try { return JSON.parse(localStorage.getItem(BEST_KEY) || "{}") || {}; } catch (e) { return {}; } }
 function recordBest(id, s) { try { const b = readBests(), t = Math.max(1, Math.floor(s) || 1); if (!(b[id] > 0) || t < b[id]) b[id] = t; localStorage.setItem(BEST_KEY, JSON.stringify(b)); } catch (e) { /* ignore */ } markProgress(true); }
-/** Hint rungs revealed on a saved board: { look, key, place } (each rung counts once per hint; the old one-rung hints count as placements). */
+/** Hint rungs revealed on a saved board: { look, key, place, note } (each rung counts once per hint; the old one-rung hints count as placements;
+ *  `note`: note cards opened). */
 export function hintCounts(cs) {
-  const rungs = Object.values(cs.hintLog || {});
+  const log = Object.entries(cs.hintLog || {}), rungs = log.filter(([k]) => !k.startsWith("n:")).map(([, v]) => v);
   const n = (r) => rungs.filter((v) => v >= r).length;
-  return { look: n(1), key: n(2), place: n(3) + Math.max(0, +cs.hints || 0) };
+  return { look: n(1), key: n(2), place: n(3) + Math.max(0, +cs.hints || 0), note: log.filter(([k]) => k.startsWith("n:")).reduce((a, [, v]) => a + v, 0) };
 }
 /**
  * The profile's numbers, per contract: { [id]: { played, solved, best, hints } } (`played`: the player marked the board, took a hint or solved it,
@@ -433,7 +478,7 @@ export function readPlayStats(puzzles) {
     const hints = hintCounts(cs);
     const solved = bests[q.id] > 0;
     // played = the player did something (a mark, a hint, a solve): merely opening a contract, or its clock running, is not playing it
-    out[q.id] = { played: solved || marks > 0 || hints.look + hints.place > 0, solved, best: solved ? bests[q.id] : 0, hints };
+    out[q.id] = { played: solved || marks > 0 || hints.look + hints.place + hints.note > 0, solved, best: solved ? bests[q.id] : 0, hints };
   });
   return out;
 }
@@ -1296,7 +1341,7 @@ function SuspectCard({ q, look, color, on, placed, emph, onPick, onInspect, coac
 }
 function AdowCard({ beach, on, placed, solved, onPick, onInspect, coach, hint, hi = false }) {
   const t = useText();
-  const text = t("game.adowHidden"); // his alibi never changes, solved or not (the solved banner says where he was)
+  const text = t("game.adowHidden"); // the alibi never changes, solved or not (the solved banner says where S. H. Adow was)
   return (
     <div className="sk-cardw">
       <button type="button" className={`sk-card adow v${on ? " on" : ""}${placed ? " placed" : ""}${coach ? " coach" : ""}${hi ? " hi" : ""}`} style={{ "--sc": BRASS }} aria-pressed={on} onClick={onPick}>
@@ -1377,7 +1422,7 @@ function SuspectSheet({ q, look, color, placed, emph, beach, onClose, gender = n
  *  - hideLogo        the wrapper already draws the site header
  *  - onLogo          () => void: the header logo becomes a button (the wrapper's "home")
  *  - menu            [{ key, label, onSelect?, href?, settings?, heading?, sub? }] the ☰ Menu at the top of the tool rail (desktop); `settings: true` opens ⚙ Settings,
- *                    `heading: true` is a group title (not clickable), `sub: true` indents an entry under it
+ *                    `heading: true` is a group title (click to fold its `sub` entries away), `sub: true` indents an entry under it
  *  - coach           { cells?: [[r,c]], card?: suspectId | "S", tool?: "light"|"eraser"|"undo"|"hint"|"submit" } pulses what the tutorial is pointing at
  *  - dossierCard     node drawn first in the suspects column when the phone is held sideways (the tutorial's lesson card, so the board keeps its height)
  *  - insetY          px of page chrome the wrapper draws above/below the game (top bar, tutorial strip): the game is 100dvh - insetY
@@ -1401,6 +1446,15 @@ function RailMenu({ items, onSettings }) {
     return () => { document.removeEventListener("pointerdown", out); document.removeEventListener("keydown", esc); };
   }, [open]);
   const pick = (it) => { setOpen(false); if (it.settings) onSettings(); else if (it.onSelect) it.onSelect(); };
+  const [folded, setFolded] = useState(() => { try { return new Set(JSON.parse(window.localStorage.getItem("shadoku-menu-fold") || "[]")); } catch { return new Set(); } }); // the groups folded shut (shared with the site's ☰ menu)
+  const fold = (k) => setFolded((f) => {
+    const n = new Set(f);
+    if (n.has(k)) n.delete(k); else n.add(k);
+    try { window.localStorage.setItem("shadoku-menu-fold", JSON.stringify([...n])); } catch { /* private mode */ }
+    return n;
+  });
+  const foldKey = (it) => (it.key === "contracts" ? "pContracts" : it.key); // the site menu calls the Contracts group "pContracts"
+  let group = null; // the heading the entry under it belongs to
   return (
     <div className="sk-railmenu" ref={ref}>
       <button type="button" className="sk-railmenu-btn" aria-haspopup="true" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
@@ -1409,11 +1463,15 @@ function RailMenu({ items, onSettings }) {
       </button>
       {open && (
         <div className="sk-railmenu-list" role="menu" aria-label={t("nav.menu")}>
-          {items.map((it) => (it.heading
-            ? <span key={it.key} className="sk-railmenu-h" role="presentation">{it.label}</span>
+          {items.map((it) => {
+            if (it.heading) group = foldKey(it); else if (!it.sub) group = null;
+            return (it.heading
+            ? <button key={it.key} type="button" className="sk-railmenu-h" aria-expanded={!folded.has(group)} onClick={() => fold(foldKey(it))}>{it.label}<span className="fold" aria-hidden="true" /></button>
+            : it.sub && folded.has(group) ? null // its group is folded shut
             : it.href
               ? <a key={it.key} role="menuitem" className={it.sub ? "sub" : undefined} href={it.href} onClick={() => setOpen(false)}>{it.label}</a>
-              : <button key={it.key} type="button" role="menuitem" className={it.sub ? "sub" : undefined} onClick={() => pick(it)}>{it.label}</button>))}
+              : <button key={it.key} type="button" role="menuitem" className={it.sub ? "sub" : undefined} onClick={() => pick(it)}>{it.label}</button>);
+          })}
         </div>
       )}
     </div>
@@ -1799,7 +1857,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       return;
     }
     if (other === id) return;
-    if (mutate((x) => withToken(x, id, r, c))) emit("place", { id, r, c }); // notes stay stored (hidden while placed) and come back if the suspect is lifted
+    // notes on the tile itself stay stored (hidden while placed) and come back if the suspect is lifted; a scapegoat's sightlines are cleared
+    if (mutate((x) => (hidersOf(p).includes(id) ? withToken(x, id, r, c) : withSightCleared(withToken(x, id, r, c), geo, r, c, autoLight)))) emit("place", { id, r, c });
     try { if (navigator.vibrate) navigator.vibrate(18); } catch (e) { /* ignore */ }
   };
   const cancelHold = () => { if (showTimer.current) { clearTimeout(showTimer.current); showTimer.current = null; } if (holdTimer.current) { clearTimeout(holdTimer.current); holdTimer.current = null; } setHoldCell((h) => (h ? null : h)); };
@@ -2019,16 +2078,28 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
      groundwork stays folded under the lens), 3 the placement. Each rung counts once per hint (hintLog → the profile's stats). */
   const cur = useMemo(() => boardHint(p, st), [p, st]);
   const revealed = cur ? st.hintLog[cur.hid] || 0 : 0;
+  // V10.6 note cards: the groundwork of a long investigation, one card at a time, before the rungs (see hintNotes)
+  const notes = useMemo(() => hintNotes(cur), [cur]);
+  const notesSeen = cur && notes.length ? st.hintLog[NOTE_LOG(cur)] || 0 : 0;
+  const [noteOn, setNoteOn] = useState(-1); // the note card on show (-1: none)
   const [hintRung, setHintRung] = useState(0); // the rung on show (0: the board moved on to a hint not opened yet)
   const [hintPick, setHintPick] = useState(-1); // the picked chain line of rung 2 (-1: the last key line)
   const [whyOpen, setWhyOpen] = useState(false); // the groundwork of rung 2 stays folded until the player asks for it (the lens)
   const [groupOpen, setGroupOpen] = useState(() => new Set()); // unfolded runs of like groundwork lines
-  useEffect(() => { setHintRung(revealed); setHintPick(-1); setWhyOpen(false); setGroupOpen(new Set()); }, [cur && cur.hid, p.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { setHintRung(revealed); setNoteOn(-1); setHintPick(-1); setWhyOpen(false); setGroupOpen(new Set()); }, [cur && cur.hid, p.id]); // eslint-disable-line react-hooks/exhaustive-deps
   const showRung = (r) => {
     if (!cur) return;
     if (r > revealed) mutate((cs) => ({ ...cs, hintLog: { ...cs.hintLog, [cur.hid]: Math.max(cs.hintLog[cur.hid] || 0, r) } }), false);
-    setHintRung(r); setHintPick(-1);
+    setNoteOn(-1); setHintRung(r); setHintPick(-1);
   };
+  const showNote = (k) => {
+    if (!cur || !notes[k]) return;
+    const lk = NOTE_LOG(cur);
+    if (k + 1 > notesSeen) mutate((cs) => ({ ...cs, hintLog: { ...cs.hintLog, [lk]: Math.max(cs.hintLog[lk] || 0, k + 1) } }), false);
+    setNoteOn(k); setHintPick(-1);
+  };
+  // the next thing to show: an unread note card while the rungs are still closed, else the highest rung reached
+  const showNext = () => (!revealed && notesSeen < notes.length ? showNote(notesSeen) : showRung(Math.max(1, revealed)));
   const keyLines = cur && cur.chain ? cur.key.map((i) => [i, cur.chain[i]]) : [];
   // the groundwork: chain lines that are not key lines, consecutive lines with one rule about the same suspects folded into one run
   const ground = useMemo(() => {
@@ -2049,6 +2120,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   };
   const hiderTiles = hidersOf(p).map((id) => hiderCell(p, id)).filter(Boolean);
   const hint = useMemo(() => { // what the board marks for the rung on show: { n, focus, cell }
+    if (cur && noteOn >= 0 && notes[noteOn]) return { n: `${cur.hid}.note${noteOn}`, focus: notes[noteOn].focus };
     if (!cur || !hintRung) return null;
     const n = `${cur.hid}.${hintRung}.${hintPick}`;
     if (cur.mistake) {
@@ -2060,8 +2132,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (hintRung === 3) return { n, focus: [], cell: cur.cell };
     const line = hintPick >= 0 ? cur.chain[hintPick] : keyLines.length ? keyLines[keyLines.length - 1][1] : null;
     return { n, focus: line ? line.focus : cur.fits };
-  }, [cur, hintRung, hintPick, geo]); // eslint-disable-line react-hooks/exhaustive-deps
-  const hintCard = hintOpen && cur && hintRung ? (cur.mistake ? (cur.mistake === "token" && hintRung >= 2 ? cur.id : null) : cur.suspect !== "S" ? cur.suspect : null) : null;
+  }, [cur, hintRung, hintPick, noteOn, notes, geo]); // eslint-disable-line react-hooks/exhaustive-deps
+  const hintCard = hintOpen && cur && hintRung && noteOn < 0 ? (cur.mistake ? (cur.mistake === "token" && hintRung >= 2 ? cur.id : null) : cur.suspect !== "S" ? cur.suspect : null) : null;
   const hintAct = () => { // rung 3's button: do what the hint says
     if (!cur) return;
     const k = key(cur.cell[0], cur.cell[1]);
@@ -2069,14 +2141,14 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     else if (cur.mistake === "cross") mutate((cs) => withCross(cs, k, false));
     else if (cur.mistake === "light") mutate((cs) => withLight(cs, k, false));
     else if (cur.suspect === "S") mutate((cs) => hidersOf(p).reduce((a, id) => withToken(a, id, ...hiderCell(p, id)), cs));
-    else mutate((cs) => withToken(cs, cur.suspect, ...cur.cell));
+    else mutate((cs) => withSightCleared(withToken(cs, cur.suspect, ...cur.cell), geo, ...cur.cell, autoLight));
   };
   const coordsOn = settings.coords || hintOpen; // row / column numbers: always (settings) or while a hint is open
   const LB = coordsOn ? COORD_BAND : 0;
   const onHint = () => {
     if (hintOpen) { setHintOpen(false); return; }
     setHintOpen(true);
-    if (cur) showRung(Math.max(1, revealed));
+    if (cur && noteOn < 0) showNext(); // a note card on show stays
   };
   useEffect(() => {
     if (!hintOpen) return undefined;
@@ -2456,6 +2528,19 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                     const zone = (at) => (p.roomLabels || p.roomNames)[geo.room(...at)];
                     const head = (extra) => <div className="sk-hint-head"><span className="sk-step">{t("hint.counsel")}</span>{extra}</div>;
                     if (!cur) return <>{head(null)}<p>{p.hints && p.hints.length ? tr("hint.allRight", "Everyone stands on the right tile. Press Submit.") : t("hint.none")}</p></>;
+                    if (noteOn >= 0 && notes[noteOn]) { // a note card: deductions for the notes, nobody named yet
+                      const nt = notes[noteOn];
+                      return <>{head(<><span className="sk-rung">{tr("hint.note", "Note {n}/{total}", { n: noteOn + 1, total: notes.length })}</span>
+                        <span className={tierClass(nt.tier)}>{t("hint.tier", { tier: nt.tier })}</span><span className="sk-rname">{nt.rule}</span></>)}
+                        {noteOn === 0 && <p>{tr("hint.noteLead", "For your notes:")}</p>}
+                        <ol className="sk-hint-why">{nt.lines.map(([i, s]) => <li key={i}><span>{s.text}</span></li>)}</ol>
+                        <div className="sk-hint-act">
+                          {noteOn + 1 < notes.length ? <button type="button" className="sk-btn primary" onClick={() => showNote(noteOn + 1)}>{tr("hint.nextNote", "Next note")}</button>
+                            : <button type="button" className="sk-btn primary" onClick={() => showRung(1)}>{tr("hint.more", "Show more")}</button>}
+                          {noteOn > 0 && <button type="button" className="sk-btn" onClick={() => showNote(noteOn - 1)}>{t("hint.back")}</button>}
+                          <button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button>
+                        </div></>;
+                    }
                     if (!hintRung) return <>{head(null)}<p>{tr("hint.ready", "Your board has moved on. Ask for the next hint when you want it.")}</p></>;
                     const stage = [tr("hint.stage.1", "Where to look"), tr("hint.stage.2", "The key deduction"), tr("hint.stage.3", "The placement")][hintRung - 1];
                     const lead = cur.mistake ? null : cur.suspect === "S" ? null : keyLines.length ? keyLines.reduce((a, b) => ((b[1].tier || 1) > (a[1].tier || 1) ? b : a))[1] : cur.place;
@@ -2503,11 +2588,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
                     return <>{head(chips)}{body}<div className="sk-hint-act">
                       {act}
                       {hintRung > 1 && <button type="button" className="sk-btn" onClick={() => { setHintRung(hintRung - 1); setHintPick(-1); }}>{t("hint.back")}</button>}
+                      {hintRung === 1 && notes.length > 0 && <button type="button" className="sk-btn" onClick={() => showNote(notes.length - 1)}>{t("hint.back")}</button>}
                       <button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button>
                     </div></>;
                   })()}
-                  {cur && !hintRung && <div className="sk-hint-act">
-                    <button type="button" className="sk-btn primary" onClick={() => showRung(Math.max(1, revealed))}>{t("hint.next")}</button>
+                  {cur && !hintRung && noteOn < 0 && <div className="sk-hint-act">
+                    <button type="button" className="sk-btn primary" onClick={showNext}>{t("hint.next")}</button>
                     <button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button>
                   </div>}
                   {!cur && <div className="sk-hint-act"><button type="button" className="sk-btn" onClick={() => setHintOpen(false)}>{t("hint.hide")}</button></div>}
@@ -3047,7 +3133,8 @@ const CSS = `
 .sk-railmenu-list>*{display:block;width:100%;padding:11px 14px;border-radius:8px;text-align:start;color:var(--fg);text-decoration:none;font:600 15px Barlow,system-ui,sans-serif}
 .sk-railmenu-list>*:hover,.sk-railmenu-list>*:focus-visible{background:rgba(217,155,38,.14);outline:none}
 .sk-railmenu-list>.sk-railmenu-h{margin-top:4px;padding:8px 14px 4px;border-top:1px solid var(--line);border-radius:0;font:400 12px 'Special Elite',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--brass2);cursor:default}
-.sk-railmenu-list>.sk-railmenu-h:hover{background:none}
+.sk-railmenu-list>.sk-railmenu-h{display:flex;align-items:center;justify-content:space-between;gap:10px;border-inline:0;border-bottom:0;cursor:pointer}
+.sk-railmenu-h .fold{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}.sk-railmenu-h[aria-expanded=false] .fold{transform:rotate(-45deg)}
 .sk-railmenu-list>.sub{padding-inline-start:26px}
 .sk-rail-cap{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center;font-weight:700;margin-bottom:-2px}
 .sk-tool{position:relative;width:100%;min-height:80px;padding:9px 4px 8px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;

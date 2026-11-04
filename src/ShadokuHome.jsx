@@ -121,7 +121,7 @@ export const STRINGS = {
     "nav.pContracts": "Contracts",
     "nav.pInitiation": "Initiation",
     "nav.pStory": "Story",
-    "nav.pDaily": "Daily Contract",
+    "nav.pDaily": "Daily Contracts",
     "nav.about": "About",
     "nav.contact": "Contact",
     "nav.home": "← Home",
@@ -185,7 +185,7 @@ export const STRINGS = {
     "env.stamp2": "FOR INITIATE EYES ONLY",
     "env.cue": "The Envelope",
     "env.aria": "Break the seal and open the contract",
-    "env.accept": "Accept the contract",
+    "env.accept": "Accept",
     "env.pick": "Pick a contract",
     "env.start": "Start Initiation",
     "env.replay": "Replay Initiation",
@@ -706,6 +706,19 @@ function useDismiss(open, setOpen, ref) {
   }, [open, setOpen, ref]);
 }
 
+/** The menu groups (Contracts, Profile) the player folded, kept in this browser: a Set of group keys + a toggle. */
+const MENU_FOLD_KEY = "shadoku-menu-fold";
+export function useMenuFold() {
+  const [folded, setFolded] = useState(() => { try { return new Set(JSON.parse(store.get(MENU_FOLD_KEY) || "[]")); } catch { return new Set(); } });
+  const toggle = useCallback((k) => setFolded((f) => {
+    const n = new Set(f);
+    if (n.has(k)) n.delete(k); else n.add(k);
+    store.set(MENU_FOLD_KEY, JSON.stringify([...n]));
+    return n;
+  }), []);
+  return [folded, toggle];
+}
+
 /** Sign In, or (signed in) the codename chip that opens the Profile menu: Info, Stats, Collection, Log Out. */
 export function UserPill() {
   const { t } = useLang();
@@ -873,6 +886,7 @@ export function SiteMenu({ current = "", onNav }) {
   const modals = useModals();
   const ctxNav = useNav();
   const [open, setOpen] = useState(false);
+  const [folded, toggle] = useMenuFold();
   const ref = useRef(null);
   useDismiss(open, setOpen, ref);
   const nav = (to) => { setOpen(false); (onNav || ctxNav)(to); };
@@ -887,7 +901,8 @@ export function SiteMenu({ current = "", onNav }) {
       </button>
       {open && (
         <nav className="sh-menu" aria-label={t("nav.menu")}>
-          {SITE_PAGES.map((m) => (m.heading ? <span key={m.key} className="sh-menu-h">{t(`nav.${m.key}`)}</span>
+          {SITE_PAGES.map((m) => (m.heading ? <button key={m.key} type="button" className="sh-menu-h" aria-expanded={!folded.has(m.key)} onClick={() => toggle(m.key)}>{t(`nav.${m.key}`)}<span className="fold" aria-hidden="true" /></button>
+            : m.sub && folded.has("pContracts") ? null // the Contracts group is folded
             : m.to === "/play" && !initiated
               ? <button key={m.to} type="button" className="sub" onClick={() => { setOpen(false); modals.openInitiation(); }}>{t("nav.pInitiation")}</button> // before the initiation: its envelope, not the story
               : m.to === "/daily" && !initiated // the daily contracts open after the initiation too: locked, it offers the initiation
@@ -1196,7 +1211,7 @@ export function ContractEnvelope(props) {
   // the finale while sealed: the red folder (Dossier № 000-OMEGA) is a folder, never an envelope
   return props.tone === "omega" && (props.variant || "hero") === "mini" ? <ContractFolder {...props} /> : <EnvelopeBody {...props} />;
 }
-function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, lead = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false, second = null }) {
+function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "hero", done = false, best = null, pre = false, acceptLabel = null, note = null, lead = null, tone = "manila", target = null, autoOpen = true, onOpen = null, noId = false, closed = false, second = null, glow = false }) {
   const pal = ENV_TONES[tone] || ENV_TONES.manila, gid = `shManila-${variant}-${tone}`;
   const { t, lang } = useLang();
   const puzzle = useMemo(() => localizeHead(rawPuzzle, trOf(t)), [rawPuzzle, t]); // title + difficulty in the active language
@@ -1229,7 +1244,7 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
 
   return (
     <div className={`sh-env-cq ${variant}${opened ? " opened" : ""}${sealed ? " sealed" : ""}${p2 ? " two" : ""}`}>
-      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}${variant === "hero" && !done ? " glow" : ""}`} {...rootProps} id={variant === "hero" && !noId ? "sh-envelope" : undefined}>
+      <div className={`sh-env tone-${tone}${opened ? " opening" : ""}${phase === "open" ? " ready" : ""}${staticOpen ? " pre" : ""}${(variant === "hero" || glow) && !done ? " glow" : ""}`} {...rootProps} id={variant === "hero" && !noId ? "sh-envelope" : undefined}>
         <div className="sh-env-lift">
           <div className="sh-env-stage">
             {/* back / inside */}
@@ -1243,11 +1258,13 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
             {p2 && (
               <div className="sh-card sh-card-2" role="img" aria-label={`${p2.title}: ${second.stamp}`}>
                 <div className="sh-card-in" aria-hidden="true">
-                  <div className="sh-card-pol"><ArtSafe><VictimPolaroid name={victimNameOf(p2)} size={200} tilt={3} /></ArtSafe></div>
-                  <div className="sh-card-txt">
-                    <div className="k sh-type">{second.label}</div>
-                    <div className="h sh-type">{p2.title}</div>
-                    <div className="m sh-type">{meta2}</div>
+                  <div className="sh-card-head sh-type"><span className="k">{second.label}</span><span className="sh-card-seal"><WaxSeal /></span><span className="i" /></div>
+                  <div className="sh-card-body">
+                    <div className="sh-card-pol"><ArtSafe><VictimPolaroid name={victimNameOf(p2)} size={200} tilt={3} /></ArtSafe></div>
+                    <div className="sh-card-txt">
+                      <div className="h sh-type">{p2.title}</div>
+                      <div className="m sh-type">{meta2}</div>
+                    </div>
                   </div>
                 </div>
                 <div className="sh-card-lock sh-type" aria-hidden="true">{second.stamp}</div>
@@ -1257,16 +1274,17 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
             {/* the contract card + the target's polaroid that slides out */}
             <div className="sh-card">
               <div className="sh-card-in">
-                <div className="sh-card-pol"><ArtSafe>{target || (isTutorial
-                  ? <AdowPolaroid size={200} tilt={2} /> /* the initiation's "target" is yourself: S. H. Adow, no stamp, no X */
-                  : <VictimPolaroid name={victimNameOf(puzzle)} size={200} tilt={2} crossed={!!done} />)}</ArtSafe></div>
-                <div className="sh-card-txt">
-                  <div className="k sh-type">{label}</div>
-                  <div className="h sh-type">{puzzle?.title || ""}</div>
-                  <div className="m sh-type">{meta}</div>
-                  <div className="sh-type">{t("env.initiate")}</div>
-                  {done && best > 0 && <div className="sh-card-best sh-type">{t("env.best")} <b>{fmtTime(best)}</b></div>}
-                  {!mini && <div className="sh-card-sign sh-type" aria-hidden="true">{t("env.sign", { action: acceptLabel || (isTutorial ? (done ? t("env.replay") : t("env.start")) : done ? t("env.reopen") : t("env.accept")) })}</div>}
+                <div className="sh-card-head sh-type"><span className="k">{label}</span><span className="sh-card-seal" aria-hidden="true"><WaxSeal silver={tone === "obsidian"} /></span><span className="i">{t("env.initiate")}</span></div>
+                <div className="sh-card-body">
+                  <div className="sh-card-pol"><ArtSafe>{target || (isTutorial
+                    ? <AdowPolaroid size={200} tilt={2} /> /* the initiation's "target" is yourself: S. H. Adow, no stamp, no X */
+                    : <VictimPolaroid name={victimNameOf(puzzle)} size={200} tilt={2} crossed={!!done} />)}</ArtSafe></div>
+                  <div className="sh-card-txt">
+                    <div className="h sh-type">{puzzle?.title || ""}</div>
+                    <div className="m sh-type">{meta}</div>
+                    {done && best > 0 && <div className="sh-card-best sh-type">{t("env.best")} <b>{fmtTime(best)}</b></div>}
+                    {!mini && <div className="sh-card-sign sh-type" aria-hidden="true">{t("env.sign", { action: acceptLabel || (isTutorial ? (done ? t("env.replay") : t("env.start")) : done ? t("env.reopen") : t("env.accept")) })}</div>}
+                  </div>
                 </div>
               </div>
               {done && <div className="sh-card-stamp sh-type" aria-hidden="true">{t("env.fulfilled")}</div>}
@@ -1488,6 +1506,8 @@ svg{direction:ltr}
 .sh-menu button{display:block;width:100%;padding:12px 14px;border:0;border-radius:8px;background:none;color:var(--sh-cream);text-align:start;font:600 16px 'Barlow',sans-serif;cursor:pointer}
 .sh-menu a:hover,.sh-menu a:focus-visible,.sh-menu button:hover,.sh-menu button:focus-visible{background:rgba(217,155,38,.14);outline:none}.sh-menu a.on{color:var(--sh-brass)}.sh-header .sh-btn.keep{display:inline-flex}
 .sh-menu-h{display:block;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;font:400 12px 'Special Elite',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--sh-brass)}
+.sh-menu button.sh-menu-h{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;margin-top:4px;padding:10px 14px 4px;border-top:1px solid #34344a;border-radius:0;font:400 12px 'Special Elite',monospace;cursor:pointer}
+.sh-menu-h .fold{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .15s}.sh-menu-h[aria-expanded=false] .fold{transform:rotate(-45deg)}
 .sh-menu .sub{padding-inline-start:26px}.sh-menu .sh-menu-sep{margin-top:4px;border-top:1px solid #34344a;border-radius:0 0 8px 8px}
 .sh-userpill{position:relative}.sh-userchip svg{color:var(--sh-muted);flex:none}
 .sh-usermenu{top:calc(100% + 8px);right:0;min-width:200px}.sh-usermenu .sh-menu-h{margin-top:0;border-top:0}
@@ -1593,7 +1613,12 @@ svg{direction:ltr}
 .sh-layer{position:absolute;inset:0;pointer-events:none}.sh-layer svg,.sh-flap-face svg{width:100%;height:100%;display:block;overflow:visible}
 .sh-layer-back{z-index:0}.sh-layer-front{z-index:3}
 .sh-card{position:absolute;z-index:2;left:12.5%;top:39.3%;width:75%;height:54.8%;pointer-events:none;background:var(--sh-cream);border:.6cqw solid #bda677;border-radius:.8cqw;box-shadow:0 .6cqw 2cqw rgba(0,0,0,.45)}
-.sh-card-in{display:flex;gap:3cqw;align-items:center;height:100%;padding:2.2cqw 3cqw;color:var(--sh-ink);font-size:2.5cqw;line-height:1.35}
+.sh-card-in{display:flex;flex-direction:column;height:100%;padding:1.6cqw 3cqw 2.4cqw;color:var(--sh-ink);font-size:2.5cqw;line-height:1.35}
+/* the header line: the case label, the wax seal, the initiate line; under it the target's polaroid and the contract's text */
+.sh-card-head{display:flex;align-items:center;justify-content:space-between;gap:2cqw;flex:none;height:6.4cqw;font-size:2.3cqw;letter-spacing:.08em;white-space:nowrap}
+.sh-card-head .k{color:var(--sh-crimson);flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis}.sh-card-head .i{flex:1 1 0;min-width:0;text-align:right;overflow:hidden;text-overflow:ellipsis}
+.sh-card-seal{flex:none;width:8.6cqw;height:8.6cqw;margin-top:-.4cqw;filter:drop-shadow(0 .3cqw .5cqw rgba(0,0,0,.4))}.sh-card-seal>*{display:block;width:100%;height:100%}
+.sh-card-body{display:flex;gap:3cqw;align-items:center;flex:1;min-height:0}
 .sh-card-pol{width:21cqw;flex:none;transform:rotate(-4deg);filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto}
 .sh-env.ready .sh-card{pointer-events:auto}
 /* two cards: the second (locked) one rises higher behind the first and fans out to the right, so its header and stamp show */
@@ -1607,10 +1632,10 @@ svg{direction:ltr}
 .sh-card-stamp{position:absolute;z-index:3;left:2%;top:16%;padding:.5cqw 1.4cqw;border:.5cqw solid #14683f;border-radius:.9cqw;background:#2f9e6b;color:#f7fbf3;font-size:3.2cqw;letter-spacing:.06em;line-height:1.1;transform:rotate(-11deg);pointer-events:none;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.45),inset 0 0 0 .3cqw rgba(247,251,243,.55)}
 .sh-card-hit{position:absolute;inset:0;z-index:2;width:100%;height:100%;padding:0;border:0;border-radius:.6cqw;background:transparent;cursor:pointer;outline:none}
 .sh-card-hit:hover,.sh-card-hit:focus-visible{box-shadow:0 0 0 .7cqw var(--sh-brass),0 0 4cqw rgba(217,155,38,.55)}
-.sh-card-sign{display:inline-block;margin-top:1.6cqw;padding:1cqw 2.4cqw;border:.45cqw solid var(--sh-crimson);border-radius:.6cqw;color:var(--sh-crimson);font-size:3.1cqw;letter-spacing:.06em;transform:rotate(-3deg);background:rgba(200,62,59,.07);animation:shSign 1.8s ease-in-out infinite;white-space:nowrap}
+.sh-card-sign{display:inline-block;align-self:flex-end;margin-top:1.6cqw;padding:1cqw 2.4cqw;border:.45cqw solid var(--sh-crimson);border-radius:.6cqw;color:var(--sh-crimson);font-size:3.1cqw;letter-spacing:.06em;transform:rotate(-3deg);background:rgba(200,62,59,.07);animation:shSign 1.8s ease-in-out infinite;white-space:nowrap}
 .sh-card:hover .sh-card-sign{background:var(--sh-crimson);color:var(--sh-cream)}
 @keyframes shSign{50%{box-shadow:0 0 0 .8cqw rgba(200,62,59,.18)}}
-.sh-card-txt .k{color:var(--sh-crimson);font-size:2.3cqw;letter-spacing:.08em}.sh-card-txt .h{font-size:4.1cqw;line-height:1.1;margin:.6cqw 0 1.2cqw}.sh-card-txt .s{margin-top:1.2cqw;color:#6a1a18}
+.sh-card-txt{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}.sh-card-txt .h{font-size:4.1cqw;line-height:1.1;margin:.6cqw 0 1.2cqw}.sh-card-txt .s{margin-top:1.2cqw;color:#6a1a18}
 .sh-flap{position:absolute;inset:0;z-index:4;pointer-events:none;transform-origin:50% 35.714%;transform-style:preserve-3d}
 .sh-flap-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .sh-flap-in{transform-origin:50% 35.714%;transform:rotateX(180deg)}

@@ -1319,8 +1319,8 @@
     "cloth": 4
    },
    "look": "blonde curly hair",
-   "clue": "Kathleen stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV.",
-   "text": "Kathleen stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV.",
+   "clue": "Kathleen stood on bare ground (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV.",
+   "text": "Kathleen stood on bare ground (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV.",
    "atoms": [
     {
      "kind": "BESIDE",
@@ -2290,7 +2290,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Kathleen “stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV”: of the 2 tiles that fit, only r7c9 is still open. Place Kathleen there.",
+   "text": "Kathleen “stood on bare ground (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV”: of the 2 tiles that fit, only r7c9 is still open. Place Kathleen there.",
    "focus": [
     [
      6,
@@ -9418,7 +9418,7 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Kathleen “stood on bare floor (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV”: of the 2 tiles that fit, only r7c9 is still open. Place Kathleen there.",
+    "text": "Kathleen “stood on bare ground (no bed, carpet runner, chair, floor cushion, patch of broken glass, rug, sofa, stool, trail of footprints or trapdoor) and was beside the TV”: of the 2 tiles that fit, only r7c9 is still open. Place Kathleen there.",
     "focus": [
      [
       6,
@@ -23559,7 +23559,9 @@
    "late_elim_gap": 5,
    "place_push": 4.36,
    "global_uses": 1,
-   "global_first_t2": false
+   "global_first_t2": false,
+   "unlock_by_place": 0.231,
+   "star_opener": false
   },
   "flow_arc_ok": false,
   "shadow_candidates_before_last": 12,
