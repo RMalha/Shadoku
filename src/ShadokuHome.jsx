@@ -1094,6 +1094,7 @@ function CredentialsCard() {
   const erase = async () => {
     if (!window.confirm(t("creds.deleteConfirm"))) return;
     if (!(await deleteAccount())) window.alert(t("creds.deleteError"));
+    else window.location.replace("/"); // a fresh page: the open screens still hold the erased progress in memory
   };
   return (
     <section className="sh-creds" aria-labelledby="sh-creds-h">

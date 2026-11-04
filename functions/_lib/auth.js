@@ -29,9 +29,10 @@ const hmacKey = (env, usage) => {
   return crypto.subtle.importKey("raw", enc.encode(env.SESSION_SECRET), { name: "HMAC", hash: "SHA-256" }, false, [usage]);
 };
 
-/** {…} → "payload.signature" (the payload gets an `exp` in epoch seconds). */
+/** {…} → "payload.signature" (the payload gets `iat`, issued at in epoch ms, and `exp` in epoch seconds). */
 export async function seal(env, data, maxAgeSec) {
-  const body = b64u(enc.encode(JSON.stringify({ ...data, exp: Math.floor(Date.now() / 1000) + maxAgeSec })));
+  const now = Date.now();
+  const body = b64u(enc.encode(JSON.stringify({ ...data, iat: now, exp: Math.floor(now / 1000) + maxAgeSec })));
   const sig = await crypto.subtle.sign("HMAC", await hmacKey(env, "sign"), enc.encode(body));
   return `${body}.${b64u(sig)}`;
 }
@@ -142,9 +143,21 @@ export const providerConfigured = (env, name) => {
 /* ───────────── session + codename record ───────────── */
 export async function readSession(request, env) {
   const s = await unseal(env, readCookie(request, cookieName(request, "sh_session")));
-  return s && s.id ? s : null;
+  if (!s || !s.id) return null;
+  // an account deleted after this session was issued (on this device or another): the session is over, or its next sync
+  // would bring the erased progress and scores back into a new account
+  const gone = env.SHADOKU_KV ? Number(await env.SHADOKU_KV.get(goneKey(s.id))) : 0;
+  const issued = Number(s.iat) || (s.exp - SESSION_DAYS * 86400) * 1000; // sessions from before `iat`: their exp says when
+  return gone && issued <= gone ? null : s;
 }
 
+/** The account is being deleted: every session issued until now stops working (readSession). The mark outlives the longest session,
+ *  then expires: it holds only the account id and the time. */
+export async function endSessions(env, id) {
+  if (env.SHADOKU_KV) await env.SHADOKU_KV.put(goneKey(id), String(Date.now()), { expirationTtl: SESSION_DAYS * 86400 + 86400 });
+}
+
+const goneKey = (id) => `gone:${id}`;
 const userKey = (id) => `user:${id}`;
 const nameKey = (name) => `name:${name.toLowerCase()}`;
 const progressKey = (id) => `progress:${id}`;

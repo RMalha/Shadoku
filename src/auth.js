@@ -4,7 +4,7 @@
  * Every hook returns `undefined` when there is no backend (npm run dev, a file:// bundle, a static host): the site then
  * keeps its local DEMO sign-in, so the game never depends on the server.
  */
-import { startSync, stopSync } from "./sync.js";
+import { startSync, stopSync, clearLocalProgress } from "./sync.js";
 
 const JSON_HEADERS = { Accept: "application/json" };
 
@@ -24,6 +24,11 @@ async function session() {
 
 export async function onSession() {
   const s = await session();
+  if (s && s.deleted) { // the account was deleted on another device: its progress goes from this browser too
+    clearLocalProgress();
+    window.location.reload(); // the server cleared the cookie, so the fresh page is simply signed out
+    return new Promise(() => {});
+  }
   if (s && s.user) startSync(); // the progress follows the account (src/sync.js)
   return s ? s.user : undefined; // user | null (not signed in) | undefined (no backend)
 }
@@ -58,11 +63,13 @@ export async function onAvatarChange(avatar) {
   return r ? r.status === 200 : undefined;
 }
 
-/** → true when the server erased the account (or there is none to erase). */
+/** → true when the server erased the account (or there is none to erase). This browser's game progress is erased with it. */
 export async function onDeleteAccount() {
   stopSync();
   const r = await call("/api/account", { method: "DELETE" });
-  return !r || r.status === 200 || r.status === 401;
+  const ok = !r || r.status === 200 || r.status === 401;
+  if (ok) clearLocalProgress();
+  return ok;
 }
 
 /** The provider's page can be restored from the back/forward cache with "Working…" still showing: reload it clean. */

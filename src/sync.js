@@ -106,11 +106,18 @@ export function startSync() {
   if (!active) { active = true; document.addEventListener("visibilitychange", onHide); }
   syncNow();
 }
-/** Signed out or account deleted: stop (this browser keeps its progress). */
+/** Signed out: stop (this browser keeps its progress; a deleted account also clears it: clearLocalProgress). */
 export function stopSync() {
   active = false;
   if (timer) { clearTimeout(timer); timer = null; }
   if (typeof document !== "undefined") document.removeEventListener("visibilitychange", onHide);
+}
+
+/** The account was deleted: this browser's game progress goes too (boards, clocks, best times, the initiation and the unlocks),
+ *  or the next sign-in would upload it into the new account and bring every score back. Settings and language stay. */
+export function clearLocalProgress() {
+  stopSync();
+  [BOARDS_KEY, BOARD_AT, TIMES_KEY, BESTS_KEY, ...FLAG_KEYS].forEach((k) => { try { window.localStorage.removeItem(k); } catch { /* private mode */ } });
 }
 
 /** The game saved something: push it soon (`soon`: a solve) or within PUSH_MS. */
