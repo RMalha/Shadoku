@@ -86,7 +86,7 @@ export function RankingPanel() {
                     {[...res.players, ...(res.me && !res.players.some((p) => p.me) ? [res.me] : [])].map((p) => (
                       <tr key={`${p.rank}-${p.codename}`} className={p.me ? "me" : ""}>
                         <td className={`pos${p.rank <= 3 ? " medal" : ""}`}>{medal(p.rank)}</td>
-                        <td className="who"><span className="sh-rank-who"><Avatar user={{ username: p.codename, avatar: p.avatar }} /><span className="nm">{p.codename}{p.me && <small> · {t("ranking.you")}</small>}</span></span></td>
+                        <td className="who"><span className="sh-rank-who"><Avatar user={{ username: p.codename, avatar: p.avatar }} round /><span className="nm">{p.codename}{p.me && <small> · {t("ranking.you")}</small>}</span></span></td>
                         <td className="num">{p.solved}</td><td className="num">⚡ {p.speed}</td><td className="num">{p.hints}</td><td className="num"><b>{p.score}</b></td>
                       </tr>
                     ))}
@@ -903,7 +903,7 @@ const COMMUNITY_CSS = `
 .sh-rank-scroll{overflow-x:auto;margin:0 -4px}
 .sh-rank-tbl td.pos{font:400 18px 'Special Elite',monospace;width:44px;text-align:center}.sh-rank-tbl td.pos.medal{font-size:24px}
 .sh-rank-tbl tr.me td{background:rgba(217,155,38,.1)}.sh-rank-tbl tr.me td:first-child{box-shadow:inset 3px 0 var(--sh-brass)}
-.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{height:40px;flex:0 0 auto}
+.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar-round{width:34px;height:34px}
 .sh-rank-who .nm{min-width:0;overflow-wrap:anywhere}
 .sh-rank-tbl th .short,.sh-rank-tbl th .sh-sr{display:none}
 .sh-rank-tbl .sh-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

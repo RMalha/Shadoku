@@ -26,7 +26,7 @@ import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
 import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, DAILIES, dailyShelves, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, Figure, TOKEN_SW } from "./ShadokuArt.jsx";
+import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, Figure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
 import { avatarOf, decodeLook } from "./avatarLook.js";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
@@ -700,9 +700,13 @@ function SignInModal({ onClose }) {
 }
 
 /** A player's avatar as a small Polaroid (the suspects' photo frame; S. H. Adow's is the Syndicate's dark one): S. H. Adow unless they
- *  chose their account picture or built a portrait (src/avatarLook.js). Its CSS sets the height; the width follows. `user`: { avatar, avatarUrl }. */
-export function Avatar({ user }) {
+ *  chose their account picture or built a portrait (src/avatarLook.js). Its CSS sets the height; the width follows. `user`: { avatar, avatarUrl }.
+ *  `round`: the small face disc instead (the header's codename chip and the ranking rows; its CSS sets width and height). */
+export function Avatar({ user, round = false }) {
   const a = avatarOf(user);
+  if (round) return a.startsWith("https://")
+    ? <img className="sh-avatar-round" src={a} alt="" referrerPolicy="no-referrer" />
+    : <span className="sh-avatar-round" aria-hidden="true"><AvatarArt code={a} crop={[TOKEN_ZOOM, TOKEN_CY]} /></span>;
   return (
     <span className={`sh-avatar${a ? "" : " adow"}`} aria-hidden="true">
       <span className="sh-avatar-pic">{a.startsWith("https://") ? <img src={a} alt="" referrerPolicy="no-referrer" /> : <AvatarArt code={a} />}</span>
@@ -711,10 +715,10 @@ export function Avatar({ user }) {
 }
 /** The avatar's crop [zoom, cy] for Figure: head, whole hat and shoulders, like the suspects' Polaroids (the board token's face crop cut the hat and clothes). */
 export const AVATAR_CROP = [1, 144];
-/** The avatar's drawing in a 96×96 SVG: the portrait on its backdrop, or S. H. Adow. */
-export function AvatarArt({ code, look = null }) {
+/** The avatar's drawing in a 96×96 SVG: the portrait on its backdrop, or S. H. Adow. `crop`: [zoom, cy] (default AVATAR_CROP). */
+export function AvatarArt({ code, look = null, crop = AVATAR_CROP }) {
   const L = look || decodeLook(code);
-  const [zoom, cy] = AVATAR_CROP;
+  const [zoom, cy] = crop;
   return (
     <svg viewBox="0 0 96 96" width="100%" height="100%" focusable="false">
       {L ? <><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={zoom} cy={cy} sw={TOKEN_SW} /></> : <AdowFigure zoom={zoom} cy={cy} sw={5.6} />}
@@ -765,7 +769,7 @@ export function UserPill() {
   return (
     <div className="sh-userpill" ref={ref}>
       <button className="sh-userchip" onClick={() => setOpen((o) => !o)} aria-haspopup="true" aria-expanded={open} aria-label={t("codename.chipAria", { name: user.username })}>
-        <Avatar user={user} /><span className="sh-userchip-name">{user.username}</span><Caret />
+        <Avatar user={user} round /><span className="sh-userchip-name">{user.username}</span><Caret />
       </button>
       {open && (
         <nav className="sh-menu sh-usermenu" aria-label={t("nav.profile")}>
@@ -1559,6 +1563,7 @@ svg{direction:ltr}
 .sh-userchip:hover{border-color:var(--sh-brass)}.sh-userchip-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sh-avatar{box-sizing:border-box;height:32px;width:auto;aspect-ratio:112/142;display:inline-flex;flex-direction:column;align-items:center;flex:none;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 3px rgba(0,0,0,.45);transform:rotate(-3deg)}
 .sh-avatar.adow{background:#2a2a33;border-color:#3b3b47}
+.sh-avatar-round{box-sizing:border-box;width:28px;height:28px;border-radius:50%;display:inline-block;flex:none;overflow:hidden;object-fit:cover;background:#171a26}.sh-avatar-round svg{display:block;width:100%;height:100%}
 .sh-avatar-pic{display:block;width:86%;aspect-ratio:1;margin-top:7%;overflow:hidden;background:#171a26;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}.sh-avatar-pic svg,.sh-avatar-pic img{display:block;width:100%;height:100%;object-fit:cover}
 .sh-iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--sh-line);background:var(--sh-panel);color:var(--sh-brass);font:700 17px 'Special Elite',monospace;cursor:pointer}
 .sh-iconbtn:hover{border-color:var(--sh-brass)}
