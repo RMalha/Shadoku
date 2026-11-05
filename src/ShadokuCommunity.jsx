@@ -900,7 +900,7 @@ const COMMUNITY_CSS = `
 .sh-rank-scroll{overflow-x:auto;margin:0 -4px}
 .sh-rank-tbl td.pos{font:400 18px 'Special Elite',monospace;width:44px;text-align:center}.sh-rank-tbl td.pos.medal{font-size:24px}
 .sh-rank-tbl tr.me td{background:rgba(217,155,38,.1)}.sh-rank-tbl tr.me td:first-child{box-shadow:inset 3px 0 var(--sh-brass)}
-.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{width:34px;height:34px;font-size:15px;flex:0 0 auto}
+.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{height:40px;flex:0 0 auto}
 .sh-rank-who small{color:var(--sh-brass);font-weight:700}
 .sh-rank-how{margin-top:12px}.sh-rank-how summary{cursor:pointer;color:var(--sh-brass);font-weight:700}
 .sh-cm-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 18px}
@@ -918,7 +918,7 @@ const COMMUNITY_CSS = `
 .sh-cm-meta{font-size:13px;color:var(--sh-muted)}.sh-cm-meta .sh-diff{font-size:13px;padding:1px 8px}
 .sh-cm-stats{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:13.5px;color:#d9d3c4}.sh-cm-stats small{color:var(--sh-muted)}.sh-cm-stats .ok{color:#7fe0b4;font-weight:700}
 .sh-cm-by{display:flex;align-items:center;gap:8px;padding:9px 16px;border-top:1px solid #2a2a38;font-size:13px;color:var(--sh-muted)}
-.sh-cm-by .sh-avatar{width:24px;height:24px;font-size:12px}.sh-cm-mine{margin-inline-start:auto;padding:1px 8px;border-radius:99px;background:rgba(217,155,38,.16);color:var(--sh-brass);font-weight:700}
+.sh-cm-by .sh-avatar{height:30px}.sh-cm-mine{margin-inline-start:auto;padding:1px 8px;border-radius:99px;background:rgba(217,155,38,.16);color:var(--sh-brass);font-weight:700}
 .sk-rate{display:flex;flex-direction:column;align-items:center;gap:4px;margin:6px 0 2px;padding:10px 12px;border-radius:12px;background:rgba(217,155,38,.08);border:1px solid rgba(217,155,38,.35)}
 .sk-rate b{font:400 16px 'Special Elite',monospace;letter-spacing:.06em;color:var(--brass2,#f0b545)}.sk-rate p{margin:0;font-size:13.5px}.sk-rate p.bad{color:#ff8a80}
 .sk-rate-stars{display:flex;gap:2px}.sk-rate-stars button{width:40px;height:40px;border:0;background:none;color:#5b5868;font-size:32px;line-height:1;cursor:pointer;transition:transform .12s,color .12s;padding:0}

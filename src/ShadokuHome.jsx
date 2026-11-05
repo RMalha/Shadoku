@@ -699,11 +699,15 @@ function SignInModal({ onClose }) {
   );
 }
 
-/** A player's avatar disc: S. H. Adow unless they chose their account picture or built a portrait (src/avatarLook.js). `user`: { avatar, avatarUrl }. */
+/** A player's avatar as a small Polaroid (the suspects' photo frame; S. H. Adow's is the Syndicate's dark one): S. H. Adow unless they
+ *  chose their account picture or built a portrait (src/avatarLook.js). Its CSS sets the height; the width follows. `user`: { avatar, avatarUrl }. */
 export function Avatar({ user }) {
   const a = avatarOf(user);
-  if (a.startsWith("https://")) return <img className="sh-avatar" src={a} alt="" referrerPolicy="no-referrer" />;
-  return <span className="sh-avatar sh-avatar-art" aria-hidden="true"><AvatarArt code={a} /></span>;
+  return (
+    <span className={`sh-avatar${a ? "" : " adow"}`} aria-hidden="true">
+      <span className="sh-avatar-pic">{a.startsWith("https://") ? <img src={a} alt="" referrerPolicy="no-referrer" /> : <AvatarArt code={a} />}</span>
+    </span>
+  );
 }
 /** The avatar's drawing in a 96×96 SVG: the portrait's face crop on its backdrop, or S. H. Adow. */
 export function AvatarArt({ code, look = null }) {
@@ -1550,8 +1554,9 @@ svg{direction:ltr}
 .sh-btn.sm{min-height:32px;padding:4px 12px;font-size:13px}
 .sh-userchip{display:flex;align-items:center;gap:8px;background:var(--sh-panel);border:1px solid var(--sh-line);border-radius:999px;padding:3px 12px 3px 4px;padding-inline:4px 12px;color:var(--sh-cream);font:600 14px 'Barlow',sans-serif;cursor:pointer}
 .sh-userchip:hover{border-color:var(--sh-brass)}.sh-userchip-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sh-avatar{width:28px;height:28px;border-radius:50%;background:var(--sh-brass);color:#1a1408;display:inline-flex;align-items:center;justify-content:center;font:700 14px 'Barlow',sans-serif;object-fit:cover;flex:none}
-.sh-avatar-art{background:#171a26;overflow:hidden;box-shadow:inset 0 0 0 1.5px rgba(245,240,230,.55)}.sh-avatar-art svg{display:block}
+.sh-avatar{box-sizing:border-box;height:32px;width:auto;aspect-ratio:112/142;display:inline-flex;flex-direction:column;align-items:center;flex:none;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 3px rgba(0,0,0,.45);transform:rotate(-3deg)}
+.sh-avatar.adow{background:#2a2a33;border-color:#3b3b47}
+.sh-avatar-pic{display:block;width:86%;aspect-ratio:1;margin-top:7%;overflow:hidden;background:#171a26;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}.sh-avatar-pic svg,.sh-avatar-pic img{display:block;width:100%;height:100%;object-fit:cover}
 .sh-iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--sh-line);background:var(--sh-panel);color:var(--sh-brass);font:700 17px 'Special Elite',monospace;cursor:pointer}
 .sh-iconbtn:hover{border-color:var(--sh-brass)}
 
@@ -1599,7 +1604,7 @@ svg{direction:ltr}
 .sh-creds-card{max-width:520px;margin:0 auto;background:linear-gradient(180deg,#20202b,#181820);border:2px dashed rgba(217,155,38,.6);border-radius:14px;padding:24px;box-shadow:0 20px 44px rgba(0,0,0,.45)}
 .sh-creds-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}.sh-creds-head h2{margin:0;font-size:clamp(20px,3.4vw,26px);color:var(--sh-cream)}
 .sh-badgeid{background:var(--sh-crimson);color:#fff;padding:2px 9px;border-radius:4px;font-size:14px;transform:rotate(-4deg)}
-.sh-creds-who{display:flex;gap:12px;align-items:center;margin-bottom:12px}.sh-creds-who .sh-avatar{width:48px;height:48px;font-size:20px}
+.sh-creds-who{display:flex;gap:12px;align-items:center;margin-bottom:12px}.sh-creds-who .sh-avatar{height:58px}
 .sh-creds-name{font-size:22px;color:var(--sh-brass)}
 .sh-auth{display:flex;flex-direction:column;gap:10px}
 .sh-oauth{display:flex;align-items:center;justify-content:center;gap:12px;min-height:46px;border-radius:10px;font:600 15px 'Barlow',sans-serif;cursor:pointer;border:1px solid var(--sh-line);transition:transform .15s,border-color .15s}

@@ -109,7 +109,7 @@ export function AvatarMaker() {
       <div className="sh-avm-modes" role="radiogroup" aria-label={t("avatar.title")}>
         {modes.map(([m, label, art]) => (
           <button key={m} type="button" role="radio" aria-checked={mode === m} className={`sh-avm-mode${mode === m ? " on" : ""}`} onClick={() => choose(m)}>
-            <span className="sh-avm-disc">{art}</span><span>{label}</span>
+            <span className={`sh-avm-disc${m === "adow" ? " adow" : ""}`}>{art}</span><span>{label}</span>
           </button>
         ))}
       </div>
@@ -164,8 +164,9 @@ const AVATAR_CSS = `
 .sh-avm-mode{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:104px;padding:10px 12px;border-radius:12px;border:1px solid var(--sh-line);background:#1a1a23;color:var(--sh-cream);font:600 13px 'Barlow',sans-serif;cursor:pointer}
 .sh-avm-mode.on{border-color:var(--sh-brass);box-shadow:0 0 0 1px var(--sh-brass) inset;background:rgba(217,155,38,.08)}
 .sh-avm-mode:focus-visible,.sh-avm-tabs button:focus-visible,.sh-avm-th:focus-visible,.sh-avm-sw:focus-visible{outline:2px solid var(--sh-brass);outline-offset:2px}
-.sh-avm-disc{width:64px;height:64px;border-radius:50%;overflow:hidden;background:#171a26;display:block;box-shadow:inset 0 0 0 1.5px rgba(245,240,230,.55)}
-.sh-avm-disc svg,.sh-avm-disc img{display:block;width:100%;height:100%;object-fit:cover}
+.sh-avm-disc{box-sizing:border-box;height:82px;aspect-ratio:112/142;display:flex;flex-direction:column;align-items:center;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 4px rgba(0,0,0,.45);transform:rotate(-2deg)}
+.sh-avm-disc.adow{background:#2a2a33;border-color:#3b3b47}
+.sh-avm-disc svg,.sh-avm-disc img{display:block;width:86%;height:auto;aspect-ratio:1;margin-top:7%;object-fit:cover;background:#171a26}
 .sh-avm-maker{border-top:1px solid var(--sh-line);padding-top:12px;margin-top:4px}
 .sh-avm-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .sh-avm-tabs button{padding:6px 12px;border-radius:99px;border:1px solid var(--sh-line);background:transparent;color:var(--sh-cream);font:600 13px 'Barlow',sans-serif;cursor:pointer}
@@ -182,5 +183,5 @@ const AVATAR_CSS = `
 .sh-avm-sw.on{border-color:var(--sh-cream);box-shadow:0 0 0 2px var(--sh-brass)}
 .sh-avm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:6px}
 .sh-avm-ok{color:var(--sh-green);font:600 14px 'Barlow',sans-serif}
-@media (max-width:480px){.sh-avm-mode{min-width:0;flex:1 1 0;padding:8px 6px}.sh-avm-disc{width:52px;height:52px}.sh-avm-th{width:46px;height:46px}}
+@media (max-width:480px){.sh-avm-mode{min-width:0;flex:1 1 0;padding:8px 6px}.sh-avm-disc{height:68px}.sh-avm-th{width:46px;height:46px}}
 `;

@@ -319,7 +319,7 @@ const PAGES_CSS = `
 .sh-tabs a:hover{background:rgba(217,155,38,.1)}.sh-tabs a.on{background:var(--sh-brass);color:#1a1408}
 .sh-tabs-out{margin-inline-start:auto}
 .sh-pinfo-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
-.sh-pinfo .sh-avatar{width:72px;height:72px;font-size:30px}
+.sh-pinfo .sh-avatar{height:92px}
 .sh-pinfo-who{display:flex;flex-direction:column;flex:1 1 160px;min-width:0}
 .sh-pinfo-name{font-size:clamp(22px,3.4vw,28px);color:var(--sh-brass);overflow-wrap:anywhere}
 .sh-pinfo-rank{margin:0 0 14px;font-size:clamp(17px,2.6vw,20px);color:var(--sh-cream)}.sh-pinfo-rank b{color:var(--sh-brass)}
