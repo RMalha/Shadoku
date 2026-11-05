@@ -1557,7 +1557,7 @@ svg{direction:ltr}
 .sh-btn.sm{min-height:32px;padding:4px 12px;font-size:13px}
 .sh-userchip{display:flex;align-items:center;gap:8px;background:var(--sh-panel);border:1px solid var(--sh-line);border-radius:999px;padding:3px 12px 3px 4px;padding-inline:4px 12px;color:var(--sh-cream);font:600 14px 'Barlow',sans-serif;cursor:pointer}
 .sh-userchip:hover{border-color:var(--sh-brass)}.sh-userchip-name{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sh-avatar{box-sizing:border-box;height:38px;width:auto;aspect-ratio:112/142;display:inline-flex;flex-direction:column;align-items:center;flex:none;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 3px rgba(0,0,0,.45);transform:rotate(-3deg)}
+.sh-avatar{box-sizing:border-box;height:32px;width:auto;aspect-ratio:112/142;display:inline-flex;flex-direction:column;align-items:center;flex:none;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 3px rgba(0,0,0,.45);transform:rotate(-3deg)}
 .sh-avatar.adow{background:#2a2a33;border-color:#3b3b47}
 .sh-avatar-pic{display:block;width:86%;aspect-ratio:1;margin-top:7%;overflow:hidden;background:#171a26;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}.sh-avatar-pic svg,.sh-avatar-pic img{display:block;width:100%;height:100%;object-fit:cover}
 .sh-iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--sh-line);background:var(--sh-panel);color:var(--sh-brass);font:700 17px 'Special Elite',monospace;cursor:pointer}

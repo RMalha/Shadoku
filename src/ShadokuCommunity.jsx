@@ -903,7 +903,7 @@ const COMMUNITY_CSS = `
 .sh-rank-scroll{overflow-x:auto;margin:0 -4px}
 .sh-rank-tbl td.pos{font:400 18px 'Special Elite',monospace;width:44px;text-align:center}.sh-rank-tbl td.pos.medal{font-size:24px}
 .sh-rank-tbl tr.me td{background:rgba(217,155,38,.1)}.sh-rank-tbl tr.me td:first-child{box-shadow:inset 3px 0 var(--sh-brass)}
-.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{height:50px;flex:0 0 auto}
+.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{height:40px;flex:0 0 auto}
 .sh-rank-who .nm{min-width:0;overflow-wrap:anywhere}
 .sh-rank-tbl th .short,.sh-rank-tbl th .sh-sr{display:none}
 .sh-rank-tbl .sh-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -993,5 +993,5 @@ const COMMUNITY_CSS = `
   .sh-rank-scroll{margin:0}.sh-rank-tbl th,.sh-rank-tbl td{padding:8px 3px}.sh-rank-tbl .num{text-align:center;white-space:nowrap}
   .sh-rank-tbl th .full{display:none}.sh-rank-tbl th .short{display:inline;font-size:16px;letter-spacing:0}.sh-rank-tbl th .sh-sr{display:inline-block}
   .sh-rank-tbl td.pos{width:28px;font-size:16px}.sh-rank-tbl td.pos.medal{font-size:20px}.sh-rank-tbl td b{font-size:16px}
-  .sh-rank-who{gap:7px}.sh-rank-who .sh-avatar{height:44px}.sh-rank-who small{display:block}}
+  .sh-rank-who{gap:7px}.sh-rank-who small{display:block}}
 `;
