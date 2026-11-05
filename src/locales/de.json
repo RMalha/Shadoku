@@ -1089,7 +1089,7 @@
   "ui.ranking.how": "Wie die Punktevergabe funktioniert",
   "ui.ranking.how.1": "+10 Punkte für jeden erfüllten Story- oder Tagesvertrag.",
   "ui.ranking.how.2": "Bis zu +5 extra für Geschwindigkeit: Je schneller deine Bestzeit, desto mehr Punkte.",
-  "ui.ranking.how.3": "Jeder Hinweis kostet 1 Punkt: 'wo man schauen sollte', eine Schlüsseldeduktion oder eine Platzierung, maximal 10 pro Vertrag.",
+  "ui.ranking.how.3": "Hinweise kosten Punkte: 1 für 'wo man schauen sollte', 1 für eine Schlüsseldeduktion und 2 für eine Platzierung, maximal 10 pro Vertrag.",
   "ui.ranking.how.4": "Community-Rätsel zählen nicht. Bei Gleichstand zählen zuerst mehr Verträge, dann die schnellere Gesamtzeit.",
   "ui.community.title": "Community-Rätsel",
   "ui.community.lead": "Verträge, die von den Agenten des Syndikats selbst erstellt wurden. Wähle eine Brettgröße, sortiere sie nach Belieben und bewerte die, die du erfüllst.",

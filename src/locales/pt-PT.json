@@ -1100,7 +1100,7 @@
   "ui.ranking.how": "Como funciona a pontuação",
   "ui.ranking.how.1": "+10 pontos por cada contrato de história ou diário que cumprires.",
   "ui.ranking.how.2": "Até +5 pontos pela rapidez: quanto mais rápido for o teu melhor tempo, mais pontos.",
-  "ui.ranking.how.3": "Cada dica custa 1 ponto: \"onde procurar\", uma dedução chave ou uma colocação, no máximo 10 por contrato.",
+  "ui.ranking.how.3": "As dicas custam pontos: 1 por \"onde procurar\", 1 por uma dedução chave e 2 por uma colocação, no máximo 10 por contrato.",
   "ui.ranking.how.4": "Puzzles da comunidade não contam. Em caso de empate, mais contratos vêm primeiro, depois o tempo total mais rápido.",
   "ui.community.title": "Puzzles da Comunidade",
   "ui.community.lead": "Contratos criados pelos próprios agentes do Sindicato. Escolhe um tamanho de tabuleiro, ordena como quiseres e avalia os que cumprires.",

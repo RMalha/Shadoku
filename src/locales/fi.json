@@ -1098,7 +1098,7 @@
   "ui.ranking.how": "Kuinka pisteytys toimii",
   "ui.ranking.how.1": "+10 pistettä jokaisesta suorittamastasi tarina- tai päivittäissopimuksesta.",
   "ui.ranking.how.2": "Jopa +5 lisää nopeudesta: mitä nopeampi on paras aikasi, sitä enemmän pisteitä.",
-  "ui.ranking.how.3": "Jokainen vihje maksaa 1 pisteen: 'minne katsoa', avainpäätelmä tai sijoittaminen, enintään 10 per sopimus.",
+  "ui.ranking.how.3": "Vihjeet maksavat pisteitä: 'minne katsoa' 1, avainpäätelmä 1 ja sijoittaminen 2, enintään 10 per sopimus.",
   "ui.ranking.how.4": "Yhteisön palapelejä ei lasketa. Tasapelitilanteessa useammat sopimukset ratkaisevat ensin, sitten nopeampi kokonaisaika.",
   "ui.community.title": "Yhteisön Palapelit",
   "ui.community.lead": "Syndikaatin omien agenttien tekemiä sopimuksia. Valitse laudan koko, lajittele ne haluamallasi tavalla ja arvostele suorittamasi.",

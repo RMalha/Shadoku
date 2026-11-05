@@ -1098,7 +1098,7 @@
   "ui.ranking.how": "Hoe de score werkt",
   "ui.ranking.how.1": "+10 punten voor elk verhaal- of dagelijks contract dat je hebt voltooid.",
   "ui.ranking.how.2": "Tot +5 extra voor snelheid: hoe sneller je beste tijd, hoe meer punten.",
-  "ui.ranking.how.3": "Elke hint kost 1 punt: ‘waar te kijken’, een belangrijke deductie of een plaatsing, maximaal 10 per contract.",
+  "ui.ranking.how.3": "Hints kosten punten: 1 voor ‘waar te kijken’, 1 voor een belangrijke deductie en 2 voor een plaatsing, maximaal 10 per contract.",
   "ui.ranking.how.4": "Communitypuzzels tellen niet mee. Bij een gelijke stand gaan meer contracten voor, daarna de snelste totaaltijd.",
   "ui.community.title": "Communitypuzzels",
   "ui.community.lead": "Contracten gemaakt door de eigen agenten van het Syndicaat. Kies een bordgrootte, sorteer ze zoals je wilt en beoordeel de contracten die je voltooit.",

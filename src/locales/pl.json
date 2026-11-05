@@ -1098,7 +1098,7 @@
   "ui.ranking.how": "Jak obliczany jest wynik",
   "ui.ranking.how.1": "+10 punktów za każdy wykonany kontrakt fabularny lub dzienny.",
   "ui.ranking.how.2": "Do +5 dodatkowych punktów za szybkość: im lepszy Twój czas, tym więcej punktów.",
-  "ui.ranking.how.3": "Każda podpowiedź kosztuje 1 punkt: „gdzie szukać”, kluczowa dedukcja lub wskazanie pozycji, maksymalnie 10 na kontrakt.",
+  "ui.ranking.how.3": "Podpowiedzi kosztują punkty: 1 za „gdzie szukać”, 1 za kluczową dedukcję i 2 za wskazanie pozycji, maksymalnie 10 na kontrakt.",
   "ui.ranking.how.4": "Łamigłówki społeczności nie są wliczane. W przypadku remisu decyduje większa liczba kontraktów, a następnie krótszy łączny czas.",
   "ui.community.title": "Łamigłówki społeczności",
   "ui.community.lead": "Kontrakty stworzone przez agentów Syndykatu. Wybierz rozmiar planszy, posortuj je według uznania i oceń te, które wykonasz.",

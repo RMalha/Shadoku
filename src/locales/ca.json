@@ -1089,7 +1089,7 @@
   "ui.ranking.how": "Com funciona la puntuació",
   "ui.ranking.how.1": "+10 punts per cada contracte diari o d'història que has complert.",
   "ui.ranking.how.2": "Fins a +5 més per velocitat: com més ràpid sigui el teu millor temps, més punts.",
-  "ui.ranking.how.3": "Cada pista costa 1 punt: 'on mirar', una deducció clau o una col·locació, com a màxim 10 per contracte.",
+  "ui.ranking.how.3": "Les pistes costen punts: 1 per 'on mirar', 1 per una deducció clau i 2 per una col·locació, com a màxim 10 per contracte.",
   "ui.ranking.how.4": "Els trencaclosques de la comunitat no compten. En cas d'empat, prevalen més contractes, i després el temps total més ràpid.",
   "ui.community.title": "Trencaclosques de la comunitat",
   "ui.community.lead": "Contractes fets pels propis agents del Sindicat. Tria una mida de tauler, ordena'ls com vulguis, i valora els que compleixis.",

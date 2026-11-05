@@ -1098,7 +1098,7 @@
   "ui.ranking.how": "Cum funcționează scorul",
   "ui.ranking.how.1": "+10 puncte pentru fiecare contract de poveste sau zilnic pe care l-ai îndeplinit.",
   "ui.ranking.how.2": "Până la +5 puncte pentru viteză: cu cât e mai rapid cel mai bun timp al tău, cu atât mai multe puncte.",
-  "ui.ranking.how.3": "Fiecare indiciu costă 1 punct: \"unde să cauți\", o deducție cheie sau o plasare, maxim 10 pe contract.",
+  "ui.ranking.how.3": "Indiciile costă puncte: 1 pentru \"unde să cauți\", 1 pentru o deducție cheie și 2 pentru o plasare, maxim 10 pe contract.",
   "ui.ranking.how.4": "Puzzle-urile comunității nu se pun la socoteală. La egalitate, primează mai multe contracte, apoi timpul total mai rapid.",
   "ui.community.title": "Puzzle-uri ale Comunității",
   "ui.community.lead": "Contracte create de propriii agenți ai Sindicatului. Alege o dimensiune a tablei, sortează-le cum vrei și evaluează-le pe cele pe care le îndeplinești.",

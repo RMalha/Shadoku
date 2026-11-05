@@ -5,7 +5,7 @@
  * Only the story and the daily contracts count (community puzzles do not: anyone could make an easy one). Per fulfilled contract:
  *   10 points                                               more contracts fulfilled = higher
  *   + up to 5 for speed: 5 × par / (par + best time), rounded   at par time 3, twice as fast 3, three times slower 1
- *   − hints: 1 per "where to look", 1 per key deduction, 1 per placement shown (at most 10 per contract); note cards are free
+ *   − hints: 1 per "where to look", 1 per key deduction, 2 per placement shown (at most 10 per contract); note cards are free
  * Every part is a whole number.
  * The pack is small (13 story cases + 15 days of dailies), so the totals stay in the hundreds.
  * Ties: more contracts first, then the smaller total of best times.
@@ -13,7 +13,7 @@
  * (functions/api/ranking.js keeps their ids in the row's `excluded`), so only contracts fulfilled after it score.
  */
 export const PAR_SECONDS = { Tutorial: 180, "Very Easy": 300, Easy: 480, Medium: 900, Hard: 1500, Expert: 2400 };
-export const HINT_COST = { l: 1, k: 1, p: 1 }; // look / key / place (note cards cost nothing)
+export const HINT_COST = { l: 1, k: 1, p: 2 }; // look / key / place (note cards cost nothing)
 export const BASE_POINTS = 10, SPEED_POINTS = 5, HINT_CAP = 10;
 export const MAX_ENTRIES = 2000;
 
