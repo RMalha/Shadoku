@@ -839,23 +839,31 @@ function CodenameModal({ onClose }) {
 /* ═════════════════════════ LEGAL MODAL ═════════════════════════ */
 const LEGAL_SECTIONS = 10; // ui.legal.s1.h / ui.legal.s1.p … ui.legal.s10.*
 
+/** The terms and privacy text: the sign-in pop-up (LegalModal) and the /legal page (ShadokuPages.jsx LegalPage) show the same. */
+export function LegalText() {
+  const { t } = useLang();
+  return (
+    <div className="sh-legal">
+      <p><Rich text={t("legal.intro")} /></p>
+      {Array.from({ length: LEGAL_SECTIONS }, (_, i) => i + 1).map((n) => (
+        <section key={n}>
+          <h3 className="sh-type">{t(`legal.s${n}.h`)}</h3>
+          <p><Rich text={t(`legal.s${n}.p`)} /></p>
+        </section>
+      ))}
+      <section>
+        <h3 className="sh-type">{t("homage.title")}</h3>
+        <p><Rich text={t("homage.text")} /></p>
+      </section>
+    </div>
+  );
+}
+
 function LegalModal({ onClose }) {
   const { t } = useLang();
   return (
     <Modal title={t("legal.title")} onClose={onClose} wide>
-      <div className="sh-legal">
-        <p><Rich text={t("legal.intro")} /></p>
-        {Array.from({ length: LEGAL_SECTIONS }, (_, i) => i + 1).map((n) => (
-          <section key={n}>
-            <h3 className="sh-type">{t(`legal.s${n}.h`)}</h3>
-            <p><Rich text={t(`legal.s${n}.p`)} /></p>
-          </section>
-        ))}
-        <section>
-          <h3 className="sh-type">{t("homage.title")}</h3>
-          <p><Rich text={t("homage.text")} /></p>
-        </section>
-      </div>
+      <LegalText />
     </Modal>
   );
 }
@@ -961,10 +969,9 @@ const SOCIALS = [
   { key: "x", label: "X", href: "https://x.com/shadokugame", d: "M17.8 3h3L14.2 10.6 22 21h-6.1l-4.8-6.3L5.6 21h-3l7.1-8.1L2.3 3h6.2l4.3 5.7zm-1 16.2h1.7L7.6 4.7H5.8z" },
 ];
 
-/** The footer of the site's pages: the social icons, About, Contact, Terms & Privacy, and the © line, all centred. */
+/** The footer of the site's pages: the social icons, About, Contact, Terms & Privacy (/legal), and the © line, all centred. */
 export function SiteFooter() {
   const { t } = useLang();
-  const modals = useModals();
   const nav = useNav();
   const page = (to, key) => <a className="sh-link" href={to} onClick={(e) => { e.preventDefault(); nav(to); }}>{t(key)}</a>;
   return (
@@ -983,7 +990,7 @@ export function SiteFooter() {
       <nav aria-label={t("footer.aria")}>
         {page("/about", "nav.about")}
         {page("/contact", "nav.contact")}
-        <button className="sh-link" onClick={modals.openLegal}>{t("footer.legal")}</button>
+        {page("/legal", "footer.legal")}
       </nav>
       <span>{t("footer.copyright")}</span>
     </footer>

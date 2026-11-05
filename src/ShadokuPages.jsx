@@ -4,6 +4,8 @@
  *
  *   /about                 AboutPage     what Shadoku is, how a puzzle is made, the homage
  *   /contact               ContactPage   the e-mail, and what to put in a report
+ *   /legal  (and /privacy) LegalPage     the terms and privacy text of the sign-in pop-up (the Play Store's privacy policy URL)
+ *   /delete-account        DeleteAccountPage  how to delete an account and what goes (the Play Store's account deletion URL)
  *   /profile               ProfilePage   (signed in) Info: avatar, codename, name, e-mail, sign-in provider; the avatar maker (ShadokuAvatar.jsx)
  *   /profile/stats                       Stats: contracts played and fulfilled, relics, hints, fastest time per difficulty
  *   /profile/collection                  Collection: the ten relics of The Umbra Conspiracy (umbra.jsx), and the Evidence Board once all are in
@@ -12,10 +14,10 @@
  *
  * Signed out, /profile asks you to sign in. Progress is read from this browser's storage (ShadokuGame's readPlayStats); signed in
  * with the backend, src/sync.js merges that storage with the account's copy, so the numbers are the same on every device.
- * Every string is a ui.about.*, ui.contact.* or ui.profile.* key in src/locales/en.json.
+ * Every string is a ui.about.*, ui.contact.*, ui.legal.*, ui.deleteAccount.* or ui.profile.* key in src/locales/en.json.
  */
 import React, { useEffect, useMemo, useState } from "react";
-import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope, CoffeeCard } from "./ShadokuHome.jsx";
+import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope, CoffeeCard, LegalText } from "./ShadokuHome.jsx";
 import { AvatarMaker } from "./ShadokuAvatar.jsx";
 import { PUZZLES, normalizePuzzles, readPlayStats, fmtTime, dailyRecords } from "./ShadokuGame.jsx";
 import { RelicCollection, EvidenceBoard, FinalDossier, ObsidianEnvelope, OmegaFolder, RELIC_CASES, UMBRA_HARD, UMBRA_FINALE, isUnlocked, resetUmbraLocks, useUmbraTick } from "./umbra.jsx";
@@ -94,6 +96,64 @@ export function ContactPage({ go }) {
           {[1, 2, 3].map((n) => <li key={n}>{t(`contact.tips.${n}`)}</li>)}
         </ul>
         <p className="sh-muted sm">{t("contact.reply")}</p>
+      </section>
+    </Page>
+  );
+}
+
+/* ═════════════════════════ /legal ═════════════════════════ */
+export function LegalPage({ go }) {
+  const { t } = useLang();
+  usePageTitle("page.legal");
+  return (
+    <Page go={go} current="/legal">
+      <h1 className="sh-type">{t("legal.title")}</h1>
+      <section className="sh-pcard">
+        <LegalText />
+      </section>
+      <div className="sh-page-cta">
+        <button type="button" className="sh-btn ghost" onClick={() => go("/delete-account")}>{t("legal.deleteLink")}</button>
+        <button type="button" className="sh-btn ghost" onClick={() => go("/contact")}>{t("nav.contact")}</button>
+      </div>
+    </Page>
+  );
+}
+
+/* ═════════════════════════ /delete-account ═════════════════════════ */
+const DELETE_STEPS = 3; // ui.deleteAccount.app.1 …
+const DELETE_GONE = 6;  // ui.deleteAccount.gone.1 … (what functions/api/account.js erases)
+export function DeleteAccountPage({ go }) {
+  const { t } = useLang();
+  const { user } = useAuth();
+  const modals = useModals();
+  usePageTitle("page.deleteAccount");
+  const list = (key, n, Tag = "ul") => (
+    <Tag className="sh-page-list">
+      {Array.from({ length: n }, (_, i) => i + 1).map((k) => <li key={k}><Rich text={t(`deleteAccount.${key}.${k}`)} /></li>)}
+    </Tag>
+  );
+  return (
+    <Page go={go} current="/delete-account">
+      <h1 className="sh-type">{t("deleteAccount.title")}</h1>
+      <p className="sh-page-lead">{t("deleteAccount.lead")}</p>
+      <section className="sh-pcard">
+        <h2 className="sh-type">{t("deleteAccount.app.h")}</h2>
+        {list("app", DELETE_STEPS, "ol")}
+        {user
+          ? <button type="button" className="sh-btn" onClick={() => go("/profile")}>{t("deleteAccount.toProfile")}</button>
+          : <button type="button" className="sh-btn" onClick={modals.openSignIn}>{t("nav.signIn")}</button>}
+      </section>
+      <section className="sh-pcard">
+        <h2 className="sh-type">{t("deleteAccount.mail.h")}</h2>
+        <p><Rich text={t("deleteAccount.mail.p")} /></p>
+      </section>
+      <section className="sh-pcard">
+        <h2 className="sh-type">{t("deleteAccount.gone.h")}</h2>
+        {list("gone", DELETE_GONE)}
+      </section>
+      <section className="sh-pcard">
+        <h2 className="sh-type">{t("deleteAccount.kept.h")}</h2>
+        <p><Rich text={t("deleteAccount.kept.p")} /></p>
       </section>
     </Page>
   );

@@ -10,6 +10,7 @@
  *            one is "today's". On localhost the coming week's queue (npm run dev) is listed under it, for testing.
  *   /play/<puzzle-name>                            one puzzle, e.g. /play/the-art-of-the-ghost (slim top bar + <ShadokuGame />; the URL follows the contract picker)
  *   /about  /contact                               plain pages (ShadokuPages.jsx)
+ *   /legal (alias /privacy)  /delete-account       the terms & privacy text and the account deletion steps (the Play Store links to both)
  *   /profile  /profile/stats  /profile/collection  the signed-in player's Info, Stats and relic Collection (ShadokuPages.jsx)
  *   /profile/ranking                               every signed-in player, ranked (ShadokuCommunity.jsx RankingPanel)
  *   /community                                     Community › COMMUNITY PUZZLES: the published puzzles by board size (ShadokuCommunity.jsx)
@@ -54,7 +55,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import ShadokuHome, {
   ShadokuProviders, SiteHeader, SiteMenu, UserPill, SiteFooter, ContractEnvelope, dailyLabel, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
 } from "./ShadokuHome.jsx";
-import { AboutPage, ContactPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
+import { AboutPage, ContactPage, LegalPage, DeleteAccountPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
 import ShadokuGame, { PUZZLES, DAILIES, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
@@ -433,7 +434,7 @@ export function buildTutorial(puzzle, lore, t = ENGLISH) {
 
 /* ═════════════════════════ ROUTER ═════════════════════════ */
 const normalise = (p) => (String(p || "/").replace(/\/+$/, "") || "/").replace(/^\/play(?=\/|$)/i, "/play"); // "/PLAY" is "/play" (the case slug is lower-cased by slugOfPath)
-const PAGES = { "/daily": "daily", "/about": "about", "/contact": "contact", "/profile": "profile", "/test/umbra": "testUmbra", "/community": "community", "/community/create": "create" };
+const PAGES = { "/daily": "daily", "/about": "about", "/contact": "contact", "/legal": "legal", "/privacy": "legal", "/delete-account": "deleteAccount", "/profile": "profile", "/test/umbra": "testUmbra", "/community": "community", "/community/create": "create" };
 /** /community/play/c1a2b3c4d5 → "c1a2b3c4d5" · anything else → "" */
 const communityIdOf = (p) => { const m = /^\/community\/play\/([A-Za-z0-9_-]{1,40})$/.exec(normalise(p)); return m ? m[1] : ""; };
 /** "/profile/stats" → "stats" · "/profile" → "info" (the tab of the profile page). */
@@ -1029,6 +1030,8 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
         : view === "daily" ? <DailyScreen go={go} />
         : view === "about" ? <AboutPage go={go} />
         : view === "contact" ? <ContactPage go={go} />
+        : view === "legal" ? <LegalPage go={go} />
+        : view === "deleteAccount" ? <DeleteAccountPage go={go} />
         : view === "profile" ? <ProfilePage go={go} tab={profileTab(path)} puzzles={puzzles} onLaunch={launchContract} ranking={<RankingPanel />} />
         : view === "community" ? <CommunityPage go={go} />
         : view === "create" ? <CreatePage go={go} />
