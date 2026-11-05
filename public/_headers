@@ -1,0 +1,10 @@
+# Cloudflare Pages response headers.
+# The service worker and the manifest must never be served stale: browsers check them for updates on every visit.
+/sw.js
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+  Content-Type: application/manifest+json
+# Vite's hashed bundles never change.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
