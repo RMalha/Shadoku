@@ -26,7 +26,7 @@ import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
 import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, DAILIES, dailyShelves, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, Figure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
+import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, Figure, TOKEN_SW } from "./ShadokuArt.jsx";
 import { avatarOf, decodeLook } from "./avatarLook.js";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
@@ -709,12 +709,15 @@ export function Avatar({ user }) {
     </span>
   );
 }
-/** The avatar's drawing in a 96×96 SVG: the portrait's face crop on its backdrop, or S. H. Adow. */
+/** The avatar's crop [zoom, cy] for Figure: head, whole hat and shoulders, like the suspects' Polaroids (the board token's face crop cut the hat and clothes). */
+export const AVATAR_CROP = [1, 144];
+/** The avatar's drawing in a 96×96 SVG: the portrait on its backdrop, or S. H. Adow. */
 export function AvatarArt({ code, look = null }) {
   const L = look || decodeLook(code);
+  const [zoom, cy] = AVATAR_CROP;
   return (
     <svg viewBox="0 0 96 96" width="100%" height="100%" focusable="false">
-      {L ? <><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={TOKEN_ZOOM} cy={TOKEN_CY} sw={TOKEN_SW} /></> : <AdowFigure zoom={TOKEN_ZOOM} cy={TOKEN_CY} sw={5.6} />}
+      {L ? <><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={zoom} cy={cy} sw={TOKEN_SW} /></> : <AdowFigure zoom={zoom} cy={cy} sw={5.6} />}
     </svg>
   );
 }

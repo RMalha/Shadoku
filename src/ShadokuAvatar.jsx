@@ -6,7 +6,7 @@
  * useAuth().setAvatar (src/auth.js → functions/api/avatar.js); the code format is src/avatarLook.js. Strings: ui.avatar.*.
  */
 import React, { useMemo, useState } from "react";
-import { useLang, useAuth, AvatarArt } from "./ShadokuHome.jsx";
+import { useLang, useAuth, AvatarArt, AVATAR_CROP } from "./ShadokuHome.jsx";
 import {
   fixLook, deriveLook, Figure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW, HAIR_META, hairList, hatList, genderOk, clothingOk,
   SKIN, HAIR_HEX, HAIR_COLORS, HAT_COLORS, FRAME_COLORS, CLOTH, ACCENTS, SUSPECT_COLORS,
@@ -98,7 +98,7 @@ export function AvatarMaker() {
   };
   const modes = [
     ["adow", t("avatar.adow"), <AvatarArt key="a" code="" />],
-    ["custom", t("avatar.custom"), <Portrait key="c" look={L} />],
+    ["custom", t("avatar.custom"), <Portrait key="c" look={L} crop={AVATAR_CROP} />],
     ...(user.avatarUrl ? [["photo", t("avatar.photo"), <img key="p" src={user.avatarUrl} alt="" referrerPolicy="no-referrer" />]] : []),
   ];
   return (
