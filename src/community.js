@@ -10,7 +10,7 @@
  * story and daily contracts are sent as ranking entries (src/ranking.js computes the score, on the server too).
  */
 import { PUZZLES, readPlayStats, dailyRecords } from "./ShadokuGame.jsx";
-import { rankStats } from "./ranking.js";
+import { rankStats, peopleOf } from "./ranking.js";
 import { SYNCED_EVENT } from "./sync.js";
 import { avatarOf } from "./avatarLook.js";
 
@@ -30,12 +30,14 @@ const readJson = (k) => { try { const v = JSON.parse(window.localStorage.getItem
 const writeJson = (k, v) => { try { window.localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } };
 
 /* ───────────── ranking ───────────── */
-/** This browser's fulfilled story and daily contracts as ranking entries ({ c: contract id, d, t, l, k, p, n }: src/ranking.js). */
+/** This browser's fulfilled story and daily contracts as ranking entries ({ c: contract id, d, s, t, l, k, p, n }: src/ranking.js;
+ *  `s` is left out for a daily rotated out of the app, whose cast this browser no longer has). */
 export function rankEntries() {
   const pack = [...PUZZLES, ...dailyRecords()], stats = readPlayStats(pack);
   return pack.filter((q) => stats[q.id] && stats[q.id].solved).map((q) => {
     const s = stats[q.id], h = s.hints || {};
-    return { c: String(q.id), d: q.difficulty || "Easy", t: s.best, l: h.look || 0, k: h.key || 0, p: h.place || 0, n: h.note || 0 };
+    const people = peopleOf(q);
+    return { c: String(q.id), d: q.difficulty || "Easy", ...(people ? { s: people } : {}), t: s.best, l: h.look || 0, k: h.key || 0, p: h.place || 0, n: h.note || 0 };
   });
 }
 
