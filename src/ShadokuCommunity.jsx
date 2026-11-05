@@ -76,15 +76,18 @@ export function RankingPanel() {
               <div className="sh-rank-scroll">
                 <table className="sh-stbl sh-rank-tbl">
                   <thead><tr>
-                    <th scope="col">{t("ranking.rank")}</th><th scope="col">{t("ranking.agent")}</th><th scope="col">{t("ranking.contracts")}</th>
-                    <th scope="col">{t("ranking.speed")}</th><th scope="col">{t("ranking.hints")}</th><th scope="col">{t("ranking.score")}</th>
+                    <th scope="col">{t("ranking.rank")}</th><th scope="col">{t("ranking.agent")}</th>
+                    {/* on a phone the number columns show an icon; the word stays as the tooltip and for screen readers */}
+                    {[["contracts", "✓"], ["speed", "⚡"], ["hints", "🔍"], ["score", "★"]].map(([k, icon]) => (
+                      <th key={k} scope="col" className="num" title={t(`ranking.${k}`)}><span className="full">{t(`ranking.${k}`)}</span><span className="short" aria-hidden="true">{icon}</span><span className="sh-sr">{t(`ranking.${k}`)}</span></th>
+                    ))}
                   </tr></thead>
                   <tbody>
                     {[...res.players, ...(res.me && !res.players.some((p) => p.me) ? [res.me] : [])].map((p) => (
                       <tr key={`${p.rank}-${p.codename}`} className={p.me ? "me" : ""}>
                         <td className={`pos${p.rank <= 3 ? " medal" : ""}`}>{medal(p.rank)}</td>
-                        <td><span className="sh-rank-who"><Avatar user={{ username: p.codename, avatar: p.avatar }} /><span>{p.codename}{p.me && <small> · {t("ranking.you")}</small>}</span></span></td>
-                        <td>{p.solved}</td><td>⚡ {p.speed}</td><td>{p.hints}</td><td><b>{p.score}</b></td>
+                        <td className="who"><span className="sh-rank-who"><Avatar user={{ username: p.codename, avatar: p.avatar }} /><span className="nm">{p.codename}{p.me && <small> · {t("ranking.you")}</small>}</span></span></td>
+                        <td className="num">{p.solved}</td><td className="num">⚡ {p.speed}</td><td className="num">{p.hints}</td><td className="num"><b>{p.score}</b></td>
                       </tr>
                     ))}
                   </tbody>
@@ -900,7 +903,10 @@ const COMMUNITY_CSS = `
 .sh-rank-scroll{overflow-x:auto;margin:0 -4px}
 .sh-rank-tbl td.pos{font:400 18px 'Special Elite',monospace;width:44px;text-align:center}.sh-rank-tbl td.pos.medal{font-size:24px}
 .sh-rank-tbl tr.me td{background:rgba(217,155,38,.1)}.sh-rank-tbl tr.me td:first-child{box-shadow:inset 3px 0 var(--sh-brass)}
-.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{height:40px;flex:0 0 auto}
+.sh-rank-who{display:inline-flex;align-items:center;gap:10px;min-width:0}.sh-rank-who .sh-avatar{height:50px;flex:0 0 auto}
+.sh-rank-who .nm{min-width:0;overflow-wrap:anywhere}
+.sh-rank-tbl th .short,.sh-rank-tbl th .sh-sr{display:none}
+.sh-rank-tbl .sh-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .sh-rank-who small{color:var(--sh-brass);font-weight:700}
 .sh-rank-how{margin-top:12px}.sh-rank-how summary{cursor:pointer;color:var(--sh-brass);font-weight:700}
 .sh-cm-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 18px}
@@ -918,7 +924,7 @@ const COMMUNITY_CSS = `
 .sh-cm-meta{font-size:13px;color:var(--sh-muted)}.sh-cm-meta .sh-diff{font-size:13px;padding:1px 8px}
 .sh-cm-stats{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:13.5px;color:#d9d3c4}.sh-cm-stats small{color:var(--sh-muted)}.sh-cm-stats .ok{color:#7fe0b4;font-weight:700}
 .sh-cm-by{display:flex;align-items:center;gap:8px;padding:9px 16px;border-top:1px solid #2a2a38;font-size:13px;color:var(--sh-muted)}
-.sh-cm-by .sh-avatar{height:30px}.sh-cm-mine{margin-inline-start:auto;padding:1px 8px;border-radius:99px;background:rgba(217,155,38,.16);color:var(--sh-brass);font-weight:700}
+.sh-cm-by .sh-avatar{height:36px}.sh-cm-mine{margin-inline-start:auto;padding:1px 8px;border-radius:99px;background:rgba(217,155,38,.16);color:var(--sh-brass);font-weight:700}
 .sk-rate{display:flex;flex-direction:column;align-items:center;gap:4px;margin:6px 0 2px;padding:10px 12px;border-radius:12px;background:rgba(217,155,38,.08);border:1px solid rgba(217,155,38,.35)}
 .sk-rate b{font:400 16px 'Special Elite',monospace;letter-spacing:.06em;color:var(--brass2,#f0b545)}.sk-rate p{margin:0;font-size:13.5px}.sk-rate p.bad{color:#ff8a80}
 .sk-rate-stars{display:flex;gap:2px}.sk-rate-stars button{width:40px;height:40px;border:0;background:none;color:#5b5868;font-size:32px;line-height:1;cursor:pointer;transition:transform .12s,color .12s;padding:0}
@@ -983,5 +989,9 @@ const COMMUNITY_CSS = `
 .sh-cr-classes li{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:#15151c}.sh-cr-classes span{display:flex;flex-direction:column}.sh-cr-classes small{color:var(--sh-muted)}
 .sh-cr-logic{margin:0;display:flex;flex-direction:column;gap:10px}.sh-cr-logic dt{font-weight:700;color:var(--sh-cream)}.sh-cr-logic dd{margin:2px 0 0;color:#dcd7cb}
 @media (max-width:860px){.sh-cr-main{grid-template-columns:1fr}.sh-cr-left{position:static}.sh-cr-boardwrap{max-width:100%}}
-@media (max-width:640px){.sh-cm-bar{flex-direction:column;align-items:stretch}.sh-cm-sort{justify-content:space-between}.sh-rank-tbl th:nth-child(4),.sh-rank-tbl td:nth-child(4){display:none}}
+@media (max-width:640px){.sh-cm-bar{flex-direction:column;align-items:stretch}.sh-cm-sort{justify-content:space-between}.sh-rank-tbl th:nth-child(4),.sh-rank-tbl td:nth-child(4){display:none}
+  .sh-rank-scroll{margin:0}.sh-rank-tbl th,.sh-rank-tbl td{padding:8px 3px}.sh-rank-tbl .num{text-align:center;white-space:nowrap}
+  .sh-rank-tbl th .full{display:none}.sh-rank-tbl th .short{display:inline;font-size:16px;letter-spacing:0}.sh-rank-tbl th .sh-sr{display:inline-block}
+  .sh-rank-tbl td.pos{width:28px;font-size:16px}.sh-rank-tbl td.pos.medal{font-size:20px}.sh-rank-tbl td b{font-size:16px}
+  .sh-rank-who{gap:7px}.sh-rank-who .sh-avatar{height:44px}.sh-rank-who small{display:block}}
 `;
