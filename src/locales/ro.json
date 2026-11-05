@@ -210,6 +210,8 @@
   "ui.creds.delete": "Șterge contul",
   "ui.creds.deleteConfirm": "Dorești să îți ștergi contul? Numele tău de cod și datele salvate pentru contul tău vor fi șterse și acest lucru nu poate fi anulat.",
   "ui.creds.deleteError": "Contul nu a putut fi șters. Te rog să încerci din nou.",
+  "ui.sync.merge.one": "Acest browser are progres la 1 contract pe care contul tău nu îl are. Vrei să îl adaugi în contul tău?\n\nDacă nu, progresul din acest browser va fi înlocuit cu cel din contul tău.",
+  "ui.sync.merge.other": "Acest browser are progres la contracte pe care contul tău nu le are (număr: {n}). Vrei să le adaugi în contul tău?\n\nDacă nu, progresul din acest browser va fi înlocuit cu cel din contul tău.",
   "ui.auth.title": "Alătură-te Sindicatului",
   "ui.auth.google": "Continuă cu Google",
   "ui.auth.github": "Continuă cu GitHub",

@@ -210,6 +210,8 @@
   "ui.creds.delete": "Fiók törlése",
   "ui.creds.deleteConfirm": "Törli a fiókját? A kódneve és a fiókhoz mentett adatai törlődnek, és ezt a műveletet nem lehet visszavonni.",
   "ui.creds.deleteError": "A fiókot nem sikerült törölni. Kérjük, próbálja újra.",
+  "ui.sync.merge.one": "Ebben a böngészőben 1 megbízásnál olyan előrehaladás van, amely a fiókodban nincs meg. Hozzáadod a fiókodhoz?\n\nHa nem, a böngésző előrehaladását a fiókodé váltja fel.",
+  "ui.sync.merge.other": "Ebben a böngészőben {n} megbízásnál olyan előrehaladás van, amely a fiókodban nincs meg. Hozzáadod őket a fiókodhoz?\n\nHa nem, a böngésző előrehaladását a fiókodé váltja fel.",
   "ui.auth.title": "Csatlakozz a Szindikátushoz",
   "ui.auth.google": "Folytatás Google-fiókkal",
   "ui.auth.github": "Folytatás GitHub-fiókkal",

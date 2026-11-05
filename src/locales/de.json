@@ -210,6 +210,8 @@
   "ui.creds.delete": "Konto löschen",
   "ui.creds.deleteConfirm": "Konto löschen? Dein Deckname und die für dein Konto gespeicherten Daten werden gelöscht. Dies kann nicht rückgängig gemacht werden.",
   "ui.creds.deleteError": "Das Konto konnte nicht gelöscht werden. Bitte versuche es erneut.",
+  "ui.sync.merge.one": "Dieser Browser hat Fortschritt in 1 Vertrag, den dein Konto nicht hat. Möchtest du ihn deinem Konto hinzufügen?\n\nWenn nicht, wird der Fortschritt in diesem Browser durch den deines Kontos ersetzt.",
+  "ui.sync.merge.other": "Dieser Browser hat Fortschritt in {n} Verträgen, die dein Konto nicht hat. Möchtest du sie deinem Konto hinzufügen?\n\nWenn nicht, wird der Fortschritt in diesem Browser durch den deines Kontos ersetzt.",
   "ui.auth.title": "Dem Syndikat beitreten",
   "ui.auth.google": "Weiter mit Google",
   "ui.auth.github": "Weiter mit GitHub",

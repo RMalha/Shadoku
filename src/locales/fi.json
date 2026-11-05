@@ -210,6 +210,8 @@
   "ui.creds.delete": "Poista tili",
   "ui.creds.deleteConfirm": "Haluatko poistaa tilisi? Koodinimesi ja tilillesi tallennetut tiedot poistetaan, eikä tätä toimintoa voi peruuttaa.",
   "ui.creds.deleteError": "Tiliä ei voitu poistaa. Yritä uudelleen.",
+  "ui.sync.merge.one": "Tässä selaimessa on edistystä 1 sopimuksessa, jota tililläsi ei ole. Lisätäänkö se tilillesi?\n\nJos ei, tämän selaimen edistys korvataan tilisi edistyksellä.",
+  "ui.sync.merge.other": "Tässä selaimessa on edistystä sopimuksissa, joita tililläsi ei ole (määrä: {n}). Lisätäänkö ne tilillesi?\n\nJos ei, tämän selaimen edistys korvataan tilisi edistyksellä.",
   "ui.auth.title": "Liity syndikaattiin",
   "ui.auth.google": "Jatka Google-tilillä",
   "ui.auth.github": "Jatka GitHub-tilillä",

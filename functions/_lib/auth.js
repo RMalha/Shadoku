@@ -162,11 +162,23 @@ const userKey = (id) => `user:${id}`;
 const nameKey = (name) => `name:${name.toLowerCase()}`;
 const progressKey = (id) => `progress:${id}`;
 
-/** The account's record: { username, avatar } ("" when unset; avatar: src/avatarLook.js). */
+/** The account's record: { username, avatar, since } ("" when unset; avatar: src/avatarLook.js; since: when an account deleted before
+ *  was made again, epoch ms, else 0: progress a browser kept from before then is not this account's, see accountSince). */
 export const getRecord = async (env, id) => {
   const rec = env.SHADOKU_KV ? await env.SHADOKU_KV.get(userKey(id), "json") : null;
-  return { username: rec?.username || "", avatar: typeof rec?.avatar === "string" ? rec.avatar : "" };
+  return { username: rec?.username || "", avatar: typeof rec?.avatar === "string" ? rec.avatar : "", since: Number.isFinite(rec?.since) ? rec.since : 0 };
 };
+
+/** → when this account started (epoch ms; 0 = its first life). An account deleted before starts at its deletion: the `gone` mark expires
+ *  with the longest session, so the first call after it copies the time into the record, where it stays. */
+export async function accountSince(env, id) {
+  if (!env.SHADOKU_KV) return 0;
+  const rec = await getRecord(env, id);
+  if (rec.since) return rec.since;
+  const gone = Number(await env.SHADOKU_KV.get(goneKey(id))) || 0;
+  if (gone) await env.SHADOKU_KV.put(userKey(id), JSON.stringify({ ...rec, since: gone }));
+  return gone;
+}
 export const getCodename = async (env, id) => (await getRecord(env, id)).username;
 
 /** → true when the name is free (or already this account's). Without a KV namespace nothing is reserved. */

@@ -10,8 +10,14 @@
  *   boards       per contract, the copy changed last (its clock comes with it; BOARD_AT stamps each save)
  * Without a backend (vite dev, file://) or signed out, nothing here runs. A pull that changed this browser's storage fires
  * PROGRESS_EVENT (useProgressTick) and UMBRA_EVENT, so open pages re-read it.
+ *
+ * Whose progress is it? OWNER_KEY remembers the account this browser last synced with and when (the server's clock). Progress
+ * the browser holds for someone else (played signed out, another account, or the same account before it was deleted and made
+ * again: functions/_lib/auth.js accountSince) is not merged silently: when it has contracts the account lacks, the player is
+ * asked first. Yes merges it; No replaces this browser's copy with the account's. A deleted account does not come back that way.
  */
 import { useEffect, useState } from "react";
+import { LOCALES, fillVars } from "./i18n.js";
 
 export const BOARDS_KEY = "shadoku-playtester-v1", TIMES_KEY = "shadoku-times-v1", BESTS_KEY = "shadoku-best-v1";
 const BOARD_AT = "shadoku-board-at"; // { [contract id]: ms of the board's last save }
@@ -20,6 +26,8 @@ export const PROGRESS_EVENT = "shadoku-progress";
 export const SYNCED_EVENT = "shadoku-synced"; // after every sync with the account (src/community.js sends the ranking numbers then)
 const UMBRA_EVENT = "shadoku-umbra";
 const PUSH_MS = 30000, PUSH_SOON_MS = 2000; // KV has a daily write budget: a push per change would spend it
+const OWNER_KEY = "shadoku-progress-owner"; // { id: account id, at: server ms of the last sync with it }
+const LANG_KEY = "shadoku-lang"; // ShadokuHome LANG_KEY: the merge question is asked outside React
 
 const isObj = (o) => !!o && typeof o === "object" && !Array.isArray(o);
 const readJson = (k) => { try { const v = JSON.parse(window.localStorage.getItem(k) || "{}"); return isObj(v) ? v : {}; } catch { return {}; } };
@@ -53,6 +61,41 @@ export function mergeProgress(a, b) {
   return out;
 }
 
+/* ───────────── whose progress ───────────── */
+const readOwner = () => { const o = readJson(OWNER_KEY); return typeof o.id === "string" ? o : null; };
+const writeOwner = (body) => { if (body.account) writeRaw(OWNER_KEY, JSON.stringify({ id: body.account, at: +body.now || Date.now() })); };
+/** The pull says this browser's copy already belongs to the account (or the server is older than the check: nothing to compare). */
+function ownsLocal(body) {
+  if (!body.account) return true;
+  const o = readOwner();
+  return !!o && o.id === body.account && +o.at >= (+body.since || 0);
+}
+const PLAY_PARTS = ["tokens", "notes", "pencil", "lights", "marks", "crosses", "syms", "hintLog"];
+const hasPlay = (b) => isObj(b) && (!!b.done || +b.hints > 0 || PLAY_PARTS.some((k) => isObj(b[k]) && Object.keys(b[k]).length > 0));
+/** → how many contracts the merge would add or change in the account's copy (boards someone played, best times). */
+function foreignContracts(local, remote) {
+  const m = mergeProgress(local, remote), r = { boards: {}, bests: {}, ...(isObj(remote) ? remote : {}) }, ids = new Set();
+  Object.keys(m.bests).forEach((id) => { if (+r.bests[id] !== m.bests[id]) ids.add(id); });
+  Object.keys(m.boards).forEach((id) => { if (hasPlay(m.boards[id]) && JSON.stringify(m.boards[id]) !== JSON.stringify(r.boards[id])) ids.add(id); });
+  return ids.size;
+}
+/** The question, in the player's language (ui.sync.merge.one / .other). */
+function askMerge(n) {
+  let lang = "en";
+  try { lang = window.localStorage.getItem(LANG_KEY) || "en"; } catch { /* noop */ }
+  const key = n === 1 ? "ui.sync.merge.one" : "ui.sync.merge.other";
+  const text = (LOCALES[lang] && LOCALES[lang][key]) || (LOCALES.en && LOCALES.en[key])
+    || "This browser has progress your account does not have ({n} contracts). Add it to your account?";
+  return window.confirm(fillVars(text, { n }));
+}
+/** This browser's copy becomes the account's (the answer was No). */
+function replaceLocal(remote) {
+  const p = { boards: {}, at: {}, times: {}, bests: {}, flags: {}, ...(isObj(remote) ? remote : {}) };
+  writeRaw(BOARDS_KEY, JSON.stringify(p.boards)); writeRaw(BOARD_AT, JSON.stringify(p.at));
+  writeRaw(TIMES_KEY, JSON.stringify(p.times)); writeRaw(BESTS_KEY, JSON.stringify(p.bests));
+  FLAG_KEYS.forEach((k) => { if (isObj(p.flags) && p.flags[k]) writeRaw(k, "1"); else { try { window.localStorage.removeItem(k); } catch { /* noop */ } } });
+}
+
 /** Saves `p` into this browser's storage; → true when something changed. */
 function writeLocal(p) {
   let changed = false;
@@ -83,7 +126,21 @@ function syncNow(keepalive = false) {
   busy = (async () => {
     const r = await api({ method: "GET" });
     if (!r || r.status !== 200) { if (r && r.status === 401) active = false; return; } // signed out elsewhere: stop
-    const remote = r.body && r.body.progress;
+    const body = isObj(r.body) ? r.body : {}, remote = body.progress;
+    if (!ownsLocal(body)) {
+      const n = foreignContracts(readLocal(), remote);
+      if (n > 0) {
+        if (keepalive) return; // the page is closing: no question now and nothing uploaded; the next page load asks
+        if (!askMerge(n)) {
+          replaceLocal(remote);
+          writeOwner(body);
+          active = false;
+          window.location.reload(); // the open screens still hold this browser's old copy in memory
+          return;
+        }
+      }
+    }
+    writeOwner(body);
     const merged = mergeProgress(readLocal(), remote);
     if (writeLocal(merged)) {
       try { window.dispatchEvent(new Event(PROGRESS_EVENT)); window.dispatchEvent(new Event(UMBRA_EVENT)); } catch { /* noop */ }
@@ -117,7 +174,7 @@ export function stopSync() {
  *  or the next sign-in would upload it into the new account and bring every score back. Settings and language stay. */
 export function clearLocalProgress() {
   stopSync();
-  [BOARDS_KEY, BOARD_AT, TIMES_KEY, BESTS_KEY, ...FLAG_KEYS].forEach((k) => { try { window.localStorage.removeItem(k); } catch { /* private mode */ } });
+  [BOARDS_KEY, BOARD_AT, TIMES_KEY, BESTS_KEY, OWNER_KEY, ...FLAG_KEYS].forEach((k) => { try { window.localStorage.removeItem(k); } catch { /* private mode */ } });
 }
 
 /** The game saved something: push it soon (`soon`: a solve) or within PUSH_MS. */

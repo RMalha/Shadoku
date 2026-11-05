@@ -211,6 +211,8 @@
   "ui.creds.delete": "Delete account",
   "ui.creds.deleteConfirm": "Delete your account? Your codename and the data saved for your account are erased and this cannot be undone.",
   "ui.creds.deleteError": "The account could not be deleted. Please try again.",
+  "ui.sync.merge.one": "This browser has progress for 1 contract that your account does not have. Add it to your account?\n\nIf you don't, this browser's progress is replaced by your account's.",
+  "ui.sync.merge.other": "This browser has progress for {n} contracts that your account does not have. Add them to your account?\n\nIf you don't, this browser's progress is replaced by your account's.",
   "ui.auth.title": "Join the Syndicate",
   "ui.auth.google": "Continue with Google",
   "ui.auth.github": "Continue with GitHub",

@@ -212,6 +212,8 @@
   "ui.creds.delete": "Eliminar conta",
   "ui.creds.deleteConfirm": "Eliminar a sua conta? O seu nome de código e os dados guardados para a sua conta serão apagados e esta ação não pode ser desfeita.",
   "ui.creds.deleteError": "Não foi possível eliminar a conta. Por favor, tente novamente.",
+  "ui.sync.merge.one": "Este navegador tem progresso em 1 contrato que a tua conta não tem. Queres adicioná-lo à tua conta?\n\nSe não, o progresso deste navegador será substituído pelo da tua conta.",
+  "ui.sync.merge.other": "Este navegador tem progresso em {n} contratos que a tua conta não tem. Queres adicioná-los à tua conta?\n\nSe não, o progresso deste navegador será substituído pelo da tua conta.",
   "ui.auth.title": "Junta-te ao Sindicato",
   "ui.auth.google": "Continuar com o Google",
   "ui.auth.github": "Continuar com o GitHub",

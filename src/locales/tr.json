@@ -210,6 +210,8 @@
   "ui.creds.delete": "Hesabı sil",
   "ui.creds.deleteConfirm": "Hesabınız silinsin mi? Kod adınız ve hesabınız için kaydedilen veriler silinir ve bu işlem geri alınamaz.",
   "ui.creds.deleteError": "Hesap silinemedi. Lütfen tekrar deneyin.",
+  "ui.sync.merge.one": "Bu tarayıcıda, hesabınızda olmayan 1 sözleşmenin ilerlemesi var. Hesabınıza eklensin mi?\n\nEklenmezse, bu tarayıcıdaki ilerleme hesabınızdaki ilerlemeyle değiştirilir.",
+  "ui.sync.merge.other": "Bu tarayıcıda, hesabınızda olmayan {n} sözleşmenin ilerlemesi var. Hesabınıza eklensin mi?\n\nEklenmezse, bu tarayıcıdaki ilerleme hesabınızdaki ilerlemeyle değiştirilir.",
   "ui.auth.title": "Sendikaya Katıl",
   "ui.auth.google": "Google ile devam et",
   "ui.auth.github": "GitHub ile devam et",

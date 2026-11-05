@@ -210,6 +210,8 @@
   "ui.creds.delete": "刪除帳號",
   "ui.creds.deleteConfirm": "確認刪除帳號？您的代號和為該帳號儲存的資料將會被清除，且此操作無法復原。",
   "ui.creds.deleteError": "帳號刪除失敗。請再試一次。",
+  "ui.sync.merge.one": "此瀏覽器中有 1 個契約的進度是你的帳號沒有的。要加入你的帳號嗎？\n\n如果不加入，此瀏覽器的進度將被你帳號的進度取代。",
+  "ui.sync.merge.other": "此瀏覽器中有 {n} 個契約的進度是你的帳號沒有的。要加入你的帳號嗎？\n\n如果不加入，此瀏覽器的進度將被你帳號的進度取代。",
   "ui.auth.title": "加入組織",
   "ui.auth.google": "透過 Google 繼續",
   "ui.auth.github": "透過 GitHub 繼續",

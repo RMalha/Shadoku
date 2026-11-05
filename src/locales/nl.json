@@ -210,6 +210,8 @@
   "ui.creds.delete": "Account verwijderen",
   "ui.creds.deleteConfirm": "Je account verwijderen? Je codenaam en de gegevens die voor je account zijn opgeslagen, worden gewist en dit kan niet ongedaan worden gemaakt.",
   "ui.creds.deleteError": "Het account kon niet worden verwijderd. Probeer het opnieuw.",
+  "ui.sync.merge.one": "Deze browser heeft voortgang in 1 contract die je account niet heeft. Wil je die aan je account toevoegen?\n\nZo niet, dan wordt de voortgang in deze browser vervangen door die van je account.",
+  "ui.sync.merge.other": "Deze browser heeft voortgang in {n} contracten die je account niet heeft. Wil je die aan je account toevoegen?\n\nZo niet, dan wordt de voortgang in deze browser vervangen door die van je account.",
   "ui.auth.title": "Sluit je aan bij het Syndicaat",
   "ui.auth.google": "Doorgaan met Google",
   "ui.auth.github": "Doorgaan met GitHub",

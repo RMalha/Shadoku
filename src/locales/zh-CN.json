@@ -210,6 +210,8 @@
   "ui.creds.delete": "删除账号",
   "ui.creds.deleteConfirm": "确认删除账号？您的代号和为该账号保存的数据将被擦除，且此操作无法撤销。",
   "ui.creds.deleteError": "账号删除失败。请重试。",
+  "ui.sync.merge.one": "此浏览器中有 1 个契约的进度是你的账户没有的。要添加到你的账户吗？\n\n如果不添加，此浏览器的进度将被你账户的进度替换。",
+  "ui.sync.merge.other": "此浏览器中有 {n} 个契约的进度是你的账户没有的。要添加到你的账户吗？\n\n如果不添加，此浏览器的进度将被你账户的进度替换。",
   "ui.auth.title": "加入组织",
   "ui.auth.google": "通过 Google 继续",
   "ui.auth.github": "通过 GitHub 继续",

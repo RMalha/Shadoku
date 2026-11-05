@@ -1,14 +1,17 @@
-// GET /api/progress             →  { progress: {…} | null }   the account's saved game progress (signed-in players only)
+// GET /api/progress             →  { progress: {…} | null, account, since, now }   the account's saved game progress (signed-in players only);
+//                                    `account` its id, `since` when it started (accountSince: a deleted account made again), `now` the server's clock:
+//                                    the browser asks before adding progress it kept from before `since` or for another account (src/sync.js)
 // PUT /api/progress { progress } →  { ok }                     replaces it (the browser merged its own progress in first: src/sync.js)
 // Without a KV namespace there is nowhere to keep it: GET answers null and PUT 503, and the game stays local.
-import { readSession, getProgress, setProgress, json, sameOrigin } from "../_lib/auth.js";
+import { readSession, getProgress, setProgress, accountSince, json, sameOrigin } from "../_lib/auth.js";
 
 const MAX_BYTES = 256 * 1024; // a full pack of boards is a few KB
 
 export async function onRequestGet({ request, env }) {
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
-  return json({ progress: await getProgress(env, s.id) });
+  const [progress, since] = await Promise.all([getProgress(env, s.id), accountSince(env, s.id)]);
+  return json({ progress, account: s.id, since, now: Date.now() });
 }
 
 export async function onRequestPut({ request, env }) {

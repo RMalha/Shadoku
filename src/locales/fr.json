@@ -210,6 +210,8 @@
   "ui.creds.delete": "Supprimer le compte",
   "ui.creds.deleteConfirm": "Supprimer votre compte ? Votre nom de code et les données enregistrées pour votre compte seront effacés et cette action est irréversible.",
   "ui.creds.deleteError": "Le compte n'a pas pu être supprimé. Veuillez réessayer.",
+  "ui.sync.merge.one": "Ce navigateur contient une progression sur 1 contrat que votre compte n'a pas. L'ajouter à votre compte ?\n\nSinon, la progression de ce navigateur sera remplacée par celle de votre compte.",
+  "ui.sync.merge.other": "Ce navigateur contient une progression sur {n} contrats que votre compte n'a pas. Les ajouter à votre compte ?\n\nSinon, la progression de ce navigateur sera remplacée par celle de votre compte.",
   "ui.auth.title": "Rejoindre le Syndicat",
   "ui.auth.google": "Continuer avec Google",
   "ui.auth.github": "Continuer avec GitHub",

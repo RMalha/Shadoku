@@ -210,6 +210,8 @@
   "ui.creds.delete": "Xóa tài khoản",
   "ui.creds.deleteConfirm": "Xóa tài khoản của bạn? Bí danh và dữ liệu đã lưu cho tài khoản của bạn sẽ bị xóa và không thể hoàn tác thao tác này.",
   "ui.creds.deleteError": "Không thể xóa tài khoản. Vui lòng thử lại.",
+  "ui.sync.merge.one": "Trình duyệt này có tiến độ của 1 hợp đồng mà tài khoản của bạn chưa có. Thêm vào tài khoản của bạn?\n\nNếu không, tiến độ trên trình duyệt này sẽ được thay bằng tiến độ của tài khoản.",
+  "ui.sync.merge.other": "Trình duyệt này có tiến độ của {n} hợp đồng mà tài khoản của bạn chưa có. Thêm vào tài khoản của bạn?\n\nNếu không, tiến độ trên trình duyệt này sẽ được thay bằng tiến độ của tài khoản.",
   "ui.auth.title": "Gia nhập Tổ chức",
   "ui.auth.google": "Tiếp tục với Google",
   "ui.auth.github": "Tiếp tục với GitHub",

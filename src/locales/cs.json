@@ -210,6 +210,8 @@
   "ui.creds.delete": "Smazat účet",
   "ui.creds.deleteConfirm": "Smazat váš účet? Vaše krycí jméno a data uložená pro váš účet budou vymazána a tuto akci nelze vrátit zpět.",
   "ui.creds.deleteError": "Účet se nepodařilo smazat. Zkuste to prosím znovu.",
+  "ui.sync.merge.one": "Tento prohlížeč má postup v 1 kontraktu, který váš účet nemá. Chcete ho přidat ke svému účtu?\n\nPokud ne, postup v tomto prohlížeči se nahradí postupem z vašeho účtu.",
+  "ui.sync.merge.other": "Tento prohlížeč má postup v kontraktech, které váš účet nemá (počet: {n}). Chcete je přidat ke svému účtu?\n\nPokud ne, postup v tomto prohlížeči se nahradí postupem z vašeho účtu.",
   "ui.auth.title": "Přidej se k Syndikátu",
   "ui.auth.google": "Pokračovat přes Google",
   "ui.auth.github": "Pokračovat přes GitHub",

@@ -210,6 +210,8 @@
   "ui.creds.delete": "Eliminar compte",
   "ui.creds.deleteConfirm": "Vols eliminar el teu compte? El teu nom en clau i les dades desades del teu compte s'esborraran i aquesta acció no es pot desfer.",
   "ui.creds.deleteError": "No s'ha pogut eliminar el compte. Si us plau, torna-ho a provar.",
+  "ui.sync.merge.one": "Aquest navegador té progrés en 1 contracte que el teu compte no té. Vols afegir-lo al teu compte?\n\nSi no ho fas, el progrés d'aquest navegador se substituirà pel del teu compte.",
+  "ui.sync.merge.other": "Aquest navegador té progrés en {n} contractes que el teu compte no té. Vols afegir-los al teu compte?\n\nSi no ho fas, el progrés d'aquest navegador se substituirà pel del teu compte.",
   "ui.auth.title": "Uneix-te al Sindicat",
   "ui.auth.google": "Continua amb Google",
   "ui.auth.github": "Continua amb GitHub",

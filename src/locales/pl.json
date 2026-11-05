@@ -210,6 +210,8 @@
   "ui.creds.delete": "Usuń konto",
   "ui.creds.deleteConfirm": "Usunąć konto? Twój kryptonim i dane zapisane na koncie zostaną skasowane, a tej operacji nie można cofnąć.",
   "ui.creds.deleteError": "Nie udało się usunąć konta. Spróbuj ponownie.",
+  "ui.sync.merge.one": "Ta przeglądarka ma postęp w 1 kontrakcie, którego nie ma Twoje konto. Dodać go do konta?\n\nJeśli nie, postęp w tej przeglądarce zostanie zastąpiony postępem z Twojego konta.",
+  "ui.sync.merge.other": "Ta przeglądarka ma postęp w kontraktach, których nie ma Twoje konto (liczba: {n}). Dodać je do konta?\n\nJeśli nie, postęp w tej przeglądarce zostanie zastąpiony postępem z Twojego konta.",
   "ui.auth.title": "Dołącz do Syndykatu",
   "ui.auth.google": "Kontynuuj przez Google",
   "ui.auth.github": "Kontynuuj przez GitHub",
