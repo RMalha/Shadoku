@@ -422,9 +422,10 @@ const withToken = (cs, id, r, c) => { // moves `id` here, bumping whoever stood 
   return { ...cs, tokens, syms };
 };
 /** A scapegoat just placed watches its sightlines, so nobody can stand there: the scapegoat letters noted on those tiles go, and so do
- *  the Light Switch marks when `lights` (the auto light now shows those tiles). Note symbols stay: they are the player's own marks. */
+ *  the Light Switch marks and the X marks when `lights` (the auto light now shows those tiles, so an X there says nothing new).
+ *  Note symbols stay: they are the player's own marks. */
 const withSightCleared = (cs, geo, r, c, lights) => {
-  let notes = cs.notes, lit = cs.lights;
+  let notes = cs.notes, lit = cs.lights, xs = cs.crosses;
   geo.rays(r, c).flat().forEach(([rr, cc]) => {
     const k = key(rr, cc), n = notes[k];
     if (n) {
@@ -432,8 +433,9 @@ const withSightCleared = (cs, geo, r, c, lights) => {
       if (t !== n) { if (notes === cs.notes) notes = { ...notes }; if (t) notes[k] = t; else delete notes[k]; }
     }
     if (lights && lit[k]) { if (lit === cs.lights) lit = { ...lit }; delete lit[k]; }
+    if (lights && xs[k]) { if (xs === cs.crosses) xs = { ...xs }; delete xs[k]; }
   });
-  return notes === cs.notes && lit === cs.lights ? cs : { ...cs, notes, lights: lit };
+  return notes === cs.notes && lit === cs.lights && xs === cs.crosses ? cs : { ...cs, notes, lights: lit, crosses: xs };
 };
 /** Hold-to-mark with a note symbol: the tile shows it in big (the same symbol again takes it off). Never part of the solution. */
 const withSym = (cs, k, id) => { const syms = { ...(cs.syms || {}) }; if (syms[k] === id) delete syms[k]; else syms[k] = id; return { ...cs, syms }; };
