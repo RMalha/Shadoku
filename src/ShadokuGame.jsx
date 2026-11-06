@@ -569,7 +569,13 @@ const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /** Returns `emph(text)` → an array of strings and styled spans for one case. */
 function buildEmphasis(p, colorOf, t = tEn) {
   const kinds = new Map();
-  const add = (term, v) => { const t = String(term || "").trim().toLowerCase(); if (t.length > 1 && !kinds.has(t)) kinds.set(t, v); };
+  const add = (term, v) => {
+    const t = String(term || "").trim().toLowerCase();
+    if (t.length < 2) return;
+    const old = kinds.get(t);
+    if (!old) kinds.set(t, v);
+    else if (old.k === "pr" && v.k === "pr" && !old.kind.split(",").includes(v.kind)) kinds.set(t, { k: "pr", kind: `${old.kind},${v.kind}` }); // one word, two props ("pine tree": PINE and SNOW_PINE): hovering lights both
+  };
   const tx = (k, fb) => { const v = t(k); return typeof v === "string" && v && v !== k ? v : fb; };
   p.suspects.forEach((q) => add(q.name, { k: "nm", id: q.id }));
   hidersOf(p).forEach((id) => add(t(`assassin.${id}`), { k: "nm", id }));
@@ -2089,7 +2095,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
       if (type === "nm") { if (st.tokens[val]) add(...st.tokens[val]); return; }
       for (let r = 0; r < geo.R; r++) for (let c = 0; c < geo.C; c++) {
         if (geo.isVoid(r, c)) continue;
-        if ((type === "pr" && geo.kind(r, c) === val) || (type === "rm" && String(geo.room(r, c)) === val) || (type === "row" && r === +val - 1) || (type === "col" && c === +val - 1)) add(r, c);
+        if ((type === "pr" && val.split(",").includes(geo.kind(r, c))) || (type === "rm" && String(geo.room(r, c)) === val) || (type === "row" && r === +val - 1) || (type === "col" && c === +val - 1)) add(r, c);
       }
     });
     return out.length ? out : null;
