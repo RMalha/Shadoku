@@ -1,0 +1,5604 @@
+{
+ "id": "daily-2026-11-06",
+ "title": "Daily Contract, Friday 6 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Medium · Forest",
+ "theme": "FOREST",
+ "difficulty": "Medium",
+ "tier": "medium",
+ "shape": "lwing",
+ "seed": 261106,
+ "attempt": 79,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "FOM0808LAR1-261106",
+ "puzzleId": "FOM0808LAR1-261106",
+ "engine": "V10.6",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 56,
+ "zoneWord": "area",
+ "size": 8,
+ "rooms": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   2,
+   2,
+   2,
+   2,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   4,
+   4,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   4,
+   4,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   4,
+   4,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   4,
+   4,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   -1,
+   -1,
+   4,
+   4,
+   0,
+   0,
+   1,
+   1
+  ],
+  [
+   -1,
+   -1,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5
+  ]
+ ],
+ "roomNames": [
+  "Hollow",
+  "Waterfall",
+  "Creek",
+  "Old Ruins",
+  "Clearing",
+  "Glade"
+ ],
+ "roomIds": [
+  "HOLLOW",
+  "WATERFALL",
+  "CREEK",
+  "OLD_RUINS",
+  "CLEARING",
+  "GLADE"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  [
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ],
+  [
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    4,
+    3
+   ],
+   [
+    4,
+    4
+   ]
+  ],
+  [
+   [
+    5,
+    1
+   ],
+   [
+    5,
+    2
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    7
+   ]
+  ]
+ ],
+ "windows": [],
+ "contents": [
+  [
+   "",
+   "",
+   "BIRCH",
+   "",
+   "FERN",
+   "FERN",
+   "FERN",
+   "FERN"
+  ],
+  [
+   "STUMP",
+   "STUMP",
+   "",
+   "",
+   "",
+   "PINE",
+   "FERN",
+   ""
+  ],
+  [
+   "",
+   "STUMP",
+   "",
+   "",
+   "",
+   "",
+   "FOOTPRINTS",
+   "FOOTPRINTS"
+  ],
+  [
+   "STUMP",
+   "STUMP",
+   "",
+   "",
+   "STUMP",
+   "",
+   "STUMP",
+   "STUMP"
+  ],
+  [
+   "",
+   "RUINED_WALL",
+   "",
+   "",
+   "STUMP",
+   "",
+   "PINE",
+   "STUMP"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "STUMP"
+  ],
+  [
+   "VOID",
+   "VOID",
+   "PINE",
+   "",
+   "",
+   "",
+   "FERN",
+   ""
+  ],
+  [
+   "VOID",
+   "VOID",
+   "CORPSE",
+   "",
+   "",
+   "STUMP",
+   "STUMP",
+   "FAIRY_RING"
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  7,
+  2
+ ],
+ "biomeProps": [
+  "BIRCH",
+  "FAIRY_RING",
+  "FERN",
+  "PINE",
+  "RUINED_WALL",
+  "STUMP"
+ ],
+ "propClasses": {
+  "BIRCH": "TALL",
+  "FAIRY_RING": "LOW",
+  "FERN": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "PINE": "TALL",
+  "RUINED_WALL": "TALL",
+  "STUMP": "LOW"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.333,
+  "lowTiles": 16,
+  "openTiles": 48,
+  "lowKinds": [
+   "FAIRY_RING",
+   "FOOTPRINTS",
+   "STUMP"
+  ],
+  "roomProps": {
+   "HOLLOW": [
+    "BIRCH",
+    "FERN",
+    "PINE",
+    "STUMP"
+   ],
+   "WATERFALL": [
+    "FERN",
+    "FOOTPRINTS",
+    "PINE",
+    "STUMP"
+   ],
+   "CREEK": [
+    "STUMP"
+   ],
+   "OLD_RUINS": [
+    "RUINED_WALL",
+    "STUMP"
+   ],
+   "CLEARING": [
+    "PINE"
+   ],
+   "GLADE": [
+    "FAIRY_RING",
+    "STUMP"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alice",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 0
+   },
+   "look": "black wavy hair, horn-rimmed glasses, beret",
+   "clue": "Alice was by the Creek.",
+   "text": "Alice was by the Creek.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "A",
+     "params": {
+      "room": "CREEK"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    3
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Bruno",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "goatee",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 4
+   },
+   "look": "brown crop hair, fedora, goatee, scarf",
+   "clue": "Bruno was in the Hollow and was not beside any tree.",
+   "text": "Bruno was in the Hollow and was not beside any tree.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "B",
+     "params": {
+      "room": "HOLLOW"
+     }
+    },
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "ANY_TREE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    0
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Conrad",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "beard",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 0
+   },
+   "look": "grey wavy hair, round glasses, beard",
+   "clue": "Conrad was sitting on a tree stump.",
+   "text": "Conrad was sitting on a tree stump.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "C",
+     "params": {
+      "prop": "STUMP"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    7
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dorothea",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 0
+   },
+   "look": "blonde short hair, scarf",
+   "clue": "Dorothea was beside a pine tree and was south of Harold.",
+   "text": "Dorothea was beside a pine tree and was south of Harold.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "PINE"
+     }
+    },
+    {
+     "kind": "SOUTH_OF",
+     "subject": "D",
+     "params": {
+      "other": "H"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    6
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Ernest",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "mustache",
+    "tie": "bowtie",
+    "skin": 3,
+    "cloth": 5
+   },
+   "look": "red short hair, peaked, mustache, bowtie",
+   "clue": "Ernest was the only person beside a fern. He was alone with someone with brown hair.",
+   "text": "Ernest was the only person beside a fern. He was alone with someone with brown hair.",
+   "atoms": [
+    {
+     "kind": "ONLY_BESIDE",
+     "subject": "E",
+     "params": {
+      "prop": "FERN"
+     }
+    },
+    {
+     "kind": "ALONE_WITH_P",
+     "subject": "E",
+     "params": {
+      "trait": "HAIR_BROWN",
+      "selfMatch": false
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": [
+     1
+    ]
+   },
+   "solution": [
+    1,
+    4
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Flora",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 4
+   },
+   "look": "black ponytail hair, fedora",
+   "clue": "Flora was alone and was beside a tree.",
+   "text": "Flora was alone and was beside a tree.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "F",
+     "params": {
+      "prop": "ANY_TREE"
+     }
+    },
+    {
+     "kind": "ALONE",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    2
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Georgina",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 2
+   },
+   "look": "blonde ponytail hair",
+   "clue": "Georgina was in the Glade.",
+   "text": "Georgina was in the Glade.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "G",
+     "params": {
+      "room": "GLADE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    5
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Harold",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 0
+   },
+   "look": "grey wavy hair, goatee, bowtie",
+   "clue": "Harold stood on bare ground (no fairy ring, trail of footprints or tree stump).",
+   "text": "Harold stood on bare ground (no fairy ring, trail of footprints or tree stump).",
+   "atoms": [
+    {
+     "kind": "BARE",
+     "subject": "H",
+     "params": {
+      "surface": "GROUND",
+      "lows": [
+       "FAIRY_RING",
+       "FOOTPRINTS",
+       "STUMP"
+      ]
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    0
+   ]
+  }
+ ],
+ "shadow": [
+  3,
+  1
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Ernest was alone with someone with brown hair. Polaroid check — people with brown hair: Bruno. None of them can still reach the Waterfall, so Ernest cannot be there.",
+   "focus": [
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_NONE_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "E",
+        "params": {
+         "trait": "HAIR_BROWN",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "HAIR_BROWN",
+       "holders": [
+        "B"
+       ]
+      }
+     },
+     "rooms": [
+      "WATERFALL"
+     ],
+     "suspect": "E"
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Alice can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Alice takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ],
+    "H": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "coords": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Georgina can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Georgina takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "H": [
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "coords": [
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Ernest was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
+   "focus": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "F": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "H": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "E",
+     "prop": "FERN"
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Flora was alone in the area, but Bruno and Ernest must be in the Hollow, so Flora cannot be in it.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "F",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "B",
+         "E"
+        ],
+        "room": "HOLLOW"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Dorothea was south of Harold. Dorothea can reach row 7 at most, so Harold must be in rows 1–6.",
+   "focus": [
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "SOUTH_OF",
+        "subject": "D",
+        "params": {
+         "other": "H"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
+       "params": {
+        "y": "D",
+        "line": 6,
+        "x": "H",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 5
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Ernest was alone with someone with brown hair, and Ernest is pinned to the Hollow: that area holds exactly two people, Ernest and someone with brown hair. So Conrad, Dorothea and Harold cannot be there.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "D": [
+     [
+      2,
+      5
+     ]
+    ],
+    "H": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_PAIR_ROOM",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "E",
+        "params": {
+         "trait": "HAIR_BROWN",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "owner": "E",
+     "room": "HOLLOW",
+     "trait": "HAIR_BROWN",
+     "suspects": [
+      "C",
+      "D",
+      "H"
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "Someone must watch it",
+   "kind": "eliminate",
+   "text": "The blindspot law: r3c7 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it, and only r4c7 can see it. Someone stands there, whoever it is, and watches its sightlines: nobody else can stand on r4c8.",
+   "focus": [
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      3,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MUST_WATCH_ONE",
+    "ruleKey": "RULE_MUST_WATCH",
+    "params": {
+     "coord": [
+      2,
+      6
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "E",
+        "params": {
+         "prop": "FERN"
+        }
+       }
+      }
+     },
+     "options": [
+      [
+       3,
+       6
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r1c1 cannot be a hiding spot (Ernest was alone with someone with brown hair in the Hollow), so someone must watch it. Only Bruno can still see it, so Bruno must stand on r1c1.",
+   "focus": [
+    [
+     0,
+     0
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      0,
+      0
+     ],
+     "ban": {
+      "templateKey": "BAN_SAID_IN",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "room": "HOLLOW"
+      }
+     },
+     "suspect": "B",
+     "coords": [
+      [
+       0,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Bruno “was in the Hollow and was not beside any tree”: every tile that fits is ruled out except r1c1. Place Bruno there.",
+   "focus": [
+    [
+     0,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    0,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r2c5 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Ernest can still see it, so Ernest must stand on r2c5.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      0,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      1,
+      4
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "E",
+        "params": {
+         "prop": "FERN"
+        }
+       }
+      }
+     },
+     "suspect": "E",
+     "coords": [
+      [
+       1,
+       4
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Ernest “was the only person beside a fern. He was alone with someone with brown hair”: of the 6 tiles that fit, only r2c5 is still open. Place Ernest there.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "E",
+   "cell": [
+    1,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      1,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r3c6 cannot be a hiding spot (Ernest was alone with someone with brown hair in the Hollow), so someone must watch it. Only Georgina can still see it, so Georgina must stand on r8c6.",
+   "focus": [
+    [
+     2,
+     5
+    ],
+    [
+     7,
+     5
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      2,
+      5
+     ],
+     "ban": {
+      "templateKey": "BAN_SAID_IN",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "room": "HOLLOW"
+      }
+     },
+     "suspect": "G",
+     "coords": [
+      [
+       7,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Georgina “was in the Glade”: of the 5 tiles that fit, only r8c6 is still open. Place Georgina there.",
+   "focus": [
+    [
+     7,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    7,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      7,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r6c7 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Conrad can still see it, so Conrad must stand on r6c8.",
+   "focus": [
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      5,
+      6
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "E",
+        "params": {
+         "prop": "FERN"
+        }
+       }
+      }
+     },
+     "suspect": "C",
+     "coords": [
+      [
+       5,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Conrad “was sitting on a tree stump”: every tile that fits is ruled out except r6c8. Place Conrad there.",
+   "focus": [
+    [
+     5,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      4,
+      7
+     ]
+    ],
+    "F": [
+     [
+      4,
+      7
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    5,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      5,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Flora was alone in the area, but Conrad must be by the Waterfall, so Flora cannot be in it.",
+   "focus": [
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      3,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "F",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "C"
+        ],
+        "room": "WATERFALL"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Flora was alone and can only be in the Clearing, so nobody else can be in the Clearing.",
+   "focus": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      3
+     ]
+    ],
+    "H": [
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "F",
+     "room": "CLEARING"
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dorothea “was beside a pine tree and was south of Harold”: of the 7 tiles that fit, only r4c7 is still open. Place Dorothea there.",
+   "focus": [
+    [
+     3,
+     6
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    3,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      3,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Dorothea was south of Harold. Dorothea can reach row 4 at most, so Harold must be in row 3.",
+   "focus": [
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "SOUTH_OF",
+        "subject": "D",
+        "params": {
+         "other": "H"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
+       "params": {
+        "y": "D",
+        "line": 3,
+        "x": "H",
+        "span": {
+         "templateKey": "FRAG_SPAN_ONE.ROW",
+         "params": {
+          "from": 2
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Harold “stood on bare ground (no fairy ring, trail of footprints or tree stump)”: every tile that fits is ruled out except r3c1. Place Harold there.",
+   "focus": [
+    [
+     2,
+     0
+    ]
+   ],
+   "elims": {},
+   "suspect": "H",
+   "cell": [
+    2,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      2,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 22,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r3c3 cannot be a hiding spot (Flora was alone in the Clearing), so someone must watch it. Only Flora can still see it, so Flora must stand on r6c3.",
+   "focus": [
+    [
+     2,
+     2
+    ],
+    [
+     5,
+     2
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      6,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      2,
+      2
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "F",
+       "room": "CLEARING"
+      }
+     },
+     "suspect": "F",
+     "coords": [
+      [
+       5,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 23,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Flora “was alone and was beside a tree”: every tile that fits is ruled out except r6c3. Place Flora there.",
+   "focus": [
+    [
+     5,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    5,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      5,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 24,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: for Alice, r2c2 is too exposed (S. H. Adow would have nowhere to hide), so Alice cannot stand there.",
+   "focus": [
+    [
+     1,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "suspect": "A",
+     "coords": [
+      [
+       1,
+       1
+      ]
+     ],
+     "reason": {
+      "templateKey": "REASON_TOO_EXPOSED",
+      "params": {
+       "who": "S"
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 25,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r1c4 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Alice can still see it, so Alice must stand on r2c4.",
+   "focus": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      0,
+      3
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ONLY_BESIDE",
+        "subject": "E",
+        "params": {
+         "prop": "FERN"
+        }
+       }
+      }
+     },
+     "suspect": "A",
+     "coords": [
+      [
+       1,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 26,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alice “was by the Creek”: of the 4 tiles that fit, only r2c4 is still open. Place Alice there.",
+   "focus": [
+    [
+     1,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    1,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      1,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 27,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r4c2. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     1
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    3,
+    1
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      3,
+      1
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "B",
+   "cell": [
+    0,
+    0
+   ],
+   "needs": [],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "key": [
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Ernest was alone with someone with brown hair. Polaroid check — people with brown hair: Bruno. None of them can still reach the Waterfall, so Ernest cannot be there.",
+     "focus": [
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        1,
+        7
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NONE_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "HAIR_BROWN",
+         "holders": [
+          "B"
+         ]
+        }
+       },
+       "rooms": [
+        "WATERFALL"
+       ],
+       "suspect": "E"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Flora was alone in the area, but Bruno and Ernest must be in the Hollow, so Flora cannot be in it.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        1
+       ],
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "F",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B",
+           "E"
+          ],
+          "room": "HOLLOW"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Ernest was alone with someone with brown hair, and Ernest is pinned to the Hollow: that area holds exactly two people, Ernest and someone with brown hair. So Conrad, Dorothea and Harold cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ]
+      ],
+      "D": [
+       [
+        2,
+        5
+       ]
+      ],
+      "H": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_PAIR_ROOM",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "owner": "E",
+       "room": "HOLLOW",
+       "trait": "HAIR_BROWN",
+       "suspects": [
+        "C",
+        "D",
+        "H"
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r1c1 cannot be a hiding spot (Ernest was alone with someone with brown hair in the Hollow), so someone must watch it. Only Bruno can still see it, so Bruno must stand on r1c1.",
+     "focus": [
+      [
+       0,
+       0
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        0,
+        0
+       ],
+       "ban": {
+        "templateKey": "BAN_SAID_IN",
+        "params": {
+         "said": {
+          "templateKey": "FRAG_SAID",
+          "params": {
+           "subject": "E",
+           "atom": {
+            "kind": "ALONE_WITH_P",
+            "subject": "E",
+            "params": {
+             "trait": "HAIR_BROWN",
+             "selfMatch": false
+            }
+           }
+          }
+         },
+         "room": "HOLLOW"
+        }
+       },
+       "suspect": "B",
+       "coords": [
+        [
+         0,
+         0
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Bruno “was in the Hollow and was not beside any tree”: every tile that fits is ruled out except r1c1. Place Bruno there.",
+    "focus": [
+     [
+      0,
+      0
+     ]
+    ],
+    "elims": {},
+    "suspect": "B",
+    "cell": [
+     0,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       0,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    1,
+    4
+   ],
+   "needs": [
+    "B"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "key": [
+    0,
+    4
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Ernest was alone with someone with brown hair. Polaroid check — people with brown hair: Bruno. None of them can still reach the Waterfall, so Ernest cannot be there.",
+     "focus": [
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        1,
+        7
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NONE_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "HAIR_BROWN",
+         "holders": [
+          "B"
+         ]
+        }
+       },
+       "rooms": [
+        "WATERFALL"
+       ],
+       "suspect": "E"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Ernest was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        1,
+        4
+       ],
+       [
+        5,
+        6
+       ]
+      ],
+      "F": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        5,
+        6
+       ]
+      ],
+      "H": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "E",
+       "prop": "FERN"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dorothea was south of Harold. Dorothea can reach row 7 at most, so Harold must be in rows 2–8.",
+     "focus": [
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        6,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "SOUTH_OF",
+          "subject": "D",
+          "params": {
+           "other": "H"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "D",
+          "line": 6,
+          "x": "H",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 1,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Ernest was alone with someone with brown hair, and Ernest is pinned to the Hollow: that area holds exactly two people, Ernest and someone with brown hair. So Conrad, Dorothea and Harold cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ]
+      ],
+      "D": [
+       [
+        2,
+        5
+       ]
+      ],
+      "H": [
+       [
+        2,
+        4
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_PAIR_ROOM",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "owner": "E",
+       "room": "HOLLOW",
+       "trait": "HAIR_BROWN",
+       "suspects": [
+        "C",
+        "D",
+        "H"
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r2c5 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Ernest can still see it, so Ernest must stand on r2c5.",
+     "focus": [
+      [
+       1,
+       4
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        0,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        1,
+        4
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ONLY_BESIDE",
+          "subject": "E",
+          "params": {
+           "prop": "FERN"
+          }
+         }
+        }
+       },
+       "suspect": "E",
+       "coords": [
+        [
+         1,
+         4
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 6,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Ernest “was the only person beside a fern. He was alone with someone with brown hair”: of the 6 tiles that fit, only r2c5 is still open. Place Ernest there.",
+    "focus": [
+     [
+      1,
+      4
+     ]
+    ],
+    "elims": {},
+    "suspect": "E",
+    "cell": [
+     1,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       1,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    7,
+    5
+   ],
+   "needs": [
+    "B",
+    "E"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "key": [
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Flora was alone in the area, but Bruno and Ernest must be in the Hollow, so Flora cannot be in it.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "F",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B",
+           "E"
+          ],
+          "room": "HOLLOW"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dorothea was south of Harold. Dorothea can reach row 7 at most, so Harold must be in rows 1–8.",
+     "focus": [
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        6,
+        3
+       ],
+       [
+        6,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "SOUTH_OF",
+          "subject": "D",
+          "params": {
+           "other": "H"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "D",
+          "line": 6,
+          "x": "H",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 0,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Ernest was alone with someone with brown hair, and Ernest is pinned to the Hollow: that area holds exactly two people, Ernest and someone with brown hair. So Dorothea and Harold cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        2,
+        5
+       ]
+      ],
+      "H": [
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        5,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_PAIR_ROOM",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "HAIR_BROWN",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "owner": "E",
+       "room": "HOLLOW",
+       "trait": "HAIR_BROWN",
+       "suspects": [
+        "D",
+        "H"
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Someone must watch it",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c6 cannot be a hiding spot (Ernest was alone with someone with brown hair in the Hollow), so someone must watch it, and only r8c6 can see it. Someone stands there, whoever it is, and watches its sightlines: nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MUST_WATCH_ONE",
+      "ruleKey": "RULE_MUST_WATCH",
+      "params": {
+       "coord": [
+        2,
+        5
+       ],
+       "ban": {
+        "templateKey": "BAN_SAID_IN",
+        "params": {
+         "said": {
+          "templateKey": "FRAG_SAID",
+          "params": {
+           "subject": "E",
+           "atom": {
+            "kind": "ALONE_WITH_P",
+            "subject": "E",
+            "params": {
+             "trait": "HAIR_BROWN",
+             "selfMatch": false
+            }
+           }
+          }
+         },
+         "room": "HOLLOW"
+        }
+       },
+       "options": [
+        [
+         7,
+         5
+        ]
+       ],
+       "coords": [
+        [
+         7,
+         3
+        ],
+        [
+         7,
+         4
+        ],
+        [
+         7,
+         6
+        ],
+        [
+         7,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Georgina “was in the Glade”: of the 5 tiles that fit, only r8c6 is still open. Place Georgina there.",
+    "focus": [
+     [
+      7,
+      5
+     ]
+    ],
+    "elims": {},
+    "suspect": "G",
+    "cell": [
+     7,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       7,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    5,
+    7
+   ],
+   "needs": [
+    "B",
+    "E",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "key": [
+    0,
+    2,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Alice can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Alice takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ]
+      ],
+      "H": [
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "A",
+       "options": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         3
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         3
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Ernest was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        5,
+        6
+       ]
+      ],
+      "F": [
+       [
+        0,
+        3
+       ],
+       [
+        5,
+        6
+       ]
+      ],
+      "H": [
+       [
+        0,
+        3
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "E",
+       "prop": "FERN"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Someone must watch it",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c7 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it, and only r4c7 can see it. Someone stands there, whoever it is, and watches its sightlines: nobody else can stand on r4c8.",
+     "focus": [
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MUST_WATCH_ONE",
+      "ruleKey": "RULE_MUST_WATCH",
+      "params": {
+       "coord": [
+        2,
+        6
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ONLY_BESIDE",
+          "subject": "E",
+          "params": {
+           "prop": "FERN"
+          }
+         }
+        }
+       },
+       "options": [
+        [
+         3,
+         6
+        ]
+       ],
+       "coords": [
+        [
+         3,
+         7
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r6c7 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Conrad can still see it, so Conrad must stand on r6c8.",
+     "focus": [
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        5,
+        6
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ONLY_BESIDE",
+          "subject": "E",
+          "params": {
+           "prop": "FERN"
+          }
+         }
+        }
+       },
+       "suspect": "C",
+       "coords": [
+        [
+         5,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Conrad “was sitting on a tree stump”: every tile that fits is ruled out except r6c8. Place Conrad there.",
+    "focus": [
+     [
+      5,
+      7
+     ]
+    ],
+    "elims": {
+     "D": [
+      [
+       4,
+       7
+      ]
+     ],
+     "F": [
+      [
+       4,
+       7
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     5,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       5,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    3,
+    6
+   ],
+   "needs": [
+    "B",
+    "C",
+    "E",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "key": [
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Flora was alone in the area, but Bruno and Ernest must be in the Hollow and Conrad must be by the Waterfall, so Flora cannot be in any of them.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        3,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_MANY",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "F",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "B",
+           "E"
+          ],
+          "room": "HOLLOW"
+         }
+        },
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "C"
+          ],
+          "room": "WATERFALL"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c7 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Dorothea can still see it, so Dorothea must stand on r4c7.",
+     "focus": [
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       6
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        2,
+        6
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ONLY_BESIDE",
+          "subject": "E",
+          "params": {
+           "prop": "FERN"
+          }
+         }
+        }
+       },
+       "suspect": "D",
+       "coords": [
+        [
+         3,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dorothea “was beside a pine tree and was south of Harold”: of the 7 tiles that fit, only r4c7 is still open. Place Dorothea there.",
+    "focus": [
+     [
+      3,
+      6
+     ]
+    ],
+    "elims": {},
+    "suspect": "D",
+    "cell": [
+     3,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       3,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    2,
+    0
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Alice can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Alice takes, the whole stretch is watched, so nobody else can stand on r2c3, r2c4.",
+     "focus": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "A",
+       "options": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         3
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         3
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Ernest was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        3
+       ]
+      ],
+      "H": [
+       [
+        0,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "E",
+       "prop": "FERN"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Flora was alone and can only be in the Clearing, so nobody else can be in the Clearing.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       6,
+       3
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        3,
+        2
+       ],
+       [
+        3,
+        3
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        6,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "F",
+       "room": "CLEARING"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dorothea was south of Harold. Dorothea can reach row 4 at most, so Harold must be in row 3.",
+     "focus": [
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        4,
+        0
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "SOUTH_OF",
+          "subject": "D",
+          "params": {
+           "other": "H"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "D",
+          "line": 3,
+          "x": "H",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.ROW",
+           "params": {
+            "from": 2
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Harold “stood on bare ground (no fairy ring, trail of footprints or tree stump)”: every tile that fits is ruled out except r3c1. Place Harold there.",
+    "focus": [
+     [
+      2,
+      0
+     ]
+    ],
+    "elims": {},
+    "suspect": "H",
+    "cell": [
+     2,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       2,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    5,
+    2
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "G",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Ernest was the only person beside a fern, so no other person (S. H. Adow included) can be beside any fern.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       7
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "E",
+       "prop": "FERN"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c3 cannot be a hiding spot (Flora was alone in the Clearing), so someone must watch it. Only Flora can still see it, so Flora must stand on r6c3.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       5,
+       2
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        6,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        2,
+        2
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "F",
+         "room": "CLEARING"
+        }
+       },
+       "suspect": "F",
+       "coords": [
+        [
+         5,
+         2
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Flora “was alone and was beside a tree”: every tile that fits is ruled out except r6c3. Place Flora there.",
+    "focus": [
+     [
+      5,
+      2
+     ]
+    ],
+    "elims": {},
+    "suspect": "F",
+    "cell": [
+     5,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       5,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    1,
+    3
+   ],
+   "needs": [
+    "B",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r1c4 cannot be a hiding spot (Ernest was the only person beside a fern), so someone must watch it. Only Alice can still see it, so Alice must stand on r2c4.",
+     "focus": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       3
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        0,
+        3
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ONLY_BESIDE",
+          "subject": "E",
+          "params": {
+           "prop": "FERN"
+          }
+         }
+        }
+       },
+       "suspect": "A",
+       "coords": [
+        [
+         1,
+         3
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Alice “was by the Creek”: of the 4 tiles that fit, only r2c4 is still open. Place Alice there.",
+    "focus": [
+     [
+      1,
+      3
+     ]
+    ],
+    "elims": {},
+    "suspect": "A",
+    "cell": [
+     1,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       1,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    3,
+    1
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r4c2. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      3,
+      1
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     3,
+     1
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       3,
+       1
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.36,
+   "elims_before_first_place": 9,
+   "last_fifth_t1_share": 0.5,
+   "hardest_last_pos": 0.96,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.0,
+   "late_elim_gap": 2,
+   "place_push": 0.25,
+   "global_uses": 0,
+   "global_first_t2": false,
+   "unlock_by_place": 0.0,
+   "star_opener": true
+  },
+  "flow_arc_ok": false,
+  "clue_fits": [
+   4,
+   5,
+   6,
+   7,
+   9,
+   10,
+   13,
+   32
+  ],
+  "blank_clues": 1,
+  "G19_clue_range": true,
+  "G20_investigation": true,
+  "shadow_candidates_before_last": 9,
+  "shadow_candidates_before_last_two": 14,
+  "dark_known_at": 8,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 1,
+  "trait_atoms": [
+   "ALONE_WITH_P"
+  ],
+  "trait_rules_used": [
+   "trait_filter",
+   "trait_partner"
+  ],
+  "trait_load_bearing": true,
+  "biome_props_on_board": [
+   "BIRCH",
+   "FAIRY_RING",
+   "FERN",
+   "PINE",
+   "RUINED_WALL",
+   "STUMP"
+  ],
+  "biome_props_in_clues": [
+   "FERN",
+   "PINE",
+   "STUMP"
+  ],
+  "biome_props_load_bearing": [
+   "FERN",
+   "PINE"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 13927,
+  "rules_used": [
+   "alone",
+   "compass",
+   "monopoly",
+   "must_watch",
+   "ray_block",
+   "shadow_law",
+   "trait_filter",
+   "trait_partner"
+  ],
+  "steps": 26,
+  "difficulty_score": 56,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.85
+ },
+ "daily": "2026-11-06"
+}
