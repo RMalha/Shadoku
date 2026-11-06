@@ -6,6 +6,7 @@
  *   /contact               ContactPage   the e-mail, and what to put in a report
  *   /legal  (and /privacy) LegalPage     the terms and privacy text of the sign-in pop-up (the Play Store's privacy policy URL)
  *   /delete-account        DeleteAccountPage  how to delete an account and what goes (the Play Store's account deletion URL)
+ *   (any puzzle, gated)    AppGatePage   on an Android phone's browser, a puzzle opens "Play in the app" instead (src/platform.js PHONE_GATED)
  *   /profile               ProfilePage   (signed in) Info: avatar, codename, name, e-mail, sign-in provider; the avatar maker (ShadokuAvatar.jsx)
  *   /profile/stats                       Stats: contracts played and fulfilled, relics, hints, fastest time per difficulty
  *   /profile/collection                  Collection: the ten relics of The Umbra Conspiracy (umbra.jsx), and the Evidence Board once all are in
@@ -14,7 +15,7 @@
  *
  * Signed out, /profile asks you to sign in. Progress is read from this browser's storage (ShadokuGame's readPlayStats); signed in
  * with the backend, src/sync.js merges that storage with the account's copy, so the numbers are the same on every device.
- * Every string is a ui.about.*, ui.contact.*, ui.legal.*, ui.deleteAccount.* or ui.profile.* key in src/locales/en.json.
+ * Every string is a ui.about.*, ui.contact.*, ui.legal.*, ui.deleteAccount.*, ui.appGate.* or ui.profile.* key in src/locales/en.json.
  */
 import React, { useEffect, useMemo, useState } from "react";
 import { SiteHeader, SiteFooter, useLang, useAuth, useModals, AuthButtons, Avatar, Rich, CONTACT_EMAIL, PROFILE_PAGES, ContractEnvelope, CoffeeCard, LegalText } from "./ShadokuHome.jsx";
@@ -25,6 +26,7 @@ import { MasterPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
 import { fetchRanking, RANKED_EVENT } from "./community.js";
+import { PLAY_URL, appLink } from "./platform.js";
 
 /** The difficulty groups, easiest first (the contracts page uses the same order). */
 export const DIFF_ORDER = ["Tutorial", "Very Easy", "Easy", "Medium", "Hard", "Expert"];
@@ -114,6 +116,31 @@ export function LegalPage({ go }) {
       <div className="sh-page-cta">
         <button type="button" className="sh-btn ghost" onClick={() => go("/delete-account")}>{t("legal.deleteLink")}</button>
         <button type="button" className="sh-btn ghost" onClick={() => go("/contact")}>{t("nav.contact")}</button>
+      </div>
+    </Page>
+  );
+}
+
+/* ═════════════════════════ PLAY IN THE APP (the phone gate) ═════════════════════════ */
+/** What an Android phone's browser shows instead of a puzzle (ShadokuApp, when src/platform.js PHONE_GATED). `path`: the puzzle's address, opened in the app. */
+export function AppGatePage({ go, path }) {
+  const { t } = useLang();
+  usePageTitle("page.appGate");
+  return (
+    <Page go={go} current={null}>
+      <section className="sh-pcard sh-appgate">
+        <img className="sh-appgate-icon" src="/icons/icon-192.png" alt="" width="96" height="96" />
+        <h1 className="sh-type">{t("appGate.title")}</h1>
+        <p>{t("appGate.lead")}</p>
+        <div className="sh-page-cta">
+          <a className="sh-btn" href={appLink(path)}>{t("appGate.open")}</a>
+          <a className="sh-btn ghost" href={PLAY_URL} target="_blank" rel="noopener noreferrer">{t("appGate.get")}</a>
+        </div>
+        <p className="sh-muted sm">{t("appGate.progress")}</p>
+        <p className="sh-muted sm">{t("appGate.desktop")}</p>
+      </section>
+      <div className="sh-page-cta">
+        <button type="button" className="sh-btn ghost" onClick={() => go("/")}>{t("nav.home")}</button>
       </div>
     </Page>
   );
@@ -367,6 +394,10 @@ const PAGES_CSS = `
 .sh-pcard p{margin:0 0 10px;color:#dcd7cb}.sh-pcard p:last-child{margin-bottom:0}
 .sh-page-cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
 .sh-page-list{margin:0 0 12px;padding-inline-start:20px;color:#dcd7cb}.sh-page-list li{margin:0 0 6px}
+.sh-appgate{max-width:520px;margin:0 auto 16px;text-align:center}
+.sh-appgate-icon{display:block;width:96px;height:96px;margin:0 auto 14px;border-radius:22px;box-shadow:0 8px 22px rgba(0,0,0,.5)}
+.sh-appgate .sh-page-cta{flex-direction:column;align-items:center;margin:18px 0}.sh-appgate .sh-btn{min-width:220px;text-decoration:none}
+.sh-appgate p.sh-muted{margin:0 0 8px}
 .sh-contact{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .sh-contact>div{flex:1 1 220px;min-width:0}.sh-contact .sh-muted{margin:0}
 .sh-contact-ico{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:rgba(217,155,38,.14);color:var(--sh-brass);font-size:26px}

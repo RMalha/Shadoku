@@ -11,6 +11,8 @@
  *   /play/<puzzle-name>                            one puzzle, e.g. /play/the-art-of-the-ghost (slim top bar + <ShadokuGame />; the URL follows the contract picker)
  *   /about  /contact                               plain pages (ShadokuPages.jsx)
  *   /legal (alias /privacy)  /delete-account       the terms & privacy text and the account deletion steps (the Play Store links to both)
+ *   Phone gate: on an Android phone's browser (src/platform.js PHONE_GATED) every board, /play/<name>, the initiation, a community
+ *   puzzle and the Workshop, opens AppGatePage ("Play in the app") instead; the lists of contracts and every other page stay open.
  *   /profile  /profile/stats  /profile/collection  the signed-in player's Info, Stats and relic Collection (ShadokuPages.jsx)
  *   /profile/ranking                               every signed-in player, ranked (ShadokuCommunity.jsx RankingPanel)
  *   /community                                     Community › COMMUNITY PUZZLES: the published puzzles by board size (ShadokuCommunity.jsx)
@@ -55,7 +57,8 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import ShadokuHome, {
   ShadokuProviders, SiteHeader, SiteMenu, UserPill, SiteFooter, ContractEnvelope, dailyLabel, LanguageSelector, useLang, useAuth, useModals, store, pushPath, registerTranslations, translate, PROFILE_PAGES, TUTORIAL_KEY,
 } from "./ShadokuHome.jsx";
-import { AboutPage, ContactPage, LegalPage, DeleteAccountPage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
+import { AboutPage, ContactPage, LegalPage, DeleteAccountPage, AppGatePage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
+import { PHONE_GATED } from "./platform.js";
 import ShadokuGame, { PUZZLES, DAILIES, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
@@ -1014,6 +1017,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     link.href = "https://www.shadoku.net" + (c === "/" ? "/" : c);
   }, [path]);
   const contracts = view === "play" && initiated && (!slugOfPath(path) || locked); // /play after the initiation: the envelopes
+  const gated = PHONE_GATED && !contracts && (view === "play" || dailyLocked || view === "communityPlay" || view === "create"); // a board on an Android phone's browser: the app
   const startInitiation = useCallback(() => go(`/play/${startSlug}`), [go, startSlug]); // the home envelope (and the Menu's pop-up) open the tutorial puzzle
   const skipInitiation = useCallback(() => { store.set(TUTORIAL_KEY, "1"); go("/play"); }, [go]); // "Skip Initiation": the case files unlock, straight to the contracts
   const launchContract = useCallback((id) => { // the profile's Evidence Board: "Enter “The Uninvited Guests”"
@@ -1025,7 +1029,8 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
       onSession={onSession} onSignOut={onSignOut} onDeleteAccount={onDeleteAccount} authError={authError}
       onStart={startInitiation} onSkip={skipInitiation} onNav={go}>
       <style data-shadoku="app">{APP_CSS}</style>
-      {contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
+      {gated ? <AppGatePage go={go} path={path} />
+        : contracts ? <ContractsScreen go={go} puzzles={puzzles} logoSrc={logoSrc} />
         : view === "play" || dailyLocked ? <PlayScreen go={go} puzzles={puzzles} logoSrc={logoSrc} lab={lab} path={path} sync={sync} />
         : view === "daily" ? <DailyScreen go={go} />
         : view === "about" ? <AboutPage go={go} />

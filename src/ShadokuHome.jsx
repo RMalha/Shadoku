@@ -35,6 +35,8 @@ import { useProgressTick } from "./sync.js";
 /* ═════════════════════════════ CONSTANTS ═════════════════════════════ */
 export const CONTACT_EMAIL = "shadoku.game@proton.me";
 export const MURDOKU_URL = "https://murdoku.com";
+/** How Google uses data from apps that show its ads: the privacy policy links it (ui.legal.s7.p, [[googleads]]). */
+export const GOOGLE_ADS_URL = "https://policies.google.com/technologies/partner-sites";
 export const COFFEE_URL = "https://buymeacoffee.com/shadoku"; // also on the victory screen (ShadokuGame.jsx)
 const LANG_KEY = "shadoku-lang";
 const USER_KEY = "shadoku-user";
@@ -109,7 +111,7 @@ export function pushPath(path) {
  * UI keys are written here without their "ui." prefix (t("nav.signIn") reads "ui.nav.signIn" from the locale files;
  * t("ui.nav.signIn") works too); generated engine keys (LORE.*, PROP.*, CLUE…) are used as they are.
  * registerTranslations("fr", { "nav.signIn": "Connexion", … }) still works (or assigning STRINGS.fr = {…}).
- * Paragraph lists are numbered keys (ui.lore.s1.1, ui.lore.s1.2 …). Inline markup: **bold**, [[murdoku]], [[email]].
+ * Paragraph lists are numbered keys (ui.lore.s1.1, ui.lore.s1.2 …). Inline markup: **bold**, [[murdoku]], [[email]], [[googleads]].
  * en.json holds every key, including all the keys added after this table; the table is only the last-resort English for the original ones.
  */
 export const STRINGS = {
@@ -488,12 +490,13 @@ function ModalHost({ children, authError, onStart, onSkip }) {
 }
 
 /* ═════════════════════════ SMALL UTILITIES ═════════════════════════ */
-/** Inline markup: **bold**, [[murdoku]], [[email]] */
+/** Inline markup: **bold**, [[murdoku]], [[email]], [[googleads]] */
 export function Rich({ text }) {
-  const parts = String(text).split(/(\*\*.+?\*\*|\[\[murdoku\]\]|\[\[email\]\])/g);
+  const parts = String(text).split(/(\*\*.+?\*\*|\[\[murdoku\]\]|\[\[email\]\]|\[\[googleads\]\])/g);
   return parts.map((p, i) => {
     if (p === "[[murdoku]]") return <a key={i} className="sh-link" href={MURDOKU_URL} target="_blank" rel="noopener noreferrer">Murdoku</a>;
     if (p === "[[email]]") return <a key={i} className="sh-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>;
+    if (p === "[[googleads]]") return <a key={i} className="sh-link" href={GOOGLE_ADS_URL} target="_blank" rel="noopener noreferrer">policies.google.com/technologies/partner-sites</a>;
     if (p.startsWith("**") && p.endsWith("**")) return <strong key={i}><Rich text={p.slice(2, -2)} /></strong>;
     return <React.Fragment key={i}>{p}</React.Fragment>;
   });
