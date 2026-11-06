@@ -493,7 +493,9 @@ export function readBestTimes(puzzles) {
 }
 const DAILY_KEEP = 14; // days of archive before today's contract (engine DAILY_KEEP: the release job deletes older ones)
 const isLocalHost = () => { try { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname); } catch { return false; } };
-const isoToday = () => { const d = new Date(), p2 = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`; };
+const DAILY_LEAD_MS = 2 * 36e5; // a contract ships at 22:00 the evening before its date (tools/release_daily.py RELEASE_HOUR)
+/** The newest contract day out now (localhost only: on the site the deploy is the clock): tomorrow's from 22:00 on. */
+const isoToday = () => { const d = new Date(Date.now() + DAILY_LEAD_MS), p2 = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`; };
 const dayNo = (iso) => { const [y, m, d] = String(iso).split("-").map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
 
 /** -> { today, archive (newest first), queue } of the daily contracts (the Daily Contract page, the home envelope). On the site the deploy is the clock: the newest shipped daily is today's. On localhost
