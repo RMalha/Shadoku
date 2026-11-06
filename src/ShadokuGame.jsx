@@ -29,8 +29,8 @@ import { localizeHead, localizeCase, trOf } from "./caseText.js";
 import { RelicCard, ObsidianEnvelope, OmegaFolder, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isRelicCase, isUnlocked, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 import {
   AdowPolaroid, AdowToken, ASSASSINS, AssassinPolaroid, AssassinToken, BIOME_META, BRASS, CELL, CREAM, CRIMSON, DIRS, FOG, FOG_OPACITY, FloorDefs, INK, LAB, LABEL,
-  FACING, FLAT_FLOOR, MasterPolaroid, PropChip, PropSprite, SUSPECT_COLORS, SuspectPolaroid, TokenAvatar, WallLayer, WindowPane,
-  assignFloors, classBlocksSight, classIsOccupiable, classIsSolid, propClassOf, floorOf, getCastForPuzzle, lookFacts, themeOf, windowAt, victimIsDummy, victimNameOf, victimGenderOf, inkOn,
+  FACING, MasterPolaroid, PropChip, PropSprite, SUSPECT_COLORS, SuspectPolaroid, TokenAvatar, WallLayer, WindowPane,
+  assignFloors, classBlocksSight, classIsSolid, propClassOf, floorOf, getCastForPuzzle, lookFacts, themeOf, windowAt, victimIsDummy, victimNameOf, victimGenderOf, inkOn,
 } from "./ShadokuArt";
 // One JSON file per puzzle (no merged shadoku_puzzles.json). Play order: the tutorial, then Very Easy → Expert.
 // ./puzzles is synced from engine/puzzles by vite.config.js; never edit it by hand.
@@ -684,7 +684,6 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     const edge = (r, c, dc) => !geo.inside(r, c + dc) || geo.isVoid(r, c + dc) || geo.room(r, c) !== geo.room(r, c + dc);
     out.forEach((it) => {
       it.rank = DRAW_RANK[geo.classOfKind(it.kind)] || 0; it.bottom = it.r + it.ch - 1;
-      it.occ = classIsOccupiable(geo.classOfKind(it.kind)) && !FLAT_FLOOR.has(it.kind); // fades under a token (flat floor items never do)
       it.flip = FACING.has(it.kind) && it.cw === 1 && it.ch === 1 && shut(it.r, it.c, 1) && !shut(it.r, it.c, -1); // face away from a wall on the east
       // a sofa down a column has its back on the west: mirror it when the room's wall runs along its east side instead, so it faces into the room
       if (it.kind === "SOFA" && it.ch > it.cw) it.flip = it.cells.every(([r, c]) => edge(r, c, 1)) && !it.cells.every(([r, c]) => edge(r, c, -1));
@@ -815,7 +814,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       {/* props by class: LOW (flush) first, then SHORT, then PERCH and TALL, each pass in reading order so upright props
           overlap correctly. A multi-tile object is ONE item drawn across its span (box origin = its top-left cell). */}
       {props.map((it) => (
-        <g key={`p${it.r}-${it.c}-${it.kind}`} transform={`translate(${X(it.c)} ${Y(it.r)})${+o.objSize ? ` translate(${it.cw * CELL / 2} ${it.ch * CELL / 2}) scale(${1 + +o.objSize}) translate(${-it.cw * CELL / 2} ${-it.ch * CELL / 2})` : ""}`} opacity={it.occ && it.cells.some(([r, c]) => tokenAt.has(key(r, c))) ? 0.6 : 1} pointerEvents="none">
+        <g key={`p${it.r}-${it.c}-${it.kind}`} transform={`translate(${X(it.c)} ${Y(it.r)})${+o.objSize ? ` translate(${it.cw * CELL / 2} ${it.ch * CELL / 2}) scale(${1 + +o.objSize}) translate(${-it.cw * CELL / 2} ${-it.ch * CELL / 2})` : ""}`} pointerEvents="none">
           <PropSprite kind={it.kind} cw={it.cw} ch={it.ch} len={it.len} horizontal={it.horizontal} cells={it.cells.map(([r, c]) => [r - it.r, c - it.c])} flip={it.flip} victim={victimNameOf(p)} dummy={victimIsDummy(p)} master={p.id === UMBRA_FINALE} second={p.id === UMBRA_HARD} />
         </g>
       ))}
@@ -1326,11 +1325,17 @@ function TintMenu({ anchor, drag, value, onPick, onClose, owner }) {
 const LensIcon = () => (
   <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><circle cx="10" cy="10" r="6.2" fill="rgba(255,255,255,.35)" stroke="currentColor" strokeWidth="2.6" /><path d="M14.8 14.8L21 21" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" /><path d="M7.4 8.4A3.6 3.6 0 0 1 10.4 6.6" fill="none" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity=".8" /></svg>
 );
-/** ♀ / ♂ beside a suspect (or the victim) when "Show Symbols for Men and Women" is on. */
+/** ♀ / ♂ beside a suspect (or the victim) when "Show Symbols for Men and Women" is on: drawn, not a font glyph (phone fonts drew ♀ / ♂ oversized and off centre).
+ *  On a dossier card it sits under the magnifying glass (.sk-cardw > .sk-gsym), clear of the Polaroid's letter. */
+const GENDER_PATH = { f: "M12 4.6a4.6 4.6 0 1 1 0 9.2a4.6 4.6 0 1 1 0-9.2M12 13.8V21M8.6 17.6h6.8", m: "M10 9.2a4.6 4.6 0 1 1 0 9.2a4.6 4.6 0 1 1 0-9.2M13.3 10.5L19 4.8M14.6 4.8H19V9.2" };
 const GenderMark = ({ g, inline = false }) => {
   const t = useText();
   if (g !== "m" && g !== "f") return null;
-  return <span className={`sk-gsym ${g}${inline ? " inl" : ""}`} role="img" aria-label={t(g === "f" ? "settings.female" : "settings.male")}>{g === "f" ? "♀" : "♂"}</span>;
+  return (
+    <span className={`sk-gsym ${g}${inline ? " inl" : ""}`} role="img" aria-label={t(g === "f" ? "settings.female" : "settings.male")}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d={GENDER_PATH[g]} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    </span>
+  );
 };
 function SuspectCard({ q, look, color, on, placed, emph, onPick, onInspect, coach, hint, gender = null, hi = false }) {
   const t = useText();
@@ -1339,10 +1344,10 @@ function SuspectCard({ q, look, color, on, placed, emph, onPick, onInspect, coac
       <button type="button" className={`sk-card v${on ? " on" : ""}${placed ? " placed" : ""}${coach ? " coach" : ""}${hi ? " hi" : ""}`} style={{ "--sc": color }} aria-pressed={on} title={hint} onClick={onPick}>
         <span className="sk-photo"><SuspectPolaroid name={q.name} id={q.id} look={look} size={120} placed={placed} /></span>
         <span className="sk-alibi">{emph(q.clue)}</span>
-        {gender && <GenderMark g={gender} />}
         {placed && <span className="sk-stamp" aria-label={t("game.placed")}>✓</span>}
       </button>
       <button type="button" className="sk-lens" onClick={onInspect} aria-label={t("game.openCard", { name: q.name })} title={t("game.suspectCard")}><LensIcon /></button>
+      {gender && <GenderMark g={gender} />}
     </div>
   );
 }
@@ -2918,16 +2923,19 @@ const CSS = `
 .sk-kwtip b{color:var(--brass2)}
 .sk-card.hi{box-shadow:0 0 0 3px #f0b94a,0 0 20px rgba(240,185,74,.6)}
 /* ♀ / ♂ */
-.sk-gsym{position:absolute;z-index:2;top:12px;right:12px;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;font:800 14px/1 system-ui,sans-serif;background:#fff;border:1.5px solid currentColor;box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.sk-gsym{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1.5px solid currentColor;box-shadow:0 1px 3px rgba(0,0,0,.35);pointer-events:none}
+.sk-gsym svg{display:block;width:15px;height:15px}
 .sk-gsym.f{color:#d0307a}.sk-gsym.m{color:#1f68c9}
-.sk-gsym.inl{position:relative;top:auto;right:auto;display:inline-grid;vertical-align:middle;margin-inline-start:7px;width:19px;height:19px;font-size:12px}
+/* on a card: centred under the magnifying glass (the lens is 26px at -8px,-8px), same corner in every layout */
+.sk-cardw>.sk-gsym{position:absolute;z-index:2;top:22px;left:-6px}
+.sk-gsym.inl{position:relative;display:inline-grid;vertical-align:middle;margin-inline-start:7px;width:19px;height:19px}
+.sk-gsym.inl svg{width:13px;height:13px}
 /* portrait mode off: a list */
 .sk-cast.list{grid-template-columns:minmax(0,1fr);justify-content:stretch}
 .sk-cast.list .sk-cardw{max-width:none;justify-self:stretch}
 .sk-cast.list .sk-card.v{display:grid;grid-template-columns:74px minmax(0,1fr);align-items:center;gap:8px;padding:6px 34px 6px 6px;border-top:0;border-left:5px solid var(--sc)}
 .sk-cast.list .sk-photo{width:100%}
 .sk-cast.list .sk-card.v .sk-alibi{background:none;padding:0;font-size:13.5px}
-.sk-cast.list .sk-gsym{top:8px;right:8px}
 /* How to play */
 .sk-howwrap>.sk-how{background:var(--panel);color:var(--fg);border:1px solid var(--line);max-width:none;width:min(720px,100%);max-height:min(90vh,900px);max-height:min(90dvh,900px);display:flex;flex-direction:column;padding:0;overflow:hidden}
 .sk-how-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px 10px;border-bottom:1px solid var(--line)}
@@ -3268,7 +3276,6 @@ const CSS = `
   .sk-cardw{max-width:none;justify-self:stretch}
   /* phone: Polaroid on the left, the statement beside it */
   .sk-card.v{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:5px;padding:5px 6px 5px 4px;border-top:0;border-left:5px solid var(--sc)}
-  .sk-card.v .sk-gsym{top:auto;right:auto;left:auto;bottom:5px;inset-inline-start:58px} /* on the photo's corner, not over the clue */
   .sk-photo{width:100%}
   .sk-card.v .sk-alibi{background:none;padding:0;font-size:12px;line-height:1.3;align-self:center;hyphens:auto}
   .sk-card.adow.v .sk-alibi{background:none}
@@ -3318,7 +3325,6 @@ const CSS = `
   .sk-cast{gap:8px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
   .sk-cardw{max-width:none;justify-self:stretch}
   .sk-card.v{display:grid;grid-template-columns:60px minmax(0,1fr);align-items:center;gap:5px;padding:4px 6px 4px 4px;border-top:0;border-left:5px solid var(--sc)}
-  .sk-card.v .sk-gsym{top:auto;right:auto;left:auto;bottom:4px;inset-inline-start:46px}
   .sk-photo{width:100%}
   .sk-card.v .sk-alibi{background:none;padding:0;font-size:12px;line-height:1.3;align-self:center;hyphens:auto}
   .sk-card.adow.v .sk-alibi{background:none}

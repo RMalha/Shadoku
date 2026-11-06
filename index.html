@@ -38,11 +38,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Special+Elite&display=swap" media="print" onload="this.media='all'" />
     <title>Shadoku — The Blindspot Murder Mystery</title>
+    <!-- The crawlable intro in #root is for crawlers and for visitors without JavaScript: painted at once only under noscript,
+         else only if the app has not started after 6 s, never as a flash of text before the app. -->
+    <style>#sh-intro>*{opacity:0;animation:sh-intro .4s 6s forwards}@keyframes sh-intro{to{opacity:1}}</style>
+    <noscript><style>#sh-intro>*{opacity:1;animation:none}</style></noscript>
   </head>
   <body>
     <div id="root">
-      <!-- First paint and crawlers: React replaces this as soon as the app mounts. -->
-      <main style="box-sizing:border-box;min-height:100vh;margin:0;padding:3rem max(1rem,calc(50% - 20rem));background:#141419;font-family:Georgia,serif;color:#ddd;line-height:1.5">
+      <!-- Crawlers and no-JavaScript visitors (see the style in the head): React replaces this as soon as the app mounts. -->
+      <main id="sh-intro" style="box-sizing:border-box;min-height:100vh;margin:0;padding:3rem max(1rem,calc(50% - 20rem));background:#141419;font-family:Georgia,serif;color:#ddd;line-height:1.5">
         <h1>Shadoku — The Blindspot Murder Mystery</h1>
         <p>Shadoku is a murder-mystery logic puzzle. Every case is a crime scene seen from above. Each suspect watches along straight lines until a wall or a tall object blocks the view, and no two suspects may see each other.</p>
         <p>Place every suspect from the clues. Exactly one tile is left that nobody can see: that is where the assassin, S. H. Adow, was hiding.</p>
