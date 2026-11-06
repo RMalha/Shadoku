@@ -366,8 +366,8 @@
     "cloth": 0
    },
    "look": "black wavy hair, horn-rimmed glasses, beret",
-   "clue": "Alice was by the Creek.",
-   "text": "Alice was by the Creek.",
+   "clue": "Alice was in the Creek.",
+   "text": "Alice was in the Creek.",
    "atoms": [
     {
      "kind": "ROOM",
@@ -2394,7 +2394,7 @@
    "tier": 1,
    "rule": "Sightline domino",
    "kind": "place",
-   "text": "Alice “was by the Creek”: of the 4 tiles that fit, only r2c4 is still open. Place Alice there.",
+   "text": "Alice “was in the Creek”: of the 4 tiles that fit, only r2c4 is still open. Place Alice there.",
    "focus": [
     [
      1,
@@ -5428,7 +5428,7 @@
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
-    "text": "Alice “was by the Creek”: of the 4 tiles that fit, only r2c4 is still open. Place Alice there.",
+    "text": "Alice “was in the Creek”: of the 4 tiles that fit, only r2c4 is still open. Place Alice there.",
     "focus": [
      [
       1,
