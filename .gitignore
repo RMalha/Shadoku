@@ -37,6 +37,7 @@ dist-ssr
 /.claude/
 /tools/
 /scripts/
+/android/
 CLAUDE.md
 murdoku_svg_catalog_complete.json
 src/extract.py
