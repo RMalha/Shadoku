@@ -1005,6 +1005,13 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     const now = currentPath(); // the live address: the game may already have replaced `path` in this commit (the tutorial's own address)
     if (!fromDisk && canonical(now) !== now) sync(canonical(now), true);
   }, [path, sync]);
+  useEffect(() => { // the page's canonical address for search engines (index.html only knows the home page)
+    if (typeof document === "undefined" || window.location.protocol === "file:") return;
+    let link = document.querySelector('link[rel="canonical"]');
+    if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
+    const c = canonical(path);
+    link.href = "https://www.shadoku.net" + (c === "/" ? "/" : c);
+  }, [path]);
   const contracts = view === "play" && initiated && (!slugOfPath(path) || locked); // /play after the initiation: the envelopes
   const startInitiation = useCallback(() => go(`/play/${startSlug}`), [go, startSlug]); // the home envelope (and the Menu's pop-up) open the tutorial puzzle
   const skipInitiation = useCallback(() => { store.set(TUTORIAL_KEY, "1"); go("/play"); }, [go]); // "Skip Initiation": the case files unlock, straight to the contracts

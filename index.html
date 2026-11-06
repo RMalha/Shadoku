@@ -7,13 +7,43 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://www.shadoku.net/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shadoku" />
+    <meta property="og:title" content="Shadoku — The Blindspot Murder Mystery" />
+    <meta property="og:description" content="Murder-mystery logic puzzles: place every suspect so nobody sees anyone, and find the one tile the killer hid in." />
+    <meta property="og:url" content="https://www.shadoku.net/" />
+    <meta property="og:image" content="https://www.shadoku.net/icons/icon-512.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Shadoku — The Blindspot Murder Mystery" />
+    <meta name="twitter:description" content="Murder-mystery logic puzzles: place every suspect so nobody sees anyone, and find the one tile the killer hid in." />
+    <meta name="twitter:image" content="https://www.shadoku.net/icons/icon-512.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Shadoku",
+        "alternateName": "Shadoku: The Blindspot Murder Mystery",
+        "url": "https://www.shadoku.net/",
+        "description": "Murder-mystery logic puzzles: place every suspect so nobody sees anyone, and find the one tile the killer hid in."
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Special+Elite&display=swap" media="print" onload="this.media='all'" />
-    <title>shadoku</title>
+    <title>Shadoku — The Blindspot Murder Mystery</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- First paint and crawlers: React replaces this as soon as the app mounts. -->
+      <main style="box-sizing:border-box;min-height:100vh;margin:0;padding:3rem max(1rem,calc(50% - 20rem));background:#141419;font-family:Georgia,serif;color:#ddd;line-height:1.5">
+        <h1>Shadoku — The Blindspot Murder Mystery</h1>
+        <p>Shadoku is a murder-mystery logic puzzle. Every case is a crime scene seen from above. Each suspect watches along straight lines until a wall or a tall object blocks the view, and no two suspects may see each other.</p>
+        <p>Place every suspect from the clues. Exactly one tile is left that nobody can see: that is where the assassin, S. H. Adow, was hiding.</p>
+        <p>Play the story cases, a new Daily Contract every day, or puzzles made by the community. Free in your browser.</p>
+        <noscript><p>Shadoku needs JavaScript to run.</p></noscript>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
