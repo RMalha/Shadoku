@@ -123,7 +123,7 @@ export const TRAIT_TEST = {
   FEMALE: (s) => s.gender === "f",
   GLASSES: (s) => !!(s.traits && s.traits.glasses),
   HAT: (s) => !!(s.traits && s.traits.hat && s.traits.hat !== "none"),
-  BEARD: (s) => !!(s.traits && s.traits.facialHair === "beard"),
+  BEARD: (s) => !!(s.traits && (s.traits.facialHair === "beard" || s.traits.facialHair === "goatee")), // the Polaroid draws a goatee as a short beard (engine BEARDED)
   MUSTACHE: (s) => !!(s.traits && s.traits.facialHair === "mustache"),
   BALD: (s) => !!(s.traits && (s.traits.hairLength === "bald" || s.traits.hairStyle === "bald")),
   HAIR_BLACK: (s) => !!(s.traits && s.traits.hairColor === "black"),
@@ -133,6 +133,9 @@ export const TRAIT_TEST = {
   HAIR_GREY: (s) => !!(s.traits && s.traits.hairColor === "grey"),
 };
 const hasTrait = (s, tr) => !!s && !!TRAIT_TEST[tr] && TRAIT_TEST[tr](s);
+/** Does every player read this trait one way on the cast's Polaroids (engine trait_clear)? A beard is drawn over the upper lip,
+ *  so beside a bearded man "a man with a mustache" could mean him too: no mustache clue in a cast with a beard. */
+export const traitClear = (sus, tr) => tr !== "MUSTACHE" || !(sus || []).some((s) => hasTrait(s, "BEARD"));
 
 /** The atom kinds the creator offers, by group (the clue's "people" sentence holds the trait kinds). */
 export const UNARY_KINDS = ["ROOM", "ROOM_PAIR", "NOT_ROOM", "CORPSE_ROOM", "ON", "BARE", "BESIDE", "NOT_BESIDE", "DOOR", "CORNER", "NOT_CORNER",
@@ -296,6 +299,7 @@ export function trueAtoms(g, d, pos, id, nounOf = (k) => k) {
   });
   Object.keys(TRAIT_TEST).forEach((tr) => {
     if (!sus.some((s) => s.id !== id && hasTrait(s, tr))) return; // nobody else has it: the clue would talk about no one
+    if (!traitClear(sus, tr)) return; // it reads two ways in this cast
     const selfMatch = hasTrait(me, tr);
     ["WITH_P", "TWO_P_ROOM", "NO_P_ROOM", "ALONE_WITH_P", "DIAG_P"].forEach((k) => add(k, { trait: tr, selfMatch }));
   });
@@ -664,5 +668,6 @@ export function checkCase(d) {
   if (dark.length !== 1 || dark[0] !== g.at(...d.shadow)) bad.push("S. H. Adow's tile must be the only dark tile");
   const full = { ...pos, S: g.at(...d.shadow) };
   sus.forEach((s) => (s.atoms || []).forEach((a) => { if (!atomHolds(g, d, full, a)) bad.push(`a clue of ${s.name} is false`); }));
+  sus.forEach((s) => (s.atoms || []).forEach((a) => { if (a.params && a.params.trait && !traitClear(sus, a.params.trait)) bad.push(`a clue of ${s.name} reads two ways in this cast`); }));
   return bad;
 }

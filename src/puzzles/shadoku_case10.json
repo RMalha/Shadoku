@@ -16898,7 +16898,8 @@
     1,
     2,
     3,
-    5
+    5,
+    6
    ],
    "chain": [
     {
@@ -17022,12 +17023,6 @@
      ],
      "elims": {
       "D": [
-       [
-        9,
-        11
-       ]
-      ],
-      "J": [
        [
         9,
         11
@@ -18078,16 +18073,88 @@
     {
      "n": 6,
      "tier": 2,
-     "rule": "The blindspot law",
+     "rule": "Someone must watch it",
      "kind": "eliminate",
-     "text": "The blindspot law: r10c10 cannot be a hiding spot (Albert was the only person on a driftwood log), so someone must watch it. Only Dmitri can still see it, so Dmitri must stand on r7c10.",
+     "text": "The blindspot law: r10c10 cannot be a hiding spot (Albert was the only person on a driftwood log), so someone must watch it from r7c10 or r10c12. Every one of those tiles watches r7c12, so nobody else can stand there.",
      "focus": [
       [
        6,
        9
       ],
       [
+       6,
+       11
+      ],
+      [
        9,
+       9
+      ],
+      [
+       9,
+       11
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        6,
+        11
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MUST_WATCH_SET",
+      "ruleKey": "RULE_MUST_WATCH",
+      "params": {
+       "coord": [
+        9,
+        9
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "A",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "A",
+          "params": {
+           "prop": "DRIFTWOOD"
+          }
+         }
+        }
+       },
+       "options": [
+        [
+         6,
+         9
+        ],
+        [
+         9,
+         11
+        ]
+       ],
+       "coords": [
+        [
+         6,
+         11
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r11c10 cannot be a hiding spot (Albert was the only person on a driftwood log), so someone must watch it. Only Dmitri can still see it, so Dmitri must stand on r7c10.",
+     "focus": [
+      [
+       6,
+       9
+      ],
+      [
+       10,
        9
       ]
      ],
@@ -18118,10 +18185,6 @@
         10
        ],
        [
-        6,
-        11
-       ],
-       [
         9,
         3
        ]
@@ -18132,7 +18195,7 @@
       "ruleKey": "RULE_SHADOW_LAW",
       "params": {
        "coord": [
-        9,
+        10,
         9
        ],
        "ban": {
@@ -18160,7 +18223,7 @@
     }
    ],
    "place": {
-    "n": 7,
+    "n": 8,
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
@@ -18240,14 +18303,88 @@
     ]
    ],
    "key": [
-    1,
     2,
     3,
-    4
+    4,
+    5
    ],
    "chain": [
     {
      "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Jocelyn was in an area with no man with a beard, but Ezra is already at the Tide Pools, so Jocelyn cannot be there.",
+     "focus": [
+      [
+       9,
+       8
+      ],
+      [
+       9,
+       9
+      ],
+      [
+       9,
+       10
+      ],
+      [
+       9,
+       11
+      ],
+      [
+       10,
+       9
+      ],
+      [
+       10,
+       10
+      ],
+      [
+       11,
+       10
+      ],
+      [
+       11,
+       11
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        9,
+        11
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_ROOM_BLOCKED",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "NO_P_ROOM",
+          "subject": "J",
+          "params": {
+           "trait": "BEARD",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "suspects": [
+        "E"
+       ],
+       "room": "TIDE_POOLS",
+       "suspect": "J"
+      }
+     }
+    },
+    {
+     "n": 2,
      "tier": 1,
      "rule": "Polaroid check",
      "kind": "eliminate",
@@ -18357,7 +18494,7 @@
      }
     },
     {
-     "n": 2,
+     "n": 3,
      "tier": 2,
      "rule": "Compass squeeze",
      "kind": "eliminate",
@@ -18437,7 +18574,7 @@
      }
     },
     {
-     "n": 3,
+     "n": 4,
      "tier": 2,
      "rule": "Polaroid partner logic",
      "kind": "eliminate",
@@ -18537,7 +18674,7 @@
      }
     },
     {
-     "n": 4,
+     "n": 5,
      "tier": 4,
      "rule": "What if…? (one-step trial)",
      "kind": "eliminate",
@@ -18587,7 +18724,7 @@
      }
     },
     {
-     "n": 5,
+     "n": 6,
      "tier": 4,
      "rule": "What if…? (one-step trial)",
      "kind": "eliminate",
@@ -18649,7 +18786,7 @@
     }
    ],
    "place": {
-    "n": 6,
+    "n": 7,
     "tier": 1,
     "rule": "Sightline domino",
     "kind": "place",
@@ -18793,12 +18930,6 @@
       ]
      ],
      "elims": {
-      "J": [
-       [
-        9,
-        11
-       ]
-      ],
       "L": [
        [
         9,
@@ -19420,10 +19551,10 @@
    "chain": [
     {
      "n": 1,
-     "tier": 2,
-     "rule": "Alone in an area",
+     "tier": 1,
+     "rule": "Polaroid check",
      "kind": "eliminate",
-     "text": "Ezra was alone and is placed at the Tide Pools, so nobody else can be at the Tide Pools.",
+     "text": "Jocelyn was in an area with no man with a beard, but Ezra is already at the Tide Pools, so Jocelyn cannot be there.",
      "focus": [
       [
        9,
@@ -19464,20 +19595,31 @@
         9,
         11
        ]
-      ],
-      "N": [
-       [
-        9,
-        11
-       ]
       ]
      },
      "i18n": {
-      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
-      "ruleKey": "RULE_ALONE",
+      "templateKey": "STEP_TRAIT_ROOM_BLOCKED",
+      "ruleKey": "RULE_TRAIT_FILTER",
       "params": {
-       "owner": "E",
-       "room": "TIDE_POOLS"
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "NO_P_ROOM",
+          "subject": "J",
+          "params": {
+           "trait": "BEARD",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "suspects": [
+        "E"
+       ],
+       "room": "TIDE_POOLS",
+       "suspect": "J"
       }
      }
     },
