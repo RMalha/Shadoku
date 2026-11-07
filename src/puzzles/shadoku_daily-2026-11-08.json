@@ -1,0 +1,12926 @@
+{
+ "id": "daily-2026-11-08",
+ "title": "Daily Contract, Sunday 8 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Expert · Desert",
+ "theme": "DESERT",
+ "difficulty": "Expert",
+ "tier": "expert",
+ "shape": "rect",
+ "seed": 261108,
+ "attempt": 136,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "DEX1010RAR1-261108",
+ "puzzleId": "DEX1010RAR1-261108",
+ "engine": "V10.6",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 197,
+ "zoneWord": "area",
+ "size": 10,
+ "rooms": [
+  [
+   3,
+   3,
+   6,
+   6,
+   6,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   6,
+   6,
+   6,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   0,
+   0,
+   0,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   0,
+   0,
+   0,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   0,
+   0,
+   0,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   0,
+   0,
+   0,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   3,
+   3,
+   0,
+   0,
+   0,
+   5,
+   2,
+   2,
+   1,
+   1
+  ],
+  [
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4
+  ],
+  [
+   7,
+   7,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4
+  ],
+  [
+   7,
+   7,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   4
+  ]
+ ],
+ "roomNames": [
+  "Sand Dunes",
+  "Dig Site",
+  "Mesa",
+  "Caravan",
+  "Oasis",
+  "Dry River",
+  "Rock Arch",
+  "Canyon"
+ ],
+ "roomIds": [
+  "SAND_DUNES",
+  "DIG_SITE",
+  "MESA",
+  "CARAVAN",
+  "OASIS",
+  "DRY_RIVER",
+  "ROCK_ARCH",
+  "CANYON"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    4
+   ],
+   [
+    0,
+    5
+   ]
+  ],
+  [
+   [
+    0,
+    7
+   ],
+   [
+    0,
+    8
+   ]
+  ],
+  [
+   [
+    1,
+    1
+   ],
+   [
+    1,
+    2
+   ]
+  ],
+  [
+   [
+    1,
+    3
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    1,
+    4
+   ],
+   [
+    1,
+    5
+   ]
+  ],
+  [
+   [
+    1,
+    5
+   ],
+   [
+    1,
+    6
+   ]
+  ],
+  [
+   [
+    1,
+    7
+   ],
+   [
+    1,
+    8
+   ]
+  ],
+  [
+   [
+    2,
+    4
+   ],
+   [
+    2,
+    5
+   ]
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   [
+    4,
+    2
+   ]
+  ],
+  [
+   [
+    5,
+    1
+   ],
+   [
+    5,
+    2
+   ]
+  ],
+  [
+   [
+    5,
+    4
+   ],
+   [
+    5,
+    5
+   ]
+  ],
+  [
+   [
+    5,
+    5
+   ],
+   [
+    5,
+    6
+   ]
+  ],
+  [
+   [
+    5,
+    7
+   ],
+   [
+    5,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    0
+   ],
+   [
+    7,
+    0
+   ]
+  ],
+  [
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    1
+   ]
+  ],
+  [
+   [
+    6,
+    3
+   ],
+   [
+    7,
+    3
+   ]
+  ],
+  [
+   [
+    6,
+    4
+   ],
+   [
+    7,
+    4
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    6,
+    6
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    7,
+    5
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    6,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    7,
+    7
+   ]
+  ],
+  [
+   [
+    6,
+    8
+   ],
+   [
+    7,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    9
+   ],
+   [
+    7,
+    9
+   ]
+  ],
+  [
+   [
+    7,
+    0
+   ],
+   [
+    8,
+    0
+   ]
+  ],
+  [
+   [
+    8,
+    1
+   ],
+   [
+    8,
+    2
+   ]
+  ],
+  [
+   [
+    9,
+    1
+   ],
+   [
+    9,
+    2
+   ]
+  ]
+ ],
+ "windows": [],
+ "contents": [
+  [
+   "CAMEL",
+   "FLOOR_PILLOW",
+   "FOOTPRINTS",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "STOOL"
+  ],
+  [
+   "",
+   "FLOOR_PILLOW",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "CHAIR",
+   "STOOL"
+  ],
+  [
+   "",
+   "BARREL",
+   "CAMEL",
+   "",
+   "",
+   "FOOTPRINTS",
+   "CAMPFIRE",
+   "BOULDER",
+   "CHAIR",
+   "CHAIR"
+  ],
+  [
+   "CAMEL",
+   "BARREL",
+   "CAMPFIRE",
+   "",
+   "CAMEL",
+   "",
+   "",
+   "",
+   "STATUE",
+   "AMPHORA"
+  ],
+  [
+   "WOVEN_MAT",
+   "WOVEN_MAT",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "OBELISK",
+   "AMPHORA",
+   "AMPHORA"
+  ],
+  [
+   "CAMPFIRE",
+   "WOVEN_MAT",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "STOOL",
+   "OBELISK"
+  ],
+  [
+   "FLOOR_PILLOW",
+   "FLOOR_PILLOW",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "STOOL",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "WOVEN_MAT",
+   "WOVEN_MAT",
+   "WOVEN_MAT",
+   "CAMPFIRE",
+   "",
+   "",
+   ""
+  ],
+  [
+   "CORPSE",
+   "",
+   "",
+   "",
+   "",
+   "OASIS_POOL",
+   "OASIS_POOL",
+   "",
+   "",
+   "AMPHORA"
+  ],
+  [
+   "OBELISK",
+   "",
+   "",
+   "CAMEL",
+   "",
+   "OASIS_POOL",
+   "OASIS_POOL",
+   "",
+   "",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "OASIS_POOL",
+   "cells": [
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  8,
+  0
+ ],
+ "biomeProps": [
+  "AMPHORA",
+  "BOULDER",
+  "CAMEL",
+  "CAMPFIRE",
+  "FLOOR_PILLOW",
+  "OASIS_POOL",
+  "OBELISK",
+  "STATUE",
+  "WOVEN_MAT"
+ ],
+ "propClasses": {
+  "AMPHORA": "SHORT",
+  "BARREL": "SHORT",
+  "BOULDER": "TALL",
+  "CAMEL": "PERCH",
+  "CAMPFIRE": "SHORT",
+  "CHAIR": "LOW",
+  "FLOOR_PILLOW": "LOW",
+  "FOOTPRINTS": "LOW",
+  "OASIS_POOL": "LOW",
+  "OBELISK": "TALL",
+  "STATUE": "TALL",
+  "STOOL": "LOW",
+  "WOVEN_MAT": "LOW"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.274,
+  "lowTiles": 23,
+  "openTiles": 84,
+  "lowKinds": [
+   "CHAIR",
+   "FLOOR_PILLOW",
+   "FOOTPRINTS",
+   "OASIS_POOL",
+   "STOOL",
+   "WOVEN_MAT"
+  ],
+  "roomProps": {
+   "CARAVAN": [
+    "BARREL",
+    "CAMEL",
+    "CAMPFIRE",
+    "FLOOR_PILLOW",
+    "WOVEN_MAT"
+   ],
+   "ROCK_ARCH": [
+    "FOOTPRINTS"
+   ],
+   "DIG_SITE": [
+    "AMPHORA",
+    "CHAIR",
+    "OBELISK",
+    "STATUE",
+    "STOOL"
+   ],
+   "SAND_DUNES": [
+    "CAMEL",
+    "CAMPFIRE"
+   ],
+   "DRY_RIVER": [
+    "FOOTPRINTS"
+   ],
+   "MESA": [
+    "BOULDER",
+    "CAMPFIRE",
+    "OBELISK"
+   ],
+   "OASIS": [
+    "AMPHORA",
+    "CAMEL",
+    "CAMPFIRE",
+    "OASIS_POOL",
+    "WOVEN_MAT"
+   ],
+   "CANYON": [
+    "OBELISK"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Archibald",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "bowtie",
+    "skin": 3,
+    "cloth": 0
+   },
+   "look": "red short hair, mustache, bowtie",
+   "clue": "Archibald was not on the Sand Dunes and was beside a camel.",
+   "text": "Archibald was not on the Sand Dunes and was beside a camel.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "A",
+     "params": {
+      "prop": "CAMEL"
+     }
+    },
+    {
+     "kind": "NOT_ROOM",
+     "subject": "A",
+     "params": {
+      "room": "SAND_DUNES"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    0
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Blair",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 2
+   },
+   "look": "grey short hair, horn-rimmed glasses, cloche, scarf",
+   "clue": "Blair was beside a campfire. She was alone with someone with red hair.",
+   "text": "Blair was beside a campfire. She was alone with someone with red hair.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "CAMPFIRE"
+     }
+    },
+    {
+     "kind": "ALONE_WITH_P",
+     "subject": "B",
+     "params": {
+      "trait": "HAIR_RED",
+      "selfMatch": false
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": [
+     1
+    ]
+   },
+   "solution": [
+    5,
+    1
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Celeste",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 1
+   },
+   "look": "blonde wavy hair",
+   "clue": "Celeste was in the same area as Florian.",
+   "text": "Celeste was in the same area as Florian.",
+   "atoms": [
+    {
+     "kind": "SAME_ROOM",
+     "subject": "C",
+     "params": {
+      "other": "F"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    8
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dinah",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 0,
+    "cloth": 4
+   },
+   "look": "red long hair, scarf",
+   "clue": "Dinah was beside an obelisk and was exactly one row south of Archibald.",
+   "text": "Dinah was beside an obelisk and was exactly one row south of Archibald.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "OBELISK"
+     }
+    },
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "D",
+     "params": {
+      "other": "A",
+      "dir": "S",
+      "dist": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    7
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elspeth",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 3,
+    "cloth": 6
+   },
+   "look": "brown short hair, horn-rimmed glasses, bowtie",
+   "clue": "Elspeth was in column 3.",
+   "text": "Elspeth was in column 3.",
+   "atoms": [
+    {
+     "kind": "COL",
+     "subject": "E",
+     "params": {
+      "index": 2
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Florian",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 0
+   },
+   "look": "black short hair, goatee, bowtie",
+   "clue": "Florian was in a corner.",
+   "text": "Florian was in a corner.",
+   "atoms": [
+    {
+     "kind": "CORNER",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    9
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gustav",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 2
+   },
+   "look": "black wavy hair, bowtie",
+   "clue": "Gustav was west of Blair and was exactly one row south of Katherine.",
+   "text": "Gustav was west of Blair and was exactly one row south of Katherine.",
+   "atoms": [
+    {
+     "kind": "WEST_OF",
+     "subject": "G",
+     "params": {
+      "other": "B"
+     }
+    },
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "G",
+     "params": {
+      "other": "K",
+      "dir": "S",
+      "dist": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    0
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Humphrey",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "peaked",
+    "facialHair": "mustache",
+    "tie": "bowtie",
+    "skin": 4,
+    "cloth": 7
+   },
+   "look": "blonde curly hair, horn-rimmed glasses, peaked, mustache, bowtie",
+   "clue": "Humphrey was at the Oasis.",
+   "text": "Humphrey was at the Oasis.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "H",
+     "params": {
+      "room": "OASIS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    8,
+    4
+   ]
+  },
+  {
+   "id": "I",
+   "name": "Isaac",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 7
+   },
+   "look": "red crop hair, bowtie",
+   "clue": "Isaac was riding a camel. He was in an area with at least two other men.",
+   "text": "Isaac was riding a camel. He was in an area with at least two other men.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "I",
+     "params": {
+      "prop": "CAMEL"
+     }
+    },
+    {
+     "kind": "TWO_P_ROOM",
+     "subject": "I",
+     "params": {
+      "trait": "MALE",
+      "selfMatch": true
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "I",
+    "place": [
+     0
+    ],
+    "people": [
+     1
+    ]
+   },
+   "solution": [
+    9,
+    3
+   ]
+  },
+  {
+   "id": "J",
+   "name": "Jemima",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 4
+   },
+   "look": "blonde long hair",
+   "clue": "Jemima was alone and was riding a camel.",
+   "text": "Jemima was alone and was riding a camel.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "J",
+     "params": {
+      "prop": "CAMEL"
+     }
+    },
+    {
+     "kind": "ALONE",
+     "subject": "J",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "J",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    2
+   ]
+  },
+  {
+   "id": "K",
+   "name": "Katherine",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 2
+   },
+   "look": "black wavy hair, scarf",
+   "clue": "Katherine was not beside any barrel.",
+   "text": "Katherine was not beside any barrel.",
+   "atoms": [
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "K",
+     "params": {
+      "prop": "BARREL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "K",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    5
+   ]
+  }
+ ],
+ "shadow": [
+  4,
+  6
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACT_EMPTY:1",
+   "text": "Exactly 1 of the areas held no scapegoat.",
+   "kind": "EXACT_EMPTY",
+   "params": {
+    "count": 1
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Jemima was alone in the area, but Humphrey must be at the Oasis, so Jemima cannot be in it.",
+   "focus": [
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      9,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "J",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "H"
+        ],
+        "room": "OASIS"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Dinah was exactly one row south of Archibald. Archibald can only be in rows 1, 2, 3, 5, 9 or 10, which leaves Dinah rows 4, 6 or 10; Dinah can only be in rows 4, 6 or 10, which leaves Archibald rows 3, 5 or 9.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     4
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      9,
+      4
+     ]
+    ],
+    "D": [
+     [
+      4,
+      6
+     ],
+     [
+      6,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "D",
+        "params": {
+         "other": "A",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "A",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           0,
+           1,
+           2,
+           4,
+           8,
+           9
+          ]
+         }
+        },
+        "x": "D",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           3,
+           5,
+           9
+          ]
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "D",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           3,
+           5,
+           9
+          ]
+         }
+        },
+        "x": "A",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           2,
+           4,
+           8
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was west of Blair. Blair can reach column 8 at most, so Gustav must be in columns 1–7; Gustav is in column 1 at the earliest, so Blair must be in columns 2–8.",
+   "focus": [
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      4,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ],
+    "G": [
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      0,
+      9
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      1,
+      9
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      2,
+      9
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      8
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      7,
+      9
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      8
+     ],
+     [
+      9,
+      7
+     ],
+     [
+      9,
+      8
+     ],
+     [
+      9,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "G",
+        "params": {
+         "other": "B"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "params": {
+        "y": "B",
+        "line": 7,
+        "x": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 0,
+          "to": 6
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "G",
+        "line": 0,
+        "y": "B",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 1,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was exactly one row south of Katherine. Katherine can only be in rows 1–10, which leaves Gustav rows 2–10; Gustav can only be in rows 2–10, which leaves Katherine rows 1–9.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ]
+    ],
+    "K": [
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      9,
+      3
+     ],
+     [
+      9,
+      4
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      9,
+      6
+     ],
+     [
+      9,
+      7
+     ],
+     [
+      9,
+      8
+     ],
+     [
+      9,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "G",
+        "params": {
+         "other": "K",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "K",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 9
+         }
+        },
+        "x": "G",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 1,
+          "to": 9
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 1,
+          "to": 9
+         }
+        },
+        "x": "K",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 8
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Caravan, Dig Site, Dry River, Mesa, Oasis, Rock Arch, Sand Dunes).",
+   "focus": [
+    [
+     8,
+     1
+    ],
+    [
+     9,
+     1
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      8,
+      1
+     ],
+     [
+      9,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "C",
+     "other": "F",
+     "rooms": [
+      "CARAVAN",
+      "DIG_SITE",
+      "DRY_RIVER",
+      "MESA",
+      "OASIS",
+      "ROCK_ARCH",
+      "SAND_DUNES"
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Blair was alone with someone with red hair. Humphrey must be at the Oasis, so Blair cannot be there.",
+   "focus": [
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      8,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_BLOCKED",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "B",
+        "params": {
+         "trait": "HAIR_RED",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "suspects": [
+      "H"
+     ],
+     "room": "OASIS",
+     "owner": "B"
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was west of Blair. Blair can reach column 7 at most, so Gustav must be in columns 1–6.",
+   "focus": [
+    [
+     1,
+     6
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     9,
+     6
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      1,
+      6
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      9,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "G",
+        "params": {
+         "other": "B"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "params": {
+        "y": "B",
+        "line": 6,
+        "x": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 0,
+          "to": 5
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Celeste was in the same area as Florian. From the marked tiles, Celeste would see every tile where Florian could still stand to make that true, and no two scapegoats may see each other. So Celeste cannot be there.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      0,
+      9
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      9
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      9
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      9
+     ],
+     [
+      9,
+      3
+     ],
+     [
+      9,
+      4
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      9,
+      6
+     ],
+     [
+      9,
+      7
+     ],
+     [
+      9,
+      8
+     ],
+     [
+      9,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "SAME_ROOM",
+        "subject": "C",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       7
+      ],
+      [
+       9,
+       8
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "x": "C",
+     "y": "F"
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Caravan, Dig Site, Mesa, Oasis, Rock Arch, Sand Dunes).",
+   "focus": [
+    [
+     0,
+     5
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "C",
+     "other": "F",
+     "rooms": [
+      "CARAVAN",
+      "DIG_SITE",
+      "MESA",
+      "OASIS",
+      "ROCK_ARCH",
+      "SAND_DUNES"
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Isaac was in an area with at least two other men. From r3c3, Isaac would see every tile where men could still join him, and no two scapegoats may see each other. So Isaac cannot be there.",
+   "focus": [
+    [
+     2,
+     2
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      2,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT_TRAIT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "I",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "I",
+        "params": {
+         "trait": "MALE",
+         "selfMatch": true
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       2,
+       2
+      ]
+     ],
+     "suspect": "I",
+     "trait": "MALE"
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Blair was alone with someone with red hair. From r4c4, Blair would see every tile where people with red hair could still join her, and no two scapegoats may see each other. So Blair cannot be there.",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT_TRAIT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "B",
+        "params": {
+         "trait": "HAIR_RED",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       3,
+       3
+      ]
+     ],
+     "suspect": "B",
+     "trait": "HAIR_RED"
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
+   "kind": "eliminate",
+   "text": "What if Archibald stood on r9c4? The clues would then put Dinah on r10c2 and Blair on r6c2, and Isaac would have no tile left. So Archibald cannot be on r9c4.",
+   "focus": [
+    [
+     8,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
+    "params": {
+     "suspect": "A",
+     "coord": [
+      8,
+      3
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NO_TILE_LEFT",
+      "params": {
+       "suspect": "I"
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "D",
+        "coord": [
+         9,
+         1
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "B",
+        "coord": [
+         5,
+         1
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Jemima was alone in the area, but Archibald must be at the Caravan, so Jemima cannot be in it.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      0,
+      0
+     ],
+     [
+      3,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "J",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "A"
+        ],
+        "room": "CARAVAN"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 2,
+   "rule": "Alone in an area",
+   "kind": "eliminate",
+   "text": "Jemima was alone and can only be on the Sand Dunes, so nobody else can be on the Sand Dunes.",
+   "focus": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      2,
+      2
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "C": [
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "E": [
+     [
+      2,
+      2
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      2
+     ]
+    ],
+    "F": [
+     [
+      2,
+      2
+     ],
+     [
+      6,
+      2
+     ]
+    ],
+    "G": [
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "I": [
+     [
+      3,
+      4
+     ]
+    ],
+    "K": [
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "J",
+     "room": "SAND_DUNES"
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Dinah was exactly one row south of Archibald. Archibald can only be in rows 3 or 5, which leaves Dinah rows 4 or 6.",
+   "focus": [
+    [
+     9,
+     1
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      9,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "D",
+        "params": {
+         "other": "A",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "A",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           2,
+           4
+          ]
+         }
+        },
+        "x": "D",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           3,
+           5
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r7c3 cannot be a hiding spot (Jemima was alone on the Sand Dunes), so someone must watch it. Only Jemima can still see it, so Jemima must stand on r3c3.",
+   "focus": [
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     2
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      3,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      6,
+      2
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "J",
+       "room": "SAND_DUNES"
+      }
+     },
+     "suspect": "J",
+     "coords": [
+      [
+       2,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Jemima “was alone and was riding a camel”: of the 5 tiles that fit, only r3c3 is still open. Place Jemima there.",
+   "focus": [
+    [
+     2,
+     2
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      2,
+      5
+     ]
+    ],
+    "K": [
+     [
+      2,
+      5
+     ]
+    ]
+   },
+   "suspect": "J",
+   "cell": [
+    2,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "J",
+     "clueOf": "J",
+     "coord": [
+      2,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 3,
+   "rule": "Common watched tiles (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Archibald can only be at r3c1 or r5c1. the two options cross each other's sightlines, so r4c1 is watched from both — nobody else can stand on r4c1.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      3,
+      0
+     ]
+    ],
+    "G": [
+     [
+      3,
+      0
+     ]
+    ],
+    "I": [
+     [
+      3,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_LOOKAHEAD_CROSSING",
+    "ruleKey": "RULE_PAIR_WATCH",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       2,
+       0
+      ],
+      [
+       4,
+       0
+      ]
+     ],
+     "common": [
+      [
+       3,
+       0
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       0
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 3,
+   "rule": "Common watched tiles (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Blair can only be at r2c7, r4c7 or r6c2. Each of those tiles watches r6c7, so it is watched whichever one Blair takes — nobody else can stand on r6c7.",
+   "focus": [
+    [
+     1,
+     6
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      5,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_LOOKAHEAD_COMMON",
+    "ruleKey": "RULE_PAIR_WATCH",
+    "params": {
+     "suspect": "B",
+     "options": [
+      [
+       1,
+       6
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       5,
+       1
+      ]
+     ],
+     "coords": [
+      [
+       5,
+       6
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Gustav was exactly one row south of Katherine. From r2c1, Katherine would see every tile where Gustav could still stand to make that true, and no two scapegoats may see each other. So Katherine cannot be there.",
+   "focus": [
+    [
+     1,
+     0
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      1,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "G",
+        "params": {
+         "other": "K",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       1,
+       0
+      ]
+     ],
+     "x": "K",
+     "y": "G"
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
+   "kind": "eliminate",
+   "text": "What if Isaac stood on r1c1? The clues would then put Archibald on r5c1, Dinah on r6c8, Gustav on r2c2, Blair on r4c7, Katherine on r1c6 and Florian on r1c10, and r4c5 would stay dark, but Jemima was alone on the Sand Dunes. So Isaac cannot be on r1c1.",
+   "focus": [
+    [
+     0,
+     0
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
+    "params": {
+     "suspect": "I",
+     "coord": [
+      0,
+      0
+     ],
+     "contra": {
+      "templateKey": "CONTRA_STAY_DARK_BANNED",
+      "params": {
+       "coord": [
+        3,
+        4
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "J",
+         "room": "SAND_DUNES"
+        }
+       }
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "A",
+        "coord": [
+         4,
+         0
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "D",
+        "coord": [
+         5,
+         7
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "G",
+        "coord": [
+         1,
+         1
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "B",
+        "coord": [
+         3,
+         6
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "K",
+        "coord": [
+         0,
+         5
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "F",
+        "coord": [
+         0,
+         9
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 22,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Isaac “was riding a camel. He was in an area with at least two other men”: of the 5 tiles that fit, only r10c4 is still open. Place Isaac there.",
+   "focus": [
+    [
+     9,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      3
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      9,
+      2
+     ]
+    ],
+    "E": [
+     [
+      9,
+      2
+     ]
+    ],
+    "F": [
+     [
+      9,
+      9
+     ]
+    ],
+    "G": [
+     [
+      1,
+      3
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      9,
+      1
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      9,
+      3
+     ],
+     [
+      9,
+      4
+     ],
+     [
+      9,
+      5
+     ]
+    ],
+    "H": [
+     [
+      7,
+      3
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      9,
+      2
+     ],
+     [
+      9,
+      3
+     ],
+     [
+      9,
+      4
+     ],
+     [
+      9,
+      5
+     ],
+     [
+      9,
+      6
+     ],
+     [
+      9,
+      7
+     ],
+     [
+      9,
+      8
+     ],
+     [
+      9,
+      9
+     ]
+    ],
+    "K": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      8,
+      3
+     ]
+    ]
+   },
+   "suspect": "I",
+   "cell": [
+    9,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "I",
+     "clueOf": "I",
+     "coord": [
+      9,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 23,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was exactly one row south of Katherine. Gustav can only be in rows 2–9, which leaves Katherine rows 1–8.",
+   "focus": [
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      4
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "G",
+        "params": {
+         "other": "K",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 1,
+          "to": 8
+         }
+        },
+        "x": "K",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 24,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Caravan, Dig Site, Mesa, Rock Arch).",
+   "focus": [
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      4
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "C",
+     "other": "F",
+     "rooms": [
+      "CARAVAN",
+      "DIG_SITE",
+      "MESA",
+      "ROCK_ARCH"
+     ]
+    }
+   }
+  },
+  {
+   "n": 25,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Isaac was in an area with at least two other men. Polaroid check — other men: Archibald, Florian, Gustav and Humphrey. Only Gustav and Humphrey can still share an area with Isaac, so they must be at the Oasis.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      8,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SHARE_TWO",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "I",
+       "atom": {
+        "kind": "TWO_P_ROOM",
+        "subject": "I",
+        "params": {
+         "trait": "MALE",
+         "selfMatch": true
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL.SELF",
+      "params": {
+       "trait": "MALE",
+       "holders": [
+        "A",
+        "F",
+        "G",
+        "H"
+       ]
+      }
+     },
+     "suspects": [
+      "G",
+      "H"
+     ],
+     "owner": "I",
+     "rooms": [
+      "OASIS"
+     ]
+    }
+   }
+  },
+  {
+   "n": 26,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was exactly one row south of Katherine. Gustav can only be in rows 8–9, which leaves Katherine rows 7–8.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      0,
+      9
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      1,
+      9
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      2,
+      9
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "G",
+        "params": {
+         "other": "K",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 7,
+          "to": 8
+         }
+        },
+        "x": "K",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 6,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 27,
+   "tier": 2,
+   "rule": "Counting areas",
+   "kind": "eliminate",
+   "text": "Exactly 1 of the areas held no scapegoat. Nobody can reach Canyon any more, so every other area needs a scapegoat. Only Katherine can reach Dry River, so she must be there.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "K": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      8
+     ],
+     [
+      6,
+      9
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      7,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ROOM_HALL_EMPTY_ONE",
+    "ruleKey": "RULE_ROOM_COUNT",
+    "params": {
+     "empty": [
+      "CANYON"
+     ],
+     "rule": {
+      "templateKey": "GLOBAL.EXACT_EMPTY",
+      "params": {
+       "count": 1
+      }
+     },
+     "rooms": [
+      "DRY_RIVER"
+     ],
+     "owner": "K"
+    }
+   }
+  },
+  {
+   "n": 28,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Katherine “was not beside any barrel”: every tile that fits is ruled out except r7c6. Place Katherine there.",
+   "focus": [
+    [
+     6,
+     5
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      8
+     ],
+     [
+      6,
+      9
+     ]
+    ],
+    "G": [
+     [
+      7,
+      5
+     ],
+     [
+      8,
+      5
+     ]
+    ],
+    "H": [
+     [
+      7,
+      5
+     ],
+     [
+      8,
+      5
+     ]
+    ]
+   },
+   "suspect": "K",
+   "cell": [
+    6,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "K",
+     "clueOf": "K",
+     "coord": [
+      6,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 29,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was exactly one row south of Katherine. Katherine can only be in row 7, which leaves Gustav row 8.",
+   "focus": [
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     4
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "G",
+        "params": {
+         "other": "K",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "K",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 6
+         }
+        },
+        "x": "G",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 30,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Gustav can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Gustav takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      7,
+      2
+     ]
+    ],
+    "H": [
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      7,
+      8
+     ],
+     [
+      7,
+      9
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       4
+      ]
+     ],
+     "coords": [
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 31,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Humphrey can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Humphrey takes, the whole stretch is watched, so nobody else can stand on r9c3.",
+   "focus": [
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      8,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "H",
+     "options": [
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "coords": [
+      [
+       8,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 32,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Elspeth can only be at r1c3 or r2c3, and those tiles all lie on one sightline. Whichever one Elspeth takes, the whole stretch is watched, so nobody else can stand on r1c3.",
+   "focus": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "E",
+     "options": [
+      [
+       0,
+       2
+      ],
+      [
+       1,
+       2
+      ]
+     ],
+     "coords": [
+      [
+       0,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 33,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Caravan, Dig Site, Mesa).",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "C",
+     "other": "F",
+     "rooms": [
+      "CARAVAN",
+      "DIG_SITE",
+      "MESA"
+     ]
+    }
+   }
+  },
+  {
+   "n": 34,
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
+   "kind": "eliminate",
+   "text": "What if Archibald stood on r5c1? The clues would then put Dinah on r6c8 and Florian on r1c10, and r1c1, r3c1 could never be watched. So Archibald cannot be on r5c1.",
+   "focus": [
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
+    "params": {
+     "suspect": "A",
+     "coord": [
+      4,
+      0
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         0
+        ],
+        [
+         2,
+         0
+        ]
+       ]
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "D",
+        "coord": [
+         5,
+         7
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "F",
+        "coord": [
+         0,
+         9
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 35,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Archibald “was not on the Sand Dunes and was beside a camel”: of the 7 tiles that fit, only r3c1 is still open. Place Archibald there.",
+   "focus": [
+    [
+     2,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ]
+    ],
+    "F": [
+     [
+      0,
+      0
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    2,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      2,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 36,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Dinah was exactly one row south of Archibald. Archibald can only be in row 3, which leaves Dinah row 4.",
+   "focus": [
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "D",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "D",
+        "params": {
+         "other": "A",
+         "dir": "S",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "A",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 2
+         }
+        },
+        "x": "D",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 3
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 37,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dinah “was beside an obelisk and was exactly one row south of Archibald”: of the 6 tiles that fit, only r4c8 is still open. Place Dinah there.",
+   "focus": [
+    [
+     3,
+     7
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      6
+     ]
+    ],
+    "C": [
+     [
+      3,
+      7
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    3,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      3,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 38,
+   "tier": 3,
+   "rule": "Common watched tiles (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Blair can only be at r2c7 or r6c2. the two options cross each other's sightlines, so r2c2, r6c7 are watched from both — nobody else can stand on r2c2.",
+   "focus": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_LOOKAHEAD_CROSSING",
+    "ruleKey": "RULE_PAIR_WATCH",
+    "params": {
+     "suspect": "B",
+     "options": [
+      [
+       1,
+       6
+      ],
+      [
+       5,
+       1
+      ]
+     ],
+     "common": [
+      [
+       1,
+       1
+      ],
+      [
+       5,
+       6
+      ]
+     ],
+     "coords": [
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 39,
+   "tier": 3,
+   "rule": "Unseen partner (lookahead)",
+   "kind": "eliminate",
+   "text": "Lookahead: Celeste was in the same area as Florian. From r5c2, r6c2, r7c2, Celeste would see every tile where Florian could still stand to make that true, and no two scapegoats may see each other. So Celeste cannot be there.",
+   "focus": [
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SIGHT",
+    "ruleKey": "RULE_PARTNER_SIGHT",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "SAME_ROOM",
+        "subject": "C",
+        "params": {
+         "other": "F"
+        }
+       }
+      }
+     },
+     "coords": [
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ]
+     ],
+     "x": "C",
+     "y": "F"
+    }
+   }
+  },
+  {
+   "n": 40,
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
+   "kind": "eliminate",
+   "text": "What if Blair stood on r2c7? The clues would then put Elspeth on r1c3 and Florian on r1c10, and r5c1, r7c1 could never be watched. So Blair cannot be on r2c7.",
+   "focus": [
+    [
+     1,
+     6
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      1,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
+    "params": {
+     "suspect": "B",
+     "coord": [
+      1,
+      6
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         4,
+         0
+        ],
+        [
+         6,
+         0
+        ]
+       ]
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "E",
+        "coord": [
+         0,
+         2
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "F",
+        "coord": [
+         0,
+         9
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 41,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Blair “was beside a campfire. She was alone with someone with red hair”: every tile that fits is ruled out except r6c2. Place Blair there.",
+   "focus": [
+    [
+     5,
+     1
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      8
+     ]
+    ],
+    "F": [
+     [
+      0,
+      1
+     ]
+    ],
+    "G": [
+     [
+      7,
+      1
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    5,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      5,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 42,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gustav was west of Blair. Blair can reach column 2 at most, so Gustav must be in column 1.",
+   "focus": [
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     4
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "G",
+        "params": {
+         "other": "B"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "params": {
+        "y": "B",
+        "line": 1,
+        "x": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_ONE.COL",
+         "params": {
+          "from": 0
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 43,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gustav “was west of Blair and was exactly one row south of Katherine”: every tile that fits is ruled out except r8c1. Place Gustav there.",
+   "focus": [
+    [
+     7,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      4,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    7,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      7,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 44,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r4c5 cannot be a hiding spot (Jemima was alone on the Sand Dunes), so someone must watch it. Only Humphrey can still see it, so Humphrey must stand on r9c5.",
+   "focus": [
+    [
+     3,
+     4
+    ],
+    [
+     8,
+     4
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      6
+     ],
+     [
+      8,
+      7
+     ],
+     [
+      8,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      3,
+      4
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "J",
+       "room": "SAND_DUNES"
+      }
+     },
+     "suspect": "H",
+     "coords": [
+      [
+       8,
+       4
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 45,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Humphrey “was at the Oasis”: every tile that fits is ruled out except r9c5. Place Humphrey there.",
+   "focus": [
+    [
+     8,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "H",
+   "cell": [
+    8,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      8,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 46,
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
+   "kind": "eliminate",
+   "text": "What if Elspeth stood on r2c3? The clues would then put Celeste on r3c9 and Florian on r1c10, and 2 tiles would stay dark instead of 1. So Elspeth cannot be on r2c3.",
+   "focus": [
+    [
+     1,
+     2
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      1,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
+    "params": {
+     "suspect": "E",
+     "coord": [
+      1,
+      2
+     ],
+     "contra": {
+      "templateKey": "CONTRA_DARK_COUNT",
+      "params": {
+       "count": 2,
+       "expected": 1
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "C",
+        "coord": [
+         2,
+         8
+        ]
+       }
+      },
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "F",
+        "coord": [
+         0,
+         9
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 47,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elspeth “was in column 3”: every tile that fits is ruled out except r1c3. Place Elspeth there.",
+   "focus": [
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "E",
+   "cell": [
+    0,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      0,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 48,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Celeste stood on r3c9? Without following any clue further, r2c5, r2c8 could never be watched. So Celeste cannot be on r3c9.",
+   "focus": [
+    [
+     2,
+     8
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "C",
+     "coord": [
+      2,
+      8
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         1,
+         4
+        ],
+        [
+         1,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 49,
+   "tier": 4,
+   "rule": "What if…? (one-step trial)",
+   "kind": "eliminate",
+   "text": "What if Celeste stood on r2c8? The clues would then put Florian on r1c7, and 2 tiles would stay dark instead of 1. So Celeste cannot be on r2c8.",
+   "focus": [
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRIAL_CHAIN",
+    "ruleKey": "RULE_LOOKAHEAD",
+    "params": {
+     "suspect": "C",
+     "coord": [
+      1,
+      7
+     ],
+     "contra": {
+      "templateKey": "CONTRA_DARK_COUNT",
+      "params": {
+       "count": 2,
+       "expected": 1
+      }
+     },
+     "seats": [
+      {
+       "templateKey": "FRAG_SEAT",
+       "params": {
+        "who": "F",
+        "coord": [
+         0,
+         6
+        ]
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 50,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Celeste “was in the same area as Florian”: every tile that fits is ruled out except r2c9. Place Celeste there.",
+   "focus": [
+    [
+     1,
+     8
+    ]
+   ],
+   "elims": {},
+   "suspect": "C",
+   "cell": [
+    1,
+    8
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      1,
+      8
+     ]
+    }
+   }
+  },
+  {
+   "n": 51,
+   "tier": 2,
+   "rule": "Shared area",
+   "kind": "eliminate",
+   "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Dig Site).",
+   "focus": [
+    [
+     0,
+     6
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SAME_ROOM",
+    "ruleKey": "RULE_SAME_ROOM",
+    "params": {
+     "owner": "C",
+     "other": "F",
+     "rooms": [
+      "DIG_SITE"
+     ]
+    }
+   }
+  },
+  {
+   "n": 52,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Florian “was in a corner”: every tile that fits is ruled out except r1c10. Place Florian there.",
+   "focus": [
+    [
+     0,
+     9
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    0,
+    9
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      0,
+      9
+     ]
+    }
+   }
+  },
+  {
+   "n": 53,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r5c7. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     4,
+     6
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    4,
+    6
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      4,
+      6
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "J",
+   "cell": [
+    2,
+    2
+   ],
+   "needs": [],
+   "tier": 4,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     9,
+     3
+    ]
+   ],
+   "key": [
+    0,
+    3,
+    4
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Jemima was alone in the area, but Humphrey must be at the Oasis, so Jemima cannot be in it.",
+     "focus": [
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       7
+      ],
+      [
+       9,
+       8
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        9,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "J",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "H"
+          ],
+          "room": "OASIS"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dinah was exactly one row south of Archibald. Archibald can only be in rows 1, 2, 3, 5, 9 or 10, which leaves Dinah rows 4, 6 or 10; Dinah can only be in rows 4, 6 or 10, which leaves Archibald rows 3, 5 or 9.",
+     "focus": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        9,
+        2
+       ],
+       [
+        9,
+        4
+       ]
+      ],
+      "D": [
+       [
+        4,
+        6
+       ],
+       [
+        6,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "D",
+          "params": {
+           "other": "A",
+           "dir": "S",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "A",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             0,
+             1,
+             2,
+             4,
+             8,
+             9
+            ]
+           }
+          },
+          "x": "D",
+          "left": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             3,
+             5,
+             9
+            ]
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "D",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             3,
+             5,
+             9
+            ]
+           }
+          },
+          "x": "A",
+          "left": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             2,
+             4,
+             8
+            ]
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Archibald stood on r9c4? The clues would then put Dinah on r10c2 and Blair on r6c2, and Isaac would have no tile left. So Archibald cannot be on r9c4.",
+     "focus": [
+      [
+       8,
+       3
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        8,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "A",
+       "coord": [
+        8,
+        3
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NO_TILE_LEFT",
+        "params": {
+         "suspect": "I"
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "D",
+          "coord": [
+           9,
+           1
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "B",
+          "coord": [
+           5,
+           1
+          ]
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Jemima was alone in the area, but Archibald must be at the Caravan, so Jemima cannot be in it.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       1
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        0,
+        0
+       ],
+       [
+        3,
+        0
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "J",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "A"
+          ],
+          "room": "CARAVAN"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Jemima stood on r4c5? Following the clues from there, r7c3 would stay dark, but Jemima was alone on the Sand Dunes. So Jemima cannot be on r4c5.",
+     "focus": [
+      [
+       3,
+       4
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        3,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "J",
+       "coord": [
+        3,
+        4
+       ],
+       "contra": {
+        "templateKey": "CONTRA_STAY_DARK_BANNED",
+        "params": {
+         "coord": [
+          6,
+          2
+         ],
+         "ban": {
+          "templateKey": "BAN_ALONE_IN",
+          "params": {
+           "owner": "J",
+           "room": "SAND_DUNES"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 6,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Jemima “was alone and was riding a camel”: of the 5 tiles that fit, only r3c3 is still open. Place Jemima there.",
+    "focus": [
+     [
+      2,
+      2
+     ]
+    ],
+    "elims": {
+     "G": [
+      [
+       2,
+       5
+      ]
+     ],
+     "K": [
+      [
+       2,
+       5
+      ]
+     ]
+    },
+    "suspect": "J",
+    "cell": [
+     2,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "J",
+      "clueOf": "J",
+      "coord": [
+       2,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "I",
+   "cell": [
+    9,
+    3
+   ],
+   "needs": [
+    "J"
+   ],
+   "tier": 4,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     9,
+     3
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Jemima was alone and is placed on the Sand Dunes, so nobody else can be on the Sand Dunes.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        3,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "J",
+       "room": "SAND_DUNES"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Isaac stood on r1c1? The clues would then put Archibald on r5c1, Gustav on r2c2, Blair on r4c7 and Dinah on r6c8, and r4c6, r5c6 could never be watched. So Isaac cannot be on r1c1.",
+     "focus": [
+      [
+       0,
+       0
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        0,
+        0
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "I",
+       "coord": [
+        0,
+        0
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           3,
+           5
+          ],
+          [
+           4,
+           5
+          ]
+         ]
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "A",
+          "coord": [
+           4,
+           0
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "G",
+          "coord": [
+           1,
+           1
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "B",
+          "coord": [
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "D",
+          "coord": [
+           5,
+           7
+          ]
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Isaac stood on r4c1? The clues would then put Archibald on r9c4 and Dinah on r10c2, and Humphrey would have no tile left. So Isaac cannot be on r4c1.",
+     "focus": [
+      [
+       3,
+       0
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        3,
+        0
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "I",
+       "coord": [
+        3,
+        0
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NO_TILE_LEFT",
+        "params": {
+         "suspect": "H"
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "A",
+          "coord": [
+           8,
+           3
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "D",
+          "coord": [
+           9,
+           1
+          ]
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Isaac “was riding a camel. He was in an area with at least two other men”: of the 5 tiles that fit, only r10c4 is still open. Place Isaac there.",
+    "focus": [
+     [
+      9,
+      3
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       8,
+       3
+      ]
+     ],
+     "C": [
+      [
+       1,
+       3
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       9,
+       2
+      ]
+     ],
+     "E": [
+      [
+       9,
+       2
+      ]
+     ],
+     "F": [
+      [
+       9,
+       9
+      ]
+     ],
+     "G": [
+      [
+       1,
+       3
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       9,
+       1
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "H": [
+      [
+       7,
+       3
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       7
+      ],
+      [
+       9,
+       8
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "K": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       8,
+       3
+      ]
+     ]
+    },
+    "suspect": "I",
+    "cell": [
+     9,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "I",
+      "clueOf": "I",
+      "coord": [
+       9,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "K",
+   "cell": [
+    6,
+    5
+   ],
+   "needs": [
+    "I",
+    "J"
+   ],
+   "tier": 3,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0,
+    2,
+    7,
+    8,
+    11
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Jemima was alone and is placed on the Sand Dunes, so nobody else can be on the Sand Dunes.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "G": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "K": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "J",
+       "room": "SAND_DUNES"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was west of Blair. Blair can reach column 8 at most, so Gustav must be in columns 1–7; Gustav is in column 1 at the earliest, so Blair must be in columns 2–8.",
+     "focus": [
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        0
+       ],
+       [
+        6,
+        0
+       ]
+      ],
+      "G": [
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        7
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        8
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "G",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "B",
+          "line": 7,
+          "x": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 0,
+            "to": 6
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "G",
+          "line": 0,
+          "y": "B",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 1,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was exactly one row south of Katherine. Katherine can only be in rows 1–9, which leaves Gustav rows 2–9; Gustav can only be in rows 2–9, which leaves Katherine rows 1–8.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        5
+       ],
+       [
+        0,
+        6
+       ]
+      ],
+      "K": [
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "K",
+           "dir": "S",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "K",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 0,
+            "to": 8
+           }
+          },
+          "x": "G",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 1,
+            "to": 8
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "G",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 1,
+            "to": 8
+           }
+          },
+          "x": "K",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 0,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Caravan, Dig Site, Dry River, Mesa, Rock Arch).",
+     "focus": [
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        8
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "C",
+       "other": "F",
+       "rooms": [
+        "CARAVAN",
+        "DIG_SITE",
+        "DRY_RIVER",
+        "MESA",
+        "ROCK_ARCH"
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Blair was alone with someone with red hair. Humphrey and Isaac must be at the Oasis, so Blair cannot be there.",
+     "focus": [
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       7
+      ],
+      [
+       9,
+       8
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_BLOCKED",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "B",
+          "params": {
+           "trait": "HAIR_RED",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "suspects": [
+        "H",
+        "I"
+       ],
+       "room": "OASIS",
+       "owner": "B"
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was west of Blair. Blair can reach column 7 at most, so Gustav must be in columns 1–6.",
+     "focus": [
+      [
+       1,
+       6
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       8,
+       6
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        1,
+        6
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "G",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "B",
+          "line": 6,
+          "x": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 0,
+            "to": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Isaac was in an area with at least two other men. Polaroid check — other men: Archibald, Florian, Gustav and Humphrey. Only Gustav and Humphrey can still share an area with Isaac, so they must be at the Oasis.",
+     "focus": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       8,
+       1
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        6,
+        5
+       ],
+       [
+        8,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SHARE_TWO",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "I",
+         "atom": {
+          "kind": "TWO_P_ROOM",
+          "subject": "I",
+          "params": {
+           "trait": "MALE",
+           "selfMatch": true
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL.SELF",
+        "params": {
+         "trait": "MALE",
+         "holders": [
+          "A",
+          "F",
+          "G",
+          "H"
+         ]
+        }
+       },
+       "suspects": [
+        "G",
+        "H"
+       ],
+       "owner": "I",
+       "rooms": [
+        "OASIS"
+       ]
+      }
+     }
+    },
+    {
+     "n": 8,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was exactly one row south of Katherine. Gustav can only be in rows 8–9, which leaves Katherine rows 7–8.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       5,
+       8
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        5
+       ],
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        7
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "K",
+           "dir": "S",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "G",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 7,
+            "to": 8
+           }
+          },
+          "x": "K",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 6,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 9,
+     "tier": 2,
+     "rule": "Someone must stand here",
+     "kind": "eliminate",
+     "text": "Exactly 1 of the areas held no scapegoat. Someone still has to stand on the marked tiles, and every one of those tiles watches r8c6, r9c6, so nobody can stand there.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       9,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ]
+      ],
+      "H": [
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ]
+      ],
+      "K": [
+       [
+        7,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_WITNESS_SET",
+      "ruleKey": "RULE_WITNESS",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACT_EMPTY",
+        "params": {
+         "count": 1
+        }
+       },
+       "options": [
+        [
+         0,
+         5
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         3,
+         5
+        ],
+        [
+         4,
+         5
+        ],
+        [
+         5,
+         5
+        ],
+        [
+         6,
+         5
+        ]
+       ],
+       "coords": [
+        [
+         7,
+         5
+        ],
+        [
+         8,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 10,
+     "tier": 3,
+     "rule": "Unseen partner (lookahead)",
+     "kind": "eliminate",
+     "text": "Lookahead: Celeste was in the same area as Florian. From the marked tiles, Celeste would see every tile where Florian could still stand to make that true, and no two scapegoats may see each other. So Celeste cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        5
+       ],
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        3,
+        5
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        6,
+        5
+       ],
+       [
+        6,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SIGHT",
+      "ruleKey": "RULE_PARTNER_SIGHT",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "SAME_ROOM",
+          "subject": "C",
+          "params": {
+           "other": "F"
+          }
+         }
+        }
+       },
+       "coords": [
+        [
+         0,
+         0
+        ],
+        [
+         0,
+         1
+        ],
+        [
+         0,
+         2
+        ],
+        [
+         0,
+         4
+        ],
+        [
+         0,
+         5
+        ],
+        [
+         0,
+         6
+        ],
+        [
+         0,
+         7
+        ],
+        [
+         0,
+         8
+        ],
+        [
+         0,
+         9
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         1,
+         9
+        ],
+        [
+         2,
+         9
+        ],
+        [
+         3,
+         5
+        ],
+        [
+         3,
+         6
+        ],
+        [
+         4,
+         5
+        ],
+        [
+         4,
+         6
+        ],
+        [
+         5,
+         5
+        ],
+        [
+         5,
+         6
+        ],
+        [
+         6,
+         5
+        ],
+        [
+         6,
+         6
+        ]
+       ],
+       "x": "C",
+       "y": "F"
+      }
+     }
+    },
+    {
+     "n": 11,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Caravan, Dig Site, Mesa, Rock Arch).",
+     "focus": [
+      [
+       0,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "C",
+       "other": "F",
+       "rooms": [
+        "CARAVAN",
+        "DIG_SITE",
+        "MESA",
+        "ROCK_ARCH"
+       ]
+      }
+     }
+    },
+    {
+     "n": 12,
+     "tier": 2,
+     "rule": "Counting areas",
+     "kind": "eliminate",
+     "text": "Exactly 1 of the areas held no scapegoat. Nobody can reach Canyon any more, so every other area needs a scapegoat. Only Katherine can reach Dry River, so she must be there.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       5
+      ]
+     ],
+     "elims": {
+      "K": [
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ],
+       [
+        6,
+        9
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        1
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        8
+       ],
+       [
+        7,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ROOM_HALL_EMPTY_ONE",
+      "ruleKey": "RULE_ROOM_COUNT",
+      "params": {
+       "empty": [
+        "CANYON"
+       ],
+       "rule": {
+        "templateKey": "GLOBAL.EXACT_EMPTY",
+        "params": {
+         "count": 1
+        }
+       },
+       "rooms": [
+        "DRY_RIVER"
+       ],
+       "owner": "K"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 13,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Katherine “was not beside any barrel”: every tile that fits is ruled out except r7c6. Place Katherine there.",
+    "focus": [
+     [
+      6,
+      5
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ],
+      [
+       6,
+       9
+      ]
+     ]
+    },
+    "suspect": "K",
+    "cell": [
+     6,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "K",
+      "clueOf": "K",
+      "coord": [
+       6,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    2,
+    0
+   ],
+   "needs": [
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 4,
+   "fits": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     4
+    ]
+   ],
+   "key": [
+    0,
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dinah was exactly one row south of Archibald. Archibald can only be in rows 1, 2, 3 or 5, which leaves Dinah rows 4 or 6; Dinah can only be in rows 4 or 6, which leaves Archibald rows 3 or 5.",
+     "focus": [
+      [
+       0,
+       1
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       4,
+       6
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        0
+       ]
+      ],
+      "D": [
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "D",
+          "params": {
+           "other": "A",
+           "dir": "S",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "A",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             0,
+             1,
+             2,
+             4
+            ]
+           }
+          },
+          "x": "D",
+          "left": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             3,
+             5
+            ]
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "D",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             3,
+             5
+            ]
+           }
+          },
+          "x": "A",
+          "left": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             2,
+             4
+            ]
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Archibald stood on r5c1? The clues would then put Dinah on r6c8, Blair on r4c7 and Florian on r1c10, and r1c1, r3c1 could never be watched. So Archibald cannot be on r5c1.",
+     "focus": [
+      [
+       4,
+       0
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        4,
+        0
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "A",
+       "coord": [
+        4,
+        0
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           0,
+           0
+          ],
+          [
+           2,
+           0
+          ]
+         ]
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "D",
+          "coord": [
+           5,
+           7
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "B",
+          "coord": [
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "F",
+          "coord": [
+           0,
+           9
+          ]
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Archibald “was not on the Sand Dunes and was beside a camel”: of the 7 tiles that fit, only r3c1 is still open. Place Archibald there.",
+    "focus": [
+     [
+      2,
+      0
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ]
+     ],
+     "F": [
+      [
+       0,
+       0
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     2,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       2,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    3,
+    7
+   ],
+   "needs": [
+    "A",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     9,
+     1
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Dinah was exactly one row south of Archibald. Archibald can only be in row 3, which leaves Dinah row 4.",
+     "focus": [
+      [
+       4,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       5,
+       8
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        4,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "D",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "D",
+          "params": {
+           "other": "A",
+           "dir": "S",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "A",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 2
+           }
+          },
+          "x": "D",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 3
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dinah “was beside an obelisk and was exactly one row south of Archibald”: of the 6 tiles that fit, only r4c8 is still open. Place Dinah there.",
+    "focus": [
+     [
+      3,
+      7
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       3,
+       6
+      ]
+     ],
+     "C": [
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ]
+     ],
+     "G": [
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     3,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       3,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    5,
+    1
+   ],
+   "needs": [
+    "A",
+    "D",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 4,
+   "fits": [
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     6
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was west of Blair. Blair can reach column 8 at most, so Gustav must be in columns 1–7; Gustav is in column 1 at the earliest, so Blair must be in columns 2–8.",
+     "focus": [
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        0
+       ],
+       [
+        6,
+        0
+       ]
+      ],
+      "G": [
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        8
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "G",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "B",
+          "line": 7,
+          "x": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 0,
+            "to": 6
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "G",
+          "line": 0,
+          "y": "B",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 1,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Blair was alone with someone with red hair. Humphrey and Isaac must be at the Oasis, so Blair cannot be there.",
+     "focus": [
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       9,
+       2
+      ],
+      [
+       9,
+       3
+      ],
+      [
+       9,
+       4
+      ],
+      [
+       9,
+       5
+      ],
+      [
+       9,
+       6
+      ],
+      [
+       9,
+       7
+      ],
+      [
+       9,
+       8
+      ],
+      [
+       9,
+       9
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        7,
+        7
+       ],
+       [
+        8,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_BLOCKED",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "B",
+          "params": {
+           "trait": "HAIR_RED",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "suspects": [
+        "H",
+        "I"
+       ],
+       "room": "OASIS",
+       "owner": "B"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Blair stood on r2c7? The clues would then put Elspeth on r1c3 and Florian on r1c10, and r5c1, r7c1 could never be watched. So Blair cannot be on r2c7.",
+     "focus": [
+      [
+       1,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        1,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "B",
+       "coord": [
+        1,
+        6
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           4,
+           0
+          ],
+          [
+           6,
+           0
+          ]
+         ]
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "E",
+          "coord": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "F",
+          "coord": [
+           0,
+           9
+          ]
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Blair “was beside a campfire. She was alone with someone with red hair”: every tile that fits is ruled out except r6c2. Place Blair there.",
+    "focus": [
+     [
+      5,
+      1
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       5,
+       7
+      ],
+      [
+       5,
+       8
+      ]
+     ],
+     "F": [
+      [
+       0,
+       1
+      ]
+     ],
+     "G": [
+      [
+       7,
+       1
+      ]
+     ],
+     "H": [
+      [
+       7,
+       1
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     5,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       5,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    7,
+    0
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D",
+    "I",
+    "K"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Jemima was alone and can only be on the Sand Dunes, so nobody else can be on the Sand Dunes.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "E": [
+       [
+        2,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ],
+      "F": [
+       [
+        2,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ],
+      "G": [
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "J",
+       "room": "SAND_DUNES"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was west of Blair. Blair can reach column 2 at most, so Gustav must be in column 1.",
+     "focus": [
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        2
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        7,
+        8
+       ],
+       [
+        7,
+        9
+       ],
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        4
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "G",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "B",
+          "line": 1,
+          "x": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 0
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gustav was exactly one row south of Katherine. Katherine can only be in row 7, which leaves Gustav row 8.",
+     "focus": [
+      [
+       4,
+       0
+      ],
+      [
+       6,
+       0
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        4,
+        0
+       ],
+       [
+        6,
+        0
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "K",
+           "dir": "S",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "K",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 6
+           }
+          },
+          "x": "G",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gustav “was west of Blair and was exactly one row south of Katherine”: every tile that fits is ruled out except r8c1. Place Gustav there.",
+    "focus": [
+     [
+      7,
+      0
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ]
+     ],
+     "E": [
+      [
+       7,
+       2
+      ]
+     ],
+     "H": [
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       7
+      ],
+      [
+       7,
+       8
+      ],
+      [
+       7,
+       9
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     7,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       7,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    8,
+    4
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D",
+    "G",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in an area",
+     "kind": "eliminate",
+     "text": "Jemima was alone and is placed on the Sand Dunes, so nobody else can be on the Sand Dunes.",
+     "focus": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "J",
+       "room": "SAND_DUNES"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Someone must watch it",
+     "kind": "eliminate",
+     "text": "The blindspot law: r4c5 cannot be a hiding spot (Jemima was alone on the Sand Dunes), so someone must watch it, and only r9c5 can see it. Someone stands there, whoever it is, and watches its sightlines: nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       4
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       6
+      ],
+      [
+       8,
+       7
+      ],
+      [
+       8,
+       8
+      ],
+      [
+       9,
+       4
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        6
+       ],
+       [
+        8,
+        7
+       ],
+       [
+        8,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MUST_WATCH_ONE",
+      "ruleKey": "RULE_MUST_WATCH",
+      "params": {
+       "coord": [
+        3,
+        4
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "J",
+         "room": "SAND_DUNES"
+        }
+       },
+       "options": [
+        [
+         8,
+         4
+        ]
+       ],
+       "coords": [
+        [
+         8,
+         2
+        ],
+        [
+         8,
+         6
+        ],
+        [
+         8,
+         7
+        ],
+        [
+         8,
+         8
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Humphrey “was at the Oasis”: every tile that fits is ruled out except r9c5. Place Humphrey there.",
+    "focus": [
+     [
+      8,
+      4
+     ]
+    ],
+    "elims": {},
+    "suspect": "H",
+    "cell": [
+     8,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       8,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    0,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 4,
+   "fits": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     2
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Elspeth stood on r2c3? The clues would then put Celeste on r3c9 and Florian on r1c10, and 2 tiles would stay dark instead of 1. So Elspeth cannot be on r2c3.",
+     "focus": [
+      [
+       1,
+       2
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        1,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "E",
+       "coord": [
+        1,
+        2
+       ],
+       "contra": {
+        "templateKey": "CONTRA_DARK_COUNT",
+        "params": {
+         "count": 2,
+         "expected": 1
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "C",
+          "coord": [
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "F",
+          "coord": [
+           0,
+           9
+          ]
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Elspeth “was in column 3”: every tile that fits is ruled out except r1c3. Place Elspeth there.",
+    "focus": [
+     [
+      0,
+      2
+     ]
+    ],
+    "elims": {},
+    "suspect": "E",
+    "cell": [
+     0,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       0,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    1,
+    8
+   ],
+   "needs": [
+    "A",
+    "B",
+    "D",
+    "E",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 4,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     4
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     8,
+     7
+    ],
+    [
+     8,
+     8
+    ],
+    [
+     9,
+     1
+    ],
+    [
+     9,
+     2
+    ],
+    [
+     9,
+     3
+    ],
+    [
+     9,
+     4
+    ],
+    [
+     9,
+     5
+    ],
+    [
+     9,
+     6
+    ],
+    [
+     9,
+     7
+    ],
+    [
+     9,
+     8
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Florian can only be at r1c7 or r1c10, and those tiles all lie on one sightline. Whichever one Florian takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       0,
+       9
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        0,
+        9
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "F",
+       "options": [
+        [
+         0,
+         6
+        ],
+        [
+         0,
+         9
+        ]
+       ],
+       "coords": [
+        [
+         0,
+         6
+        ],
+        [
+         0,
+         7
+        ],
+        [
+         0,
+         8
+        ],
+        [
+         0,
+         9
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Dig Site, Mesa).",
+     "focus": [
+      [
+       1,
+       4
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        1,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "C",
+       "other": "F",
+       "rooms": [
+        "DIG_SITE",
+        "MESA"
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 3,
+     "rule": "Unseen partner (lookahead)",
+     "kind": "eliminate",
+     "text": "Lookahead: Celeste was in the same area as Florian. From the marked tiles, Celeste would see every tile where Florian could still stand to make that true, and no two scapegoats may see each other. So Celeste cannot be there.",
+     "focus": [
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       9
+      ],
+      [
+       2,
+       9
+      ],
+      [
+       4,
+       6
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        9
+       ],
+       [
+        2,
+        9
+       ],
+       [
+        4,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SIGHT",
+      "ruleKey": "RULE_PARTNER_SIGHT",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "SAME_ROOM",
+          "subject": "C",
+          "params": {
+           "other": "F"
+          }
+         }
+        }
+       },
+       "coords": [
+        [
+         1,
+         6
+        ],
+        [
+         1,
+         9
+        ],
+        [
+         2,
+         9
+        ],
+        [
+         4,
+         6
+        ]
+       ],
+       "x": "C",
+       "y": "F"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 3,
+     "rule": "Coverage check (lookahead)",
+     "kind": "eliminate",
+     "text": "What if Celeste stood on r3c9? Without following any clue further, r2c5, r2c8 could never be watched. So Celeste cannot be on r3c9.",
+     "focus": [
+      [
+       2,
+       8
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        2,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COVER_CHECK",
+      "ruleKey": "RULE_COVER_CHECK",
+      "params": {
+       "suspect": "C",
+       "coord": [
+        2,
+        8
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           1,
+           4
+          ],
+          [
+           1,
+           7
+          ]
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 4,
+     "rule": "What if…? (one-step trial)",
+     "kind": "eliminate",
+     "text": "What if Celeste stood on r2c8? The clues would then put Florian on r1c7, and 2 tiles would stay dark instead of 1. So Celeste cannot be on r2c8.",
+     "focus": [
+      [
+       1,
+       7
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        1,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRIAL_CHAIN",
+      "ruleKey": "RULE_LOOKAHEAD",
+      "params": {
+       "suspect": "C",
+       "coord": [
+        1,
+        7
+       ],
+       "contra": {
+        "templateKey": "CONTRA_DARK_COUNT",
+        "params": {
+         "count": 2,
+         "expected": 1
+        }
+       },
+       "seats": [
+        {
+         "templateKey": "FRAG_SEAT",
+         "params": {
+          "who": "F",
+          "coord": [
+           0,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 6,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Celeste “was in the same area as Florian”: every tile that fits is ruled out except r2c9. Place Celeste there.",
+    "focus": [
+     [
+      1,
+      8
+     ]
+    ],
+    "elims": {},
+    "suspect": "C",
+    "cell": [
+     1,
+     8
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       1,
+       8
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    0,
+    9
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "G",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     9,
+     9
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Shared area",
+     "kind": "eliminate",
+     "text": "Celeste was in the same area as Florian, so both must be in an area they can both still reach (Dig Site).",
+     "focus": [
+      [
+       0,
+       6
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SAME_ROOM",
+      "ruleKey": "RULE_SAME_ROOM",
+      "params": {
+       "owner": "C",
+       "other": "F",
+       "rooms": [
+        "DIG_SITE"
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Florian “was in a corner”: every tile that fits is ruled out except r1c10. Place Florian there.",
+    "focus": [
+     [
+      0,
+      9
+     ]
+    ],
+    "elims": {},
+    "suspect": "F",
+    "cell": [
+     0,
+     9
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       0,
+       9
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    4,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r5c7. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      4,
+      6
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     4,
+     6
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       4,
+       6
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.314,
+   "elims_before_first_place": 16,
+   "last_fifth_t1_share": 0.455,
+   "hardest_last_pos": 0.941,
+   "trials_in_last_fifth": 2,
+   "late_cascade": 0.0,
+   "late_elim_gap": 6,
+   "place_push": 4.36,
+   "global_uses": 1,
+   "global_first_t2": false,
+   "unlock_by_place": 0.0,
+   "star_opener": false
+  },
+  "flow_arc_ok": false,
+  "clue_fits": [
+   5,
+   5,
+   6,
+   7,
+   9,
+   9,
+   11,
+   24,
+   80,
+   84,
+   84
+  ],
+  "blank_clues": 3,
+  "G19_clue_range": true,
+  "G20_investigation": true,
+  "shadow_candidates_before_last": 4,
+  "shadow_candidates_before_last_two": 10,
+  "dark_known_at": 11,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 2,
+  "trait_atoms": [
+   "ALONE_WITH_P",
+   "TWO_P_ROOM"
+  ],
+  "trait_rules_used": [
+   "trait_partner"
+  ],
+  "trait_load_bearing": true,
+  "biome_props_on_board": [
+   "AMPHORA",
+   "BOULDER",
+   "CAMEL",
+   "CAMPFIRE",
+   "FLOOR_PILLOW",
+   "OASIS_POOL",
+   "OBELISK",
+   "STATUE",
+   "WOVEN_MAT"
+  ],
+  "biome_props_in_clues": [
+   "CAMEL",
+   "CAMPFIRE",
+   "OBELISK"
+  ],
+  "biome_props_load_bearing": [
+   "CAMEL",
+   "CAMPFIRE",
+   "OBELISK"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 401687,
+  "rules_used": [
+   "alone",
+   "compass",
+   "cover_check",
+   "lookahead",
+   "pair_watch",
+   "partner_sight",
+   "ray_block",
+   "room_count",
+   "same_room",
+   "shadow_law",
+   "trait_partner"
+  ],
+  "steps": 52,
+  "difficulty_score": 197,
+  "hardest_step_tier": 4,
+  "tall_scale": 1.0
+ },
+ "daily": "2026-11-08"
+}
