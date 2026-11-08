@@ -362,7 +362,10 @@ export function boardHint(p, cs) {
   const log = cs.hintLog || {}, hid = (h) => `h:${h.suspect}`;
   const started = open.filter((h) => log[hid(h)]).sort((a, b) => log[hid(b)] - log[hid(a)])[0];
   const h = started || open[0];
-  return { ...h, hid: hid(h) };
+  if (!h.chain) return { ...h, hid: hid(h) };
+  // The player may have placed more scapegoats than this hint needed: its lines that only narrow those down say nothing about the board any more.
+  const keep = h.chain.map((_, i) => i).filter((i) => { const who = Object.keys(h.chain[i].elims || {}); return !who.length || who.some((w) => !right.has(w)); });
+  return { ...h, chain: keep.map((i) => h.chain[i]), key: (h.key || []).filter((k) => keep.includes(k)).map((k) => keep.indexOf(k)), hid: hid(h) };
 }
 /**
  * The note cards of a placement hint (V10.6): its groundwork (the chain lines that are not key lines) in order, a run of lines with one
@@ -3218,6 +3221,7 @@ const CSS = `
 .sk-tabs button[aria-selected=true]{border-color:var(--brass);color:var(--brass2);background:var(--panel2)}
 .sk-labscroll{flex:1 1 auto;min-height:0;overflow:auto;padding:18px;overscroll-behavior:contain}
 
+@media (min-width:961px) and (min-height:521px){.sk-overlay:has(>.sk-hint){width:min(920px,calc(100% - 120px))}} /* the hint uses the room a narrower suspects column leaves */
 @media (min-width:961px){
   .sk-game[data-split]{grid-template-columns:minmax(340px,1fr) max(300px,min(var(--stagew),calc(100% - 456px))) 116px}
   .sk-split{display:block;position:absolute;z-index:7;top:0;bottom:0;left:0;width:10px;cursor:col-resize;touch-action:none}
