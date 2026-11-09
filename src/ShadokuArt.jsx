@@ -12,7 +12,7 @@
  *    flat fills, OS 1.5 outline with IS 0.9 detail, one shade step, a flat GroundShadow under upright props. Grouped by
  *    biome kit (MANSION, FARM, BEACH, FOREST, MOUNTAINS, DESERT, STREET, UNIVERSAL), with the span-aware ones (RugN / Rug,
  *    BedSpan / Bed, SofaSpan / Sofa, BilliardSpan / BilliardTable, FootprintsSpan / Footprints,
- *    BoatSpan / Boat, OasisPoolSpan / OasisPool, HotPoolSpan / HotPool, CarpetRunner). Helpers: OS, IS, GroundShadow, inkBox, slabTop, slabSide,
+ *    BoatSpan / Boat, OasisPoolSpan / OasisPool, HotPoolSpan / HotPool, StageCurtainSpan / StageCurtain, CarouselSpan / Carousel, CarpetRunner). Helpers: OS, IS, GroundShadow, inkBox, slabTop, slabSide,
  *    polyD, r2, useUid and the LOW-furniture camera lowCam / camTop / camSide / camFront. Registries: SPRITES,
  *    SPAN_SPRITES, PropSprite, PropChip, WallLayer, WindowPane, windowAt, X0, Y0
  *  - Portrait kit: AV (avataaars table), SKIN / HAIR / CLOTH palettes, the look
@@ -40,12 +40,22 @@ const CLASS_IDS = {
     "TV", "WARDROBE", "WATER_TOWER", "WINE_RACK", "WOODPILE",
     // front-end-only sprites (not in the catalog; never in an engine case)
     "SCARECROW", "LIFEGUARD_CHAIR", "TOTEM", "SANDSTONE_ARCH",
+    // sub-biomes (engine catalog: SUB_PROP_INFO)
+    "FUNNEL", "LIFEBOAT", "VENTILATOR", "BOILER", // Ocean Liner sub-biome
+    "POPCORN_CART", "TENT_POLE", "CANNON", "FUNHOUSE_MIRROR", "FERRIS_WHEEL", // Carnival sub-biome
+    "STAGE_CURTAIN", "STAGE_FLAT", "SPOTLIGHT", "DOUBLE_BASS", // Opera House sub-biome
+    "CYPRESS", "MOSSY_OAK", // Bayou sub-biome
   ],
-  PERCH: ["CAMEL", "HORSE", "PIANO"],
+  PERCH: ["CAMEL", "HORSE", "PIANO",
+    // sub-biomes (engine catalog: SUB_PROP_INFO)
+    "CAROUSEL", "HARP", "AIRBOAT",
+  ],
   SHORT: [
     "AMPHORA", "ANCHOR", "BARREL", "BEEHIVE", "BILLIARD_TABLE", "CAIRN", "CAMPFIRE", "CARDBOARD_BOX", "CRATE", "DESK", "DISPLAY_CASE", "FERN", "GRAMOPHONE",
     "HYDRANT", "JUKEBOX", "LANTERN", "SANDCASTLE", "SARCOPHAGUS", "SKI_RACK", "SNOWMAN", "STOVE", "TABLE", "TEA_TROLLEY",
     "TIKI_TORCH", "TRAFFIC_CONE", "TRASH_CAN", "TROUGH", "WASHER", "WELL", "WHEELBARROW",
+    // sub-biomes (engine catalog: SUB_PROP_INFO)
+    "SHIP_WHEEL", "CAPSTAN", "RING_TOSS", "COSTUME_TRUNK", "PROPS_TABLE", "CELLO", "TIMPANI", "MUSIC_STAND", "FOOTLIGHTS", "VELVET_ROPE", "CRAB_TRAP",
   ],
   LOW: [
     "BARBER_CHAIR", "BEARSKIN", "BED", "BENCH", "BOAT", "BROKEN_GLASS", "CARPET_RUNNER", "CHAIR", "COOLER", "CUSHION", "DRIFTWOOD", "FAIRY_RING",
@@ -54,6 +64,8 @@ const CLASS_IDS = {
     // front-end-only sprites
     "FLOOR_GRATE", "BUCKET", "CHICKEN_FEED", "STARFISH", "PICKAXE", "BONES", "SCORPION_NEST",
     "POTTERY_SHARDS", "TRASH_BAG", "GRAFFITI", "CHANDELIER_FALL",
+    // sub-biomes (engine catalog: SUB_PROP_INFO)
+    "DECK_CHAIR", "ROPE_COIL", "SAWDUST_RING", "CONDUCTOR_PODIUM", "THEATER_SEAT", "LILY_PADS",
   ],
 };
 /** Front-end default class per prop id, used only when a case has no "propClasses" entry for the kind. */
@@ -66,9 +78,10 @@ export const LOW = new Set(CLASS_IDS.LOW);
 /** LOW items lying flat on the floor (rugs, runners, mats, hatches, puddles): the board never fades them under a token, so a long
  *  runner does not turn see-through when one person stands on one of its tiles. Sit-on furniture still fades. */
 export const FLAT_FLOOR = new Set(["BEARSKIN", "BROKEN_GLASS", "CARPET_RUNNER", "FAIRY_RING", "FLOOR_GRATE", "FOOTPRINTS", "GRATE", "HOT_POOL", "ICE",
-  "MANHOLE", "MOSS", "MUD", "OASIS_POOL", "PUDDLE", "RUG", "STRAW_MAT", "TOWEL", "TRAPDOOR", "WOVEN_MAT", "GRAFFITI"]);
-/** Animals drawn in profile facing east: the board mirrors one (`flip`) when a wall is on its east side and not its west, so its head never pokes into the wall. */
-export const FACING = new Set(["CAMEL", "HORSE"]);
+  "MANHOLE", "MOSS", "MUD", "OASIS_POOL", "PUDDLE", "RUG", "STRAW_MAT", "TOWEL", "TRAPDOOR", "WOVEN_MAT", "GRAFFITI",
+  "ROPE_COIL", "SAWDUST_RING", "LILY_PADS"]);
+/** Things drawn in profile facing east (animals, the airboat): the board mirrors one (`flip`) when a wall is on its east side and not its west, so its head or bow never pokes into the wall. */
+export const FACING = new Set(["CAMEL", "HORSE", "AIRBOAT"]);
 /** The class of `kind` in puzzle `p`: the case's own propClasses first, then PROP_CLASS. null for floor, CORPSE, VOID and unknown ids. */
 export function propClassOf(p, kind) {
   if (!kind || kind === "CORPSE" || kind === "VOID") return null;
@@ -109,6 +122,15 @@ export const LABEL = {
   BIRCH: "Birch Tree", TRAFFIC_CONE: "Traffic Cone", CLOCK: "Grandfather Clock", TEA_TROLLEY: "Tea Trolley",
   SPIRAL_STAIRS: "Spiral Staircase",
   HAY_WAGON: "Hay Wagon", HOT_POOL: "Hot Pool",
+  // Ocean Liner sub-biome
+  FUNNEL: "Ship's Funnel", LIFEBOAT: "Lifeboat", VENTILATOR: "Cowl Ventilator", BOILER: "Boiler", SHIP_WHEEL: "Ship's Wheel", CAPSTAN: "Capstan", DECK_CHAIR: "Deck Chair", ROPE_COIL: "Rope Coil",
+  // Carnival sub-biome
+  CAROUSEL: "Carousel", POPCORN_CART: "Popcorn Cart", TENT_POLE: "Tent Pole", CANNON: "Human Cannon", FUNHOUSE_MIRROR: "Funhouse Mirror", FERRIS_WHEEL: "Ferris Wheel", RING_TOSS: "Ring Toss", SAWDUST_RING: "Sawdust Ring",
+  // Opera House sub-biome
+  STAGE_CURTAIN: "Stage Curtain", STAGE_FLAT: "Scenery Flat", SPOTLIGHT: "Spotlight", HARP: "Harp", COSTUME_TRUNK: "Costume Trunk", PROPS_TABLE: "Props Table",
+  DOUBLE_BASS: "Double Bass", CELLO: "Cello", TIMPANI: "Timpani", MUSIC_STAND: "Music Stand", CONDUCTOR_PODIUM: "Conductor's Podium", THEATER_SEAT: "Theater Seat", FOOTLIGHTS: "Footlights", VELVET_ROPE: "Velvet Rope",
+  // Bayou sub-biome
+  CYPRESS: "Bald Cypress", MOSSY_OAK: "Mossy Oak", AIRBOAT: "Airboat", CRAB_TRAP: "Crab Trap", LILY_PADS: "Lily Pads",
 };
 
 /* ---- Biomes: the 7 environments (`p.theme`) ------------------------------ */
@@ -122,6 +144,11 @@ export const BIOME_META = {
   MOUNTAINS: { label: "Mountains", icon: "🏔️", wall: "#8c969e" },
   DESERT: { label: "Desert", icon: "🏜️", wall: "#d9b382" },
   STREET: { label: "Street", icon: "🏙️", wall: "#a65346" },
+  // sub-biomes (engine SUB_BIOME_DEFS): a theme for walls and floors, deliberately not in BIOMES (no filter, no rotation)
+  LINER: { label: "Ocean Liner", icon: "🚢", wall: "#d9dde0" },
+  CARNIVAL: { label: "Carnival", icon: "🎪", wall: "#c96f3f" },
+  OPERA: { label: "Opera House", icon: "🎭", wall: "#7d3b45" },
+  BAYOU: { label: "Bayou", icon: "🐊", wall: "#6b6a47" },
 };
 export const themeOf = (p) => (p && BIOME_META[String(p.theme || "").toUpperCase()] ? String(p.theme).toUpperCase() : "MANSION");
 /** Which kit each prop belongs to (drives the Biome Filter in the inspector). A value is one biome, UNIVERSAL, or a list of
@@ -157,6 +184,15 @@ export const PROP_BIOME = {
   BIRCH: "FOREST", TRAFFIC_CONE: "STREET", CLOCK: "MANSION", TEA_TROLLEY: "MANSION",
   SPIRAL_STAIRS: "BEACH", // engine scope: BIOME, themes [BEACH] (the Lighthouse zone)
   HAY_WAGON: "FARM", HOT_POOL: "MOUNTAINS",
+  // Ocean Liner sub-biome
+  FUNNEL: "BEACH", LIFEBOAT: "BEACH", VENTILATOR: "BEACH", BOILER: "BEACH", SHIP_WHEEL: "BEACH", CAPSTAN: "BEACH", DECK_CHAIR: "BEACH", ROPE_COIL: "BEACH",
+  // Carnival sub-biome
+  CAROUSEL: "STREET", POPCORN_CART: "STREET", TENT_POLE: "STREET", CANNON: "STREET", FUNHOUSE_MIRROR: "STREET", FERRIS_WHEEL: "STREET", RING_TOSS: "STREET", SAWDUST_RING: "STREET",
+  // Opera House sub-biome
+  STAGE_CURTAIN: "MANSION", STAGE_FLAT: "MANSION", SPOTLIGHT: "MANSION", HARP: "MANSION", COSTUME_TRUNK: "MANSION", PROPS_TABLE: "MANSION",
+  DOUBLE_BASS: "MANSION", CELLO: "MANSION", TIMPANI: "MANSION", MUSIC_STAND: "MANSION", CONDUCTOR_PODIUM: "MANSION", THEATER_SEAT: "MANSION", FOOTLIGHTS: "MANSION", VELVET_ROPE: "MANSION",
+  // Bayou sub-biome
+  CYPRESS: "FOREST", MOSSY_OAK: "FOREST", AIRBOAT: "FOREST", CRAB_TRAP: "FOREST", LILY_PADS: "FOREST",
 };
 export const FILTERS = ["ALL", "UNIVERSAL", ...BIOMES];
 export const FILTER_LABEL = { ALL: "All", UNIVERSAL: "Universal", ...Object.fromEntries(BIOMES.map((b) => [b, BIOME_META[b].label])) };
@@ -176,16 +212,18 @@ export const SUSPECT_COLORS = ["#f4a259", "#7cc6fe", "#c9a3e6", "#8fd694", "#f78
 /*  Floors: each room gets an architectural texture, picked by its name     */
 /* ---------------------------------------------------------------------- */
 export const INDOOR_FLOORS = ["parquet", "checker", "marble", "carpet", "stone", "slate", "terracotta"];
-export const FLOORS = [...INDOOR_FLOORS, "grass", "dirt", "sand", "boardwalk", "snow", "canyon", "asphalt", "cobble"];
+export const FLOORS = [...INDOOR_FLOORS, "grass", "dirt", "sand", "boardwalk", "snow", "canyon", "asphalt", "cobble", "marsh"];
 export const FLOOR_LABEL = {
   parquet: "Parquet wood", checker: "Checker tile", marble: "Marble", carpet: "Carpet", stone: "Flagstone", slate: "Slate tile", terracotta: "Terracotta", water: "Open water",
-  grass: "Grass", dirt: "Tilled soil", sand: "Wind-rippled sand", boardwalk: "Boardwalk planks", snow: "Alpine snow", canyon: "Canyon rock", asphalt: "Asphalt", cobble: "Cobble pavers",
+  grass: "Grass", dirt: "Tilled soil", sand: "Wind-rippled sand", boardwalk: "Boardwalk planks", snow: "Alpine snow", canyon: "Canyon rock", asphalt: "Asphalt", cobble: "Cobble pavers", marsh: "Marsh",
 };
 /** Biome floors, in the order the per-biome pools below hand them out. */
 export const BIOME_FLOORS = { MANSION: INDOOR_FLOORS, FARM: ["grass", "dirt", "boardwalk", "parquet", "stone", "slate"],
   BEACH: ["sand", "boardwalk", "stone", "slate", "grass", "terracotta", "parquet"], FOREST: ["grass", "dirt", "stone", "slate", "boardwalk", "parquet"],
   MOUNTAINS: ["snow", "stone", "slate", "parquet", "boardwalk", "canyon"], DESERT: ["sand", "canyon", "stone", "terracotta", "grass", "carpet"],
-  STREET: ["asphalt", "cobble", "slate", "stone", "checker", "parquet"] };
+  STREET: ["asphalt", "cobble", "slate", "stone", "checker", "parquet"],
+  LINER: ["boardwalk", "parquet", "carpet", "checker", "slate", "marble"], CARNIVAL: ["dirt", "grass", "cobble", "boardwalk", "carpet", "sand"],
+  OPERA: ["carpet", "parquet", "marble", "stone", "checker", "slate"], BAYOU: ["grass", "dirt", "marsh", "boardwalk"] };
 export const FLOOR_RULES = [ // the mansion rules (unchanged)
   [/bed|dormitory/i, "carpet"], [/kitchen|refectory/i, "checker"], [/bath/i, "marble"],
   [/sculpture|lobby|foyer/i, "marble"], [/vault|chapel|gatehouse/i, "stone"],
@@ -204,6 +242,10 @@ export const BIOME_RULES = {
   MOUNTAINS: [[/ridge|summit|ledge|peak|slope|ice|cave/i, "snow"], [/cliff|trail/i, "stone"], [/station|hut|refuge|tower/i, "slate"]],
   DESERT: [[/tent|caravan|bazaar|market/i, "carpet"], [/tomb|temple|ruin|pyramid|sphinx/i, "stone"], [/palm|garden/i, "grass"], [/dune|sand|oasis/i, "sand"], [/canyon|mesa|pass|gorge|rock|cliff/i, "canyon"]],
   STREET: [[/rooftop|roof|alley|crosswalk|crossing|road|street|lane|avenue|parking/i, "asphalt"], [/corner|plaza|sidewalk|square|market|newsstand|stand|courtyard/i, "cobble"], [/subway|station|metro|underpass/i, "slate"]],
+  LINER: [[/deck|promenade/i, "boardwalk"], [/boiler|hold/i, "slate"], [/ballroom|bridge/i, "parquet"], [/galley/i, "checker"]],
+  CARNIVAL: [[/big top|side show/i, "sand"], [/midway|wheel|cannon|menagerie/i, "dirt"], [/carousel|ring toss/i, "cobble"], [/mirror|ticket/i, "carpet"]],
+  OPERA: [[/stage/i, "parquet"], [/pit/i, "stone"], [/balcony|box|green|dressing/i, "carpet"]],
+  BAYOU: [[/backwater/i, "marsh"], [/dock|shack|stilt|smoke/i, "boardwalk"], [/grove/i, "grass"], [/swamp|mangrove/i, "dirt"]],
 };
 export function floorOf(name, id, theme = "MANSION") {
   const t = BIOME_META[String(theme || "").toUpperCase()] ? String(theme).toUpperCase() : "MANSION", n = name || "";
@@ -371,6 +413,25 @@ export function FloorDefs({ align = true }) {
           [1, 33, 20, 14], [23, 33, 18, 14], [43, 33, 20, 14], [1, 49, 14, 14], [17, 49, 24, 14], [43, 49, 20, 14]].map(([x, y, w, h], i) =>
           <rect key={i} x={x} y={y} width={w} height={h} rx="3" fill={["#8a847d", "#7c766f", "#948e86", "#847e77"][i % 4]} stroke="#4a4642" strokeWidth="1" />)}
       </>)}
+      {P("marsh", (() => {
+        // a fine irregular mottle of wet ground and deep water (no big shapes, so the eye reads a surface and not a 64-unit lattice); each blob near an edge is repeated across it, so there is no seam
+        const copies = (list, fill) => list.flatMap(([x, y, r, w], i) => [-64, 0, 64].flatMap((ox) => [-64, 0, 64].filter((oy) => x + ox + r * 1.4 > 0 && x + ox - r * 1.4 < 64 && y + oy + r * 1.4 > 0 && y + oy - r * 1.4 < 64).map((oy) => <path key={`${fill}${i}${ox}${oy}`} d={blob(x + ox, y + oy, r, w)} fill={fill} />)));
+        const blob = (cx, cy, r, w) => {
+          const n = w.length, pts = w.map((v, i) => { const a = (i * 2 * Math.PI) / n; return [cx + r * v * Math.cos(a), cy + r * v * .82 * Math.sin(a)]; });
+          const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], q = (p) => `${r2(p[0])} ${r2(p[1])}`;
+          return `M${q(mid(pts[n - 1], pts[0]))}` + pts.map((p, i) => `Q${q(p)} ${q(mid(p, pts[(i + 1) % n]))}`).join("") + "Z";
+        };
+        const W1 = [1.2, .7, 1.1, .8, 1.2, .75], W2 = [.9, 1.2, .7, 1.1, .8, 1.15, .75], W3 = [1.1, .85, 1.25, .7, 1, .9];
+        const MUD = [[10, 13, 10, W1], [31, 5, 6, W2], [51, 17, 12, W3], [20, 36, 8, W2], [42, 42, 13, W1], [3, 52, 7, W3], [60, 44, 5, W2], [29, 59, 6, W1], [52, 63, 5, W3], [38, 27, 4, W1]];
+        const DEEP = [[24, 22, 6, W3], [8, 34, 5, W1], [55, 33, 6, W2], [17, 53, 6, W3], [40, 56, 4, W2]];
+        return <>
+          <rect width="64" height="64" fill="#536a5a" />
+          {copies(MUD, "#6a6a50")}
+          {copies(DEEP, "#4b6253")}
+          <path d="M39 32Q44 29 49 32M7 41Q11 38.6 15 41M28 21Q32 18.6 36 21" fill="none" stroke="#6a8270" strokeWidth="1" strokeLinecap="round" />
+          {[[15, 9], [44, 12], [24, 45], [53, 47]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r=".8" fill="#7c8756" />)}
+        </>;
+      })())}
       {P("water", <>
         <rect width="64" height="64" fill="#2c8bb0" />
         {[8, 24, 40, 56].map((y, i) => <path key={y} d={`M${i % 2 ? -8 : 0} ${y}Q${i % 2 ? 0 : 8} ${y - 5} ${i % 2 ? 8 : 16} ${y}T${i % 2 ? 24 : 32} ${y}T${i % 2 ? 40 : 48} ${y}T${i % 2 ? 56 : 64} ${y}T${i % 2 ? 72 : 80} ${y}`} fill="none" stroke={i % 2 ? "#4fa9cb" : "#6cc3e0"} strokeWidth="1.7" strokeOpacity=".8" />)}
@@ -6014,6 +6075,1640 @@ export function HotPoolSpan({ cw = 1, ch = 1 }) {
 }
 export const HotPool = () => <HotPoolSpan cw={1} ch={1} />;
 
+/* ====================================================================== */
+/*  SUB-BIOME KITS · catalog SUB_PROP_INFO, zones in SUB_BIOME_DEFS        */
+/*  Ocean Liner (BEACH), Carnival (STREET), Opera House (MANSION),          */
+/*  Bayou (FOREST). The same camera, inks and helpers as every other prop.  */
+/* ====================================================================== */
+/** An upright round body between y0 and y1, both ends bowed towards the viewer (seen slightly from above). Path `d`. */
+export const drumBand = (cx, rx, ry, y0, y1) => `M${r2(cx - rx)} ${r2(y0)}A${rx} ${ry} 0 0 0 ${r2(cx + rx)} ${r2(y0)}V${r2(y1)}A${rx} ${ry} 0 0 1 ${r2(cx - rx)} ${r2(y1)}Z`;
+/** The east part of a drumBand, from the fraction `f` of the radius out to its right edge: the one shade step of a round body. Path `d`. */
+export const drumEast = (cx, rx, ry, y0, y1, f = .45) => {
+  const sx = r2(cx + f * rx), dy = r2(ry * Math.sqrt(1 - f * f));
+  return `M${sx} ${r2(y0 + dy)}A${rx} ${ry} 0 0 0 ${r2(cx + rx)} ${r2(y0)}V${r2(y1)}A${rx} ${ry} 0 0 1 ${sx} ${r2(y1 + dy)}Z`;
+};
+/** The front half of a ring round a round body: one seam line across it. Path `d`. */
+export const drumSeam = (cx, rx, ry, y) => `M${r2(cx - rx)} ${r2(y)}A${rx} ${ry} 0 0 0 ${r2(cx + rx)} ${r2(y)}`;
+/** A tube, pole or rope along `d`: an ink stroke with a narrower colour stroke over it, `w` wide overall, `e` of ink each side. */
+export const Tube = ({ d, c, w = 3.6, e = 1 }) => (
+  <>
+    <path d={d} fill="none" stroke={INK} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" />
+    <path d={d} fill="none" stroke={c} strokeWidth={r2(w - 2 * e)} strokeLinecap="round" strokeLinejoin="round" />
+  </>
+);
+/** A five-pointed star. Path `d`. */
+export const starD = (cx, cy, r, rot = -90) => polyD(...Array.from({ length: 10 }, (_, i) => {
+  const a = ((rot + i * 36) * Math.PI) / 180, q = i % 2 ? r * .42 : r;
+  return [cx + q * Math.cos(a), cy + q * Math.sin(a)];
+}));
+
+
+/* ---- Ocean Liner (sub-biome of BEACH) ---- */
+
+/** TALL. Ship's funnel: a fat buff drum raked a few degrees aft, a black cap and a red band, a thin steam pipe with a brass
+ *  whistle up its west side, rising out of a riveted steel deck collar. */
+export function Funnel() {
+  const paint = "#ece2c8", paintD = "#bfb190", cap = "#2e2e38", capD = "#1e1e27", band = "#c83e3b", bandD = "#93302f";
+  const steel = "#8795a1", steelL = "#aeb9c2", steelD = "#5f6c78";
+  const cx = 31, rx = 15, ry = 4.6, y0 = 9.4, yb = 50;
+  const parts = [[y0, 19.4, cap, capD], [19.4, 23.6, paint, paintD], [23.6, 33, band, bandD], [33, yb, paint, paintD]];
+  const rivet = (y) => Array.from({ length: 7 }, (_, k) => k - 3).map((k) => <circle key={`${y}${k}`} cx={r2(cx + k * 4.1)} cy={r2(y + ry * Math.sqrt(Math.max(0, 1 - ((k * 4.1) / rx) ** 2)))} r=".55" fill={INK} />);
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57} rx={24} ry={3.6} />
+      {/* deck collar: a squat steel ring with rivets */}
+      <path d={drumBand(32, 21, 5, 45, 52.2)} fill={steel} />
+      <path d={drumEast(32, 21, 5, 45, 52.2)} fill={steelD} />
+      <path d={drumBand(32, 21, 5, 45, 52.2)} fill="none" {...OS} />
+      <ellipse cx="32" cy="45" rx="21" ry="5" fill={steelL} {...OS} />
+      {Array.from({ length: 9 }, (_, k) => k - 4).map((k) => <circle key={k} cx={r2(32 + k * 4.6)} cy={r2(48.6 + 5 * Math.sqrt(1 - ((k * 4.6) / 21) ** 2))} r=".65" fill={INK} />)}
+      {/* the drum, raked aft about its foot */}
+      <g transform="translate(0 50) skewX(-4) translate(0 -50)">
+        {/* steam pipe and whistle on the west side */}
+        <Tube d="M12.8 47V8.6" c="#c9a24a" w={3.4} e={1} />
+        <path d="M14.8 22.4H17M14.8 39H17" {...IS} strokeWidth="1.4" />
+        <path d="M10.6 8.8L14.8 8.8L14 3.8H11.4Z" {...IS} fill={BRASS} />
+        {/* bands, each with its east strip, then one outline round the whole drum */}
+        {parts.map(([a, b, c, d]) => <g key={a}><path d={drumBand(cx, rx, ry, a, b)} fill={c} /><path d={drumEast(cx, rx, ry, a, b, .42)} fill={d} /></g>)}
+        <path d={`M${cx - 10.4} 36.4V47.8`} stroke="#fff" strokeOpacity=".5" strokeWidth="1.5" strokeLinecap="round" />
+        <path d={drumSeam(cx, rx, ry, 19.4)} {...IS} />
+        <path d={drumSeam(cx, rx, ry, 23.6)} {...IS} />
+        <path d={drumSeam(cx, rx, ry, 33)} {...IS} />
+        {rivet(38.4)}{rivet(44.4)}
+        <path d={drumBand(cx, rx, ry, y0, yb)} fill="none" {...OS} />
+        {/* the mouth: cap rim, dark inside */}
+        <ellipse cx={cx} cy={y0} rx={rx} ry={ry} fill={cap} {...OS} />
+        <ellipse cx={cx} cy={y0 + .3} rx={rx - 2.8} ry={ry - 1.5} fill="#0f0f15" />
+      </g>
+    </g>
+  );
+}
+
+/** TALL. Lifeboat hung high on two white curved davits: a white double-ended hull with a red bottom, a buff canvas cover and a
+ *  lifebuoy amidships, its keel up over head height with only the davit posts and a winch beneath it. Seen from the side,
+ *  so it reads nothing like the BOAT you sit in. */
+export function Lifeboat() {
+  const paint = "#efe9d8", paintD = "#bdb39c", hull = "#f4efe3", hullD = "#c9c0aa", anti = "#b8432f", canvas = "#d8c79c", canvasD = "#b19f72", rail = "#b77d45", iron = "#5f6c78";
+  const shape = "M8.6 11.4C11 15.4 13.4 25.6 22.6 26.6H41.4C50.6 25.6 53 15.4 55.4 11.4Q32 18 8.6 11.4Z";
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.2} rx={29} ry={3} />
+      {/* deck sockets, then the two davits curving in over the boat */}
+      <path d={inkBox(1.6, 52.6, 9, 4.6, 1, .2)} fill={iron} {...OS} />
+      <path d={inkBox(53.4, 52.6, 9, 4.6, 1, .2)} fill={iron} {...OS} />
+      <Tube d="M6 54V15C6 6.4 10 2.6 15 3C18.6 3.4 20.6 5.6 20.8 8.6" c={paint} w={5.2} e={1.3} />
+      <Tube d="M58 54V15C58 6.4 54 2.6 49 3C45.4 3.4 43.4 5.6 43.2 8.6" c={paintD} w={5.2} e={1.3} />
+      {/* winch on the west post, a coil of the falls on the east post */}
+      <circle cx="6" cy="39" r="3.6" {...IS} fill="#c9a24a" />
+      <path d="M6 39L11 42.4" stroke={INK} strokeWidth="2" strokeLinecap="round" />
+      <circle cx="11.2" cy="42.6" r="1.3" fill={INK} />
+      <ellipse cx="58" cy="37.6" rx="3.9" ry="1.9" {...IS} fill="#d9bc84" />
+      <ellipse cx="58" cy="40.4" rx="4.3" ry="2" {...IS} fill="#d9bc84" />
+      {/* falls: a block on each davit tip, short ropes to the boat */}
+      <path d="M20.8 9V14.6M43.2 9V14.6" stroke={INK} strokeWidth="1.4" strokeLinecap="round" />
+      <path d={inkBox(19.2, 7.2, 3.2, 3.2, .6, .1)} {...IS} fill={iron} />
+      <path d={inkBox(41.6, 7.2, 3.2, 3.2, .6, .1)} {...IS} fill={iron} />
+      {/* hull: white topsides, the shaded east run, a red bottom, a strake seam, then the outline and gunwale */}
+      <path d={shape} fill={hull} />
+      <path d="M55.4 11.4C53 15.4 50.6 25.6 41.4 26.6H38.6C44.8 25.6 47.4 19.6 48.4 13.5Q52.4 12.6 55.4 11.4Z" fill={hullD} />
+      <path d="M14.8 21.6Q32 24 49.2 21.6C47.4 24.8 44.8 26.3 41.4 26.6H22.6C19.2 26.3 16.6 24.8 14.8 21.6Z" fill={anti} />
+      <path d="M14.8 21.6Q32 24 49.2 21.6" {...IS} />
+      <path d={shape} fill="none" {...OS} />
+      <Tube d="M8.6 11.4Q32 18 55.4 11.4" c={rail} w={3.2} e={.9} />
+      {/* the canvas cover laced over the gunwale, a shaded east end and three ties */}
+      <path d="M12.4 13.2C17 6.6 47 6.6 51.6 13.2Q32 18.4 12.4 13.2Z" fill={canvas} {...OS} />
+      <path d="M51.6 13.2C49 9.6 43 8.1 37.8 7.9C42.2 9.4 45.2 12 45.8 15.3Q49 14.4 51.6 13.2Z" fill={canvasD} />
+      <path d="M19.8 10.3L20.8 15.4M32 8.8V16.6M44.2 10.3L43.2 15.4" {...IS} strokeOpacity=".6" />
+      {/* lifebuoy amidships */}
+      <circle cx="32" cy="21.8" r="3.9" {...IS} fill="#c83e3b" />
+      <path d="M28.4 21.8H30.4M33.6 21.8H35.6M32 18.2V20.2M32 23.4V25.4" stroke={CREAM} strokeWidth="1.3" />
+      <circle cx="32" cy="21.8" r="1.5" {...IS} fill={hull} />
+    </g>
+  );
+}
+
+/** TALL. Ship's cowl ventilator: a white pipe taller than a person rising from a deck flange, bending over at the top into a
+ *  big trumpet mouth turned sideways to the west, red inside with a dark throat, two brass collars on the pipe. */
+export function Ventilator() {
+  const paint = "#efe9d8", paintD = "#bdb39c", red = "#c83e3b", redD = "#7c2526", steel = "#8795a1", steelD = "#5f6c78";
+  const cx = 35;
+  const body = `M${cx - 5.4} 52V37.4C${cx - 5.4} 32 ${cx - 9.6} 30 16.4 30L16.4 3C${cx - 3} 3 ${cx + 5.4} 13 ${cx + 5.4} 27V52Z`;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57} rx={18} ry={3.2} />
+      {/* deck flange */}
+      <path d={drumBand(cx, 11, 3.2, 50.6, 54)} fill={steel} />
+      <path d={drumEast(cx, 11, 3.2, 50.6, 54)} fill={steelD} />
+      <path d={drumBand(cx, 11, 3.2, 50.6, 54)} fill="none" {...OS} />
+      <ellipse cx={cx} cy="50.6" rx="11" ry="3.2" fill="#aeb9c2" {...OS} />
+      {/* pipe and bend, the outer curve shaded, then its outline */}
+      <path d={body} fill={paint} />
+      <path d={`M${cx + 5.4} 52V27C${cx + 5.4} 15 ${cx} 7.4 22 4.4C30 8.4 ${cx + 1.2} 16 ${cx + 1.2} 27V52Z`} fill={paintD} />
+      <path d={body} fill="none" {...OS} />
+      {/* brass collars and a turning handle */}
+      {[46, 39.4].map((y) => <path key={y} d={drumBand(cx, 5.4, 1.4, y, y + 2.2)} {...OS} strokeWidth="1.1" fill={BRASS} />)}
+      <Tube d={`M${cx + 5.4} 43H${cx + 11}`} c={BRASS} w={2.8} e={.9} />
+      <circle cx={cx + 11.4} cy="43" r="1.6" {...IS} fill={BRASS} />
+      {/* the trumpet mouth: white lip, red inside, dark throat */}
+      <ellipse cx="16.4" cy="16.5" rx="8.2" ry="14.6" fill={paint} {...OS} />
+      <ellipse cx="17.2" cy="16.5" rx="5.9" ry="12" {...IS} fill={red} />
+      <path d="M17.2 4.5A5.9 12 0 0 1 17.2 28.5A5.9 12 0 0 0 17.2 4.5Z" fill={redD} />
+      <ellipse cx="19.4" cy="16.5" rx="3" ry="7.2" fill="#3a1114" />
+    </g>
+  );
+}
+
+/** TALL. Engine-room boiler: an upright riveted iron drum on a plinth, a brass-rimmed pressure gauge with a red needle, a
+ *  red valve wheel, a firebox door with a glow behind its slits and a stubby flanged steam pipe out of the top. */
+export function Boiler() {
+  const iron = "#5d6977", ironL = "#83909e", ironD = "#3e4853", plinth = "#6b5048", plinthD = "#4a362f", fire = "#f08a2a", fireL = "#f8cf55";
+  const cx = 31, rx = 18.5, ry = 5.2, y0 = 12.4, yb = 45;
+  const rivets = (y, n = 7, s = 5.4) => Array.from({ length: n }, (_, k) => k - (n - 1) / 2).map((k) => <circle key={`${y}${k}`} cx={r2(cx + k * s)} cy={r2(y + ry * Math.sqrt(1 - ((k * s) / rx) ** 2))} r=".75" fill={INK} />);
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57.2} rx={25} ry={3.4} />
+      {/* drum and its shade */}
+      <path d={drumBand(cx, rx, ry, y0, yb)} fill={iron} />
+      <path d={drumEast(cx, rx, ry, y0, yb, .4)} fill={ironD} />
+      <path d={`M${cx - 14} 20V43`} stroke="#fff" strokeOpacity=".22" strokeWidth="2" strokeLinecap="round" />
+      {/* seams and rivets */}
+      {[20.4, 33.4].map((y) => <path key={y} d={drumSeam(cx, rx, ry, y)} {...IS} />)}
+      {rivets(18.2)}{rivets(22.6)}{rivets(31.2)}{rivets(35.6)}
+      <path d={drumBand(cx, rx, ry, y0, yb)} fill="none" {...OS} />
+      <ellipse cx={cx} cy={y0} rx={rx} ry={ry} fill={ironL} {...OS} />
+      <ellipse cx={cx} cy={y0 + .2} rx={r2(rx - 4)} ry={r2(ry - 1.2)} {...IS} strokeOpacity=".5" />
+      {/* stubby steam pipe with a brass flange, out of the crown */}
+      <path d={drumBand(37, 4.6, 1.5, 5, 12.8)} fill={ironD} {...OS} />
+      <path d={inkBox(31, 2.2, 12, 3.8, 1, .1)} fill={BRASS} {...OS} />
+      {/* plinth */}
+      <path d={inkBox(9.6, 45.6, 44.4, 11.2, 1.2, .3)} fill={plinth} {...OS} />
+      <path d={inkBox(46, 46.4, 7.2, 9.6, .8, 0)} fill={plinthD} />
+      <path d="M12 51H52" {...IS} strokeOpacity=".55" />
+      {/* firebox door */}
+      <path d="M21.4 54.4V43.6Q31 38.4 40.6 43.6V54.4Z" fill={ironD} {...OS} />
+      <path d={inkBox(25, 45, 12, 2.2, .6, 0)} {...IS} fill={fire} />
+      <path d={inkBox(25, 48.4, 12, 2.2, .6, 0)} {...IS} fill={fireL} />
+      <circle cx="38.2" cy="51.6" r="1.1" fill={BRASS} />
+      {/* pressure gauge, and a red valve wheel on the east side */}
+      <circle cx="23" cy="27" r="6.2" fill={BRASS} {...OS} />
+      <circle cx="23" cy="27" r="4.4" {...IS} fill={CREAM} />
+      <path d="M19.6 28.4L19.1 29M23 23.3V24M26.4 28.4L26.9 29" {...IS} />
+      <path d="M23 27L25.6 24.6" stroke={CRIMSON} strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="23" cy="27" r=".9" fill={INK} />
+      <path d="M42.4 28.4V24.4" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx="42.4" cy="23.6" r="3.9" fill="none" stroke={INK} strokeWidth="3" />
+      <circle cx="42.4" cy="23.6" r="3.9" fill="none" stroke={CRIMSON} strokeWidth="1.4" />
+      <path d="M38.8 23.6H46M42.4 20V27.2" {...IS} />
+    </g>
+  );
+}
+
+/** SHORT. Ship's wheel at the helm: a teak wheel with eight turned spokes, its hub at waist height, on a navy binnacle pedestal
+ *  with a brass compass dome peeping over the rim and a round foot plate seen from above. */
+export function ShipWheel() {
+  const navy = "#2f4a66", navyL = "#476a8c", navyD = "#1f3348", teak = "#c08a48", teakL = "#e0b077", teakD = "#7d5126";
+  const cx = 32, cy = 35.2, R = 10.8;
+  const ang = (i) => Math.PI / 8 + (i * Math.PI) / 4;
+  const ray = (i, r0, r1) => `M${r2(cx + r0 * Math.cos(ang(i)))} ${r2(cy + r0 * Math.sin(ang(i)))}L${r2(cx + r1 * Math.cos(ang(i)))} ${r2(cy + r1 * Math.sin(ang(i)))}`;
+  const eight = [0, 1, 2, 3, 4, 5, 6, 7];
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57} rx={21} ry={3.4} />
+      {/* round foot plate */}
+      <path d={drumBand(32, 19, 4.8, 50.4, 53)} fill={navyD} {...OS} />
+      <ellipse cx="32" cy="50.4" rx="19" ry="4.8" fill={navyL} {...OS} />
+      {/* pedestal, its east third shaded; brass collar and the compass dome on top */}
+      <path d="M26 25H38L40 44L46 51.6Q32 55.6 18 51.6L24 44Z" fill={navy} {...OS} />
+      <path d="M34 25H38L40 44L46 51.6Q40.6 53.2 35.4 53.6Z" fill={navyD} />
+      <path d={inkBox(23.8, 43, 16.4, 2.6, .8, .1)} {...IS} fill={BRASS} />
+      <path d="M25.6 25.6C25.6 16.4 38.4 16.4 38.4 25.6Z" fill={BRASS} {...OS} />
+      <path d="M28 22.4C29 20.2 31 19.4 32.8 19.6" stroke="#fff" strokeOpacity=".6" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+      <path d={inkBox(24.4, 24.6, 15.2, 3.2, .8, .1)} fill={BRASS} {...OS} />
+      {/* the wheel's rim thickness, a shade down and up-right, seen from above */}
+      <circle cx={cx + 1.1} cy={cy - 1.3} r={R} fill="none" stroke={INK} strokeWidth="5.8" />
+      <circle cx={cx + 1.1} cy={cy - 1.3} r={R} fill="none" stroke={teakD} strokeWidth="3.4" />
+      {/* spokes through the rim and out to the handles */}
+      {eight.map((i) => <Tube key={i} d={ray(i, 2, 15)} c={teak} w={3} e={1} />)}
+      {eight.map((i) => <Tube key={`h${i}`} d={ray(i, 14.6, 16.9)} c={teakL} w={4.4} e={1} />)}
+      {/* rim, its lit upper-left arc, the brass hub */}
+      <circle cx={cx} cy={cy} r={R} fill="none" stroke={INK} strokeWidth="5.8" />
+      <circle cx={cx} cy={cy} r={R} fill="none" stroke={teak} strokeWidth="3.4" />
+      <path d={`M${r2(cx - 11.1)} ${r2(cy - 1.8)}A11.3 11.3 0 0 1 ${r2(cx + 1.8)} ${r2(cy - 11.1)}`} fill="none" stroke={teakL} strokeWidth="1.1" strokeLinecap="round" />
+      <circle cx={cx} cy={cy} r="3.6" fill={BRASS} {...OS} />
+      <circle cx={cx} cy={cy} r="1.1" fill={INK} />
+    </g>
+  );
+}
+
+/** SHORT. Mooring capstan at waist height: an iron drum with a flared foot, its waist wound with four turns of hemp rope whose
+ *  end trails off along the deck, and a wide cap seen from above with six bar sockets round a brass boss. */
+export function Capstan() {
+  const iron = "#5b6774", ironL = "#8a96a2", ironD = "#3d4752", rope = "#d9bc84", ropeD = "#a88a52";
+  const wraps = [34.4, 38.6, 42.8, 47];
+  const sockets = [0, 1, 2, 3, 4, 5].map((k) => { const a = ((k * 60 + 30) * Math.PI) / 180; return [r2(32 + 12 * Math.cos(a)), r2(24.6 + 4.9 * Math.sin(a))]; });
+  const turn = (y) => `M19.8 ${y}Q32 ${r2(y + 6.2)} 44.2 ${r2(y + 1.6)}`;
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57} rx={23} ry={3.2} />
+      {/* foot flange */}
+      <path d={drumBand(32, 18, 6, 48.4, 51)} fill={ironD} {...OS} />
+      <ellipse cx="32" cy="48.4" rx="18" ry="6" fill={iron} {...OS} />
+      {/* the waist */}
+      <path d={drumBand(32, 12.6, 4.4, 28, 49.4)} fill={iron} />
+      <path d={drumEast(32, 12.6, 4.4, 28, 49.4)} fill={ironD} />
+      <path d={drumBand(32, 12.6, 4.4, 28, 49.4)} fill="none" {...OS} />
+      {/* the rope: the trailing end first, then the turns, bottom up */}
+      <Tube d="M44 48.8C50 49.4 54.6 52 58.6 56.2" c={rope} w={4.6} e={1} />
+      <path d="M58.4 56.2L60.8 55M58.6 56.3L61.2 57.4M58 56.6L59.4 58.6" {...IS} />
+      {[...wraps].reverse().map((y) => <Tube key={y} d={turn(y)} c={rope} w={4.8} e={1} />)}
+      {wraps.map((y) => <path key={`t${y}`} d={turn(y)} fill="none" stroke={ropeD} strokeWidth="2.8" strokeDasharray=".9 2.6" />)}
+      {/* the cap: rim, top, a brass boss and six bar sockets */}
+      <path d={drumBand(32, 16.6, 7.2, 24.6, 29.4)} fill={iron} />
+      <path d={drumEast(32, 16.6, 7.2, 24.6, 29.4)} fill={ironD} />
+      <path d={drumBand(32, 16.6, 7.2, 24.6, 29.4)} fill="none" {...OS} />
+      <ellipse cx="32" cy="24.6" rx="16.6" ry="7.2" fill={ironL} {...OS} />
+      <ellipse cx="32" cy="24.6" rx="8" ry="3.4" {...IS} />
+      {sockets.map(([x, y]) => <ellipse key={`${x}${y}`} cx={x} cy={y} rx="2.1" ry="1.2" fill={INK} />)}
+      <ellipse cx="32" cy="24.2" rx="4.6" ry="2.2" {...IS} fill={BRASS} />
+    </g>
+  );
+}
+
+/** LOW. Slatted steamer lounger, kept low in the LOW-furniture camera: a long wooden frame running west to east, head raised and
+ *  feet down, a cream canvas sling with teal stripes over the back and seat, bare slats on the foot rest. No shadow. */
+export function DeckChair() {
+  const wood = "#b98a55", woodL = "#dcb67f", woodD = "#7f5a30", canvas = "#efe6cf", canvasD = "#cdbf9b", stripe = "#2f8f9a";
+  const P = lowCam(56), D = 17, rail = 3.6;
+  const pts = [[9, 26], [24, 11], [41, 11], [55, 7]]; // the profile, head to foot: [x, height of the slatted top]
+  const lerp = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+  const quad = (a, b, z0, z1) => polyD(P(a[0], z0, a[1]), P(a[0], z1, a[1]), P(b[0], z1, b[1]), P(b[0], z0, b[1]));
+  const atZ = (z, list = pts) => list.map(([x, h]) => P(x, z, h));
+  const leg = (x, h, z) => <Tube key={`${x}${z}`} d={`M${P(x, z, h - rail).map(r2).join(" ")}L${P(x, z, 0).map(r2).join(" ")}`} c={z ? woodD : wood} w={3.8} e={1} />;
+  const rung = (a, b, t, z0 = 0, z1 = D) => { const q = lerp(a, b, t); return `M${P(q[0], z0, q[1]).map(r2).join(" ")}L${P(q[0], z1, q[1]).map(r2).join(" ")}`; };
+  const [A, B, C, E] = pts;
+  const head = lerp(A, B, .05), band = lerp(A, B, .26);
+  return (
+    <g>
+      {/* far legs and the back stay */}
+      {leg(27, 11, D)}{leg(44, 11, D)}{leg(52, 7.4, D)}
+      <Tube d={`M${P(14.5, D - 3, 21).map(r2).join(" ")}L${P(23, D - 3, 0).map(r2).join(" ")}`} c={woodD} w={3.4} e={1} />
+      {/* the slatted top, in three planes, lit */}
+      <path d={quad(A, B, 0, D)} fill={woodL} {...OS} />
+      <path d={quad(B, C, 0, D)} fill={woodL} {...OS} />
+      <path d={quad(C, E, 0, D)} fill={woodL} {...OS} />
+      {[.2, .4, .6, .8].map((t) => <path key={t} d={rung(C, E, t)} {...IS} />)}
+      {/* canvas sling over the back and seat, its stripes running head to foot, a pale headrest band */}
+      <path d={polyD(...atZ(1.8, [head, B, C]), ...atZ(15.2, [head, B, C]).reverse())} {...IS} fill={canvas} />
+      {[5.2, 8.5, 11.8].map((z) => <path key={z} d={`M${atZ(z, [head, B, C]).map((p) => p.map(r2).join(" ")).join("L")}`} fill="none" stroke={stripe} strokeWidth="1.4" />)}
+      <path d={quad(head, band, 1.8, 15.2)} {...IS} fill={canvasD} />
+      {/* near rail along the whole length, the near legs, the end grain at the foot */}
+      {leg(27, 11, 0)}{leg(44, 11, 0)}{leg(52, 7.4, 0)}
+      <path d={polyD(...atZ(0), ...pts.slice().reverse().map(([x, h]) => P(x, 0, h - rail)))} fill={wood} {...OS} />
+      <path d={camSide(P, E[0], 0, D, E[1] - rail, E[1])} fill={woodD} {...OS} />
+    </g>
+  );
+}
+
+/** LOW. A coil of thick hemp rope flat on the deck, seen from above: one rope spiralling in eight half turns from the middle out to
+ *  the edge of the tile, with twist marks across it and a whipped end lying loose. Flush: you can stand on it. No shadow. */
+export function RopeCoil() {
+  const rope = "#d9bc84", ropeD = "#a88a52", ropeL = "#f0dcae";
+  const p = 6.4, N = 8, y0 = 30.4;
+  let x = 32, d = `M${x} ${y0}`, ticks = "";
+  for (let i = 1; i <= N; i++) {
+    const R = (i * p) / 2, sg = i % 2 ? 1 : -1, c = x + sg * R, nx = c + sg * R, a0 = i % 2 ? Math.PI : 0;
+    d += `A${r2(R)} ${r2(R)} 0 0 1 ${r2(nx)} ${y0}`;
+    const n = Math.max(1, Math.round((Math.PI * R) / 2.5));
+    for (let k = 0; k < n; k++) {
+      const a = a0 + (Math.PI * (k + .5)) / n, b = a + 1.6 / R;
+      ticks += `M${r2(c + (R + 2.1) * Math.cos(a))} ${r2(y0 + (R + 2.1) * Math.sin(a))}L${r2(c + (R - 2.1) * Math.cos(b))} ${r2(y0 + (R - 2.1) * Math.sin(b))}`;
+    }
+    x = nx;
+  }
+  const tail = `M${r2(x)} ${y0}C${r2(x - 1)} 24 ${r2(x + 2.6)} 19 ${r2(x + 6.4)} 14`;
+  return (
+    <g>
+      <Tube d={tail} c={rope} w={6.8} e={1} />
+      <path d={d} fill="none" stroke={INK} strokeWidth="6.9" strokeLinecap="round" />
+      <path d={d} fill="none" stroke={rope} strokeWidth="4.7" strokeLinecap="round" />
+      <path d={ticks} fill="none" stroke={ropeD} strokeWidth=".95" strokeLinecap="round" />
+      {/* the whipped end of the rope, frayed past its binding */}
+      <path d={`M${r2(x + 4.6)} 15.6L${r2(x + 8.8)} 12.8`} stroke={ropeL} strokeWidth="4.8" strokeLinecap="butt" />
+      <path d={`M${r2(x + 7.6)} 12L${r2(x + 11)} 9.8M${r2(x + 8.4)} 13L${r2(x + 12)} 11.8M${r2(x + 9)} 14.2L${r2(x + 12)} 14`} {...IS} />
+    </g>
+  );
+}
+
+
+/* ---- Carnival (sub-biome of STREET) ---- */
+
+/** A striped conical canopy seen from slightly above, with a gold rounding board round its rim and a scalloped valance under it: `apex`, the eave `cx ey rx ry`, `n` panels. */
+export function CarouselCanopy({ apex, cx, ey, rx, ry, n = 12, band = 6, val = 3.8, bulb = 1.3 }) {
+  const red = "#c83e3b", redD = "#8f2a2a", cream = "#f4efe2", creamD = "#cfc6b0", gold = "#e3b94f", goldD = "#a87a24", goldL = "#f4d98a";
+  const P = (t) => [cx + rx * Math.cos(Math.PI * (1 - t)), ey + ry * Math.sin(Math.PI * (1 - t))];
+  const panels = Array.from({ length: n }, (_, i) => i);
+  const shade = (i) => i >= n * .68;
+  const colour = (i) => (i % 2 ? (shade(i) ? creamD : cream) : (shade(i) ? redD : red));
+  return (
+    <g>
+      {/* the valance under the board */}
+      {panels.map((i) => {
+        const a = P(i / n), b = P((i + 1) / n), m = P((i + .5) / n);
+        return <path key={i} d={`M${r2(a[0])} ${r2(a[1] + band)}Q${r2(m[0])} ${r2(m[1] + band + val * 2)} ${r2(b[0])} ${r2(b[1] + band)}Z`} fill={colour(i)} stroke={INK} strokeWidth=".9" strokeLinejoin="round" />;
+      })}
+      {/* the rounding board, gold with a shaded east run and a bulb at every panel */}
+      <path d={drumBand(cx, rx, ry, ey, ey + band)} fill={gold} />
+      <path d={drumEast(cx, rx, ry, ey, ey + band, .42)} fill={goldD} />
+      <path d={drumBand(cx, rx, ry, ey, ey + band)} fill="none" {...OS} />
+      {panels.slice(1).map((i) => { const a = P(i / n); return <circle key={`b${i}`} cx={r2(a[0])} cy={r2(a[1] + band / 2)} r={bulb} fill={goldL} stroke={INK} strokeWidth=".7" />; })}
+      {/* the striped cone */}
+      {panels.map((i) => { const a = P(i / n), b = P((i + 1) / n); return <path key={`p${i}`} d={polyD(apex, a, b)} fill={colour(i)} />; })}
+      <path d={`M${r2(cx - rx)} ${ey}L${apex[0]} ${apex[1]}L${r2(cx + rx)} ${ey}A${rx} ${ry} 0 0 1 ${r2(cx - rx)} ${ey}Z`} fill="none" {...OS} />
+    </g>
+  );
+}
+
+/** One of the carousel's riding horses, facing east (`flip`: west): a cream body, gold mane and tail, gilded hooves and a big crimson saddle, on a striped brass pole and foot plate. Origin: the middle
+ *  of the foot plate, drawn upward. `s` scales the shape only: the outline stays OS and IS at any size. */
+export function RideHorse({ x, y, flip, s = 1 }) {
+  const coat = "#f2ebdc", coatD = "#c9bda6", mane = "#e0ad3f", hoof = "#d9a93c", pole = "#e3b94f", red = "#c83e3b", seat = "#c83e3b", seatL = "#e4766c", seatD = "#8f2a2a";
+  const O = { ...OS, strokeWidth: r2(1.5 / s) }, I = { ...IS, strokeWidth: r2(.9 / s) };
+  return (
+    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
+      <ellipse cx="0" cy="-1" rx="9" ry="2.6" fill={hoof} {...O} />
+      <rect x="-1.9" y="-47" width="3.8" height="46" fill={pole} {...O} />
+      <path d="M-1.9 -40L1.9 -44M-1.9 -32L1.9 -36M-1.9 -14L1.9 -18M-1.9 -7L1.9 -11" stroke={red} strokeWidth="2.2" />
+      <circle cx="0" cy="-48" r="2.3" fill={hoof} {...O} />
+      {/* tail, far legs, body */}
+      <path d="M-14.6 -31C-20.8 -33 -25.2 -29.4 -25 -21.6C-22 -25 -19 -26.2 -15.4 -26.6Z" fill={mane} {...O} />
+      <path d="M-10 -21C-12.4 -16.8 -14.4 -14.6 -18 -12.8L-16 -9.8C-11.6 -11.6 -8.2 -15.2 -5.6 -19.4Z" fill={coatD} {...O} />
+      <path d="M12 -22C14.4 -20.2 17.6 -18.4 21 -18.4L21.6 -14.2C16.6 -14 13 -16.8 9.4 -18.8Z" fill={coatD} {...O} />
+      <path d="M-15.8 -26.4C-15.8 -32.4 -11 -34.8 -5 -34.8H7.8C13.4 -34.8 16.4 -31.6 16.4 -27C16.4 -22 13.4 -19.2 8 -19.2H-5.8C-12.2 -19.2 -15.8 -22 -15.8 -26.4Z" fill={coat} {...O} />
+      {/* near hind leg and foreleg, hooves */}
+      <path d="M-11.8 -23.6C-13.6 -19 -17.2 -15.4 -21 -13.4L-19.2 -10C-14.2 -12 -10 -15.6 -7 -20.4Z" fill={coat} {...O} />
+      <path d="M-21.6 -14L-18.8 -9.6L-21.6 -8.4L-24.4 -12.6Z" {...I} fill={hoof} />
+      <path d="M13 -24.6C15.6 -23 19 -21.4 22.4 -21.2L23 -16.6C17.8 -16.4 13 -18.8 9 -21.2Z" fill={coat} {...O} />
+      <path d="M22.4 -21.6L27 -21L27.4 -17L23 -16.6Z" {...I} fill={hoof} />
+      {/* neck, head, mane */}
+      <path d="M8.2 -32.4C10 -38 12.8 -43 16.6 -45.8L23.6 -41.4C21.6 -36 19.6 -31 17.4 -26.8C13 -26.6 9.8 -28.8 8.2 -32.4Z" fill={coat} {...O} />
+      <path d="M15.6 -46.2C18.4 -49.6 23.6 -49 25.2 -45.4L28 -39.2C29 -36.4 26.2 -34.6 23.8 -36L19 -38.6C15.8 -40.4 13.8 -43.6 15.6 -46.2Z" fill={coat} {...O} />
+      <path d="M17.6 -42.8L26.4 -38.4" stroke={mane} strokeWidth="1.2" />
+      <circle cx="20.8" cy="-44" r="1" fill={INK} />
+      <path d="M15.8 -46.2C11.8 -44.2 9 -38.8 7.8 -31.4C9.4 -29.6 11 -29.4 12.4 -29.8C13.6 -35.4 15.6 -40 18.4 -44.2Z" fill={mane} {...O} />
+      {/* the seat: blanket edge and crimson saddle */}
+      <path d="M-8.4 -36.6Q0 -32 8.6 -36.6L8.2 -26.8Q0 -22.4 -8.2 -26.8Z" fill={seat} {...O} />
+      <path d="M-7.4 -33.4Q0 -29.6 7.8 -33.4L7.6 -31Q0 -27.2 -7.6 -31Z" fill={seatL} />
+      <path d="M-8 -28Q0 -23.6 8 -28" fill="none" stroke={BRASS} strokeWidth="1.1" />
+      <path d="M-8.4 -36.6Q-9.4 -40 -6.8 -39.8Q-5.4 -38.4 -4.4 -36.2ZM8.6 -36.6Q9.6 -40 7 -39.8Q5.6 -38.4 4.6 -36.2Z" fill={seatD} {...O} />
+    </g>
+  );
+}
+
+/** PERCH, multi-tile. The carnival's carousel, drawn once across its 2x2: a round platform with a red and cream skirt and teak boards, four horses (one on each tile, facing outward so
+ *  none hides behind the canopy), a striped centre column and a striped canopy over the middle only. Every tile is a seat. On a single tile (the catalog fallback, the inspector, a rider's chip) it is one horse under the canopy. */
+export function CarouselSpan({ cw = 2, ch = 2 }) {
+  const u = useUid();
+  const red = "#c83e3b", cream = "#f4efe2", gold = "#e3b94f", goldD = "#a87a24", teak = "#c9a169", teakD = "#94703f";
+  // the platform: a drum skirt in red and cream blocks, a teak deck with radial boards, a brass edge line
+  const platform = (cx, y0, rx, ry, rim, skirt, boards, inner) => {
+    const ang = (k) => Math.PI * (1 - k / skirt);
+    const planks = boards ? Array.from({ length: boards }, (_, k) => { const a = (k * 2 * Math.PI) / boards; return `M${r2(cx + 16 * Math.cos(a))} ${r2(y0 + ((16 * ry) / rx) * Math.sin(a))}L${r2(cx + (rx - 2) * Math.cos(a))} ${r2(y0 + (ry - 2) * Math.sin(a))}`; }).join("") : "";
+    return (
+      <>
+        <path d={drumBand(cx, rx, ry, y0, y0 + rim)} fill={red} {...OS} />
+        {Array.from({ length: skirt }, (_, k) => k).filter((k) => k % 2).map((k) => {
+          const a0 = ang(k), a1 = ang(k + 1), x0 = cx + rx * Math.cos(a0), ya = y0 + ry * Math.sin(a0), x1 = cx + rx * Math.cos(a1), yb = y0 + ry * Math.sin(a1);
+          return <path key={k} d={polyD([x0, ya + .4], [x1, yb + .4], [x1, yb + rim - .4], [x0, ya + rim - .4])} fill={cream} />;
+        })}
+        <path d={drumEast(cx, rx, ry, y0, y0 + rim, .42)} fill="#000" fillOpacity=".24" />
+        <path d={drumBand(cx, rx, ry, y0, y0 + rim)} fill="none" {...OS} />
+        <ellipse cx={cx} cy={y0} rx={rx} ry={ry} fill={teak} {...OS} />
+        {planks ? <path d={planks} fill="none" stroke={teakD} strokeWidth=".9" strokeOpacity=".8" /> : null}
+        <ellipse cx={cx} cy={y0} rx={rx - inner[0]} ry={ry - inner[1]} fill="none" stroke={BRASS} strokeWidth="1.5" />
+      </>
+    );
+  };
+  const flag = (cx, top) => (
+    <>
+      <path d={`M${cx} ${r2(top - .8)}V${r2(top - 5.8)}`} {...OS} strokeWidth="1.6" />
+      <path d={`M${r2(cx + .6)} ${r2(top - 6.2)}L${r2(cx + 11)} ${r2(top - 3.8)}L${r2(cx + .6)} ${r2(top - 1)}Z`} {...IS} fill={red} />
+      <circle cx={cx} cy={top} r="2.5" fill={gold} {...OS} />
+    </>
+  );
+  if (Math.min(cw, ch) < 2) {
+    return (
+      <g transform={`translate(${32 * cw - 32} ${64 * ch - 64})`}>
+        <GroundShadow cx={32} cy={57.6} rx={29} ry={2.6} />
+        {platform(32, 48.6, 28.4, 6.4, 5, 14, 0, [3, 1.6])}
+        <RideHorse x={31} y={51.4} s={.66} />
+        {flag(32, 7.6)}
+        <CarouselCanopy apex={[32, 8]} cx={32} ey={17} rx={26} ry={5.2} n={8} band={3.8} val={2.2} bulb={1} />
+      </g>
+    );
+  }
+  const cx = 64, px = 64, pw = 12, py0 = 36, py1 = 78;
+  const stripes = Array.from({ length: 8 }, (_, i) => py0 - 6 + i * 9);
+  return (
+    <g transform={`translate(${32 * cw - 64} ${64 * ch - 128})`}>
+      <defs><clipPath id={`${u}c`}><rect x={px - pw / 2} y={py0} width={pw} height={py1 - py0} /></clipPath></defs>
+      <GroundShadow cx={cx} cy={123} rx={58} ry={3.4} />
+      {platform(cx, 72, 60, 42, 8, 22, 24, [5, 3.4])}
+      {/* the two back horses, the column on its gilded foot, the two front horses */}
+      <RideHorse x={32} y={52} flip />
+      <RideHorse x={96} y={52} />
+      <path d={drumBand(cx, 15, 5.2, 72, 77)} fill={goldD} {...OS} />
+      <ellipse cx={cx} cy="72" rx="15" ry="5.2" fill={gold} {...OS} />
+      <rect x={px - pw / 2} y={py0} width={pw} height={py1 - py0 - 6} fill={gold} />
+      <g clipPath={`url(#${u}c)`}>{stripes.map((y) => <path key={y} d={polyD([px - 8, y + 5], [px + 8, y - 3.6], [px + 8, y + 2.2], [px - 8, y + 10.8])} fill={red} />)}</g>
+      <rect x={px - pw / 2} y={py0} width={pw} height={py1 - py0 - 6} fill="none" {...OS} />
+      <RideHorse x={32} y={107} flip />
+      <RideHorse x={96} y={107} />
+      {/* the canopy over the middle only, so every horse stays in the clear */}
+      {flag(cx, 9)}
+      <CarouselCanopy apex={[cx, 9.6]} cx={cx} ey={30} rx={31} ry={8} n={12} band={6} val={3.8} bulb={1.3} />
+    </g>
+  );
+}
+export const Carousel = () => <CarouselSpan cw={1} ch={1} />;
+
+/** TALL. Popcorn cart: a red-and-cream striped cart on two big spoked wheels with a push handle, a glass case heaped with popcorn around
+ *  a small kettle, and a little peaked roof in red and cream stripes with a scalloped valance and a gold finial. */
+export function PopcornCart() {
+  const red = "#c83e3b", redD = "#8f2a2a", white = "#f4efe2", glass = "#cfe7ef", glassD = "#9fc4d2", corn = "#f6e4a6", cornD = "#dfb95a", gold = BRASS;
+  const x = 12, w = 34, top = 18, mid = 36, bot = 50, dx = 6, dy = 5; // front face x 12..46
+  const A = [32, 4.8], L = [7.2, 19], R = [50, 19], Rb = [57, 14.2], rn = 6; // the roof: apex over the middle of the cart, front eave L..R, east eave R..Rb
+  const heap = `M${x + 3} ${mid}V30.4Q17 26.6 19.6 29.2Q21.4 25 25.2 28.2Q28 24.4 31.4 28Q34.8 24.8 37.6 28.6Q40.6 26 43 30.4V${mid}Z`;
+  const spokes = (cx, cy) => [0, 1, 2, 3, 4, 5].map((k) => { const a = (k * Math.PI) / 3 + .4; return <path key={k} d={`M${cx} ${cy}L${r2(cx + 6 * Math.cos(a))} ${r2(cy + 6 * Math.sin(a))}`} stroke={INK} strokeWidth="1.1" />; });
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57.4} rx={25} ry={3.2} />
+      {/* push handle */}
+      <Tube d="M13 39L4.4 36.4" c="#94703f" w={3.4} e={1} />
+      {/* cart body: east side, stripes across the front */}
+      <path d={slabSide(x, mid, w, bot - mid, dx, dy)} fill={redD} {...OS} />
+      <path d={inkBox(x, mid, w, bot - mid, 1, .2)} fill={red} />
+      {[1, 3, 5].map((k) => <rect key={k} x={r2(x + (k * w) / 7)} y={mid + .4} width={r2(w / 7)} height={bot - mid - .8} fill={white} />)}
+      <path d={inkBox(x, mid, w, bot - mid, 1, .2)} fill="none" {...OS} />
+      {/* glass case: east pane, front pane with the popcorn and kettle, posts, a streak of light */}
+      <path d={polyD([x + 32, top + 1], [x + w + dx - 2, top - dy + 1], [x + w + dx - 2, mid - dy], [x + 32, mid])} {...OS} fill={glassD} />
+      <path d={inkBox(x + 2, top, 30, mid - top, .6, .1)} fill={glass} />
+      <path d={heap} {...IS} fill={corn} />
+      {[[19, 33], [24.6, 31.8], [30, 33.6], [35.6, 32], [40, 34]].map(([cx, cy]) => <circle key={cx} cx={cx} cy={cy} r="1.1" fill={cornD} />)}
+      <path d="M24 21.2H34V24.2Q29 27.6 24 24.2Z" {...IS} fill="#aeb9c2" />
+      <path d="M29 21V18.4" {...IS} />
+      <path d="M20.6 30L25.6 20.6M23.6 32L28.6 22.6" stroke="#fff" strokeOpacity=".7" strokeWidth="1.2" strokeLinecap="round" />
+      <path d={inkBox(x + 2, top, 30, mid - top, .6, .1)} fill="none" {...OS} />
+      {[x + 2, x + 30].map((px) => <rect key={px} x={px} y={top} width="2.2" height={mid - top} fill={white} stroke={INK} strokeWidth=".9" />)}
+      {/* shelf between case and body */}
+      <path d={slabSide(x - 1.2, mid - 1.4, w + 2.4, 3, dx - 1, dy - 1)} fill={redD} {...OS} />
+      <path d={inkBox(x - 1.2, mid - 1.4, w + 2.4, 3, .6, .1)} fill={white} {...OS} />
+      {/* roof, a shallow tent over the cart: its narrow east slope first (a triangle running up to the apex), the striped front slope, a scalloped valance on both eaves, the finial */}
+      <path d={polyD(A, R, Rb)} fill={redD} {...OS} />
+      <path d={`M${R[0]} ${R[1]}Q${R[0] + 2.8} ${R[1] + 3.2} ${R[0] + 3.6} ${R[1] - 2.4}Q${R[0] + 6.2} ${R[1] + .6} ${Rb[0]} ${Rb[1]}`} {...IS} fill={redD} />
+      {Array.from({ length: rn }, (_, i) => i).map((i) => <path key={i} d={polyD(A, [L[0] + ((R[0] - L[0]) * i) / rn, L[1]], [L[0] + ((R[0] - L[0]) * (i + 1)) / rn, L[1]])} fill={i % 2 ? white : red} />)}
+      <path d={polyD(A, L, R)} fill="none" {...OS} />
+      <path d={Array.from({ length: rn }, (_, i) => `M${r2(L[0] + (i * (R[0] - L[0])) / rn)} ${L[1]}a${r2((R[0] - L[0]) / (2 * rn))} ${r2((R[0] - L[0]) / (2 * rn))} 0 0 0 ${r2((R[0] - L[0]) / rn)} 0`).join("")} {...IS} fill={red} />
+      <circle cx={A[0]} cy={A[1] - 1.6} r="2.5" fill={gold} {...OS} />
+      {/* two big spoked wheels */}
+      {[20, 42].map((cx) => (
+        <g key={cx}>
+          <circle cx={cx} cy="49.6" r="7.6" fill="none" stroke={INK} strokeWidth="3.6" />
+          <circle cx={cx} cy="49.6" r="7.6" fill="none" stroke={white} strokeWidth="1.6" />
+          {spokes(cx, 49.6)}
+          <circle cx={cx} cy="49.6" r="2" {...IS} fill={gold} />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+/** TALL. Big-top king pole: a thick red-and-cream striped mast on a timber foot with sandbags, a steel bale ring, four guy ropes out to
+ *  pegs at the corners, and a red swallow-tail pennant flying from the very top. */
+export function TentPole() {
+  const u = useUid();
+  const red = "#c83e3b", redD = "#8f2a2a", cream = "#f4efe2", rope = "#e7d8b4", timber = "#b98a55", timberD = "#7f5a30", bag = "#cdb98a", bagD = "#a08e60", steel = "#8795a1";
+  const px = 32, pw = 7.2, y0 = 9, y1 = 53;
+  const stripes = Array.from({ length: 8 }, (_, i) => y0 - 4 + i * 7);
+  const guys = [["M32 11L4.6 55", 3], ["M32 11L59.4 55", 3], ["M32 24L14 57", 3], ["M32 24L50 57", 3]];
+  const peg = (x, y) => <path d={polyD([x - 2, y - 3], [x + 1.4, y - 3.4], [x + 1, y + 2], [x - 1.2, y + 2.2])} {...IS} fill={timber} />;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.4} rx={28} ry={3} />
+      {guys.map(([d]) => <path key={d} d={d} fill="none" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />)}
+      {guys.map(([d]) => <path key={`r${d}`} d={d} fill="none" stroke={rope} strokeWidth=".9" strokeLinecap="round" />)}
+      {peg(4.6, 55)}{peg(59.4, 55)}{peg(14, 57)}{peg(50, 57)}
+      {/* far half of the bale ring */}
+      <path d={`M${px - 9.6} 24A9.6 3 0 0 1 ${px + 9.6} 24`} fill="none" stroke={INK} strokeWidth="3.6" />
+      <path d={`M${px - 9.6} 24A9.6 3 0 0 1 ${px + 9.6} 24`} fill="none" stroke={steel} strokeWidth="1.6" />
+      {/* the mast: stripes, east side shaded */}
+      <defs><clipPath id={`${u}m`}><rect x={px - pw / 2} y={y0} width={pw} height={y1 - y0} /></clipPath></defs>
+      <rect x={px - pw / 2} y={y0} width={pw} height={y1 - y0} fill={cream} />
+      <g clipPath={`url(#${u}m)`}>
+        {stripes.map((y) => <path key={y} d={polyD([px - 6, y + 4], [px + 6, y - 3], [px + 6, y + 1.4], [px - 6, y + 8.4])} fill={red} />)}
+        <rect x={px + 1.4} y={y0} width={pw} height={y1 - y0} fill="#000" fillOpacity=".24" />
+      </g>
+      <rect x={px - pw / 2} y={y0} width={pw} height={y1 - y0} fill="none" {...OS} />
+      {/* near half of the bale ring */}
+      <path d={`M${px - 9.6} 24A9.6 3 0 0 0 ${px + 9.6} 24`} fill="none" stroke={INK} strokeWidth="3.6" />
+      <path d={`M${px - 9.6} 24A9.6 3 0 0 0 ${px + 9.6} 24`} fill="none" stroke={steel} strokeWidth="1.6" />
+      {/* cap, staff and the pennant flying east */}
+      <path d={inkBox(px - 5, y0 - 1.8, 10, 3.6, 1, .1)} fill={BRASS} {...OS} />
+      <Tube d={`M${px} 8V2.4`} c={timberD} w={2.6} e={.8} />
+      <path d={`M${px + .8} 2.2Q44 1.4 59 3.8L52.6 7.2L59 11Q44 12.4 ${px + .8} 13Z`} fill={red} {...OS} />
+      <path d={`M${px + 1} 6.8Q42 7 50.4 7.1`} stroke={cream} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      <path d={`M${px + 1.2} 10.8Q42 11 50.8 9.4L52.6 7.2L59 11Q44 12.4 ${px + .8} 13Z`} fill={redD} />
+      {/* timber foot and three sandbags */}
+      <path d={slabSide(19, 51.6, 26, 5, 3, 3)} fill={timberD} {...OS} />
+      <path d={slabTop(19, 51.6, 26, 3, 3)} fill={timber} {...OS} />
+      <path d={inkBox(19, 51.6, 26, 5, .8, .2)} fill={timberD} {...OS} />
+      {[[17.4, 48.6], [39.8, 48.6], [28.6, 52.2]].map(([bx, by]) => (
+        <g key={bx}>
+          <path d={inkBox(bx, by, 10.8, 6.6, 2.8, .4)} fill={bag} {...OS} />
+          <path d={`M${r2(bx + 1.8)} ${r2(by + 4.6)}H${r2(bx + 9)}V${r2(by + 5.8)}H${r2(bx + 1.8)}Z`} fill={bagD} />
+          <path d={`M${r2(bx + 5.4)} ${r2(by + .8)}V${r2(by + 3)}`} {...IS} />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+/** TALL. Human-cannonball cannon: a long barrel raised steeply on a low carriage, red with a navy star band and cream hoops, a flared
+ *  muzzle with a dark bore pointing at the sky, one big yellow spoked wheel over its breech and a trail reaching back on the floor. */
+export function Cannon() {
+  const red = "#c83e3b", redD = "#8f2a2a", cream = "#f4efe2", navy = "#2a4d7d", navyD = "#1c3558", gold = "#f2c84b", wheel = "#e3b94f", wheelD = "#b88a2c";
+  const hub = [26.4, 46];
+  const star = (lx, ly, r) => <path d={starD(lx, ly, r, 0)} fill={gold} stroke={INK} strokeWidth=".6" strokeLinejoin="round" />;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.4} rx={26} ry={3.2} />
+      {/* trail along the floor and the carriage cheeks */}
+      <path d="M4.6 57.2L8.6 50.6L27 41.4L42 44L46 50.6V57.2Z" fill={navy} {...OS} />
+      <path d="M36.4 43L42 44L46 50.6V57.2H38Z" fill={navyD} />
+      <path d="M12 54.4H42" {...IS} strokeOpacity=".55" />
+      {/* the barrel, drawn lying along +x and raised */}
+      <g transform={`translate(${hub[0]} ${hub[1]}) rotate(-66)`}>
+        <path d="M-6 -9.8Q-11.6 0 -6 9.8L37 8.2V9.8H46V-9.8H37V-8.2Z" fill={red} />
+        <path d="M-9.6 4.4L46 4.4V9.8H37V8.2L-6 9.8Q-8.6 7 -9.6 4.4Z" fill={redD} />
+        {/* cream hoops and a navy band of stars */}
+        <path d="M9 -9.2H14.6V9.2H9Z" fill={cream} />
+        <path d="M9 4.4H14.6V9.2H9Z" fill="#cfc6b0" />
+        <path d="M18 -9H34.4V8.4H18Z" fill={navy} />
+        <path d="M18 4.4H34.4V8.4H18Z" fill={navyD} />
+        {star(22.4, -3.1, 3.8)}{star(30.6, -3.1, 3.8)}{star(26.5, 2.8, 3.4)}
+        <path d="M-6 -9.8Q-11.6 0 -6 9.8L37 8.2V9.8H46V-9.8H37V-8.2Z" fill="none" {...OS} />
+        <path d="M9 -9.4V9.4M14.6 -9.2V9.2M18 -9V9M34.4 -8.6V8.6M37 -8.2V8.2" {...IS} />
+        {/* muzzle: lip and dark bore */}
+        <ellipse cx="46" cy="0" rx="3.4" ry="9.8" fill={gold} {...OS} />
+        <ellipse cx="46.4" cy="0" rx="2.1" ry="7.2" fill="#14141a" />
+      </g>
+      {/* the wheel */}
+      <circle cx={hub[0]} cy={hub[1]} r="9.6" fill="none" stroke={INK} strokeWidth="4.6" />
+      <circle cx={hub[0]} cy={hub[1]} r="9.6" fill="none" stroke={wheel} strokeWidth="2.2" />
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const a = (k * Math.PI) / 4 + .2; return <Tube key={k} d={`M${hub[0]} ${hub[1]}L${r2(hub[0] + 8.8 * Math.cos(a))} ${r2(hub[1] + 8.8 * Math.sin(a))}`} c={wheelD} w={2.4} e={.8} />; })}
+      <circle cx={hub[0]} cy={hub[1]} r="3.4" fill={red} {...OS} />
+      <circle cx={hub[0]} cy={hub[1]} r="1" fill={INK} />
+    </g>
+  );
+}
+
+/** TALL. Funhouse mirror on a low plinth: a tall gilded frame pinched at the waist in a wavy hourglass, a shell crest and a scroll at each
+ *  side of the pinch, the glass inside showing a flat, wildly stretched reflection and a few wave lines. */
+export function FunhouseMirror() {
+  const u = useUid();
+  const gold = "#d9a93c", goldL = "#f0cb6e", goldD = "#a87a24", glass = "#bfe0e8", glassD = "#9cc4d2";
+  const wood = "#6b4a2d", woodD = "#4a321f", jacket = "#c45970", legs = "#4f6f8c", skin = "#e7c7a0", hair = "#6b4a2d";
+  const outer = "M32 6.6C43 6.6 50.4 10.6 50 18.2C49.6 24 44.4 26 44.4 31C44.4 36.4 51.4 38.6 51 45.4C50.6 50.8 43.2 53.2 32 53.2C20.8 53.2 13.4 50.8 13 45.4C12.6 38.6 19.6 36.4 19.6 31C19.6 26 14.4 24 14 18.2C13.6 10.6 21 6.6 32 6.6Z";
+  const inner = "M32 11C40.4 11 45.8 13.6 45.6 18.6C45.4 23.4 40 26 40 31C40 36 46.8 39.8 46.6 45C46.4 48.2 40.4 48.8 32 48.8C23.6 48.8 17.6 48.2 17.4 45C17.2 39.8 24 36 24 31C24 26 18.6 23.4 18.4 18.6C18.2 13.6 23.6 11 32 11Z";
+  return (
+    <g>
+      <defs><clipPath id={`${u}o`}><path d={outer} /></clipPath><clipPath id={`${u}i`}><path d={inner} /></clipPath></defs>
+      <GroundShadow cx={32} cy={57.4} rx={20} ry={3} />
+      {/* plinth and two struts */}
+      <path d={inkBox(20, 51.8, 24, 5.4, 1, .2)} fill={wood} {...OS} />
+      <path d="M38 52.4H43.2V56.4H38Z" fill={woodD} />
+      {/* the frame: gold, shaded east, ticks of carving round it */}
+      <path d={outer} fill={gold} />
+      <g clipPath={`url(#${u}o)`}><rect x="39" y="4" width="16" height="52" fill={goldD} /></g>
+      <path d={outer} fill="none" {...OS} />
+      {/* the shell crest */}
+      <path d="M23 7.6C24.4 1.6 39.6 1.6 41 7.6Q32 9.8 23 7.6Z" fill={goldL} {...OS} />
+      <path d="M27 3.6L29 7.4M32 2.6V7.8M37 3.6L35 7.4" {...IS} />
+      {/* scrolls at the waist */}
+      {[18.4, 45.6].map((x, i) => <circle key={x} cx={x} cy="31" r="3.5" fill={i ? goldD : goldL} {...OS} />)}
+      {[18.4, 45.6].map((x) => <circle key={`d${x}`} cx={x} cy="31" r="1.1" fill={INK} />)}
+      {/* the glass and the reflection: a huge flat head, a pinched jacket, ballooning legs */}
+      <path d={inner} fill={glass} />
+      <g clipPath={`url(#${u}i)`}>
+        <path d="M18 24Q26 20 32 24T46 24V34Q38 30 32 34T18 34Z" fill={glassD} />
+        <path d="M18 40Q26 36 32 40T46 40V44Q38 40 32 44T18 44Z" fill={glassD} />
+        <path d="M30 37C22 39 20 45 23 49.4H41C44 45 42 39 34 37Z" fill={legs} />
+        <path d="M26.4 22.4C28.6 28 29.6 32 30 37H34C34.4 32 35.4 28 37.6 22.4Z" fill={jacket} />
+        <ellipse cx="32" cy="17.4" rx="9.4" ry="6" fill={skin} />
+        <path d="M22.8 16.6C24 10.6 40 10.6 41.2 16.6C37 13.8 27 13.8 22.8 16.6Z" fill={hair} />
+        <circle cx="28.4" cy="17.8" r="1.2" fill={INK} /><circle cx="35.6" cy="17.8" r="1.2" fill={INK} />
+        <path d="M28 21Q32 23.6 36 21" {...IS} />
+        <path d="M20.4 15L23.8 28M22.6 34.4L24 45" stroke="#fff" strokeOpacity=".65" strokeWidth="1.3" strokeLinecap="round" />
+      </g>
+      <path d={inner} fill="none" {...OS} />
+    </g>
+  );
+}
+
+/** TALL, multi-tile. The carnival's Ferris wheel, drawn once across its span (the 2x2 is the real one; 1x1 is the fallback): a red rim on a
+ *  far ring, spokes to a brass hub, little gondolas in four colours hanging level all round, on a two-legged A-frame (the
+ *  far one a shade down) that stands on a striped loading deck. */
+export function FerrisWheelSpan({ cw = 2, ch = 2 }) {
+  const k = Math.min(cw, ch), big = k >= 2;
+  const W = 64 * cw, H = 64 * ch, ox = W / 2, base = H - 6;
+  const red = "#c83e3b", redD = "#8f2a2a", cream = "#f4efe2", steel = "#5f6c78", steelD = "#3f4a55", gold = BRASS, bulb = "#ffe08a";
+  const colours = [["#2f8f9a", "#1f6a73"], ["#f2c84b", "#c79a2c"], ["#e0705c", "#a34a3a"], ["#4f77a8", "#335680"]];
+  const R = big ? 45 : 21.6, cy = base - (big ? 72 : 33.4), wf = big ? 6.4 : 4.6, sf = big ? 2.8 : 2.2;
+  const N = big ? 8 : 6, S = big ? 16 : 8, off = big ? 0 : Math.PI / 6, dx = big ? 7 : 3.6, dy = big ? 5 : 2.8;
+  const legX = big ? 40 : 19.6, feet = base - (big ? 8 : 3);
+  const gW = big ? 18 : 10.4, gH = big ? 11 : 6.4, drop = big ? 6.4 : 3.4, roof = big ? 7 : 3.8;
+  const pts = (n, r, a0 = 0, ox2 = ox, cy2 = cy) => Array.from({ length: n }, (_, i) => { const a = a0 + (i * 2 * Math.PI) / n - Math.PI / 2; return [r2(ox2 + r * Math.cos(a)), r2(cy2 + r * Math.sin(a))]; });
+  const legs = (dxx, c) => <Tube d={`M${r2(ox + dxx - legX)} ${feet - (dxx ? dy : 0)}L${r2(ox + dxx)} ${r2(cy - (dxx ? dy : 0))}L${r2(ox + dxx + legX)} ${feet - (dxx ? dy : 0)}`} c={c} w={big ? 6.8 : 4.8} e={big ? 1.5 : 1.2} />;
+  const deckY = base - (big ? 9.2 : 4.6), deckH = big ? 9.2 : 4.6, deckX = big ? 16 : 7;
+  const stripes = big ? 12 : 8, deckW = W - deckX * 2;
+  const gondola = ([px, py], i) => {
+    const [c, cD] = colours[i % colours.length];
+    const y0 = py + drop + roof * .5, x0 = px - gW / 2, x1 = px + gW / 2;
+    return (
+      <g key={i}>
+        <path d={`M${px} ${py}V${r2(y0)}`} stroke={INK} strokeWidth={big ? 1.8 : 1.3} strokeLinecap="round" />
+        <path d={`M${r2(x0 + 1)} ${r2(y0)}Q${r2(px)} ${r2(y0 - roof * 1.6)} ${r2(x1 - 1)} ${r2(y0)}Z`} {...(big ? OS : IS)} fill={cream} />
+        <path d={`M${r2(x0)} ${r2(y0 + roof * .35)}H${r2(x1)}V${r2(y0 + roof * .5 + gH * .3)}Q${r2(x1)} ${r2(y0 + roof * .5 + gH)} ${r2(px)} ${r2(y0 + roof * .5 + gH)}Q${r2(x0)} ${r2(y0 + roof * .5 + gH)} ${r2(x0)} ${r2(y0 + roof * .5 + gH * .3)}Z`} {...(big ? OS : IS)} fill={c} />
+        <path d={`M${r2(px + gW * .18)} ${r2(y0 + roof * .35)}H${r2(x1)}V${r2(y0 + roof * .5 + gH * .3)}Q${r2(x1)} ${r2(y0 + roof * .5 + gH)} ${r2(px)} ${r2(y0 + roof * .5 + gH)}Q${r2(px + gW * .2)} ${r2(y0 + roof * .5 + gH * .7)} ${r2(px + gW * .18)} ${r2(y0 + roof * .35)}Z`} fill={cD} />
+      </g>
+    );
+  };
+  return (
+    <g>
+      <GroundShadow cx={ox} cy={base + .6} rx={big ? 54 : 27} ry={big ? 4.6 : 3.2} />
+      {/* the far ring and A-frame, a shade down */}
+      {legs(dx, steelD)}
+      <circle cx={ox + dx} cy={cy - dy} r={R} fill="none" stroke={INK} strokeWidth={big ? 4.8 : 3.4} />
+      <circle cx={ox + dx} cy={cy - dy} r={R} fill="none" stroke={redD} strokeWidth={big ? 2 : 1.3} />
+      {/* the axle, the spokes, the inner ring */}
+      <Tube d={`M${ox} ${cy}L${ox + dx} ${cy - dy}`} c={steelD} w={big ? 6 : 4} e={1} />
+      {pts(S, R).map(([x, y], i) => <path key={i} d={`M${ox} ${cy}L${x} ${y}`} fill="none" stroke={INK} strokeWidth={sf} />)}
+      {pts(S, R).map(([x, y], i) => <path key={`c${i}`} d={`M${ox} ${cy}L${x} ${y}`} fill="none" stroke={cream} strokeWidth={r2(sf - 1.5)} />)}
+      <circle cx={ox} cy={cy} r={r2(R * .58)} fill="none" stroke={INK} strokeWidth={big ? 3 : 2.2} />
+      <circle cx={ox} cy={cy} r={r2(R * .58)} fill="none" stroke={cream} strokeWidth={big ? 1.2 : .8} />
+      {/* the near A-frame, the rim with its bulbs */}
+      {legs(0, steel)}
+      <circle cx={ox} cy={cy} r={R} fill="none" stroke={INK} strokeWidth={wf} />
+      <circle cx={ox} cy={cy} r={R} fill="none" stroke={red} strokeWidth={r2(wf - 3)} />
+      {big ? pts(S, R, Math.PI / S).map(([x, y], i) => <circle key={i} cx={x} cy={y} r="1.3" fill={bulb} stroke={INK} strokeWidth=".6" />) : null}
+      {/* the striped loading deck */}
+      <path d={slabSide(deckX, deckY, deckW, deckH, big ? 4 : 2.4, big ? 4 : 2.4)} fill={redD} {...OS} />
+      <path d={slabTop(deckX, deckY, deckW, big ? 4 : 2.4, big ? 4 : 2.4)} fill={cream} {...OS} />
+      <path d={inkBox(deckX, deckY, deckW, deckH, 1, .2)} fill={red} />
+      {Array.from({ length: stripes }, (_, i) => i).filter((i) => i % 2).map((i) => <rect key={i} x={r2(deckX + (i * deckW) / stripes)} y={deckY + .4} width={r2(deckW / stripes)} height={deckH - .8} fill={cream} />)}
+      <path d={inkBox(deckX, deckY, deckW, deckH, 1, .2)} fill="none" {...OS} />
+      {/* the gondolas hang level over everything, the hub on top of the spokes */}
+      {pts(N, R, off).map(gondola)}
+      <circle cx={ox} cy={cy} r={big ? 6.4 : 3.6} fill={gold} {...OS} />
+      <circle cx={ox} cy={cy} r={big ? 2 : 1.2} fill={INK} />
+    </g>
+  );
+}
+export const FerrisWheel = () => <FerrisWheelSpan cw={1} ch={1} />;
+
+/** SHORT. Ring-toss stand at waist height: a red-and-cream striped crate with a gold star on the front and nine bottle necks standing on its
+ *  top (green, amber, one blue), a red and a yellow ring round two of the necks and a missed blue ring lying on the floor. */
+export function RingToss() {
+  const red = "#c83e3b", redD = "#8f2a2a", cream = "#f4efe2", top = "#ead9b5", green = "#4c8a5e", amber = "#b5763a", blue = "#4f8fb8";
+  const x = 11, y = 36, w = 38, h = 21, dx = 6, dy = 13, st = 7;
+  const P = (uu, v) => [r2(x + uu * w + v * dx), r2(y - v * dy)];
+  // rows from the back forward, each [u, v, colour, ring colour?]
+  const bottles = [
+    [.2, .86, green], [.5, .86, amber], [.8, .86, green, "#e3b94f"],
+    [.2, .5, amber], [.5, .5, blue], [.8, .5, amber],
+    [.2, .15, green, CRIMSON], [.5, .15, amber], [.8, .15, green],
+  ];
+  const ring = (bx, ry, c, front) => {
+    const d = front ? `M${r2(bx - 5)} ${ry}A5 2 0 0 0 ${r2(bx + 5)} ${ry}` : `M${r2(bx - 5)} ${ry}A5 2 0 0 1 ${r2(bx + 5)} ${ry}`;
+    return <><path d={d} fill="none" stroke={INK} strokeWidth="2.8" strokeLinecap="round" /><path d={d} fill="none" stroke={c} strokeWidth="1.2" strokeLinecap="round" /></>;
+  };
+  const bottle = ([uu, v, c, rc], i) => {
+    const [bx, by] = P(uu, v), yl = by - 12.4, ry = r2(by - 9.4);
+    return (
+      <g key={i}>
+        {rc ? ring(bx, ry, rc, false) : null}
+        <path d={`M${r2(bx - 2.9)} ${r2(by)}V${r2(by - 5.6)}Q${r2(bx - 2.9)} ${r2(by - 7.6)} ${r2(bx - 1.3)} ${r2(by - 8.4)}V${r2(yl)}H${r2(bx + 1.3)}V${r2(by - 8.4)}Q${r2(bx + 2.9)} ${r2(by - 7.6)} ${r2(bx + 2.9)} ${r2(by - 5.6)}V${r2(by)}Z`} {...IS} fill={c} />
+        <rect x={r2(bx - 1.9)} y={r2(yl - 1.2)} width="3.8" height="1.5" rx=".5" {...IS} fill={c} />
+        <path d={`M${r2(bx - 1.3)} ${r2(by - 1.2)}V${r2(by - 5)}`} stroke="#fff" strokeOpacity=".5" strokeWidth=".9" strokeLinecap="round" />
+        {rc ? ring(bx, ry, rc, true) : null}
+      </g>
+    );
+  };
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57.4} rx={25} ry={3.2} />
+      {/* crate: east side, top, striped front with a star */}
+      <path d={slabSide(x, y, w, h, dx, dy)} fill={redD} {...OS} />
+      <path d={slabTop(x, y, w, dx, dy)} fill={top} {...OS} />
+      <path d={inkBox(x, y, w, h, 1, .3)} fill={red} />
+      {[1, 3, 5].map((k) => <rect key={k} x={r2(x + (k * w) / st)} y={y + .4} width={r2(w / st)} height={h - .8} fill={cream} />)}
+      <path d={inkBox(x, y, w, h, 1, .3)} fill="none" {...OS} />
+      <circle cx={x + w / 2} cy={y + h / 2} r="6.8" {...IS} fill={cream} />
+      <path d={starD(x + w / 2, y + h / 2, 5.4)} {...IS} fill={BRASS} />
+      {/* bottles, back row first, so the near ones overlap the far ones */}
+      {bottles.map(bottle)}
+      {/* a missed ring lying on the floor */}
+      <ellipse cx="53.6" cy="55.6" rx="6" ry="2.6" fill="none" stroke={INK} strokeWidth="3" />
+      <ellipse cx="53.6" cy="55.6" rx="6" ry="2.6" fill="none" stroke="#4f77a8" strokeWidth="1.4" />
+    </g>
+  );
+}
+
+/** LOW. A sawdust ring flat on the ground, seen from above: a round patch of raked sawdust with loose flecks inside a curb painted in red and
+ *  cream blocks. Flush: you stand on it. No shadow. */
+export function SawdustRing() {
+  const dust = "#d9b778", dustL = "#e9d09c", dustD = "#ab8748", red = "#c83e3b", cream = "#f4efe2";
+  const c = 32, Ro = 28.6, Ri = 23.2, mid = (Ro + Ri) / 2, w = Ro - Ri, C = 2 * Math.PI * mid, seg = C / 18;
+  const flecks = scatter(150, 17, 9, 9, 55, 55).filter(([x, y]) => Math.hypot(x - c, y - c) < Ri - 2.4);
+  return (
+    <g>
+      <circle cx={c} cy={c} r={Ro} fill={red} {...OS} />
+      <circle cx={c} cy={c} r={r2(mid)} fill="none" stroke={cream} strokeWidth={r2(w - .3)} strokeDasharray={`${r2(seg)} ${r2(seg)}`} />
+      <circle cx={c} cy={c} r={Ri} fill={dust} {...OS} />
+      {/* raked arcs and a lighter crown in the middle */}
+      <circle cx={c - 1.4} cy={c - 1.4} r="15.4" fill={dustL} />
+      <path d="M14 32A18 18 0 0 1 28.6 14.6M50 30.6A18 18 0 0 1 34 49.8M19.4 30.4A12.6 12.6 0 0 1 30 19.6M44.2 33A12.6 12.6 0 0 1 33.6 44.6" fill="none" stroke={dustD} strokeOpacity=".7" strokeWidth="1" strokeLinecap="round" />
+      {flecks.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={i % 3 ? ".55" : ".8"} fill={i % 4 ? dustD : "#f2e2bb"} />)}
+    </g>
+  );
+}
+
+
+/* ---- Opera House (sub-biome of MANSION) ---- */
+
+/** TALL. Heavy red velvet stage drape, floor to rail: a brass rail with a scalloped pelmet, the velvet falling in pleats, drawn in at the
+ *  waist by a gold tieback with a tassel and flaring out again to a wavy hem on the floor. */
+export function StageCurtain() {
+  const u = useUid();
+  const v = "#a82a35", vD = "#7a1c28", vL = "#c8505e", gold = "#d9a93c", goldL = "#f0cb6e", goldD = "#a87a24";
+  const top = 12, tie = 36, hem = 56.8, n = 6;
+  const shape = `M9 ${top}C9 23 15.4 30 21 ${tie}C17 44 12 50 8.4 ${hem}Q14.4 59.4 20.2 ${hem}Q26 59.6 32 ${hem}Q38 59.6 43.8 ${hem}Q49.6 59.4 55.6 ${hem}C52 50 47 44 43 ${tie}C48.6 30 55 23 55 ${top}Z`;
+  const xt = (i) => 9 + (i * 46) / n, xw = (i) => 21 + (i * 22) / n, xb = (i) => 8.4 + (i * 47.2) / n;
+  const pleats = Array.from({ length: n }, (_, i) => i);
+  return (
+    <g>
+      <defs><clipPath id={`${u}v`}><path d={shape} /></clipPath></defs>
+      <GroundShadow cx={32} cy={57.6} rx={27} ry={3} />
+      {/* the velvet: pleats gathered to the waist, then fanned to the hem, alternate ones in shade, one lit */}
+      <path d={shape} fill={v} />
+      <g clipPath={`url(#${u}v)`}>
+        {pleats.map((i) => (i % 2 ? <g key={i}>
+          <path d={polyD([xt(i), top], [xt(i + 1), top], [xw(i + 1), tie], [xw(i), tie])} fill={vD} />
+          <path d={polyD([xw(i), tie], [xw(i + 1), tie], [xb(i + 1), 60], [xb(i), 60])} fill={vD} />
+        </g> : null))}
+        <path d={polyD([xt(2), top], [xt(2) + 2.8, top], [xw(2) + 1, tie], [xw(2), tie])} fill={vL} />
+        <path d={polyD([xw(2), tie], [xw(2) + 1, tie], [xb(2) + 2.8, 60], [xb(2), 60])} fill={vL} />
+        {pleats.slice(1).map((i) => <path key={i} d={`M${r2(xt(i))} ${top}L${r2(xw(i))} ${tie}L${r2(xb(i))} 60`} {...IS} />)}
+      </g>
+      <path d={shape} fill="none" {...OS} />
+      {/* pelmet with its scallops and gold trim, the brass rail over it */}
+      <path d="M6.6 5.4H57.4V12.4Q50.6 20 44 12.8Q38 20 32 12.8Q26 20 20 12.8Q13.4 20 6.6 12.4Z" fill={v} {...OS} />
+      <path d="M41 5.4H57.4V12.4Q50.6 20 44 12.8L41 15.8Z" fill={vD} />
+      <path d="M6.6 12.4Q13.4 20 20 12.8Q26 20 32 12.8Q38 20 44 12.8Q50.6 20 57.4 12.4" fill="none" stroke={gold} strokeWidth="1.5" strokeLinecap="round" />
+      <Tube d="M5 4.4H59" c={goldL} w={4.2} e={1.2} />
+      {[4.6, 59.4].map((x) => <circle key={x} cx={x} cy="4.4" r="2.8" fill={gold} {...OS} />)}
+      {/* the gold tieback and tassel */}
+      <path d="M19.6 33.6Q32 38.4 44.4 33.6V38.6Q32 43.2 19.6 38.6Z" fill={gold} {...OS} />
+      <path d="M41 35V40Q43 39.6 44.4 38.6V33.6Q43 34.4 41 35Z" fill={goldD} />
+      <path d="M21.4 37.3Q32 41.5 42.6 37.3" {...IS} />
+      <circle cx="44.6" cy="38" r="2.4" fill={goldL} {...OS} />
+      <path d="M41.2 40.4H48L49.6 50.4Q44.6 52.6 39.6 50.4Z" fill={gold} {...OS} />
+      <path d="M46 40.4H48L49.6 50.4Q47.8 51.2 46 51.4Z" fill={goldD} />
+      <path d="M42.8 42.4L42.4 50.6M44.6 42.4V51M46.4 42.4L47 50.6" {...IS} />
+    </g>
+  );
+}
+
+/** TALL. A theatre scenery flat, floor to above head height: a timber-framed canvas face-on, painted with a castle on a hill under a big moon,
+ *  a painted tree and a strip of bare canvas at the foot, and behind its east edge a timber brace to the floor held by a stage weight. */
+export function StageFlat() {
+  const u = useUid();
+  const timber = "#c9a169", timberD = "#94703f", timberL = "#e0bf8c", canvas = "#e9dcc0", sky = "#4f7fa8", cloud = "#79a3c0", moon = "#f6edc4", hill = "#3a5570", hillD = "#2c4258", castle = "#a3a6b8", castleD = "#6d7086", ground = "#5e8a56", leaf = "#2f6b47", iron = "#3b3f49";
+  const x = 7, y = 6, w = 42, h = 50, dd = 3, m = 2.6; // front x 7..49, y 6..56
+  const ax = x + m, ay = y + m, aw = w - 2 * m, ah = h - 2 * m; // painted area
+  const crenel = (X, Y, n, W) => Array.from({ length: n }, (_, i) => <rect key={`${X}${i}`} x={r2(X + (i * W) / n + (W / n) * .15)} y={Y - 2} width={r2((W / n) * .7)} height="2.2" {...IS} fill={castle} />);
+  return (
+    <g>
+      <defs><clipPath id={`${u}a`}><rect x={ax} y={ay} width={aw} height={ah} /></clipPath></defs>
+      <GroundShadow cx={35} cy={57.2} rx={28} ry={3} />
+      {/* the brace behind the east edge: a strut and a foot rail, a stage weight on the rail */}
+      <Tube d="M49 16L61.4 56.4" c={timberD} w={5} e={1.2} />
+      <Tube d="M47 56H62" c={timberD} w={4.4} e={1.2} />
+      <path d={inkBox(54.6, 49.6, 8.4, 6.4, 1.2, .2)} fill={iron} {...OS} />
+      <path d="M56.8 49.6Q58.8 46.4 60.8 49.6" fill="none" stroke={INK} strokeWidth="1.6" strokeLinecap="round" />
+      {/* the flat: edge and top of its timber frame, the canvas face */}
+      <path d={slabSide(x, y, w, h, dd, dd)} fill={timberD} {...OS} />
+      <path d={slabTop(x, y, w, dd, dd)} fill={timberL} {...OS} />
+      <path d={inkBox(x, y, w, h, .8, .2)} fill={canvas} {...OS} />
+      {/* the painted scene */}
+      <rect x={ax} y={ay} width={aw} height={ah} fill={sky} />
+      <g clipPath={`url(#${u}a)`}>
+        <circle cx="38.6" cy="19" r="6.6" fill={moon} />
+        <path d="M9 16Q17 12.4 24 15Q27 13 32 15V18Q24 16.4 17 18.6Q12 20 9 18Z" fill={cloud} />
+        <path d="M9 39C14 28 22 26 28 33C33 28 41 27 50 38V52H9Z" fill={hill} />
+        <path d="M9 39C14 28 22 26 28 33Q26 44 16 52H9Z" fill={hillD} />
+        {/* castle: keep, tower, crenels, gate, slit windows */}
+        <rect x="16.6" y="27.6" width="15" height="11" {...IS} fill={castle} />
+        <rect x="26" y="27.6" width="5.6" height="11" fill={castleD} />
+        <rect x="19.6" y="20.6" width="7" height="8" {...IS} fill={castle} />
+        <rect x="24.4" y="20.6" width="2.2" height="8" fill={castleD} />
+        {crenel(16.6, 27.6, 4, 15)}{crenel(19.6, 20.6, 3, 7)}
+        <path d="M22.4 38.6V34.4Q24.4 32 26.4 34.4V38.6Z" fill={INK} />
+        <rect x="22.4" y="23.4" width="1.3" height="2.8" fill={INK} /><rect x="28.8" y="30" width="1.3" height="2.8" fill={INK} />
+        <path d="M9 45C20 39.6 36 39 50 46V52H9Z" fill={ground} />
+        <rect x="42.2" y="39" width="2.8" height="8" fill="#5a3b22" />
+        <circle cx="43.6" cy="35" r="6.4" fill={leaf} /><circle cx="39" cy="38" r="4" fill={leaf} /><circle cx="47.4" cy="38.2" r="3.8" fill={leaf} />
+      </g>
+      {/* frame inner edge and a strip of bare canvas with paint drips at the foot */}
+      <rect x={ax} y={ay} width={aw} height={ah} {...IS} fill="none" />
+      <path d={`M${ax} ${ay + ah - 3.4}Q${ax + 8} ${ay + ah - 5.6} ${ax + 17} ${ay + ah - 3.6}T${ax + aw} ${ay + ah - 3.4}V${ay + ah}H${ax}Z`} fill={canvas} />
+      <path d={`M${ax} ${ay + ah - 3.4}Q${ax + 8} ${ay + ah - 5.6} ${ax + 17} ${ay + ah - 3.6}T${ax + aw} ${ay + ah - 3.4}`} fill="none" stroke={ground} strokeWidth="1.2" strokeLinecap="round" />
+      <path d={`M${ax} ${ay + ah}V${ay}H${ax + aw}V${ay + ah}`} {...IS} strokeOpacity=".35" />
+      {/* two timber battens showing at the top corners of the frame */}
+      <path d="M7.6 8.6H48.4" stroke={timber} strokeWidth="2.4" />
+    </g>
+  );
+}
+
+/** TALL. Theatre spotlight on a tall tripod, the lamp well above head height: three steel legs and a column, a black lamp housing tilted down to the
+ *  stage on a brass pivot, cooling slits, barn-door flaps round a warm lens with a small glow, and a cable looping to the floor. */
+export function Spotlight() {
+  const body = "#34363f", bodyL = "#5b5e6a", bodyD = "#202129", steel = "#70788a", steelD = "#4a505c", lens = "#ffe9a8", lensL = "#fff6d6", brass = BRASS;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.4} rx={24} ry={3} />
+      {/* the cable looping down the column to the floor */}
+      <path d="M21 28C13 34 15 46 26 50.4C33 53 40 53 46 56.2" fill="none" stroke={INK} strokeWidth="1.5" strokeLinecap="round" />
+      {/* tripod legs, the column, feet */}
+      <Tube d="M32 41L13 56.6" c={steelD} w={3.8} e={1} />
+      <Tube d="M32 41L51 56.6" c={steelD} w={3.8} e={1} />
+      <Tube d="M32 41V55.6" c={steel} w={3.8} e={1} />
+      <path d="M32 47.4L22.4 49.6M32 47.4L41.6 49.6" {...IS} strokeWidth="1.2" />
+      <Tube d="M32 45V21" c={steel} w={5} e={1.2} />
+      <path d={inkBox(28.6, 37.4, 6.8, 5.2, 1.4, .1)} fill={steelD} {...OS} />
+      <circle cx="37.2" cy="40" r="1.7" {...IS} fill={brass} />
+      {/* the yoke from the column to the pivot */}
+      <Tube d="M26.4 21.6V15.4M37.6 21.6V15.4M26.4 21.6H37.6" c={steelD} w={3.4} e={1} />
+      {/* the lamp, tilted down: glow, body with a lit top and cooling slits, barn doors and lens */}
+      <g transform="translate(32 15) rotate(16)">
+        <ellipse cx="21" cy="0" rx="9.6" ry="14.6" fill="#ffe9a8" fillOpacity=".33" />
+        <path d={inkBox(-15.4, -6.4, 3.4, 12.8, 1.2, .1)} fill={bodyD} {...OS} />
+        <path d={inkBox(-12.8, -9.4, 25.6, 18.8, 3, .3)} fill={body} {...OS} />
+        <path d="M-11.6 -8.2H11.6V-4.4H-11.6Z" fill={bodyL} />
+        <path d="M-9 -8V-1.4M-5 -8V-1.4M-1 -8V-1.4" stroke={INK} strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M12.6 -10.6L18.4 -12.4V12.4L12.6 10.6Z" fill={bodyD} {...OS} />
+        <path d="M18.4 -12.4L27 -17.6L27.8 -14.2L19 -9Z" fill={bodyL} {...OS} />
+        <path d="M18.4 12.4L27 17.6L27.8 14.2L19 9Z" fill={bodyD} {...OS} />
+        <ellipse cx="19.2" cy="0" rx="4" ry="10.4" fill={lens} {...OS} />
+        <ellipse cx="18.6" cy="-2.4" rx="1.8" ry="5" fill={lensL} />
+        <circle cx="0" cy="1.8" r="2.5" fill={brass} {...OS} />
+        <circle cx="0" cy="1.8" r=".8" fill={INK} />
+      </g>
+    </g>
+  );
+}
+
+/** PERCH. Concert harp with its stool: a gilded pillar and shoulder sweeping over a tapered sounding box, the strings between them, all rising higher
+ *  than a head so it blocks a sightline; and in front of it the player's stool with a crimson padded seat, the clearest shape on the sprite. */
+export function Harp() {
+  const gold = "#d9a93c", goldL = "#f0cb6e", goldD = "#a87a24", seat = "#a8303f", seatL = "#c95a66", seatD = "#7b2230", leg = "#5e3b22";
+  const sb = (x) => 48 - (x - 20) * 1.34; // the sounding box's line
+  const strings = Array.from({ length: 10 }, (_, i) => 20.8 + i * 2.65);
+  const sx = 44.2, sy = 45.4, rx = 11.6, ry = 4.4, st = 3.4; // the stool's seat
+  const stoolLeg = (x, sg) => <Tube key={x} d={`M${x} ${sy + st}L${r2(x + sg * 2.6)} 57`} c={leg} w={3.2} e={.9} />;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.4} rx={26} ry={3.2} />
+      {/* strings, ink under a thin pale line so they read on any floor */}
+      {strings.map((x) => <path key={x} d={`M${r2(x)} 9.6V${r2(sb(x) - 1)}`} stroke={INK} strokeWidth="1.5" strokeLinecap="round" />)}
+      {strings.map((x) => <path key={`s${x}`} d={`M${r2(x)} 10V${r2(sb(x) - 1)}`} stroke="#f4efe2" strokeWidth=".7" strokeLinecap="round" />)}
+      {/* sounding box: tapered, its east side shaded, ribs across it */}
+      <path d="M18 48.6L29.6 48.6L50.4 13.6L45 9.4Z" fill={gold} {...OS} />
+      <path d="M29.6 48.6L50.4 13.6L47.6 11.4L25 48.6Z" fill={goldD} />
+      <path d="M21.6 44.4L28.8 45.4M27.4 35.4L33.4 36.2M33.2 26.4L38.6 27M39 17.4L43.8 18" {...IS} />
+      {/* pillar with fluting and a crown */}
+      <path d={inkBox(13.2, 12, 5.4, 37, 1.6, .2)} fill={goldL} {...OS} />
+      <path d="M16.6 13V48" stroke={goldD} strokeWidth="1.3" />
+      <path d="M10.8 12.4L12.4 7.6H19.4L21 12.4Z" fill={gold} {...OS} />
+      <circle cx="15.9" cy="5.6" r="2.4" fill={goldL} {...OS} />
+      {/* shoulder: the S-curve from the crown across to the top of the sounding box */}
+      <path d="M19 7.6C22.6 3.6 29.4 3.4 34.4 7C38.2 9.8 42 9.4 45 7.6C47.4 6.4 50.6 8 51.2 11C51.8 14 49.4 16.2 46.8 15.2C42.4 15.8 37.4 15 33 11.6C28.4 8.6 23.4 9 19.8 12.4Z" fill={gold} {...OS} />
+      <path d="M21.4 9.2C25 6 29.8 6.2 33.8 8.8C37.6 11.8 42 12.8 46 12.2" fill="none" stroke={goldD} strokeWidth="1.2" strokeLinecap="round" />
+      {/* base with two pedals */}
+      <path d={slabSide(11.4, 48, 25.6, 5.4, 3, 3)} fill={goldD} {...OS} />
+      <path d={slabTop(11.4, 48, 25.6, 3, 3)} fill={goldL} {...OS} />
+      <path d={inkBox(11.4, 48, 25.6, 5.4, 1, .2)} fill={gold} {...OS} />
+      {[16, 26].map((x) => <path key={x} d={`M${x} 53.4V56.6`} stroke={INK} strokeWidth="2.2" strokeLinecap="round" />)}
+      {/* the stool in front: legs, then its seat with a padded crimson top */}
+      {stoolLeg(sx - 8.4, -1)}{stoolLeg(sx + 8.4, 1)}{stoolLeg(sx, 0)}
+      <path d={drumBand(sx, rx, ry, sy, sy + st)} fill={seatD} {...OS} />
+      <ellipse cx={sx} cy={sy} rx={rx} ry={ry} fill={seat} {...OS} />
+      <ellipse cx={sx - 2} cy={sy - .9} rx="6.6" ry="1.9" fill={seatL} />
+      <circle cx={sx} cy={sy} r=".9" fill={seatD} />
+    </g>
+  );
+}
+
+/** SHORT. Costume trunk at waist height: a bottle-green wardrobe trunk with its lid seen from above, leather straps with brass buckles round it,
+ *  brass corners and clasp, a travel label on the front and a pink feather boa caught under the lid. */
+export function CostumeTrunk() {
+  const body = "#2f6f6a", bodyL = "#45918a", bodyD = "#1f4f4c", strap = "#7a5233", brass = BRASS, brassD = "#a87a24", feather = "#d76f93", featherD = "#a84f6c";
+  const x = 10, y = 33, w = 38, h = 23, dx = 6, dy = 12, sd = 6.6;
+  const P = (uu, v) => [r2(x + uu * w + v * dx), r2(y - v * dy)];
+  const strapBand = (sx) => (
+    <g key={sx}>
+      <path d={polyD(P(sx, 0), P(sx, 1), P(sx + .1, 1), P(sx + .1, 0))} {...IS} fill={strap} />
+      <rect x={r2(x + sx * w)} y={y} width={r2(.1 * w)} height={h} {...IS} fill={strap} />
+      <rect x={r2(x + sx * w - .9)} y={y + 3.4} width={r2(.1 * w + 1.8)} height="4.2" rx=".6" {...IS} fill={brass} />
+    </g>
+  );
+  const corner = (px, py, sx, sy) => <path key={`${px}${py}`} d={polyD([px, py], [px + sx * 6, py], [px, py + sy * 6])} {...IS} fill={brass} />;
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57.2} rx={25} ry={3.2} />
+      {/* east side with the lid seam, the lid from above, the front */}
+      <path d={slabSide(x, y, w, h, dx, dy)} fill={bodyD} {...OS} />
+      <path d={`M${x + w} ${y + sd}L${x + w + dx} ${y + sd - dy}`} {...IS} />
+      <path d={slabTop(x, y, w, dx, dy)} fill={bodyL} {...OS} />
+      <path d={inkBox(x, y, w, h, 1.4, .3)} fill={body} {...OS} />
+      <path d={`M${x} ${y + sd}H${x + w}`} {...IS} />
+      {/* the boa caught under the lid */}
+      <path d={`M31 ${y + sd - .4}C28 ${y + sd + 3} 32 ${y + sd + 7} 29 ${y + sd + 12}C33.4 ${y + sd + 10} 36 ${y + sd + 5} 35.4 ${y + sd - .4}Z`} {...IS} fill={feather} />
+      <path d={`M33 ${y + sd + 1}Q32 ${y + sd + 5} 31.4 ${y + sd + 9}`} {...IS} stroke={featherD} />
+      {/* straps across the lid and down the front, brass buckles */}
+      {strapBand(.14)}{strapBand(.74)}
+      {/* travel label */}
+      <g transform="rotate(-7 21 48)">
+        <rect x="14.6" y="44.6" width="13.4" height="7.8" rx="1.6" {...IS} fill={CREAM} />
+        <path d="M14.8 48H27.8" stroke={CRIMSON} strokeWidth="1.6" />
+      </g>
+      {/* brass clasp and corners */}
+      <path d={inkBox(27.4, y + sd - 2.6, 5, 5.4, .8, .1)} {...IS} fill={brass} />
+      <circle cx="29.9" cy={y + sd} r=".8" fill={INK} />
+      {corner(x, y, 1, 1)}{corner(x + w, y, -1, 1)}{corner(x, y + h, 1, -1)}{corner(x + w, y + h, -1, -1)}
+      <path d={polyD(P(.92, 1), P(1, 1), P(1, .8))} {...IS} fill={brassD} />
+      <path d={polyD(P(0, 1), P(.08, 1), P(0, .8))} {...IS} fill={brass} />
+    </g>
+  );
+}
+
+/** SHORT. A stagehand's props table: a table top painted stage-black on raw pine X-trestles, seen from above in the waist-height camera, white spike tape
+ *  marking out the places, a pale comedy mask with a red ribbon and a gold goblet set out on it. Unlike the plain TABLE, no cloth and no turned legs. */
+export function PropsTable() {
+  const top = "#57525f", topL = "#6d6778", front = "#3f3b47", side = "#2a2830", pine = "#c9a169", pineD = "#8f6a3a", tape = "#efe6cf", mask = "#f4efe2", maskD = "#cfc6b0", gold = BRASS, goldD = "#a87a24";
+  const x = 9, y = 34, w = 42, dx = 6, dy = 13, t = 3.6;
+  const P = (uu, v) => [r2(x + uu * w + v * dx), r2(y - v * dy)];
+  const X = (ox, oy, wd, hd, c) => <><Tube d={`M${ox} ${oy}L${ox + wd} ${oy + hd}`} c={c} w={4} e={1} /><Tube d={`M${ox + wd} ${oy}L${ox} ${oy + hd}`} c={c} w={4} e={1} /></>;
+  const tapeLine = (a, b) => `M${P(...a).join(" ")}L${P(...b).join(" ")}`;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.4} rx={26} ry={3.2} />
+      {/* the far trestle, a shade down, under the back of the top; the near trestle and stretcher */}
+      {X(19, 26, 13, 17, pineD)}
+      {X(38, 26, 13, 17, pineD)}
+      {X(10.6, 36, 12, 21, pine)}
+      {X(37.4, 36, 12, 21, pine)}
+      <Tube d="M17 46.6H43" c={pineD} w={3.6} e={1} />
+      {/* top: east edge, painted top with a lighter strip, front edge */}
+      <path d={slabSide(x, y, w, t, dx, dy)} fill={side} {...OS} />
+      <path d={slabTop(x, y, w, dx, dy)} fill={top} {...OS} />
+      <path d={polyD(P(.04, .9), P(.42, .9), P(.36, .62), P(.02, .62))} fill={topL} />
+      <path d={inkBox(x, y, w, t, .8, .2)} fill={front} {...OS} />
+      {/* white spike tape: an L at each corner of the mask's place, an X for the goblet */}
+      <g fill="none" stroke={tape} strokeWidth="1.5" strokeLinecap="round">
+        <path d={`${tapeLine([.08, .12], [.08, .3])}${tapeLine([.08, .12], [.2, .12])}`} />
+        <path d={`${tapeLine([.5, .92], [.5, .74])}${tapeLine([.5, .92], [.38, .92])}`} />
+        <path d={`${tapeLine([.66, .18], [.9, .36])}${tapeLine([.9, .18], [.66, .36])}`} />
+      </g>
+      {/* the gold goblet */}
+      <ellipse cx="44" cy="26.4" rx="5" ry="1.9" fill={gold} {...OS} />
+      <path d="M43.2 25.8V19.6H44.8V25.8Z" {...IS} fill={goldD} />
+      <path d="M37.6 10.4Q37.8 19.8 44 20.4Q50.2 19.8 50.4 10.4Z" fill={gold} {...OS} />
+      <path d="M47.4 10.4H50.4Q50.2 19.8 44 20.4Q47.2 18 47.4 10.4Z" fill={goldD} />
+      <ellipse cx="44" cy="10.4" rx="6.4" ry="2" fill="#2a2830" {...OS} />
+      <ellipse cx="44" cy="10.4" rx="3.8" ry="1" fill="#b5395b" />
+      <circle cx="44" cy="15.6" r="1.5" {...IS} fill={CRIMSON} />
+      {/* the comedy mask, propped at a slant, with a ribbon */}
+      <g transform="translate(23.8 23.4) rotate(-8)">
+        <path d="M7.6 -4C11 -3.8 12.6 -.6 11.4 3.4C11 5 10 6.2 9 7" fill="none" stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
+        <path d="M7.6 -4C11 -3.8 12.6 -.6 11.4 3.4C11 5 10 6.2 9 7" fill="none" stroke={CRIMSON} strokeWidth="1.2" strokeLinecap="round" />
+        <path d="M-7.6 -6.4Q0 -9.4 7.6 -6.4C8.4 1 5.2 9 0 9.6C-5.2 9 -8.4 1 -7.6 -6.4Z" fill={mask} {...OS} />
+        <path d="M3 -6.8Q5.4 -7.2 7.6 -6.4C8.4 1 5.2 9 0 9.6C3.4 7 5 1 3 -6.8Z" fill={maskD} />
+        <path d="M-5.6 -2.2Q-3.4 -5.4 -1.2 -2.2Q-3.4 -.8 -5.6 -2.2Z" fill={INK} />
+        <path d="M1.2 -2.2Q3.4 -5.4 5.6 -2.2Q3.4 -.8 1.2 -2.2Z" fill={INK} />
+        <path d="M-4.2 2.6Q0 8 4.2 2.6Q0 5 -4.2 2.6Z" fill={INK} />
+      </g>
+    </g>
+  );
+}
+
+
+/** TALL, multi-tile. The theatre's main curtain drawn once across a 1xN row (N from 2 up): a full-width red velvet drape against the back wall, closed in deep folds, under a
+ *  swagged valance with a gold fringe and a gold crest at its centre; at BOTH outer ends a swept drape is gathered by a gold tieback with a tassel. The fold and swag widths are
+ *  constant in board units and the tiebacks stay at the two ends, so it is one curtain at any length. A column or a single tile falls back on the one-tile StageCurtain. */
+export function StageCurtainSpan({ cw = 1, ch = 1 }) {
+  const u = useUid();
+  if (cw < 2) return <g transform={`translate(0 ${64 * (ch - 1)})`}><StageCurtain /></g>;
+  const W = 64 * cw;
+  const v = "#a82a35", vD = "#7a1c28", vL = "#c8505e", gold = "#d9a93c", goldL = "#f0cb6e", goldD = "#a87a24";
+  const top = 9, tie = 36, hem = 56.8, inset = 2.6;
+  // the closed middle: folds of a constant width, a wavy hem, every other fold a shade down
+  const folds = Math.max(4, Math.round((W - 2 * inset) / 12.8)), fw = (W - 2 * inset) / folds;
+  const fx = (i) => r2(inset + i * fw);
+  const backD = `M${inset} ${top}H${W - inset}V${hem}${Array.from({ length: folds }, (_, i) => `Q${r2(fx(folds - i) - fw / 2)} ${hem + 2.8} ${fx(folds - i - 1)} ${hem}`).join("")}Z`;
+  // the swept drape at the west end (the east one is its mirror): wide at the rail, cinched at the tieback, flared to the hem
+  const gw = 42, tw = 15.4, gb = 27, n = 5;
+  const sx = (i) => .8 + (i * (gw - .8)) / n, wx = (i) => 2.4 + (i * (tw - 2.4)) / n, bx = (i) => .8 + (i * (gb - .8)) / n;
+  const sweep = `M.8 ${top}H${gw}C${gw - 3} ${top + 14} ${tw + 6} ${tie - 7} ${tw} ${tie}C${tw + 2} ${tie + 7} ${gb - 4} ${hem - 8} ${gb} ${hem}Q${r2(gb * .75)} ${hem + 2.6} ${r2(gb * .5)} ${hem}Q${r2(gb * .25)} ${hem + 2.6} .8 ${hem}C.8 ${hem - 7} 2.4 ${tie + 7} 2.4 ${tie}C2.4 ${tie - 7} .8 ${top + 12} .8 ${top}Z`;
+  const sweepEl = (flip) => (
+    <g key={flip ? "e" : "w"} transform={flip ? `translate(${W} 0) scale(-1 1)` : undefined}>
+      <path d={sweep} fill={v} />
+      <g clipPath={`url(#${u}s)`}>
+        {[1, 3].map((i) => <g key={i}>
+          <path d={polyD([sx(i), top], [sx(i + 1), top], [wx(i + 1), tie], [wx(i), tie])} fill={vD} />
+          <path d={polyD([wx(i), tie], [wx(i + 1), tie], [bx(i + 1), 60], [bx(i), 60])} fill={vD} />
+        </g>)}
+        <path d={polyD([sx(2) + .4, top], [sx(2) + 2.6, top], [wx(2) + .7, tie], [wx(2) + .1, tie])} fill={vL} />
+        <path d={polyD([wx(2) + .1, tie], [wx(2) + .7, tie], [bx(2) + 2.6, 60], [bx(2) + .4, 60])} fill={vL} />
+        {[1, 2, 3, 4].map((i) => <path key={i} d={`M${r2(sx(i))} ${top}L${r2(wx(i))} ${tie}L${r2(bx(i))} 60`} {...IS} />)}
+      </g>
+      <path d={sweep} fill="none" {...OS} />
+      {/* the gold tieback across the cinch, a boss on the wall side, a tassel hanging on the inside */}
+      <path d={`M1 ${tie - 2.8}Q${r2(tw / 2)} ${tie + .6} ${r2(tw + 1.4)} ${tie - 2.4}V${tie + 2.2}Q${r2(tw / 2)} ${tie + 5.2} 1 ${tie + 2}Z`} fill={gold} {...OS} />
+      <path d={`M2.6 ${tie + .6}Q${r2(tw / 2)} ${tie + 3.4} ${r2(tw)} ${tie + .8}`} {...IS} />
+      <circle cx="3.6" cy={tie - .2} r="2.7" fill={goldL} {...OS} />
+      <circle cx={r2(tw + 1)} cy={tie} r="2.1" fill={goldL} {...OS} />
+      <path d={`M${r2(tw - 2.2)} ${tie + 2.2}H${r2(tw + 4.2)}L${r2(tw + 5.6)} ${tie + 12}Q${r2(tw + 1)} ${tie + 14} ${r2(tw - 3.6)} ${tie + 12}Z`} fill={gold} {...OS} />
+      <path d={`M${r2(tw + 1.4)} ${tie + 2.2}H${r2(tw + 4.2)}L${r2(tw + 5.6)} ${tie + 12}Q${r2(tw + 3.4)} ${tie + 13} ${r2(tw + 1.4)} ${tie + 13.2}Z`} fill={goldD} />
+      <path d={`M${r2(tw - .8)} ${tie + 4}L${r2(tw - 1.2)} ${tie + 12.2}M${r2(tw + 2.8)} ${tie + 4}L${r2(tw + 3.4)} ${tie + 12.2}`} {...IS} />
+    </g>
+  );
+  // the valance: swags of a constant width, hung from a gold cord
+  const swags = Math.max(2, Math.round(W / 32)), sw = W / swags, vTop = 2.8, vEdge = 11.6, vLow = 19.6;
+  const sxv = (i) => r2(i * sw);
+  const vEdgeD = Array.from({ length: swags }, (_, i) => `M${sxv(i)} ${vEdge}Q${r2(sxv(i) + sw / 2)} ${r2(2 * vLow - vEdge)} ${sxv(i + 1)} ${vEdge}`).join("");
+  const valance = `M0 ${vTop}H${W}V${vEdge}${Array.from({ length: swags }, (_, i) => `Q${r2(sxv(swags - i) - sw / 2)} ${r2(2 * vLow - vEdge)} ${sxv(swags - i - 1)} ${vEdge}`).join("")}Z`;
+  const cross = Array.from({ length: swags }, (_, i) => i);
+  return (
+    <g>
+      <defs>
+        <clipPath id={`${u}b`}><path d={backD} /></clipPath>
+        <clipPath id={`${u}s`}><path d={sweep} /></clipPath>
+        <clipPath id={`${u}v`}><path d={valance} /></clipPath>
+      </defs>
+      <GroundShadow cx={W / 2} cy={57.6} rx={W / 2 - 1} ry={3} />
+      {/* the closed curtain behind */}
+      <path d={backD} fill={v} />
+      <g clipPath={`url(#${u}b)`}>
+        {Array.from({ length: folds }, (_, i) => i).filter((i) => i % 2).map((i) => <path key={i} d={polyD([fx(i), top], [fx(i + 1), top], [fx(i + 1), 60], [fx(i), 60])} fill={vD} />)}
+        {Array.from({ length: folds }, (_, i) => i).filter((i) => i % 2 === 0 && i % 6 === 2).map((i) => <path key={i} d={polyD([fx(i) + 1.6, top], [fx(i) + 4, top], [fx(i) + 4, 60], [fx(i) + 1.6, 60])} fill={vL} />)}
+        {Array.from({ length: folds - 1 }, (_, i) => i + 1).map((i) => <path key={i} d={`M${fx(i)} ${top}V60`} {...IS} />)}
+      </g>
+      <path d={backD} fill="none" {...OS} />
+      {sweepEl(false)}{sweepEl(true)}
+      {/* valance: velvet, the shaded belly of each swag, drape lines, a gold fringe with ticks along its scallops, the gold cord on top */}
+      <path d={valance} fill={v} />
+      <g clipPath={`url(#${u}v)`}>
+        {cross.map((i) => <path key={i} d={`M${sxv(i)} ${vEdge}Q${r2(sxv(i) + sw / 2)} ${r2(2 * vLow - vEdge)} ${sxv(i + 1)} ${vEdge}L${sxv(i + 1)} 6.4Q${r2(sxv(i) + sw / 2)} ${r2(vLow + 2)} ${sxv(i)} 6.4Z`} fill={vD} />)}
+        {cross.map((i) => <path key={`d${i}`} d={`M${sxv(i)} 6.4Q${r2(sxv(i) + sw / 2)} ${r2(vLow - 3)} ${sxv(i + 1)} 6.4`} {...IS} />)}
+      </g>
+      <path d={valance} fill="none" {...OS} />
+      <path d={vEdgeD} fill="none" stroke={INK} strokeWidth="4.4" strokeLinecap="round" />
+      <path d={vEdgeD} fill="none" stroke={gold} strokeWidth="2.6" strokeLinecap="round" />
+      <path d={vEdgeD} fill="none" stroke={goldD} strokeWidth="2.6" strokeDasharray=".9 2.2" />
+      <Tube d={`M1.4 ${vTop}H${W - 1.4}`} c={goldL} w={3.8} e={1.1} />
+      {/* a little gold tassel at every join of the swags, and the crest at the centre of the whole curtain */}
+      {cross.slice(1).map((i) => (
+        <g key={i}>
+          <circle cx={sxv(i)} cy={vEdge} r="2.1" fill={goldL} {...OS} />
+          <path d={`M${r2(sxv(i) - 2.1)} ${r2(vEdge + 1.6)}H${r2(sxv(i) + 2.1)}L${r2(sxv(i) + 2.9)} ${r2(vEdge + 8.4)}H${r2(sxv(i) - 2.9)}Z`} fill={gold} {...OS} />
+          <path d={`M${sxv(i)} ${r2(vEdge + 3)}V${r2(vEdge + 8)}`} {...IS} />
+        </g>
+      ))}
+      <path d={`M${W / 2} 4.8C${W / 2 + 7} 3.6 ${W / 2 + 10.4} 8.4 ${W / 2 + 7.4} 12C${W / 2 + 5.2} 14.8 ${W / 2 + 2} 16 ${W / 2} 17.4C${W / 2 - 2} 16 ${W / 2 - 5.2} 14.8 ${W / 2 - 7.4} 12C${W / 2 - 10.4} 8.4 ${W / 2 - 7} 3.6 ${W / 2} 4.8Z`} fill={goldL} {...OS} />
+      <path d={starD(W / 2, 10.4, 4.1)} {...IS} fill={CRIMSON} />
+    </g>
+  );
+}
+
+/** TALL. Upright double bass on its stand, the scroll well over head height: a long fretless neck with an ebony fingerboard and four strings over the bridge, sloped shoulders, a wide
+ *  lower bout with F-holes, machine heads either side of the pegbox, leaning a touch into a black stand with a neck yoke and splayed feet. */
+export function DoubleBass() {
+  const u = useUid();
+  const wood = "#b4682f", woodL = "#d69556", woodD = "#7c441d", ebony = "#2b2630", iron = "#6a6d7a", ivory = "#efe6cf";
+  const body = "M32 21.6C36.2 21.6 38.2 22.8 40.6 25.2C43.8 28 47 29 47.2 32.6C47.4 36 42.6 36 42.2 39.6C41.8 43.2 51.2 43.6 51.4 49.6C51.6 54.2 42.4 56.4 32 56.4C21.6 56.4 12.4 54.2 12.6 49.6C12.8 43.6 22.2 43.2 21.8 39.6C21.4 36 16.6 36 16.8 32.6C17 29 20.2 28 23.4 25.2C25.8 22.8 27.8 21.6 32 21.6Z";
+  const strings = [29.9, 31.3, 32.7, 34.1];
+  return (
+    <g>
+      <defs><clipPath id={`${u}b`}><path d={body} /></clipPath></defs>
+      <GroundShadow cx={32} cy={57.6} rx={24} ry={3} />
+      {/* the stand behind it: splayed feet and an arm up to a yoke under the neck */}
+      <Tube d="M14 57.4L32 51L50 57.4" c={iron} w={3.2} e={1} />
+      <Tube d="M52 57.2L46.4 34L38.6 22.6" c={iron} w={3} e={1} />
+      <g transform="rotate(3 32 57)">
+        {/* the neck, pegbox and scroll, machine heads either side */}
+        <path d="M28.6 26V10H35.4V26Z" fill={woodD} {...OS} />
+        <path d={inkBox(28.2, 5.6, 7.6, 7.6, 1.4, .1)} fill={wood} {...OS} />
+        <circle cx="32" cy="4.4" r="3.3" fill={wood} {...OS} />
+        <circle cx="32" cy="4.4" r="1.1" fill={INK} />
+        {[7.4, 11].map((y) => <g key={y}><path d={`M25 ${y}H39`} stroke={INK} strokeWidth="2.2" strokeLinecap="round" /><circle cx="24.6" cy={y} r="1.5" {...IS} fill={BRASS} /><circle cx="39.4" cy={y} r="1.5" {...IS} fill={BRASS} /></g>)}
+        {/* the body: varnish, its shaded east third, one lit shape on the lower bout, an inlaid line round it */}
+        <path d={body} fill={wood} />
+        <g clipPath={`url(#${u}b)`}><path d="M41.8 18C38 32 45 42 40 60H56V18Z" fill={woodD} /></g>
+        <path d="M17 47.6C19 45.2 22.6 44.6 25 45.6C24 48 20.6 50.4 17.8 50.2Z" fill={woodL} />
+        <path d={body} fill="none" {...OS} />
+        {/* F-holes */}
+        <path d="M24.2 37.4C22 39.4 25.8 42.6 23 46M39.8 37.4C42 39.4 38.2 42.6 41 46" fill="none" stroke={INK} strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="24.4" cy="37.2" r="1.1" fill={INK} /><circle cx="22.8" cy="46.2" r="1.1" fill={INK} /><circle cx="39.6" cy="37.2" r="1.1" fill={INK} /><circle cx="41.2" cy="46.2" r="1.1" fill={INK} />
+        {/* fingerboard, tailpiece, bridge, strings */}
+        <path d="M29.2 9.4H34.8L36.6 38.4H27.4Z" fill={ebony} {...OS} />
+        <path d="M28.8 46.4H35.2L34.2 54.4Q32 55.2 29.8 54.4Z" fill={ebony} {...OS} />
+        {strings.map((x) => <path key={x} d={`M${x} 9.6V46.6`} stroke={ivory} strokeWidth=".6" />)}
+        <path d="M26.2 44.8Q32 42.8 37.8 44.8L36.4 46.6H27.6Z" {...IS} fill={ivory} />
+      </g>
+    </g>
+  );
+}
+
+/** SHORT. Cello on a low stand, chest height with its belly seen from above: round shoulders and a tight waist in a dark red varnish, tilted back into a black stand, F-holes, an ebony
+ *  fingerboard and a short neck ending in a scroll, a spike into the floor. */
+export function Cello() {
+  const u = useUid();
+  const wood = "#8d3f22", woodL = "#b9683a", woodD = "#5f2914", ebony = "#2b2630", iron = "#6a6d7a", ivory = "#efe6cf";
+  const body = "M32 28.6C35.6 28.6 37.6 29.4 39.6 30.6C42.4 32.2 44.6 33.8 44.6 37C44.6 39.8 41 40 40.6 42.4C40.2 44.8 46.6 45.6 46.6 49.4C46.6 52.8 40 54.6 32 54.6C24 54.6 17.4 52.8 17.4 49.4C17.4 45.6 23.8 44.8 23.4 42.4C23 40 19.4 39.8 19.4 37C19.4 33.8 21.6 32.2 24.4 30.6C26.4 29.4 28.4 28.6 32 28.6Z";
+  return (
+    <g>
+      <defs><clipPath id={`${u}b`}><path d={body} /></clipPath></defs>
+      <GroundShadow cx={32} cy={57.4} rx={20} ry={3} />
+      {/* stand: feet and a back arm */}
+      <Tube d="M15.6 57.2L32 52.8L48.4 57.2" c={iron} w={3} e={1} />
+      <Tube d="M50 57L46.4 34.4L40 29" c={iron} w={2.8} e={.9} />
+      <g transform="rotate(4 32 56)">
+        {/* spike, neck, pegbox and scroll */}
+        <path d="M32 54V57.4" stroke={INK} strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M29.6 31V21H34.4V31Z" fill={woodD} {...OS} />
+        <path d={inkBox(29.2, 17.2, 5.6, 5.8, 1.2, .1)} fill={wood} {...OS} />
+        <circle cx="32" cy="16" r="2.6" fill={wood} {...OS} />
+        <circle cx="32" cy="16" r=".9" fill={INK} />
+        <path d="M26.4 19H37.6M26.4 21.8H37.6" stroke={INK} strokeWidth="1.8" strokeLinecap="round" />
+        {/* body, shaded east third, lit lower bout */}
+        <path d={body} fill={wood} />
+        <g clipPath={`url(#${u}b)`}><path d="M41 26C37.4 36 43.4 44 39 58H54V26Z" fill={woodD} /></g>
+        <path d="M21.4 46.6C23 44.8 25.8 44.4 27.6 45.2C26.8 47.2 24 49 22 48.8Z" fill={woodL} />
+        <path d={body} fill="none" {...OS} />
+        <path d="M25.6 37.4C24 39 26.6 41.6 24.6 44.2M38.4 37.4C40 39 37.4 41.6 39.4 44.2" fill="none" stroke={INK} strokeWidth="1.3" strokeLinecap="round" />
+        {/* fingerboard, tailpiece, bridge, strings */}
+        <path d="M30 20.4H34L35.2 39.6H28.8Z" fill={ebony} {...OS} />
+        <path d="M29.4 46H34.6L33.8 52.6Q32 53.3 30.2 52.6Z" fill={ebony} {...OS} />
+        {[30.8, 31.9, 33, 34.1].map((x) => <path key={x} d={`M${x} 20.6V46`} stroke={ivory} strokeWidth=".55" />)}
+        <path d="M27.4 44.4Q32 42.8 36.6 44.4L35.6 46H28.4Z" {...IS} fill={ivory} />
+      </g>
+    </g>
+  );
+}
+
+/** SHORT. Copper kettledrum at waist height (SHORT camera): the cream drumhead seen from above inside a brass counter-hoop, a beaten-copper bowl with a lit west flank and a shaded east
+ *  one, tension rods round the rim, three steel legs and a foot pedal, a pair of felt mallets laid across the head. */
+export function Timpani() {
+  const copper = "#bb6d36", copperL = "#e6ab78", copperD = "#7f4520", head = "#efe6cf", headD = "#d3c7a9", steel = "#7c8591", hoop = "#d9a93c", hoopD = "#a87a24", stick = "#c9a169", felt = "#c83e3b";
+  const cx = 32, rx = 24, ry = 9.6, yr = 30.6, n = 7, dx = 7;
+  const bowl = `M${cx - rx} ${yr}C${cx - rx + .6} 44 ${cx - 13} 51.4 ${cx} 51.4C${cx + 13} 51.4 ${cx + rx - .6} 44 ${cx + rx} ${yr}Z`;
+  const rods = Array.from({ length: n }, (_, i) => i - (n - 1) / 2).map((k) => {
+    const x = cx + k * dx, y = yr + 1.2 + ry * Math.sqrt(1 - ((k * dx) / rx) ** 2);
+    return [r2(x), r2(y)];
+  });
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57.4} rx={23} ry={3.2} />
+      {/* legs and the foot pedal under the bowl */}
+      <Tube d="M21 44L13.4 56.6" c={steel} w={3.8} e={1} />
+      <Tube d="M43 44L50.6 56.6" c={steel} w={3.8} e={1} />
+      <Tube d="M32 49V54.4" c={steel} w={4.2} e={1.1} />
+      <path d={polyD([27, 54.2], [37, 54.2], [38.6, 57.4], [25.4, 57.4])} fill={hoopD} {...OS} />
+      {/* the bowl */}
+      <path d={bowl} fill={copper} />
+      <path d={`M${cx + 9} ${yr}C${cx + 9} 41 ${cx + 8} 47 ${cx + 2} 51.2C${cx + 13} 51 ${cx + rx - .6} 44 ${cx + rx} ${yr}Z`} fill={copperD} />
+      <path d={`M${cx - rx + 4} ${yr + 3}C${cx - rx + 6} 40 ${cx - 12} 45.6 ${cx - 9} 47C${cx - 14} 45.6 ${cx - rx + 2.6} 41 ${cx - rx + 4} ${yr + 3}Z`} fill={copperL} />
+      <path d={bowl} fill="none" {...OS} />
+      {/* tension rods from the hoop down the bowl */}
+      {rods.map(([x, y]) => <g key={x}><path d={`M${x} ${y}V${r2(y + 6.4)}`} stroke={INK} strokeWidth="2.4" strokeLinecap="round" /><path d={`M${x} ${y}V${r2(y + 6.4)}`} stroke={steel} strokeWidth="1" strokeLinecap="round" /></g>)}
+      {/* the counter-hoop and head */}
+      <path d={drumBand(cx, rx, ry, yr - 3, yr + 1)} fill={hoop} {...OS} />
+      <path d={drumEast(cx, rx, ry, yr - 3, yr + 1, .42)} fill={hoopD} />
+      <path d={drumBand(cx, rx, ry, yr - 3, yr + 1)} fill="none" {...OS} />
+      <ellipse cx={cx} cy={yr - 3} rx={rx} ry={ry} fill={head} {...OS} />
+      <path d={`M${cx - rx + 3.4} ${yr - 3.6}A${rx - 3.4} ${ry - 1.8} 0 0 1 ${cx + rx - 3.4} ${yr - 3.6}A${rx - 3.4} ${ry - .2} 0 0 0 ${cx - rx + 3.4} ${yr - 3.6}Z`} fill={headD} />
+      <ellipse cx={cx} cy={yr - 3.4} rx="7" ry="2.6" fill="none" stroke={headD} strokeWidth="1" />
+      {/* two felt mallets laid across the head */}
+      <Tube d="M46 24.4L22.6 32.8" c={stick} w={2.6} e={.8} />
+      <circle cx="21.6" cy="33.2" r="2.8" fill={felt} {...OS} />
+      <Tube d="M49.4 29.8L26.6 24" c={stick} w={2.6} e={.8} />
+      <circle cx="25.4" cy="23.6" r="2.8" fill={felt} {...OS} />
+    </g>
+  );
+}
+
+/** SHORT. A slim music stand, believable next to the instruments: about two thirds of the height of the cello and a desk no wider than its body. Three thin steel legs and one post under a small tilted black
+ *  desk with an open score on it, two staves and a few notes on each cream page, a ledge along the bottom. Thin enough to see past. */
+export function MusicStand() {
+  const steel = "#7c8591", desk = "#33343e", deskL = "#565866", paper = "#f3efe2", line = "#8a8576";
+  const y0 = 42; // the desk's bottom edge
+  const staves = [33.6, 37.4];
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.3} rx={13.4} ry={2} />
+      {/* legs and the post */}
+      <Tube d="M32 50.4L21.4 56.9" c={steel} w={2.6} e={.85} />
+      <Tube d="M32 50.4L42.6 56.9" c={steel} w={2.6} e={.85} />
+      <Tube d="M32 50.4V56.4" c={steel} w={2.6} e={.85} />
+      <Tube d="M32 51.4V42.4" c={steel} w={3} e={1} />
+      <path d={inkBox(30, 48.4, 4, 2.6, .7, .1)} fill={deskL} {...OS} />
+      {/* the desk tilted back: its plate, the open score, the spine, the ledge */}
+      <path d={polyD([19.6, y0], [44.4, y0], [42.6, 29.2], [21.4, 29.2])} fill={desk} {...OS} />
+      <path d={polyD([22, y0 - 1.1], [31.6, y0 - 1.8], [31.6, 30.8], [23.2, 30.4])} {...IS} fill={paper} />
+      <path d={polyD([42, y0 - 1.1], [32.4, y0 - 1.8], [32.4, 30.8], [40.8, 30.4])} {...IS} fill={paper} />
+      {staves.map((y) => <path key={`l${y}`} d={`M23.8 ${y}H30.6`} stroke={line} strokeWidth=".7" />)}
+      {staves.map((y) => <path key={`r${y}`} d={`M33.4 ${y}H40.2`} stroke={line} strokeWidth=".7" />)}
+      {[[25.6, 33], [29, 36.8], [35.2, 36.8], [38.6, 33]].map(([x, y]) => <g key={x}><ellipse cx={x} cy={y} rx="1.05" ry=".8" fill={INK} /><path d={`M${r2(x + .95)} ${y}V${r2(y - 3)}`} stroke={INK} strokeWidth=".7" /></g>)}
+      <path d={inkBox(18.6, y0 - .9, 26.8, 2.8, .9, .2)} fill={deskL} {...OS} />
+    </g>
+  );
+}
+
+/** LOW. Conductor's podium in the LOW-furniture camera, a step up from the floor: a walnut box with a red carpet top and gold edging you stand on, a brass rail round its back and sides on slim
+ *  posts, and at the back a small music desk with the score open and a white baton lying across it. No shadow. */
+export function ConductorPodium() {
+  const wood = "#5e3b22", woodL = "#7a5233", woodD = "#3f2615", carpet = "#a8303f", carpetL = "#c95a66", gold = "#d9a93c", goldL = "#f0cb6e", paper = "#f3efe2", desk = "#33343e";
+  const P = lowCam(58), pt = (a) => P(...a).map(r2).join(" ");
+  const xa = 8, xb = 50, D = 33, h = 8, H = h + 15;
+  const rail = `M${pt([xa + 2.4, 9, H])}L${pt([xa + 2.4, D - 2.6, H])}L${pt([xb - 2.4, D - 2.6, H])}L${pt([xb - 2.4, 9, H])}`;
+  const post = (x, z) => <Tube key={`${x}${z}`} d={`M${pt([x, z, h])}L${pt([x, z, H])}`} c={gold} w={2.8} e={.9} />;
+  const dx = 29, dz = D - 10, dh = h + 13; // the music desk's foot, on the platform
+  return (
+    <g>
+      {/* the box: east side, the wood top, the carpet inset with a gold line, the front face with its gold moulding */}
+      <path d={camSide(P, xb, 0, D, 0, h)} fill={woodD} {...OS} />
+      <path d={camTop(P, xa, xb, 0, D, h)} fill={woodL} {...OS} />
+      <path d={camTop(P, xa + 3, xb - 3, 3, D - 3, h)} fill={carpet} stroke={gold} strokeWidth="1.2" strokeLinejoin="round" />
+      <path d={camTop(P, xa + 5.5, xb - 16, 10, D - 12, h)} fill={carpetL} />
+      <path d={camFront(P, xa, xb, 0, 0, h, 1.2)} fill={wood} {...OS} />
+      <path d={`M${pt([xa + .6, 0, h - 2.6])}L${pt([xb - .6, 0, h - 2.6])}`} stroke={gold} strokeWidth="1.5" />
+      {/* the rail, all of it first: the back posts, the U of the rail, the front posts */}
+      {post(xa + 2.4, D - 2.6)}{post(xb - 2.4, D - 2.6)}
+      <Tube d={rail} c={goldL} w={3.2} e={1} />
+      {post(xa + 2.4, 9)}{post(xb - 2.4, 9)}
+      {/* the music desk stands in front of the rail, with its open score and the baton across it */}
+      <Tube d={`M${pt([dx, dz, h])}L${pt([dx, dz, dh])}`} c={gold} w={3} e={1} />
+      <g transform={`translate(${P(dx, dz, dh).map(r2).join(" ")})`}>
+        <path d={polyD([-11.8, 3], [11.8, 3], [9.6, -9.6], [-9.6, -9.6])} fill={desk} {...OS} />
+        <path d={polyD([-9.2, 2], [-.4, 1.6], [-.4, -8.4], [-7.8, -8.6])} {...IS} fill={paper} />
+        <path d={polyD([9.2, 2], [.4, 1.6], [.4, -8.4], [7.8, -8.6])} {...IS} fill={paper} />
+        <path d="M-7 -5.2H-1.6M-7.6 -2.6H-1.6M-8.2 0H-1.6M1.6 -5.2H7M1.6 -2.6H7.6M1.6 0H8.2" stroke="#8a8576" strokeWidth=".6" />
+        <path d="M-10.8 -1.4L10.2 -6.6" stroke={INK} strokeWidth="2.8" strokeLinecap="round" />
+        <path d="M-10.8 -1.4L10.2 -6.6" stroke={paper} strokeWidth="1.1" strokeLinecap="round" />
+        <circle cx="-11.2" cy="-1.3" r="1.7" {...IS} fill={BRASS} />
+      </g>
+    </g>
+  );
+}
+
+/** LOW. Red velvet tip-up theatre seat in the LOW-furniture camera: a padded back with gold-piped top and a little brass number plate, a sprung cushion folded down, two dark wooden arms on cast
+ *  standards with a gold boss. Arms stop a hair inside the tile so a row reads as one line of seats. No shadow. */
+export function TheaterSeat() {
+  const v = "#a82a35", vD = "#7a1c28", vL = "#c8505e", gold = "#d9a93c", goldL = "#f0cb6e", wood = "#4a2c1c", woodL = "#6f4a33", woodD = "#2f1c12";
+  const P = lowCam(56), pt = (a) => P(...a).map(r2).join(" ");
+  const top = (...a) => camTop(P, ...a), side = (...a) => camSide(P, ...a), front = (...a) => camFront(P, ...a);
+  const xa = 8.4, xb = 51.6, zs = 16, zb = 17, zd = 21, hc = 14, hc0 = 8.6, hb = 29, ah = 20;
+  const arm = (x) => (
+    <g key={x}>
+      <path d={side(x + 6, 1, zd - 1, 0, ah)} fill={woodD} {...OS} />
+      <path d={top(x, x + 6, 1, zd - 1, ah)} fill={woodL} {...OS} />
+      <path d={front(x, x + 6, 1, 0, ah, 1.2)} fill={wood} {...OS} />
+      <circle cx={r2(P(x + 3, 1, 12)[0])} cy={r2(P(x + 3, 1, 12)[1])} r="1.9" {...IS} fill={gold} />
+      <path d={`M${pt([x + 1.4, 1, ah - 3.4])}L${pt([x + 4.6, 1, ah - 3.4])}`} stroke={gold} strokeWidth="1" />
+    </g>
+  );
+  return (
+    <g>
+      {/* the padded back: its east edge, gold-piped top, then the velvet with the shaded north-east channels */}
+      <path d={side(xb, zb, zd, 3, hb)} fill={vD} {...OS} />
+      <path d={top(xa, xb, zb, zd, hb)} fill={goldL} {...OS} />
+      <path d={front(xa, xb, zb, 5, hb, 3)} fill={v} {...OS} />
+      <path d={front(xa + 3.4, xb - 3.4, zb, 6.5, hb - 3.2, 2)} fill={vD} />
+      <path d={front(xa + 3.4, xb - 11, zb, 6.5, hb - 3.2, 2)} fill={v} />
+      <path d={`M${pt([xa + 5, zb, hb - 2.2])}L${pt([xb - 5, zb, hb - 2.2])}`} stroke={gold} strokeWidth="1.4" strokeLinecap="round" />
+      {/* a little brass number plate at the top of the back */}
+      <path d={front(25.6, 34.4, zb, hb - 7.2, hb - 3.6, .6)} {...IS} fill={gold} />
+      {arm(1.4)}
+      {/* the sprung cushion: lit top with its seam, velvet front, a gold piping along its nose */}
+      <path d={top(xa, xb, 0, zs, hc)} fill={vL} {...OS} />
+      <path d={top(xa + 4.6, xb - 4.6, 4, zs - 3, hc)} fill={v} />
+      <path d={front(xa, xb, 0, hc0, hc, 2)} fill={v} {...OS} />
+      <path d={`M${pt([xa + 3, 0, hc - 1.6])}L${pt([xb - 3, 0, hc - 1.6])}`} stroke={gold} strokeWidth="1.4" strokeLinecap="round" />
+      {/* under the cushion: the dark mechanism and the bracket (it tips up) */}
+      <path d={front(xa + 6, xb - 6, 1, 3, hc0, .8)} fill={woodD} {...OS} />
+      {arm(52.6)}
+    </g>
+  );
+}
+
+/** SHORT. A shell-shaped brass footlight on the lip of the stage, ankle height: a fluted scallop hood on a low brass foot, seen from the house side, the lamp hidden behind it throwing a warm
+ *  flat fan of light up the back of the shell and a pool on the boards (flat shapes only). */
+export function Footlights() {
+  const brass = "#d9a93c", brassL = "#f0cb6e", brassD = "#a87a24", glow = "#ffd98a", glowL = "#fff0c4";
+  const cx = 32, by = 53.6, rx = 22, ry = 21, n = 9;
+  const a = (i) => Math.PI + (i * Math.PI) / n, ptOn = (i, f = 1) => [r2(cx + rx * f * Math.cos(a(i))), r2(by + ry * f * Math.sin(a(i)))];
+  const lobes = Array.from({ length: n }, (_, i) => i);
+  const shell = `M${cx - 6} ${by}L${ptOn(0).join(" ")}${lobes.map((i) => { const [x, y] = ptOn(i + 1), [mx, my] = [cx + rx * 1.1 * Math.cos(a(i + .5)), by + ry * 1.1 * Math.sin(a(i + .5))]; return `Q${r2(mx)} ${r2(my)} ${x} ${y}`; }).join("")}L${cx + 6} ${by}Z`;
+  return (
+    <g>
+      {/* the warm light, three flat shapes: a pool on the boards, a wide fan up the wall, a tighter fan over the shell */}
+      <ellipse cx={cx} cy={57.2} rx="27" ry="4.6" fill={glow} fillOpacity=".34" />
+      <path d={`M${cx - 26} 36C${cx - 18} 15 ${cx + 18} 15 ${cx + 26} 36L${cx + 10} ${by}H${cx - 10}Z`} fill={glow} fillOpacity=".3" />
+      <path d={`M${cx - 15} 34C${cx - 10} 21 ${cx + 10} 21 ${cx + 15} 34L${cx + 6} ${by}H${cx - 6}Z`} fill={glowL} fillOpacity=".45" />
+      <GroundShadow cx={cx} cy={57.4} rx={15} ry={2} />
+      {/* a low brass foot, then the shell with its flutes, the east flutes a shade down */}
+      <path d={drumBand(cx, 15, 3, 53.4, 56.4)} fill={brassD} {...OS} />
+      <path d={shell} fill={brass} />
+      <path d={`M${cx} ${by}L${ptOn(5).join(" ")}${lobes.slice(5).map((i) => { const [x, y] = ptOn(i + 1), [mx, my] = [cx + rx * 1.1 * Math.cos(a(i + .5)), by + ry * 1.1 * Math.sin(a(i + .5))]; return `Q${r2(mx)} ${r2(my)} ${x} ${y}`; }).join("")}L${cx + 6} ${by}Z`} fill={brassD} />
+      <path d={`M${ptOn(1, .9).join(" ")}Q${r2(cx - 12)} ${r2(by - 18)} ${ptOn(2.6, .94).join(" ")}L${r2(cx - 7)} ${r2(by - 8)}L${ptOn(1, .9).join(" ")}Z`} fill={brassL} />
+      {lobes.slice(1).map((i) => <path key={i} d={`M${r2(cx + 5 * Math.cos(a(i)))} ${r2(by + 5 * Math.sin(a(i)))}L${ptOn(i, .95).join(" ")}`} {...IS} />)}
+      <path d={shell} fill="none" {...OS} />
+      {/* the hinge knuckle at the bottom of the shell */}
+      <path d={inkBox(cx - 6.4, by - 2.6, 12.8, 5, 1.6, .1)} fill={brassL} {...OS} />
+      <circle cx={cx} cy={by - .2} r="1" fill={INK} />
+    </g>
+  );
+}
+
+/** SHORT. Brass post and a red velvet rope: a turned brass post with a ball top on a weighted round foot, a rope hanging from a hook each side in a slack curve to the very edge of the tile, level
+ *  there, so a row of them joins up into one barrier. Sight passes over it. */
+export function VelvetRope() {
+  const brass = "#d9a93c", brassL = "#f0cb6e", brassD = "#a87a24", rope = "#a82a35", ropeL = "#c8505e", ropeD = "#7a1c28";
+  const cx = 32, hook = 30.2, sag = 42.4;
+  const west = `M-.4 ${sag}C12 ${sag} 22 ${sag - 3.4} ${cx - 3.6} ${hook}`;
+  const east = `M${cx + 3.6} ${hook}C42 ${sag - 3.4} 52 ${sag} 64.4 ${sag}`;
+  const shape = (d, key) => (
+    <g key={key}>
+      <path d={d} fill="none" stroke={INK} strokeWidth="6.2" />
+      <path d={d} fill="none" stroke={rope} strokeWidth="3.6" />
+      <path d={d} fill="none" stroke={ropeD} strokeWidth="3.6" strokeDasharray="1 3.8" />
+      <path d={d} fill="none" stroke={ropeL} strokeWidth=".9" transform="translate(0 -.9)" />
+    </g>
+  );
+  return (
+    <g>
+      <GroundShadow cx={cx} cy={57} rx={14} ry={2.8} />
+      {shape(west, "w")}{shape(east, "e")}
+      {/* the weighted foot */}
+      <path d={drumBand(cx, 12, 3.8, 50.8, 53.6)} fill={brassD} {...OS} />
+      <ellipse cx={cx} cy="50.8" rx="12" ry="3.8" fill={brass} {...OS} />
+      <ellipse cx={cx - 3} cy="50" rx="5.2" ry="1.3" fill={brassL} />
+      {/* the post, its east side shaded, two collars, the ball top */}
+      <path d={inkBox(cx - 2.5, 21, 5, 30, 1, .1)} fill={brass} {...OS} />
+      <path d="M32.6 22V50.4H34.2V22Z" fill={brassD} />
+      <path d={inkBox(cx - 2.5, 21, 5, 30, 1, .1)} fill="none" {...OS} />
+      <path d={drumBand(cx, 4, 1.2, 25.8, 27.6)} fill={brassL} {...OS} />
+      <path d={drumBand(cx, 4.4, 1.3, 46, 47.8)} fill={brassL} {...OS} />
+      <circle cx={cx} cy="19.4" r="4.4" fill={brass} {...OS} />
+      <path d="M29.6 18.4C30 16.6 31.4 16 32.8 16" fill="none" stroke={brassL} strokeWidth="1.3" strokeLinecap="round" />
+      {/* the snap hooks where the rope clips on */}
+      {[-1, 1].map((sg) => <g key={sg}><circle cx={cx + sg * 4} cy={hook} r="2.2" fill={brass} {...OS} /><path d={`M${cx + sg * 2} ${hook}H${cx + sg * 3}`} {...IS} /></g>)}
+    </g>
+  );
+}
+
+
+/* ---- Bayou (sub-biome of FOREST) ---- */
+
+/** TALL. Bald cypress: a trunk flaring out into a wide, fluted, buttressed foot with five knobbly cypress knees standing round it, a flat, feathery crown
+ *  of pale sage needles with wispy ragged edges and two lower side sprays. Clearly unlike the rounded oak or the coned pine. */
+export function Cypress() {
+  const u = useUid();
+  const bark = "#8a7660", barkD = "#5f4f3f", leaf = "#8aa35c", leafD = "#64803f", leafL = "#b0c47a", knee = "#a08a6c", kneeD = "#6d5a45";
+  const trunk = "M7 57.6C14.6 55.6 20 49 23.4 40.4C25.4 33 27.4 24 28.8 12.6L35.2 12.6C36.6 24 38.6 33 40.6 40.4C44 49 49.4 55.6 57 57.6Q48.8 56 44.6 57.8Q41 56.4 37.6 57.8Q34.4 56.2 30.6 57.8Q27 56.4 23.2 57.8Q15.4 56 7 57.6Z";
+  const crown = "M6 15C8 9 14 6 20 6.6C24 3.6 30 3.4 34 5.6C39 3.6 46 4.4 50 7.6C55 7.8 59.4 11 59.8 15.4C60.8 19.4 58 21.8 54 21.4L54.8 26.4L50.6 22.8L48.6 27.6L45 23.2L41.8 27.2L39 23.2L36 26.8L33 23.2L29.6 27.6L26.8 23.2L23 27.2L20.8 22.8L16.8 26.6L15.4 21.8C12 23.4 5.2 21.4 6 15Z";
+  const spray = (d, fl = leaf) => <path d={d} fill={fl} {...OS} />;
+  const kneeD_ = (x, y, h, w) => `M${x - w} ${y}C${r2(x - w * .9)} ${r2(y - h * .6)} ${r2(x - w * .4)} ${r2(y - h)} ${x} ${r2(y - h)}C${r2(x + w * .4)} ${r2(y - h)} ${r2(x + w * .9)} ${r2(y - h * .6)} ${x + w} ${y}Q${x} ${r2(y + 1.2)} ${x - w} ${y}Z`;
+  const knees = [[8.4, 54.6, 8.4, 3.1], [17.4, 57.6, 6, 2.6], [46.6, 57.6, 7, 2.8], [55.6, 54.6, 9.4, 3.2], [33, 59.4, 4.6, 2.4]];
+  return (
+    <g>
+      <defs><clipPath id={`${u}c`}><path d={crown} /></clipPath></defs>
+      <GroundShadow cx={32} cy={57.6} rx={30} ry={3.6} />
+      {/* two lower side sprays on bare limbs */}
+      <Tube d="M29.6 26C24 28.4 18 30.6 12 31" c={barkD} w={3.6} e={1} />
+      <Tube d="M34.6 24C40 27 46 29 52 29.4" c={barkD} w={3.6} e={1} />
+      {spray("M6.6 33.4C4.4 29.4 7 25.4 12 25.6C17 24.6 21 26.8 21 30.4C21 33.4 18.4 34.6 16.4 34.2L15.4 37.4L12.4 34.6L9.4 37.2Z", leafD)}
+      {spray("M44 31.8C42 28 44.6 24 49.6 24.2C54.6 23.4 58.6 25.6 58.6 29.2C58.6 32 56 33.4 54 32.8L53 36L50 33.2L47 35.8Z", leafD)}
+      {/* the trunk: bark, shaded east half, flutes running up from the buttresses */}
+      <path d={trunk} fill={bark} />
+      <path d="M35.2 12.6C36.6 24 38.6 33 40.6 40.4C44 49 49.4 55.6 57 57.6Q48.8 56 44.6 57.8Q41 56.4 37.6 57.8C38 52 37.4 44 36.2 38C35 30 33 20 32.6 12.6Z" fill={barkD} />
+      <path d={trunk} fill="none" {...OS} />
+      <path d="M18 53C23 49 27 42 29.4 30M28 56.4C29 49 30.6 42 31.2 30M38 56C36.6 49 34.8 42 33.6 30M46 54.4C42 49 38 42 35.8 32" {...IS} />
+      {/* the flat feathery crown: base, a darker ragged underside, one lit patch, then its outline */}
+      <path d={crown} fill={leaf} />
+      <g clipPath={`url(#${u}c)`}>
+        <path d="M0 18.4C10 16 18 19.4 28 17.2C38 19.6 46 15.6 64 18V30H0Z" fill={leafD} />
+        <path d="M11 11.6C14 9 18 8.6 21.4 9.6C19 11 17 12.6 15.6 14.6C13.6 14.8 12 13.6 11 11.6Z" fill={leafL} />
+      </g>
+      <path d="M22 13.6C25 11.4 29 11.4 32 13M36 11.4C39 9.6 43 9.8 46 11.8M16 18C19 16.4 22 16.4 24.6 17.6M41 17.4C44 15.6 48 15.8 50.6 17.2" {...IS} />
+      <path d={crown} fill="none" {...OS} />
+      {/* the knees standing round the foot */}
+      {knees.map(([x, y, h, w], i) => (
+        <g key={i}>
+          <path d={kneeD_(x, y, h, w)} fill={i % 2 ? kneeD : knee} {...OS} />
+          <path d={`M${r2(x - w * .36)} ${r2(y - h * .55)}Q${x} ${r2(y - h * .7)} ${r2(x + w * .36)} ${r2(y - h * .55)}`} {...IS} strokeOpacity=".5" />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+/** TALL. Live oak hung with Spanish moss: a wide, dark, flattened crown over a low, forked trunk with long reaching limbs, and heavy ragged curtains of grey-green moss
+ *  hanging from the crown and limbs nearly to the ground. Clearly unlike the plain OAK. */
+export function MossyOak() {
+  const u = useUid();
+  const leaf = "#4f6e3f", leafD = "#385030", leafL = "#6f8f55", bark = "#6a5642", barkD = "#4a3a2c", moss = "#a8b39c", mossD = "#7d8b75";
+  const crown = "M6.6 28.4A6.4 6.4 0 0 1 2.4 18.4A7.6 7.6 0 0 1 9.4 7.8A8.6 8.6 0 0 1 24.4 4.4A9.6 9.6 0 0 1 41.4 4.6A8.6 8.6 0 0 1 54 8.2A7.8 7.8 0 0 1 61.6 18.8A6.4 6.4 0 0 1 57.6 28.8Q51 32 45.4 29.6Q39.4 32.4 32.6 30.2Q25.6 32.8 19.6 29.6Q12.6 32 6.6 28.4Z";
+  const trunk = "M21 57.4C25.6 55 27.4 49 27.2 43.6C26.8 38.4 24 33.6 20 30.6L26 27.4C29 30 31 33.6 32.4 36C34 33.2 36.6 29.8 39.6 27.4L45.2 30.4C41 34 38 38.4 37.4 43.6C37.2 49 38.8 55 43.4 57.4Q37.4 56.2 34.8 57.8Q31.8 56.2 29.4 57.6Q26 56.4 21 57.4Z";
+  // a curtain of Spanish moss: its top hidden under the crown, n ragged tips at its foot, longer and shorter in turn
+  const drape = (x, y, w, L, n) => {
+    const at = (i) => r2(x - w * .7 + (i * 2 * w * .7) / (n - 1)), tip = (i) => r2(y + L * (i % 2 ? .78 : 1)), notch = (i) => r2(y + L * (.5 + (i % 3) * .06));
+    let d = `M${r2(x - w)} ${y}Q${r2(x - w * 1.1)} ${r2(y + L * .5)} ${at(0)} ${tip(0)}`;
+    for (let i = 0; i < n - 1; i++) d += `L${r2((at(i) + at(i + 1)) / 2)} ${notch(i)}L${at(i + 1)} ${tip(i + 1)}`;
+    return `${d}Q${r2(x + w * 1.1)} ${r2(y + L * .5)} ${r2(x + w)} ${y}Z`;
+  };
+  const far = [[13, 25, 4, 21, 3], [23, 27, 3, 14, 2], [41.4, 26, 3, 15, 2], [51.4, 25, 4, 22, 3]];
+  const near = [[6.6, 24, 4.6, 29, 4], [17.4, 26.6, 4.8, 28, 4], [28.2, 27.6, 3.6, 18, 3], [37.4, 27.6, 3.4, 16, 3], [47.4, 26.4, 4.8, 28, 4], [57.8, 24, 4.6, 28, 4]];
+  return (
+    <g>
+      <defs><clipPath id={`${u}k`}><path d={crown} /></clipPath></defs>
+      <GroundShadow cx={32} cy={57.6} rx={29} ry={3.8} />
+      {/* the far beards, then the limbs and trunk */}
+      {far.map(([x, y, w, L, n], i) => <path key={i} d={drape(x, y, w, L, n)} {...IS} fill={mossD} />)}
+      <Tube d="M27.4 42C20 40 12 38.6 6.4 34" c={barkD} w={6} e={1.4} />
+      <Tube d="M37 42C44 40 52 38.6 57.6 34" c={barkD} w={6} e={1.4} />
+      <path d={trunk} fill={bark} />
+      <path d="M33.2 34.8C34.6 32.8 37.2 29.8 39.6 27.4L45.2 30.4C41 34 38 38.4 37.4 43.6C37.2 49 38.8 55 43.4 57.4Q40.4 56.8 37.8 57.2C35.6 53 34.6 49 34.6 44.6C34.4 40.8 33.6 37.2 33.2 34.8Z" fill={barkD} />
+      <path d={trunk} fill="none" {...OS} />
+      <path d="M29.6 40C29 44.6 29.2 49 28.4 53M26 33.6C27 34.8 27.8 36.6 28.4 38.4" {...IS} />
+      {/* the near curtains of moss, hung from under the crown over the trunk and limbs */}
+      {near.map(([x, y, w, L, n], i) => (
+        <g key={i}>
+          <path d={drape(x, y, w, L, n)} {...IS} fill={moss} />
+          <path d={`M${r2(x - w * .42)} ${r2(y + 3)}L${r2(x - w * .5)} ${r2(y + L * .46)}M${r2(x + w * .42)} ${r2(y + 3)}L${r2(x + w * .46)} ${r2(y + L * .52)}`} {...IS} stroke={mossD} />
+        </g>
+      ))}
+      {/* the crown: dark, a lighter top, clump marks */}
+      <path d={crown} fill={leaf} />
+      <g clipPath={`url(#${u}k)`}>
+        <path d="M0 23C9 19.6 17 25 27 21.6C36 25 45 19 54 23C58 21 61 22 64 21V36H0Z" fill={leafD} />
+        <path d="M6 15.4A7.6 7.6 0 0 1 17 7.6A7.4 7.4 0 0 0 9.4 17.4Z" fill={leafL} />
+      </g>
+      <path d="M17 16.4A5.6 5.6 0 0 1 25 13.4M33 11.4A5.6 5.6 0 0 1 41 9.6M43 19.4A5.2 5.2 0 0 1 50 16.8M24 23A4.8 4.8 0 0 1 31 21.4" {...IS} />
+      <path d={crown} fill="none" {...OS} />
+    </g>
+  );
+}
+
+/** PERCH. Swamp airboat in side profile, bow to the east: a long flat olive hull swept up to a blunt bow, a cream stripe and an aluminium deck, the driver's high crimson seat on a tube
+ *  frame midships with a control stick in front of it, and at the stern the big caged fan (a three-quarter oval: dark disc, wooden propeller, wire hoops) with its engine block and a red rudder vane. */
+export function Airboat() {
+  const wire = "#c9d2d6", wireD = "#8b979d", cage = "#39464d", blade = "#b7a68a", hull = "#6f7f4a", hullD = "#4f5c33", deck = "#aeb7bd", cream = "#efe6cf", seat = "#a8303f", seatL = "#c95a66", post = "#5f6c78", eng = "#3a3f49", engL = "#5b6270", ripple = "#cfe6ef";
+  const fx = 14.6, fy = 23.6, frx = 10.8, fry = 21; // the cage: centre and radii
+  const shell = "M5.4 45.6H49.4C54.6 45.6 59 43.6 62.6 39.6L63.4 43.4C60.4 52.6 55 56.8 47 56.8H9.6C6.6 56.8 5.4 54.8 5.4 52Z";
+  return (
+    <g>
+      <GroundShadow cx={33} cy={57.6} rx={30} ry={2.6} />
+      {/* the rudder vane aft of the cage */}
+      <path d="M1.2 14L4.8 12.6V38.4L1.2 37Z" fill={CRIMSON} {...OS} />
+      {/* the cage in three-quarter: dark disc, propeller, wire hoops, a bright rim, a brass hub */}
+      <ellipse cx={fx} cy={fy} rx={frx} ry={fry} fill={cage} />
+      <path d={`M${fx} ${r2(fy - 17.6)}Q${r2(fx + 4.6)} ${fy} ${fx} ${r2(fy + 17.6)}Q${r2(fx - 4.6)} ${fy} ${fx} ${r2(fy - 17.6)}Z`} {...IS} fill={blade} />
+      <ellipse cx={fx} cy={fy} rx={r2(frx * .62)} ry={r2(fry * .62)} fill="none" stroke={wireD} strokeWidth=".9" />
+      <path d={`M${r2(fx - frx)} ${fy}H${r2(fx + frx)}M${r2(fx - frx * .72)} ${r2(fy - fry * .72)}L${r2(fx + frx * .72)} ${r2(fy + fry * .72)}M${r2(fx + frx * .72)} ${r2(fy - fry * .72)}L${r2(fx - frx * .72)} ${r2(fy + fry * .72)}`} stroke={wireD} strokeWidth=".9" />
+      <ellipse cx={fx} cy={fy} rx={frx} ry={fry} fill="none" stroke={INK} strokeWidth="4.4" />
+      <ellipse cx={fx} cy={fy} rx={frx} ry={fry} fill="none" stroke={wire} strokeWidth="2" />
+      <circle cx={fx} cy={fy} r="2.4" fill={BRASS} {...OS} />
+      {/* struts, the engine block with its exhaust */}
+      <Tube d="M22 36L33 44.6M18 44.6L24 30" c={post} w={3} e={.9} />
+      <path d={inkBox(24.6, 33.6, 9.8, 11, 1.4, .2)} fill={eng} {...OS} />
+      <path d="M26 36H33M26 39H33M26 42H33" stroke={engL} strokeWidth="1" />
+      <Tube d="M30 33.6C30 28.6 27.6 27.6 24.4 26.6" c={post} w={3} e={.9} />
+      {/* the hull: olive side swept up to the bow, a darker bottom, a cream stripe, the outline, then the deck */}
+      <path d={shell} fill={hull} />
+      <path d="M5.8 52H58.2C55 55.4 51.4 56.8 47 56.8H9.6C7.2 56.8 5.8 55.4 5.8 52Z" fill={hullD} />
+      <path d="M6 49.2H50C55 49.2 58.6 47 61.4 44" fill="none" stroke={cream} strokeWidth="1.6" strokeLinecap="round" />
+      <path d={shell} fill="none" {...OS} />
+      <path d="M4.6 42.8H49C54 42.8 58.6 41 62.2 37.6L63 40.2C59.2 44 54.6 45.8 49.4 45.8H4.6Z" fill={deck} {...OS} />
+      {/* the high seat: tube frame, control stick, then the crimson back and cushion */}
+      <Tube d="M36.6 34V43.2M46.4 34V43.2M36.6 39.4H46.4" c={post} w={3.2} e={1} />
+      <Tube d="M52.4 43.6L49.8 33" c={post} w={2.8} e={.9} />
+      <circle cx="49.6" cy="31.8" r="2" {...IS} fill={CRIMSON} />
+      <path d="M36.2 12C39.4 10.6 43 11.4 43 15L41.8 29.6H34.2L33.8 15.6C33.8 14 34.8 12.8 36.2 12Z" fill={seat} {...OS} />
+      <path d="M36.2 13.8C37.6 13 40.2 13.2 40.4 15L39.8 18.6H35.6Z" fill={seatL} />
+      <path d={inkBox(33, 28.6, 16.4, 6.2, 2.6, .3)} fill={seat} {...OS} />
+      <path d="M35.2 30.2H47.4" stroke={seatL} strokeWidth="1.6" strokeLinecap="round" />
+      {/* ripples at the waterline */}
+      <path d="M.6 57.6Q3.4 56 6.2 57.6M56 57.2Q59.2 55.6 62.4 57.2" fill="none" stroke={ripple} strokeWidth="1.2" strokeLinecap="round" />
+    </g>
+  );
+}
+
+/** SHORT. Wire crab trap at waist height: a square cage of green-coated mesh over a dark inside with a red crab in it, a heavier wire frame, an orange float
+ *  with a cream band sitting on the lid and a length of hemp rope looped from it down to the floor. */
+export function CrabTrap() {
+  const frame = "#6c9a7d", frameD = "#47705a", mesh = "#a9cdb0", inside = "#22332d", float = "#e5692b", floatD = "#b84a17", rope = "#d9bc84", crab = "#ee6d33", crabD = "#b84a1c";
+  const x = 11, y = 36, w = 34, h = 20, dx = 7, dy = 12, step = 4.25;
+  const front = [], side = [], top = [];
+  for (let i = 1; i < 8; i++) front.push(`M${r2(x + i * step)} ${y}V${y + h}`);
+  for (let j = 1; j <= 4; j++) front.push(`M${x} ${y + j * 4}H${x + w}`);
+  for (let i = 1; i < 4; i++) side.push(`M${r2(x + w + (i * dx) / 4)} ${r2(y - (i * dy) / 4)}V${r2(y + h - (i * dy) / 4)}`);
+  for (let j = 1; j <= 4; j++) side.push(`M${x + w} ${y + j * 4}L${x + w + dx} ${y + j * 4 - dy}`);
+  for (let i = 1; i < 8; i++) top.push(`M${r2(x + i * step)} ${y}L${r2(x + i * step + dx)} ${y - dy}`);
+  for (let j = 1; j < 4; j++) top.push(`M${r2(x + (j * dx) / 4)} ${r2(y - (j * dy) / 4)}H${r2(x + w + (j * dx) / 4)}`);
+  const claw = (cx, cy, sx) => <path d={`M${cx} ${cy}Q${r2(cx + sx * 3.8)} ${r2(cy - 4.4)} ${r2(cx + sx * 7.4)} ${r2(cy - 2.8)}L${r2(cx + sx * 5.4)} ${r2(cy - .4)}L${r2(cx + sx * 7.2)} ${r2(cy + 1.8)}Q${r2(cx + sx * 3)} ${r2(cy + 2.4)} ${cx} ${cy}Z`} {...IS} fill={crab} />;
+  const buoyX = 44, buoyY = 19.8;
+  return (
+    <g>
+      <GroundShadow cx={32} cy={57.4} rx={25} ry={3.2} />
+      {/* the dark inside of the cage and the crab in it, the mesh over them */}
+      <path d={`M${x} ${y}L${x + dx} ${y - dy}H${x + w + dx}V${y + h - dy}L${x + w} ${y + h}H${x}Z`} fill={inside} />
+      <g transform="translate(28 47)">
+        {[-8, -5, -2, 2, 5, 8].map((lx, i) => <path key={i} d={`M${lx * .5} 3.4L${lx} 7.2`} stroke={INK} strokeWidth="1.6" strokeLinecap="round" />)}
+        {claw(-6.6, 1, -1)}{claw(6.6, 1, 1)}
+        <ellipse cx="0" cy="1.8" rx="8.4" ry="5.4" {...IS} fill={crab} />
+        <path d="M-6.6 3.2Q0 7.4 6.6 3.2Q0 5.6 -6.6 3.2Z" fill={crabD} />
+        <circle cx="-2.6" cy="-1" r="1" fill={INK} /><circle cx="2.6" cy="-1" r="1" fill={INK} />
+      </g>
+      <path d={front.join("")} fill="none" stroke={mesh} strokeWidth=".95" />
+      <path d={side.join("")} fill="none" stroke={frameD} strokeWidth=".95" />
+      <path d={top.join("")} fill="none" stroke={mesh} strokeWidth=".95" />
+      {/* the heavy wire frame */}
+      <path d={slabSide(x, y, w, h, dx, dy)} fill="none" stroke={INK} strokeWidth="3.4" strokeLinejoin="round" />
+      <path d={slabTop(x, y, w, dx, dy)} fill="none" stroke={INK} strokeWidth="3.4" strokeLinejoin="round" />
+      <path d={inkBox(x, y, w, h, .6, .1)} fill="none" stroke={INK} strokeWidth="3.4" />
+      <path d={slabSide(x, y, w, h, dx, dy)} fill="none" stroke={frameD} strokeWidth="1.4" strokeLinejoin="round" />
+      <path d={slabTop(x, y, w, dx, dy)} fill="none" stroke={frame} strokeWidth="1.4" strokeLinejoin="round" />
+      <path d={inkBox(x, y, w, h, .6, .1)} fill="none" stroke={frame} strokeWidth="1.4" />
+      {/* the rope from the float, over the near edge and in a loop on the floor */}
+      <Tube d={`M${buoyX - 1} ${buoyY + 7}C38 30 26 25 21 34.2C17.6 40.6 5.2 39 6 48C6.8 55.4 18.8 56 21.2 53.4`} c={rope} w={3.2} e={.95} />
+      {/* the float: a cream band across an orange body, a darker east side, a rope eye */}
+      <ellipse cx={buoyX} cy={buoyY - 5.8} rx="1.8" ry="2.2" fill="none" stroke={INK} strokeWidth="1.5" />
+      <path d={`M${buoyX} ${buoyY - 7.4}C${buoyX + 7.6} ${buoyY - 7.4} ${buoyX + 7.6} ${buoyY + 7.4} ${buoyX} ${buoyY + 7.4}C${buoyX - 7.6} ${buoyY + 7.4} ${buoyX - 7.6} ${buoyY - 7.4} ${buoyX} ${buoyY - 7.4}Z`} fill={float} {...OS} />
+      <path d={`M${buoyX + 2.4} ${buoyY - 6.8}C${buoyX + 7.4} ${buoyY - 4.8} ${buoyX + 7.4} ${buoyY + 4.8} ${buoyX + 2.4} ${buoyY + 6.8}Q${buoyX + 4.2} ${buoyY} ${buoyX + 2.4} ${buoyY - 6.8}Z`} fill={floatD} />
+      <path d={`M${buoyX - 5.4} ${buoyY - 1.2}Q${buoyX} ${buoyY + 1.2} ${buoyX + 5.4} ${buoyY - 1.2}V${buoyY + 2.2}Q${buoyX} ${buoyY + 4.6} ${buoyX - 5.4} ${buoyY + 2.2}Z`} {...IS} fill={CREAM} />
+    </g>
+  );
+}
+
+/** LOW. Lily pads in the shallows, a top-down footprint: a muddy bank round clear green water with a pale sandy patch in the middle, where someone could stand,
+ *  ripple rings across it, five notched pads round the edges and one pink water lily. Flush: you stand in it. No shadow. */
+export function LilyPads() {
+  const bank = "#8b9a5e", water = "#5b9a88", waterD = "#468272", shallow = "#9fcdb5", ripple = "#d7ecdf", pad = "#5f9a4a", padD = "#477a3a", padL = "#83ba66", petal = "#f0a6c0", petalD = "#d67a9c", petalL = "#fbe1ea", yolk = "#f2c84b";
+  const outer = "M4 32C3.4 19.4 11 10.6 21.6 7C30.6 2.4 46 3 53.4 10C60.6 15 62.6 24.6 60.8 33C62.2 44 56 54.6 45 58C37 62 24.8 62.2 17 57.2C8.4 52.8 3.4 42.8 4 32Z";
+  const inner = "M8 32C7.6 21.6 14.2 13.6 23.6 10.6C31.4 6.8 44.4 7.4 50.8 13.4C57 17.6 58.8 26 57.2 33C58.4 42.6 53 51.6 43.8 54.6C36.6 58 25.8 58.2 19.2 53.8C11.8 50 7.6 41.4 8 32Z";
+  const padShape = (cx, cy, r, a) => {
+    const f = Math.PI / 9, t = (a * Math.PI) / 180, p = (q) => `${r2(cx + r * Math.cos(q))} ${r2(cy + r * Math.sin(q))}`;
+    return `M${cx} ${cy}L${p(t + f)}A${r} ${r} 0 1 1 ${p(t - f)}Z`;
+  };
+  const pads = [[15, 17.4, 9.6, 40], [50.4, 18.6, 8.2, 150], [12.6, 45.6, 8, -40], [50.4, 48, 10, 215], [31.6, 8.6, 4.6, 95]];
+  return (
+    <g>
+      <path d={outer} fill={bank} {...OS} />
+      <path d={inner} {...IS} fill={water} />
+      <path d="M8.2 28C9.8 21 14.6 16 21.6 13C29 9 42 9.4 49 14.6C42 12.4 33 13.4 26 16.6C18.6 18.4 12.4 22 8.2 28Z" fill={waterD} />
+      {/* the pale shallows in the middle, ripple rings round them */}
+      <ellipse cx="31" cy="33.4" rx="13.4" ry="10.6" fill={shallow} />
+      <ellipse cx="31" cy="33.4" rx="18.6" ry="14.6" fill="none" stroke={ripple} strokeOpacity=".75" strokeWidth="1.1" />
+      <ellipse cx="31" cy="33.4" rx="23.4" ry="18.4" fill="none" stroke={ripple} strokeOpacity=".4" strokeWidth=".9" />
+      {pads.map(([x, y, r, a], i) => (
+        <g key={i}>
+          <path d={padShape(x, y, r, a)} fill={i % 2 ? padD : pad} {...OS} />
+          <path d={padShape(x, y, r * .62, a)} fill={padL} fillOpacity=".55" />
+          {[60, 180, 300].map((da) => <path key={da} d={`M${x} ${y}L${r2(x + r * .86 * Math.cos(((a + da) * Math.PI) / 180))} ${r2(y + r * .86 * Math.sin(((a + da) * Math.PI) / 180))}`} {...IS} />)}
+        </g>
+      ))}
+      {/* the water lily, on the big south-east pad */}
+      <g transform="translate(50.4 48)">
+        <circle r="10.4" fill={INK} fillOpacity=".55" />
+        {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => <path key={a} transform={`rotate(${a})`} d="M0 -1Q4.2 -5 0 -10.4Q-4.2 -5 0 -1Z" fill={petal} stroke={petalD} strokeWidth=".7" strokeLinejoin="round" />)}
+        {[22.5, 112.5, 202.5, 292.5].map((a) => <path key={a} transform={`rotate(${a})`} d="M0 0Q3 -3.4 0 -7Q-3 -3.4 0 0Z" fill={petalL} />)}
+        <circle r="2" fill={yolk} stroke={INK} strokeWidth=".7" />
+      </g>
+    </g>
+  );
+}
+
 /* ---------------------------------------------------------------------- */
 /*  Registry + dispatcher                                                  */
 /* ---------------------------------------------------------------------- */
@@ -6042,17 +7737,31 @@ export const SPRITES = { TABLE: Table, PLANT: Plant, SHELF: Shelf, TV, STATUE: S
   WARDROBE: Wardrobe, TRASH_CAN: TrashCan, BEEHIVE: Beehive, SARCOPHAGUS: Sarcophagus,
   BIRCH: Birch, TRAFFIC_CONE: TrafficCone, CLOCK: Clock, TEA_TROLLEY: TeaTrolley,
   SPIRAL_STAIRS: SpiralStairs,
-  HAY_WAGON: HayWagon, HOT_POOL: HotPool };
+  HAY_WAGON: HayWagon, HOT_POOL: HotPool,
+  // Ocean Liner sub-biome
+  FUNNEL: Funnel, LIFEBOAT: Lifeboat, VENTILATOR: Ventilator, BOILER: Boiler, SHIP_WHEEL: ShipWheel, CAPSTAN: Capstan, DECK_CHAIR: DeckChair, ROPE_COIL: RopeCoil,
+  // Carnival sub-biome
+  CAROUSEL: Carousel, POPCORN_CART: PopcornCart, TENT_POLE: TentPole, CANNON: Cannon, FUNHOUSE_MIRROR: FunhouseMirror, FERRIS_WHEEL: FerrisWheel, RING_TOSS: RingToss, SAWDUST_RING: SawdustRing,
+  // Opera House sub-biome
+  STAGE_CURTAIN: StageCurtain, STAGE_FLAT: StageFlat, SPOTLIGHT: Spotlight, HARP: Harp, COSTUME_TRUNK: CostumeTrunk, PROPS_TABLE: PropsTable,
+  DOUBLE_BASS: DoubleBass, CELLO: Cello, TIMPANI: Timpani, MUSIC_STAND: MusicStand, CONDUCTOR_PODIUM: ConductorPodium, THEATER_SEAT: TheaterSeat, FOOTLIGHTS: Footlights, VELVET_ROPE: VelvetRope,
+  // Bayou sub-biome
+  CYPRESS: Cypress, MOSSY_OAK: MossyOak, AIRBOAT: Airboat, CRAB_TRAP: CrabTrap, LILY_PADS: LilyPads };
 export const PROP_ORDER = ["TABLE", "PLANT", "SHELF", "TV", "STATUE", "PILLAR", "SAFE", "PIANO", "SCREEN", "CHAIR", "RUG", "BED", "STOOL", "CORPSE", "EASEL", "DISPLAY_CASE", "CHANDELIER_FALL", "GRAMOPHONE", "CUSHION", "CARPET_RUNNER", "FLOOR_GRATE", "SOFA",
   "ARMOR", "BILLIARD_TABLE", "DESK", "STOVE", "WINE_RACK", "CLOCK", "TEA_TROLLEY",
+  "STAGE_CURTAIN", "STAGE_FLAT", "SPOTLIGHT", "HARP", "COSTUME_TRUNK", "PROPS_TABLE", "DOUBLE_BASS", "CELLO", "TIMPANI", "MUSIC_STAND", "CONDUCTOR_PODIUM", "THEATER_SEAT", "FOOTLIGHTS", "VELVET_ROPE", // Opera House sub-biome
   "CRATE", "BARREL", "PUDDLE", "TRAPDOOR", "FOOTPRINTS", "BROKEN_GLASS", "LANTERN",
   "HAYBALE", "TRACTOR", "HAY_WAGON", "WELL", "TREE", "MUD", "STRAW_MAT", "SCARECROW", "TROUGH", "WHEELBARROW", "BUCKET", "CHICKEN_FEED", "HORSE",
   "PALM", "UMBRELLA", "SURF_RACK", "TOWEL", "BOAT", "LIFEGUARD_CHAIR", "TIKI_TORCH", "SANDCASTLE", "STARFISH", "COOLER", "DRIFTWOOD", "CHANGING_HUT", "LOCKER", "ANCHOR", "SPIRAL_STAIRS",
+  "FUNNEL", "LIFEBOAT", "VENTILATOR", "BOILER", "SHIP_WHEEL", "CAPSTAN", "DECK_CHAIR", "ROPE_COIL", // Ocean Liner sub-biome
   "PINE", "BOULDER", "SHRUB", "TENT", "STUMP", "MOSS", "TOTEM", "CAMPFIRE", "FERN", "FALLEN_LOG", "WOODPILE", "OAK", "BIRCH", "FAIRY_RING", "RUINED_WALL",
+  "CYPRESS", "MOSSY_OAK", "AIRBOAT", "CRAB_TRAP", "LILY_PADS", // Bayou sub-biome
   "SNOW_PINE", "CAIRN", "FIREPLACE", "SLED", "ICE", "SNOWDRIFT", "PICKAXE", "BEARSKIN", "SKI_RACK", "SNOWMAN", "ICE_PILLAR", "HOT_POOL",
   "CACTUS", "OBELISK", "AMPHORA", "OASIS_POOL", "WOVEN_MAT", "SANDSTONE_ARCH", "BONES", "SCORPION_NEST", "POTTERY_SHARDS", "FLOOR_PILLOW", "CAMEL", "MARKET_STALL",
   "DUMPSTER", "PHONE_BOOTH", "HYDRANT", "FOUNTAIN", "MANHOLE", "GRATE", "STREETLIGHT", "NEWSSTAND", "TRASH_BAG", "CARDBOARD_BOX", "GRAFFITI",
-  "BARBER_CHAIR", "BENCH", "JUKEBOX", "POSTER_COLUMN", "WASHER", "WATER_TOWER", "TRAFFIC_CONE", "TRASH_CAN", "WARDROBE", "BEEHIVE", "SARCOPHAGUS"];
+  "BARBER_CHAIR", "BENCH", "JUKEBOX", "POSTER_COLUMN", "WASHER", "WATER_TOWER", "TRAFFIC_CONE", "TRASH_CAN",
+  "CAROUSEL", "POPCORN_CART", "TENT_POLE", "CANNON", "FUNHOUSE_MIRROR", "FERRIS_WHEEL", "RING_TOSS", "SAWDUST_RING", // Carnival sub-biome
+  "WARDROBE", "BEEHIVE", "SARCOPHAGUS"];
 export const PROP_NOTE = {
   TABLE: "Chestnut table at waist height: a plank top seen from above with a cream linen runner hanging over the front edge, a jug of flowers and a bowl of fruit on it, an apron and four square legs. Waist height: sight passes over.",
   PLANT: "Big potted plant: a dense fan of about twenty long ribbed leaves on short stems growing out of the soil inside a terracotta pot, arching up past head height, with two leaves spilling over the rim in front of the pot. Tall.",
@@ -6181,6 +7890,45 @@ export const PROP_NOTE = {
   HAY_WAGON: "Farm hay wagon in side view: a lumpy golden heap of hay (darker on the east, pale tufts and loose strands) piled well above head height on a wooden flat-bed between two end boards, a big spoked rear wheel and a smaller front wheel with iron tyres, the shaft reaching down to the ground, a pitchfork stuck in the heap. Tall.",
   HOT_POOL: "Hot spring pool seen from above, drawn once across its 1x1, 1x2, 2x1 or 2x2 span: an irregular basin of milky blue-green water in bands (pale shallows, deeper middle) inside a ring of grey volcanic rim stones with snow caps on the north side, wisps of steam curling off the water, a few bubbles and a ripple. Flush: you soak in it. No shadow.",
   TEA_TROLLEY: "Two-tier mahogany tea trolley on brass casters with a push handle: a blue-banded teapot and two cups on the top tray, a layer cake and scones below. Waist height: sight passes over.",
+  // Ocean Liner sub-biome
+  FUNNEL: "Ship's funnel taller than a person: a fat buff drum raked a little aft, with a black cap, a red band, rivets and a thin steam pipe with a brass whistle, rising from a steel deck collar. Tall.",
+  LIFEBOAT: "White lifeboat hung high on two curved davits, seen from the side: a red bottom, a canvas cover and a lifebuoy, its keel over head height with only the davit posts and a winch beneath it. Tall.",
+  VENTILATOR: "Ship's cowl ventilator: a white pipe above head height bending over into a big trumpet mouth turned sideways, red inside with a dark throat, on a deck flange with brass collars. Tall.",
+  BOILER: "Engine-room boiler: a riveted iron drum on a plinth with a brass pressure gauge, a red valve wheel, a glowing firebox door and a stubby flanged pipe out of the top. Tall.",
+  SHIP_WHEEL: "Ship's wheel at the helm: eight turned teak spokes with handles, its hub at waist height on a navy binnacle pedestal with a brass compass dome. Short: sight passes over it.",
+  CAPSTAN: "Mooring capstan at waist height: an iron drum wound with four turns of hemp rope whose end trails along the deck, its wide cap seen from above with bar sockets round a brass boss. Short: sight passes over it.",
+  DECK_CHAIR: "Slatted steamer lounger you sit on, kept low: a long wooden frame, head raised and feet down, a striped canvas sling over the back and seat, bare slats on the foot rest. No shadow.",
+  ROPE_COIL: "Thick hemp rope coiled flat on the deck, seen from above: one rope spiralling out from the middle with twist marks across it and a whipped end lying loose. Flush: you stand on it. No shadow.",
+  // Carnival sub-biome
+  CAROUSEL: "The carnival's carousel, drawn once across its 2x2: a round platform with a red and cream skirt, four horses on striped poles (one on each tile, each with a big crimson saddle), a striped centre column and a striped canopy over the middle. Every tile is a seat. Perch: blocks sight, the rider is seen.",
+  POPCORN_CART: "Red-and-cream striped popcorn cart on two spoked wheels with a push handle: a glass case heaped with popcorn round a little kettle, under a peaked striped roof with a scalloped valance and a gold finial. Above head height. Tall.",
+  TENT_POLE: "Big-top king pole: a thick red-and-cream striped mast on a timber foot with sandbags, a steel bale ring, four guy ropes out to pegs, a red swallow-tail pennant at the top. Tall.",
+  CANNON: "Human-cannonball cannon: a long red barrel raised steeply, a navy band of gold stars and cream hoops, a flared muzzle with a dark bore, one big yellow spoked wheel and a trail on the floor. Tall.",
+  FUNHOUSE_MIRROR: "Standing funhouse mirror: a gilded frame pinched at the waist like a wavy hourglass, a shell crest and two scrolls, the glass showing a flat, wildly stretched reflection. Above head height. Tall.",
+  FERRIS_WHEEL: "The carnival's Ferris wheel, drawn once across its 2x2 span: a red rim with bulbs on a far ring, cream spokes to a brass hub, eight gondolas in four colours hanging level, on a steel A-frame that stands on a striped loading deck. Tall.",
+  RING_TOSS: "Ring-toss stand at waist height: a red-and-cream striped crate with a gold star, nine bottle necks standing on top, two rings on the necks and a missed one on the floor. Short: sight passes over it.",
+  SAWDUST_RING: "Circus ring flat on the ground, seen from above: raked sawdust with loose flecks inside a curb painted in red and cream blocks. Flush: you stand on it. No shadow.",
+  // Opera House sub-biome
+  STAGE_CURTAIN: "Theatre main curtain in red velvet, floor to rail. On one tile, a brass rail and scalloped pelmet over deep pleats drawn in at the waist by a gold tieback with a tassel. Across a 1xN row it is drawn once: a full-width closed curtain in folds under a swagged valance with a gold fringe and a central crest, gathered by a gold tieback at both outer ends. Tall.",
+  STAGE_FLAT: "Theatre scenery flat, above head height: a timber-framed canvas painted with a castle under a big moon and a strip of bare canvas at the foot, a timber brace and stage weight behind its east edge. Tall.",
+  SPOTLIGHT: "Theatre spotlight on a tall steel tripod, the lamp above head height: a black housing tilted down on a yoke, cooling slits, barn doors round a warm lens with a small glow, a cable looping to the floor. Tall.",
+  HARP: "Gilded concert harp rising above head height with its strings, and in front of it the player's stool with a crimson padded seat, the clearest shape on it. Perch: blocks sight, the harpist is seen.",
+  COSTUME_TRUNK: "Bottle-green wardrobe trunk at waist height, its lid seen from above: leather straps with brass buckles, brass corners and clasp, a travel label and a pink feather boa caught under the lid. Short: sight passes over it.",
+  PROPS_TABLE: "Stagehand's props table at waist height: a stage-black top on raw pine X-trestles, white spike tape marking the places, a comedy mask with a red ribbon and a gold goblet set out on it. Short: sight passes over it.",
+  DOUBLE_BASS: "Upright double bass on its stand, the scroll well over head height: sloped shoulders, a long ebony fingerboard, four strings over the bridge, F-holes and machine heads. Tall: blocks sight.",
+  CELLO: "Cello on a low stand at chest height, its dark red belly seen from above: round shoulders, a short neck to the scroll, F-holes and an ebony fingerboard. Short: sight passes over it.",
+  TIMPANI: "Copper kettledrum at waist height: a cream drumhead seen from above inside a brass hoop, tension rods round the bowl, three steel legs, a foot pedal and two felt mallets laid across the head. Short: sight passes over it.",
+  MUSIC_STAND: "Slim music stand, about two thirds of the height of a cello: three thin steel legs and one post under a small tilted black desk with an open score on it. Short: you can see past it.",
+  CONDUCTOR_PODIUM: "Conductor's podium, a step up from the floor: a walnut box with a red carpet top and gold edging, a brass rail round its back and sides and a small music desk with an open score and a white baton. You stand on it. No shadow.",
+  THEATER_SEAT: "Red velvet tip-up theatre seat, kept low: a padded back with gold piping and a little brass number plate, a folded-down cushion, two dark wooden arms. A row of them reads as one line of seats. Someone sits on it. No shadow.",
+  FOOTLIGHTS: "Shell-shaped brass footlight on the lip of the stage, ankle height: a fluted scallop hood on a low foot throwing a warm flat fan of light up its back and a pool on the boards. Short: sight passes over it.",
+  VELVET_ROPE: "Brass post on a weighted foot with a red velvet rope hanging from it in a slack curve to each side edge of the tile, so a row of them joins up into one barrier. Short: sight passes over it.",
+  // Bayou sub-biome
+  CYPRESS: "Bald cypress: a trunk flaring into a wide fluted, buttressed foot with knobbly cypress knees round it, under a flat feathery sage crown with wispy edges and two side sprays. Tall.",
+  MOSSY_OAK: "Live oak hung with Spanish moss: a wide dark flattened crown over a low forked trunk, ragged grey-green curtains of moss hanging from it nearly to the ground. Tall.",
+  AIRBOAT: "Swamp airboat in side profile, bow to the east: a long flat olive hull swept up to a blunt bow with a cream stripe and an aluminium deck, the driver's high crimson seat on a tube frame midships, and the big caged fan with its engine and a rudder vane at the stern. Perch: blocks sight, the driver is seen.",
+  CRAB_TRAP: "Wire crab trap at waist height: a green mesh cage over a dark inside with a crab in it, an orange float with a cream band on the lid and a length of rope looped to the floor. Short: sight passes over it.",
+  LILY_PADS: "Lily pads in the shallows, seen from above: a muddy bank round clear green water with a pale sandy patch in the middle where someone can stand, five notched pads and one pink water lily. Flush: you stand in it. No shadow.",
 };
 /** Optional per-prop scale about the base (kind to factor). Empty: every prop is drawn at its final size, so none needs it; kept as a hook for the board's PropSprite. */
 export const FIT = {};
@@ -6208,6 +7956,9 @@ export const SPAN_SPRITES = {
   BOAT: BoatSpan,
   OASIS_POOL: OasisPoolSpan,
   HOT_POOL: HotPoolSpan,
+  FERRIS_WHEEL: FerrisWheelSpan, // Carnival sub-biome
+  CAROUSEL: CarouselSpan, // Carnival sub-biome
+  STAGE_CURTAIN: StageCurtainSpan, // Opera House sub-biome
 };
 
 /**

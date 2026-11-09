@@ -20,6 +20,8 @@
  */
 
 const PH = /\{(\w+)(?:\|(\w+)(?::([^}]*))?)?\}/g;
+/** A sub-biome reads its door phrase from its parent biome (engine SUB_BIOME_DEFS). */
+const SUB_BIOME_PARENT = { LINER: "BEACH", CARNIVAL: "STREET", OPERA: "MANSION", BAYOU: "FOREST" };
 const SELF_KINDS = ["WITH_P", "TWO_P_ROOM", "NO_P_ROOM", "ALONE_WITH_P", "DIAG_P"];
 
 /** Param name → type (engine/shadoku_i18n.py PARAM_TYPES). */
@@ -225,7 +227,7 @@ function atomKey(tok, ctx, register = "ATOM") {
   const base = `${register}.${k}`;
   let v = null;
   if (k === "NOT_BESIDE" && p.prop === "CORPSE") v = "CORPSE";
-  else if (k === "DOOR") v = ctx.theme;
+  else if (k === "DOOR") v = SUB_BIOME_PARENT[ctx.theme] || ctx.theme;
   else if (k === "EXACT_OFFSET") v = p.dir;
   else if (k === "ONLY_G_ROOM") v = p.trait;
   else if (SELF_KINDS.includes(k) && p.selfMatch) v = "SELF";

@@ -51,6 +51,8 @@ import manor from "./puzzles/shadoku_MAX1111RAR5-4201.json";
 const DEFAULT_PUZZLES = [tutorial, case1, case2, case3, case4, case5, case6, case7, case8, case9, case10, uninvited, manor];
 
 export const BZ = 8; // slim outer bezel around the floorplan
+/** Ocean Liner: the ship sails in open water, a band of sea drawn all round the board, outside the tiles (board units; 0 elsewhere). */
+const seaBand = (p) => (themeOf(p) === "LINER" ? 46 : 0);
 const HOLD_SHOW_MS = 240; // the placing ring only appears once a press lasts this long
 const HOLD_MS = 1000; // press-and-hold: places a suspect on a tile, and (on the Eraser) clears the whole board. The player is never told a number. // Eraser: hold this long to clear the whole board (and to place a suspect by pressing and holding)
 const ZOOMS = [1, 1.5, 2, 2.5, 3]; // the + / − steps; a pinch or Ctrl + wheel zooms freely between the first and the last
@@ -182,6 +184,9 @@ export const PUZZLES = normalizePuzzles(DEFAULT_PUZZLES);
 const DAILY_RAW = import.meta.glob("./puzzles/shadoku_daily-*.json", { query: "?raw", import: "default", eager: true });
 const parseCase = (s) => { try { return JSON.parse(s); } catch (e) { return null; } };
 export const DAILIES = normalizePuzzles(Object.values(DAILY_RAW).map(parseCase).filter((d) => d && d.daily).sort((a, b) => (a.daily < b.daily ? -1 : 1)));
+/* Sub-biome previews (Puzzle IDs LI / CA / OP / BA, engine/puzzles_preview): only `npm run dev` mirrors them; a build removes them, so this is empty on the site. */
+const PREVIEW_RAW = import.meta.glob("./puzzles/shadoku_{LI,CA,OP,BA}[VEMHX][0-9]*.json", { query: "?raw", import: "default", eager: true });
+export const PREVIEWS = normalizePuzzles(Object.values(PREVIEW_RAW).map(parseCase).filter(Boolean).sort((a, b) => (a.id < b.id ? -1 : 1)));
 
 const HINT_RUNGS = 3; // where to look → the key deduction → the placement
 // Note cards (V10.6, Murdoku's first hints): a hint whose groundwork has NOTES_MIN lines or more opens with up to NOTES_MAX cards of
@@ -656,7 +661,7 @@ const LetterToken = ({ cx, cy, id, fill, ink, ring, dashed = false }) => (
 function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, solved, flash, hover, onStroke, onHover, onKey, onCell, hold, coachCells, describe, uid = "main", opts = null, hiCells = null }) {
   const svg = useRef(null);
   const t = useText();
-  const o = { ...BOARD_OPTS, ...(opts || {}) }, LB = o.coords ? COORD_BAND : 0;
+  const o = { ...BOARD_OPTS, ...(opts || {}) }, LB = o.coords ? COORD_BAND : 0, seaM = seaBand(p);
   const R = geo.R, C = geo.C, X = (c) => LAB + c * CELL, Y = (r) => LAB + r * CELL;
   const W = C * CELL + 2 * BZ, H = R * CELL + 2 * BZ;
   const s = normCase(st);
@@ -769,7 +774,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
   };
 
   return (
-    <svg ref={svg} className="sk-board" viewBox={`${LAB - BZ - LB} ${LAB - BZ - LB} ${W + LB} ${H + LB}`} role="grid" aria-label={t("game.boardAria", { title: p.title, rows: R, cols: C })}
+    <svg ref={svg} className="sk-board" viewBox={`${LAB - BZ - LB - seaM} ${LAB - BZ - LB - seaM} ${W + LB + 2 * seaM} ${H + LB + 2 * seaM}`} role="grid" aria-label={t("game.boardAria", { title: p.title, rows: R, cols: C })}
       onPointerDown={(e) => {
         if (e.button !== 0 && !(e.button === 2 && e.pointerType === "mouse" && onStroke)) return; // the right button: the game's right-click setting
         const c = cellAt(e); if (!c) return;
@@ -791,6 +796,16 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
           </linearGradient>
         ))}
       </defs>
+      {seaM > 0 && (
+        <g pointerEvents="none">
+          <rect x={LAB - BZ - LB - seaM} y={LAB - BZ - LB - seaM} width={W + LB + 2 * seaM} height={H + LB + 2 * seaM} rx="14" fill="url(#skf-water)" />
+          <rect x={LAB - BZ - LB - seaM} y={LAB - BZ - LB - seaM} width={W + LB + 2 * seaM} height={H + LB + 2 * seaM} rx="14" fill="#06304a" opacity=".3" />
+          <g className="sk-foam" fill="none" strokeLinecap="round">
+            <rect x={LAB - BZ - 6} y={LAB - BZ - 6} width={W + 12} height={H + 12} rx="20" stroke="#fff" strokeOpacity=".92" strokeWidth="2.6" strokeDasharray="17 9" />
+            <rect x={LAB - BZ - 15} y={LAB - BZ - 15} width={W + 30} height={H + 30} rx="28" stroke="#e4f8ff" strokeOpacity=".5" strokeWidth="1.5" strokeDasharray="6 9" />
+          </g>
+        </g>
+      )}
       <rect x={LAB - BZ} y={LAB - BZ} width={W} height={H} rx="14" fill="#0e0f15" />
       {real.map(([r, c]) => <rect key={`f${r}-${c}`} x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-${floors[geo.room(r, c)] || floorOf(p.roomNames[geo.room(r, c)], geo.room(r, c), theme)})`} />)}
       {real.map(([r, c]) => <rect key={`g${r}-${c}`} x={X(c) + 0.5} y={Y(r) + 0.5} width={CELL - 1} height={CELL - 1} fill="none" stroke="#000" strokeOpacity=".16" />)}
@@ -2184,7 +2199,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     else mutate((cs) => withSightCleared(withToken(cs, cur.suspect, ...cur.cell), geo, ...cur.cell, autoLight));
   };
   const coordsOn = settings.coords || hintOpen; // row / column numbers: always (settings) or while a hint is open
-  const LB = coordsOn ? COORD_BAND : 0;
+  const LB = coordsOn ? COORD_BAND : 0, seaM = seaBand(p);
   const onHint = () => {
     if (hintOpen) { setHintOpen(false); return; }
     setHintOpen(true);
@@ -2336,7 +2351,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     if (!vp || zoom <= 1 || !hintFocus) return;
     const rs = hintFocus.map((f) => f[0]), cs = hintFocus.map((f) => f[1]);
     const cr = (Math.min(...rs) + Math.max(...rs)) / 2, cc = (Math.min(...cs) + Math.max(...cs)) / 2;
-    const fx = (BZ + LB + (cc + 0.5) * CELL) / (geo.C * CELL + 2 * BZ + LB), fy = (BZ + LB + (cr + 0.5) * CELL) / (geo.R * CELL + 2 * BZ + LB);
+    const fx = (BZ + LB + seaM + (cc + 0.5) * CELL) / (geo.C * CELL + 2 * BZ + LB + 2 * seaM), fy = (BZ + LB + seaM + (cr + 0.5) * CELL) / (geo.R * CELL + 2 * BZ + LB + 2 * seaM);
     const left = fx * vp.scrollWidth - vp.clientWidth / 2, top = fy * vp.scrollHeight - vp.clientHeight / 2;
     try { vp.scrollTo({ left, top, behavior: "smooth" }); } catch (e) { vp.scrollLeft = left; vp.scrollTop = top; }
   }, [hint && hint.n, hintOpen, zoom, p.id]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -2374,10 +2389,10 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     return () => ro.disconnect();
   }, []);
 
-  const ar = (geo.C * CELL + 2 * BZ + LB) / (geo.R * CELL + 2 * BZ + LB);
+  const ar = (geo.C * CELL + 2 * BZ + LB + 2 * seaM) / (geo.R * CELL + 2 * BZ + LB + 2 * seaM);
   const autoLight = settings.autoLight || legacy; // the tutorial's lessons rely on the automatic lights
   const boardOpts = { coords: coordsOn, roomHover: settings.roomHover, roomLabel: settings.roomLabel, objSize: settings.objSize, walls: settings.walls, autoLight, tokenStyle: settings.tokenStyle, selHi: settings.selHi, lightTint: settings.lightTint, myTint: settings.myTint };
-  const naturalW = Math.round(geo.C * CELL + 2 * BZ + LB); // "Auto-Scale Board" off: one board unit = one pixel at most
+  const naturalW = Math.round(geo.C * CELL + 2 * BZ + LB + 2 * seaM); // "Auto-Scale Board" off: one board unit = one pixel at most
   const victimG = !settings.gender || victimIsDummy(p) || p.id === UMBRA_HARD ? null : p.id === UMBRA_FINALE ? "m" : victimGenderOf(victimNameOf(p)); // the finale's corpse is Master U. M. Bra; The Uninvited Guests' is hooded N. O. Ir (no gender shown)
   /* The Umbra Conspiracy (umbra.jsx): the relic of a solved standard contract, the black envelope once all ten are solved, the
      Omega dossier after "The Uninvited Guests", and the finale's own verdict. `onLaunch(id)` opens a contract (the site's router);

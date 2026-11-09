@@ -59,7 +59,7 @@ import ShadokuHome, {
 } from "./ShadokuHome.jsx";
 import { AboutPage, ContactPage, LegalPage, DeleteAccountPage, AppGatePage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
 import { PHONE_GATED } from "./platform.js";
-import ShadokuGame, { PUZZLES, DAILIES, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
+import ShadokuGame, { PUZZLES, DAILIES, PREVIEWS, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
@@ -96,6 +96,7 @@ registerTranslations("en", {
   "daily.archiveNote": "Older contracts are rotated out.",
   "daily.archiveEmpty": "Nothing here yet: the archive fills up day by day.",
   "daily.queue": "Queue (local testing only)",
+  "daily.previews": "Sub-biome previews (local testing only)",
   "daily.cap": "{date} · {difficulty}",
   "hub.open": "Open the envelope",
   "hub.close": "Close",
@@ -727,6 +728,14 @@ function DailyScreen({ go }) {
             {shelf(queue)}
           </section>
         )}
+        {PREVIEWS.length > 0 && (
+          <section className="sh-hub-group" aria-label={t("daily.previews")}>
+            <h2 className="sh-hub-h"><span className="sh-hub-diff d-queue">{t("daily.previews")}</span></h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {PREVIEWS.map((q) => <button type="button" key={q.id} className="sh-btn ghost" onClick={() => go(`/play/${puzzleSlug(q)}`)}>{q.subtitle} · {q.id}</button>)}
+            </div>
+          </section>
+        )}
       </main>
       <SiteFooter />
 
@@ -839,7 +848,7 @@ function CommunityPlayScreen({ go, id, logoSrc }) {
 
 function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
   const { t } = useLang();
-  const pack = useMemo(() => [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES], [puzzles]); // the story, then the daily contracts (no picker after the initiation: fixedCase)
+  const pack = useMemo(() => [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES, ...PREVIEWS], [puzzles]); // the story, then the daily contracts (no picker after the initiation: fixedCase); PREVIEWS is dev-only
   const tutorial = pack.find((q) => q.id === TUTORIAL_PUZZLE) || null;
   const tutorialId = tutorial ? tutorial.id : (pack[0] && pack[0].id) || TUTORIAL_PUZZLE; // a pack without the tutorial: teach on its first case
   const firstCase = pack.find((q) => q.id !== tutorialId) || null; // "Case #1"
@@ -998,7 +1007,7 @@ export default function ShadokuApp({ onSignIn, onCheckUsername, onUsernameChange
     if (view !== "play" || !initiated) return false;
     const slug = slugOfPath(path);
     if (!slug) return false;
-    const pack = [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES], q = findPuzzleBySlug(pack, slug);
+    const pack = [...(puzzles ? normalizePuzzles(puzzles) : PUZZLES), ...DAILIES, ...PREVIEWS], q = findPuzzleBySlug(pack, slug);
     return !q || !isUnlocked(q.id, new Set(Object.keys(readBestTimes(pack)))); // no such contract: the envelopes too
   }, [view, initiated, puzzles, path, tick]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (locked) sync("/play", true); }, [locked, sync]);
