@@ -1,0 +1,2206 @@
+{
+ "id": "daily-2026-11-10",
+ "title": "Daily Contract, Tuesday 10 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Easy · Beach",
+ "theme": "BEACH",
+ "difficulty": "Easy",
+ "tier": "easy",
+ "shape": "lwing",
+ "seed": 261110,
+ "attempt": 4156,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "BEE0707LAR1-261110",
+ "puzzleId": "BEE0707LAR1-261110",
+ "engine": "V10.6",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 12,
+ "zoneWord": "area",
+ "size": 7,
+ "rooms": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   1,
+   2,
+   2
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   1,
+   2,
+   2
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   1,
+   2,
+   2
+  ],
+  [
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4
+  ],
+  [
+   3,
+   3,
+   3,
+   4,
+   4,
+   -1,
+   -1
+  ],
+  [
+   3,
+   3,
+   3,
+   4,
+   4,
+   -1,
+   -1
+  ]
+ ],
+ "roomNames": [
+  "Boathouse",
+  "Cabana",
+  "Lighthouse",
+  "Seawall",
+  "Snack Bar"
+ ],
+ "roomIds": [
+  "BOATHOUSE",
+  "CABANA",
+  "LIGHTHOUSE",
+  "SEAWALL",
+  "SNACK_BAR"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    5
+   ],
+   [
+    1,
+    5
+   ]
+  ],
+  [
+   [
+    2,
+    3
+   ],
+   [
+    2,
+    4
+   ]
+  ],
+  [
+   [
+    3,
+    2
+   ],
+   [
+    4,
+    2
+   ]
+  ],
+  [
+   [
+    3,
+    3
+   ],
+   [
+    4,
+    3
+   ]
+  ],
+  [
+   [
+    3,
+    4
+   ],
+   [
+    4,
+    4
+   ]
+  ],
+  [
+   [
+    3,
+    5
+   ],
+   [
+    4,
+    5
+   ]
+  ],
+  [
+   [
+    6,
+    2
+   ],
+   [
+    6,
+    3
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   0,
+   6,
+   "N"
+  ]
+ ],
+ "contents": [
+  [
+   "ANCHOR",
+   "CORPSE",
+   "",
+   "",
+   "SURF_RACK",
+   "COOLER",
+   "COOLER"
+  ],
+  [
+   "BARREL",
+   "BARREL",
+   "",
+   "SURF_RACK",
+   "",
+   "STOOL",
+   "SPIRAL_STAIRS"
+  ],
+  [
+   "BARREL",
+   "",
+   "BOAT",
+   "",
+   "",
+   "STOOL",
+   ""
+  ],
+  [
+   "",
+   "SURF_RACK",
+   "BOAT",
+   "",
+   "CHAIR",
+   "STOOL",
+   ""
+  ],
+  [
+   "PALM",
+   "",
+   "",
+   "",
+   "",
+   "STOOL",
+   "STOOL"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "",
+   "VOID",
+   "VOID"
+  ],
+  [
+   "",
+   "",
+   "",
+   "COOLER",
+   "COOLER",
+   "VOID",
+   "VOID"
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "BOAT",
+   "cells": [
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  0,
+  1
+ ],
+ "biomeProps": [
+  "ANCHOR",
+  "BOAT",
+  "COOLER",
+  "PALM",
+  "SPIRAL_STAIRS",
+  "SURF_RACK"
+ ],
+ "propClasses": {
+  "ANCHOR": "SHORT",
+  "BARREL": "SHORT",
+  "BOAT": "LOW",
+  "CHAIR": "LOW",
+  "COOLER": "LOW",
+  "PALM": "TALL",
+  "SPIRAL_STAIRS": "TALL",
+  "STOOL": "LOW",
+  "SURF_RACK": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.343,
+  "lowTiles": 12,
+  "openTiles": 35,
+  "lowKinds": [
+   "BOAT",
+   "CHAIR",
+   "COOLER",
+   "STOOL"
+  ],
+  "roomProps": {
+   "BOATHOUSE": [
+    "ANCHOR",
+    "BARREL",
+    "BOAT",
+    "COOLER",
+    "SURF_RACK"
+   ],
+   "LIGHTHOUSE": [
+    "SPIRAL_STAIRS",
+    "STOOL"
+   ],
+   "CABANA": [
+    "CHAIR"
+   ],
+   "SEAWALL": [
+    "PALM"
+   ],
+   "SNACK_BAR": [
+    "COOLER",
+    "STOOL"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Augustin",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "beret",
+    "facialHair": "beard",
+    "tie": "bowtie",
+    "skin": 4,
+    "cloth": 7
+   },
+   "look": "blonde curly hair, round glasses, beret, beard, bowtie",
+   "clue": "Augustin was sitting on a cooler.",
+   "text": "Augustin was sitting on a cooler.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "A",
+     "params": {
+      "prop": "COOLER"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    4
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Bertram",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 2
+   },
+   "look": "bald, goatee, necktie",
+   "clue": "Bertram stood on bare ground (no boat, chair, cooler or stool) and was not beside any palm tree.",
+   "text": "Bertram stood on bare ground (no boat, chair, cooler or stool) and was not beside any palm tree.",
+   "atoms": [
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "PALM"
+     }
+    },
+    {
+     "kind": "BARE",
+     "subject": "B",
+     "params": {
+      "surface": "SAND",
+      "lows": [
+       "BOAT",
+       "CHAIR",
+       "COOLER",
+       "STOOL"
+      ]
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    1
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Charlotte",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 3
+   },
+   "look": "brown curly hair, beret",
+   "clue": "Charlotte was beside the spiral staircase.",
+   "text": "Charlotte was beside the spiral staircase.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "SPIRAL_STAIRS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    6
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dinah",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 5
+   },
+   "look": "blonde bob hair, round glasses, beret, necktie",
+   "clue": "Dinah was beside the Corpse.",
+   "text": "Dinah was beside the Corpse.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "CORPSE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Edmund",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "peaked",
+    "facialHair": "beard",
+    "tie": "scarf",
+    "skin": 3,
+    "cloth": 7
+   },
+   "look": "brown wavy hair, peaked, beard, scarf",
+   "clue": "Edmund was in the Boathouse and was in row 3.",
+   "text": "Edmund was in the Boathouse and was in row 3.",
+   "atoms": [
+    {
+     "kind": "ROW",
+     "subject": "E",
+     "params": {
+      "index": 2
+     }
+    },
+    {
+     "kind": "ROOM",
+     "subject": "E",
+     "params": {
+      "room": "BOATHOUSE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    3
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Flora",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 1
+   },
+   "look": "grey wavy hair, horn-rimmed glasses, scarf",
+   "clue": "Flora was the only person beside a barrel.",
+   "text": "Flora was the only person beside a barrel.",
+   "atoms": [
+    {
+     "kind": "ONLY_BESIDE",
+     "subject": "F",
+     "params": {
+      "prop": "BARREL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    0
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gwendolyn",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 1,
+    "cloth": 2
+   },
+   "look": "grey wavy hair, cloche",
+   "clue": "Gwendolyn was beside a surfboard rack.",
+   "text": "Gwendolyn was beside a surfboard rack.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "G",
+     "params": {
+      "prop": "SURF_RACK"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    5
+   ]
+  }
+ ],
+ "shadow": [
+  4,
+  6
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dinah “was beside the Corpse”: only r1c3 fits. Place Dinah there.",
+   "focus": [
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      2
+     ]
+    ],
+    "E": [
+     [
+      2,
+      2
+     ]
+    ],
+    "F": [
+     [
+      1,
+      2
+     ]
+    ],
+    "G": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      3,
+      2
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    0,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      0,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Edmund can only be at r3c2 or r3c4, and those tiles all lie on one sightline. Whichever one Edmund takes, the whole stretch is watched, so nobody else can stand on r3c2, r3c4, r3c5.",
+   "focus": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ]
+    ],
+    "F": [
+     [
+      2,
+      1
+     ]
+    ],
+    "G": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "E",
+     "options": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ]
+     ],
+     "coords": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Flora “was the only person beside a barrel”: of the 3 tiles that fit, only r4c1 is still open. Place Flora there.",
+   "focus": [
+    [
+     3,
+     0
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      0
+     ]
+    ],
+    "G": [
+     [
+      3,
+      0
+     ]
+    ]
+   },
+   "suspect": "F",
+   "cell": [
+    3,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      3,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gwendolyn “was beside a surfboard rack”: of the 7 tiles that fit, only r1c6 is still open. Place Gwendolyn there.",
+   "focus": [
+    [
+     0,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ]
+    ],
+    "C": [
+     [
+      1,
+      5
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    0,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      0,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Charlotte “was beside the spiral staircase”: of the 2 tiles that fit, only r3c7 is still open. Place Charlotte there.",
+   "focus": [
+    [
+     2,
+     6
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      6
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    2,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      2,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Augustin can only be at r7c4 or r7c5, and those tiles all lie on one sightline. Whichever one Augustin takes, the whole stretch is watched, so nobody else can stand on r7c1, r7c2.",
+   "focus": [
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "coords": [
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Flora was the only person beside a barrel, so no other person (S. H. Adow included) can be beside any barrel.",
+   "focus": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      2,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "F",
+     "prop": "BARREL"
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Edmund “was in the Boathouse and was in row 3”: of the 3 tiles that fit, only r3c4 is still open. Place Edmund there.",
+   "focus": [
+    [
+     2,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      6,
+      3
+     ]
+    ],
+    "B": [
+     [
+      3,
+      3
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    2,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      2,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Augustin “was sitting on a cooler”: of the 4 tiles that fit, only r7c5 is still open. Place Augustin there.",
+   "focus": [
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      1,
+      4
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    6,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      6,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Bertram “stood on bare ground (no boat, chair, cooler or stool) and was not beside any palm tree”: every tile that fits is ruled out except r6c2. Place Bertram there.",
+   "focus": [
+    [
+     5,
+     1
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    5,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      5,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r5c7. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     4,
+     6
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    4,
+    6
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      4,
+      6
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "D",
+   "cell": [
+    0,
+    2
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dinah “was beside the Corpse”: only r1c3 fits. Place Dinah there.",
+    "focus": [
+     [
+      0,
+      2
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ]
+     ],
+     "E": [
+      [
+       2,
+       2
+      ]
+     ],
+     "F": [
+      [
+       1,
+       2
+      ]
+     ],
+     "G": [
+      [
+       0,
+       3
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       3,
+       2
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     0,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       0,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    3,
+    0
+   ],
+   "needs": [
+    "D"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     0
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Edmund can only be at r3c2 or r3c4, and those tiles all lie on one sightline. Whichever one Edmund takes, the whole stretch is watched, so nobody else can stand on r3c2, r3c4, r3c5.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        4
+       ]
+      ],
+      "F": [
+       [
+        2,
+        1
+       ]
+      ],
+      "G": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "E",
+       "options": [
+        [
+         2,
+         1
+        ],
+        [
+         2,
+         3
+        ]
+       ],
+       "coords": [
+        [
+         2,
+         1
+        ],
+        [
+         2,
+         3
+        ],
+        [
+         2,
+         4
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Flora “was the only person beside a barrel”: of the 3 tiles that fit, only r4c1 is still open. Place Flora there.",
+    "focus": [
+     [
+      3,
+      0
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       3,
+       0
+      ]
+     ],
+     "G": [
+      [
+       3,
+       0
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     3,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       3,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    0,
+    5
+   ],
+   "needs": [
+    "D",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Edmund can only be at r3c2 or r3c4, and those tiles all lie on one sightline. Whichever one Edmund takes, the whole stretch is watched, so nobody else can stand on r3c2, r3c4, r3c5.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        4
+       ]
+      ],
+      "G": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "E",
+       "options": [
+        [
+         2,
+         1
+        ],
+        [
+         2,
+         3
+        ]
+       ],
+       "coords": [
+        [
+         2,
+         1
+        ],
+        [
+         2,
+         3
+        ],
+        [
+         2,
+         4
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gwendolyn “was beside a surfboard rack”: of the 7 tiles that fit, only r1c6 is still open. Place Gwendolyn there.",
+    "focus": [
+     [
+      0,
+      5
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ]
+     ],
+     "C": [
+      [
+       1,
+       5
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     0,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       0,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    2,
+    6
+   ],
+   "needs": [
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     6
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Charlotte “was beside the spiral staircase”: of the 2 tiles that fit, only r3c7 is still open. Place Charlotte there.",
+    "focus": [
+     [
+      2,
+      6
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       2,
+       6
+      ],
+      [
+       3,
+       6
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     2,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       2,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    2,
+    3
+   ],
+   "needs": [
+    "C",
+    "D",
+    "F",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Flora was the only person beside a barrel, so no other person (S. H. Adow included) can be beside any barrel.",
+     "focus": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       0
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "F",
+       "prop": "BARREL"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Edmund “was in the Boathouse and was in row 3”: of the 3 tiles that fit, only r3c4 is still open. Place Edmund there.",
+    "focus": [
+     [
+      2,
+      3
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       6,
+       3
+      ]
+     ],
+     "B": [
+      [
+       3,
+       3
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       3
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     2,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       2,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    6,
+    4
+   ],
+   "needs": [
+    "E",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Augustin “was sitting on a cooler”: of the 4 tiles that fit, only r7c5 is still open. Place Augustin there.",
+    "focus": [
+     [
+      6,
+      4
+     ]
+    ],
+    "elims": {
+     "B": [
+      [
+       1,
+       4
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       6,
+       2
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     6,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       6,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    5,
+    1
+   ],
+   "needs": [
+    "A",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Bertram “stood on bare ground (no boat, chair, cooler or stool) and was not beside any palm tree”: every tile that fits is ruled out except r6c2. Place Bertram there.",
+    "focus": [
+     [
+      5,
+      1
+     ]
+    ],
+    "elims": {},
+    "suspect": "B",
+    "cell": [
+     5,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       5,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    4,
+    6
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r5c7. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      4,
+      6
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     4,
+     6
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       4,
+       6
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 0.667,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.667,
+   "late_elim_gap": 2,
+   "place_push": 3.57,
+   "global_uses": 0,
+   "global_first_t2": false,
+   "unlock_by_place": 0.667,
+   "star_opener": false
+  },
+  "flow_arc_ok": true,
+  "clue_fits": [
+   1,
+   2,
+   3,
+   3,
+   4,
+   7,
+   21
+  ],
+  "entry": 1,
+  "G18_one_entry": true,
+  "shadow_candidates_before_last": 3,
+  "shadow_candidates_before_last_two": 9,
+  "dark_known_at": 7,
+  "G5_late_shadow": true,
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "ANCHOR",
+   "BOAT",
+   "COOLER",
+   "PALM",
+   "SPIRAL_STAIRS",
+   "SURF_RACK"
+  ],
+  "biome_props_in_clues": [
+   "COOLER",
+   "SPIRAL_STAIRS",
+   "SURF_RACK"
+  ],
+  "biome_props_load_bearing": [
+   "COOLER",
+   "SPIRAL_STAIRS",
+   "SURF_RACK"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 16,
+  "rules_used": [
+   "monopoly",
+   "ray_block"
+  ],
+  "steps": 10,
+  "difficulty_score": 12,
+  "hardest_step_tier": 2,
+  "tall_scale": 1.15
+ },
+ "daily": "2026-11-10"
+}
