@@ -187,6 +187,8 @@ function fmtParam(key, val, f, arg, ctx, who) {
     if (f === "noun") return ctx.propForm(val, "noun");
     if (f === "prep") return ctx.propForm(val, "prep");
     if (f === "on") return ctx.propForm(val, "onPhrase", who);
+    // a locale's own case forms (PROP.<id>.<form>: tr gen, uk and el beside/any, fr de_a); <form>_the when the board holds just one
+    if (f && ctx.has(`PROP.${val}.${f}`)) return ctx.propForm(val, ctx.onlyOne(val) && ctx.has(`PROP.${val}.${f}_the`) ? `${f}_the` : f);
   } else if (t === "PropIdList" && f === "noun_or") {
     return ctx.orList(val.map((p) => ctx.propForm(p, "noun")));
   } else if (t === "TraitId" && f) {
