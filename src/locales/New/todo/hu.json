@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Beavatás",
-  "ui.creds.delete": "Fiók törlése",
-  "ui.creds.deleteConfirm": "Törli a fiókját? A kódneve és a fiókhoz mentett adatai törlődnek, és ezt a műveletet nem lehet visszavonni.",
-  "ui.creds.deleteError": "A fiókot nem sikerült törölni. Kérjük, próbálja újra."
-}

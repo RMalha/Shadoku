@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Coś poszło nie tak",
+  "ui.error.body": "Nie udało się wyświetlić tej strony. Odświeżenie zwykle pomaga. Jeśli problem powróci, wyczyszczenie zapisanej planszy tej sprawy może pomóc.",
+  "ui.error.reload": "Odśwież",
+  "ui.error.clear": "Wyczyść zapis tej sprawy",
   "ui.propInspector.perchTag": "Podwyższony obiekt",
   "ui.propInspector.shortTag": "Mały obiekt",
   "ui.tutorial.loreNote": "Stuknij kartę kozła ofiarnego, aby go wybrać, stuknij pole, aby zapisać notatkę ołówkiem, przytrzymaj pole aż do zapełnienia pierścienia, aby umieścić kozła ofiarnego, lub użyj narzędzia 💡 Włącznik, aby wykluczyć pola. Rozwiąż planszę i ukończ swoją inicjację!",

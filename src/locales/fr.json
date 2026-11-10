@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Une erreur est survenue",
+  "ui.error.body": "Impossible d'afficher cette page. Un rechargement règle généralement le problème. Si l'erreur persiste, effacer le plateau sauvegardé de cette affaire peut aider.",
+  "ui.error.reload": "Recharger",
+  "ui.error.clear": "Effacer la sauvegarde de cette affaire",
   "ui.propInspector.perchTag": "Objet perché",
   "ui.propInspector.shortTag": "Objet court",
   "ui.tutorial.loreNote": "Touchez une carte de bouc émissaire, touchez une case pour noter au crayon, maintenez une case appuyée jusqu'à remplir l'anneau pour placer le bouc émissaire, ou utilisez 💡 Interrupteur pour écarter des cases. Résolvez le plateau pour terminer votre initiation !",

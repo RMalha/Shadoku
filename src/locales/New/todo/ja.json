@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "イニシエーション",
-  "ui.creds.delete": "アカウントを削除",
-  "ui.creds.deleteConfirm": "アカウントを削除しますか？コードネームとアカウントに保存されたデータは消去され、元に戻すことはできません。",
-  "ui.creds.deleteError": "アカウントを削除できませんでした。もう一度お試しください。"
-}

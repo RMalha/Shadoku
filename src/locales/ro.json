@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Ceva nu a mers bine",
+  "ui.error.body": "Această pagină nu a putut fi afișată. Reîncărcarea rezolvă de obicei problema. Dacă reapare, ștergerea tablei salvate a acestui caz poate ajuta.",
+  "ui.error.reload": "Reîncarcă",
+  "ui.error.clear": "Șterge salvarea acestui caz",
   "ui.propInspector.perchTag": "Obiect înalt ocupabil",
   "ui.propInspector.shortTag": "Obiect scund neocupabil",
   "ui.tutorial.loreNote": "Atinge cartonașul unui țap ispășitor, atinge un pătrățel pentru a nota cu creionul, ține apăsat un pătrățel până se umple inelul pentru a-l plasa sau folosește 💡 Întrerupătorul pentru a exclude pătrățele. Rezolvă tabla pentru a-ți încheia inițierea!",

@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Algo correu mal",
+  "ui.error.body": "Não foi possível desenhar esta página. Recarregar costuma resolver. Se voltar a acontecer, limpar o tabuleiro guardado deste caso pode ajudar.",
+  "ui.error.reload": "Recarregar",
+  "ui.error.clear": "Limpar dados guardados deste caso",
   "ui.propInspector.perchTag": "Objeto de Poleiro",
   "ui.propInspector.shortTag": "Objeto Baixo",
   "ui.tutorial.loreNote": "Toca na carta de um bode expiatório, toca numa casa para apontar uma nota a lápis, mantém premida uma casa até o anel encher para o posicionar, ou usa o 💡 Interruptor para descartar casas. Resolve o tabuleiro para concluíres a tua iniciação!",

@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Zasvěcení",
-  "ui.creds.delete": "Smazat účet",
-  "ui.creds.deleteConfirm": "Smazat váš účet? Vaše krycí jméno a data uložená pro váš účet budou vymazána a tuto akci nelze vrátit zpět.",
-  "ui.creds.deleteError": "Účet se nepodařilo smazat. Zkuste to prosím znovu."
-}

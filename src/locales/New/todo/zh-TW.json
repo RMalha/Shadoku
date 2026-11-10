@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "入會儀式",
-  "ui.creds.delete": "刪除帳號",
-  "ui.creds.deleteConfirm": "確認刪除帳號？您的代號和為該帳號儲存的資料將會被清除，且此操作無法復原。",
-  "ui.creds.deleteError": "帳號刪除失敗。請再試一次。"
-}

@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Etwas ist schiefgelaufen",
+  "ui.error.body": "Diese Seite konnte nicht dargestellt werden. Neu laden hilft meistens. Tritt der Fehler wieder auf, kann das Löschen des gespeicherten Spielfelds dieses Falls helfen.",
+  "ui.error.reload": "Neu laden",
+  "ui.error.clear": "Speicherstand dieses Falls löschen",
   "ui.propInspector.perchTag": "Erhöhtes Objekt",
   "ui.propInspector.shortTag": "Flaches Objekt",
   "ui.tutorial.loreNote": "Tippe auf eine Sündenbockkarte, tippe auf ein Feld für eine Bleistiftnotiz, halte ein Feld gedrückt, bis sich der Ring füllt, um die Person zu platzieren, oder nutze den 💡 Lichtschalter, um Felder auszuschließen. Löse das Spielfeld, um deine Initiation abzuschließen!",

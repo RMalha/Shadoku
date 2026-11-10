@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Qualcosa è andato storto",
+  "ui.error.body": "Impossibile disegnare questa pagina. Ricaricare di solito risolve il problema. Se si ripresenta, cancellare il tabellone salvato di questo caso potrebbe aiutare.",
+  "ui.error.reload": "Ricarica",
+  "ui.error.clear": "Cancella il salvataggio di questo caso",
   "ui.propInspector.perchTag": "Oggetto rialzato",
   "ui.propInspector.shortTag": "Oggetto basso",
   "ui.tutorial.loreNote": "Tocca la scheda di un capro espiatorio, tocca una casella per annotare un appunto a matita, tieni premuta una casella finché l'anello non si riempie per posizionarlo, oppure usa 💡 Interruttore per escludere le caselle. Risolvi la griglia per completare la tua iniziazione!",

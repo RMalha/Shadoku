@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Bir şeyler ters gitti",
+  "ui.error.body": "Bu sayfa çizilemedi. Yeniden yüklemek genellikle sorunu çözer. Tekrar olursa bu vakanın kayıtlı tahtasını temizlemek işe yarayabilir.",
+  "ui.error.reload": "Yeniden yükle",
+  "ui.error.clear": "Bu vakanın kaydını temizle",
   "ui.propInspector.perchTag": "Yüksek Nesne",
   "ui.propInspector.shortTag": "Kısa Nesne",
   "ui.tutorial.loreNote": "Bir günah keçisi kartına dokunun, kurşun kalemle not almak için bir kareye dokunun, yerleştirmek için halka dolana kadar bir kareye basılı tutun veya kareleri elemek için 💡 Işık Anahtarı'nı kullanın. Kabul töreninizi tamamlamak için tahtayı çözün!",

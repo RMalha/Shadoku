@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Er is iets misgegaan",
+  "ui.error.body": "Deze pagina kon niet worden weergegeven. Herladen lost dit meestal op. Als het probleem terugkomt, kan het helpen om het opgeslagen bord van deze zaak te wissen.",
+  "ui.error.reload": "Herladen",
+  "ui.error.clear": "Opgeslagen bord van deze zaak wissen",
   "ui.propInspector.perchTag": "Verhoogd object",
   "ui.propInspector.shortTag": "Laag obstakel",
   "ui.tutorial.loreNote": "Tik op een zondebokkaart, tik op een tegel om een potloodnotitie te maken, houd een tegel ingedrukt tot de ring vol is om iemand te plaatsen, of gebruik de 💡 Lichtschakelaar om tegels uit te sluiten. Los het bord op om je inwijding te voltooien!",

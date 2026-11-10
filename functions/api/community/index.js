@@ -2,7 +2,7 @@
 // POST /api/community { puzzle, difficulty }  →  { id }   publish (signed-in players; the case must pass src/creatorCore.js checkCase)
 import { readSession, getRecord, json, sameOrigin } from "../../_lib/auth.js";
 import { db, noStorage, readBody, shownAvatar } from "../../_lib/db.js";
-import { cleanCase, listRow, newId, DIFF_RANK, MAX_CASE_BYTES, MAX_PER_AUTHOR, SELECT_ROW } from "../../_lib/community.js";
+import { cleanCase, listRow, newId, DIFF_RANK, MAX_CASE_BYTES, MAX_PER_AUTHOR, SELECT_LIST } from "../../_lib/community.js";
 
 const SORTS = {
   stars: "(CASE WHEN rating_count = 0 THEN 0 ELSE 1.0 * rating_sum / rating_count END) {o}, rating_count {o}, created DESC",
@@ -20,7 +20,7 @@ export async function onRequestGet({ request, env }) {
   const order = url.searchParams.get("order") === "asc" ? "ASC" : "DESC";
   const where = size >= 5 && size <= 10 ? `WHERE size = ${size}` : "";
   const s = await readSession(request, env).catch(() => null);
-  const rows = (await d.prepare(`${SELECT_ROW} ${where} ORDER BY ${SORTS[sort].replace(/\{o\}/g, order)} LIMIT 500`).all()).results;
+  const rows = (await d.prepare(`${SELECT_LIST} ${where} ORDER BY ${SORTS[sort].replace(/\{o\}/g, order)} LIMIT 500`).all()).results;
   return json({ puzzles: rows.map((r) => listRow(r, s && s.id)) });
 }
 

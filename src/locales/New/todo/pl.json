@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Inicjacja",
-  "ui.creds.delete": "Usuń konto",
-  "ui.creds.deleteConfirm": "Usunąć konto? Twój kryptonim i dane zapisane na koncie zostaną skasowane, a tej operacji nie można cofnąć.",
-  "ui.creds.deleteError": "Nie udało się usunąć konta. Spróbuj ponownie."
-}

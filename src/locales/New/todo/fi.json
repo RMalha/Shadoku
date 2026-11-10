@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Initiaatio",
-  "ui.creds.delete": "Poista tili",
-  "ui.creds.deleteConfirm": "Haluatko poistaa tilisi? Koodinimesi ja tilillesi tallennetut tiedot poistetaan, eikä tätä toimintoa voi peruuttaa.",
-  "ui.creds.deleteError": "Tiliä ei voitu poistaa. Yritä uudelleen."
-}

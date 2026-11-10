@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "入会仪式",
-  "ui.creds.delete": "删除账号",
-  "ui.creds.deleteConfirm": "确认删除账号？您的代号和为该账号保存的数据将被擦除，且此操作无法撤销。",
-  "ui.creds.deleteError": "账号删除失败。请重试。"
-}

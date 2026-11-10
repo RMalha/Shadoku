@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Đã xảy ra lỗi",
+  "ui.error.body": "Không thể hiển thị trang này. Tải lại thường sẽ khắc phục được. Nếu lỗi lặp lại, xóa bàn chơi đã lưu của vụ án này có thể giúp ích.",
+  "ui.error.reload": "Tải lại",
+  "ui.error.clear": "Xóa bản lưu của vụ án này",
   "ui.propInspector.perchTag": "Bục đứng cao",
   "ui.propInspector.shortTag": "Vật thể thấp",
   "ui.tutorial.loreNote": "Chạm vào thẻ vật tế thần, chạm vào một ô để ghi chú bằng bút chì, nhấn và giữ một ô cho đến khi vòng tròn đầy để đặt vật tế thần, hoặc dùng 💡 Công tắc đèn để loại trừ các ô. Giải toàn bộ bàn chơi để hoàn thành lễ nhập môn!",

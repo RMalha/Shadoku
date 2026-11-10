@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Bắt đầu",
-  "ui.creds.delete": "Xóa tài khoản",
-  "ui.creds.deleteConfirm": "Xóa tài khoản của bạn? Bí danh và dữ liệu đã lưu cho tài khoản của bạn sẽ bị xóa và không thể hoàn tác thao tác này.",
-  "ui.creds.deleteError": "Không thể xóa tài khoản. Vui lòng thử lại."
-}

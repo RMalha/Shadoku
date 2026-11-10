@@ -95,8 +95,8 @@ export const LANGUAGES = (() => {
 /* ═════════════════════════════ STORAGE ═════════════════════════════ */
 const memStore = {};
 export const store = {
-  get(k) { try { return window.localStorage.getItem(k); } catch { return k in memStore ? memStore[k] : null; } },
-  set(k, v) { memStore[k] = v; try { window.localStorage.setItem(k, v); } catch { /* private mode / sandbox */ } },
+  get(k) { if (k in memStore) return memStore[k]; try { return window.localStorage.getItem(k); } catch { return null; } }, // a value localStorage refused is still the newest
+  set(k, v) { try { window.localStorage.setItem(k, v); delete memStore[k]; } catch { memStore[k] = v; /* private mode / sandbox / full */ } },
   del(k) { delete memStore[k]; try { window.localStorage.removeItem(k); } catch { /* noop */ } },
 };
 
@@ -724,7 +724,7 @@ export function AvatarArt({ code, look = null, crop = AVATAR_CROP }) {
   const [zoom, cy] = crop;
   return (
     <svg viewBox="0 0 96 96" width="100%" height="100%" focusable="false">
-      {L ? <><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={zoom} cy={cy} sw={TOKEN_SW} /></> : <AdowFigure zoom={zoom} cy={cy} sw={5.6} />}
+      {L ? <ArtBoundary fallback={<AdowFigure zoom={zoom} cy={cy} sw={5.6} />}><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={zoom} cy={cy} sw={TOKEN_SW} /></ArtBoundary> : <AdowFigure zoom={zoom} cy={cy} sw={5.6} />}
     </svg>
   );
 }

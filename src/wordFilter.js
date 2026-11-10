@@ -38,11 +38,17 @@ const WORDS = [
   "amk", "gavat", "kahpe", "orospu", "pezevenk", "siktir", "yarak", "yarrak",
 ];
 const STEMS = ["fuck", "motherf", "faggot", "asshole", "arsehole", "bullshit", "dickhead", "cocksuck", "hijoputa", "hijodeputa",
-  "vaffancul", "arschloch", "hurensohn", "putain", "enculé", "orospu", "siktir", "γαμησ"];
+  "vaffancul", "arschloch", "hurensohn", "putain", "enculé", "orospu", "siktir", "γαμησ",
+  // slurs and spellings with no harmless word around them (so "niggerz", "shitshow", "phuck" are caught as part of a longer word)
+  "nigger", "shitshow", "shitface", "cuntface", "fvck", "phuck"];
 
-const LEET = { 0: "o", 1: "i", 3: "e", 4: "a", 5: "s", 7: "t", 8: "b", "@": "a", $: "s", "!": "i", "|": "i", "€": "e" };
-const fold = (s) => String(s).toLowerCase().replace(/ß/g, "ss").replace(/ς/g, "σ").normalize("NFKD").replace(/\p{M}/gu, "")
-  .replace(/[0134578@$!|€]/g, (c) => LEET[c]);
+const LEET = { 0: "o", 1: "i", 3: "e", 4: "a", 5: "s", 6: "g", 7: "t", 8: "b", 9: "g", "@": "a", $: "s", "!": "i", "|": "i", "€": "e" };
+// Cyrillic and Greek letters that look like Latin ones, and ƒ (applied to the word lists as well, so both sides fold the same way)
+const LOOKALIKE = { а: "a", с: "c", е: "e", і: "i", ї: "i", ј: "j", о: "o", р: "p", х: "x", у: "y", к: "k", м: "m", н: "h", т: "t", в: "b", ѕ: "s", ԁ: "d",
+  ι: "i", ο: "o", α: "a", ε: "e", ν: "v", ρ: "p", υ: "u", κ: "k", τ: "t", ƒ: "f" };
+const fold = (s) => String(s).toLowerCase().replace(/ß/g, "ss").replace(/ς/g, "σ").normalize("NFKD").replace(/\p{M}|\p{Cf}/gu, "")
+  .replace(/[а-яіїјѕԁιοαενρυκτƒ]/g, (c) => LOOKALIKE[c] || c)
+  .replace(/[013456789@$!|€]/g, (c) => LEET[c]);
 const WORD_SET = new Set(WORDS.map(fold));
 const STEM_LIST = STEMS.map(fold);
 
@@ -62,6 +68,10 @@ function wordsOf(text) {
 
 /** → the first offending word of `text`, or "" when it is clean. */
 export function badWordIn(text) {
+  // a word split by spaces or marks ("fu ck", "f-uck", "sh.it"): the letters joined, tested against the long stems only
+  const joined = fold(text).replace(/[^\p{L}]+/gu, "");
+  const split = STEM_LIST.find((st) => st.length >= 4 && !/hole$|^motherf$/.test(st) && joined.includes(st));
+  if (split) return split;
   for (const w of wordsOf(text)) {
     const forms = w.includes("*") ? [..."aeiou"].map((v) => w.replace(/\*/g, v)) : [w];
     for (const v of new Set(forms.flatMap((f) => [f, f.replace(/(\p{L})\1+/gu, "$1")]))) {

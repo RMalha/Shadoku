@@ -1,4 +1,8 @@
 # Cloudflare Pages response headers.
+# Every page: HTTPS only (HSTS), and no framing by other sites. A full Content-Security-Policy is a separate job (it needs a browser pass).
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: frame-ancestors 'self'
 # The service worker and the manifest must never be served stale: browsers check them for updates on every visit.
 /sw.js
   Cache-Control: no-cache

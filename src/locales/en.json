@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Something went wrong",
+  "ui.error.body": "This page could not be drawn. Reloading usually fixes it. If it comes back, clearing this case's saved board may help.",
+  "ui.error.reload": "Reload",
+  "ui.error.clear": "Clear this case's save",
   "ui.propInspector.perchTag": "Perch Prop",
   "ui.propInspector.shortTag": "Short Prop",
   "ui.tutorial.loreNote": "Tap a scapegoat card, tap a tile to pencil a note, press and hold a tile until the ring fills to place them, or use 💡 Light Switch to rule out tiles. Solve the board to complete your initiation!",

@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "문제가 발생했습니다",
+  "ui.error.body": "페이지를 표시할 수 없습니다. 보통 새로고침하면 해결됩니다. 문제가 반복되면 이 사건의 저장된 보드를 초기화해 보세요.",
+  "ui.error.reload": "새로고침",
+  "ui.error.clear": "이 사건의 저장 데이터 초기화",
   "ui.propInspector.perchTag": "올라설 수 있는 소품",
   "ui.propInspector.shortTag": "낮은 장애물 소품",
   "ui.tutorial.loreNote": "희생양 카드를 탭하고, 타일을 탭하여 연필로 메모하거나, 링이 채워질 때까지 타일을 길게 눌러 배치하거나, 💡 조명 스위치를 사용해 타일을 제외하세요. 보드를 풀어 입문을 완료하세요!",

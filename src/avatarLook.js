@@ -23,7 +23,7 @@ export function encodeLook(L) {
 
 /** "L:…" → a complete look (repaired by fixLook), or null when it is not an avatar code. */
 export function decodeLook(code) {
-  if (typeof code !== "string" || !code.startsWith("L:")) return null;
+  if (typeof code !== "string" || !code.startsWith("L:") || !AVATAR_RE.test(code)) return null; // same charset as the server: nothing else reaches the markup
   const v = code.slice(2).split("."), o = {};
   LOOK_FIELDS.forEach((k, i) => { o[k] = NUMERIC.has(k) ? Math.max(0, parseInt(v[i], 10) || 0) : v[i] || "none"; });
   o.back = SUSPECT_COLORS[o.back % SUSPECT_COLORS.length];

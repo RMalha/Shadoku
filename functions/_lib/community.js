@@ -53,3 +53,5 @@ export const listRow = (r, me) => ({
 });
 
 export const SELECT_ROW = "SELECT puzzles.*, players.codename AS codename, players.avatar AS avatar FROM puzzles LEFT JOIN players ON players.id = puzzles.author_id";
+/** The same without the case data (`data` can be ~100 KB a row): what the public list reads. */
+export const SELECT_LIST = "SELECT puzzles.id, puzzles.author_id, puzzles.author, puzzles.author_avatar, puzzles.title, puzzles.theme, puzzles.size, puzzles.difficulty, puzzles.diff_rank, puzzles.suspects, puzzles.created, puzzles.plays, puzzles.solves, puzzles.rating_sum, puzzles.rating_count, players.codename AS codename, players.avatar AS avatar FROM puzzles LEFT JOIN players ON players.id = puzzles.author_id";

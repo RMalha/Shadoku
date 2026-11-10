@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Valami hiba történt",
+  "ui.error.body": "Az oldalt nem sikerült kirajzolni. Az újratöltés általában megoldja. Ha a hiba visszatér, segíthet az ügy mentett táblájának törlése.",
+  "ui.error.reload": "Újratöltés",
+  "ui.error.clear": "Az ügy mentésének törlése",
   "ui.propInspector.perchTag": "Magaslati tárgy",
   "ui.propInspector.shortTag": "Alacsony akadály",
   "ui.tutorial.loreNote": "Koppints egy bűnbak kártyájára, koppints egy mezőre ceruzás jegyzet írásához, tartsd lenyomva a mezőt, amíg a gyűrű megtelik a végleges elhelyezéshez, vagy használd a 💡 Villanykapcsolót a mezők kizárásához. Oldd meg a táblát a beavatásod teljesítéséhez!",

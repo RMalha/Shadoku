@@ -13,6 +13,8 @@ import { json } from "./auth.js";
 
 /** An avatar choice: "" (S. H. Adow), "photo" or an "L:" portrait (src/avatarLook.js has the same pattern; it imports the art, so not shared). */
 export const AVATAR_RE = /^(|photo|L:[A-Za-z0-9.]{1,200})$/;
+/** AVATAR_RE plus the shape of an "L:" code: 17 fields (src/avatarLook.js LOOK_FIELDS), none named like an Object.prototype member (the art looks fields up in plain tables). */
+export const avatarOk = (v) => typeof v === "string" && AVATAR_RE.test(v) && (!v.startsWith("L:") || (v.slice(2).split(".").length === 17 && v.slice(2).split(".").every((f) => !(f in Object.prototype))));
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS players (id TEXT PRIMARY KEY, codename TEXT NOT NULL, avatar TEXT NOT NULL DEFAULT '', solved INTEGER NOT NULL DEFAULT 0,
@@ -68,7 +70,7 @@ export async function readBody(request, max) {
 /** An avatar URL worth showing to other players: https, short, no quotes. */
 export const cleanAvatar = (u) => (typeof u === "string" && /^https:\/\/[^\s"'<>]{1,480}$/.test(u) ? u : "");
 /** The avatar other players see, from the account's choice (src/avatarLook.js): "" (S. H. Adow), the session's picture URL, or the "L:" portrait. */
-export const shownAvatar = (choice, s) => (choice === "photo" ? cleanAvatar(s.avatar) : AVATAR_RE.test(choice || "") && choice.startsWith("L:") ? choice : "");
+export const shownAvatar = (choice, s) => (choice === "photo" ? cleanAvatar(s.avatar) : avatarOk(choice || "") && choice.startsWith("L:") ? choice : "");
 
 /** The account chose another avatar: its ranking row and its community puzzles follow. */
 export async function setPlayerAvatar(env, id, shown) {

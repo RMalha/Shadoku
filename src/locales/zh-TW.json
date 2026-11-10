@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "發生錯誤",
+  "ui.error.body": "無法繪製此頁面，通常重新載入即可解決。若問題再次發生，清除此案件的盤面存檔可能會有幫助。",
+  "ui.error.reload": "重新載入",
+  "ui.error.clear": "清除此案件的存檔",
   "ui.propInspector.perchTag": "可站立高處道具",
   "ui.propInspector.shortTag": "低矮障礙道具",
   "ui.tutorial.loreNote": "點選代罪羔羊卡片，輕觸格子可做鉛筆標記，長按格子直到圓環填滿即可放置代罪羔羊，或使用 💡 電燈開關排除格子。解開盤面以完成你的入會試煉！",

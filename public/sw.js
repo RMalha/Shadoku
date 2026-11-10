@@ -9,7 +9,7 @@
 const VERSION = "v1";
 const SHELL = `shadoku-shell-${VERSION}`;
 const STATIC = `shadoku-static-${VERSION}`;
-const ASSETS = "shadoku-assets"; // hashed names: safe across versions
+const ASSETS = "shadoku-assets-v2"; // hashed names: safe across versions (v2: the v1 cache could hold index.html saved under a missing asset URL)
 const KEEP_ASSETS = 80; // a build is a handful of files; this keeps a few builds back
 const PRECACHE = ["/", "/manifest.webmanifest", "/icons/icon-192.png", "/favicon.png"];
 
@@ -31,10 +31,13 @@ async function prune(cache, max) {
   await Promise.all(keys.slice(0, Math.max(0, keys.length - max)).map((k) => cache.delete(k)));
 }
 
+const isHtml = (res) => /text\/html/.test(res.headers.get("content-type") || "");
+
 async function page(request) {
   try {
     const res = await fetch(request);
-    if (res.ok) {
+    // only a real page becomes the offline shell: not /sitemap.xml, /robots.txt or the host's index.html answering for a missing file
+    if (res.ok && isHtml(res) && !/\.[a-z0-9]+$/i.test(new URL(request.url).pathname)) {
       const copy = res.clone();
       caches.open(SHELL).then((c) => c.put("/", copy));
     }
@@ -48,7 +51,8 @@ async function cacheFirst(request) {
   const hit = await caches.match(request, { cacheName: ASSETS });
   if (hit) return hit;
   const res = await fetch(request);
-  if (res.ok) {
+  // a missing /assets/<oldhash>.js is answered with the SPA's index.html (200): never keep that under the asset's URL
+  if (res.ok && !isHtml(res)) {
     const cache = await caches.open(ASSETS);
     await cache.put(request, res.clone());
     prune(cache, KEEP_ASSETS);

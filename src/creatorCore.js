@@ -589,12 +589,19 @@ const cellOk = (d, x) => Array.isArray(x) && x.length === 2 && isInt(x[0]) && is
 const ID_RE = /^[A-Z][A-Z0-9_]{0,31}$/;
 const PARAM_RULES = {
   room: (v, d) => (d.roomIds || []).includes(v), room2: (v, d) => (d.roomIds || []).includes(v),
-  prop: (v, d) => v === "CORPSE" || v === "ANY_TREE" || !!(d.propClasses && d.propClasses[v]),
+  prop: (v, d) => v === "CORPSE" || v === "ANY_TREE" || (typeof v === "string" && !!d.propClasses && Object.hasOwn(d.propClasses, v)),
   other: (v, d) => (d.suspects || []).some((s) => s.id === v),
   index: (v, d) => isInt(v) && v >= 0 && v < Math.max(d.rooms.length, d.rooms[0].length),
   dir: (v) => Object.prototype.hasOwnProperty.call(OFFSET, v), dist: (v) => v === 1,
   trait: (v) => Object.prototype.hasOwnProperty.call(TRAIT_TEST, v), selfMatch: (v) => typeof v === "boolean",
-  surface: (v) => /^[A-Z]{1,16}$/.test(v), lows: (v, d) => Array.isArray(v) && v.length <= 40 && v.every((k) => !!(d.propClasses && d.propClasses[k])),
+  surface: (v) => /^[A-Z]{1,16}$/.test(v), lows: (v, d) => Array.isArray(v) && v.length <= 40 && v.every((k) => typeof k === "string" && !!d.propClasses && Object.hasOwn(d.propClasses, k)),
+};
+/** The params a clue part cannot be read (or judged) without, by kind: a part that lacks one would pass as vacuously true. */
+const REQUIRED_PARAMS = {
+  ROOM: ["room"], ROOM_PAIR: ["room", "room2"], NOT_ROOM: ["room"], ONLY_G_ROOM: ["room", "trait"],
+  ON: ["prop"], ONLY_ON: ["prop"], BESIDE: ["prop"], NOT_BESIDE: ["prop"], ONLY_BESIDE: ["prop"], ROW: ["index"], COL: ["index"],
+  NORTH_OF: ["other"], SOUTH_OF: ["other"], EAST_OF: ["other"], WEST_OF: ["other"], SAME_ROOM: ["other"], DIFF_ROOM: ["other"], EXACT_OFFSET: ["other", "dir"],
+  WITH_P: ["trait"], TWO_P_ROOM: ["trait"], NO_P_ROOM: ["trait"], ALONE_WITH_P: ["trait"], DIAG_P: ["trait"],
 };
 
 /** The zone numbers of `rooms` whose tiles do not all touch (a zone must be one piece). */
@@ -625,11 +632,12 @@ export function checkCase(d) {
   if (!THEMES.includes(d.theme)) bad.push("unknown theme");
   if (typeof d.title !== "string" || !d.title.trim() || d.title.length > 60) bad.push("the title must be 1–60 characters");
   else if (hasBadWords(d.title)) bad.push("the title has a word that is not allowed");
+  if (d.roomNames.some((n) => hasBadWords(n))) bad.push("a zone name has a word that is not allowed");
   if (!Array.isArray(d.contents) || d.contents.length !== R || !d.contents.every((row) => Array.isArray(row) && row.length === C && row.every((k) => k === "" || (typeof k === "string" && ID_RE.test(k))))) return [...bad, "bad contents"];
   const pc = d.propClasses || {};
-  if (typeof pc !== "object" || Object.entries(pc).some(([k, v]) => !ID_RE.test(k) || !PROP_CLASS_IDS.includes(v))) bad.push("bad prop classes");
+  if (typeof pc !== "object" || Array.isArray(pc) || Object.entries(pc).some(([k, v]) => !ID_RE.test(k) || !PROP_CLASS_IDS.includes(v)) || Object.keys(pc).length > R * C) bad.push("bad prop classes");
   let corpses = 0;
-  d.contents.forEach((row) => row.forEach((k) => { if (k === "CORPSE") corpses++; else if (k && !pc[k]) bad.push(`no class for ${k}`); }));
+  d.contents.forEach((row) => row.forEach((k) => { if (k === "CORPSE") corpses++; else if (k && !Object.hasOwn(pc, k)) bad.push(`no class for ${k}`); }));
   if (corpses !== 1 || !cellOk(d, d.corpse) || d.contents[d.corpse[0]][d.corpse[1]] !== "CORPSE") bad.push("the board needs exactly one Corpse");
   if (!Array.isArray(d.doors) || d.doors.length > 200) return [...bad, "bad doors"];
   for (const dr of d.doors) {
@@ -645,12 +653,15 @@ export function checkCase(d) {
     if (!s || !LETTERS.includes(s.id) || ids.has(s.id)) return [...bad, "bad scapegoat letters"];
     ids.add(s.id);
     if (typeof s.name !== "string" || !s.name || s.name.length > 24 || s.name[0].toUpperCase() !== s.id) bad.push(`bad name for ${s.id}`);
+    else if (hasBadWords(s.name)) bad.push(`the name of ${s.id} has a word that is not allowed`);
     if (s.gender !== "m" && s.gender !== "f") bad.push(`bad gender for ${s.id}`);
     if (!cellOk(d, s.solution)) return [...bad, `no tile for ${s.id}`];
+    if (typeof s.clue === "string" && hasBadWords(s.clue)) bad.push(`the clue text of ${s.id} has a word that is not allowed`);
     if (!Array.isArray(s.atoms) || s.atoms.length < 1 || s.atoms.length > MAX_ATOMS) bad.push(`${s.name} needs 1–${MAX_ATOMS} clue parts`);
-    (s.atoms || []).forEach((a) => {
-      if (!a || !ATOM_KINDS.has(a.kind) || a.subject !== s.id || typeof a.params !== "object" || !a.params) { bad.push(`bad clue part for ${s.id}`); return; }
-      Object.entries(a.params).forEach(([k, v]) => { if (!PARAM_RULES[k] || !PARAM_RULES[k](v, d)) bad.push(`bad ${k} in ${s.id}'s clue`); });
+    (Array.isArray(s.atoms) ? s.atoms : []).forEach((a) => {
+      if (!a || !ATOM_KINDS.has(a.kind) || a.subject !== s.id || typeof a.params !== "object" || !a.params || Array.isArray(a.params)) { bad.push(`bad clue part for ${s.id}`); return; }
+      Object.entries(a.params).forEach(([k, v]) => { if (!Object.hasOwn(PARAM_RULES, k) || !PARAM_RULES[k](v, d)) bad.push(`bad ${k} in ${s.id}'s clue`); });
+      (REQUIRED_PARAMS[a.kind] || []).forEach((k) => { if (!Object.hasOwn(a.params, k)) bad.push(`${a.kind} in ${s.id}'s clue needs ${k}`); });
     });
   }
   if (!cellOk(d, d.shadow)) return [...bad, "no tile for S. H. Adow"];

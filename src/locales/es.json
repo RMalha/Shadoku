@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Algo salió mal",
+  "ui.error.body": "No se pudo dibujar esta página. Recargar suele solucionarlo. Si vuelve a ocurrir, borrar el tablero guardado de este caso puede ayudar.",
+  "ui.error.reload": "Recargar",
+  "ui.error.clear": "Borrar el guardado de este caso",
   "ui.propInspector.perchTag": "Objeto elevado",
   "ui.propInspector.shortTag": "Objeto pequeño",
   "ui.tutorial.loreNote": "Toca la ficha de un chivo expiatorio, toca una casilla para anotar a lápiz, mantén pulsada una casilla hasta que el anillo se llene para colocarlo, o usa el 💡 Interruptor para descartar casillas. ¡Resuelve el tablero para completar tu iniciación!",

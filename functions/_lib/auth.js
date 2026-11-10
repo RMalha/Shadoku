@@ -83,8 +83,8 @@ export const redirect = (location, cookies = []) => {
   return new Response(null, { status: 302, headers: h });
 };
 
-/** Only same-site paths: "/play/x?y" yes, "//evil.example" and "https://…" no. */
-export const safeReturn = (p) => (typeof p === "string" && /^\/(?![/\\])/.test(p) && p.length < 300 ? p : "/");
+/** Only same-site paths: "/play/x?y" yes; "//evil.example", "/\t/evil.example" (URL parsers drop the tab), backslashes and "https://…" no: printable ASCII only. */
+export const safeReturn = (p) => (typeof p === "string" && /^\/(?!\/)[\x21-\x5b\x5d-\x7e]*$/.test(p) && p.length < 300 ? p : "/");
 
 /** The origin the site is served from (SITE_URL pins it for the OAuth redirect URIs). */
 export const siteOrigin = (request, env) => (env.SITE_URL ? env.SITE_URL.replace(/\/+$/, "") : new URL(request.url).origin);

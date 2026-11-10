@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Alguna cosa ha anat malament",
+  "ui.error.body": "No s'ha pogut dibuixar aquesta pàgina. Recarregar-la normalment ho soluciona. Si torna a passar, esborrar el tauler desat d'aquest cas pot ajudar.",
+  "ui.error.reload": "Recarrega",
+  "ui.error.clear": "Esborra les dades desades d'aquest cas",
   "ui.propInspector.perchTag": "Objecte elevat",
   "ui.propInspector.shortTag": "Objecte baix",
   "ui.tutorial.loreNote": "Toca la fitxa d'un boc expiatori, toca una casella per anotar amb el llapis, mantén premuda una casella fins que s'ompli l'anell per col·locar-lo o fes servir 💡 Interruptor per descartar caselles. Resol el tauler per completar la teva iniciació!",

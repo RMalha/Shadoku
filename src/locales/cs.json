@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Něco se pokazilo",
+  "ui.error.body": "Tuto stránku se nepodařilo vykreslit. Opětovné načtení to obvykle opraví. Pokud se chyba vrátí, může pomoci vymazat uloženou plochu tohoto případu.",
+  "ui.error.reload": "Načíst znovu",
+  "ui.error.clear": "Vymazat uložený stav tohoto případu",
   "ui.propInspector.perchTag": "Vyvýšený objekt",
   "ui.propInspector.shortTag": "Malý objekt",
   "ui.tutorial.loreNote": "Klepnutím na kartu obětního beránka ji vybereš, klepnutím na políčko si napíšeš poznámku tužkou, podržením políčka až do naplnění kroužku obětního beránka umístíš, nebo pomocí nástroje 💡 Vypínač vyloučíš políčka. Vyřeš plán a dokonči své zasvěcení!",

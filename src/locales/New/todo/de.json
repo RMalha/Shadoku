@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Initiierung",
-  "ui.creds.delete": "Konto löschen",
-  "ui.creds.deleteConfirm": "Konto löschen? Dein Deckname und die für dein Konto gespeicherten Daten werden gelöscht. Dies kann nicht rückgängig gemacht werden.",
-  "ui.creds.deleteError": "Das Konto konnte nicht gelöscht werden. Bitte versuche es erneut."
-}

@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "Jokin meni vikaan",
+  "ui.error.body": "Tätä sivua ei voitu piirtää. Uudelleenlataus korjaa sen yleensä. Jos ongelma toistuu, tämän tapauksen tallennetun laudan tyhjentäminen voi auttaa.",
+  "ui.error.reload": "Lataa uudelleen",
+  "ui.error.clear": "Tyhjennä tämän tapauksen tallennus",
   "ui.propInspector.perchTag": "Koroke-esine",
   "ui.propInspector.shortTag": "Matala este",
   "ui.tutorial.loreNote": "Napauta syntipukkikorttia, napauta ruutua tehdäksesi lyijykynämerkinnän, paina ruutua pitkään, kunnes kehä täyttyy asettaaksesi hahmon, tai käytä 💡 Valokatkaisijaa sulkeaksesi ruutuja pois. Ratkaise lauta suorittaaksesi vihkimyksesi!",

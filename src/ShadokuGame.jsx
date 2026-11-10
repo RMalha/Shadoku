@@ -1834,10 +1834,13 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   /** Apply `fn` to this case. `push` saves the previous board on the Undo stack. Returns whether anything changed. */
   const mutate = (fn, push = true) => {
     let cur, next;
-    try { cur = caseNow(); next = fn(cur); } catch (err) { // a damaged save must never freeze the board: start this case over instead
+    try { cur = caseNow(); } catch (err) { // a damaged save must never freeze the board: start this case over instead, keeping a copy of the old one
+      console.warn("[Shadoku] damaged save for", p.id, err);
+      try { localStorage.setItem(`shadoku-backup:${p.id}`, JSON.stringify(live.current[p.id])); } catch { /* no storage */ }
       live.current = { ...live.current, [p.id]: normCase(undefined) };
-      cur = caseNow(); next = fn(cur);
+      cur = caseNow();
     }
+    try { next = fn(cur); } catch (err) { console.warn("[Shadoku] a move failed and was ignored:", err); return false; } // a bug in a move must not erase the board
     if (next === cur) return false;
     if (push) { setUndo((u) => ({ ...u, [p.id]: [...(u[p.id] || []), snap(cur)].slice(-120) })); setRedo((u) => (u[p.id] && u[p.id].length ? { ...u, [p.id]: [] } : u)); } // a new move drops the undone ones
     if (cur.done && next.tokens !== cur.tokens) next = { ...next, done: false }; // editing the placements re-opens the case

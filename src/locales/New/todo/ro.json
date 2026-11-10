@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "Inițiere",
-  "ui.creds.delete": "Șterge contul",
-  "ui.creds.deleteConfirm": "Dorești să îți ștergi contul? Numele tău de cod și datele salvate pentru contul tău vor fi șterse și acest lucru nu poate fi anulat.",
-  "ui.creds.deleteError": "Contul nu a putut fi șters. Te rog să încerci din nou."
-}

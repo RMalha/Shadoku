@@ -8240,10 +8240,10 @@ export function fixLook(L) {
   const o = { ...L, gender: g };
   if (g === "f") { o.facialHair = "none"; if (o.brows === "unibrowNatural") o.brows = "defaultNatural"; }
   else if (!BEARDS.includes(o.facialHair)) o.facialHair = "none";
-  if (!AV.eyes[o.eyes]) o.eyes = "default";
-  if (!AV.eyebrows[o.brows]) o.brows = "defaultNatural";
-  if (!AV.mouth[o.mouth]) o.mouth = "default";
-  if (!AV.clothing[o.clothing]) o.clothing = "shirtCrewNeck";
+  if (!Object.hasOwn(AV.eyes, o.eyes)) o.eyes = "default";
+  if (!Object.hasOwn(AV.eyebrows, o.brows)) o.brows = "defaultNatural";
+  if (!Object.hasOwn(AV.mouth, o.mouth)) o.mouth = "default";
+  if (!Object.hasOwn(AV.clothing, o.clothing)) o.clothing = "shirtCrewNeck";
   if (!clothingOk(o.clothing, g)) o.clothing = "shirtCrewNeck";
   if (!TIES.includes(o.tie)) o.tie = "none";
   if (o.tie !== "none") {
@@ -8252,22 +8252,22 @@ export function fixLook(L) {
     if (!okC.includes(o.clothing)) o.clothing = okC[0];
   }
   if (g === "m" && o.glassesStyle === "kurt") o.glassesStyle = "round";
-  if (!AV.accessories[o.glassesStyle] || o.glassesStyle === "eyepatch") o.glassesStyle = "none";
+  if (!Object.hasOwn(AV.accessories, o.glassesStyle) || o.glassesStyle === "eyepatch") o.glassesStyle = "none";
   o.glasses = o.glassesStyle !== "none";
   if (o.glasses) o.eyepatch = false;
-  if (!o.hat || !HAT_META[o.hat] || !genderOk(HAT_META[o.hat][0], g)) o.hat = "none";
+  if (!o.hat || !Object.hasOwn(HAT_META, o.hat) || !genderOk(HAT_META[o.hat][0], g)) o.hat = "none";
   if (o.hairStyle === "bald" || o.hairLength === "bald") { o.hairStyle = "bald"; o.hairLength = "bald"; o.hairColor = "none"; }
   else {
     const len = o.hairLength === "long" ? "long" : "short";
     const pool = hairList(g, len);
     let h = o.hairStyle;
-    if (!HAIR_META[h] || !genderOk(HAIR_META[h][0], g) || HAIR_META[h][1] !== len) h = pool.includes(DEFAULT_HAIR[g][len]) ? DEFAULT_HAIR[g][len] : pool[0];
+    if (!Object.hasOwn(HAIR_META, h) || !genderOk(HAIR_META[h][0], g) || HAIR_META[h][1] !== len) h = pool.includes(DEFAULT_HAIR[g][len]) ? DEFAULT_HAIR[g][len] : pool[0];
     if (o.hat !== "none" && !hatFits(h, o.hat)) {
       const alt = pool.filter((x) => !CAST_SKIP.has(x)).find((x) => hatFits(x, o.hat));
       if (alt) h = alt; else o.hat = hatFits(h, "hat") ? "hat" : "none";
     }
     o.hairStyle = h; o.hairLength = len;
-    if (!HAIR_HEX[o.hairColor] || o.hairColor === "none") o.hairColor = "brown";
+    if (!Object.hasOwn(HAIR_HEX, o.hairColor) || o.hairColor === "none") o.hairColor = "brown";
   }
   return o;
 }

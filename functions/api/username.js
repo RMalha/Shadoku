@@ -15,7 +15,7 @@ export async function onRequestPut({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
-  const { name } = await request.json().catch(() => ({}));
+  const { name } = (await request.json().catch(() => null)) || {};
   if (!USERNAME_RE.test(name || "")) return json({ error: "format" }, 400);
   if (!(await codenameFree(env, name, s.id))) return json({ error: "taken" }, 409);
   await setCodename(env, s.id, name);

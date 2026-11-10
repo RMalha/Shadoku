@@ -797,7 +797,7 @@ function CommunityPlayScreen({ go, id, logoSrc }) {
     if (test) {
       let d = null;
       try { d = JSON.parse(store.get(CREATE_TEST_KEY) || "null"); } catch { /* a damaged copy */ }
-      setRes(d && d.rooms ? { ok: true, puzzle: d, meta: null, myRating: 0 } : { error: "not_found" });
+      setRes(d && Array.isArray(d.rooms) && Array.isArray(d.suspects) && d.suspects.length ? { ok: true, puzzle: d, meta: null, myRating: 0 } : { error: "not_found" });
       return undefined;
     }
     getCommunity(id).then((r) => { if (alive) setRes(r); });

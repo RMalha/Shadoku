@@ -1,6 +1,0 @@
-{
-  "ui.nav.pInitiation": "İnisiyasyon",
-  "ui.creds.delete": "Hesabı sil",
-  "ui.creds.deleteConfirm": "Hesabınız silinsin mi? Kod adınız ve hesabınız için kaydedilen veriler silinir ve bu işlem geri alınamaz.",
-  "ui.creds.deleteError": "Hesap silinemedi. Lütfen tekrar deneyin."
-}

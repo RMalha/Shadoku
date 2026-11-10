@@ -1,4 +1,8 @@
 {
+  "ui.error.title": "出错了",
+  "ui.error.body": "页面绘制失败，重新加载通常可以解决。如果问题再次出现，清除本案件的盘面存档可能会有帮助。",
+  "ui.error.reload": "重新加载",
+  "ui.error.clear": "清除本案件存档",
   "ui.propInspector.perchTag": "可站立高物",
   "ui.propInspector.shortTag": "矮障碍物",
   "ui.tutorial.loreNote": "点击替罪羊卡牌，轻触格子用铅笔做标记，长按格子直到圆环填满以放置替罪羊，或使用 💡 电灯开关排除格子。解开棋盘以完成你的入盟仪式！",
