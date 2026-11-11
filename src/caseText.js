@@ -124,14 +124,17 @@ class Ctx {
   contract(text) {
     if (this.pairs === undefined) {
       this.pairs = (this.tr("ui.fmt.contract") || "").split("|").filter(Boolean).map((p) => {
-        const [from, to] = p.split("=");
+        const i = p.lastIndexOf("="), from = p.slice(0, i), to = p.slice(i + 1); // the last "=": a pattern may hold a lookahead (hu "a\(z\)(?=\s+[aeiou…])=az")
         return [new RegExp(String.raw`(^|[^\p{L}])(${from.replace(/ /g, String.raw`\s+`)})(?![\p{L}])`, "giu"), to];
       });
     }
     return this.pairs.reduce((s, [re, to]) => s.replace(re, (_, pre, hit) => pre + (hit[0] !== hit[0].toLowerCase() ? to[0].toUpperCase() + to.slice(1) : to)), text);
   }
   coord(c) { return this.fmt("ui.fmt.coord", { row: c[0] + 1, col: c[1] + 1 }); }
-  roomIn(id) { return this.fmt("ui.fmt.roomIn", { prep: this.prep(id), room: this.roomName(id) }); }
+  roomIn(id) {
+    const prep = this.prep(id), room = this.roomName(id);
+    return /['’]$/.test(prep) ? prep + room : this.fmt("ui.fmt.roomIn", { prep, room }); // fr/it "dans l'" + "Orangerie": no space after an elided article
+  }
   /** PROP.<id>.<form>, preferring its .m/.f/.n variant when a subject `who` is given (suspect letter; assassins and S. H. Adow are "n"). */
   propForm(id, form, who) {
     const v = this.tr(this.gKey(`PROP.${id}.${form}`, who));
@@ -159,6 +162,10 @@ function fmtParam(key, val, f, arg, ctx, who) {
     if (f == null) return ctx.name(val);
     if (f === "pronoun" || f === "Pronoun" || f === "obj") return pronoun(ctx, ctx.gender(val), f);
     if (f === "clue") return renderClue(val, ctx, false);
+    if (f === "gw") { // a word chosen by this person's gender: {owner|gw:ο:η:ο/η} (masculine:feminine:unknown)
+      const [m, fe, n = m] = String(arg || "").split(":"), g = ctx.gender(val);
+      return g === "m" ? m : g === "f" ? fe : n;
+    }
   } else if (t === "WhoRef" && f == null) {
     return val === "ALL" ? ctx.T("ui.fmt.assassins") : ctx.name(val);
   } else if (t === "SuspectRefList") {
