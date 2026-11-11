@@ -17,7 +17,13 @@
     { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Daily Contract", "url": "/daily?source=pwa", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Story", "url": "/play?source=pwa", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+    { "name": "Daily Contract", "url": "/daily?source=pwa", "icons": [
+      { "src": "/icons/shortcut-daily-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+      { "src": "/icons/shortcut-daily-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" }
+    ] },
+    { "name": "Story", "url": "/play?source=pwa", "icons": [
+      { "src": "/icons/shortcut-story-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+      { "src": "/icons/shortcut-story-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" }
+    ] }
   ]
 }

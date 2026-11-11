@@ -18,7 +18,8 @@ const idx = (list) => list.map((_, i) => i);
 const FRAMES = idx(FRAME_COLORS).filter((i) => FRAME_COLORS.indexOf(FRAME_COLORS[i]) === i); // the palette repeats its first colour
 const BEACH = new Set(["shirtless", "bikini"]); // beach wear stays on the beach
 
-/** The rows of each tab: [look field, "thumb" | "swatch", options for the current look, the swatch colour of an option]. */
+/** The rows of each tab: [look field, "thumb" | "swatch", options for the current look, the swatch colour of an option,
+ *  the row's label key when it is not the field's own (a function of the look)]. */
 const TABS = {
   face: [
     ["gender", "thumb", () => ["f", "m"]],
@@ -44,7 +45,8 @@ const TABS = {
     ["clothing", "thumb", (L) => CLOTHING.filter((c) => !BEACH.has(c) && clothingOk(c, L.gender))],
     ["cloth", "swatch", () => idx(CLOTH), (v) => CLOTH[v]],
     ["tie", "thumb", (L) => TIES.filter((x) => x === "none" || genderOk(TIE_GENDER[x], L.gender))],
-    ["accent", "swatch", (L) => (L.tie === "none" ? [] : idx(ACCENTS)), (v) => ACCENTS[v]],
+    // the accent colours the neckwear, or the T-shirt under an overall (an overall never has neckwear), so each has its own colour row
+    ["accent", "swatch", (L) => (L.tie === "none" && L.clothing !== "overall" ? [] : idx(ACCENTS)), (v) => ACCENTS[v], (L) => (L.clothing === "overall" ? "tee" : "accent")],
   ],
   backdrop: [
     ["back", "swatch", () => SUSPECT_COLORS, (v) => v],
@@ -123,12 +125,12 @@ export function AvatarMaker() {
             <button type="button" className="sh-avm-dice" onClick={() => pick(randomLook())}>🎲 {t("avatar.random")}</button>
           </div>
           <div className="sh-avm-rows" role="tabpanel">
-            {TABS[tab].map(([key, kind, optionsOf, colorOf]) => {
+            {TABS[tab].map(([key, kind, optionsOf, colorOf, labelOf]) => {
               const opts = optionsOf(L);
               if (!opts.length) return null;
               return (
                 <div key={key} className="sh-avm-row">
-                  <span className="sh-avm-label">{t(`avatar.row.${key}`)}</span>
+                  <span className="sh-avm-label">{t(`avatar.row.${labelOf ? labelOf(L) : key}`)}</span>
                   <div className={`sh-avm-opts ${kind}`}>
                     {opts.map((v, i) => {
                       const on = L[key] === v;

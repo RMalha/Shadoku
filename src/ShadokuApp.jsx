@@ -953,7 +953,6 @@ function PlayScreen({ go, puzzles, logoSrc, lab, path, sync }) {
 
   const helpExtra = useCallback(({ close }) => (
     <div className="sh-help-extra">
-      <p className="sh-dos-note">{t(LORE_NOTE_KEY)}</p>
       <button type="button" className="sk-btn primary" onClick={() => { close(); replay(); }}>{t("help.replay")}</button>
     </div>
   ), [replay, t]);
@@ -1148,7 +1147,7 @@ html:has(.sh-playroot),html:has(.sh-playroot) body{overflow:hidden;overscroll-be
 .sh-hub-x{position:absolute;top:-6px;right:-4px;z-index:5;width:38px;height:38px;border-radius:50%;border:1px solid #5a4a3e;background:#1d1615;color:#F5F0E6;font-size:22px;line-height:1;cursor:pointer}
 .sh-hub-x:hover{background:#2a1d1c}
 .sh-help-extra{margin-top:12px;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.sh-help-extra .sh-dos-note{align-self:stretch;margin:0;color:#4a3d2c;background:rgba(217,155,38,.14)}
+.sh-help-extra .sh-dos-note{align-self:stretch;margin:0;color:#e9d9b8;background:rgba(217,155,38,.14)}
 .sh-help-extra .sk-btn{padding:8px 14px}
 @media (max-width:520px){.sh-hub-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.sh-hub-cap{font-size:12px}}
 @media (max-width:640px){

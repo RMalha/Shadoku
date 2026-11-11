@@ -26,6 +26,7 @@ export const PROGRESS_EVENT = "shadoku-progress";
 export const SYNCED_EVENT = "shadoku-synced"; // after every sync with the account (src/community.js sends the ranking numbers then)
 const UMBRA_EVENT = "shadoku-umbra";
 const PUSH_MS = 30000, PUSH_SOON_MS = 2000; // KV has a daily write budget: a push per change would spend it
+const BACKUP_KEY = "shadoku-progress-backup"; // this browser's copy as it was before the account's replaced it
 const OWNER_KEY = "shadoku-progress-owner"; // { id: account id, at: server ms of the last sync with it }
 const LANG_KEY = "shadoku-lang"; // ShadokuHome LANG_KEY: the merge question is asked outside React
 
@@ -86,10 +87,13 @@ function askMerge(n) {
   const key = n === 1 ? "ui.sync.merge.one" : "ui.sync.merge.other";
   const text = (LOCALES[lang] && LOCALES[lang][key]) || (LOCALES.en && LOCALES.en[key])
     || "This browser has progress your account does not have ({n} contracts). Add it to your account?";
-  return window.confirm(fillVars(text, { n }));
+  const t0 = performance.now(), yes = window.confirm(fillVars(text, { n }));
+  // A browser that suppresses dialogs answers false at once, without showing anything: nobody says No in under 100 ms. Merging never destroys (followup-ui-01).
+  return yes || performance.now() - t0 < 100;
 }
 /** This browser's copy becomes the account's (the answer was No). */
 function replaceLocal(remote) {
+  writeRaw(BACKUP_KEY, JSON.stringify(readLocal())); // what this browser held, in case the No was a mistake (followup-ui-01)
   const p = { boards: {}, at: {}, times: {}, bests: {}, flags: {}, ...(isObj(remote) ? remote : {}) };
   writeRaw(BOARDS_KEY, JSON.stringify(p.boards)); writeRaw(BOARD_AT, JSON.stringify(p.at));
   writeRaw(TIMES_KEY, JSON.stringify(p.times)); writeRaw(BESTS_KEY, JSON.stringify(p.bests));
@@ -107,7 +111,7 @@ function writeLocal(p) {
 // JSON.stringify of the pieces, in a fixed order: "did the merge change anything?"
 const same = (a, b) => isObj(b) && ["boards", "at", "times", "bests", "flags"].every((k) => JSON.stringify(a[k] || {}) === JSON.stringify(b[k] || {}));
 
-let active = false, timer = null, busy = null;
+let active = false, timer = null, busy = null, dirty = false, dirtyKeep = false; // dirty: a sync was asked for while one was running
 
 async function api(init) {
   try {
@@ -122,7 +126,7 @@ const put = (progress, keepalive = false) => api({ method: "PUT", headers: { "Co
  *  `keepalive`: the page is being hidden, the push may outlive it (if the pull does not, the changes wait here for the next sync). */
 function syncNow(keepalive = false) {
   if (!active) return Promise.resolve();
-  if (busy) return busy;
+  if (busy) { dirty = true; dirtyKeep = dirtyKeep || keepalive; return busy; } // that sync read the storage before this change: run once more after it
   busy = (async () => {
     const r = await api({ method: "GET" });
     if (!r || r.status !== 200) { if (r && r.status === 401) active = false; return; } // signed out elsewhere: stop
@@ -147,8 +151,18 @@ function syncNow(keepalive = false) {
     }
     if (!same(merged, remote)) await put(merged, keepalive);
     try { window.dispatchEvent(new Event(SYNCED_EVENT)); } catch { /* noop */ }
-  })().finally(() => { busy = null; });
+  })().finally(() => {
+    busy = null;
+    if (dirty) { const k = dirtyKeep; dirty = false; dirtyKeep = false; if (active) syncNow(k); }
+  });
   return busy;
+}
+
+/** Push what is waiting now (sign-out): at most `ms` of waiting, the sign-out must not hang on a bad network. */
+export async function flushSync(ms = 3000) {
+  if (!active) return;
+  if (timer) { clearTimeout(timer); timer = null; }
+  await Promise.race([syncNow(), new Promise((res) => setTimeout(res, ms))]);
 }
 
 const onHide = () => {

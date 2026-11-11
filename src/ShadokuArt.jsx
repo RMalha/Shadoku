@@ -311,10 +311,10 @@ export const hash = (s) => { let h = 2166136261; for (const ch of String(s)) { h
 /* ---------------------------------------------------------------------- */
 /*  Floor textures (seamless 64×64 tiles, aligned to the board grid)        */
 /* ---------------------------------------------------------------------- */
-export function FloorDefs({ align = true }) {
-  const pt = align ? `translate(${LAB} ${LAB})` : undefined;
+export function FloorDefs({ align = true, uid = "" }) { // uid: a board mounted next to others needs its own ids (followup-mechanical-06)
+  const sfx = uid ? `-${uid}` : "", pt = align ? `translate(${LAB} ${LAB})` : undefined;
   const P = (id, children) => (
-    <pattern id={`skf-${id}`} width="64" height="64" patternUnits="userSpaceOnUse" patternTransform={pt}>{children}</pattern>
+    <pattern id={`skf-${id}${sfx}`} width="64" height="64" patternUnits="userSpaceOnUse" patternTransform={pt}>{children}</pattern>
   );
   const plankShades = ["#b98a5a", "#c4966a", "#ad7f50"];
   const planks = [];
@@ -437,7 +437,7 @@ export function FloorDefs({ align = true }) {
         {[8, 24, 40, 56].map((y, i) => <path key={y} d={`M${i % 2 ? -8 : 0} ${y}Q${i % 2 ? 0 : 8} ${y - 5} ${i % 2 ? 8 : 16} ${y}T${i % 2 ? 24 : 32} ${y}T${i % 2 ? 40 : 48} ${y}T${i % 2 ? 56 : 64} ${y}T${i % 2 ? 72 : 80} ${y}`} fill="none" stroke={i % 2 ? "#4fa9cb" : "#6cc3e0"} strokeWidth="1.7" strokeOpacity=".8" />)}
         {[[10, 14], [38, 6], [52, 30], [20, 44], [46, 58], [6, 34]].map(([x, y], i) => <path key={i} d={`M${x} ${y}l4-1`} stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeOpacity=".55" />)}
       </>)}
-      <radialGradient id="skGlow">
+      <radialGradient id={`skGlow${sfx}`}>
         <stop offset="0" stopColor="#ffd9a0" stopOpacity=".42" />
         <stop offset="1" stopColor="#ffd9a0" stopOpacity="0" />
       </radialGradient>
@@ -1126,22 +1126,25 @@ export function Bed({ len = 2, horizontal = false }) {
  *  the Master's household at the throat.
  *  `master` wins over `second`, `second` over `victim`; `dummy` wins over all.
  *  Top-down and flush like the other floor items, inked in OS, no shadow. Drawn on every board. */
-export function Corpse({ victim = "Victor", dummy = false, master = false, second = false } = {}) {
+export function Corpse({ victim = "Victor", dummy = false, master = false, second = false, look = null } = {}) { // look: overrides of the victim's look (review sheets)
   const u = useUid();
   const M = !!master && !dummy;
   const N = !!second && !dummy && !M; // N. O. Ir, hooded
   // the Master's own look, minus the glasses (they lie on the floor beside him)
-  const V = M ? { ...MASTER_LOOK, glasses: false, glassesStyle: "none" } : victimLook(victim, dummy), F = fixLook(V);
+  const V = M ? { ...MASTER_LOOK, glasses: false, glassesStyle: "none" } : (look ? { ...victimLook(victim, dummy), ...look } : victimLook(victim, dummy)), F = fixLook(V);
   const k = .126, sw = 11.9; // the 280-unit portrait frame scaled into the tile; sw * k = 1.5, like OS
   const skin = dummy ? V.dummyColor : M ? MASTER_LOOK.pal.skin : N ? "#262833" /* gloves */ : SKIN[F.skin % SKIN.length];
   const bare = !dummy && !N && (F.clothing === "shirtless" || F.clothing === "bikini");
+  const overall = !dummy && !N && F.clothing === "overall";
   const blazer = !dummy && !N && /^blazer/.test(F.clothing);
   const clothes = dummy ? mix(V.dummyColor, -.28) : M ? MASTER_LOOK.pal.clothes : N ? SECOND_CLOAK : bare ? skin : CLOTH[F.cloth % CLOTH.length];
-  const sleeve = dummy ? V.dummyColor : clothes;
-  const trousers = dummy ? V.dummyColor : M ? "#2b2932" : N ? "#15161e" : mix(CLOTH[F.cloth % CLOTH.length], -.4), shoe = dummy ? mix(V.dummyColor, -.45) : M ? "#4a2e22" : N ? "#0e0f14" : "#2a2220";
+  const sleeve = dummy ? V.dummyColor : overall ? skin : clothes; // an overall has no sleeves: bare arms, with the short sleeves of the T-shirt under it
+  const trousers = dummy ? V.dummyColor : M ? "#2b2932" : N ? "#15161e" : bare ? skin : overall ? clothes : mix(CLOTH[F.cloth % CLOTH.length], -.4), shoe = dummy ? mix(V.dummyColor, -.45) : M ? "#4a2e22" : N ? "#0e0f14" : bare ? skin : "#2a2220"; // bare: legs and feet are skin; overall: legs match the one-piece
   const tie = ACCENTS[(F.accent || 0) % ACCENTS.length];
   const mouth = ["smile", "twinkle", "tongue", "eating"].includes(F.mouth) ? "serious" : F.mouth;
-  const bust = dummy ? dummySvg(V.dummyColor, sw) : composeLook({ ...F, eyes: "xDizzy", mouth }, sw);
+  const own = !dummy && !N && (M || blazer || overall || bare); // these draw their whole body here (the portrait gives only the head and neck), so the torso has no seam
+  const bust = dummy ? dummySvg(V.dummyColor, sw) : composeLook({ ...F, eyes: "xDizzy", mouth }, sw, { lashes: false, headOnly: own });
+  const wear = CLOTH[F.cloth % CLOTH.length]; // swim trunks / bikini: the colour of the portrait's bikini
   // a crash-test dummy is not a person: its pool is dark oil (near-black blue-brown, glossy highlight), not blood
   const blood = dummy ? "#2d2c38" : "#8a1c24", bloodL = dummy ? "#98a0b6" : "#bb4650";
   // the real victim's pool spreads out round the head; the dummy's oil has leaked from its chest, so its head stays clear of the dark (no black "hair" halo)
@@ -1156,9 +1159,11 @@ export function Corpse({ victim = "Victor", dummy = false, master = false, secon
   const shoes = [[20.6, 68.2, 26], [40.4, 70.4, -32]], hands = [[12.8, 12.8], [49.6, 49]];
   const lining = "#2a2d40"; // N. O. Ir's cloak inside: a step lighter than the trousers, so the legs read on it
   const torso = `M19.8 30V37Q20.6 43.4 22.8 ${yH + .4}Q32 ${yH + 2.4} 41.2 ${yH + .4}Q43.4 43.4 44.2 37V30Z`;
+  const yC = 33.4; // where the torso takes over from the portrait's shoulders (the portrait is clipped at 273 × k ≈ 34.4, just below)
+  const torsoLow = `M19.8 ${yC}V37Q20.6 43.4 22.8 ${yH + .4}Q32 ${yH + 2.4} 41.2 ${yH + .4}Q43.4 43.4 44.2 37V${yC}Z`;
   return (
     <g transform="translate(32.4 32) rotate(-34) scale(.77) translate(-32 -37.4)">
-      <defs><clipPath id={`${u}b`}><rect x="0" y="-40" width="280" height="313" /></clipPath></defs>
+      <defs><clipPath id={`${u}b`}><rect x="0" y="-40" width="280" height="313" /></clipPath><clipPath id={`${u}t`}><rect x="0" y={yC} width="64" height="40" /></clipPath></defs>
       {/* blood pool spreading out from under the head and shoulders, one wet sheen and two drops */}
       <path d={lobed(pool, .62)} fill={blood} {...OS} />
       {dummy
@@ -1172,26 +1177,122 @@ export function Corpse({ victim = "Victor", dummy = false, master = false, secon
         {legs.map((l, i) => <path key={`l${i}`} d={line(l)} strokeWidth={LW + 3} />)}
         {arms.map((a, i) => <path key={`a${i}`} d={line(a)} strokeWidth={AW + 3} />)}
       </g>
-      {shoes.map(([x, y, r]) => <ellipse key={x} cx={x} cy={y} rx="3.2" ry="4.7" transform={`rotate(${r} ${x} ${y})`} fill={shoe} {...OS} />)}
+      {shoes.map(([x, y, r]) => (bare
+        ? <g key={x} transform={`translate(${x} ${y}) rotate(${r})`}>{/* a bare foot, toes at the far end */}
+          <path d="M-2.2 -3.6Q0 -5 2.2 -3.6Q3.2 0 2.6 2.8Q2.2 4.6 0 4.6Q-2.4 4.6 -2.7 2.6Q-3.2 0 -2.2 -3.6Z" fill={skin} {...OS} />
+          <path d="M-1.3 3.1V4.3M0 3.3V4.5M1.3 3.1V4.3" {...IS} strokeWidth=".7" stroke={mix(skin, -.45)} />
+        </g>
+        : <ellipse key={x} cx={x} cy={y} rx="3.2" ry="4.7" transform={`rotate(${r} ${x} ${y})`} fill={shoe} {...OS} />))}
       {legs.map((l, i) => <path key={`l${i}`} d={line(l)} fill="none" stroke={trousers} strokeWidth={LW} strokeLinejoin="round" strokeLinecap="round" />)}
-      <path d="M20.6 51.4Q18.4 53.4 19.6 55.8" {...IS} stroke={mix(trousers, -.45)} />{/* the crease inside the bent knee */}
+      <path d="M20.6 51.4Q18.4 53.4 19.6 55.8" {...IS} stroke={mix(trousers, bare ? -.3 : -.45)} />{/* the crease inside the bent knee */}
       {arms.map((a, i) => <path key={`a${i}`} d={line(a)} fill="none" stroke={sleeve} strokeWidth={AW} strokeLinejoin="round" strokeLinecap="round" />)}
+      {overall && [[[22.4, 32], [16.3, 28.4]], [[41.6, 32], [46.8, 36.3]]].map((a, i) => <path key={`ti${i}`} d={line(a)} fill="none" stroke={INK} strokeWidth={AW + 3.6} />)}
+      {overall && [[[22.4, 32], [16.9, 28.7]], [[41.6, 32], [46.3, 35.9]]].map((a, i) => <path key={`tc${i}`} d={line(a)} fill="none" stroke={tie} strokeWidth={AW + .8} />)}
       {hands.map(([x, y]) => <circle key={x} cx={x} cy={y} r="2.6" fill={skin} {...OS} />)}
       {/* trousers at the hips, then the torso in the outfit's colour, carrying on from the portrait's shoulders */}
-      <path d={inkBox(22.6, yH - 4, 18.8, 6.6, 2.6, .3)} fill={trousers} {...OS} />
-      <path d={torso} fill={clothes} {...OS} />
-      {blazer && <path d="M28.6 30L32 39.8L35.4 30Z" {...IS} fill={M ? MASTER_LOOK.pal.shirt : "#e4dcc8"} />}
-      {M && <path d="M25.4 30.6L30.4 40.6M38.6 30.6L33.6 40.6" {...IS} stroke="#4a4654" />}
-      {!dummy && !N && F.tie === "necktie" && <path d="M30.2 30H33.8L34.4 36.8L32 39.2L29.6 36.8Z" {...IS} fill={tie} />}
-      {blazer && <><path d="M32 39.8V44.6" {...IS} /><circle cx="33.4" cy="41.8" r=".75" fill={INK} /></>}
-      {!dummy && !N && F.clothing === "hoodie" && <path d="M25.6 38.4H38.4L37 43.6H27Z" {...IS} />}
-      {N && <path d="M32 32V45" {...IS} stroke="#3a3f55" />}
-      {!dummy && !N && F.clothing === "overall" && <path d={inkBox(28, 34.6, 8, 5.6, 1, .2)} {...IS} />}
-      {bare && <circle cx="32" cy="40.6" r=".8" fill={mix(skin, -.35)} />}
-      {dummy && <><path d="M32 31V44.8" {...IS} strokeOpacity=".5" /><path d="M23.6 41.6H40.4" {...IS} strokeOpacity=".4" /></>}
+      <path d={inkBox(22.6, yH - 4, 18.8, 6.6, 2.6, .3)} fill={trousers} {...(F.clothing === "bikini" && bare ? {} : OS)} />
+      {!own && <path d={torso} fill={clothes} {...OS} />}
       {/* the portrait itself: head and shoulders, face up (its flat bottom edge trimmed off) */}
       {N ? <SecondHood /> : <g transform={P}><g clipPath={`url(#${u}b)`} dangerouslySetInnerHTML={{ __html: bust }} /></g>}
+      {/* the lower torso again, over the portrait: it hides the portrait's clipped edge (a clip anti-aliases each layer on its own,
+          so the skin and shirt under the jacket bled through as a pale seam across the chest), open at the top so no line shows */}
+      {own && <OwnTorso M={M} F={F} skin={skin} clothes={clothes} wear={wear} tee={tie} tie={tie} shirt={M ? MASTER_LOOK.pal.shirt : "#e4dcc8"} />}
+      {!own && <><path d={torsoLow} fill={clothes} />
+      <path d={torsoLow.replace(/Z$/, "")} fill="none" {...OS} /></>}
+      {!own && <g clipPath={`url(#${u}t)`}>
+        {blazer && <><path d="M28.7 30L32 40.2L35.3 30Z" {...IS} fill={M ? MASTER_LOOK.pal.shirt : "#e4dcc8"} /><path d="M26.7 30H28.7L32 40.2L30.6 41.4ZM37.3 30H35.3L32 40.2L33.4 41.4Z" fill="#000" fillOpacity=".15" /></>}
+        {M && <path d="M25.4 30.6L30.4 40.6M38.6 30.6L33.6 40.6" {...IS} stroke="#4a4654" />}
+        {!dummy && !N && F.tie === "necktie" && <path d="M30.2 30H33.8L34.4 36.8L32 39.2L29.6 36.8Z" {...IS} fill={tie} />}
+        {blazer && <><path d="M32 39.8V44.6" {...IS} /><circle cx="33.4" cy="41.8" r=".75" fill={INK} /></>}
+        {!dummy && !N && F.clothing === "hoodie" && <path d="M25.6 38.4H38.4L37 43.6H27Z" {...IS} />}
+        {N && <path d="M32 32V45" {...IS} stroke="#3a3f55" />}
+        {!dummy && !N && F.clothing === "overall" && <path d={inkBox(28, 34.6, 8, 5.6, 1, .2)} {...IS} />}
+        {bare && <circle cx="32" cy="40.6" r=".8" fill={mix(skin, -.35)} />}
+        {dummy && <><path d="M32 31V44.8" {...IS} strokeOpacity=".5" /><path d="M23.6 41.6H40.4" {...IS} strokeOpacity=".4" /></>}
+      </g>}
+      {!own && !dummy && F.tie === "scarf" && <g transform={P}><g transform="translate(8)" dangerouslySetInnerHTML={{ __html: fillT(TIE_SVG.scarf, { ink: INK, sw, tie, tieD: mix(tie, -.3) }) }} /></g>}
       {M && <MasterSpecs />}
+    </g>
+  );
+}
+/** The corpse's own body for the outfits whose torso must read as one piece (blazers incl. the Master's, overalls over a
+ *  T-shirt, swim trunks, bikini): drawn in the corpse's frame (neck at x 32, shoulders y 26, hem y 47) over the portrait's
+ *  head and neck stub. `wear` is the outfit's colour (the portrait's clothes colour), `tee` the T-shirt under an overall.
+ */
+function OwnTorso({ M, F, skin, clothes, wear, tee, tie, shirt }) {
+  const c = F.clothing, dark = { fill: "#000", fillOpacity: ".16" };
+  const body = "M28.4 25.4C25 26 21.8 27.6 20.6 30.4C19.6 33 19.6 36 19.8 38Q20.6 43.4 22.8 45.6Q32 47.6 41.2 45.6Q43.4 43.4 44.2 38C44.4 36 44.4 33 43.4 30.4C42.2 27.6 39 26 35.6 25.4Z";
+  if (/^blazer/.test(c) || M) {
+    const sweater = M || c === "blazerAndSweater";
+    const bowtie = M || F.tie === "bowtie", necktie = !M && F.tie === "necktie";
+    const tieC = M ? MASTER_LOOK.pal.tie : tie;
+    return (
+      <g>
+        <path d={body} fill={clothes} {...OS} />
+        {sweater
+          ? <path d="M28.2 25.6Q32 34.6 35.8 25.6Z" {...IS} fill={shirt} />
+          : <path d="M28.6 25.6L35.4 25.6L32 40.4Z" {...IS} fill={shirt} />}
+        <path d="M28.4 25.6L32 40.6L29.2 41.2L24.6 32.4L26.2 27.4Z" {...IS} fill={clothes} /><path d="M28.4 25.6L32 40.6L29.2 41.2L24.6 32.4L26.2 27.4Z" {...dark} />
+        <path d="M35.6 25.6L32 40.6L34.8 41.2L39.4 32.4L37.8 27.4Z" {...IS} fill={clothes} /><path d="M35.6 25.6L32 40.6L34.8 41.2L39.4 32.4L37.8 27.4Z" {...dark} />
+        <path d="M32 41V46.4" {...IS} /><circle cx="33.2" cy="43.6" r=".75" fill={INK} />
+        <path d="M37 32.6L40.6 31.8L40.8 33.4L37.2 34.2Z" {...IS} fill={M ? "#34313c" : mix(clothes, -.35)} />
+        {necktie && <><path d="M30.6 26.4H33.4L34 29L32 29.8L30 29Z" {...IS} fill={tieC} /><path d="M30.4 29.6L33.6 29.6L34.6 40L32 42.4L29.4 40Z" {...IS} fill={tieC} /></>}
+        {bowtie && <><path d="M31.4 27.2L26.4 24.4Q24.6 27.2 26.4 30Z" {...IS} fill={tieC} /><path d="M32.6 27.2L37.6 24.4Q39.4 27.2 37.6 30Z" {...IS} fill={tieC} /><rect x="30.5" y="25.6" width="3" height="3.2" rx="1" {...IS} fill={mix(tieC, -.3)} /></>}
+      </g>
+    );
+  }
+  if (c === "overall") {
+    return (
+      <g>
+        {/* the T-shirt (crew neck), then the one-piece: bib, straps with buttons, chest pocket */}
+        <path d={body} fill={tee} {...OS} />
+        <path d="M28.6 25.8Q32 29.4 35.4 25.8" {...IS} stroke={mix(tee, -.4)} strokeWidth="1.1" />
+        <path d="M25.6 33.6L38.4 33.6L39 36.6L43.8 38.4Q43.4 43.4 41.2 45.6Q32 47.6 22.8 45.6Q20.6 43.4 20.2 38.4L25 36.6Z" fill={clothes} {...OS} />
+        <path d="M26.2 34.2L23.6 27.2M37.8 34.2L40.4 27.2" fill="none" stroke={INK} strokeWidth="4.1" strokeLinecap="round" /><path d="M26.2 34.2L23.6 27.2M37.8 34.2L40.4 27.2" fill="none" stroke={clothes} strokeWidth="2.4" strokeLinecap="round" />
+        <circle cx="26.4" cy="34.6" r="1" {...IS} fill="#f1ead8" /><circle cx="37.6" cy="34.6" r="1" {...IS} fill="#f1ead8" />
+        <path d={inkBox(28.4, 37.2, 7.2, 5, 1, .2)} {...IS} />
+      </g>
+    );
+  }
+  const wD = mix(wear, -.32), wL = mix(wear, .45), navel = <circle cx="32" cy="40.2" r=".8" fill={mix(skin, -.35)} />;
+  // a thigh piece of a garment: from the hip a fraction t of the way to the knee, cut square at the hem (ink first, then the colour)
+  const HIP = [[28.4, 44], [35.6, 44]], KNEE = [[15.6, 52.4], [37.6, 56]];
+  const thigh = (i, t, ext = 0) => {
+    const [ax, ay] = HIP[i], [kx, ky] = KNEE[i], dx = kx - ax, dy = ky - ay, len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len;
+    const s = 2.6, e = t * len + ext; // start a little down the thigh, so the round end stays below the waistband
+    return `M${r2(ax + ux * s)} ${r2(ay + uy * s)}L${r2(ax + ux * e)} ${r2(ay + uy * e)}`;
+  };
+  const legsOf = (t, w) => (<>
+    {[0, 1].map((i) => <path key={`i${i}`} d={thigh(i, t, .75)} fill="none" stroke={INK} strokeWidth={w + 3} />)}
+    <path d="M20.6 41.6H43.4L42.4 47.2Q37 49 32 47.8Q27 49.4 21.8 47Z" fill={INK} {...OS} />
+    {[0, 1].map((i) => <path key={`c${i}`} d={thigh(i, t)} fill="none" stroke={wear} strokeWidth={w} />)}
+    <path d="M20.6 41.6H43.4L42.4 47.2Q37 49 32 47.8Q27 49.4 21.8 47Z" fill={wear} />
+  </>);
+  const hemOf = (t, w, col) => [0, 1].map((i) => {
+    const [ax, ay] = HIP[i], [kx, ky] = KNEE[i], dx = kx - ax, dy = ky - ay, len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len, e = t * len;
+    return <path key={`h${i}`} d={`M${r2(ax + ux * (e - 1.5))} ${r2(ay + uy * (e - 1.5))}L${r2(ax + ux * e)} ${r2(ay + uy * e)}`} fill="none" stroke={col} strokeWidth={w} />;
+  });
+  const waist = (col) => <path d="M20.6 41.6H43.4L43.1 43.6Q32 44.8 20.9 43.6Z" {...IS} fill={col} />;
+  const cord = <path d="M32 43.4Q30.6 46.4 29.6 44.6M32 43.4Q33.4 46.4 34.4 44.6" {...IS} stroke="#f5f0e6" strokeWidth=".8" />;
+  const briefs = "M20.8 41.8Q32 43.6 43.2 41.8L42.7 44.2Q36.8 45.2 33.8 47.9H30.2Q27.2 45.2 21.3 44.2Z";
+  if (c === "shirtless") {
+    const chest = <path d="M24.6 33.2Q28.4 36.4 31.6 34.6M32.4 34.6Q35.6 36.4 39.4 33.2" fill="none" stroke={mix(skin, -.28)} strokeWidth=".9" strokeLinecap="round" />;
+    return (
+      <g>
+        <path d={body} fill={skin} {...OS} />{chest}{navel}
+        {/* swim trunks to mid-thigh: waistband, drawstring, darker hems */}
+        {legsOf(.6, 7.8)}{hemOf(.6, 7.8, wD)}{waist(wD)}{cord}
+      </g>
+    );
+  }
+  // bikini: triangle top (straps over the shoulders, a string round the ribs), bottoms knotted at the hips
+  return (
+    <g>
+      <path d={body} fill={skin} {...OS} />{navel}
+      <path d="M27.8 28.2L24.2 26.7M36.2 28.2L39.8 26.7M20.4 34.2L24 34.4M43.6 34.2L40 34.4" fill="none" stroke={INK} strokeWidth="2.3" strokeLinecap="round" /><path d="M27.8 28.2L24.2 26.7M36.2 28.2L39.8 26.7M20.4 34.2L24 34.4M43.6 34.2L40 34.4" fill="none" stroke={wear} strokeWidth="1" strokeLinecap="round" />
+      <path d="M27.6 27.8L31.7 34.6Q26.8 36.6 22.4 34.4Z" fill={wear} {...OS} /><path d="M36.4 27.8L32.3 34.6Q37.2 36.6 41.6 34.4Z" fill={wear} {...OS} />
+      <path d={briefs} fill={wear} {...OS} />
+      <circle cx="20.9" cy="42.9" r="1.3" fill={wear} {...OS} strokeWidth="1.1" /><circle cx="43.1" cy="42.9" r="1.3" fill={wear} {...OS} strokeWidth="1.1" />
     </g>
   );
 }
@@ -8163,6 +8264,9 @@ AV.clothing.bikini = `<g transform="translate(0 -170)" stroke-linecap="round" st
   <path d="M100 248L74 292H126Z" fill="{{clothes}}" stroke="{{ink}}" stroke-width="{{sw}}"/>
   <path d="M164 248L138 292H190Z" fill="{{clothes}}" stroke="{{ink}}" stroke-width="{{sw}}"/>
   <path d="M99 256L90 272M163 256L154 272" fill="none" stroke="#fff" stroke-width="3.2" stroke-opacity=".3"/></g>`;
+/* An overall is worn over a crew-neck T-shirt. The T-shirt takes the look's accent colour (ACCENTS), which is otherwise the
+   neckwear's: an overall never has neckwear (TIE_CLOTHING), so the two colours are chosen independently. */
+AV.clothing.overall = AV.clothing.shirtCrewNeck.replace("{{clothes}}", "{{accent}}") + AV.clothing.overall;
 export const CLOTHING = ["blazerAndShirt", "blazerAndSweater", "collarAndSweater", "shirtCrewNeck", "shirtVNeck", "shirtScoopNeck", "hoodie", "overall", "shirtless", "bikini"];
 export const CLOTHING_GENDER = { shirtScoopNeck: "f", shirtless: "m", bikini: "f" };
 export const TIE_GENDER = { necktie: "m", bowtie: "m", scarf: "x" };
@@ -8274,9 +8378,9 @@ export function fixLook(L) {
 
 export const svgCache = new Map();
 /** The portrait as SVG markup in the 280×280 avataaars frame (cached). `look.pal` can override colours (Adow). */
-export function composeLook(look, sw = 4.2) {
+export function composeLook(look, sw = 4.2, { lashes: withLashes = true, headOnly = false } = {}) { // headOnly: head and a neck stub, no shoulders, clothing or neckwear (the corpse draws its own body) // lashes: false for the corpse (at its scale they read as black blots over the X eyes)
   const L = fixLook(look), pal = L.pal || {};
-  const ck = JSON.stringify([L, sw]);
+  const ck = JSON.stringify([L, sw, withLashes, headOnly]);
   if (svgCache.has(ck)) return svgCache.get(ck);
   const hat = L.hat !== "none" ? L.hat : null, hides = hat && hidesHair(hat);
   const bald = L.hairStyle === "bald";
@@ -8290,13 +8394,14 @@ export function composeLook(look, sw = 4.2) {
   };
   const tie = ACCENTS[(L.accent || 0) % ACCENTS.length];
   const g = (tr, inner) => (inner ? `<g transform="${tr}">${fillT(inner, t)}</g>` : "");
-  const lashes = L.gender === "f" && L.eyes !== "hearts" && EYE_LASH[L.eyes]
+  const lashes = withLashes && L.gender === "f" && L.eyes !== "hearts" && EYE_LASH[L.eyes]
     ? `<path d="${EYE_LASH[L.eyes]}" fill="none" stroke="${t.ink === INK ? INK : "#000"}" stroke-width="${(sw * 0.64).toFixed(2)}" stroke-linecap="round"/>` : "";
   let clothing = AV.clothing[L.clothing];
   if (pal.shirt) clothing = clothing.split("#e4dcc8").join(pal.shirt).split("#f1ead8").join(pal.shirt);
-  let s = fillT(AV.base, t);
-  s += g("translate(0 170)", clothing);
-  if (L.tie !== "none" && TIE_SVG[L.tie]) s += fillT(TIE_SVG[L.tie], { ...t, tie: pal.tie || tie, tieD: mix(pal.tie || tie, -0.3) });
+  const base = headOnly ? AV.base.replace("a72 72 0 0 0-72 72v9h200v-9a72 72 0 0 0-72-72", "v6h56v-6") : AV.base;
+  let s = fillT(base, t);
+  if (!headOnly) s += g("translate(0 170)", clothing);
+  if (!headOnly && L.tie !== "none" && TIE_SVG[L.tie]) s += fillT(TIE_SVG[L.tie], { ...t, tie: pal.tie || tie, tieD: mix(pal.tie || tie, -0.3) });
   s += g("translate(78 134)", AV.mouth[L.mouth]);
   s += g("translate(104 122)", AV.nose);
   s += g("translate(76 90)", AV.eyes[L.eyes] + lashes);

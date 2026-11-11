@@ -17,10 +17,16 @@ import { avatarOf } from "./avatarLook.js";
 const JSON_HEADERS = { Accept: "application/json", "Content-Type": "application/json" };
 const DEMO_KEY = "shadoku-community-demo", PLAYER_KEY = "shadoku-player-id", PLAYED_KEY = "shadoku-community-played";
 
+/** Only a dev host (npm run dev, a LAN preview, file://) may fall back to the local demo. On the live site a non-JSON reply is a 5xx page or a
+ *  rate-limit page: a backend that should answer and does not, so the caller says "network" and nothing is stored as if it had been sent. */
+const devHost = () => typeof window === "undefined" || window.location.protocol === "file:"
+  || /^(localhost|127\.|\[::1\]|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|$)/.test(window.location.hostname);
+const noBackend = () => (devHost() ? null : { status: 0, body: { error: "network" } });
+
 async function call(path, init) {
   try {
     const r = await fetch(path, { credentials: "same-origin", ...init, headers: { ...JSON_HEADERS, ...(init?.headers || {}) } });
-    if (!/json/.test(r.headers.get("content-type") || "")) return null; // the SPA's index.html answered: no backend here
+    if (!/json/.test(r.headers.get("content-type") || "")) return noBackend(); // the SPA's index.html answered: no backend here (a dev host only)
     return { status: r.status, body: await r.json().catch(() => ({})) };
   } catch { return { status: 0, body: { error: "network" } }; }
 }

@@ -4,7 +4,7 @@
  * Every hook returns `undefined` when there is no backend (npm run dev, a file:// bundle, a static host): the site then
  * keeps its local DEMO sign-in, so the game never depends on the server.
  */
-import { startSync, stopSync, clearLocalProgress } from "./sync.js";
+import { startSync, stopSync, flushSync, clearLocalProgress } from "./sync.js";
 
 const JSON_HEADERS = { Accept: "application/json" };
 
@@ -53,6 +53,7 @@ export async function onSignIn(provider) {
 }
 
 export async function onSignOut() {
+  try { await flushSync(); } catch { /* the sign-out goes on */ } // a change made just before is pushed first (followup-ui-09)
   stopSync();
   await call("/api/auth/logout", { method: "POST" });
 }

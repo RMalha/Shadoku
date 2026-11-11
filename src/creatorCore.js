@@ -21,11 +21,12 @@
  *   checkCase(d)           what is wrong with a case (structure, laws, false clues): [] when it is sound
  */
 import { hasBadWords } from "./wordFilter.js";
+const CLUE_STORED = 400; // functions/_lib/community.js keeps only this much of a clue text: the rest is never shown, so the filter does not read it (followup-engine-07)
 
 export const PROP_CLASS_IDS = ["TALL", "PERCH", "SHORT", "LOW"];
 export const DIFFICULTIES = ["Very Easy", "Easy", "Medium", "Hard", "Expert"];
 export const SIZES = [5, 6, 7, 8, 9, 10];
-export const THEMES = ["MANSION", "FARM", "BEACH", "FOREST", "MOUNTAINS", "DESERT", "STREET"];
+export const THEMES = ["MANSION", "FARM", "BEACH", "FOREST", "MOUNTAINS", "DESERT", "STREET", "LINER", "CARNIVAL", "OPERA", "BAYOU"]; // the 4 sub-biomes last (engine SUB_BIOME_DEFS)
 export const MAX_SUSPECTS = 12;
 export const MIN_SUSPECTS = 3;
 export const MAX_ATOMS = 3;
@@ -656,7 +657,7 @@ export function checkCase(d) {
     else if (hasBadWords(s.name)) bad.push(`the name of ${s.id} has a word that is not allowed`);
     if (s.gender !== "m" && s.gender !== "f") bad.push(`bad gender for ${s.id}`);
     if (!cellOk(d, s.solution)) return [...bad, `no tile for ${s.id}`];
-    if (typeof s.clue === "string" && hasBadWords(s.clue)) bad.push(`the clue text of ${s.id} has a word that is not allowed`);
+    if (typeof s.clue === "string" && hasBadWords(s.clue.slice(0, CLUE_STORED))) bad.push(`the clue text of ${s.id} has a word that is not allowed`);
     if (!Array.isArray(s.atoms) || s.atoms.length < 1 || s.atoms.length > MAX_ATOMS) bad.push(`${s.name} needs 1–${MAX_ATOMS} clue parts`);
     (Array.isArray(s.atoms) ? s.atoms : []).forEach((a) => {
       if (!a || !ATOM_KINDS.has(a.kind) || a.subject !== s.id || typeof a.params !== "object" || !a.params || Array.isArray(a.params)) { bad.push(`bad clue part for ${s.id}`); return; }

@@ -184,8 +184,7 @@ export const STRINGS = {
     "codename.cancel": "Keep current",
 
     "env.prompt": "Click to break the seal & open the contract",
-    "env.stamp1": "CONFIDENTIAL —",
-    "env.stamp2": "FOR INITIATE EYES ONLY",
+    "env.stamp1": "CONFIDENTIAL",
     "env.cue": "The Envelope",
     "env.aria": "Break the seal and open the contract",
     "env.accept": "Accept",
@@ -1356,8 +1355,8 @@ function EnvelopeBody({ puzzle: rawPuzzle, label, onAccept, onPick, variant = "h
                 {tone === "manila" && <g transform="rotate(-5 240 368)">
                   <rect x="100" y="338" width="280" height="60" fill="none" stroke={pal.stamp} strokeWidth="3" rx="3" opacity=".9" />
                   <rect x="106" y="344" width="268" height="48" fill="none" stroke={pal.stamp} strokeWidth="1" rx="2" opacity=".7" />
-                  <text x="240" y="366" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="19" fill={pal.stamp} opacity=".92">{t("env.stamp1").replace(/\s*[—–-]\s*$/, "")}</text>
-                  <text x="240" y="385" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="14" fill={pal.stamp} opacity=".92">{t("env.stamp2")}</text>
+                  {(() => { const word = t("env.stamp1").replace(/\s*[—–-]+\s*$/, ""), long = [...word].length > 13; // one word, centred; a long one (fi, it) is squeezed into the box
+                    return <text x="240" y="377" textAnchor="middle" fontFamily="'Special Elite',monospace" fontSize="25" letterSpacing="1.5" fill={pal.stamp} opacity=".92" {...(long ? { textLength: 250, lengthAdjust: "spacingAndGlyphs" } : {})}>{word}</text>; })()}
                 </g>}
               </svg>
             </div>

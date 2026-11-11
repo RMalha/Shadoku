@@ -786,7 +786,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       onPointerCancel={() => onStroke && onStroke("cancel")}
       onPointerLeave={() => onHover && onHover(null)}
       onContextMenu={(e) => e.preventDefault()}>
-      <FloorDefs />
+      <FloorDefs uid={uid} />
       <defs>
         {/* the shadow's hatching: a dark stroke and a pale one side by side, so an unlit tile reads on light and dark floors alike */}
         {/* the shadow's rim: a soft darkening on the sides of a dark tile that face light, a wall or the floor's edge, one per side */}
@@ -798,7 +798,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       </defs>
       {seaM > 0 && (
         <g pointerEvents="none">
-          <rect x={LAB - BZ - LB - seaM} y={LAB - BZ - LB - seaM} width={W + LB + 2 * seaM} height={H + LB + 2 * seaM} rx="14" fill="url(#skf-water)" />
+          <rect x={LAB - BZ - LB - seaM} y={LAB - BZ - LB - seaM} width={W + LB + 2 * seaM} height={H + LB + 2 * seaM} rx="14" fill={`url(#skf-water-${uid})`} />
           <rect x={LAB - BZ - LB - seaM} y={LAB - BZ - LB - seaM} width={W + LB + 2 * seaM} height={H + LB + 2 * seaM} rx="14" fill="#06304a" opacity=".3" />
           <g className="sk-foam" fill="none" strokeLinecap="round">
             <rect x={LAB - BZ - 6} y={LAB - BZ - 6} width={W + 12} height={H + 12} rx="20" stroke="#fff" strokeOpacity=".92" strokeWidth="2.6" strokeDasharray="17 9" />
@@ -807,7 +807,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         </g>
       )}
       <rect x={LAB - BZ} y={LAB - BZ} width={W} height={H} rx="14" fill="#0e0f15" />
-      {real.map(([r, c]) => <rect key={`f${r}-${c}`} x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-${floors[geo.room(r, c)] || floorOf(p.roomNames[geo.room(r, c)], geo.room(r, c), theme)})`} />)}
+      {real.map(([r, c]) => <rect key={`f${r}-${c}`} x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-${floors[geo.room(r, c)] || floorOf(p.roomNames[geo.room(r, c)], geo.room(r, c), theme)}-${uid})`} />)}
       {real.map(([r, c]) => <rect key={`g${r}-${c}`} x={X(c) + 0.5} y={Y(r) + 0.5} width={CELL - 1} height={CELL - 1} fill="none" stroke="#000" strokeOpacity=".16" />)}
       {LB > 0 && (
         <g pointerEvents="none" textAnchor="middle" fill="#a9b0c4" style={{ fontFamily: "'Barlow', system-ui, sans-serif", fontWeight: 700, fontSize: 10 }}>
@@ -820,7 +820,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         <g pointerEvents="none">
           {water.map(([r, c]) => (
             <g key={`w${r}-${c}`}>
-              <rect x={X(c)} y={Y(r)} width={CELL} height={CELL} fill="url(#skf-water)" />
+              <rect x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-water-${uid})`} />
               <rect x={X(c)} y={Y(r)} width={CELL} height={CELL} fill="#06304a" opacity={Math.min(0.5, 0.12 * ((depth.get(key(r, c)) || 3) - 1))} />
               <rect x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={FOG} opacity=".3" />
             </g>
@@ -965,7 +965,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         );
         return (
           <g key={`tok${id}`} pointerEvents="none">
-            <circle cx={cx} cy={cy} r="34" fill="url(#skGlow)" />
+            <circle cx={cx} cy={cy} r="34" fill={`url(#skGlow-${uid})`} />
             {letter ? <LetterToken cx={cx} cy={cy} id={id} fill={colorOf(id)} ink={inkOn(colorOf(id))} ring={INK} /> : <TokenAvatar cx={cx} cy={cy} look={looks[id]} id={id} uid={uid} />}
             <PropChip kind={geo.kind(r, c)} cls={geo.cls(r, c)} x={X(c) + 12} y={Y(r) + 12} />{sel}{bad}
           </g>
@@ -2006,7 +2006,11 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         if (!s.drag && e && Math.hypot(e.clientX - s.x, e.clientY - s.y) >= 10) { s.drag = true; cancelHold(); }
         return;
       }
-      if (!cell || sameCell(s.last, cell[0], cell[1])) return;
+      if (!cell) return;
+      if (sameCell(s.last, cell[0], cell[1])) { // sliding about inside the start tile is not a hold any more (followup-ui-06)
+        if (s.tool === "suspect" && !s.drag && e && Math.hypot(e.clientX - s.x, e.clientY - s.y) >= 10) cancelHold();
+        return;
+      }
       if (s.tool === "suspect" && !s.drag) {
         if (e && Math.hypot(e.clientX - s.x, e.clientY - s.y) < 10) return; // jitter guard: a wobbly tap is still a tap
         s.drag = true; cancelHold(); paint(...s.start);
@@ -2145,6 +2149,8 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const [whyOpen, setWhyOpen] = useState(false); // the groundwork of rung 2 stays folded until the player asks for it (the lens)
   const [groupOpen, setGroupOpen] = useState(() => new Set()); // unfolded runs of like groundwork lines
   useEffect(() => { setHintRung(revealed); setNoteOn(-1); setHintPick(-1); setWhyOpen(false); setGroupOpen(new Set()); }, [cur && cur.hid, p.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  // placing a scapegoat can drop lines, and with them the card on show: fall back to "none" so the Next button comes back (followup-engine-01)
+  useEffect(() => { if (noteOn >= notes.length) setNoteOn(-1); }, [noteOn, notes.length]);
   const showRung = (r) => {
     if (!cur) return;
     if (r > revealed) mutate((cs) => ({ ...cs, hintLog: { ...cs.hintLog, [cur.hid]: Math.max(cs.hintLog[cur.hid] || 0, r) } }), false);
@@ -2337,7 +2343,10 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     vp.addEventListener("touchmove", move, { passive: false });
     vp.addEventListener("touchend", end); vp.addEventListener("touchcancel", end);
     vp.addEventListener("wheel", wheel, { passive: false });
+    const stale = () => { if (document.visibilityState === "hidden") { pinchRef.current = null; abortRef.current && abortRef.current(); } }; // a missed touchend must not swallow the next tap (followup-ui-10)
+    document.addEventListener("visibilitychange", stale);
     return () => {
+      pinchRef.current = null; document.removeEventListener("visibilitychange", stale);
       vp.removeEventListener("touchstart", start); vp.removeEventListener("touchmove", move);
       vp.removeEventListener("touchend", end); vp.removeEventListener("touchcancel", end); vp.removeEventListener("wheel", wheel);
     };
@@ -3382,6 +3391,7 @@ const CSS = `
      "Hold to clear all…" tip stays hidden here (the filling ring on the button still shows the hold) */
   .sk-rail{overflow-y:auto;scrollbar-width:none}
   .sk-eraser{touch-action:pan-y} /* a swipe that starts on the Eraser scrolls the rail (the browser cancels the hold) */
+  .sk-tool.sk-light{touch-action:pan-y} /* the same for the Light button (the browser cancels the hold) */
   .sk-tip{display:none}
   .sk-menu-btn .sk-ci{display:none}
   .sk-solved{flex-wrap:wrap}.sk-solved button{white-space:normal;text-align:center}
