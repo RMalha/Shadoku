@@ -1,0 +1,44 @@
+# Checks every push and pull request on the public repo: lint, the checks in scripts/ (locales, hardening, case text) and a production
+# build. The engine's --verify cannot run here (engine/ is private): it runs in the private repo, tools/cloud/verify.yml.
+# Lives on master as .github/workflows/ci.yml; it must also be on `release` (the public main) to run. See docs/ops/runbook.md.
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: Assetlinks and headers shipped
+        run: |
+          test -s dist/.well-known/assetlinks.json
+          test -s dist/_headers
+          node -e "const a=JSON.parse(require('fs').readFileSync('dist/.well-known/assetlinks.json','utf8'));if(!a[0].target.sha256_cert_fingerprints.length)process.exit(1)"
+  audit:
+    # Informational: a known vulnerability in a dependency shows up as a failed (red) job without blocking the checks above.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - run: npm audit --omit=dev --audit-level=high

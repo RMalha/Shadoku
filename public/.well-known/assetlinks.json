@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "net.shadoku.app",
+      "sha256_cert_fingerprints": [
+        "DF:42:2D:8B:45:D5:AA:B4:FF:98:4D:39:B0:EF:06:60:33:58:75:85:E3:B5:A0:CE:03:C3:87:33:B2:ED:FF:32"
+      ]
+    }
+  }
+]

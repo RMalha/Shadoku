@@ -11,6 +11,8 @@
     "check:i18n": "node scripts/check-locales.mjs",
     "test:case-text": "node scripts/test-case-text.mjs",
     "test:hardening": "node scripts/test-hardening.mjs",
+    "test": "npm run check:i18n && npm run test:hardening && npm run test:case-text",
+    "ci": "npm run lint && npm test && npm run build",
     "preview": "vite preview",
     "dev:cf": "vite build && wrangler pages dev dist",
     "deploy": "vite build && wrangler pages deploy dist --project-name shadoku"

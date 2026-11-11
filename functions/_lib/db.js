@@ -8,6 +8,8 @@
  *   puzzles   community puzzles: the case JSON (`data`), its search fields and its counters
  *   ratings   one row per player and puzzle (1–5 stars; a new rating replaces the old one)
  *   plays     one row per player (an account id, or "anon:<browser id>") and puzzle; `solved` once they fulfilled it
+ *   rate_limits  one row per key (endpoint + account or hashed address) and time window; swept hourly (ratelimit.js)
+ *   errors    the last client-side errors the app reported (api/report.js); rows older than 14 days are swept
  */
 import { json } from "./auth.js";
 
@@ -30,6 +32,10 @@ const SCHEMA = [
   "CREATE INDEX IF NOT EXISTS ratings_user ON ratings (user_id)",
   "CREATE TABLE IF NOT EXISTS plays (puzzle_id TEXT NOT NULL, player TEXT NOT NULL, solved INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (puzzle_id, player))",
   "CREATE INDEX IF NOT EXISTS plays_player ON plays (player)",
+  "CREATE TABLE IF NOT EXISTS rate_limits (k TEXT NOT NULL, w INTEGER NOT NULL, n INTEGER NOT NULL, until INTEGER NOT NULL, PRIMARY KEY (k, w))",
+  "CREATE INDEX IF NOT EXISTS rate_limits_until ON rate_limits (until)",
+  "CREATE TABLE IF NOT EXISTS errors (id INTEGER PRIMARY KEY AUTOINCREMENT, at INTEGER NOT NULL, route TEXT NOT NULL, build TEXT NOT NULL, message TEXT NOT NULL, stack TEXT NOT NULL, kind TEXT NOT NULL)",
+  "CREATE INDEX IF NOT EXISTS errors_at ON errors (at)",
 ];
 
 /** Columns added after the first release: a database made before them gets them on first use (CREATE TABLE IF NOT EXISTS skips an existing table). */

@@ -4,6 +4,7 @@
 // PUT /api/progress { progress } →  { ok }                     replaces it (the browser merged its own progress in first: src/sync.js)
 // Without a KV namespace there is nowhere to keep it: GET answers null and PUT 503, and the game stays local.
 import { readSession, getProgress, setProgress, accountSince, json, sameOrigin } from "../_lib/auth.js";
+import { limit } from "../_lib/ratelimit.js";
 
 const MAX_BYTES = 256 * 1024; // a full pack of boards is a few KB
 
@@ -18,6 +19,8 @@ export async function onRequestPut({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
+  const blocked = await limit(env, request, "progress", { max: 120, windowSec: 600, id: s.id });
+  if (blocked) return blocked;
   if (!env.SHADOKU_KV) return json({ error: "storage" }, 503);
   const text = await request.text();
   if (text.length > MAX_BYTES) return json({ error: "size" }, 413);

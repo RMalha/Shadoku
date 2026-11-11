@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { tEn } from "./i18n.js";
 import { BOARDS_KEY } from "./sync.js";
+import { reportError } from "./reportError.js";
 
 const EN = {
   "ui.error.title": "Something went wrong",
@@ -27,7 +28,7 @@ function clearSave() {
 export default class ErrorBoundary extends Component {
   constructor(p) { super(p); this.state = { err: false }; }
   static getDerivedStateFromError() { return { err: true }; }
-  componentDidCatch(e) { console.error("[Shadoku] the app failed to render:", e); }
+  componentDidCatch(e) { console.error("[Shadoku] the app failed to render:", e); reportError(e, "render"); }
   render() {
     if (!this.state.err) return this.props.children;
     const btn = { font: "inherit", padding: "10px 18px", margin: "6px", borderRadius: 8, border: "1px solid #888", background: "transparent", color: "inherit", cursor: "pointer" };

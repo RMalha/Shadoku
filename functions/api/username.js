@@ -2,6 +2,7 @@
 // PUT /api/username  { name }    →  { ok } | 409 taken (the codename is saved for the account)
 import { readSession, codenameFree, setCodename, json, sameOrigin, USERNAME_RE } from "../_lib/auth.js";
 import { renamePlayer } from "../_lib/db.js";
+import { limit } from "../_lib/ratelimit.js";
 
 export async function onRequestGet({ request, env }) {
   const s = await readSession(request, env);
@@ -15,6 +16,8 @@ export async function onRequestPut({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
+  const blocked = await limit(env, request, "username", { max: 10, windowSec: 600, id: s.id });
+  if (blocked) return blocked;
   const { name } = (await request.json().catch(() => null)) || {};
   if (!USERNAME_RE.test(name || "")) return json({ error: "format" }, 400);
   if (!(await codenameFree(env, name, s.id))) return json({ error: "taken" }, 409);

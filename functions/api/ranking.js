@@ -5,6 +5,7 @@
 import { readSession, getRecord, json, sameOrigin } from "../_lib/auth.js";
 import { db, noStorage, readBody, shownAvatar } from "../_lib/db.js";
 import { rankStats, entryId } from "../../src/ranking.js";
+import { limit } from "../_lib/ratelimit.js";
 
 const TOP = 100;
 const row = (r, me) => ({ rank: r.rank, codename: r.codename, avatar: r.avatar, solved: r.solved, hints: r.hints, speed: r.speed, seconds: r.seconds, score: r.score, me: r.id === me });
@@ -33,6 +34,8 @@ export async function onRequestPut({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
+  const blocked = await limit(env, request, "ranking", { max: 60, windowSec: 600, id: s.id });
+  if (blocked) return blocked;
   const d = await db(env);
   if (!d) return noStorage();
   const body = await readBody(request, 200 * 1024);

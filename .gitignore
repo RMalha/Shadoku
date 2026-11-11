@@ -36,7 +36,10 @@ dist-ssr
 /engine/
 /.claude/
 /tools/
-/scripts/
+/scripts/*
+!/scripts/check-locales.mjs
+!/scripts/test-hardening.mjs
+!/scripts/test-case-text.mjs
 /android/
 CLAUDE.md
 murdoku_svg_catalog_complete.json

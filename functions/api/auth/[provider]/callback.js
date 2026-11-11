@@ -2,8 +2,11 @@
 import {
   PROVIDERS, providerConfigured, readCookie, cookieName, unseal, seal, setCookie, clearCookie, redirect, siteOrigin, SESSION_DAYS,
 } from "../../../_lib/auth.js";
+import { limit } from "../../../_lib/ratelimit.js";
 
 export async function onRequestGet({ request, env, params }) {
+  const blocked = await limit(env, request, "callback", { max: 30, windowSec: 600 });
+  if (blocked) return blocked;
   const name = params.provider;
   const fail = (code) => redirect(`/?auth_error=${code}`, [clearCookie(request, "sh_oauth")]);
   if (!providerConfigured(env, name)) return fail("not_configured");

@@ -3,6 +3,7 @@
 import { readSession, getRecord, json, sameOrigin } from "../../_lib/auth.js";
 import { db, noStorage, readBody, shownAvatar } from "../../_lib/db.js";
 import { cleanCase, listRow, newId, DIFF_RANK, MAX_CASE_BYTES, MAX_PER_AUTHOR, SELECT_LIST } from "../../_lib/community.js";
+import { limit } from "../../_lib/ratelimit.js";
 
 const SORTS = {
   stars: "(CASE WHEN rating_count = 0 THEN 0 ELSE 1.0 * rating_sum / rating_count END) {o}, rating_count {o}, created DESC",
@@ -28,6 +29,8 @@ export async function onRequestPost({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
+  const blocked = await limit(env, request, "publish", { max: 10, windowSec: 3600, id: s.id });
+  if (blocked) return blocked;
   const d = await db(env);
   if (!d) return noStorage();
   const body = await readBody(request, MAX_CASE_BYTES);

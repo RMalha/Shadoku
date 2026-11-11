@@ -1,7 +1,10 @@
 // GET /api/auth/<google|github>/login?return=/play  →  302 to the provider's consent page.
 import { PROVIDERS, providerConfigured, randomToken, seal, sha256b64u, setCookie, redirect, safeReturn, siteOrigin } from "../../../_lib/auth.js";
+import { limit } from "../../../_lib/ratelimit.js";
 
 export async function onRequestGet({ request, env, params }) {
+  const blocked = await limit(env, request, "login", { max: 30, windowSec: 600 });
+  if (blocked) return blocked;
   const name = params.provider;
   if (!providerConfigured(env, name)) return redirect("/?auth_error=not_configured");
   const p = PROVIDERS[name];

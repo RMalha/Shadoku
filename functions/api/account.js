@@ -5,11 +5,14 @@
 // account; this browser erases its own copy (src/auth.js onDeleteAccount).
 import { readSession, deleteRecord, endSessions, clearCookie, json, sameOrigin } from "../_lib/auth.js";
 import { erasePlayer } from "../_lib/db.js";
+import { limit } from "../_lib/ratelimit.js";
 
 export async function onRequestDelete({ request, env }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
+  const blocked = await limit(env, request, "account", { max: 5, windowSec: 3600, id: s.id });
+  if (blocked) return blocked;
   await endSessions(env, s.id);
   await erasePlayer(env, s.id);
   await deleteRecord(env, s.id);

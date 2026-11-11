@@ -2,11 +2,14 @@
 import { readSession, json, sameOrigin } from "../../../_lib/auth.js";
 import { db, noStorage, readBody, recountRatings } from "../../../_lib/db.js";
 import { ID_RE } from "../../../_lib/community.js";
+import { limit } from "../../../_lib/ratelimit.js";
 
 export async function onRequestPut({ request, env, params }) {
   if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
   const s = await readSession(request, env);
   if (!s) return json({ error: "auth" }, 401);
+  const blocked = await limit(env, request, "rate", { max: 60, windowSec: 600, id: s.id });
+  if (blocked) return blocked;
   if (!ID_RE.test(params.id)) return json({ error: "not_found" }, 404);
   const d = await db(env);
   if (!d) return noStorage();
