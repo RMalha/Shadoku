@@ -1,0 +1,5598 @@
+{
+ "id": "daily-2026-11-12",
+ "title": "Daily Contract, Thursday 12 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Medium · Carnival",
+ "theme": "CARNIVAL",
+ "difficulty": "Medium",
+ "tier": "medium",
+ "shape": "rect",
+ "seed": 261112,
+ "attempt": 969,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "CAM0808RAR1-261112",
+ "puzzleId": "CAM0808RAR1-261112",
+ "engine": "V10.7",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 36,
+ "zoneWord": "area",
+ "size": 8,
+ "rooms": [
+  [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  [
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   3
+  ],
+  [
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   3
+  ],
+  [
+   4,
+   4,
+   4,
+   4,
+   4,
+   4,
+   5,
+   3
+  ],
+  [
+   2,
+   2,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   2,
+   2,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   2,
+   2,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ ],
+ "roomNames": [
+  "Side Show",
+  "Big Top",
+  "Midway",
+  "Ring Toss",
+  "Big Wheel",
+  "Ticket Box"
+ ],
+ "roomIds": [
+  "SIDE_SHOW",
+  "BIG_TOP",
+  "MIDWAY",
+  "RING_TOSS",
+  "BIG_WHEEL",
+  "TICKET_BOX"
+ ],
+ "doors": [
+  [
+   [
+    1,
+    5
+   ],
+   [
+    2,
+    5
+   ]
+  ],
+  [
+   [
+    1,
+    7
+   ],
+   [
+    2,
+    7
+   ]
+  ],
+  [
+   [
+    2,
+    6
+   ],
+   [
+    2,
+    7
+   ]
+  ],
+  [
+   [
+    4,
+    1
+   ],
+   [
+    5,
+    1
+   ]
+  ],
+  [
+   [
+    4,
+    5
+   ],
+   [
+    4,
+    6
+   ]
+  ],
+  [
+   [
+    4,
+    6
+   ],
+   [
+    5,
+    6
+   ]
+  ],
+  [
+   [
+    4,
+    7
+   ],
+   [
+    5,
+    7
+   ]
+  ],
+  [
+   [
+    6,
+    1
+   ],
+   [
+    6,
+    2
+   ]
+  ]
+ ],
+ "windows": [],
+ "contents": [
+  [
+   "",
+   "",
+   "",
+   "CARPET_RUNNER",
+   "",
+   "",
+   "TENT_POLE",
+   ""
+  ],
+  [
+   "",
+   "CARPET_RUNNER",
+   "CARPET_RUNNER",
+   "CARPET_RUNNER",
+   "",
+   "SAWDUST_RING",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "FERRIS_WHEEL",
+   "FERRIS_WHEEL",
+   "BROKEN_GLASS",
+   "BENCH",
+   "",
+   "STOOL"
+  ],
+  [
+   "",
+   "",
+   "FERRIS_WHEEL",
+   "FERRIS_WHEEL",
+   "PUDDLE",
+   "BENCH",
+   "TABLE",
+   "RING_TOSS"
+  ],
+  [
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "",
+   "",
+   "BENCH",
+   "BROKEN_GLASS",
+   ""
+  ],
+  [
+   "",
+   "BENCH",
+   "",
+   "",
+   "",
+   "CORPSE",
+   "",
+   ""
+  ],
+  [
+   "POPCORN_CART",
+   "BENCH",
+   "SAWDUST_RING",
+   "",
+   "",
+   "",
+   "",
+   "POPCORN_CART"
+  ],
+  [
+   "RING_TOSS",
+   "FOOTPRINTS",
+   "STOOL",
+   "STOOL",
+   "TABLE",
+   "TABLE",
+   "TABLE",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "CARPET_RUNNER",
+   "cells": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ]
+   ]
+  },
+  {
+   "kind": "FERRIS_WHEEL",
+   "cells": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ]
+  },
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  5,
+  5
+ ],
+ "biomeProps": [
+  "BENCH",
+  "CARPET_RUNNER",
+  "FERRIS_WHEEL",
+  "POPCORN_CART",
+  "RING_TOSS",
+  "SAWDUST_RING",
+  "TENT_POLE"
+ ],
+ "propClasses": {
+  "BENCH": "LOW",
+  "BROKEN_GLASS": "LOW",
+  "CARPET_RUNNER": "LOW",
+  "FERRIS_WHEEL": "TALL",
+  "FOOTPRINTS": "LOW",
+  "POPCORN_CART": "TALL",
+  "PUDDLE": "LOW",
+  "RING_TOSS": "SHORT",
+  "SAWDUST_RING": "LOW",
+  "STOOL": "LOW",
+  "TABLE": "SHORT",
+  "TENT_POLE": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.42,
+  "lowTiles": 21,
+  "openTiles": 50,
+  "lowKinds": [
+   "BENCH",
+   "BROKEN_GLASS",
+   "CARPET_RUNNER",
+   "FOOTPRINTS",
+   "PUDDLE",
+   "SAWDUST_RING",
+   "STOOL"
+  ],
+  "roomProps": {
+   "BIG_TOP": [
+    "CARPET_RUNNER",
+    "SAWDUST_RING",
+    "TENT_POLE"
+   ],
+   "BIG_WHEEL": [
+    "BENCH",
+    "BROKEN_GLASS",
+    "FERRIS_WHEEL",
+    "FOOTPRINTS",
+    "PUDDLE"
+   ],
+   "RING_TOSS": [
+    "RING_TOSS",
+    "STOOL"
+   ],
+   "TICKET_BOX": [
+    "BROKEN_GLASS",
+    "TABLE"
+   ],
+   "MIDWAY": [
+    "BENCH",
+    "FOOTPRINTS",
+    "POPCORN_CART",
+    "RING_TOSS"
+   ],
+   "SIDE_SHOW": [
+    "POPCORN_CART",
+    "SAWDUST_RING",
+    "STOOL",
+    "TABLE"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alfred",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "beard",
+    "tie": "scarf",
+    "skin": 4,
+    "cloth": 5
+   },
+   "look": "brown wavy hair, beard, scarf",
+   "clue": "Alfred was in row 2.",
+   "text": "Alfred was in row 2.",
+   "atoms": [
+    {
+     "kind": "ROW",
+     "subject": "A",
+     "params": {
+      "index": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    7
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Boris",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "peaked",
+    "facialHair": "mustache",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 1
+   },
+   "look": "black curly hair, horn-rimmed glasses, peaked, mustache",
+   "clue": "Boris was the only person beside the Ferris wheel and was west of Elspeth.",
+   "text": "Boris was the only person beside the Ferris wheel and was west of Elspeth.",
+   "atoms": [
+    {
+     "kind": "ONLY_BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "FERRIS_WHEEL"
+     }
+    },
+    {
+     "kind": "WEST_OF",
+     "subject": "B",
+     "params": {
+      "other": "E"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    4
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Camille",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 5
+   },
+   "look": "black bun hair",
+   "clue": "Camille was alone with a man with a beard.",
+   "text": "Camille was alone with a man with a beard.",
+   "atoms": [
+    {
+     "kind": "ALONE_WITH_P",
+     "subject": "C",
+     "params": {
+      "trait": "BEARD",
+      "selfMatch": false
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [],
+    "people": [
+     0
+    ]
+   },
+   "solution": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dexter",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 7
+   },
+   "look": "bald, horn-rimmed glasses, bowtie",
+   "clue": "Dexter was beside a popcorn cart.",
+   "text": "Dexter was beside a popcorn cart.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "POPCORN_CART"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    0
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elspeth",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 6
+   },
+   "look": "blonde ponytail hair",
+   "clue": "Elspeth was beside the Corpse. She was alone with another woman.",
+   "text": "Elspeth was beside the Corpse. She was alone with another woman.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "E",
+     "params": {
+      "prop": "CORPSE"
+     }
+    },
+    {
+     "kind": "ALONE_WITH_P",
+     "subject": "E",
+     "params": {
+      "trait": "FEMALE",
+      "selfMatch": true
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": [
+     1
+    ]
+   },
+   "solution": [
+    5,
+    6
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Felix",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "beard",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 3
+   },
+   "look": "brown crop hair, horn-rimmed glasses, beard, bowtie",
+   "clue": "Felix was standing on a trail of footprints.",
+   "text": "Felix was standing on a trail of footprints.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "F",
+     "params": {
+      "prop": "FOOTPRINTS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    0
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gertrude",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "red",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 7
+   },
+   "look": "red wavy hair",
+   "clue": "Gertrude was sitting on a bench and was exactly one column west of Camille.",
+   "text": "Gertrude was sitting on a bench and was exactly one column west of Camille.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "G",
+     "params": {
+      "prop": "BENCH"
+     }
+    },
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "G",
+     "params": {
+      "other": "C",
+      "dir": "W",
+      "dist": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    1
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Hilda",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 0
+   },
+   "look": "black long hair, cloche",
+   "clue": "Hilda was not beside any table.",
+   "text": "Hilda was not beside any table.",
+   "atoms": [
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "H",
+     "params": {
+      "prop": "TABLE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    2
+   ]
+  }
+ ],
+ "shadow": [
+  2,
+  5
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_ON:PUDDLE",
+   "text": "Exactly one person was in the puddle.",
+   "kind": "EXACTLY_ONE_ON",
+   "params": {
+    "prop": "PUDDLE"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Camille was alone with a man with a beard. Polaroid check — men with beards: Alfred and Felix. None of them can still reach the Side Show, the Ring Toss or the Ticket Box, so Camille cannot be there.",
+   "focus": [
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_NONE_REACH",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "C",
+        "params": {
+         "trait": "BEARD",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL",
+      "params": {
+       "trait": "BEARD",
+       "holders": [
+        "A",
+        "F"
+       ]
+      }
+     },
+     "rooms": [
+      "SIDE_SHOW",
+      "RING_TOSS",
+      "TICKET_BOX"
+     ],
+     "suspect": "C"
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Alfred can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Alfred takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ]
+    ],
+    "H": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "A",
+     "options": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "coords": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Boris was the only person beside the Ferris wheel, so no other person (S. H. Adow included) can be beside any Ferris wheel.",
+   "focus": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ],
+    "F": [
+     [
+      4,
+      2
+     ]
+    ],
+    "H": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "B",
+     "prop": "FERRIS_WHEEL"
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was in the puddle. Only Boris can still reach the puddle, so he must be in one.",
+   "focus": [
+    [
+     3,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "PUDDLE"
+      }
+     },
+     "owner": "B",
+     "prop": "PUDDLE"
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Boris “was the only person beside the Ferris wheel and was west of Elspeth”: of the 6 tiles that fit, only r4c5 is still open. Place Boris there.",
+   "focus": [
+    [
+     3,
+     4
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      4
+     ]
+    ],
+    "G": [
+     [
+      3,
+      5
+     ]
+    ],
+    "H": [
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      4
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    3,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      3,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Polaroid check",
+   "kind": "eliminate",
+   "text": "Camille was alone with a man with a beard, but the Big Wheel already holds Boris, so Camille cannot be there.",
+   "focus": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_TRAIT_ROOM_OCCUPIED",
+    "ruleKey": "RULE_TRAIT_FILTER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "C",
+        "params": {
+         "trait": "BEARD",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "room": "BIG_WHEEL",
+     "suspects": [
+      "B"
+     ],
+     "suspect": "C"
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Boris was west of Elspeth. Boris is in column 5 at the earliest, so Elspeth must be in columns 6–7.",
+   "focus": [
+    [
+     5,
+     4
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      5,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "B",
+        "params": {
+         "other": "E"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "B",
+        "line": 4,
+        "y": "E",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 5,
+          "to": 6
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Gertrude was exactly one column west of Camille. Camille can only be in columns 1, 2, 3, 4, 5, 6 or 8, which leaves Gertrude column 2; Gertrude can only be in column 2, which leaves Camille column 3.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "G": [
+     [
+      2,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "G",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "G",
+        "params": {
+         "other": "C",
+         "dir": "W",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "C",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5,
+           7
+          ]
+         }
+        },
+        "x": "G",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 1
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "G",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 1
+         }
+        },
+        "x": "C",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 2
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Camille “was alone with a man with a beard”: every tile that fits is ruled out except r1c3. Place Camille there.",
+   "focus": [
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      2
+     ]
+    ],
+    "H": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    0,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      0,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Gertrude can only be at r6c2 or r7c2, and those tiles all lie on one sightline. Whichever one Gertrude takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      6,
+      1
+     ]
+    ],
+    "F": [
+     [
+      4,
+      1
+     ],
+     [
+      7,
+      1
+     ]
+    ],
+    "H": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ]
+     ],
+     "coords": [
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Felix “was standing on a trail of footprints”: of the 4 tiles that fit, only r5c1 is still open. Place Felix there.",
+   "focus": [
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      5
+     ]
+    ]
+   },
+   "suspect": "F",
+   "cell": [
+    4,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      4,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Camille was alone with a man with a beard, and Camille is pinned to the Big Top: that area holds exactly two people, Camille and a man with a beard. So Hilda cannot be there.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      0,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_PAIR_ROOM",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "C",
+        "params": {
+         "trait": "BEARD",
+         "selfMatch": false
+        }
+       }
+      }
+     },
+     "owner": "C",
+     "room": "BIG_TOP",
+     "trait": "BEARD",
+     "suspects": [
+      "H"
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Elspeth was alone with another woman, and Elspeth is pinned to the Side Show: that area holds exactly two people, Elspeth and a woman. So Dexter cannot be there.",
+   "focus": [
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_PAIR_ROOM",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "E",
+        "params": {
+         "trait": "FEMALE",
+         "selfMatch": true
+        }
+       }
+      }
+     },
+     "owner": "E",
+     "room": "SIDE_SHOW",
+     "trait": "FEMALE",
+     "suspects": [
+      "D"
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dexter “was beside a popcorn cart”: of the 5 tiles that fit, only r6c1 is still open. Place Dexter there.",
+   "focus": [
+    [
+     5,
+     0
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      5,
+      1
+     ]
+    ],
+    "H": [
+     [
+      5,
+      0
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    5,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      5,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gertrude “was sitting on a bench and was exactly one column west of Camille”: of the 5 tiles that fit, only r7c2 is still open. Place Gertrude there.",
+   "focus": [
+    [
+     6,
+     1
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      6,
+      5
+     ]
+    ],
+    "H": [
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    6,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      6,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elspeth “was beside the Corpse. She was alone with another woman”: of the 3 tiles that fit, only r6c7 is still open. Place Elspeth there.",
+   "focus": [
+    [
+     5,
+     6
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    5,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      5,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 2,
+   "rule": "Polaroid partner logic",
+   "kind": "eliminate",
+   "text": "Elspeth was alone with another woman. Polaroid check — other women: Camille, Gertrude and Hilda. Only Hilda can still share an area with Elspeth, so she must be at the Side Show.",
+   "focus": [
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     4,
+     7
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      4,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_PARTNER_SHARE_ONE",
+    "ruleKey": "RULE_TRAIT_PARTNER",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "ALONE_WITH_P",
+        "subject": "E",
+        "params": {
+         "trait": "FEMALE",
+         "selfMatch": true
+        }
+       }
+      }
+     },
+     "poll": {
+      "templateKey": "FRAG_POLL.SELF",
+      "params": {
+       "trait": "FEMALE",
+       "holders": [
+        "C",
+        "G",
+        "H"
+       ]
+      }
+     },
+     "partner": "H",
+     "owner": "E",
+     "rooms": [
+      "SIDE_SHOW"
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Hilda “was not beside any table”: every tile that fits is ruled out except r8c3. Place Hilda there.",
+   "focus": [
+    [
+     7,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "H",
+   "cell": [
+    7,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      7,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r1c8 cannot be a hiding spot (Camille was alone with a man with a beard in the Big Top), so someone must watch it. Only Alfred can still see it, so Alfred must stand on r2c8.",
+   "focus": [
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      0,
+      7
+     ],
+     "ban": {
+      "templateKey": "BAN_SAID_IN",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "C",
+          "params": {
+           "trait": "BEARD",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "room": "BIG_TOP"
+      }
+     },
+     "suspect": "A",
+     "coords": [
+      [
+       1,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alfred “was in row 2”: of the 8 tiles that fit, only r2c8 is still open. Place Alfred there.",
+   "focus": [
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    1,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 8,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      1,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     2,
+     5
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    2,
+    5
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      2,
+      5
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "B",
+   "cell": [
+    3,
+    4
+   ],
+   "needs": [],
+   "tier": 2,
+   "fits": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "key": [
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Boris was the only person beside the Ferris wheel, so no other person (S. H. Adow included) can be beside any Ferris wheel.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ]
+      ],
+      "F": [
+       [
+        4,
+        2
+       ]
+      ],
+      "H": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "B",
+       "prop": "FERRIS_WHEEL"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was in the puddle. Only Boris can still reach the puddle, so he must be in one.",
+     "focus": [
+      [
+       3,
+       4
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "PUDDLE"
+        }
+       },
+       "owner": "B",
+       "prop": "PUDDLE"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Boris “was the only person beside the Ferris wheel and was west of Elspeth”: of the 6 tiles that fit, only r4c5 is still open. Place Boris there.",
+    "focus": [
+     [
+      3,
+      4
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ]
+     ],
+     "G": [
+      [
+       3,
+       5
+      ]
+     ],
+     "H": [
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       4
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     3,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       3,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    0,
+    2
+   ],
+   "needs": [
+    "B"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Camille was alone with a man with a beard. Polaroid check — men with beards: Alfred and Felix. None of them can still reach the Side Show, the Ring Toss or the Ticket Box, so Camille cannot be there.",
+     "focus": [
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        2,
+        6
+       ],
+       [
+        2,
+        7
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        5
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_NONE_REACH",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "C",
+          "params": {
+           "trait": "BEARD",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL",
+        "params": {
+         "trait": "BEARD",
+         "holders": [
+          "A",
+          "F"
+         ]
+        }
+       },
+       "rooms": [
+        "SIDE_SHOW",
+        "RING_TOSS",
+        "TICKET_BOX"
+       ],
+       "suspect": "C"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Polaroid check",
+     "kind": "eliminate",
+     "text": "Camille was alone with a man with a beard, but the Big Wheel already holds Boris, so Camille cannot be there.",
+     "focus": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       4,
+       4
+      ],
+      [
+       4,
+       5
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_TRAIT_ROOM_OCCUPIED",
+      "ruleKey": "RULE_TRAIT_FILTER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "C",
+          "params": {
+           "trait": "BEARD",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "room": "BIG_WHEEL",
+       "suspects": [
+        "B"
+       ],
+       "suspect": "C"
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Alfred can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Alfred takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ]
+      ],
+      "H": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "A",
+       "options": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         3
+        ],
+        [
+         1,
+         4
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         1,
+         7
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         2
+        ],
+        [
+         1,
+         3
+        ],
+        [
+         1,
+         4
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         1,
+         7
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gertrude was exactly one column west of Camille. Camille can only be in columns 1, 2, 3, 4, 5, 6 or 8, which leaves Gertrude column 2; Gertrude can only be in column 2, which leaves Camille column 3.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       2,
+       5
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       7,
+       1
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        3
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        5
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        7,
+        1
+       ]
+      ],
+      "G": [
+       [
+        2,
+        5
+       ],
+       [
+        4,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "C",
+           "dir": "W",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "C",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.COL",
+           "params": {
+            "lines": [
+             0,
+             1,
+             2,
+             3,
+             4,
+             5,
+             7
+            ]
+           }
+          },
+          "x": "G",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "G",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          },
+          "x": "C",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 2
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Camille “was alone with a man with a beard”: every tile that fits is ruled out except r1c3. Place Camille there.",
+    "focus": [
+     [
+      0,
+      2
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       1,
+       2
+      ]
+     ],
+     "H": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     0,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       0,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    4,
+    0
+   ],
+   "needs": [
+    "B",
+    "C"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "key": [
+    0,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Boris was the only person beside the Ferris wheel, so no other person (S. H. Adow included) can be beside any Ferris wheel.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       4,
+       3
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        4,
+        2
+       ]
+      ],
+      "H": [
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        4,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "B",
+       "prop": "FERRIS_WHEEL"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gertrude was exactly one column west of Camille. Camille can only be in column 3, which leaves Gertrude column 2.",
+     "focus": [
+      [
+       2,
+       5
+      ],
+      [
+       4,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        2,
+        5
+       ],
+       [
+        4,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "C",
+           "dir": "W",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "C",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 2
+           }
+          },
+          "x": "G",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Gertrude can only be at r6c2 or r7c2, and those tiles all lie on one sightline. Whichever one Gertrude takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       7,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        6,
+        1
+       ]
+      ],
+      "F": [
+       [
+        4,
+        1
+       ],
+       [
+        7,
+        1
+       ]
+      ],
+      "H": [
+       [
+        4,
+        1
+       ],
+       [
+        5,
+        1
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        7,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "G",
+       "options": [
+        [
+         5,
+         1
+        ],
+        [
+         6,
+         1
+        ]
+       ],
+       "coords": [
+        [
+         4,
+         1
+        ],
+        [
+         5,
+         1
+        ],
+        [
+         6,
+         1
+        ],
+        [
+         7,
+         1
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Felix “was standing on a trail of footprints”: of the 4 tiles that fit, only r5c1 is still open. Place Felix there.",
+    "focus": [
+     [
+      4,
+      0
+     ]
+    ],
+    "elims": {
+     "H": [
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       5
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     4,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       4,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    5,
+    0
+   ],
+   "needs": [
+    "B",
+    "C",
+    "F"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "key": [
+    1,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gertrude was exactly one column west of Camille. Camille can only be in column 3, which leaves Gertrude column 2.",
+     "focus": [
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "C",
+           "dir": "W",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "C",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 2
+           }
+          },
+          "x": "G",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Gertrude can only be at r6c2 or r7c2, and those tiles all lie on one sightline. Whichever one Gertrude takes, the whole stretch is watched, so nobody else can stand on r6c2, r7c2, r8c2.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ],
+      [
+       7,
+       1
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        6,
+        1
+       ]
+      ],
+      "H": [
+       [
+        5,
+        1
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        7,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "G",
+       "options": [
+        [
+         5,
+         1
+        ],
+        [
+         6,
+         1
+        ]
+       ],
+       "coords": [
+        [
+         5,
+         1
+        ],
+        [
+         6,
+         1
+        ],
+        [
+         7,
+         1
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Elspeth was alone with another woman, and Elspeth is pinned to the Side Show: that area holds exactly two people, Elspeth and a woman. So Dexter cannot be there.",
+     "focus": [
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_PAIR_ROOM",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "FEMALE",
+           "selfMatch": true
+          }
+         }
+        }
+       },
+       "owner": "E",
+       "room": "SIDE_SHOW",
+       "trait": "FEMALE",
+       "suspects": [
+        "D"
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dexter “was beside a popcorn cart”: of the 5 tiles that fit, only r6c1 is still open. Place Dexter there.",
+    "focus": [
+     [
+      5,
+      0
+     ]
+    ],
+    "elims": {
+     "G": [
+      [
+       5,
+       1
+      ]
+     ],
+     "H": [
+      [
+       5,
+       0
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     5,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       5,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    6,
+    1
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "F"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Gertrude was exactly one column west of Camille. Camille can only be in column 3, which leaves Gertrude column 2.",
+     "focus": [
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "G",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "G",
+          "params": {
+           "other": "C",
+           "dir": "W",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "C",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 2
+           }
+          },
+          "x": "G",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gertrude “was sitting on a bench and was exactly one column west of Camille”: of the 5 tiles that fit, only r7c2 is still open. Place Gertrude there.",
+    "focus": [
+     [
+      6,
+      1
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       6,
+       5
+      ]
+     ],
+     "H": [
+      [
+       6,
+       1
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       6,
+       3
+      ],
+      [
+       7,
+       1
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     6,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       6,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    5,
+    6
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "F",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Boris was west of Elspeth. Boris is in column 5 at the earliest, so Elspeth must be in column 7.",
+     "focus": [
+      [
+       5,
+       4
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        5,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "B",
+          "params": {
+           "other": "E"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "B",
+          "line": 4,
+          "y": "E",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 6
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Elspeth “was beside the Corpse. She was alone with another woman”: of the 3 tiles that fit, only r6c7 is still open. Place Elspeth there.",
+    "focus": [
+     [
+      5,
+      6
+     ]
+    ],
+    "elims": {},
+    "suspect": "E",
+    "cell": [
+     5,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       5,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    7,
+    2
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Alfred can only be at the marked tiles, and those tiles all lie on one sightline. Whichever one Alfred takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "A",
+       "options": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         3
+        ],
+        [
+         1,
+         4
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         1,
+         7
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         0
+        ],
+        [
+         1,
+         1
+        ],
+        [
+         1,
+         3
+        ],
+        [
+         1,
+         4
+        ],
+        [
+         1,
+         5
+        ],
+        [
+         1,
+         6
+        ],
+        [
+         1,
+         7
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Camille was alone with a man with a beard, and Camille is pinned to the Big Top: that area holds exactly two people, Camille and a man with a beard. So Hilda cannot be there.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       7
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        0,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_PAIR_ROOM",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "C",
+          "params": {
+           "trait": "BEARD",
+           "selfMatch": false
+          }
+         }
+        }
+       },
+       "owner": "C",
+       "room": "BIG_TOP",
+       "trait": "BEARD",
+       "suspects": [
+        "H"
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Polaroid partner logic",
+     "kind": "eliminate",
+     "text": "Elspeth was alone with another woman. Polaroid check — other women: Camille, Gertrude and Hilda. Only Hilda can still share an area with Elspeth, so she must be at the Side Show.",
+     "focus": [
+      [
+       2,
+       5
+      ],
+      [
+       2,
+       7
+      ],
+      [
+       4,
+       7
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        7
+       ],
+       [
+        4,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_PARTNER_SHARE_ONE",
+      "ruleKey": "RULE_TRAIT_PARTNER",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "ALONE_WITH_P",
+          "subject": "E",
+          "params": {
+           "trait": "FEMALE",
+           "selfMatch": true
+          }
+         }
+        }
+       },
+       "poll": {
+        "templateKey": "FRAG_POLL.SELF",
+        "params": {
+         "trait": "FEMALE",
+         "holders": [
+          "C",
+          "G",
+          "H"
+         ]
+        }
+       },
+       "partner": "H",
+       "owner": "E",
+       "rooms": [
+        "SIDE_SHOW"
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Hilda “was not beside any table”: every tile that fits is ruled out except r8c3. Place Hilda there.",
+    "focus": [
+     [
+      7,
+      2
+     ]
+    ],
+    "elims": {},
+    "suspect": "H",
+    "cell": [
+     7,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       7,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    1,
+    7
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r1c8 cannot be a hiding spot (Camille was alone with a man with a beard in the Big Top), so someone must watch it. Only Alfred can still see it, so Alfred must stand on r2c8.",
+     "focus": [
+      [
+       0,
+       7
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        0,
+        7
+       ],
+       "ban": {
+        "templateKey": "BAN_SAID_IN",
+        "params": {
+         "said": {
+          "templateKey": "FRAG_SAID",
+          "params": {
+           "subject": "C",
+           "atom": {
+            "kind": "ALONE_WITH_P",
+            "subject": "C",
+            "params": {
+             "trait": "BEARD",
+             "selfMatch": false
+            }
+           }
+          }
+         },
+         "room": "BIG_TOP"
+        }
+       },
+       "suspect": "A",
+       "coords": [
+        [
+         1,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Alfred “was in row 2”: of the 8 tiles that fit, only r2c8 is still open. Place Alfred there.",
+    "focus": [
+     [
+      1,
+      7
+     ]
+    ],
+    "elims": {},
+    "suspect": "A",
+    "cell": [
+     1,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 8,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       1,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    2,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r3c6. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      2,
+      5
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     2,
+     5
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       2,
+       5
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.211,
+   "elims_before_first_place": 4,
+   "last_fifth_t1_share": 0.5,
+   "hardest_last_pos": 0.947,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.333,
+   "late_elim_gap": 2,
+   "place_push": 3.25,
+   "global_uses": 1,
+   "global_first_t2": false,
+   "unlock_by_place": 0.286,
+   "star_opener": false
+  },
+  "flow_arc_ok": false,
+  "clue_fits": [
+   3,
+   4,
+   5,
+   5,
+   6,
+   8,
+   43,
+   50
+  ],
+  "blank_clues": 2,
+  "G19_clue_range": true,
+  "G20_investigation": true,
+  "shadow_candidates_before_last": 10,
+  "shadow_candidates_before_last_two": 12,
+  "dark_known_at": 8,
+  "G5_late_shadow": true,
+  "reveal_leaks": [
+   "CF",
+   "DG"
+  ],
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 2,
+  "trait_atoms": [
+   "ALONE_WITH_P"
+  ],
+  "trait_rules_used": [
+   "trait_filter",
+   "trait_partner"
+  ],
+  "trait_load_bearing": true,
+  "biome_props_on_board": [
+   "BENCH",
+   "CARPET_RUNNER",
+   "FERRIS_WHEEL",
+   "POPCORN_CART",
+   "RING_TOSS",
+   "SAWDUST_RING",
+   "TENT_POLE"
+  ],
+  "biome_props_in_clues": [
+   "BENCH",
+   "FERRIS_WHEEL",
+   "POPCORN_CART"
+  ],
+  "biome_props_load_bearing": [
+   "BENCH",
+   "FERRIS_WHEEL",
+   "POPCORN_CART"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 8236,
+  "rules_used": [
+   "compass",
+   "global_prop_monopoly",
+   "monopoly",
+   "ray_block",
+   "shadow_law",
+   "trait_filter",
+   "trait_partner"
+  ],
+  "steps": 20,
+  "difficulty_score": 36,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.55
+ },
+ "daily": "2026-11-12"
+}
