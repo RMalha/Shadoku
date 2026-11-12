@@ -1,0 +1,5437 @@
+{
+ "id": "daily-2026-11-13",
+ "title": "Daily Contract, Friday 13 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Medium · Ocean Liner",
+ "theme": "LINER",
+ "difficulty": "Medium",
+ "tier": "medium",
+ "shape": "rect",
+ "seed": 261113,
+ "attempt": 3370,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "LIM0808RAR1-261113",
+ "puzzleId": "LIM0808RAR1-261113",
+ "engine": "V10.7",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 45,
+ "zoneWord": "area",
+ "size": 8,
+ "rooms": [
+  [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   3,
+   3,
+   3,
+   3,
+   4,
+   4,
+   4,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   4,
+   4,
+   4,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   4,
+   4,
+   4,
+   4
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   5,
+   5,
+   5,
+   5
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   5,
+   5,
+   5,
+   5
+  ]
+ ],
+ "roomNames": [
+  "Boat Deck",
+  "Top Deck",
+  "Cabin",
+  "Bridge",
+  "Cargo Hold",
+  "Sun Deck"
+ ],
+ "roomIds": [
+  "BOAT_DECK",
+  "TOP_DECK",
+  "CABIN",
+  "BRIDGE",
+  "CARGO_HOLD",
+  "SUN_DECK"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  [
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ]
+  ],
+  [
+   [
+    3,
+    1
+   ],
+   [
+    4,
+    1
+   ]
+  ],
+  [
+   [
+    3,
+    3
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  [
+   [
+    5,
+    7
+   ],
+   [
+    6,
+    7
+   ]
+  ],
+  [
+   [
+    6,
+    3
+   ],
+   [
+    6,
+    4
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   0,
+   7,
+   "E"
+  ]
+ ],
+ "contents": [
+  [
+   "",
+   "BED",
+   "BED",
+   "",
+   "",
+   "RUG",
+   "RUG",
+   ""
+  ],
+  [
+   "CAPSTAN",
+   "DECK_CHAIR",
+   "CAPSTAN",
+   "",
+   "",
+   "",
+   "",
+   "ROPE_COIL"
+  ],
+  [
+   "",
+   "",
+   "CORPSE",
+   "",
+   "DECK_CHAIR",
+   "",
+   "",
+   "LIFEBOAT"
+  ],
+  [
+   "CHAIR",
+   "CHAIR",
+   "SHIP_WHEEL",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "FUNNEL",
+   "DECK_CHAIR",
+   "ROPE_COIL",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "CRATE",
+   "CRATE",
+   "CRATE",
+   "ROPE_COIL"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "DECK_CHAIR",
+   "BROKEN_GLASS",
+   "DECK_CHAIR",
+   ""
+  ],
+  [
+   "DECK_CHAIR",
+   "",
+   "",
+   "",
+   "",
+   "",
+   "DECK_CHAIR",
+   "VENTILATOR"
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "BED",
+   "cells": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ]
+   ]
+  },
+  {
+   "kind": "RUG",
+   "cells": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  2,
+  2
+ ],
+ "biomeProps": [
+  "BED",
+  "CAPSTAN",
+  "DECK_CHAIR",
+  "FUNNEL",
+  "LIFEBOAT",
+  "ROPE_COIL",
+  "RUG",
+  "SHIP_WHEEL",
+  "VENTILATOR"
+ ],
+ "propClasses": {
+  "BED": "LOW",
+  "BROKEN_GLASS": "LOW",
+  "CAPSTAN": "SHORT",
+  "CHAIR": "LOW",
+  "CRATE": "SHORT",
+  "DECK_CHAIR": "LOW",
+  "FUNNEL": "TALL",
+  "LIFEBOAT": "TALL",
+  "ROPE_COIL": "LOW",
+  "RUG": "LOW",
+  "SHIP_WHEEL": "SHORT",
+  "VENTILATOR": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.315,
+  "lowTiles": 17,
+  "openTiles": 54,
+  "lowKinds": [
+   "BED",
+   "BROKEN_GLASS",
+   "CHAIR",
+   "DECK_CHAIR",
+   "ROPE_COIL",
+   "RUG"
+  ],
+  "roomProps": {
+   "CABIN": [
+    "BED",
+    "RUG"
+   ],
+   "BOAT_DECK": [
+    "CAPSTAN",
+    "DECK_CHAIR",
+    "LIFEBOAT",
+    "ROPE_COIL"
+   ],
+   "BRIDGE": [
+    "CHAIR",
+    "SHIP_WHEEL"
+   ],
+   "TOP_DECK": [
+    "DECK_CHAIR",
+    "FUNNEL"
+   ],
+   "CARGO_HOLD": [
+    "CRATE",
+    "ROPE_COIL"
+   ],
+   "SUN_DECK": [
+    "BROKEN_GLASS",
+    "DECK_CHAIR",
+    "VENTILATOR"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alistair",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "beard",
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 3
+   },
+   "look": "black crop hair, fedora, beard, bowtie",
+   "clue": "Alistair was east of Elspeth.",
+   "text": "Alistair was east of Elspeth.",
+   "atoms": [
+    {
+     "kind": "EAST_OF",
+     "subject": "A",
+     "params": {
+      "other": "E"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Belinda",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 6
+   },
+   "look": "blonde ponytail hair, beret",
+   "clue": "Belinda was on the Top Deck and was west of Gertrude.",
+   "text": "Belinda was on the Top Deck and was west of Gertrude.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "B",
+     "params": {
+      "room": "TOP_DECK"
+     }
+    },
+    {
+     "kind": "WEST_OF",
+     "subject": "B",
+     "params": {
+      "other": "G"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    3
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Clara",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 6
+   },
+   "look": "blonde bun hair",
+   "clue": "Clara was the only person in a deck chair.",
+   "text": "Clara was the only person in a deck chair.",
+   "atoms": [
+    {
+     "kind": "ONLY_ON",
+     "subject": "C",
+     "params": {
+      "prop": "DECK_CHAIR"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    0
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dmitri",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 5
+   },
+   "look": "blonde curly hair, bowtie",
+   "clue": "Dmitri was sitting on a coil of rope.",
+   "text": "Dmitri was sitting on a coil of rope.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "D",
+     "params": {
+      "prop": "ROPE_COIL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    7
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elspeth",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 4
+   },
+   "look": "brown curly hair, beret",
+   "clue": "Elspeth was on the Bridge and was exactly one column east of Clara.",
+   "text": "Elspeth was on the Bridge and was exactly one column east of Clara.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "E",
+     "params": {
+      "room": "BRIDGE"
+     }
+    },
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "E",
+     "params": {
+      "other": "C",
+      "dir": "E",
+      "dist": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    1
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Felix",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "mustache",
+    "tie": "scarf",
+    "skin": 3,
+    "cloth": 4
+   },
+   "look": "brown wavy hair, mustache, scarf",
+   "clue": "Felix was in a corner.",
+   "text": "Felix was in a corner.",
+   "atoms": [
+    {
+     "kind": "CORNER",
+     "subject": "F",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    4
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gertrude",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 2,
+    "cloth": 1
+   },
+   "look": "brown bob hair, fedora, bowtie",
+   "clue": "Gertrude was not beside any lifeboat.",
+   "text": "Gertrude was not beside any lifeboat.",
+   "atoms": [
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "G",
+     "params": {
+      "prop": "LIFEBOAT"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    5
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Henry",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 2
+   },
+   "look": "brown crop hair, horn-rimmed glasses",
+   "clue": "Henry was in column 8.",
+   "text": "Henry was in column 8.",
+   "atoms": [
+    {
+     "kind": "COL",
+     "subject": "H",
+     "params": {
+      "index": 7
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    7
+   ]
+  }
+ ],
+ "shadow": [
+  5,
+  2
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_ON:BED",
+   "text": "Exactly one person was on the bed.",
+   "kind": "EXACTLY_ONE_ON",
+   "params": {
+    "prop": "BED"
+   }
+  },
+  {
+   "id": "EXACTLY_ONE_BESIDE:ROPE_COIL",
+   "text": "Exactly one person was beside a coil of rope.",
+   "kind": "EXACTLY_ONE_BESIDE",
+   "params": {
+    "prop": "ROPE_COIL"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Elspeth can only be at r4c1, r4c2 or r4c4, and those tiles all lie on one sightline. Whichever one Elspeth takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ]
+    ],
+    "F": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      7
+     ]
+    ],
+    "G": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ]
+    ],
+    "H": [
+     [
+      3,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "E",
+     "options": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       3
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       1
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Clara was the only person in a deck chair, so no other person (S. H. Adow included) can be in any deck chair.",
+   "focus": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "B": [
+     [
+      4,
+      3
+     ],
+     [
+      7,
+      0
+     ]
+    ],
+    "F": [
+     [
+      4,
+      3
+     ],
+     [
+      7,
+      0
+     ]
+    ],
+    "G": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      6
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_ON",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "C",
+     "prop": "DECK_CHAIR"
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Alistair was east of Elspeth. Elspeth is in column 1 at the earliest, so Alistair must be in columns 2–8.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     6,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      0
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "EAST_OF",
+        "subject": "A",
+        "params": {
+         "other": "E"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "E",
+        "line": 0,
+        "y": "A",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 1,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Belinda was west of Gertrude. Belinda is in column 1 at the earliest, so Gertrude must be in columns 2–8.",
+   "focus": [
+    [
+     0,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     6,
+     0
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      0,
+      0
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      6,
+      0
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "B",
+        "params": {
+         "other": "G"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "B",
+        "line": 0,
+        "y": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 1,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Elspeth was exactly one column east of Clara. Clara can only be in columns 1, 2, 4, 5 or 7, which leaves Elspeth column 2; Elspeth can only be in column 2, which leaves Clara column 1.",
+   "focus": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      6
+     ]
+    ],
+    "E": [
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "E",
+        "params": {
+         "other": "C",
+         "dir": "E",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "C",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.COL",
+         "params": {
+          "lines": [
+           0,
+           1,
+           3,
+           4,
+           6
+          ]
+         }
+        },
+        "x": "E",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 1
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "E",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 1
+         }
+        },
+        "x": "C",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.COL",
+         "params": {
+          "line": 0
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Clara “was the only person in a deck chair”: of the 7 tiles that fit, only r8c1 is still open. Place Clara there.",
+   "focus": [
+    [
+     7,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "B": [
+     [
+      4,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "F": [
+     [
+      4,
+      0
+     ],
+     [
+      7,
+      3
+     ]
+    ],
+    "G": [
+     [
+      7,
+      1
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    7,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      7,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elspeth “was on the Bridge and was exactly one column east of Clara”: of the 3 tiles that fit, only r4c2 is still open. Place Elspeth there.",
+   "focus": [
+    [
+     3,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "B": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ]
+    ],
+    "G": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      6,
+      1
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    3,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      3,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Alistair was east of Elspeth. Elspeth is in column 2 at the earliest, so Alistair must be in columns 3–8.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      1
+     ],
+     [
+      2,
+      1
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "A",
+       "atom": {
+        "kind": "EAST_OF",
+        "subject": "A",
+        "params": {
+         "other": "E"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "E",
+        "line": 1,
+        "y": "A",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 2,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Belinda was west of Gertrude. Belinda is in column 3 at the earliest, so Gertrude must be in columns 4–8.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "B",
+        "params": {
+         "other": "G"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "B",
+        "line": 2,
+        "y": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 3,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was on the bed. Only Alistair can still reach the bed, so he must be on one.",
+   "focus": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "BED"
+      }
+     },
+     "owner": "A",
+     "prop": "BED"
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alistair “was east of Elspeth”: every tile that fits is ruled out except r1c3. Place Alistair there.",
+   "focus": [
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      0
+     ],
+     [
+      0,
+      7
+     ]
+    ],
+    "G": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ]
+    ],
+    "H": [
+     [
+      0,
+      7
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    0,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      0,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r3c5 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Gertrude can still see it, so Gertrude must stand on r2c5, r3c4, r3c6.",
+   "focus": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      4,
+      4
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      3
+     ],
+     [
+      6,
+      5
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      2,
+      4
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "ONLY_ON",
+        "subject": "C",
+        "params": {
+         "prop": "DECK_CHAIR"
+        }
+       }
+      }
+     },
+     "suspect": "G",
+     "coords": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was beside a coil of rope. Only Henry can still reach a tile beside a coil of rope, so he must stand beside one.",
+   "focus": [
+    [
+     1,
+     6
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     7
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      1,
+      7
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH_BESIDE",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_BESIDE",
+      "params": {
+       "prop": "ROPE_COIL"
+      }
+     },
+     "owner": "H",
+     "prop": "ROPE_COIL"
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Henry “was in column 8”: of the 6 tiles that fit, only r5c8 is still open. Place Henry there.",
+   "focus": [
+    [
+     4,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      4,
+      4
+     ],
+     [
+      5,
+      7
+     ]
+    ]
+   },
+   "suspect": "H",
+   "cell": [
+    4,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      4,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dmitri “was sitting on a coil of rope”: of the 3 tiles that fit, only r2c8 is still open. Place Dmitri there.",
+   "focus": [
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      7
+     ]
+    ],
+    "G": [
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    1,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      1,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Felix “was in a corner”: every tile that fits is ruled out except r8c5. Place Felix there.",
+   "focus": [
+    [
+     7,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    7,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      7,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r5c4 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Belinda can still see it, so Belinda must stand on r6c4, r7c4.",
+   "focus": [
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      4,
+      3
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "ONLY_ON",
+        "subject": "C",
+        "params": {
+         "prop": "DECK_CHAIR"
+        }
+       }
+      }
+     },
+     "suspect": "B",
+     "coords": [
+      [
+       5,
+       3
+      ],
+      [
+       6,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Belinda was west of Gertrude. Belinda is in column 4 at the earliest, so Gertrude must be in column 6.",
+   "focus": [
+    [
+     2,
+     3
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      2,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "B",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "B",
+        "params": {
+         "other": "G"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "B",
+        "line": 3,
+        "y": "G",
+        "span": {
+         "templateKey": "FRAG_SPAN_ONE.COL",
+         "params": {
+          "from": 5
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gertrude “was not beside any lifeboat”: every tile that fits is ruled out except r3c6. Place Gertrude there.",
+   "focus": [
+    [
+     2,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    2,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      2,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r7c7 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Belinda can still see it, so Belinda must stand on r7c4.",
+   "focus": [
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     6
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      6,
+      6
+     ],
+     "ban": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "C",
+       "atom": {
+        "kind": "ONLY_ON",
+        "subject": "C",
+        "params": {
+         "prop": "DECK_CHAIR"
+        }
+       }
+      }
+     },
+     "suspect": "B",
+     "coords": [
+      [
+       6,
+       3
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Belinda “was on the Top Deck and was west of Gertrude”: every tile that fits is ruled out except r7c4. Place Belinda there.",
+   "focus": [
+    [
+     6,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    6,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      6,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 22,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r6c3. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     5,
+     2
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    5,
+    2
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      5,
+      2
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "C",
+   "cell": [
+    7,
+    0
+   ],
+   "needs": [],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Elspeth was exactly one column east of Clara. Clara can only be in columns 1, 2, 4, 5 or 7, which leaves Elspeth column 2; Elspeth can only be in column 2, which leaves Clara column 1.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       6
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ]
+      ],
+      "E": [
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "C",
+           "dir": "E",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "C",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.COL",
+           "params": {
+            "lines": [
+             0,
+             1,
+             3,
+             4,
+             6
+            ]
+           }
+          },
+          "x": "E",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "E",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          },
+          "x": "C",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 0
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Clara “was the only person in a deck chair”: of the 7 tiles that fit, only r8c1 is still open. Place Clara there.",
+    "focus": [
+     [
+      7,
+      0
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ]
+     ],
+     "B": [
+      [
+       4,
+       0
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       6,
+       0
+      ],
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ]
+     ],
+     "F": [
+      [
+       4,
+       0
+      ],
+      [
+       7,
+       3
+      ]
+     ],
+     "G": [
+      [
+       7,
+       1
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     7,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       7,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    3,
+    1
+   ],
+   "needs": [
+    "C"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Elspeth was exactly one column east of Clara. Clara can only be in column 1, which leaves Elspeth column 2.",
+     "focus": [
+      [
+       3,
+       0
+      ],
+      [
+       3,
+       3
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "C",
+           "dir": "E",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "C",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 0
+           }
+          },
+          "x": "E",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.COL",
+           "params": {
+            "line": 1
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Elspeth “was on the Bridge and was exactly one column east of Clara”: of the 3 tiles that fit, only r4c2 is still open. Place Elspeth there.",
+    "focus": [
+     [
+      3,
+      1
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ]
+     ],
+     "B": [
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       1
+      ],
+      [
+       6,
+       1
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     3,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       3,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    0,
+    2
+   ],
+   "needs": [
+    "C",
+    "E"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Clara was the only person in a deck chair, so no other person (S. H. Adow included) can be in any deck chair.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       6
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ]
+      ],
+      "B": [
+       [
+        4,
+        3
+       ]
+      ],
+      "F": [
+       [
+        4,
+        3
+       ]
+      ],
+      "G": [
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "C",
+       "prop": "DECK_CHAIR"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Alistair was east of Elspeth. Elspeth is in column 2 at the earliest, so Alistair must be in columns 3–8.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "A",
+         "atom": {
+          "kind": "EAST_OF",
+          "subject": "A",
+          "params": {
+           "other": "E"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "E",
+          "line": 1,
+          "y": "A",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 2,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Belinda was west of Gertrude. Belinda is in column 3 at the earliest, so Gertrude must be in columns 4–8.",
+     "focus": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        0,
+        0
+       ],
+       [
+        0,
+        1
+       ],
+       [
+        0,
+        2
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "B",
+          "params": {
+           "other": "G"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "B",
+          "line": 2,
+          "y": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 3,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was on the bed. Only Alistair can still reach the bed, so he must be on one.",
+     "focus": [
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       2
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        0,
+        3
+       ],
+       [
+        0,
+        4
+       ],
+       [
+        0,
+        5
+       ],
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        7
+       ],
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        4
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        2,
+        3
+       ],
+       [
+        2,
+        5
+       ],
+       [
+        2,
+        6
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        3
+       ],
+       [
+        6,
+        5
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "BED"
+        }
+       },
+       "owner": "A",
+       "prop": "BED"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Alistair “was east of Elspeth”: every tile that fits is ruled out except r1c3. Place Alistair there.",
+    "focus": [
+     [
+      0,
+      2
+     ]
+    ],
+    "elims": {
+     "F": [
+      [
+       0,
+       0
+      ],
+      [
+       0,
+       7
+      ]
+     ],
+     "G": [
+      [
+       0,
+       3
+      ],
+      [
+       0,
+       4
+      ],
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       7
+      ]
+     ],
+     "H": [
+      [
+       0,
+       7
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     0,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       0,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    4,
+    7
+   ],
+   "needs": [
+    "A",
+    "C",
+    "E"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "key": [
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Clara was the only person in a deck chair, so no other person (S. H. Adow included) can be in any deck chair.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        3
+       ]
+      ],
+      "F": [
+       [
+        4,
+        3
+       ]
+      ],
+      "G": [
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "C",
+       "prop": "DECK_CHAIR"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Belinda was west of Gertrude. Belinda is in column 3 at the earliest, so Gertrude must be in columns 4–8.",
+     "focus": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "B",
+          "params": {
+           "other": "G"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "B",
+          "line": 2,
+          "y": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 3,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c5 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Gertrude can still see it, so Gertrude must stand on r2c5, r3c4, r3c6.",
+     "focus": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        1,
+        3
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        4,
+        4
+       ],
+       [
+        4,
+        5
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        3
+       ],
+       [
+        6,
+        5
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        2,
+        4
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "C",
+          "params": {
+           "prop": "DECK_CHAIR"
+          }
+         }
+        }
+       },
+       "suspect": "G",
+       "coords": [
+        [
+         1,
+         4
+        ],
+        [
+         2,
+         3
+        ],
+        [
+         2,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was beside a coil of rope. Only Henry can still reach a tile beside a coil of rope, so he must stand beside one.",
+     "focus": [
+      [
+       1,
+       6
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       5
+      ],
+      [
+       4,
+       7
+      ]
+     ],
+     "elims": {
+      "H": [
+       [
+        1,
+        7
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH_BESIDE",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_BESIDE",
+        "params": {
+         "prop": "ROPE_COIL"
+        }
+       },
+       "owner": "H",
+       "prop": "ROPE_COIL"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Henry “was in column 8”: of the 6 tiles that fit, only r5c8 is still open. Place Henry there.",
+    "focus": [
+     [
+      4,
+      7
+     ]
+    ],
+    "elims": {
+     "D": [
+      [
+       4,
+       4
+      ],
+      [
+       5,
+       7
+      ]
+     ]
+    },
+    "suspect": "H",
+    "cell": [
+     4,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       4,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    1,
+    7
+   ],
+   "needs": [
+    "H"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     7
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dmitri “was sitting on a coil of rope”: of the 3 tiles that fit, only r2c8 is still open. Place Dmitri there.",
+    "focus": [
+     [
+      1,
+      7
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ]
+     ],
+     "C": [
+      [
+       1,
+       1
+      ]
+     ],
+     "F": [
+      [
+       1,
+       7
+      ]
+     ],
+     "G": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       1,
+       6
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     1,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       1,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    7,
+    4
+   ],
+   "needs": [
+    "A",
+    "C",
+    "D",
+    "E",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Clara was the only person in a deck chair, so no other person (S. H. Adow included) can be in any deck chair.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        3
+       ]
+      ],
+      "F": [
+       [
+        4,
+        3
+       ]
+      ],
+      "G": [
+       [
+        2,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "C",
+       "prop": "DECK_CHAIR"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Felix “was in a corner”: every tile that fits is ruled out except r8c5. Place Felix there.",
+    "focus": [
+     [
+      7,
+      4
+     ]
+    ],
+    "elims": {
+     "G": [
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     7,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       7,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    2,
+    5
+   ],
+   "needs": [
+    "A",
+    "C",
+    "D",
+    "E",
+    "F",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Clara was the only person in a deck chair, so no other person (S. H. Adow included) can be in any deck chair.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        3
+       ]
+      ],
+      "G": [
+       [
+        2,
+        4
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        6,
+        6
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "C",
+       "prop": "DECK_CHAIR"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Belinda was west of Gertrude. Belinda is in column 3 at the earliest, so Gertrude must be in columns 4–6.",
+     "focus": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "B",
+          "params": {
+           "other": "G"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "B",
+          "line": 2,
+          "y": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 3,
+            "to": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c5 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Gertrude can still see it, so Gertrude must stand on r3c4, r3c6.",
+     "focus": [
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        5,
+        3
+       ],
+       [
+        6,
+        3
+       ],
+       [
+        6,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        2,
+        4
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "C",
+          "params": {
+           "prop": "DECK_CHAIR"
+          }
+         }
+        }
+       },
+       "suspect": "G",
+       "coords": [
+        [
+         2,
+         3
+        ],
+        [
+         2,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r5c4 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Belinda can still see it, so Belinda must stand on r6c4, r7c4.",
+     "focus": [
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       6,
+       3
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        4,
+        3
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "C",
+          "params": {
+           "prop": "DECK_CHAIR"
+          }
+         }
+        }
+       },
+       "suspect": "B",
+       "coords": [
+        [
+         5,
+         3
+        ],
+        [
+         6,
+         3
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Belinda was west of Gertrude. Belinda is in column 4 at the earliest, so Gertrude must be in column 6.",
+     "focus": [
+      [
+       2,
+       3
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        2,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "B",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "B",
+          "params": {
+           "other": "G"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "B",
+          "line": 3,
+          "y": "G",
+          "span": {
+           "templateKey": "FRAG_SPAN_ONE.COL",
+           "params": {
+            "from": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 6,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gertrude “was not beside any lifeboat”: every tile that fits is ruled out except r3c6. Place Gertrude there.",
+    "focus": [
+     [
+      2,
+      5
+     ]
+    ],
+    "elims": {},
+    "suspect": "G",
+    "cell": [
+     2,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       2,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    6,
+    3
+   ],
+   "needs": [
+    "A",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Clara was the only person in a deck chair, so no other person (S. H. Adow included) can be in any deck chair.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       0
+      ],
+      [
+       7,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        4,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_ON",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "C",
+       "prop": "DECK_CHAIR"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r5c4 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Belinda can still see it, so Belinda must stand on r6c4, r7c4.",
+     "focus": [
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       6,
+       3
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        5,
+        2
+       ],
+       [
+        6,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        4,
+        3
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "C",
+          "params": {
+           "prop": "DECK_CHAIR"
+          }
+         }
+        }
+       },
+       "suspect": "B",
+       "coords": [
+        [
+         5,
+         3
+        ],
+        [
+         6,
+         3
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r7c7 cannot be a hiding spot (Clara was the only person in a deck chair), so someone must watch it. Only Belinda can still see it, so Belinda must stand on r7c4.",
+     "focus": [
+      [
+       6,
+       3
+      ],
+      [
+       6,
+       6
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        5,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        6,
+        6
+       ],
+       "ban": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "C",
+         "atom": {
+          "kind": "ONLY_ON",
+          "subject": "C",
+          "params": {
+           "prop": "DECK_CHAIR"
+          }
+         }
+        }
+       },
+       "suspect": "B",
+       "coords": [
+        [
+         6,
+         3
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 4,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Belinda “was on the Top Deck and was west of Gertrude”: every tile that fits is ruled out except r7c4. Place Belinda there.",
+    "focus": [
+     [
+      6,
+      3
+     ]
+    ],
+    "elims": {},
+    "suspect": "B",
+    "cell": [
+     6,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       6,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    5,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r6c3. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      5,
+      2
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     5,
+     2
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       5,
+       2
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.25,
+   "elims_before_first_place": 5,
+   "last_fifth_t1_share": 0.4,
+   "hardest_last_pos": 0.95,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.333,
+   "late_elim_gap": 2,
+   "place_push": 4.38,
+   "global_uses": 2,
+   "global_first_t2": false,
+   "unlock_by_place": 0.286,
+   "star_opener": false
+  },
+  "flow_arc_ok": false,
+  "clue_fits": [
+   3,
+   3,
+   6,
+   7,
+   10,
+   15,
+   52,
+   54
+  ],
+  "blank_clues": 2,
+  "G19_clue_range": true,
+  "G20_investigation": true,
+  "shadow_candidates_before_last": 6,
+  "shadow_candidates_before_last_two": 11,
+  "dark_known_at": 8,
+  "G5_late_shadow": true,
+  "reveal_leaks": [
+   "DH",
+   "GH"
+  ],
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "BED",
+   "CAPSTAN",
+   "DECK_CHAIR",
+   "FUNNEL",
+   "LIFEBOAT",
+   "ROPE_COIL",
+   "RUG",
+   "SHIP_WHEEL",
+   "VENTILATOR"
+  ],
+  "biome_props_in_clues": [
+   "DECK_CHAIR",
+   "ROPE_COIL"
+  ],
+  "biome_props_load_bearing": [
+   "DECK_CHAIR",
+   "ROPE_COIL"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 6883,
+  "rules_used": [
+   "compass",
+   "global_prop_monopoly",
+   "monopoly",
+   "ray_block",
+   "shadow_law"
+  ],
+  "steps": 21,
+  "difficulty_score": 45,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.55
+ },
+ "daily": "2026-11-13"
+}
