@@ -1,16 +1,15 @@
 # Cloudflare Pages response headers.
 # Every page: HTTPS only (HSTS), no framing by other sites, no MIME sniffing, a short Referer, and no powerful browser features.
-# The Content-Security-Policy is in REPORT-ONLY mode first: the browser lists what it would block in the console without blocking it.
-# Open the site (home, a case, the Workshop, sign-in, the share button) with the console open; when it stays clean, rename the header
-# to Content-Security-Policy. Violations also go to /api/report (kind "error") only if you add a report-uri; none is set on purpose.
+# The Content-Security-Policy is ENFORCED (checked in a real browser on 2026-11-12: no violations from the app's own code). Cloudflare's injected
+# bot-detection script is inline and is blocked by it on purpose. To loosen it for a new feature, edit the directive below and re-run the walk
+# in docs/ops/runbook.md section 5.
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: frame-ancestors 'self'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), accelerometer=(), gyroscope=(), magnetometer=()
   Cross-Origin-Opener-Policy: same-origin-allow-popups
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://accounts.google.com https://github.com; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://accounts.google.com https://github.com; frame-ancestors 'self'
 # The service worker and the manifest must never be served stale: browsers check them for updates on every visit.
 /sw.js
   Cache-Control: no-cache
