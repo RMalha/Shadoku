@@ -5,6 +5,7 @@
       "namespace": "android_app",
       "package_name": "net.shadoku.app",
       "sha256_cert_fingerprints": [
+        "45:56:C4:4D:47:AD:E9:AF:D6:58:4B:B8:E0:29:DC:69:41:C4:41:C5:5F:95:EB:D8:E2:50:6C:B3:5D:32:CE:B8",
         "DF:42:2D:8B:45:D5:AA:B4:FF:98:4D:39:B0:EF:06:60:33:58:75:85:E3:B5:A0:CE:03:C3:87:33:B2:ED:FF:32"
       ]
     }
