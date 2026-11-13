@@ -38,9 +38,15 @@ function parse(file, text) {
   return null;
 }
 
+/** The 12 languages of the site and the app. Only these are loaded and offered; a file for any other code is ignored.
+ *  Retired locales (ar, cs, el, hu, ja, ko, ro, tr, vi, zh-CN, zh-TW) sit in src/locales/_archive/ (the glob above is
+ *  not recursive, so they never reach the bundle). To bring one back: move its file up and add its code here. */
+export const SUPPORTED_LOCALES = ["en", "ca", "de", "es", "fi", "fr", "it", "nl", "pl", "pt-PT", "ru", "uk"];
+
 export const LOCALES = {};
 for (const [path, text] of Object.entries(RAW)) {
   const code = path.replace(/^.*\//, "").replace(/\.json$/i, "");
+  if (!SUPPORTED_LOCALES.includes(code)) continue;
   const dict = parse(path, text);
   if (dict) LOCALES[code] = dict;
 }

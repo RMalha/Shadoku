@@ -45,29 +45,17 @@ const ENVELOPE_MS = 850;
 
 const BASE_LANGUAGES = [
   { code: "ca", label: "Català" },
-  { code: "cs", label: "Čeština" },
   { code: "de", label: "Deutsch" },
   { code: "en", label: "English" },
   { code: "es", label: "Español" },
   { code: "fr", label: "Français" },
   { code: "it", label: "Italiano" },
-  { code: "hu", label: "Magyar" },
   { code: "nl", label: "Nederlands" },
   { code: "pl", label: "Polski" },
-  { code: "pt", label: "Português" },
   { code: "pt-PT", label: "Português" },
-  { code: "ro", label: "Română" },
   { code: "fi", label: "Suomi" },
-  { code: "vi", label: "Tiếng Việt" },
-  { code: "tr", label: "Türkçe" },
-  { code: "el", label: "Ελληνικά" },
   { code: "ru", label: "Русский" },
   { code: "uk", label: "Українська" },
-  { code: "ar", label: "العربية", dir: "rtl" },
-  { code: "ko", label: "한국어" },
-  { code: "ja", label: "日本語" },
-  { code: "zh-CN", label: "简体中文" },
-  { code: "zh-TW", label: "繁體中文" },
 ];
 const RTL = new Set(["ar", "he", "fa", "ur", "ps", "yi"]);
 const nativeName = (code) => {
