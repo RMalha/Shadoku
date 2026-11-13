@@ -629,22 +629,38 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   eq("every Bronze Pack has its hints card and its Rare card", Array.from({ length: 2000 }, () => eco.rollPack(bronzeTable, rnd)).every((c) => c.length === 5 && c[0].hints === 5 && c[1].rarity === "rare" && c[1].guaranteed && c.filter((x) => x.hints).length === 1), true);
   eq("the server's random numbers stay in range and cover it", (() => { const got = new Set(); for (let i = 0; i < 3000; i++) { const x = eco.randomInt(7); if (!Number.isInteger(x) || x < 0 || x > 6) return false; got.add(x); } return got.size === 7; })(), true);
   eq("a rarity with no cosmetic is left out; a guaranteed rarity with none becomes a random card", (() => { const t = eco.packOdds("p", { cards: 5, hints: 5, guaranteed: "epic" }, { common: 40, rare: 30, epic: 20, legendary: 10 }, [{ id: "a", rarity: "common" }, { id: "b", rarity: "rare" }]); return [t.guaranteed, t.random, t.total, t.rarities.map((r) => r.rarity), t.legendaryEvery]; })(), [[], 4, 70, ["common", "rare"], 0]);
-  // the Legendary timer: the 10th Gold Pack a player opens, and the 20th, holds a guaranteed Legendary card in place of a random one
+  // the Legendary timer: ten Gold Packs in a row with no Legendary card, and the tenth holds a guaranteed one in place of a random card.
+  // Luck is switched off and on through pack_odds (a weight of 0: no Legendary by chance), so the count is known.
   const T = "google:timer";
   await call("GET /wallet", { as: T });
-  d1.raw.prepare("INSERT INTO inventory (account_id, item_id, tier, qty, first_at) VALUES (?, 'pack_gold', 0, 21, 0), (?, 'pack_bronze', 0, 30, 0)").run(T, T);
-  const openAs = (packId) => call("POST /packs/open", { as: T, body: { packId, oddsVersion: odds[packId].version, requestId: uid() } });
+  d1.raw.prepare("INSERT INTO inventory (account_id, item_id, tier, qty, first_at) VALUES (?, 'pack_gold', 0, 25, 0), (?, 'pack_bronze', 0, 30, 0)").run(T, T);
+  const luck = (legendary, others = [40, 30, 20]) => ["common", "rare", "epic", "legendary"].forEach((rarity, i) => d1.raw.prepare("UPDATE pack_odds SET weight = ? WHERE rarity = ?").run(i < 3 ? others[i] : legendary, rarity));
+  const openAs = async (packId) => call("POST /packs/open", { as: T, body: { packId, oddsVersion: (await packOdds())[packId].version, requestId: uid() } });
+  const since = async () => (await call("GET /wallet", { as: T })).body.state.packsSinceLegendary;
+  const timed = (list) => list.filter((g) => g.body.cards.some((c) => c.timer)).map((g) => g.body.number).sort((x, y) => x - y);
+  const lucky = (g) => g.body.cards.filter((c) => c.rarity === "legendary").length;
+  luck(0);
   const golds = [];
   for (let i = 0; i < 8; i++) golds.push(await openAs("pack_gold"));
-  golds.push(...(await atOnce([() => openAs("pack_gold"), () => openAs("pack_gold")]))); // the 9th and the 10th, at once
-  for (let i = 0; i < 10; i++) golds.push(await openAs("pack_gold"));
-  const timed = (list) => list.filter((g) => g.body.cards.some((c) => c.timer));
-  eq("the 10th and the 20th Gold Pack hold the timer's Legendary card, and only they", [golds.every((g) => g.status === 200 && g.body.cards.length === 5), golds.map((g) => g.body.number).sort((a, b) => a - b).join(), timed(golds).map((g) => g.body.number).sort((a, b) => a - b), timed(golds).every((g) => { const c = g.body.cards.find((x) => x.timer); return c.rarity === "legendary" && c.guaranteed && ["expired", "future"].includes(c.item) && g.body.cards.filter((x) => x.guaranteed).length === 3 && g.body.cards.filter((x) => x.timer).length === 1; })], [true, Array.from({ length: 20 }, (_, i) => i + 1).join(), [10, 20], true]);
+  const version = (await packOdds()).pack_gold.version, at = (requestId = uid()) => call("POST /packs/open", { as: T, body: { packId: "pack_gold", oddsVersion: version, requestId } });
+  golds.push(...(await atOnce([() => at(), () => at()]))); // the 9th and the 10th, at once
+  eq("ten Gold Packs with no Legendary: the tenth holds the timer's card, and only it", [golds.every((g) => g.status === 200 && g.body.cards.length === 5), golds.map((g) => g.body.number).sort((x, y) => x - y).join(), timed(golds), golds.map(lucky).reduce((n, x) => n + x, 0), golds.filter((g) => g.body.cards.some((c) => c.timer)).every((g) => { const c = g.body.cards.find((x) => x.timer); return c.rarity === "legendary" && c.guaranteed && ["expired", "future"].includes(c.item) && g.body.cards.filter((x) => x.guaranteed).length === 3; }), (await since()).pack_gold], [true, "1,2,3,4,5,6,7,8,9,10", [10], 1, true, 0]);
+  for (let i = 0; i < 4; i++) golds.push(await openAs("pack_gold")); // 11 to 14: four in a row without one
+  eq("the count starts again after the timer's card", (await since()).pack_gold, 4);
+  luck(10, [0, 0, 0]); // every random card is a Legendary
+  const fluke = await openAs("pack_gold"); // the 15th
+  eq("a Legendary by chance: no timer card, and the count starts again", [lucky(fluke), fluke.body.cards.some((c) => c.timer), (await since()).pack_gold], [3, false, 0]);
+  luck(0);
+  const later = [];
+  for (let i = 0; i < 10; i++) later.push(await openAs("pack_gold")); // 16 to 25: the 20th is no longer the timer's, the 25th is
+  eq("…so the timer pays ten packs after that luck, not on the 20th", [later.map((g) => g.body.number).join(), timed(later), later.map(lucky).reduce((n, x) => n + x, 0), (await since()).pack_gold], ["16,17,18,19,20,21,22,23,24,25", [25], 1, 0]);
   const bronzes = [];
   for (let i = 0; i < 30; i++) bronzes.push(await openAs("pack_bronze"));
-  const thirtieth = bronzes[29].body.cards;
-  eq("the 30th Bronze Pack too, still with its hints card and its Rare card", [timed(bronzes).map((g) => g.body.number), thirtieth.length, thirtieth[0], thirtieth[1].rarity, thirtieth.filter((c) => c.timer).map((c) => c.rarity), (await call("GET /wallet", { as: T })).body.state.packsOpened], [[30], 5, { hints: 5 }, "rare", ["legendary"], { pack_bronze: 30, pack_gold: 20 }]);
+  const thirtieth = bronzes[29].body.cards, endState = (await call("GET /wallet", { as: T })).body.state;
+  eq("thirty Bronze Packs with no Legendary: the 30th, still with its hints card and its Rare card", [timed(bronzes), thirtieth.length, thirtieth[0], thirtieth[1].rarity, thirtieth.filter((c) => c.timer).map((c) => c.rarity), endState.packsOpened, endState.packsSinceLegendary], [[30], 5, { hints: 5 }, "rare", ["legendary"], { pack_bronze: 30, pack_gold: 25 }, { pack_bronze: 0, pack_gold: 0 }]);
+  luck(10);
   eq("the timer is rolled only when it is due", [eco.legendaryDue({ legendaryEvery: 10 }, 8), eco.legendaryDue({ legendaryEvery: 10 }, 9), eco.legendaryDue({ legendaryEvery: 10 }, 19), eco.legendaryDue({ legendaryEvery: 0 }, 9), eco.rollPack(table, rnd, { legendary: true }).some((c) => c.timer)], [false, true, true, false, false]);
+  eq("the count goes up with a pack that held no Legendary and back to 0 with one that did", [eco.dryAfter(3, [{ hints: 5 }, { item: "a", rarity: "rare" }]), eco.dryAfter(3, [{ item: "a", rarity: "rare" }, { item: "b", rarity: "legendary" }]), eco.dryAfter(9, [{ item: "b", rarity: "legendary", guaranteed: true, timer: true }])], [4, 0, 0]);
   eq("with no cosmetics at all there is nothing to roll", eco.packOdds("p", { cards: 5 }, { common: 40 }, []).rarities.length, 0);
   d1.raw.exec("UPDATE items SET active = 0 WHERE kind IN ('avatar', 'prop', 'furniture')");
   await call("POST /shop/buy", { as: A, body: { itemId: "pack_gold", requestId: uid() } });
@@ -848,7 +864,14 @@ function audit(label) {
   ok(`${label}: never more than one free Shop swap a day`, !one("SELECT 1 AS x FROM shop_refreshes WHERE how = 'free' GROUP BY account_id, day HAVING COUNT(*) > 1"));
   ok(`${label}: every Shop swap after it spent a watched ad of its own`, rows("SELECT account_id, COUNT(*) AS n FROM shop_refreshes WHERE how = 'ad' GROUP BY account_id").every((r) => r.n === one("SELECT COUNT(*) AS n FROM ad_tickets WHERE account_id = ? AND placement = 'shop_refresh' AND paid_at IS NOT NULL AND used_at IS NOT NULL", r.account_id).n));
   ok(`${label}: a player's packs of a kind are numbered 1, 2, 3 …`, !one("SELECT 1 AS x FROM pack_opens GROUP BY account_id, pack_id HAVING COUNT(*) <> MAX(seq) OR COUNT(DISTINCT seq) <> COUNT(*)"));
-  ok(`${label}: the Legendary timer's card is in every 30th Bronze, 20th Silver, 10th Gold pack and in no other`, rows("SELECT pack_id, seq, result FROM pack_opens").every((o) => JSON.parse(o.result).some((c) => c.timer) === (o.seq % { pack_bronze: 30, pack_silver: 20, pack_gold: 10 }[o.pack_id] === 0)));
+  ok(`${label}: a pack's count of packs in a row with no Legendary follows the cards, and the timer's card comes only when 29 Bronze, 19 Silver or 9 Gold came before it without one`, (() => {
+    const dry = new Map();
+    return rows("SELECT account_id, pack_id, dry, result FROM pack_opens ORDER BY account_id, pack_id, seq").every((o) => {
+      const key = `${o.account_id} ${o.pack_id}`, was = dry.get(key) || 0, cards = JSON.parse(o.result);
+      dry.set(key, o.dry);
+      return o.dry === eco.dryAfter(was, cards) && (!cards.some((c) => c.timer) || (was >= { pack_bronze: 30, pack_silver: 20, pack_gold: 10 }[o.pack_id] - 1 && cards.find((c) => c.timer).rarity === "legendary"));
+    });
+  })());
   ok(`${label}: a pack's hints are paid once per opened pack`, rows("SELECT account_id, ref FROM ledger WHERE reason = 'pack'").every((l) => one("SELECT 1 AS x FROM pack_opens WHERE account_id = ? AND request_id = ?", l.account_id, l.ref)));
   ok(`${label}: hints never below zero without a refund`, rows("SELECT w.account_id, w.hints FROM wallets w WHERE w.hints < 0").every((w) => one("SELECT 1 AS x FROM ledger WHERE account_id = ? AND reason = 'refund'", w.account_id)));
 }

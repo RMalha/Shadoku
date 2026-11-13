@@ -2,8 +2,10 @@
  * Packs and cards (app/docs/Stuff.xlsx "Packs"; the author's answers of 2026-11-13).
  *
  * A pack holds 5 cards. Bronze: one "5 hints" card, one Rare card, three random cards. Silver: the same with an Epic card.
- * Gold: one Rare card, one Epic card, three random cards. The Legendary timer: the 30th Bronze, 20th Silver or 10th Gold pack
- * a player opens (and every 30th, 20th, 10th after it) holds a guaranteed Legendary card in place of one random card. A random card is Common 40 %, Rare 30 %, Epic 20 %, Legendary 10 % (table pack_odds), then any
+ * Gold: one Rare card, one Epic card, three random cards. The Legendary timer: a player who opens 30 Bronze, 20 Silver or 10
+ * Gold packs in a row with no Legendary card finds a guaranteed one in the last of them, in place of one random card. Any
+ * Legendary card out of a pack of that kind, by chance or by the timer, starts that kind's count again (the author, 2026-11-13).
+ * A random card is Common 40 %, Rare 30 %, Epic 20 %, Legendary 10 % (table pack_odds), then any
  * cosmetic of that rarity with equal chance. Cards are cosmetics (avatar items, hideout props and furniture); duplicates are
  * kept and counted, and three of a kind merge into the next variant: card -> Bronze -> Silver -> Gold -> Diamond.
  *
@@ -17,7 +19,7 @@
 import { post, when, wrote, newOp } from "./ledger.js";
 import { questBumps, questDefs } from "./quests.js";
 import { snapshot } from "./context.js";
-import { CLIENT_ID_RE, COSMETIC_GROUP, MAX_TIER, MERGE_COUNT, VARIANTS, dayKey, legendaryDue, packOdds, randomInt, rollPack } from "./economy.js";
+import { CLIENT_ID_RE, COSMETIC_GROUP, MAX_TIER, MERGE_COUNT, VARIANTS, dayKey, dryAfter, legendaryDue, packOdds, randomInt, rollPack } from "./economy.js";
 
 const ITEM_ID_RE = /^[A-Za-z0-9_.-]{1,64}$/;
 
@@ -50,7 +52,7 @@ export function publishedOdds(info) {
     randomCards: info.random,
     random: info.rarities.filter((r) => r.weight > 0).map((r) => ({ rarity: r.rarity, percent: pct(r.weight, info.total), items: r.items.map((item) => ({ id: item, percent: pct(r.weight, info.total * r.items.length) })) })),
     legendaryTimer: info.legendaryEvery
-      ? { every: info.legendaryEvery, ...sure("legendary"), note: `Every ${info.legendaryEvery}th pack of this kind you open holds a guaranteed Legendary card, in place of one random card.` }
+      ? { every: info.legendaryEvery, ...sure("legendary"), note: `Open ${info.legendaryEvery} packs of this kind in a row with no Legendary card and the last of them holds a guaranteed one, in place of one random card. Any Legendary card from a pack of this kind starts the count again.` }
       : null,
     duplicates: `Duplicates are kept. ${MERGE_COUNT} of the same card merge into its next variant: ${VARIANTS.slice(1).join(", ")}.`,
   };
@@ -78,9 +80,11 @@ export async function openPack(ctx, { packId, oddsVersion, requestId }) {
   const defs = await questDefs(ctx), day = dayKey(now, tz);
   const holds = "EXISTS (SELECT 1 FROM inventory i WHERE i.account_id = ? AND i.item_id = ? AND i.tier = 0 AND i.qty >= 1)";
   for (let attempt = 0; attempt < 4; attempt++) {
-    // which pack of its kind this is decides the Legendary timer: the open is recorded only if that count still stands
-    const opened = (await d.prepare("SELECT COUNT(*) AS n FROM pack_opens WHERE account_id = ? AND pack_id = ?").bind(id, packId).first()).n;
-    const timer = legendaryDue(info, opened);
+    // the Legendary timer: how many packs of this kind in a row held no Legendary card. The open is recorded only if no
+    // other pack of this kind was opened since this was read, so two packs opened at once cannot both be the timer's
+    const last = await d.prepare("SELECT COUNT(*) AS n, COALESCE((SELECT p.dry FROM pack_opens p WHERE p.account_id = ? AND p.pack_id = ? ORDER BY p.seq DESC LIMIT 1), 0) AS dry FROM pack_opens o WHERE o.account_id = ? AND o.pack_id = ?")
+      .bind(id, packId, id, packId).first();
+    const opened = last.n, timer = legendaryDue(info, last.dry);
     const cards = rollPack(info, randomInt, { legendary: timer });
     const hints = cards.reduce((n, c) => n + (c.hints || 0), 0);
     const counts = new Map();
@@ -88,10 +92,10 @@ export async function openPack(ctx, { packId, oddsVersion, requestId }) {
     const op = newOp(), mine = when.gate("pack_opens", op);
     const stmts = [
       d.prepare(
-        `INSERT INTO pack_opens (account_id, request_id, pack_id, seq, odds_version, result, at, op) SELECT ?, ?, ?, ?, ?, ?, ?, ?
+        `INSERT INTO pack_opens (account_id, request_id, pack_id, seq, dry, odds_version, result, at, op) SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?
          WHERE ${holds} AND (SELECT COUNT(*) FROM pack_opens o WHERE o.account_id = ? AND o.pack_id = ?) = ?
          ON CONFLICT (account_id, request_id) DO NOTHING RETURNING request_id`,
-      ).bind(id, requestId, packId, opened + 1, info.version, JSON.stringify(cards), now, op, id, packId, id, packId, opened),
+      ).bind(id, requestId, packId, opened + 1, dryAfter(last.dry, cards), info.version, JSON.stringify(cards), now, op, id, packId, id, packId, opened),
       d.prepare(`UPDATE inventory SET qty = qty - 1 WHERE account_id = ? AND item_id = ? AND tier = 0 AND ${mine.sql}`).bind(id, packId, ...mine.binds),
       ...(hints ? post(d, { id: newOp(), account: id, currency: "hint", delta: hints, reason: "pack", ref: requestId, day, at: now, meta: { pack: packId }, guards: [mine] }) : []),
       ...questBumps(ctx, defs, day, (kind) => kind === "open_pack", mine),

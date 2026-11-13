@@ -112,7 +112,7 @@ export async function snapshot(ctx) {
     d.prepare("SELECT COUNT(*) AS n FROM hint_uses WHERE account_id = ? AND day = ? AND source = 'free'").bind(id, day),
     d.prepare("SELECT COUNT(*) AS n FROM shop_refreshes WHERE account_id = ? AND day = ? AND how = 'free'").bind(id, day),
     d.prepare("SELECT COUNT(*) AS n FROM ad_tickets WHERE account_id = ? AND placement = 'shop_refresh' AND paid_at IS NOT NULL AND used_at IS NULL").bind(id),
-    d.prepare("SELECT pack_id, COUNT(*) AS n FROM pack_opens WHERE account_id = ? GROUP BY pack_id").bind(id),
+    d.prepare("SELECT o.pack_id, COUNT(*) AS n, (SELECT p.dry FROM pack_opens p WHERE p.account_id = o.account_id AND p.pack_id = o.pack_id ORDER BY p.seq DESC LIMIT 1) AS dry FROM pack_opens o WHERE o.account_id = ? GROUP BY o.pack_id").bind(id),
   ])).slice(deal.length);
   const wallet = r[0].results[0] || { coins: 0, hints: 0, version: 0 };
   const streak = r[3].results[0] || { current: 0, best: 0, last_date: "", cycle_day: 0 };
@@ -144,7 +144,9 @@ export async function snapshot(ctx) {
     questRefresh: { dailyFree: !freeUsed.has("d"), weeklyFree: !freeUsed.has("w"), adTickets: r[7].results[0].n },
     // the Shop's cosmetics of the day: one free swap a day; each paid "shop_refresh" ad ticket is one more
     shopRefresh: { free: r[10].results[0].n === 0, adTickets: r[11].results[0].n },
-    packsOpened: Object.fromEntries(r[12].results.map((o) => [o.pack_id, o.n])), // per kind of pack: the Legendary timer counts these (GET /shop: odds.legendaryTimer.every)
+    packsOpened: Object.fromEntries(r[12].results.map((o) => [o.pack_id, o.n])), // per kind of pack
+    // the Legendary timer, per kind of pack: packs opened in a row with no Legendary card (GET /shop: odds.legendaryTimer.every is the row that pays)
+    packsSinceLegendary: Object.fromEntries(r[12].results.map((o) => [o.pack_id, o.dry])),
     social: Object.fromEntries(SOCIAL_NETWORKS.map((n) => [n, visits.get(n) || "new"])),
   };
 }

@@ -128,17 +128,20 @@ CREATE TABLE pack_odds (
 );
 
 -- Every pack opened: the audit of every roll, and why a repeated request opens nothing more. result: the cards, as JSON.
--- seq: the account's count of packs of this kind, this one included (the Legendary timer: every Nth holds a Legendary card).
+-- seq: the account's count of packs of this kind, this one included. dry: its packs of this kind in a row with no Legendary
+-- card, this one included (0: this one held a Legendary). The Legendary timer pays the pack that would make it N.
 CREATE TABLE pack_opens (
   account_id TEXT NOT NULL,
   request_id TEXT NOT NULL,
   pack_id TEXT NOT NULL,
   seq INTEGER NOT NULL,
+  dry INTEGER NOT NULL CHECK (dry >= 0),
   odds_version TEXT NOT NULL,
   result TEXT NOT NULL,
   at INTEGER NOT NULL,
   op TEXT NOT NULL,
-  PRIMARY KEY (account_id, request_id)
+  PRIMARY KEY (account_id, request_id),
+  UNIQUE (account_id, pack_id, seq)
 );
 
 -- Every swap of one of a player's "cosmetics of the day" in the Shop. shelf: '<group>:<rarity>'; item_id: what the swap put

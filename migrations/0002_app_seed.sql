@@ -43,8 +43,9 @@ INSERT INTO quest_defs (id, period, kind, target, reward) VALUES
   ('w_reward7',   'weekly', 'streak',          7,  100);
 
 -- The Shop, for coins (sheet "Shop"). Packs: what they hold is in `data` (5 cards; "hints": a 5-hints card; "guaranteed": one
--- card of exactly each rarity listed; the rest random by pack_odds below; "legendaryEvery": the Legendary timer: every Nth
--- pack of that kind a player opens holds a guaranteed Legendary card in place of a random one). Bought or won packs wait in the inventory until they are opened.
+-- card of exactly each rarity listed; the rest random by pack_odds below; "legendaryEvery": the Legendary timer: N packs
+-- of that kind opened in a row with no Legendary card, and the Nth holds a guaranteed one in place of a random card). Bought
+-- or won packs wait in the inventory until they are opened.
 -- Cosmetics have no rows yet: they come with their art, each with a rarity, and are priced by it (50 / 100 / 200 / 400:
 -- functions/_lib/app/economy.js COSMETIC_PRICES). Until some exist, a pack cannot be opened (409 empty_pool).
 INSERT INTO items (id, kind, price_coins, data) VALUES

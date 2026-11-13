@@ -197,8 +197,14 @@ export function packOdds(packId, data, weights, pool) {
   return { version, cards, hints, guaranteed, legendaryEvery, random, rarities: total || guaranteed.length ? rarities : [], total };
 }
 
-/** → true when the next pack of this kind is the one the Legendary timer pays: `opened` = how many the account opened so far. */
-export const legendaryDue = (info, opened) => info.legendaryEvery > 0 && (opened + 1) % info.legendaryEvery === 0;
+/**
+ * → true when the next pack of this kind is the one the Legendary timer pays. `dry`: how many packs of this kind the account
+ * opened in a row with no Legendary card (dryAfter). The timer pays the Nth of such a row: luck starts the count again.
+ */
+export const legendaryDue = (info, dry) => info.legendaryEvery > 0 && dry + 1 >= info.legendaryEvery;
+
+/** → the count of packs in a row with no Legendary card, after a pack with these cards: 0 when it held one (by chance or by the timer). */
+export const dryAfter = (dry, cards) => (cards.some((c) => c.rarity === "legendary") ? 0 : dry + 1);
 
 /**
  * Rolls one pack from its table. `rnd(n)` → an integer in [0, n). `legendary`: the Legendary timer is due (legendaryDue):
