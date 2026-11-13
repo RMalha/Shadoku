@@ -1,0 +1,9446 @@
+{
+ "id": "daily-2026-11-14",
+ "title": "Daily Contract, Saturday 14 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Hard · Opera House",
+ "theme": "OPERA",
+ "difficulty": "Hard",
+ "tier": "hard",
+ "shape": "rect",
+ "seed": 261114,
+ "attempt": 507,
+ "traitMode": "off",
+ "propMode": "require",
+ "castKey": "OPH0909ROR1-261114",
+ "puzzleId": "OPH0909ROR1-261114",
+ "engine": "V10.7",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 91,
+ "zoneWord": "room",
+ "size": 9,
+ "rooms": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   3,
+   3,
+   3
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   3,
+   3,
+   3
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   3,
+   3,
+   3
+  ],
+  [
+   1,
+   1,
+   5,
+   6,
+   6,
+   6,
+   2,
+   2,
+   4
+  ],
+  [
+   1,
+   1,
+   5,
+   6,
+   6,
+   6,
+   2,
+   2,
+   4
+  ],
+  [
+   1,
+   1,
+   5,
+   6,
+   6,
+   6,
+   2,
+   2,
+   4
+  ],
+  [
+   1,
+   1,
+   5,
+   6,
+   6,
+   6,
+   2,
+   2,
+   4
+  ],
+  [
+   1,
+   1,
+   5,
+   6,
+   6,
+   6,
+   2,
+   2,
+   4
+  ],
+  [
+   1,
+   1,
+   5,
+   6,
+   6,
+   6,
+   2,
+   2,
+   4
+  ]
+ ],
+ "roomNames": [
+  "Stage",
+  "Prop Store",
+  "Balcony",
+  "Backstage",
+  "Green Room",
+  "Lobby",
+  "Pit"
+ ],
+ "roomIds": [
+  "STAGE",
+  "PROP_STORE",
+  "BALCONY",
+  "BACKSTAGE",
+  "GREEN_ROOM",
+  "LOBBY",
+  "PIT"
+ ],
+ "doors": [
+  [
+   [
+    0,
+    5
+   ],
+   [
+    0,
+    6
+   ]
+  ],
+  [
+   [
+    1,
+    5
+   ],
+   [
+    1,
+    6
+   ]
+  ],
+  [
+   [
+    2,
+    0
+   ],
+   [
+    3,
+    0
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ]
+  ],
+  [
+   [
+    2,
+    4
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  [
+   [
+    2,
+    8
+   ],
+   [
+    3,
+    8
+   ]
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   [
+    4,
+    3
+   ]
+  ],
+  [
+   [
+    5,
+    2
+   ],
+   [
+    5,
+    3
+   ]
+  ],
+  [
+   [
+    5,
+    5
+   ],
+   [
+    5,
+    6
+   ]
+  ],
+  [
+   [
+    5,
+    7
+   ],
+   [
+    5,
+    8
+   ]
+  ],
+  [
+   [
+    6,
+    1
+   ],
+   [
+    6,
+    2
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    6,
+    6
+   ]
+  ],
+  [
+   [
+    6,
+    7
+   ],
+   [
+    6,
+    8
+   ]
+  ],
+  [
+   [
+    7,
+    2
+   ],
+   [
+    7,
+    3
+   ]
+  ],
+  [
+   [
+    7,
+    5
+   ],
+   [
+    7,
+    6
+   ]
+  ],
+  [
+   [
+    8,
+    1
+   ],
+   [
+    8,
+    2
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   8,
+   7,
+   "S"
+  ],
+  [
+   3,
+   8,
+   "E"
+  ],
+  [
+   8,
+   2,
+   "S"
+  ]
+ ],
+ "contents": [
+  [
+   "STAGE_CURTAIN",
+   "STAGE_CURTAIN",
+   "STAGE_CURTAIN",
+   "STAGE_CURTAIN",
+   "STAGE_CURTAIN",
+   "",
+   "STOOL",
+   "STAGE_FLAT",
+   "STOOL"
+  ],
+  [
+   "",
+   "",
+   "",
+   "FOOTLIGHTS",
+   "",
+   "",
+   "STOOL",
+   "",
+   "STOOL"
+  ],
+  [
+   "",
+   "",
+   "",
+   "FOOTLIGHTS",
+   "BROKEN_GLASS",
+   "",
+   "STAGE_FLAT",
+   "CRATE",
+   ""
+  ],
+  [
+   "",
+   "PROPS_TABLE",
+   "",
+   "DOUBLE_BASS",
+   "CONDUCTOR_PODIUM",
+   "CELLO",
+   "",
+   "SPOTLIGHT",
+   ""
+  ],
+  [
+   "FOOTPRINTS",
+   "",
+   "",
+   "",
+   "MUSIC_STAND",
+   "MUSIC_STAND",
+   "",
+   "",
+   ""
+  ],
+  [
+   "FOOTPRINTS",
+   "STAGE_FLAT",
+   "CARPET_RUNNER",
+   "",
+   "",
+   "",
+   "THEATER_SEAT",
+   "THEATER_SEAT",
+   ""
+  ],
+  [
+   "FOOTPRINTS",
+   "",
+   "CARPET_RUNNER",
+   "DOUBLE_BASS",
+   "HARP",
+   "CORPSE",
+   "",
+   "",
+   ""
+  ],
+  [
+   "",
+   "STAGE_FLAT",
+   "CARPET_RUNNER",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "FOOTPRINTS",
+   "",
+   "",
+   "COSTUME_TRUNK"
+  ],
+  [
+   "PROPS_TABLE",
+   "BROKEN_GLASS",
+   "",
+   "",
+   "TIMPANI",
+   "",
+   "SPOTLIGHT",
+   "",
+   "WARDROBE"
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "STAGE_CURTAIN",
+   "cells": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ]
+   ]
+  },
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     4,
+     0
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     6,
+     0
+    ]
+   ]
+  },
+  {
+   "kind": "CARPET_RUNNER",
+   "cells": [
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     7,
+     2
+    ]
+   ]
+  },
+  {
+   "kind": "FOOTPRINTS",
+   "cells": [
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  6,
+  5
+ ],
+ "biomeProps": [
+  "CARPET_RUNNER",
+  "CELLO",
+  "CONDUCTOR_PODIUM",
+  "COSTUME_TRUNK",
+  "DOUBLE_BASS",
+  "FOOTLIGHTS",
+  "HARP",
+  "MUSIC_STAND",
+  "PROPS_TABLE",
+  "SPOTLIGHT",
+  "STAGE_CURTAIN",
+  "STAGE_FLAT",
+  "THEATER_SEAT",
+  "TIMPANI",
+  "WARDROBE"
+ ],
+ "propClasses": {
+  "BROKEN_GLASS": "LOW",
+  "CARPET_RUNNER": "LOW",
+  "CELLO": "SHORT",
+  "CONDUCTOR_PODIUM": "LOW",
+  "COSTUME_TRUNK": "SHORT",
+  "CRATE": "SHORT",
+  "DOUBLE_BASS": "TALL",
+  "FOOTLIGHTS": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "HARP": "PERCH",
+  "MUSIC_STAND": "SHORT",
+  "PROPS_TABLE": "SHORT",
+  "SPOTLIGHT": "TALL",
+  "STAGE_CURTAIN": "TALL",
+  "STAGE_FLAT": "TALL",
+  "STOOL": "LOW",
+  "THEATER_SEAT": "LOW",
+  "TIMPANI": "SHORT",
+  "WARDROBE": "TALL"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.321,
+  "lowTiles": 18,
+  "openTiles": 56,
+  "lowKinds": [
+   "BROKEN_GLASS",
+   "CARPET_RUNNER",
+   "CONDUCTOR_PODIUM",
+   "FOOTPRINTS",
+   "STOOL",
+   "THEATER_SEAT"
+  ],
+  "roomProps": {
+   "STAGE": [
+    "BROKEN_GLASS",
+    "FOOTLIGHTS",
+    "STAGE_CURTAIN"
+   ],
+   "BACKSTAGE": [
+    "CRATE",
+    "STAGE_FLAT",
+    "STOOL"
+   ],
+   "PROP_STORE": [
+    "BROKEN_GLASS",
+    "FOOTPRINTS",
+    "PROPS_TABLE",
+    "STAGE_FLAT"
+   ],
+   "PIT": [
+    "CELLO",
+    "CONDUCTOR_PODIUM",
+    "DOUBLE_BASS",
+    "FOOTPRINTS",
+    "HARP",
+    "MUSIC_STAND",
+    "TIMPANI"
+   ],
+   "BALCONY": [
+    "SPOTLIGHT",
+    "THEATER_SEAT"
+   ],
+   "LOBBY": [
+    "CARPET_RUNNER"
+   ],
+   "GREEN_ROOM": [
+    "COSTUME_TRUNK",
+    "WARDROBE"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Albert",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "beret",
+    "facialHair": "mustache",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 2
+   },
+   "look": "grey crop hair, round glasses, beret, mustache, necktie",
+   "clue": "Albert was in row 9.",
+   "text": "Albert was in row 9.",
+   "atoms": [
+    {
+     "kind": "ROW",
+     "subject": "A",
+     "params": {
+      "index": 8
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    8,
+    3
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Benedict",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 0
+   },
+   "look": "grey curly hair, bowtie",
+   "clue": "Benedict could see the Corpse.",
+   "text": "Benedict could see the Corpse.",
+   "atoms": [
+    {
+     "kind": "SEE_CORPSE",
+     "subject": "B",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    7
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Clara",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 1,
+    "cloth": 3
+   },
+   "look": "black curly hair, necktie",
+   "clue": "Clara was not in the Backstage and was beside a scenery flat.",
+   "text": "Clara was not in the Backstage and was beside a scenery flat.",
+   "atoms": [
+    {
+     "kind": "NOT_ROOM",
+     "subject": "C",
+     "params": {
+      "room": "BACKSTAGE"
+     }
+    },
+    {
+     "kind": "BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "STAGE_FLAT"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    8,
+    1
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dashiell",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "grey",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 1,
+    "cloth": 7
+   },
+   "look": "grey crop hair, scarf",
+   "clue": "Dashiell was on the Balcony.",
+   "text": "Dashiell was on the Balcony.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "D",
+     "params": {
+      "room": "BALCONY"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    7,
+    6
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Eloise",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 4
+   },
+   "look": "black bob hair",
+   "clue": "Eloise was exactly one row north of Dashiell.",
+   "text": "Eloise was exactly one row north of Dashiell.",
+   "atoms": [
+    {
+     "kind": "EXACT_OFFSET",
+     "subject": "E",
+     "params": {
+      "other": "D",
+      "dir": "N",
+      "dist": 1
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    2
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Florence",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bun",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 4,
+    "cloth": 7
+   },
+   "look": "blonde bun hair",
+   "clue": "Florence was south of Josephine.",
+   "text": "Florence was south of Josephine.",
+   "atoms": [
+    {
+     "kind": "SOUTH_OF",
+     "subject": "F",
+     "params": {
+      "other": "J"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    8
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Genevieve",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 1,
+    "cloth": 5
+   },
+   "look": "black long hair, bowtie",
+   "clue": "Genevieve was alone and was in column 5.",
+   "text": "Genevieve was alone and was in column 5.",
+   "atoms": [
+    {
+     "kind": "COL",
+     "subject": "G",
+     "params": {
+      "index": 4
+     }
+    },
+    {
+     "kind": "ALONE",
+     "subject": "G",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    4
+   ]
+  },
+  {
+   "id": "H",
+   "name": "Hugo",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "scarf",
+    "skin": 1,
+    "cloth": 1
+   },
+   "look": "blonde short hair, goatee, scarf",
+   "clue": "Hugo was standing on a trail of footprints and was not beside any scenery flat.",
+   "text": "Hugo was standing on a trail of footprints and was not beside any scenery flat.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "H",
+     "params": {
+      "prop": "FOOTPRINTS"
+     }
+    },
+    {
+     "kind": "NOT_BESIDE",
+     "subject": "H",
+     "params": {
+      "prop": "STAGE_FLAT"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "H",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    0
+   ]
+  },
+  {
+   "id": "I",
+   "name": "Isidore",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "beret",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 1
+   },
+   "look": "brown short hair, round glasses, beret",
+   "clue": "Isidore was beside a double bass.",
+   "text": "Isidore was beside a double bass.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "I",
+     "params": {
+      "prop": "DOUBLE_BASS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "I",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    3
+   ]
+  },
+  {
+   "id": "J",
+   "name": "Josephine",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "short",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 0
+   },
+   "look": "brown short hair",
+   "clue": "Josephine was west of Benedict.",
+   "text": "Josephine was west of Benedict.",
+   "atoms": [
+    {
+     "kind": "WEST_OF",
+     "subject": "J",
+     "params": {
+      "other": "B"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "J",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    6
+   ]
+  }
+ ],
+ "shadow": [
+  5,
+  5
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [
+  {
+   "id": "EXACTLY_ONE_ON:CARPET_RUNNER",
+   "text": "Exactly one person was on the carpet runner.",
+   "kind": "EXACTLY_ONE_ON",
+   "params": {
+    "prop": "CARPET_RUNNER"
+   }
+  }
+ ],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 2,
+   "rule": "Alone in a room",
+   "kind": "eliminate",
+   "text": "Genevieve was alone in the room, but Isidore must be in the Pit, so Genevieve cannot be in it.",
+   "focus": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      4
+     ],
+     [
+      7,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_BLOCKED_ONE",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "G",
+     "bits": [
+      {
+       "templateKey": "FRAG_MUST_BE_IN",
+       "params": {
+        "suspects": [
+         "I"
+        ],
+        "room": "PIT"
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Genevieve can only be at r2c5 or r3c5, and those tiles all lie on one sightline. Whichever one Genevieve takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+   "focus": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      6,
+      4
+     ]
+    ],
+    "E": [
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "F": [
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "I": [
+     [
+      3,
+      4
+     ],
+     [
+      6,
+      4
+     ]
+    ],
+    "J": [
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      5,
+      4
+     ],
+     [
+      6,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "G",
+     "options": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ]
+     ],
+     "coords": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 2,
+   "rule": "Alone in a room",
+   "kind": "eliminate",
+   "text": "Genevieve was alone and can only be on the Stage, so nobody else can be on the Stage.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      5
+     ]
+    ],
+    "F": [
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      5
+     ]
+    ],
+    "J": [
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+    "ruleKey": "RULE_ALONE",
+    "params": {
+     "owner": "G",
+     "room": "STAGE"
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Eloise was exactly one row north of Dashiell. Dashiell can only be in rows 4–9, which leaves Eloise rows 3–8.",
+   "focus": [
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      8
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "E",
+        "params": {
+         "other": "D",
+         "dir": "N",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "D",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 3,
+          "to": 8
+         }
+        },
+        "x": "E",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 2,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Florence was south of Josephine. Florence can reach row 9 at most, so Josephine must be in rows 1–8; Josephine is in row 1 at the earliest, so Florence must be in rows 2–9.",
+   "focus": [
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      8
+     ]
+    ],
+    "J": [
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      2
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "F",
+       "atom": {
+        "kind": "SOUTH_OF",
+        "subject": "F",
+        "params": {
+         "other": "J"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.ROW",
+       "params": {
+        "y": "F",
+        "line": 8,
+        "x": "J",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 0,
+          "to": 7
+         }
+        }
+       }
+      },
+      {
+       "templateKey": "FRAG_COMPASS_MIN.ROW",
+       "params": {
+        "x": "J",
+        "line": 0,
+        "y": "F",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.ROW",
+         "params": {
+          "from": 1,
+          "to": 8
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Josephine was west of Benedict. Benedict can reach column 9 at most, so Josephine must be in columns 1–8.",
+   "focus": [
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     8
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      0,
+      8
+     ],
+     [
+      1,
+      8
+     ],
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "J",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "J",
+        "params": {
+         "other": "B"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MAX.COL",
+       "params": {
+        "y": "B",
+        "line": 8,
+        "x": "J",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 0,
+          "to": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Someone must stand here",
+   "kind": "eliminate",
+   "text": "Exactly one person was on the carpet runner. Someone still has to stand on r6c3, r7c3 or r8c3, and every one of those tiles watches r4c3, r5c3, r9c3, so nobody can stand there.",
+   "focus": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      2
+     ]
+    ],
+    "E": [
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      2
+     ]
+    ],
+    "F": [
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      8,
+      2
+     ]
+    ],
+    "J": [
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_WITNESS_SET",
+    "ruleKey": "RULE_WITNESS",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "CARPET_RUNNER"
+      }
+     },
+     "options": [
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       7,
+       2
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       8,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r1c6 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Josephine can still see it, so Josephine must stand on r1c7.",
+   "focus": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ]
+   ],
+   "elims": {
+    "J": [
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      0,
+      5
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     },
+     "suspect": "J",
+     "coords": [
+      [
+       0,
+       6
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Josephine “was west of Benedict”: every tile that fits is ruled out except r1c7. Place Josephine there.",
+   "focus": [
+    [
+     0,
+     6
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      6
+     ]
+    ]
+   },
+   "suspect": "J",
+   "cell": [
+    0,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "J",
+     "clueOf": "J",
+     "coord": [
+      0,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Josephine was west of Benedict. Josephine is in column 7 at the earliest, so Benedict must be in columns 8–9.",
+   "focus": [
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     8,
+     5
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      5,
+      5
+     ],
+     [
+      6,
+      6
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      8,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COMPASS_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "J",
+       "atom": {
+        "kind": "WEST_OF",
+        "subject": "J",
+        "params": {
+         "other": "B"
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_COMPASS_MIN.COL",
+       "params": {
+        "x": "J",
+        "line": 6,
+        "y": "B",
+        "span": {
+         "templateKey": "FRAG_SPAN_RANGE.COL",
+         "params": {
+          "from": 7,
+          "to": 8
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 11,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Benedict can only be at r7c8 or r7c9, and those tiles all lie on one sightline. Whichever one Benedict takes, the whole stretch is watched, so nobody else can stand on r7c7, r7c8, r7c9.",
+   "focus": [
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ]
+    ],
+    "E": [
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      8
+     ]
+    ],
+    "F": [
+     [
+      6,
+      6
+     ],
+     [
+      6,
+      7
+     ],
+     [
+      6,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "B",
+     "options": [
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ]
+     ],
+     "coords": [
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 12,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Eloise was exactly one row north of Dashiell. Dashiell can only be in rows 4, 5, 6, 8 or 9, which leaves Eloise rows 3, 4, 5, 7 or 8.",
+   "focus": [
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "E",
+        "params": {
+         "other": "D",
+         "dir": "N",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "D",
+        "src": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           3,
+           4,
+           5,
+           7,
+           8
+          ]
+         }
+        },
+        "x": "E",
+        "left": {
+         "templateKey": "FRAG_LINES_LIST.ROW",
+         "params": {
+          "lines": [
+           2,
+           3,
+           4,
+           6,
+           7
+          ]
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 13,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r3c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Genevieve can still see it, so Genevieve must stand on r3c5.",
+   "focus": [
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "elims": {
+    "G": [
+     [
+      1,
+      4
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      2,
+      1
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     },
+     "suspect": "G",
+     "coords": [
+      [
+       2,
+       4
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 14,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Genevieve “was alone and was in column 5”: of the 6 tiles that fit, only r3c5 is still open. Place Genevieve there.",
+   "focus": [
+    [
+     2,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "G",
+   "cell": [
+    2,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      2,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 15,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: r2c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Florence can still see it, so Florence must stand on r2c8, r2c9.",
+   "focus": [
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      5,
+      3
+     ],
+     [
+      5,
+      5
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      2
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ],
+     [
+      8,
+      1
+     ],
+     [
+      8,
+      3
+     ],
+     [
+      8,
+      5
+     ],
+     [
+      8,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "coord": [
+      1,
+      1
+     ],
+     "ban": {
+      "templateKey": "BAN_ALONE_IN",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     },
+     "suspect": "F",
+     "coords": [
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 16,
+   "tier": 2,
+   "rule": "Exactly-one census",
+   "kind": "eliminate",
+   "text": "Exactly one person was on the carpet runner. Only Eloise can still reach the carpet runner, so she must be on one.",
+   "focus": [
+    [
+     5,
+     2
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     7,
+     2
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      2,
+      8
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      8
+     ],
+     [
+      4,
+      0
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      3
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      4,
+      8
+     ],
+     [
+      6,
+      0
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      7,
+      0
+     ],
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ],
+     [
+      7,
+      6
+     ],
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_CENSUS_ONLY_REACH",
+    "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+    "params": {
+     "rule": {
+      "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+      "params": {
+       "prop": "CARPET_RUNNER"
+      }
+     },
+     "owner": "E",
+     "prop": "CARPET_RUNNER"
+    }
+   }
+  },
+  {
+   "n": 17,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Eloise was exactly one row north of Dashiell. Eloise can only be in rows 7–8, which leaves Dashiell rows 8–9.",
+   "focus": [
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "E",
+        "params": {
+         "other": "D",
+         "dir": "N",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "E",
+        "src": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 6,
+          "to": 7
+         }
+        },
+        "x": "D",
+        "left": {
+         "templateKey": "FRAG_LINES_RANGE.ROW",
+         "params": {
+          "from": 7,
+          "to": 8
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 18,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Eloise stood on r8c3? Without following any clue further, r4c7, r5c7 could never be watched. So Eloise cannot be on r8c3.",
+   "focus": [
+    [
+     7,
+     2
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      7,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "E",
+     "coord": [
+      7,
+      2
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         3,
+         6
+        ],
+        [
+         4,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 19,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Eloise “was exactly one row north of Dashiell”: every tile that fits is ruled out except r7c3. Place Eloise there.",
+   "focus": [
+    [
+     6,
+     2
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      6,
+      1
+     ]
+    ],
+    "H": [
+     [
+      6,
+      0
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    6,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      6,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 20,
+   "tier": 2,
+   "rule": "Compass squeeze",
+   "kind": "eliminate",
+   "text": "Eloise was exactly one row north of Dashiell. Eloise can only be in row 7, which leaves Dashiell row 8.",
+   "focus": [
+    [
+     8,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      8,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_OFFSET_SQUEEZE",
+    "ruleKey": "RULE_COMPASS",
+    "params": {
+     "said": {
+      "templateKey": "FRAG_SAID",
+      "params": {
+       "subject": "E",
+       "atom": {
+        "kind": "EXACT_OFFSET",
+        "subject": "E",
+        "params": {
+         "other": "D",
+         "dir": "N",
+         "dist": 1
+        }
+       }
+      }
+     },
+     "bits": [
+      {
+       "templateKey": "FRAG_OFFSET_BIT",
+       "params": {
+        "y": "E",
+        "src": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 6
+         }
+        },
+        "x": "D",
+        "left": {
+         "templateKey": "FRAG_LINES_ONE.ROW",
+         "params": {
+          "line": 7
+         }
+        }
+       }
+      }
+     ]
+    }
+   }
+  },
+  {
+   "n": 21,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Dashiell can only be at r8c7 or r8c8, and those tiles all lie on one sightline. Whichever one Dashiell takes, the whole stretch is watched, so nobody else can stand on r8c4, r8c5, r8c6.",
+   "focus": [
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "H": [
+     [
+      7,
+      3
+     ],
+     [
+      7,
+      4
+     ],
+     [
+      7,
+      5
+     ]
+    ],
+    "I": [
+     [
+      7,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "D",
+     "options": [
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "coords": [
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 22,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Hugo “was standing on a trail of footprints and was not beside any scenery flat”: of the 5 tiles that fit, only r5c1 is still open. Place Hugo there.",
+   "focus": [
+    [
+     4,
+     0
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      7,
+      0
+     ]
+    ]
+   },
+   "suspect": "H",
+   "cell": [
+    4,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "H",
+     "clueOf": "H",
+     "coord": [
+      4,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 23,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Clara “was not in the Backstage and was beside a scenery flat”: of the 5 tiles that fit, only r9c2 is still open. Place Clara there.",
+   "focus": [
+    [
+     8,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      1
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    8,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      8,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 24,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Dashiell stood on r8c8? Without following any clue further, r4c7, r5c7 could never be watched. So Dashiell cannot be on r8c8.",
+   "focus": [
+    [
+     7,
+     7
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      7,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "D",
+     "coord": [
+      7,
+      7
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         3,
+         6
+        ],
+        [
+         4,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 25,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dashiell “was on the Balcony”: every tile that fits is ruled out except r8c7. Place Dashiell there.",
+   "focus": [
+    [
+     7,
+     6
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    7,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      7,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 26,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Albert stood on r9c8? Without following any clue further, r9c4, r9c6 could never be watched. So Albert cannot be on r9c8.",
+   "focus": [
+    [
+     8,
+     7
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "A",
+     "coord": [
+      8,
+      7
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         8,
+         3
+        ],
+        [
+         8,
+         5
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 27,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Benedict stood on r7c9? Without following any clue further, r5c8, r9c8 could never be watched. So Benedict cannot be on r7c9.",
+   "focus": [
+    [
+     6,
+     8
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      6,
+      8
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "B",
+     "coord": [
+      6,
+      8
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         4,
+         7
+        ],
+        [
+         8,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 28,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Benedict “could see the Corpse”: of the 7 tiles that fit, only r7c8 is still open. Place Benedict there.",
+   "focus": [
+    [
+     6,
+     7
+    ]
+   ],
+   "elims": {},
+   "suspect": "B",
+   "cell": [
+    6,
+    7
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      6,
+      7
+     ]
+    }
+   }
+  },
+  {
+   "n": 29,
+   "tier": 3,
+   "rule": "Coverage check (lookahead)",
+   "kind": "eliminate",
+   "text": "What if Florence stood on r2c8? Without following any clue further, r1c9, r3c9 could never be watched. So Florence cannot be on r2c8.",
+   "focus": [
+    [
+     1,
+     7
+    ]
+   ],
+   "elims": {
+    "F": [
+     [
+      1,
+      7
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_COVER_CHECK",
+    "ruleKey": "RULE_COVER_CHECK",
+    "params": {
+     "suspect": "F",
+     "coord": [
+      1,
+      7
+     ],
+     "contra": {
+      "templateKey": "CONTRA_NEVER_WATCHED",
+      "params": {
+       "coords": [
+        [
+         0,
+         8
+        ],
+        [
+         2,
+         8
+        ]
+       ]
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 30,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Florence “was south of Josephine”: every tile that fits is ruled out except r2c9. Place Florence there.",
+   "focus": [
+    [
+     1,
+     8
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    1,
+    8
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_RULED_OUT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      1,
+      8
+     ]
+    }
+   }
+  },
+  {
+   "n": 31,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: for Albert, r9c6 is too exposed (S. H. Adow would have nowhere to hide), so Albert cannot stand there.",
+   "focus": [
+    [
+     8,
+     5
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      8,
+      5
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "suspect": "A",
+     "coords": [
+      [
+       8,
+       5
+      ]
+     ],
+     "reason": {
+      "templateKey": "REASON_TOO_EXPOSED",
+      "params": {
+       "who": "S"
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 32,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Albert “was in row 9”: of the 5 tiles that fit, only r9c4 is still open. Place Albert there.",
+   "focus": [
+    [
+     8,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    8,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      8,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 33,
+   "tier": 2,
+   "rule": "The blindspot law",
+   "kind": "eliminate",
+   "text": "The blindspot law: for Isidore, r6c4 is too exposed (S. H. Adow would have nowhere to hide), so Isidore cannot stand there.",
+   "focus": [
+    [
+     5,
+     3
+    ]
+   ],
+   "elims": {
+    "I": [
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+    "ruleKey": "RULE_SHADOW_LAW",
+    "params": {
+     "suspect": "I",
+     "coords": [
+      [
+       5,
+       3
+      ]
+     ],
+     "reason": {
+      "templateKey": "REASON_TOO_EXPOSED",
+      "params": {
+       "who": "S"
+      }
+     }
+    }
+   }
+  },
+  {
+   "n": 34,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Isidore “was beside a double bass”: of the 5 tiles that fit, only r5c4 is still open. Place Isidore there.",
+   "focus": [
+    [
+     4,
+     3
+    ]
+   ],
+   "elims": {},
+   "suspect": "I",
+   "cell": [
+    4,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 5,
+     "suspect": "I",
+     "clueOf": "I",
+     "coord": [
+      4,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 35,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r6c6. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     5,
+     5
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    5,
+    5
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      5,
+      5
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "J",
+   "cell": [
+    0,
+    6
+   ],
+   "needs": [],
+   "tier": 2,
+   "fits": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "key": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone in the room, but Isidore must be in the Pit, so Genevieve cannot be in it.",
+     "focus": [
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "I"
+          ],
+          "room": "PIT"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Genevieve can only be at r2c5 or r3c5, and those tiles all lie on one sightline. Whichever one Genevieve takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        6,
+        4
+       ]
+      ],
+      "E": [
+       [
+        1,
+        4
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "F": [
+       [
+        1,
+        4
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "I": [
+       [
+        3,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "J": [
+       [
+        1,
+        4
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "G",
+       "options": [
+        [
+         1,
+         4
+        ],
+        [
+         2,
+         4
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         4
+        ],
+        [
+         2,
+         4
+        ],
+        [
+         3,
+         4
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         6,
+         4
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone and can only be on the Stage, so nobody else can be on the Stage.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        0,
+        5
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ]
+      ],
+      "F": [
+       [
+        0,
+        5
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ]
+      ],
+      "J": [
+       [
+        0,
+        5
+       ],
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Eloise was exactly one row north of Dashiell. Dashiell can only be in rows 4–9, which leaves Eloise rows 3–8.",
+     "focus": [
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       1,
+       6
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        8
+       ],
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "D",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "D",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 8
+           }
+          },
+          "x": "E",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 2,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Florence was south of Josephine. Florence can reach row 9 at most, so Josephine must be in rows 1–8; Josephine is in row 1 at the earliest, so Florence must be in rows 2–9.",
+     "focus": [
+      [
+       0,
+       6
+      ],
+      [
+       0,
+       8
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        6
+       ],
+       [
+        0,
+        8
+       ]
+      ],
+      "J": [
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "F",
+         "atom": {
+          "kind": "SOUTH_OF",
+          "subject": "F",
+          "params": {
+           "other": "J"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.ROW",
+         "params": {
+          "y": "F",
+          "line": 8,
+          "x": "J",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 0,
+            "to": 7
+           }
+          }
+         }
+        },
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "J",
+          "line": 0,
+          "y": "F",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 1,
+            "to": 8
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Josephine was west of Benedict. Benedict can reach column 9 at most, so Josephine must be in columns 1–8.",
+     "focus": [
+      [
+       0,
+       8
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       2,
+       8
+      ],
+      [
+       3,
+       8
+      ],
+      [
+       4,
+       8
+      ],
+      [
+       5,
+       8
+      ],
+      [
+       6,
+       8
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        0,
+        8
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        8
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "J",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MAX.COL",
+         "params": {
+          "y": "B",
+          "line": 8,
+          "x": "J",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 0,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 2,
+     "rule": "Someone must stand here",
+     "kind": "eliminate",
+     "text": "Exactly one person was on the carpet runner. Someone still has to stand on r6c3, r7c3 or r8c3, and every one of those tiles watches r4c3, r5c3, r9c3, so nobody can stand there.",
+     "focus": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       8,
+       2
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        8,
+        2
+       ]
+      ],
+      "E": [
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ]
+      ],
+      "F": [
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        8,
+        2
+       ]
+      ],
+      "J": [
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_WITNESS_SET",
+      "ruleKey": "RULE_WITNESS",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "CARPET_RUNNER"
+        }
+       },
+       "options": [
+        [
+         5,
+         2
+        ],
+        [
+         6,
+         2
+        ],
+        [
+         7,
+         2
+        ]
+       ],
+       "coords": [
+        [
+         3,
+         2
+        ],
+        [
+         4,
+         2
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 8,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r1c6 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Josephine can still see it, so Josephine must stand on r1c7.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       0,
+       6
+      ]
+     ],
+     "elims": {
+      "J": [
+       [
+        1,
+        6
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        0,
+        5
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "G",
+         "room": "STAGE"
+        }
+       },
+       "suspect": "J",
+       "coords": [
+        [
+         0,
+         6
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 9,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Josephine “was west of Benedict”: every tile that fits is ruled out except r1c7. Place Josephine there.",
+    "focus": [
+     [
+      0,
+      6
+     ]
+    ],
+    "elims": {
+     "F": [
+      [
+       1,
+       6
+      ]
+     ]
+    },
+    "suspect": "J",
+    "cell": [
+     0,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "J",
+      "clueOf": "J",
+      "coord": [
+       0,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "G",
+   "cell": [
+    2,
+    4
+   ],
+   "needs": [
+    "J"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     4
+    ]
+   ],
+   "key": [
+    0,
+    3
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone in the room, but Isidore must be in the Pit, so Genevieve cannot be in it.",
+     "focus": [
+      [
+       3,
+       4
+      ],
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       4
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ],
+       [
+        7,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_BLOCKED_ONE",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "bits": [
+        {
+         "templateKey": "FRAG_MUST_BE_IN",
+         "params": {
+          "suspects": [
+           "I"
+          ],
+          "room": "PIT"
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Genevieve can only be at r2c5 or r3c5, and those tiles all lie on one sightline. Whichever one Genevieve takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       1,
+       4
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       5,
+       4
+      ],
+      [
+       6,
+       4
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        6,
+        4
+       ]
+      ],
+      "E": [
+       [
+        1,
+        4
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "F": [
+       [
+        1,
+        4
+       ],
+       [
+        2,
+        4
+       ],
+       [
+        3,
+        4
+       ],
+       [
+        5,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ],
+      "I": [
+       [
+        3,
+        4
+       ],
+       [
+        6,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "G",
+       "options": [
+        [
+         1,
+         4
+        ],
+        [
+         2,
+         4
+        ]
+       ],
+       "coords": [
+        [
+         1,
+         4
+        ],
+        [
+         2,
+         4
+        ],
+        [
+         3,
+         4
+        ],
+        [
+         5,
+         4
+        ],
+        [
+         6,
+         4
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone and can only be on the Stage, so nobody else can be on the Stage.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ]
+      ],
+      "F": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ],
+       [
+        2,
+        0
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        2,
+        2
+       ],
+       [
+        2,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PINNED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r3c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Genevieve can still see it, so Genevieve must stand on r3c5.",
+     "focus": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       4
+      ]
+     ],
+     "elims": {
+      "G": [
+       [
+        1,
+        4
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        2,
+        1
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "G",
+         "room": "STAGE"
+        }
+       },
+       "suspect": "G",
+       "coords": [
+        [
+         2,
+         4
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 5,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Genevieve “was alone and was in column 5”: of the 6 tiles that fit, only r3c5 is still open. Place Genevieve there.",
+    "focus": [
+     [
+      2,
+      4
+     ]
+    ],
+    "elims": {},
+    "suspect": "G",
+    "cell": [
+     2,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       2,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    6,
+    2
+   ],
+   "needs": [
+    "G",
+    "J"
+   ],
+   "tier": 3,
+   "fits": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    7,
+    9
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone and is placed on the Stage, so nobody else can be on the Stage.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ]
+      ],
+      "F": [
+       [
+        1,
+        0
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        2
+       ],
+       [
+        1,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Eloise was exactly one row north of Dashiell. Dashiell can only be in rows 4–9, which leaves Eloise rows 3–8.",
+     "focus": [
+      [
+       0,
+       8
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ],
+      [
+       8,
+       1
+      ],
+      [
+       8,
+       2
+      ],
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       5
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        0,
+        8
+       ],
+       [
+        1,
+        7
+       ],
+       [
+        1,
+        8
+       ],
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        2
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "D",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "D",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 3,
+            "to": 8
+           }
+          },
+          "x": "E",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 2,
+            "to": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Josephine was west of Benedict. Josephine is in column 7 at the earliest, so Benedict must be in columns 8–9.",
+     "focus": [
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        5,
+        5
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        8,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "J",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "J",
+          "line": 6,
+          "y": "B",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 7,
+            "to": 8
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Benedict can only be at r7c8 or r7c9, and those tiles all lie on one sightline. Whichever one Benedict takes, the whole stretch is watched, so nobody else can stand on r7c7, r7c8, r7c9.",
+     "focus": [
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ]
+      ],
+      "E": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ]
+      ],
+      "F": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "B",
+       "options": [
+        [
+         6,
+         7
+        ],
+        [
+         6,
+         8
+        ]
+       ],
+       "coords": [
+        [
+         6,
+         6
+        ],
+        [
+         6,
+         7
+        ],
+        [
+         6,
+         8
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Eloise was exactly one row north of Dashiell. Dashiell can only be in rows 4, 5, 6, 8 or 9, which leaves Eloise rows 3, 4, 5, 7 or 8.",
+     "focus": [
+      [
+       5,
+       0
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       5,
+       3
+      ],
+      [
+       5,
+       5
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       5,
+       8
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "D",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "D",
+          "src": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             3,
+             4,
+             5,
+             7,
+             8
+            ]
+           }
+          },
+          "x": "E",
+          "left": {
+           "templateKey": "FRAG_LINES_LIST.ROW",
+           "params": {
+            "lines": [
+             2,
+             3,
+             4,
+             6,
+             7
+            ]
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "Someone must stand here",
+     "kind": "eliminate",
+     "text": "Exactly one person was on the carpet runner. Someone still has to stand on r6c3, r7c3 or r8c3, and every one of those tiles watches r4c3, r5c3, r9c3, so nobody can stand there.",
+     "focus": [
+      [
+       1,
+       2
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       7,
+       2
+      ],
+      [
+       8,
+       2
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        8,
+        2
+       ]
+      ],
+      "E": [
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ]
+      ],
+      "F": [
+       [
+        3,
+        2
+       ],
+       [
+        4,
+        2
+       ],
+       [
+        8,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_WITNESS_SET",
+      "ruleKey": "RULE_WITNESS",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "CARPET_RUNNER"
+        }
+       },
+       "options": [
+        [
+         5,
+         2
+        ],
+        [
+         6,
+         2
+        ],
+        [
+         7,
+         2
+        ]
+       ],
+       "coords": [
+        [
+         3,
+         2
+        ],
+        [
+         4,
+         2
+        ],
+        [
+         8,
+         2
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r2c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Florence can still see it, so Florence must stand on r2c8, r2c9.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        8
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        5,
+        0
+       ],
+       [
+        5,
+        2
+       ],
+       [
+        5,
+        3
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        6,
+        2
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        2
+       ],
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ],
+       [
+        8,
+        1
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        1,
+        1
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "G",
+         "room": "STAGE"
+        }
+       },
+       "suspect": "F",
+       "coords": [
+        [
+         1,
+         7
+        ],
+        [
+         1,
+         8
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 8,
+     "tier": 2,
+     "rule": "Exactly-one census",
+     "kind": "eliminate",
+     "text": "Exactly one person was on the carpet runner. Only Eloise can still reach the carpet runner, so she must be on one.",
+     "focus": [
+      [
+       5,
+       2
+      ],
+      [
+       6,
+       2
+      ],
+      [
+       7,
+       2
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        0
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        8
+       ],
+       [
+        4,
+        0
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        4,
+        3
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        6,
+        0
+       ],
+       [
+        6,
+        1
+       ],
+       [
+        7,
+        0
+       ],
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_CENSUS_ONLY_REACH",
+      "ruleKey": "RULE_GLOBAL_PROP_MONOPOLY",
+      "params": {
+       "rule": {
+        "templateKey": "GLOBAL.EXACTLY_ONE_ON",
+        "params": {
+         "prop": "CARPET_RUNNER"
+        }
+       },
+       "owner": "E",
+       "prop": "CARPET_RUNNER"
+      }
+     }
+    },
+    {
+     "n": 9,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Eloise was exactly one row north of Dashiell. Eloise can only be in rows 7–8, which leaves Dashiell rows 8–9.",
+     "focus": [
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "D",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "E",
+          "src": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 6,
+            "to": 7
+           }
+          },
+          "x": "D",
+          "left": {
+           "templateKey": "FRAG_LINES_RANGE.ROW",
+           "params": {
+            "from": 7,
+            "to": 8
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 10,
+     "tier": 3,
+     "rule": "Coverage check (lookahead)",
+     "kind": "eliminate",
+     "text": "What if Eloise stood on r8c3? Without following any clue further, r4c7, r5c7 could never be watched. So Eloise cannot be on r8c3.",
+     "focus": [
+      [
+       7,
+       2
+      ]
+     ],
+     "elims": {
+      "E": [
+       [
+        7,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COVER_CHECK",
+      "ruleKey": "RULE_COVER_CHECK",
+      "params": {
+       "suspect": "E",
+       "coord": [
+        7,
+        2
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           3,
+           6
+          ],
+          [
+           4,
+           6
+          ]
+         ]
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 11,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Eloise “was exactly one row north of Dashiell”: every tile that fits is ruled out except r7c3. Place Eloise there.",
+    "focus": [
+     [
+      6,
+      2
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       6,
+       1
+      ]
+     ],
+     "H": [
+      [
+       6,
+       0
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     6,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       6,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "H",
+   "cell": [
+    4,
+    0
+   ],
+   "needs": [
+    "E",
+    "G",
+    "J"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     4,
+     0
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ]
+   ],
+   "key": [
+    1
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Eloise was exactly one row north of Dashiell. Eloise can only be in row 7, which leaves Dashiell row 8.",
+     "focus": [
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "D",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "E",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 6
+           }
+          },
+          "x": "D",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Dashiell can only be at r8c7 or r8c8, and those tiles all lie on one sightline. Whichever one Dashiell takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        7,
+        5
+       ]
+      ],
+      "F": [
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ]
+      ],
+      "H": [
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ]
+      ],
+      "I": [
+       [
+        7,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "D",
+       "options": [
+        [
+         7,
+         6
+        ],
+        [
+         7,
+         7
+        ]
+       ],
+       "coords": [
+        [
+         7,
+         3
+        ],
+        [
+         7,
+         4
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         7,
+         6
+        ],
+        [
+         7,
+         7
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 3,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Hugo “was standing on a trail of footprints and was not beside any scenery flat”: of the 5 tiles that fit, only r5c1 is still open. Place Hugo there.",
+    "focus": [
+     [
+      4,
+      0
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       7,
+       0
+      ]
+     ],
+     "F": [
+      [
+       3,
+       0
+      ],
+      [
+       4,
+       0
+      ],
+      [
+       4,
+       1
+      ],
+      [
+       5,
+       0
+      ],
+      [
+       7,
+       0
+      ]
+     ]
+    },
+    "suspect": "H",
+    "cell": [
+     4,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "H",
+      "clueOf": "H",
+      "coord": [
+       4,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    8,
+    1
+   ],
+   "needs": [
+    "E",
+    "H"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Clara “was not in the Backstage and was beside a scenery flat”: of the 5 tiles that fit, only r9c2 is still open. Place Clara there.",
+    "focus": [
+     [
+      8,
+      1
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       8,
+       1
+      ]
+     ],
+     "F": [
+      [
+       8,
+       1
+      ]
+     ],
+     "J": [
+      [
+       8,
+       1
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     8,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       8,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    7,
+    6
+   ],
+   "needs": [
+    "C",
+    "E",
+    "G",
+    "H",
+    "J"
+   ],
+   "tier": 3,
+   "fits": [
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "key": [
+    1,
+    6
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone and is placed on the Stage, so nobody else can be on the Stage.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Eloise was exactly one row north of Dashiell. Eloise can only be in row 7, which leaves Dashiell row 8.",
+     "focus": [
+      [
+       3,
+       6
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       7
+      ],
+      [
+       5,
+       6
+      ],
+      [
+       5,
+       7
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       8,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        3,
+        6
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_OFFSET_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "E",
+         "atom": {
+          "kind": "EXACT_OFFSET",
+          "subject": "E",
+          "params": {
+           "other": "D",
+           "dir": "N",
+           "dist": 1
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_OFFSET_BIT",
+         "params": {
+          "y": "E",
+          "src": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 6
+           }
+          },
+          "x": "D",
+          "left": {
+           "templateKey": "FRAG_LINES_ONE.ROW",
+           "params": {
+            "line": 7
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Dashiell can only be at r8c7 or r8c8, and those tiles all lie on one sightline. Whichever one Dashiell takes, the whole stretch is watched, so nobody else can stand on the marked tiles.",
+     "focus": [
+      [
+       7,
+       2
+      ],
+      [
+       7,
+       3
+      ],
+      [
+       7,
+       4
+      ],
+      [
+       7,
+       5
+      ],
+      [
+       7,
+       6
+      ],
+      [
+       7,
+       7
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        7,
+        5
+       ]
+      ],
+      "F": [
+       [
+        7,
+        3
+       ],
+       [
+        7,
+        4
+       ],
+       [
+        7,
+        5
+       ],
+       [
+        7,
+        6
+       ],
+       [
+        7,
+        7
+       ]
+      ],
+      "I": [
+       [
+        7,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "D",
+       "options": [
+        [
+         7,
+         6
+        ],
+        [
+         7,
+         7
+        ]
+       ],
+       "coords": [
+        [
+         7,
+         3
+        ],
+        [
+         7,
+         4
+        ],
+        [
+         7,
+         5
+        ],
+        [
+         7,
+         6
+        ],
+        [
+         7,
+         7
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Josephine was west of Benedict. Josephine is in column 7 at the earliest, so Benedict must be in columns 8–9.",
+     "focus": [
+      [
+       5,
+       5
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        5,
+        5
+       ],
+       [
+        6,
+        6
+       ],
+       [
+        8,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "J",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "J",
+          "line": 6,
+          "y": "B",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 7,
+            "to": 8
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Benedict can only be at r7c8 or r7c9, and those tiles all lie on one sightline. Whichever one Benedict takes, the whole stretch is watched, so nobody else can stand on r7c7, r7c8, r7c9.",
+     "focus": [
+      [
+       6,
+       4
+      ],
+      [
+       6,
+       6
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       8
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        6,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        6,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "B",
+       "options": [
+        [
+         6,
+         7
+        ],
+        [
+         6,
+         8
+        ]
+       ],
+       "coords": [
+        [
+         6,
+         6
+        ],
+        [
+         6,
+         7
+        ],
+        [
+         6,
+         8
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r2c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Florence can still see it, so Florence must stand on r2c8, r2c9.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        6
+       ],
+       [
+        3,
+        8
+       ],
+       [
+        4,
+        6
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        1,
+        1
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "G",
+         "room": "STAGE"
+        }
+       },
+       "suspect": "F",
+       "coords": [
+        [
+         1,
+         7
+        ],
+        [
+         1,
+         8
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 7,
+     "tier": 3,
+     "rule": "Coverage check (lookahead)",
+     "kind": "eliminate",
+     "text": "What if Dashiell stood on r8c8? Without following any clue further, r4c7, r5c7 could never be watched. So Dashiell cannot be on r8c8.",
+     "focus": [
+      [
+       7,
+       7
+      ]
+     ],
+     "elims": {
+      "D": [
+       [
+        7,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COVER_CHECK",
+      "ruleKey": "RULE_COVER_CHECK",
+      "params": {
+       "suspect": "D",
+       "coord": [
+        7,
+        7
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           3,
+           6
+          ],
+          [
+           4,
+           6
+          ]
+         ]
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 8,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dashiell “was on the Balcony”: every tile that fits is ruled out except r8c7. Place Dashiell there.",
+    "focus": [
+     [
+      7,
+      6
+     ]
+    ],
+    "elims": {},
+    "suspect": "D",
+    "cell": [
+     7,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       7,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    6,
+    7
+   ],
+   "needs": [
+    "C",
+    "D",
+    "E",
+    "G",
+    "H",
+    "J"
+   ],
+   "tier": 3,
+   "fits": [
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     8,
+     5
+    ]
+   ],
+   "key": [
+    1,
+    4
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone and is placed on the Stage, so nobody else can be on the Stage.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Josephine was west of Benedict. Josephine is in column 7 at the earliest, so Benedict must be in columns 8–9.",
+     "focus": [
+      [
+       5,
+       5
+      ],
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        5,
+        5
+       ],
+       [
+        8,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "J",
+         "atom": {
+          "kind": "WEST_OF",
+          "subject": "J",
+          "params": {
+           "other": "B"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.COL",
+         "params": {
+          "x": "J",
+          "line": 6,
+          "y": "B",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.COL",
+           "params": {
+            "from": 7,
+            "to": 8
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r2c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Florence can still see it, so Florence must stand on r2c8, r2c9.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        8
+       ],
+       [
+        4,
+        7
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        7
+       ],
+       [
+        5,
+        8
+       ],
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ],
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        1,
+        1
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "G",
+         "room": "STAGE"
+        }
+       },
+       "suspect": "F",
+       "coords": [
+        [
+         1,
+         7
+        ],
+        [
+         1,
+         8
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 3,
+     "rule": "Coverage check (lookahead)",
+     "kind": "eliminate",
+     "text": "What if Albert stood on r9c8? Without following any clue further, r9c4, r9c6 could never be watched. So Albert cannot be on r9c8.",
+     "focus": [
+      [
+       8,
+       7
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        8,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COVER_CHECK",
+      "ruleKey": "RULE_COVER_CHECK",
+      "params": {
+       "suspect": "A",
+       "coord": [
+        8,
+        7
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           8,
+           3
+          ],
+          [
+           8,
+           5
+          ]
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 3,
+     "rule": "Coverage check (lookahead)",
+     "kind": "eliminate",
+     "text": "What if Benedict stood on r7c9? Without following any clue further, r5c8, r9c8 could never be watched. So Benedict cannot be on r7c9.",
+     "focus": [
+      [
+       6,
+       8
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        6,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COVER_CHECK",
+      "ruleKey": "RULE_COVER_CHECK",
+      "params": {
+       "suspect": "B",
+       "coord": [
+        6,
+        8
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           4,
+           7
+          ],
+          [
+           8,
+           7
+          ]
+         ]
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 6,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Benedict “could see the Corpse”: of the 7 tiles that fit, only r7c8 is still open. Place Benedict there.",
+    "focus": [
+     [
+      6,
+      7
+     ]
+    ],
+    "elims": {},
+    "suspect": "B",
+    "cell": [
+     6,
+     7
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       6,
+       7
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    1,
+    8
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "G",
+    "H",
+    "J"
+   ],
+   "tier": 3,
+   "fits": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     0,
+     8
+    ],
+    [
+     1,
+     0
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     1,
+     7
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     5,
+     0
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     6,
+     0
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     7,
+     0
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     7,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     7,
+     5
+    ],
+    [
+     7,
+     6
+    ],
+    [
+     7,
+     7
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "key": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Albert can only be at r9c4 or r9c6, and those tiles all lie on one sightline. Whichever one Albert takes, the whole stretch is watched, so nobody else can stand on r9c4, r9c6.",
+     "focus": [
+      [
+       8,
+       3
+      ],
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        8,
+        3
+       ],
+       [
+        8,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "A",
+       "options": [
+        [
+         8,
+         3
+        ],
+        [
+         8,
+         5
+        ]
+       ],
+       "coords": [
+        [
+         8,
+         3
+        ],
+        [
+         8,
+         5
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 2,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Isidore can only be at r5c4 or r6c4, and those tiles all lie on one sightline. Whichever one Isidore takes, the whole stretch is watched, so nobody else can stand on r5c4, r6c4.",
+     "focus": [
+      [
+       4,
+       3
+      ],
+      [
+       5,
+       3
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        4,
+        3
+       ],
+       [
+        5,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "I",
+       "options": [
+        [
+         4,
+         3
+        ],
+        [
+         5,
+         3
+        ]
+       ],
+       "coords": [
+        [
+         4,
+         3
+        ],
+        [
+         5,
+         3
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 3,
+     "tier": 2,
+     "rule": "Alone in a room",
+     "kind": "eliminate",
+     "text": "Genevieve was alone and is placed on the Stage, so nobody else can be on the Stage.",
+     "focus": [
+      [
+       0,
+       5
+      ],
+      [
+       1,
+       0
+      ],
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       2
+      ],
+      [
+       1,
+       4
+      ],
+      [
+       1,
+       5
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       2,
+       5
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        1,
+        1
+       ],
+       [
+        1,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_ALONE_CLAIMS_PLACED",
+      "ruleKey": "RULE_ALONE",
+      "params": {
+       "owner": "G",
+       "room": "STAGE"
+      }
+     }
+    },
+    {
+     "n": 4,
+     "tier": 2,
+     "rule": "Compass squeeze",
+     "kind": "eliminate",
+     "text": "Florence was south of Josephine. Josephine is in row 1 at the earliest, so Florence must be in rows 2–6.",
+     "focus": [
+      [
+       0,
+       8
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        0,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COMPASS_SQUEEZE",
+      "ruleKey": "RULE_COMPASS",
+      "params": {
+       "said": {
+        "templateKey": "FRAG_SAID",
+        "params": {
+         "subject": "F",
+         "atom": {
+          "kind": "SOUTH_OF",
+          "subject": "F",
+          "params": {
+           "other": "J"
+          }
+         }
+        }
+       },
+       "bits": [
+        {
+         "templateKey": "FRAG_COMPASS_MIN.ROW",
+         "params": {
+          "x": "J",
+          "line": 0,
+          "y": "F",
+          "span": {
+           "templateKey": "FRAG_SPAN_RANGE.ROW",
+           "params": {
+            "from": 1,
+            "to": 5
+           }
+          }
+         }
+        }
+       ]
+      }
+     }
+    },
+    {
+     "n": 5,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: r2c2 cannot be a hiding spot (Genevieve was alone on the Stage), so someone must watch it. Only Florence can still see it, so Florence must stand on r2c8, r2c9.",
+     "focus": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       7
+      ],
+      [
+       1,
+       8
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        2,
+        8
+       ],
+       [
+        3,
+        8
+       ],
+       [
+        4,
+        8
+       ],
+       [
+        5,
+        5
+       ],
+       [
+        5,
+        8
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_FORCE_WATCHER",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "coord": [
+        1,
+        1
+       ],
+       "ban": {
+        "templateKey": "BAN_ALONE_IN",
+        "params": {
+         "owner": "G",
+         "room": "STAGE"
+        }
+       },
+       "suspect": "F",
+       "coords": [
+        [
+         1,
+         7
+        ],
+        [
+         1,
+         8
+        ]
+       ]
+      }
+     }
+    },
+    {
+     "n": 6,
+     "tier": 3,
+     "rule": "Coverage check (lookahead)",
+     "kind": "eliminate",
+     "text": "What if Florence stood on r2c8? Without following any clue further, r1c9, r3c9 could never be watched. So Florence cannot be on r2c8.",
+     "focus": [
+      [
+       1,
+       7
+      ]
+     ],
+     "elims": {
+      "F": [
+       [
+        1,
+        7
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_COVER_CHECK",
+      "ruleKey": "RULE_COVER_CHECK",
+      "params": {
+       "suspect": "F",
+       "coord": [
+        1,
+        7
+       ],
+       "contra": {
+        "templateKey": "CONTRA_NEVER_WATCHED",
+        "params": {
+         "coords": [
+          [
+           0,
+           8
+          ],
+          [
+           2,
+           8
+          ]
+         ]
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 7,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Florence “was south of Josephine”: every tile that fits is ruled out except r2c9. Place Florence there.",
+    "focus": [
+     [
+      1,
+      8
+     ]
+    ],
+    "elims": {},
+    "suspect": "F",
+    "cell": [
+     1,
+     8
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_RULED_OUT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       1,
+       8
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    8,
+    3
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "J"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     8,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     8,
+     3
+    ],
+    [
+     8,
+     5
+    ],
+    [
+     8,
+     7
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: for Albert, r9c6 is too exposed (S. H. Adow would have nowhere to hide), so Albert cannot stand there.",
+     "focus": [
+      [
+       8,
+       5
+      ]
+     ],
+     "elims": {
+      "A": [
+       [
+        8,
+        5
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "suspect": "A",
+       "coords": [
+        [
+         8,
+         5
+        ]
+       ],
+       "reason": {
+        "templateKey": "REASON_TOO_EXPOSED",
+        "params": {
+         "who": "S"
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Albert “was in row 9”: of the 5 tiles that fit, only r9c4 is still open. Place Albert there.",
+    "focus": [
+     [
+      8,
+      3
+     ]
+    ],
+    "elims": {},
+    "suspect": "A",
+    "cell": [
+     8,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       8,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "I",
+   "cell": [
+    4,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "J"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "The blindspot law",
+     "kind": "eliminate",
+     "text": "The blindspot law: for Isidore, r6c4 is too exposed (S. H. Adow would have nowhere to hide), so Isidore cannot stand there.",
+     "focus": [
+      [
+       5,
+       3
+      ]
+     ],
+     "elims": {
+      "I": [
+       [
+        5,
+        3
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_SHADOW_TOO_EXPOSED",
+      "ruleKey": "RULE_SHADOW_LAW",
+      "params": {
+       "suspect": "I",
+       "coords": [
+        [
+         5,
+         3
+        ]
+       ],
+       "reason": {
+        "templateKey": "REASON_TOO_EXPOSED",
+        "params": {
+         "who": "S"
+        }
+       }
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Isidore “was beside a double bass”: of the 5 tiles that fit, only r5c4 is still open. Place Isidore there.",
+    "focus": [
+     [
+      4,
+      3
+     ]
+    ],
+    "elims": {},
+    "suspect": "I",
+    "cell": [
+     4,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 5,
+      "suspect": "I",
+      "clueOf": "I",
+      "coord": [
+       4,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    5,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r6c6. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      5,
+      5
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     5,
+     5
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       5,
+       5
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 0,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.242,
+   "elims_before_first_place": 8,
+   "last_fifth_t1_share": 0.571,
+   "hardest_last_pos": 0.848,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.125,
+   "late_elim_gap": 2,
+   "place_push": 0.7,
+   "global_uses": 2,
+   "global_first_t2": false,
+   "unlock_by_place": 0.111,
+   "star_opener": true
+  },
+  "flow_arc_ok": false,
+  "clue_fits": [
+   5,
+   5,
+   5,
+   5,
+   6,
+   7,
+   10,
+   56,
+   56,
+   56
+  ],
+  "blank_clues": 3,
+  "G19_clue_range": true,
+  "G20_investigation": true,
+  "shadow_candidates_before_last": 2,
+  "shadow_candidates_before_last_two": 3,
+  "dark_known_at": 10,
+  "G5_late_shadow": true,
+  "reveal_leaks": [
+   "CE",
+   "EH"
+  ],
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "CARPET_RUNNER",
+   "CELLO",
+   "CONDUCTOR_PODIUM",
+   "COSTUME_TRUNK",
+   "DOUBLE_BASS",
+   "FOOTLIGHTS",
+   "HARP",
+   "MUSIC_STAND",
+   "PROPS_TABLE",
+   "SPOTLIGHT",
+   "STAGE_CURTAIN",
+   "STAGE_FLAT",
+   "THEATER_SEAT",
+   "TIMPANI",
+   "WARDROBE"
+  ],
+  "biome_props_in_clues": [
+   "DOUBLE_BASS",
+   "STAGE_FLAT"
+  ],
+  "biome_props_load_bearing": [
+   "DOUBLE_BASS",
+   "STAGE_FLAT"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": false,
+  "bruteforce_nodes": 172839,
+  "rules_used": [
+   "alone",
+   "compass",
+   "cover_check",
+   "global_prop_monopoly",
+   "ray_block",
+   "shadow_law",
+   "witness"
+  ],
+  "steps": 34,
+  "difficulty_score": 91,
+  "hardest_step_tier": 3,
+  "tall_scale": 1.3
+ },
+ "daily": "2026-11-14"
+}
