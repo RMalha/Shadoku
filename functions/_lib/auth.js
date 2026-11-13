@@ -37,15 +37,16 @@ export async function seal(env, data, maxAgeSec) {
   return `${body}.${b64u(sig)}`;
 }
 
-/** → the payload, or null when the signature is wrong, the token is malformed or it expired. */
-export async function unseal(env, token) {
+/** → the payload, or null when the signature is wrong, the token is malformed or it expired (more than `graceSec` ago: only the
+ *  app's token renewal passes one, functions/_lib/app/accounts.js; everything else reads a token with no grace). */
+export async function unseal(env, token, graceSec = 0) {
   try {
     const [body, sig] = String(token || "").split(".");
     if (!body || !sig) return null;
     const ok = await crypto.subtle.verify("HMAC", await hmacKey(env, "verify"), unb64u(sig), enc.encode(body));
     if (!ok) return null;
     const data = JSON.parse(new TextDecoder().decode(unb64u(body)));
-    return data.exp > Date.now() / 1000 ? data : null;
+    return data.exp + graceSec > Date.now() / 1000 ? data : null;
   } catch { return null; }
 }
 

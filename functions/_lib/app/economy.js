@@ -42,10 +42,13 @@ export const AD_TICKET_TTL_MS = 3600 * 1000;
  *   sync_max_events           events handled per POST /api/app/sync (the rest come back "deferred")
  *   daily_quests              quests dealt to each player per day, from the active daily ones (FIRST GUESS)
  *   weekly_quests             quests dealt to each player per week, from the active weekly ones (FIRST GUESS)
+ *   guests_per_address_hour   new guest accounts per client address and hour (POST /api/app/auth/guest). FIRST GUESS: a mobile
+ *                             network puts many phones behind one address, so it is set high
  *   min_solve_seconds         by board side: a faster solve counts as progress, pays nothing and raises a flag.
  *                             FIRST GUESSES, set low on purpose: tune them with real solve times.
  */
 export const CONFIG_DEFAULTS = Object.freeze({
+  guests_per_address_hour: 60,
   ad_coins_per_day: 3,
   ad_client_claims_per_day: 5,
   daily_max_age_days: 30,

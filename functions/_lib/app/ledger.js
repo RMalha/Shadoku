@@ -52,6 +52,27 @@ export function post(d, { id, account, currency = "coin", delta, reason, ref, da
   ];
 }
 
+/**
+ * As post(), for an amount the DATABASE works out from the server's own rows inside the batch (a guest's whole balance when it
+ * signs in, the rewards of the contracts it brings: accounts.js). `amount`: { sql, binds }, a scalar SQL expression written in
+ * code, never a value from a request. A NULL or zero amount writes nothing.
+ * No ON CONFLICT here: a second line under the same key aborts the whole batch, so half a transfer can never be written.
+ */
+export function postFrom(d, { id, account, currency = "coin", amount, reason, ref, day, at, meta = null, guards = [] }) {
+  const col = COLUMN[currency];
+  if (!col || !amount || typeof amount.sql !== "string" || !Array.isArray(amount.binds) || !id || !account || !reason || ref === undefined || ref === null || !day) throw new Error("ledger: bad line");
+  const where = guards.map((g) => ` AND (${g.sql})`).join("");
+  return [
+    d.prepare(
+      `INSERT INTO ledger (id, account_id, currency, delta, reason, ref, balance_after, day, at, meta)
+       SELECT ?, w.account_id, ?, x.n, ?, ?, w.${col} + x.n, ?, ?, ? FROM wallets w, (SELECT CAST((${amount.sql}) AS INTEGER) AS n) x
+       WHERE w.account_id = ? AND x.n IS NOT NULL AND x.n <> 0${where} RETURNING delta, balance_after`,
+    ).bind(id, currency, reason, String(ref), day, at, meta ? JSON.stringify(meta) : null, ...amount.binds, account, ...guards.flatMap((g) => g.binds)),
+    d.prepare(`UPDATE wallets SET ${col} = ${col} + (SELECT delta FROM ledger WHERE id = ?), version = version + 1, updated = ? WHERE account_id = ? AND EXISTS (SELECT 1 FROM ledger WHERE id = ?)`)
+      .bind(id, at, account, id),
+  ];
+}
+
 /** The statement that opens an account's wallet, at zero (the only way a wallet row is made). */
 export const openWallet = (d, account) => d.prepare("INSERT INTO wallets (account_id) VALUES (?) ON CONFLICT (account_id) DO NOTHING").bind(account);
 

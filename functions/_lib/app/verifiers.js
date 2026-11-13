@@ -53,7 +53,7 @@ const unconfiguredAds = {
  * Both work only on localhost or a Pages PREVIEW address (<name>.<project>.pages.dev), never on the site's own domain,
  * so setting one of them in production by mistake gives nothing away.
  */
-const devHost = (request) => /^(localhost|127\.0\.0\.1|\[::1\]|[a-z0-9-]+\.[a-z0-9-]+\.pages\.dev)$/.test(new URL(request.url).hostname);
+export const devHost = (request) => /^(localhost|127\.0\.0\.1|\[::1\]|[a-z0-9-]+\.[a-z0-9-]+\.pages\.dev)$/.test(new URL(request.url).hostname);
 
 /** @type {BillingVerifier} */
 const devBilling = {

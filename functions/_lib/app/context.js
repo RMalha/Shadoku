@@ -6,12 +6,14 @@
  *
  * Who is calling (architecture 4.1):
  *   - the app: `Authorization: Bearer <token>`, a token sealed with SESSION_SECRET whose payload says aud "app". There is no
- *     cookie, so no CSRF check. Issuing these tokens (guest accounts, the native sign-ins) is the sign-in phase's job:
- *     sealAppToken() below is what it will call. The site's cookie reader refuses them (readSession, `aud`).
- *   - a browser on the site's own origin with the site's session cookie (local testing with DEV_LOGIN): writes must be same-origin.
+ *     cookie, so no CSRF check. The tokens are issued by functions/api/app/auth/** (accounts.js: a guest account, a sign-in, a
+ *     renewal). The site's cookie reader refuses them (readSession, `aud`). A token names its device (`dev`): the call is
+ *     refused once that device signed out (revoked) or signed in to another account, whatever the token's expiry says.
+ *   - a browser on the site's own origin with the site's session cookie (local testing with DEV_LOGIN): writes must be
+ *     same-origin, and a call that names any other origin is refused, reads too (cookies are never accepted cross-origin).
  * Storage: the app's tables come from migrations/ (not created lazily): until they are applied the answer is 503 "schema".
  */
-import { json, readSession, sameOrigin, seal, unseal, sessionAlive, SESSION_DAYS } from "../auth.js";
+import { json, readSession, sameOrigin, siteOrigin, seal, unseal, sessionAlive, SESSION_DAYS } from "../auth.js";
 import { db } from "../db.js";
 import { limit } from "../ratelimit.js";
 import { parseConfig, dayKey, hintsPerDay, periodKey, AD_COIN_REWARD, SOCIAL_NETWORKS, VARIANTS } from "./economy.js";
@@ -20,8 +22,17 @@ import { dealStatements, questDefs } from "./quests.js";
 
 export const APP_AUD = "app";
 
-/** → the bearer token of an app session: { id, aud: "app", dev } for 30 days. */
-export const sealAppToken = (env, { id, dev = "" }) => seal(env, { id, aud: APP_AUD, dev }, SESSION_DAYS * 86400);
+/** How long an app token lasts; POST /api/app/auth/refresh renews it (accounts.js). */
+export const APP_TOKEN_SEC = SESSION_DAYS * 86400;
+const short = (v, max) => (typeof v === "string" ? v.slice(0, max) : "");
+
+/**
+ * → the bearer token of an app session: { id, aud: "app", dev, provider, name, avatar } for 30 days. `dev`: its row in `devices`
+ * ("" only for tokens made by the tests and scripts: nothing to revoke). `provider`, `name`, `avatar`: who signed in, as the
+ * site's session cookie carries them ("guest" and nothing else for a guest).
+ */
+export const sealAppToken = (env, { id, dev = "", provider = "", name = "", avatar = "" }, maxAgeSec = APP_TOKEN_SEC) =>
+  seal(env, { id, aud: APP_AUD, dev: short(dev, 64), provider: short(provider, 20), name: short(name, 80), avatar: short(avatar, 300) }, maxAgeSec);
 
 /** The server's clock. (`env.NOW`, a function, replaces it in the tests: bindings come from wrangler's configuration, never from a request.) */
 export const clock = (env) => (typeof env.NOW === "function" ? env.NOW() : Date.now());
@@ -34,27 +45,53 @@ async function appDb(env) {
   const d = await db(env);
   if (!d) return fail("storage", 503);
   if (!schemaSeen) {
-    const row = await d.prepare("SELECT COUNT(*) AS n FROM sqlite_master WHERE type = 'table' AND name IN ('wallets', 'ledger')").first();
-    if (!row || row.n !== 2) return fail("schema", 503);
+    const row = await d.prepare("SELECT COUNT(*) AS n FROM sqlite_master WHERE type = 'table' AND name IN ('wallets', 'ledger', 'devices', 'identities')").first();
+    if (!row || row.n !== 4) return fail("schema", 503); // every migration up to 0003_app_identity.sql
     schemaSeen = true;
   }
   return { d };
 }
 
+/**
+ * → the payload of the request's bearer token, or null: the signature is ours, it was made for the app and it has not expired
+ * (`graceSec`: or expired no longer ago than that: only the sign-in and renewal endpoints pass one). Nothing else is checked
+ * here: whether its account was deleted, its device revoked or its account merged is the caller's business.
+ */
+export async function readBearer(request, env, graceSec = 0) {
+  const m = /^Bearer ([A-Za-z0-9_.-]{20,2000})$/.exec(request.headers.get("Authorization") || "");
+  const s = m ? await unseal(env, m[1], graceSec) : null;
+  return s && s.aud === APP_AUD && typeof s.id === "string" && s.id ? { ...s, dev: typeof s.dev === "string" ? s.dev : "" } : null;
+}
+
 async function caller(request, env, write) {
-  const header = request.headers.get("Authorization");
-  if (header) { // the app: a bearer token and nothing else (a wrong one never falls back to a cookie)
-    const m = /^Bearer ([A-Za-z0-9_.-]{20,2000})$/.exec(header);
-    const s = m ? await unseal(env, m[1]) : null;
-    return s && s.aud === APP_AUD && typeof s.id === "string" && s.id && (await sessionAlive(env, s)) ? { id: s.id } : fail("auth", 401);
+  if (request.headers.get("Authorization")) { // the app: a bearer token and nothing else (a wrong one never falls back to a cookie)
+    const s = await readBearer(request, env);
+    return s && (await sessionAlive(env, s)) ? { id: s.id, dev: s.dev } : fail("auth", 401);
   }
-  if (write && !sameOrigin(request, env)) return fail("origin", 403);
+  const origin = request.headers.get("Origin");
+  if (write ? !sameOrigin(request, env) : !!origin && origin !== siteOrigin(request, env)) return fail("origin", 403);
   const s = await readSession(request, env);
-  return s ? { id: s.id } : fail("auth", 401);
+  return s ? { id: s.id, dev: "" } : fail("auth", 401);
 }
 
 /**
- * → { d, env, id, account, cfg, now, tz } or { error: Response }.
+ * What the sign-in endpoints start with (functions/api/app/auth/**): the caller has no session yet, or the one it has is about
+ * to change, so there is no account here. Nothing in them reads a cookie, so there is nothing for another site to forge.
+ * → { d, env, cfg, now } or { error: Response }. `rate`: { name, max, windowSec } per client address.
+ */
+export async function appDoor(request, env, { rate = null } = {}) {
+  const store = await appDb(env);
+  if (store.error) return store;
+  const { d } = store;
+  if (rate) {
+    const blocked = await limit(env, request, rate.name, { max: rate.max, windowSec: rate.windowSec });
+    if (blocked) return { error: blocked };
+  }
+  return { d, env, cfg: parseConfig((await d.prepare("SELECT k, v FROM app_config").all()).results), now: clock(env) };
+}
+
+/**
+ * → { d, env, id, dev, account, cfg, now, tz } or { error: Response }. `dev`: the token's device ("" for a cookie caller).
  * `write`: the call changes something (a cookie caller must then be same-origin). `rate`: { name, max, windowSec } per account.
  */
 export async function appContext(request, env, { write = false, rate = null } = {}) {
@@ -73,11 +110,20 @@ export async function appContext(request, env, { write = false, rate = null } = 
     openWallet(d, who.id),
     d.prepare("SELECT * FROM accounts WHERE id = ?").bind(who.id),
     d.prepare("SELECT k, v FROM app_config"),
+    // the token's device: seen now (noted once an hour), and read back to see that it is still this account's
+    ...(who.dev ? [
+      d.prepare("UPDATE devices SET last_seen = ? WHERE id = ? AND account_id = ? AND revoked_at IS NULL AND last_seen < ?").bind(now, who.dev, who.id, now - 3600 * 1000),
+      d.prepare("SELECT account_id, revoked_at FROM devices WHERE id = ?").bind(who.dev),
+    ] : []),
   ]);
   const account = res[2].results[0];
   if (account.banned) return fail("banned", 403);
-  if (account.merged_into) return fail("merged", 409, { into: account.merged_into });
-  return { d, env, id: who.id, account, cfg: parseConfig(res[3].results), now, tz: account.tz_offset };
+  if (account.merged_into) return fail("merged", 409, { into: account.merged_into }); // a guest that signed in: the phone holds a newer token
+  if (who.dev) {
+    const device = res[5].results[0];
+    if (!device || device.revoked_at || device.account_id !== who.id) return fail("revoked", 401); // signed out, or the phone signed in to another account
+  }
+  return { d, env, id: who.id, dev: who.dev, account, cfg: parseConfig(res[3].results), now, tz: account.tz_offset };
 }
 
 /** The statement that files an anti-cheat signal for review (`guard`: a ledger.js `when` condition without `w`, or none). */
@@ -152,22 +198,22 @@ export async function snapshot(ctx) {
 }
 
 /**
- * The account is being deleted (DELETE /api/account): its wallet, ledger, inventory and play records go. Its purchase rows stay,
- * without the account id: the token hash must keep refusing a replay, and a refund from Google must still find its order.
- * A database without the app's tables (migrations not applied) has nothing to erase.
+ * The account is being deleted (DELETE /api/account): its wallet, ledger, inventory and play records go, and with them the phones
+ * signed in to it, the sign-ins linked to it and whatever is left of the guest accounts it grew from (accounts.js mergeGuest).
+ * Its purchase rows stay, without the account id: the token hash must keep refusing a replay, and a refund from Google must
+ * still find its order. A database without the app's tables (migrations not applied) has nothing to erase.
  */
 export async function eraseAppAccount(env, id) {
   const d = await db(env).catch(() => null);
   if (!d) return;
-  const gone = (table, column = "account_id") => d.prepare(`DELETE FROM ${table} WHERE ${column} = ?`).bind(id);
-  try {
-    await d.batch([
-      gone("wallets"), gone("ledger"), gone("inventory"), gone("entitlements"), gone("ad_tickets"), gone("ad_rewards"), gone("solves"),
-      gone("quest_state"), gone("streaks"), gone("social_visits"), gone("flags"), gone("pack_opens"), gone("card_merges"), gone("hint_uses"), gone("shop_refreshes"),
-      d.prepare("UPDATE purchases SET account_id = 'erased' WHERE account_id = ?").bind(id),
-      gone("accounts", "id"),
-    ]);
-  } catch (e) {
-    if (!/no such table/i.test(String(e && e.message))) throw e;
-  }
+  const mine = "account_id = ? OR account_id IN (SELECT id FROM accounts WHERE merged_into = ?)";
+  const gone = (table) => d.prepare(`DELETE FROM ${table} WHERE ${mine}`).bind(id, id);
+  const run = (statements) => d.batch(statements).catch((e) => { if (!/no such table/i.test(String(e && e.message))) throw e; });
+  // the sign-in records first, and on their own: a database that has no migration 0003 yet still erases everything below
+  await run([gone("devices"), gone("identities")]);
+  await run([
+    ...["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes"].map(gone),
+    d.prepare(`UPDATE purchases SET account_id = 'erased' WHERE ${mine}`).bind(id, id),
+    d.prepare("DELETE FROM accounts WHERE id = ? OR merged_into = ?").bind(id, id),
+  ]);
 }

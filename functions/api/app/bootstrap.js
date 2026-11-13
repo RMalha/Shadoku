@@ -5,6 +5,7 @@
 import { json } from "../../_lib/auth.js";
 import { appContext, snapshot } from "../../_lib/app/context.js";
 import { accountHash } from "../../_lib/app/billing.js";
+import { signIns } from "../../_lib/app/accounts.js";
 import { questDefs } from "../../_lib/app/quests.js";
 import { REWARDS, AD_COIN_REWARD, SOCIAL_REWARD, SOCIAL_NETWORKS, STREAK_CYCLE, DAILY_PLAN, COSMETIC_PRICES, HINTS_PER_DAY, MERGE_COUNT, VARIANTS, addDays, dayKey, dealQuests, periodKey } from "../../_lib/app/economy.js";
 
@@ -20,7 +21,8 @@ export async function onRequestGet({ request, env }) {
   }));
   return json({
     serverTime: ctx.now,
-    account: { id: ctx.id, kind: ctx.account.kind, purchaseHash: await accountHash(ctx.id) },
+    // signIns: the providers this account can be signed in to with (none for a guest); device: the row this phone's token names
+    account: { id: ctx.id, kind: ctx.account.kind, purchaseHash: await accountHash(ctx.id), signIns: await signIns(ctx.d, ctx.id), device: ctx.dev },
     rewards: { solve: REWARDS, ad: AD_COIN_REWARD, social: SOCIAL_REWARD },
     prices: { cosmetics: COSMETIC_PRICES },
     hints: { perDay: HINTS_PER_DAY }, // free hints a day: everyone, a member, a golden member

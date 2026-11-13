@@ -829,7 +829,8 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   eq("no file but functions/_lib/app/ledger.js writes the wallets or ledger tables", offenders, []);
   ok("…and ledger.js does", writes.test(fs.readFileSync(path.join(ROOT, "functions", "_lib", "app", "ledger.js"), "utf8")));
   const handlers = files.filter((f) => f.includes(path.join("api", "app")));
-  eq("every app endpoint goes through appContext, or is one of the two verified callbacks", handlers.filter((f) => !/appContext\(/.test(fs.readFileSync(f, "utf8"))).map((f) => path.basename(f)).sort(), ["rtdn.js", "ssv.js"]);
+  eq("every app endpoint goes through appContext, or is one of the two verified callbacks", handlers.filter((f) => !/app(Context|Door)\(/.test(fs.readFileSync(f, "utf8"))).map((f) => path.basename(f)).sort(), ["rtdn.js", "ssv.js"]);
+  eq("…and only the sign-in endpoints have no session to check (appDoor)", handlers.filter((f) => /appDoor\(/.test(fs.readFileSync(f, "utf8"))).map((f) => path.relative(path.join(ROOT, "functions", "api", "app"), f).replaceAll(path.sep, "/")).sort(), ["auth/dev.js", "auth/google.js", "auth/guest.js", "auth/refresh.js"]);
 }
 
 /* ───────────── a hostile client, at random: the books always balance ───────────── */
