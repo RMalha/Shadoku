@@ -5,6 +5,7 @@
 // account; this browser erases its own copy (src/auth.js onDeleteAccount).
 import { readSession, deleteRecord, endSessions, clearCookie, json, sameOrigin } from "../_lib/auth.js";
 import { erasePlayer } from "../_lib/db.js";
+import { eraseAppAccount } from "../_lib/app/context.js";
 import { limit } from "../_lib/ratelimit.js";
 
 export async function onRequestDelete({ request, env }) {
@@ -15,6 +16,7 @@ export async function onRequestDelete({ request, env }) {
   if (blocked) return blocked;
   await endSessions(env, s.id);
   await erasePlayer(env, s.id);
+  await eraseAppAccount(env, s.id); // the app's wallet and play records (nothing to do before its tables exist)
   await deleteRecord(env, s.id);
   return json({ ok: true }, 200, [clearCookie(request, "sh_session")]);
 }

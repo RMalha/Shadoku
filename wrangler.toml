@@ -13,7 +13,11 @@ id = "5dada60c1d764a75bd966fb67378b04b"
 # The Syndicate ranking and the community puzzles (functions/_lib/db.js; tables are created on first use).
 # Created with: npx wrangler d1 create shadoku. Without this binding those endpoints answer 503 and the pages say the feature is unavailable.
 # Locally, wrangler pages dev uses its own local copy of this database (tables are created on first use there too).
+# The Android app's wallet (functions/api/app, functions/_lib/app) keeps its tables in the same database, but they come from
+# migrations/ and are NOT created on first use:  npx wrangler d1 migrations apply shadoku --local | --remote
+# Until they are applied, /api/app/* answers 503 "schema"; the site is not affected.
 [[d1_databases]]
 binding = "SHADOKU_DB"
 database_name = "shadoku"
 database_id = "256df518-c797-4a52-8683-3bf3b19d9220"
+migrations_dir = "migrations"

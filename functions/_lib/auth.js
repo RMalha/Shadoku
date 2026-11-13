@@ -143,12 +143,17 @@ export const providerConfigured = (env, name) => {
 /* ───────────── session + codename record ───────────── */
 export async function readSession(request, env) {
   const s = await unseal(env, readCookie(request, cookieName(request, "sh_session")));
-  if (!s || !s.id) return null;
-  // an account deleted after this session was issued (on this device or another): the session is over, or its next sync
-  // would bring the erased progress and scores back into a new account
+  // `aud` marks a token made for something else (the app's bearer token, functions/_lib/app/context.js): never a site cookie
+  if (!s || !s.id || s.aud) return null;
+  return (await sessionAlive(env, s)) ? s : null;
+}
+
+/** → false for a session of an account deleted after it was issued (on this device or another): the session is over, or its
+ *  next sync would bring the erased progress and scores back into a new account. */
+export async function sessionAlive(env, s) {
   const gone = env.SHADOKU_KV ? Number(await env.SHADOKU_KV.get(goneKey(s.id))) : 0;
   const issued = Number(s.iat) || (s.exp - SESSION_DAYS * 86400) * 1000; // sessions from before `iat`: their exp says when
-  return gone && issued <= gone ? null : s;
+  return !(gone && issued <= gone);
 }
 
 /** The account is being deleted: every session issued until now stops working (readSession). The mark outlives the longest session,
