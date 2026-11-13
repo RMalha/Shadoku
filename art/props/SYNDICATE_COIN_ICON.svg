@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+<!-- SHADOKU icon SYNDICATE_COIN_ICON (24px currency icon): thick outline, one emblem. -->
+<g stroke-linejoin="round" stroke-linecap="round">
+<circle cx="12" cy="13.5" r="9.5" fill="#6b4a28" stroke="#1A1A22" stroke-width="1.5"/>
+<circle cx="12" cy="10.5" r="9" fill="#c99a52" stroke="#1A1A22" stroke-width="1.5"/>
+<circle cx="12" cy="10.5" r="6.3" fill="none" stroke="#8a6330" stroke-width="1"/>
+<path d="M12 5L14 7.6V12.4L12 16L10 12.4V7.6Z" fill="#f7e9c0" stroke="#1A1A22" stroke-width="1.2"/>
+<path d="M9 7.8H15" stroke="#1A1A22" stroke-width="1.6"/>
+</g></svg>

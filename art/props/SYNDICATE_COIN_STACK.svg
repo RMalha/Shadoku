@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<!-- SHADOKU prop SYNDICATE_COIN_STACK (currency art, 64x64): bottom-centre anchor. Outline #1A1A22 1.5, detail 0.9. -->
+<g stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="32" cy="57" rx="28" ry="4" fill="#000" fill-opacity=".34"/>
+<g id="c1"><path d="M10 44v6A22 8 0 0 0 54 50v-6Z" fill="#6b4a28" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="32" cy="44" rx="22" ry="8" fill="#b98a4a" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="32" cy="44" rx="17" ry="5.8" fill="#a47838" stroke="#1A1A22" stroke-width="0.9"/></g>
+<g><path d="M13 37v6A22 8 0 0 0 57 43v-6Z" fill="#6b4a28" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="35" cy="37" rx="22" ry="8" fill="#b98a4a" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="35" cy="37" rx="17" ry="5.8" fill="#a47838" stroke="#1A1A22" stroke-width="0.9"/></g>
+<g><path d="M9 30v6A22 8 0 0 0 53 36v-6Z" fill="#6b4a28" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="31" cy="30" rx="22" ry="8" fill="#b98a4a" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="31" cy="30" rx="17" ry="5.8" fill="#a47838" stroke="#1A1A22" stroke-width="0.9"/></g>
+<g><path d="M12 23v6A22 8 0 0 0 56 29v-6Z" fill="#6b4a28" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="34" cy="23" rx="22" ry="8" fill="#b98a4a" stroke="#1A1A22" stroke-width="1.5"/><ellipse cx="34" cy="23" rx="17" ry="5.8" fill="#a47838" stroke="#1A1A22" stroke-width="0.9"/>
+<path d="M34 18.5L36.2 22V25.5L34 28L31.8 25.5V22Z" fill="#e7d8b4" stroke="#1A1A22" stroke-width="1"/><path d="M30 21.5H38" stroke="#1A1A22" stroke-width="1.6"/></g>
+<path d="M18 21A17 5.8 0 0 1 26 17.8" fill="none" stroke="#e0b872" stroke-width="1.4"/>
+</g></svg>

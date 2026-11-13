@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<!-- SHADOKU prop SYNDICATE_COIN (currency art, 64x64): bottom-centre anchor. Outline #1A1A22 1.5, detail 0.9. -->
+<g stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="32" cy="57.4" rx="24" ry="3.2" fill="#000" fill-opacity=".34"/>
+<circle cx="32" cy="34" r="24" fill="#6b4a28" stroke="#1A1A22" stroke-width="1.5"/>
+<circle cx="32" cy="30" r="24" fill="#b98a4a" stroke="#1A1A22" stroke-width="1.5"/>
+<circle cx="32" cy="30" r="19.5" fill="#a47838" stroke="#1A1A22" stroke-width="0.9"/>
+<path d="M14 22A19.5 19.5 0 0 1 28 11" fill="none" stroke="#e0b872" stroke-width="2"/>
+<path d="M32 15L36 22V40L32 49L28 40V22Z" fill="#e7d8b4" stroke="#1A1A22" stroke-width="1.5"/>
+<path d="M32 15L36 22V40L32 49Z" fill="#b8a98a"/>
+<path d="M32 15L36 22V40L32 49L28 40V22Z" fill="none" stroke="#1A1A22" stroke-width="1.5"/>
+<path d="M23 20H41" stroke="#1A1A22" stroke-width="4"/><path d="M23 20H41" stroke="#e0b872" stroke-width="1.6"/>
+<circle cx="32" cy="12.5" r="2.6" fill="#e0b872" stroke="#1A1A22" stroke-width="1.2"/>
+<path d="M32 23V42" stroke="#1A1A22" stroke-width="0.9"/>
+<path d="M50 40l2 -1.5l1 2z" fill="#6b4a28"/><path d="M13 36l2 1l-1 2z" fill="#6b4a28"/>
+</g></svg>

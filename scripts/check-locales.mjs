@@ -29,7 +29,7 @@ function load(file) {
 
 const en = load("en.json");
 if (!en) errs.push("en.json: missing or unreadable");
-let checked = 0;
+let checked = 0, forms = 0;
 for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith(".json") && f !== "en.json").sort()) {
   const loc = load(file);
   if (!loc || !en) continue;
@@ -37,6 +37,10 @@ for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith(".json") && f !=
     if (typeof v !== "string") continue;
     // <key>.m / .f / .n: gendered variants of a key (the app tries them first, see KG in ShadokuApp.jsx); checked against the base key
     const ref = k in en ? k : /\.[mfn]$/.test(k) && k.slice(0, -2) in en ? k.slice(0, -2) : null;
+    // PROP.<id>.<form> / TRAIT.<id>.<form>: a language's own case forms (fr de_a, uk beside/any...; src/caseText.js uses whatever
+    // forms the locale has). English has no such key, so they are checked against the prop or trait itself: one English dropped still warns.
+    const own = !ref && /^(PROP|TRAIT)\.[A-Z0-9_]+\.[A-Za-z_]+$/.test(k) && `${k.slice(0, k.lastIndexOf("."))}.a` in en;
+    if (own) { if (names(v).length) errs.push(`${file}: ${k} is a case form and takes no {placeholder}`); forms++; continue; }
     if (!ref) { warns.push(`${file}: ${k} is not in en.json`); continue; }
     if (!v) continue; // an empty value falls back to English
     const have = names(v), drop = MAY_DROP[ref] || [];
@@ -47,5 +51,5 @@ for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith(".json") && f !=
 }
 for (const w of warns) console.log("warn  " + w);
 for (const e of errs) console.log("ERROR " + e);
-console.log(`${en ? Object.keys(en).length : 0} en.json keys, ${checked} translated keys checked, ${errs.length} error(s)`);
+console.log(`${en ? Object.keys(en).length : 0} en.json keys, ${checked} translated keys checked, ${forms} case forms of the languages' own, ${errs.length} error(s)`);
 process.exit(errs.length ? 1 : 0);

@@ -841,10 +841,6 @@ export function LegalText() {
           <p><Rich text={t(`legal.s${n}.p`)} /></p>
         </section>
       ))}
-      <section>
-        <h3 className="sh-type">{t("homage.title")}</h3>
-        <p><Rich text={t("homage.text")} /></p>
-      </section>
     </div>
   );
 }
