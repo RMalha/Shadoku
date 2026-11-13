@@ -45,13 +45,10 @@ const CLASS_IDS = {
     "POPCORN_CART", "TENT_POLE", "CANNON", "FUNHOUSE_MIRROR", "FERRIS_WHEEL", // Carnival sub-biome
     "STAGE_CURTAIN", "STAGE_FLAT", "SPOTLIGHT", "DOUBLE_BASS", // Opera House sub-biome
     "CYPRESS", "MOSSY_OAK", // Bayou sub-biome
-    // sub-theme batch (engine catalog: EXTRA_PROP_INFO)
-    "CLOTHES_RAIL", "OVEN", "PRESS", "NET_RACK", "SALT_PILE", "TRAM", "TELESCOPE", "CRANE",
   ],
   PERCH: ["CAMEL", "HORSE", "PIANO",
     // sub-biomes (engine catalog: SUB_PROP_INFO)
     "CAROUSEL", "HARP", "AIRBOAT",
-    "BUNK_BED", "ORGAN", // EXTRA_PROP_INFO
   ],
   SHORT: [
     "AMPHORA", "ANCHOR", "BARREL", "BEEHIVE", "BILLIARD_TABLE", "CAIRN", "CAMPFIRE", "CARDBOARD_BOX", "CRATE", "DESK", "DISPLAY_CASE", "FERN", "GRAMOPHONE",
@@ -59,7 +56,6 @@ const CLASS_IDS = {
     "TIKI_TORCH", "TRAFFIC_CONE", "TRASH_CAN", "TROUGH", "WASHER", "WELL", "WHEELBARROW",
     // sub-biomes (engine catalog: SUB_PROP_INFO)
     "SHIP_WHEEL", "CAPSTAN", "RING_TOSS", "COSTUME_TRUNK", "PROPS_TABLE", "CELLO", "TIMPANI", "MUSIC_STAND", "FOOTLIGHTS", "VELVET_ROPE", "CRAB_TRAP",
-    "COUNTER", "WORKBENCH", "MANNEQUIN", "ALTAR", "DRAFTING_TABLE", "MAQUETTE", // EXTRA_PROP_INFO
   ],
   LOW: [
     "BARBER_CHAIR", "BEARSKIN", "BED", "BENCH", "BOAT", "BROKEN_GLASS", "CARPET_RUNNER", "CHAIR", "COOLER", "CUSHION", "DRIFTWOOD", "FAIRY_RING",
@@ -135,10 +131,6 @@ export const LABEL = {
   DOUBLE_BASS: "Double Bass", CELLO: "Cello", TIMPANI: "Timpani", MUSIC_STAND: "Music Stand", CONDUCTOR_PODIUM: "Conductor's Podium", THEATER_SEAT: "Theater Seat", FOOTLIGHTS: "Footlights", VELVET_ROPE: "Velvet Rope",
   // Bayou sub-biome
   CYPRESS: "Bald Cypress", MOSSY_OAK: "Mossy Oak", AIRBOAT: "Airboat", CRAB_TRAP: "Crab Trap", LILY_PADS: "Lily Pads",
-  // sub-theme batch
-  COUNTER: "Shop Counter", WORKBENCH: "Workbench", MANNEQUIN: "Mannequin", ALTAR: "Altar", DRAFTING_TABLE: "Drafting Table", MAQUETTE: "Architectural Model",
-  CLOTHES_RAIL: "Clothes Rail", OVEN: "Brick Oven", PRESS: "Printing Press", NET_RACK: "Net Rack", SALT_PILE: "Salt Pile", TRAM: "Tram", TELESCOPE: "Telescope", CRANE: "Crane",
-  BUNK_BED: "Bunk Bed", ORGAN: "Church Organ",
 };
 
 /* ---- Biomes: the 7 environments (`p.theme`) ------------------------------ */
@@ -201,10 +193,6 @@ export const PROP_BIOME = {
   DOUBLE_BASS: "MANSION", CELLO: "MANSION", TIMPANI: "MANSION", MUSIC_STAND: "MANSION", CONDUCTOR_PODIUM: "MANSION", THEATER_SEAT: "MANSION", FOOTLIGHTS: "MANSION", VELVET_ROPE: "MANSION",
   // Bayou sub-biome
   CYPRESS: "FOREST", MOSSY_OAK: "FOREST", AIRBOAT: "FOREST", CRAB_TRAP: "FOREST", LILY_PADS: "FOREST",
-  // sub-theme batch
-  COUNTER: "STREET", WORKBENCH: "STREET", MANNEQUIN: "STREET", ALTAR: "MANSION", DRAFTING_TABLE: "MANSION", MAQUETTE: "MANSION",
-  CLOTHES_RAIL: "STREET", OVEN: "STREET", PRESS: "STREET", NET_RACK: "BEACH", SALT_PILE: "BEACH", TRAM: "STREET", TELESCOPE: "MANSION", CRANE: "BEACH",
-  BUNK_BED: "MANSION", ORGAN: "MANSION",
 };
 export const FILTERS = ["ALL", "UNIVERSAL", ...BIOMES];
 export const FILTER_LABEL = { ALL: "All", UNIVERSAL: "Universal", ...Object.fromEntries(BIOMES.map((b) => [b, BIOME_META[b].label])) };
@@ -7822,560 +7810,6 @@ export function LilyPads() {
   );
 }
 
-/* ---- Sub-theme batch (16 props): shops, workshops, church, harbour, tram depot, observatory ---------------- */
-/** An oblique box standing on y: front face x..x+w, y-h..y; the top and east face recede by (dx, dy). */
-const OBox = ({ x, y, w, h, dx, dy, c, cl, cd, st = OS }) => (
-  <g>
-    <path d={slabSide(x, y - h, w, h, dx, dy)} {...st} fill={cd} />
-    <path d={slabTop(x, y - h, w, dx, dy)} {...st} fill={cl} />
-    <path d={`M${x} ${y - h}H${x + w}V${y}H${x}Z`} {...st} fill={c} />
-  </g>
-);
-
-/** SHORT. Shop counter at waist height: a long timber counter with panelled front and a plinth, a brass bell,
- *  a little cash register and a jar of sweets on its top. */
-export function Counter() {
-  const wood = "#8b5a36", woodL = "#b98556", woodD = "#5c3a22", panel = "#744a2c";
-  const x = 5, y = 34, w = 48, h = 20, dx = 6, dy = 13;
-  return (
-    <g>
-      <GroundShadow cx={32} cy={57} rx={27} ry={3.4} />
-      <path d={slabSide(x, y, w, h, dx, dy)} fill={woodD} {...OS} />
-      <path d={inkBox(x, y, w, h, 1.2, .3)} fill={wood} {...OS} />
-      {[0, 1, 2, 3].map((i) => <path key={i} d={inkBox(x + 3 + i * 11.6, y + 5.4, 9.6, 8.6, .8, 0)} {...IS} fill={panel} />)}
-      <path d={inkBox(x + 1, y + h - 3.4, w - 2, 3.4, .6, 0)} {...IS} fill={woodD} />
-      <path d={slabTop(x - 1, y, w + 2, dx, dy)} fill={woodL} {...OS} />
-      <path d={inkBox(x - 1, y, w + 2, 3.6, .8, .2)} fill={wood} {...OS} />
-      {/* cash register */}
-      <OBox x={10.6} y={30} w={11} h={6.4} dx={3.4} dy={4.4} c="#454c58" cl="#6c7482" cd="#2e333c" />
-      <path d={inkBox(13, 20.4, 6.4, 4, .8, 0)} {...IS} fill="#e8efe0" />
-      {[13.4, 16.2, 19].map((kx) => <circle key={kx} cx={kx} cy="28.2" r=".8" fill={BRASS} />)}
-      {/* brass service bell */}
-      <path d="M28.4 30.6a4.2 4.2 0 0 1 8.4 0Z" fill={BRASS} {...OS} />
-      <circle cx="32.6" cy="25.8" r="1" {...IS} fill={BRASS} />
-      {/* sweet jar */}
-      <path d={inkBox(41.4, 22.4, 7.6, 8.8, 1.6, .2)} {...IS} fill="#cfe8ee" />
-      {[[43.4, 29], [46.2, 28.6], [44.8, 26.4]].map(([cx, cy], i) => <circle key={i} cx={cx} cy={cy} r="1.3" fill={["#c83e3b", "#efd96b", "#6fb36f"][i]} />)}
-      <path d={inkBox(41, 21, 8.4, 1.8, .6, 0)} {...IS} fill={BRASS} />
-    </g>
-  );
-}
-
-/** SHORT. Joiner's workbench at waist height: a thick pine top on trestle legs with a lower shelf, an iron vice screwed to the
- *  front-left corner, a hammer and a plank on top and a red tool box on the shelf. */
-export function Workbench() {
-  const wood = "#b58a58", woodL = "#d5ac78", woodD = "#7e5c38", iron = "#515862", ironL = "#7d8591";
-  const x = 6, y = 34, w = 46, dx = 6, dy = 13;
-  return (
-    <g>
-      <GroundShadow cx={33} cy={57} rx={27} ry={3.4} />
-      {[8, 44].map((lx) => <path key={lx} d={inkBox(lx, 38, 5, 19, .8, 0)} fill={woodD} {...OS} />)}
-      <path d={slabSide(10, 49, 38, 3.2, 3, 3)} fill={woodD} {...OS} />
-      <path d={inkBox(10, 49, 38, 3.2, .6, 0)} fill={wood} {...OS} />
-      <path d={inkBox(30, 41, 14, 8, 1, .2)} fill="#b8433a" {...OS} />
-      <path d="M33 41V39.4H41V41" {...IS} />
-      <path d={slabSide(x, y, w, 4.6, dx, dy)} fill={woodD} {...OS} />
-      <path d={slabTop(x, y, w, dx, dy)} fill={woodL} {...OS} />
-      <path d={inkBox(x, y, w, 4.8, 1, .2)} fill={wood} {...OS} />
-      <path d={`M18 ${y - 6}L26 ${y - 8.6}M30 ${y - 3}L40 ${y - 6}`} {...IS} stroke={woodD} />
-      {/* vice */}
-      <OBox x={9} y={31.4} w={9} h={5.4} dx={3.4} dy={4} c={iron} cl={ironL} cd="#383d45" />
-      <path d={inkBox(8, 24.6, 3.4, 7.4, .6, 0)} fill={iron} {...OS} />
-      <path d="M13 28.4L19.6 25.4" stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
-      <path d="M13 28.4L19.6 25.4" stroke={ironL} strokeWidth="1.1" strokeLinecap="round" />
-      <circle cx="20.2" cy="25.2" r="1.3" {...IS} fill={ironL} />
-      {/* hammer and plank */}
-      <OBox x={30} y={30.4} w={15} h={2.6} dx={5} dy={6.4} c="#e2c590" cl="#f1deb2" cd="#b99a62" st={IS} />
-      <path d="M24 28.4L36 26.6" stroke={INK} strokeWidth="3" strokeLinecap="round" />
-      <path d="M24 28.4L36 26.6" stroke="#9c6a42" strokeWidth="1.4" strokeLinecap="round" />
-      <path d={inkBox(20.6, 25.4, 5.2, 4.8, .6, 0)} fill={iron} {...OS} />
-    </g>
-  );
-}
-
-/** SHORT. Tailor's dummy: a linen-covered torso on a turned pole with a three-footed stand, a wooden knob for a head and a yellow
- *  tape measure round its neck. Shoulder-wide (20 units) and no higher than the chest of a person. */
-export function Mannequin() {
-  const u = useUid();
-  const lin = "#e8dcc0", linD = "#bfae88", wood = "#7a4c2c", woodL = "#a67a50";
-  const torso = "M26 24C24 25 22.5 26 22.5 29L24 39Q32 43 40 39L41.5 29C41.5 26 40 25 38 24L36 22H28Z";
-  return (
-    <g>
-      <defs><clipPath id={`${u}c`}><rect x="33" y="14" width="14" height="32" /></clipPath></defs>
-      <GroundShadow cx={32} cy={57} rx={13} ry={2.8} />
-      {[[20, 57], [44, 57], [32, 56]].map(([fx, fy], i) => (
-        <g key={i}>
-          <path d={`M32 50L${fx} ${fy}`} stroke={INK} strokeWidth="4" strokeLinecap="round" />
-          <path d={`M32 50L${fx} ${fy}`} stroke={i === 2 ? wood : woodL} strokeWidth="1.8" strokeLinecap="round" />
-        </g>
-      ))}
-      <path d={inkBox(30.6, 40, 2.8, 12, .6, 0)} fill={woodL} {...OS} />
-      <circle cx="32" cy="46" r="1.8" fill={BRASS} {...OS} />
-      <path d={torso} fill={lin} {...OS} />
-      <path d={torso} fill={linD} clipPath={`url(#${u}c)`} />
-      <path d={torso} fill="none" {...OS} />
-      <path d="M32 22.6V41M26.4 30.4Q29.4 33 32 31.2M37.6 30.4Q34.6 33 32 31.2" {...IS} stroke={linD} />
-      <ellipse cx="32" cy="21.4" rx="3.6" ry="1.5" fill={wood} {...OS} />
-      <circle cx="32" cy="17.6" r="2.4" fill={woodL} {...OS} />
-      {/* tape measure round the neck, one end hanging, and a few pins */}
-      <path d="M26.6 24.4Q32 27 37.4 24.4L38 26.4Q32 29 26 26.4Z" {...IS} fill="#efd96b" />
-      <path d="M37.6 26.4L38.4 36" stroke="#efd96b" strokeWidth="2" strokeLinecap="round" />
-      {[[28.6, 34.6], [35.6, 33.2], [27, 29.6]].map(([px, py], i) => <circle key={i} cx={px} cy={py} r=".8" fill="#c83e3b" />)}
-    </g>
-  );
-}
-
-/** SHORT. Stone altar at waist height: a block of grey masonry on a step, a purple altar cloth with gold fringe and a gold
- *  diamond hanging down its front, two candles and a gold chalice on top. */
-export function Altar() {
-  const st = "#b9b2a4", stL = "#d6d0c2", stD = "#8f8878", cloth = "#6b3f7a", clothL = "#8a5a99";
-  const x = 8, y = 33, w = 44, h = 21, dx = 6, dy = 13;
-  const P = (uu, v) => [r2(x + uu * w + v * dx), r2(y - v * dy)];
-  const [c1x, c1y] = P(.12, .5), [c2x, c2y] = P(.88, .5), [chx, chy] = P(.5, .4);
-  return (
-    <g>
-      <GroundShadow cx={33} cy={57} rx={27} ry={3.4} />
-      <path d={inkBox(5, 52, 50, 5, 1, .2)} fill={stD} {...OS} />
-      <path d={slabSide(x, y, w, h - 2, dx, dy)} fill={stD} {...OS} />
-      <path d={inkBox(x, y, w, h - 2, 1, .3)} fill={st} {...OS} />
-      <path d="M8.6 40H51.4M8.6 46.4H51.4M14 40V46.4M30 40V46.4M44 40V46.4M22 46.4V52" {...IS} stroke={stD} />
-      {/* slab top and the cloth over it */}
-      <path d={slabTop(x - 1, y, w + 2, dx, dy)} fill={stL} {...OS} />
-      <path d={slabTop(x + 1, y, w - 2, dx - .4, dy - 2)} {...IS} fill={clothL} />
-      <path d={inkBox(x + 6, y, w - 12, 15, .8, .3)} fill={cloth} {...OS} />
-      <path d={`M${x + 6} ${y + 12.6}H${x + w - 6}`} {...IS} stroke={BRASS} />
-      {Array.from({ length: 12 }, (_, i) => <path key={i} d={`M${r2(x + 7.6 + i * 2.7)} ${y + 15}V${y + 17.4}`} stroke={BRASS} strokeWidth=".9" strokeLinecap="round" />)}
-      <path d="M30 36.2L34.2 40.6L30 45L25.8 40.6Z" {...IS} fill={BRASS} />
-      {/* candles and chalice */}
-      {[[c1x, c1y], [c2x, c2y]].map(([cx, cy], i) => (
-        <g key={i}>
-          <rect x={cx - 1.4} y={cy - 8} width="2.8" height="8" {...IS} fill={CREAM} />
-          <path d={`M${cx} ${cy - 8.4}C${cx - 1.5} ${cy - 10} ${cx - .3} ${cy - 11.2} ${cx} ${cy - 12.6}C${cx + .3} ${cy - 11.2} ${cx + 1.5} ${cy - 10} ${cx} ${cy - 8.4}Z`} {...IS} fill="#ffb347" />
-        </g>
-      ))}
-      <path d={`M${chx} ${chy - 3.4}V${chy - .6}M${chx - 2.4} ${chy - .6}H${chx + 2.4}`} stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
-      <path d={`M${chx} ${chy - 3.4}V${chy - .6}M${chx - 2.4} ${chy - .6}H${chx + 2.4}`} stroke={BRASS} strokeWidth="1.1" strokeLinecap="round" />
-      <path d={`M${chx - 3} ${chy - 8.4}H${chx + 3}Q${chx + 2.4} ${chy - 3.6} ${chx} ${chy - 3.4}Q${chx - 2.4} ${chy - 3.6} ${chx - 3} ${chy - 8.4}Z`} fill={BRASS} {...OS} />
-    </g>
-  );
-}
-
-/** SHORT. Draughtsman's table, below eye height: a pale board tilted up and away on two wooden trestle legs with a cross brace,
- *  a pencil ledge along the front edge, a blue-print sheet pinned to it with a green set square and a T-square on top. */
-export function DraftingTable() {
-  const wood = "#a97b4e", woodL = "#c99d6c", woodD = "#6f4a2a", paper = "#eef3f6", blue = "#5f8bb0";
-  const x = 8, y = 34, w = 40, dx = 8, dy = 18;
-  const P = (uu, v) => [r2(x + uu * w + v * dx), r2(y - v * dy)];
-  return (
-    <g>
-      <GroundShadow cx={33} cy={57} rx={26} ry={3.4} />
-      <path d={inkBox(17, 38, 3.4, 12, .6, 0)} fill={woodD} {...OS} />
-      <path d={inkBox(50, 36, 3.4, 13, .6, 0)} fill={woodD} {...OS} />
-      {[11, 42].map((lx) => <path key={lx} d={inkBox(lx, 38, 4.6, 19, .8, 0)} fill={wood} {...OS} />)}
-      <path d={inkBox(14, 47, 30, 2.8, .6, 0)} fill={woodD} {...OS} />
-      {/* the tilted board: side, top, front edge */}
-      <path d={slabSide(x, y, w, 3.6, dx, dy)} fill={woodD} {...OS} />
-      <path d={slabTop(x, y, w, dx, dy)} fill={woodL} {...OS} />
-      <path d={inkBox(x, y, w, 3.8, .8, .2)} fill={wood} {...OS} />
-      <path d={polyD(P(.04, .1), P(.96, .1), P(.96, .92), P(.04, .92))} {...IS} fill={paper} />
-      <path d={`M${P(.12, .72)}L${P(.5, .72)}L${P(.5, .88)}M${P(.5, .3)}H${P(.9, .3)[0]}M${P(.62, .5)}L${P(.86, .78)}`} stroke={blue} strokeWidth=".9" fill="none" strokeLinecap="round" />
-      {/* set square and T-square */}
-      <path d={polyD(P(.14, .14), P(.5, .14), P(.14, .6))} fill="#7fcf9a" fillOpacity=".85" {...IS} />
-      <path d={polyD(P(.22, .2), P(.34, .2), P(.22, .34))} {...IS} fill={paper} />
-      <path d={polyD(P(.58, .1), P(.64, .1), P(.64, .92), P(.58, .92))} {...IS} fill={woodL} />
-      {/* pencil ledge and pencils */}
-      <path d={inkBox(x + 2, y + 3.6, w - 4, 2, .6, 0)} fill={woodD} {...OS} />
-      <path d="M17 36.2H25M28 36.2H33" stroke="#efd96b" strokeWidth="1.3" strokeLinecap="round" />
-    </g>
-  );
-}
-
-/* ---- two-tile props: the model table and the tram ----------------------------------------------------------- */
-/** SHORT, multi-tile. Architectural model of a hotel on its display table, drawn once across the span (either way round): a
- *  cream and green base plate with a long main block, a tower with a gold roof band, a low wing and an annex, tiny windows
- *  and two lollipop trees, on a table with an apron and legs. Waist height: sight passes over. */
-export function MaquetteSpan({ cw = 1, ch = 1 }) {
-  if (cw === 1 && ch === 1) return <g transform="translate(0 32) scale(.5)"><MaquetteSpan cw={2} ch={1} /></g>;
-  const wood = "#8f5a33", woodL = "#b57b4b", woodD = "#5e3920", plate = "#e9e4d0", green = "#8fb06a", wall = "#f1ede2", wallL = "#fffdf4", wallD = "#cfc8b2";
-  const vert = ch > cw, W = 64 * cw, H = 64 * ch;
-  const [x, yF, w, dx, dy] = vert ? [10, H - 24, 36, 12, 66] : [8, 40, W - 22, 10, 19];
-  const P = (uu, v) => [x + uu * w + v * dx, yF - v * dy];
-  const boxes = (vert
-    ? [[.08, .08, .84, .18, 6, wall], [.06, .34, .88, .3, 11, wall], [.28, .68, .4, .16, 20, wallL]]
-    : [[.06, .3, .5, .36, 9, wall], [.48, .36, .13, .3, 19, wallL], [.64, .16, .3, .52, 7, wall], [.06, .72, .2, .18, 5, wall]]
-  ).sort((a, b) => b[1] - a[1]);
-  const trees = vert ? [[.1, .94], [.88, .96], [.9, .04]] : [[.4, .08], [.95, .06], [.34, .86]];
-  return (
-    <g>
-      <GroundShadow cx={W / 2} cy={H - 7} rx={w / 2 + 6} ry={3.4} />
-      {[x + 2, x + w - 7].map((lx) => <path key={lx} d={inkBox(lx, yF + 5, 5.4, H - yF - 11, .8, 0)} fill={woodD} {...OS} />)}
-      <path d={slabSide(x, yF, w, 6, dx, dy)} fill={woodD} {...OS} />
-      <path d={slabTop(x, yF, w, dx, dy)} fill={woodL} {...OS} />
-      <path d={inkBox(x - 1, yF, w + 2, 6.6, 1, .2)} fill={wood} {...OS} />
-      <path d={polyD(P(.03, .05), P(.97, .05), P(.97, .95), P(.03, .95))} {...IS} fill={plate} />
-      <path d={polyD(P(.05, .08), P(.95, .08), P(.95, .92), P(.05, .92))} {...IS} fill={green} />
-      {trees.map(([tu, tv], i) => { const [tx, ty] = P(tu, tv); return <g key={i}><path d={`M${r2(tx)} ${r2(ty)}V${r2(ty - 3)}`} stroke={woodD} strokeWidth="1" /><circle cx={r2(tx)} cy={r2(ty - 4.4)} r="2.5" {...IS} fill="#4c7a5e" /></g>; })}
-      {boxes.map(([bu, bv, wp, dp, bh, col], i) => {
-        const [bx, by] = P(bu, bv), bw = wp * w, bdx = dp * dx, bdy = dp * dy;
-        const cols = Math.max(1, Math.floor(bw / 4.4)), rows = Math.floor((bh - 2) / 3.8);
-        return (
-          <g key={i}>
-            <OBox x={r2(bx)} y={r2(by)} w={r2(bw)} h={bh} dx={r2(bdx)} dy={r2(bdy)} c={col} cl={wallL} cd={wallD} st={IS} />
-            {bw > 7 && Array.from({ length: rows * cols }, (_, k) => {
-              const rr = Math.floor(k / cols), cc = k % cols, gap = bw / cols;
-              return <rect key={k} x={r2(bx + cc * gap + gap / 2 - .8)} y={r2(by - bh + 2 + rr * 3.8)} width="1.6" height="2" fill="#3b5870" />;
-            })}
-            {bh > 15 && <path d={slabTop(r2(bx - .6), r2(by - bh), r2(bw + 1.2), r2(bdx), r2(bdy))} {...IS} fill="#d9a526" />}
-          </g>
-        );
-      })}
-    </g>
-  );
-}
-export const Maquette = () => <MaquetteSpan cw={1} ch={1} />;
-
-/** TALL. Rail of hanging clothes: a chrome rail on two upright stands with feet, a row of coats on hangers, in five colours with
- *  collars, buttons and sleeves, hanging from above head height to the knee. */
-export function ClothesRail() {
-  const coats = [["#8c3b3b", "#6a2929"], ["#3f5f84", "#2d445f"], ["#d8c9a0", "#b3a37a"], ["#4c7a5e", "#35583f"], ["#7a5a8a", "#58406a"]];
-  return (
-    <g>
-      <GroundShadow cx={32} cy={57.4} rx={27} ry={3.2} />
-      {coats.map(([c, cd], i) => {
-        const cx = 12 + i * 10, hem = 44 + (i % 2) * 5 + (i === 2 ? 2 : 0);
-        return (
-          <g key={i}>
-            <path d={`M${cx} 9.6V12`} stroke={INK} strokeWidth="1.2" />
-            <path d={`M${cx - 6.4} 15.6L${cx} 12.6L${cx + 6.4} 15.6L${cx + 7.4} ${hem}H${cx - 7.4}Z`} fill={c} {...OS} />
-            <path d={`M${cx + 2} 14.2L${cx + 6.4} 15.6L${cx + 7.4} ${hem}H${cx + 2.4}Z`} fill={cd} />
-            <path d={`M${cx - 6.4} 15.6L${cx + 6.4} 15.6M${cx} 12.6V${hem}`} {...IS} />
-            <path d={`M${cx - 6.4} 15.6L${cx - 7.8} ${hem - 6}M${cx + 6.4} 15.6L${cx + 7.8} ${hem - 6}`} {...IS} />
-            <circle cx={cx - 1.4} cy="22" r=".8" fill={INK} /><circle cx={cx - 1.4} cy="29" r=".8" fill={INK} />
-          </g>
-        );
-      })}
-      {[6, 58].map((px) => (
-        <g key={px}>
-          <path d={inkBox(px - 1.4, 8, 2.8, 47, .6, 0)} fill="#aeb5be" {...OS} />
-          <path d={inkBox(px - 6, 54, 12, 3.4, 1, 0)} fill="#6e7580" {...OS} />
-        </g>
-      ))}
-      <path d="M4.6 8.4H59.4" stroke={INK} strokeWidth="4" strokeLinecap="round" />
-      <path d="M4.6 8.4H59.4" stroke="#d3d9e0" strokeWidth="1.8" strokeLinecap="round" />
-    </g>
-  );
-}
-
-/** TALL. Brick oven built up to the ceiling: a stout brick base with an arched fire mouth glowing orange beside a log store, a
- *  brick dome above it and a tall chimney stack standing up behind. Brick courses are drawn in short broken lines. */
-export function Oven() {
-  const u = useUid();
-  const br = "#b4583f", brL = "#cf7556", brD = "#7f3a29", mortar = "#8a4a38";
-  const dome = "M10 36C10 14 50 14 50 36Z";
-  return (
-    <g>
-      <defs><clipPath id={`${u}d`}><path d={dome} /></clipPath></defs>
-      <GroundShadow cx={31} cy={57.4} rx={27} ry={3.4} />
-      {/* chimney stack */}
-      <path d={slabSide(36, 3, 10, 24, 4, 4)} fill={brD} {...OS} />
-      <path d={inkBox(36, 3, 10, 24, .8, .2)} fill={br} {...OS} />
-      <path d={slabTop(34, 1, 14, 4, 4)} fill={brL} {...OS} />
-      <path d={inkBox(34, 1, 14, 3.4, .6, 0)} fill={brD} {...OS} />
-      <path d="M36.6 8H45.4M36.6 14H45.4M36.6 20H45.4M41 3V8M39 8V14M43 14V20" {...IS} stroke={mortar} />
-      {/* base block */}
-      <path d={slabSide(6, 34, 46, 23, 5, 5)} fill={brD} {...OS} />
-      <path d={inkBox(6, 34, 46, 23, 1, .3)} fill={br} {...OS} />
-      <path d={slabTop(6, 34, 46, 5, 5)} fill={brL} {...OS} />
-      {/* dome, shaded on its east side */}
-      <path d={dome} fill={br} {...OS} />
-      <path d="M36 15.6C46 19 50 28 50 36H38C38 28 38 20 36 15.6Z" fill={brD} clipPath={`url(#${u}d)`} />
-      <path d={dome} fill="none" {...OS} />
-      <path d="M13 28Q30 22 47 28M11 32Q30 26 49 32M20 20Q30 18 40 20" {...IS} stroke={mortar} />
-      <path d="M7 40H51M7 46H51M7 52H51M15 40V46M33 40V46M24 46V52M42 46V52M12 52V57" {...IS} stroke={mortar} />
-      {/* arched fire mouth with glow and a log store beside */}
-      <path d="M18 57V44Q18 37.4 28 37.4Q38 37.4 38 44V57Z" fill="#1d1410" {...OS} />
-      <path d="M21 56V45Q21 40.6 28 40.6Q35 40.6 35 45V56Z" fill="#e0703a" />
-      <path d="M24 56V47Q24 43.6 28 43.6Q32 43.6 32 47V56Z" fill="#ffb347" />
-      <path d="M17 38.2Q28 33.4 39 38.2" {...IS} />
-      {[[41.6, 53.4], [41.6, 49.4]].map(([lx, ly], i) => <g key={i}><path d={inkBox(lx, ly, 9, 3.6, 1.6, 0)} {...IS} fill="#8b5a36" /><circle cx={lx + 1.6} cy={ly + 1.8} r=".8" fill="#d6b27f" /></g>)}
-    </g>
-  );
-}
-
-/** TALL. Cast-iron hand printing press, well above head height: a wooden base carrying a bed with a paper stack, two iron
- *  standards joined by a heavy crossbeam, a big screw spindle with its long handle bar and ball ends, and the platen. */
-export function Press() {
-  const iron = "#3d434d", ironL = "#6b7380", ironD = "#262a31", wood = "#8b5a36", woodD = "#5c3a22", paper = "#f4f1e6";
-  return (
-    <g>
-      <GroundShadow cx={32} cy={57.4} rx={27} ry={3.4} />
-      <path d={slabSide(7, 46, 50, 11, 4, 4)} fill={woodD} {...OS} />
-      <path d={inkBox(7, 46, 50, 11, 1, .3)} fill={wood} {...OS} />
-      <path d={slabTop(7, 46, 50, 4, 4)} fill="#b98556" {...OS} />
-      <path d="M14 48V57M49 48V57" {...IS} />
-      <path d={inkBox(34, 39.4, 16, 6.6, .8, 0)} {...IS} fill={paper} />
-      <path d="M35 42H49M35 44H49" {...IS} stroke="#b3ae9a" />
-      <path d={inkBox(10, 41, 18, 5, .8, 0)} fill={ironD} {...OS} />
-      <path d="M12 43.5H26" stroke={ironL} strokeWidth="1" strokeDasharray="1.4 1" />
-      {[11, 45].map((px) => <path key={px} d={inkBox(px, 8, 8, 38, 1.2, .2)} fill={iron} {...OS} />)}
-      <path d="M13 12V44M47 12V44" stroke={ironL} strokeWidth=".9" />
-      <path d={slabSide(7, 6, 50, 8, 4, 4)} fill={ironD} {...OS} />
-      <path d={slabTop(7, 6, 50, 4, 4)} fill={ironL} {...OS} />
-      <path d={inkBox(7, 6, 50, 8, 1.4, .3)} fill={iron} {...OS} />
-      <path d={inkBox(28.6, 14, 6.8, 20, .8, 0)} fill={ironL} {...OS} />
-      <path d="M28.8 18H35.2M28.8 22H35.2M28.8 26H35.2M28.8 30H35.2" {...IS} />
-      <path d={inkBox(24, 33.4, 16, 6, 1, .2)} fill={iron} {...OS} />
-      <path d="M32 20L8 24" stroke={INK} strokeWidth="4" strokeLinecap="round" />
-      <path d="M32 20L8 24" stroke={wood} strokeWidth="2" strokeLinecap="round" />
-      <circle cx="6.8" cy="24.2" r="2.6" fill={ironL} {...OS} />
-      <circle cx="33" cy="19.8" r="2" fill={ironD} {...OS} />
-    </g>
-  );
-}
-
-/** TALL. Net rack on the quay: three tall timber poles under a crossbeam, two fishing nets hung in drooping swags of teal mesh
- *  with a row of orange floats along the top and lead weights along the lower hem. */
-export function NetRack() {
-  const u = useUid();
-  const net = "M10 12H54V48Q49 52 43 48T32 49T21 48T10 50Z";
-  const wood = "#8b6a44", woodD = "#5a4128";
-  const mesh = Array.from({ length: 16 }, (_, i) => i * 4);
-  return (
-    <g>
-      <defs><clipPath id={`${u}n`}><path d={net} /></clipPath></defs>
-      <GroundShadow cx={32} cy={57.4} rx={27} ry={3.2} />
-      <path d={net} fill="#7fa9a8" />
-      <g clipPath={`url(#${u}n)`} stroke="#3d6468" strokeWidth=".7" fill="none">
-        {mesh.map((k) => <path key={k} d={`M${k - 6} 10L${k + 40} 56M${k + 50} 10L${k + 4} 56`} />)}
-      </g>
-      <path d={net} fill="none" {...OS} />
-      {[14, 22, 30, 38, 46, 54].map((fx) => <circle key={fx} cx={fx - 2} cy="13.6" r="2.2" {...IS} fill="#e8742f" />)}
-      {[16, 25, 34, 43].map((lx, i) => <circle key={lx} cx={lx} cy={48.4 + (i % 2 ? .4 : 0)} r=".9" fill="#454c58" />)}
-      {[8, 32, 56].map((px) => <path key={px} d={inkBox(px - 1.8, 5, 3.6, 52, .8, 0)} fill={wood} {...OS} />)}
-      <path d="M32 6V56" stroke={woodD} strokeWidth=".8" />
-      <path d={inkBox(4, 5, 56, 4.2, 1, .2)} fill={wood} {...OS} />
-      <path d={inkBox(3, 55, 8, 2.6, 1, 0)} fill={woodD} {...OS} /><path d={inkBox(53, 55, 8, 2.6, 1, 0)} fill={woodD} {...OS} />
-    </g>
-  );
-}
-
-/** TALL. Heap of coarse salt piled into a cone clearly taller than a person: white on the sun side, a cool blue-grey on the
- *  east, a few crystal facets and a wooden shovel stuck in the foot of the heap. */
-export function SaltPile() {
-  const cone = "M32 3C34 12 38 20 44 30C49 39 57 49 60 56C50 59.4 14 59.4 4 56C7 49 14 40 19 31C25 21 30 12 32 3Z";
-  return (
-    <g>
-      <GroundShadow cx={32} cy={57.4} rx={29} ry={3.6} />
-      <path d={cone} fill="#f2f2ec" {...OS} />
-      <path d="M32 3C34 12 38 20 44 30C49 39 57 49 60 56C52 58.6 42 59.4 36 59C38 40 35 22 32 3Z" fill="#cdd5de" />
-      <path d={cone} fill="none" {...OS} />
-      <path d="M32 3C33 20 35 40 36 59M32 14L40 30M27 22L19 34M44 30L52 46M22 40L14 50" {...IS} stroke="#9aa5b2" />
-      {[[24, 30], [28, 44], [40, 44], [37, 22], [46, 52], [16, 52]].map(([sx, sy], i) => <path key={i} d={`M${sx} ${sy}l1.6 -2.2l1.6 2.2l-1.6 2.2Z`} fill="#fff" stroke="#9aa5b2" strokeWidth=".5" />)}
-      <path d="M12 50L22 44" stroke={INK} strokeWidth="3.6" strokeLinecap="round" />
-      <path d="M12 50L22 44" stroke="#a97b4e" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M22.4 43.6L28 40L30 44L25 48Z" fill="#6e7580" {...OS} />
-    </g>
-  );
-}
-
-/** TALL, multi-tile. Closed tram car, drawn once across its span. Along a row it is seen from the side: a cream car with a red
- *  skirt, a row of windows, two door pairs, a curved grey roof carrying a pantograph, bogie wheels and a lit front. Down a
- *  column it is seen head-on, with the roof and the windowed east side running away behind. */
-export function TramSpan({ cw = 1, ch = 1 }) {
-  if (cw === 1 && ch === 1) return <g transform="translate(0 32) scale(.5)"><TramSpan cw={2} ch={1} /></g>;
-  const cream = "#efe4c4", creamD = "#c9bc98", red = "#b8402f", redD = "#8a2e22", roof = "#8d949c", roofL = "#b3bac2", glass = "#6fa3bd", glassL = "#9cc6d8";
-  const W = 64 * cw, H = 64 * ch;
-  if (ch > cw) {
-    const x = 10, w = 36, yb = H - 6, yt = yb - 50, dx = 14, dy = 56;
-    const S = (a, z) => [r2(x + w + a * dx), r2(yb - a * dy - z)];
-    return (
-      <g>
-        <GroundShadow cx={x + w / 2 + 8} cy={H - 7} rx={w / 2 + 10} ry={3.6} />
-        <path d={slabSide(x, yt, w, 50, dx, dy)} fill={creamD} {...OS} />
-        <path d={polyD(S(0, 0), S(1, 0), S(1, 11), S(0, 11))} {...IS} fill={redD} />
-        {[.08, .26, .44, .62, .8].map((a) => <path key={a} d={polyD(S(a, 20), S(a + .12, 20), S(a + .12, 38), S(a, 38))} {...IS} fill={glass} />)}
-        <path d={slabTop(x, yt, w, dx, dy)} fill={roofL} {...OS} />
-        <path d={`M${x + 6} ${yt}L${x + 6 + dx} ${yt - dy}M${x + w - 6} ${yt}L${x + w - 6 + dx} ${yt - dy}`} {...IS} stroke={roof} />
-        <path d={`M${x + 12} ${yt - 20}L${x + 20} ${yt - 32}L${x + 28} ${yt - 20}M${x + 14} ${yt - 32}H${x + 26}`} stroke={INK} strokeWidth="1.6" fill="none" strokeLinecap="round" />
-        <path d={inkBox(x, yt, w, 50, 2, .3)} fill={cream} {...OS} />
-        <path d={inkBox(x, yb - 12, w, 12, 1, .3)} fill={red} {...OS} />
-        <path d={inkBox(x + 3, yt + 8, w - 6, 24, 1.6, .2)} fill={glass} {...OS} />
-        <path d={`M${x + w / 2} ${yt + 8}V${yt + 32}M${x + 3} ${yt + 20}H${x + w - 3}`} {...IS} />
-        <path d={`M${x + 6} ${yt + 11}L${x + 12} ${yt + 11}L${x + 6} ${yt + 18}Z`} fill={glassL} />
-        <path d={inkBox(x + 8, yt + 2.2, w - 16, 4.4, .8, 0)} {...IS} fill="#efd96b" />
-        <circle cx={x + 7} cy={yb - 6} r="2.6" {...IS} fill="#ffe27a" /><circle cx={x + w - 7} cy={yb - 6} r="2.6" {...IS} fill="#ffe27a" />
-        <path d={inkBox(x - 1.4, yb - 2.2, w + 2.8, 3.4, 1, 0)} fill="#454c58" {...OS} />
-      </g>
-    );
-  }
-  const x0 = 6, x1 = W - 6, yb = 51, yt = 22;
-  const wx = (i) => x0 + 8 + i * ((x1 - x0 - 24) / 8) + (i > 2 ? 2 : 0) + (i > 5 ? 2 : 0);
-  return (
-    <g>
-      <GroundShadow cx={W / 2} cy={H - 6.5} rx={(x1 - x0) / 2 + 2} ry={3.4} />
-      <path d={`M${W / 2 - 9} 15L${W / 2} 4.6L${W / 2 + 9} 15M${W / 2 - 6} 4.4H${W / 2 + 6}`} stroke={INK} strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d={`M${x0 + 2} ${yt}Q${x0 + 2} 13.4 ${x0 + 14} 13.4H${x1 - 14}Q${x1 - 2} 13.4 ${x1 - 2} ${yt}Z`} fill={roof} {...OS} />
-      <path d={`M${x0 + 14} 15.4H${x1 - 14}`} stroke={roofL} strokeWidth="1.2" strokeLinecap="round" />
-      <path d={inkBox(x0, yt, x1 - x0, yb - yt, 2, .3)} fill={cream} {...OS} />
-      <path d={inkBox(x0, yb - 11, x1 - x0, 11, 2, .3)} fill={red} {...OS} />
-      <path d={`M${x0 + 1} ${yb - 11}H${x1 - 1}`} stroke="#efd96b" strokeWidth="1.2" />
-      {Array.from({ length: 8 }, (_, i) => (i === 2 || i === 5
-        ? <g key={i}><path d={inkBox(wx(i), yt + 3, 9.6, 26, 1, .2)} fill={creamD} {...OS} /><path d={`M${wx(i) + 4.8} ${yt + 3}V${yt + 29}`} {...IS} /><path d={inkBox(wx(i) + 1.4, yt + 6, 7, 10, .8, 0)} {...IS} fill={glass} /></g>
-        : <path key={i} d={inkBox(wx(i), yt + 4, 10.4, 11, 1.2, .2)} fill={glass} {...OS} />))}
-      <path d={inkBox(x1 - 15, yt - 1.6, 10, 3.6, .6, 0)} {...IS} fill="#efd96b" />
-      <circle cx={x1 - 4} cy={yb - 5} r="2.4" {...IS} fill="#ffe27a" />
-      {[24, 40, W - 40, W - 24].map((cx) => <g key={cx}><circle cx={cx} cy={yb + 3.4} r="4.4" fill="#454c58" {...OS} /><circle cx={cx} cy={yb + 3.4} r="1.4" fill={roofL} /></g>)}
-    </g>
-  );
-}
-export const Tram = () => <TramSpan cw={1} ch={1} />;
-
-/** TALL. Observatory telescope on a tripod: a long cream tube with brass bands, a dew cap, a finder scope and an eyepiece,
- *  swung up at about 48 degrees on a brass fork head over a stout pier, its muzzle well above head height. */
-export function Telescope() {
-  const cream = "#e6e2d6", creamD = "#bdb7a2", brass = BRASS;
-  return (
-    <g>
-      <GroundShadow cx={28} cy={57.4} rx={21} ry={3.2} />
-      {[[11, 57], [45, 57], [28, 56]].map(([fx, fy], i) => (
-        <g key={i}>
-          <path d={`M28 42L${fx} ${fy}`} stroke={INK} strokeWidth="4.2" strokeLinecap="round" />
-          <path d={`M28 42L${fx} ${fy}`} stroke={i === 2 ? "#6f4a2a" : "#a67a50"} strokeWidth="2" strokeLinecap="round" />
-        </g>
-      ))}
-      <path d={inkBox(24, 36, 8, 14, 1.4, .2)} fill="#3d434d" {...OS} />
-      <path d={inkBox(21.4, 48.2, 13.2, 2.8, .8, 0)} fill="#6b7380" {...OS} />
-      <path d={inkBox(23.4, 31, 9, 7, 1.4, .2)} fill={brass} {...OS} />
-      <g transform="translate(26 33) rotate(-48)">
-        <path d={inkBox(-7, -3, 7, 6, .8, 0)} fill="#3d434d" {...OS} />
-        <path d={inkBox(-1, -4.6, 36, 9.2, 2, .2)} fill={cream} {...OS} />
-        <path d="M-1 1.2H35V4.6H-1Z" fill={creamD} />
-        <path d={inkBox(-1, -4.6, 36, 9.2, 2, .2)} fill="none" {...OS} />
-        <path d={inkBox(33, -6, 10, 12, 1.4, .2)} fill={creamD} {...OS} />
-        <path d="M43 -4.4V4.4" stroke={INK} strokeWidth="1.4" />
-        {[7, 26].map((bx) => <path key={bx} d={inkBox(bx, -5.4, 2.6, 10.8, .6, 0)} fill={brass} {...OS} />)}
-        <path d={inkBox(8, -10.2, 14, 4, 1.4, .1)} fill={creamD} {...OS} />
-        <path d="M11 -6.4V-5M20 -6.4V-5" {...IS} />
-      </g>
-      <circle cx="26" cy="33" r="2.4" fill={brass} {...OS} />
-    </g>
-  );
-}
-
-/** TALL. Harbour crane in painted iron: a concrete plinth carrying a lattice mast, a cab and a long lattice jib to the east
- *  with a counterweight at the back, tie cables from the apex and a hook hanging on a cable. */
-export function Crane() {
-  const y = "#d9a526", yD = "#a97e18", iron = "#3d434d", conc = "#9a9da3", concD = "#6e7178";
-  const zig = (x0, x1, ya, yb, n) => Array.from({ length: n }, (_, i) => {
-    const t0 = ya + ((yb - ya) / n) * i, t1 = ya + ((yb - ya) / n) * (i + 1);
-    return `M${i % 2 ? x1 : x0} ${t0}L${i % 2 ? x0 : x1} ${t1}`;
-  }).join("");
-  return (
-    <g>
-      <GroundShadow cx={32} cy={57.4} rx={26} ry={3.4} />
-      <path d={slabSide(14, 49, 32, 8, 4, 4)} fill={concD} {...OS} />
-      <path d={inkBox(14, 49, 32, 8, 1, .3)} fill={conc} {...OS} />
-      <path d={slabTop(14, 49, 32, 4, 4)} fill="#c1c4c9" {...OS} />
-      <path d={zig(24.8, 37.2, 16, 48, 8)} {...IS} stroke={yD} strokeWidth="1.2" />
-      <path d="M24.6 14V49M37.4 14V49" stroke={INK} strokeWidth="3.2" strokeLinecap="round" />
-      <path d="M24.6 14V49M37.4 14V49" stroke={y} strokeWidth="1.6" strokeLinecap="round" />
-      <path d={inkBox(22, 46, 18, 3.4, .8, 0)} fill={yD} {...OS} />
-      <path d={inkBox(22, 10.6, 18, 4, .8, 0)} fill={iron} {...OS} />
-      <path d={inkBox(25, 5.4, 9, 6, 1.2, 0)} fill={y} {...OS} />
-      <path d={inkBox(27, 6.8, 5, 2.8, .6, 0)} {...IS} fill="#9cc6d8" />
-      <path d={inkBox(6, 9, 20, 3, .6, 0)} fill={y} {...OS} />
-      <path d={inkBox(5, 11.6, 9, 9, .8, 0)} fill={iron} {...OS} />
-      <path d="M5.4 15.4H13.6" {...IS} stroke="#6b7380" />
-      <path d="M26 7.6H60V12.4H26Z" fill={y} {...OS} />
-      <path d="M28 12.2L32 7.8L36 12.2L40 7.8L44 12.2L48 7.8L52 12.2L56 7.8L60 12.2" {...IS} stroke={yD} />
-      <path d="M31 5.4V1.6" stroke={INK} strokeWidth="2" strokeLinecap="round" />
-      <path d="M31 1.6L59 8M31 1.6L8 9.4" {...IS} />
-      <path d={inkBox(50, 12.4, 6, 3, .6, 0)} fill={iron} {...OS} />
-      <path d="M53 15.4V38" stroke={INK} strokeWidth="1" />
-      <path d="M53 38V41.4Q53 45.6 49.6 45.6Q47.4 45.6 47.4 43.4" fill="none" stroke={INK} strokeWidth="2.6" strokeLinecap="round" />
-      <path d="M53 38V41.4Q53 45.6 49.6 45.6Q47.4 45.6 47.4 43.4" fill="none" stroke="#6b7380" strokeWidth="1.2" strokeLinecap="round" />
-      <path d={inkBox(50.4, 36, 5.2, 3, .6, 0)} fill={y} {...OS} />
-    </g>
-  );
-}
-
-/** PERCH. Bunk bed seen from the side: four timber posts, a bottom bunk and a person-sized top bunk with a guard rail, a mattress,
- *  a pillow and a blanket on each, and a ladder at the foot end. The upper bunk and the posts block the view. */
-export function BunkBed() {
-  const wood = "#7a4c2c", woodL = "#9c6a42", woodD = "#4f301b", linL = "#f8f2e2", linD = "#c2b693";
-  const x = 7, w = 46, dx = 5, dy = 5;
-  const bunk = (yy, blk, blkL) => {
-    const Q = (uu, v) => [r2(x + 1 + uu * (w - 2) + v * dx), r2(yy - 4 - v * dy)];
-    return (
-      <g>
-        <path d={slabSide(x + 1, yy - 4, w - 2, 4, dx, dy)} fill={linD} {...OS} />
-        <path d={slabTop(x + 1, yy - 4, w - 2, dx, dy)} fill={linL} {...OS} />
-        <path d={polyD(Q(.3, .04), Q(1, .04), Q(1, .96), Q(.3, .96))} {...IS} fill={blkL} />
-        <path d={polyD(Q(.04, .2), Q(.24, .2), Q(.24, .86), Q(.04, .86))} {...IS} fill="#fff" />
-        <path d={inkBox(x, yy, w, 4, 1, .2)} fill={wood} {...OS} />
-        <path d={inkBox(x + 1, yy - 4, w - 2, 4, 1, .2)} fill={blk} {...OS} />
-      </g>
-    );
-  };
-  return (
-    <g>
-      <GroundShadow cx={32} cy={57.4} rx={27} ry={3.4} />
-      {[x + dx + 1, x + w + dx - 3].map((px) => <path key={px} d={inkBox(px, 6, 3, 44, .6, 0)} fill={woodD} {...OS} />)}
-      {bunk(48, "#4b7a9e", "#6a97b8")}
-      {bunk(31, "#b8403f", "#d46a63")}
-      <path d={`M${x + 8} 17.6H${x + w - 4}`} stroke={INK} strokeWidth="3.4" strokeLinecap="round" />
-      <path d={`M${x + 8} 17.6H${x + w - 4}`} stroke={woodL} strokeWidth="1.6" strokeLinecap="round" />
-      {[x - 1, x + w - 2].map((px) => <path key={px} d={inkBox(px, 8, 3.6, 49, .6, 0)} fill={wood} {...OS} />)}
-      {[x - 1, x + w - 2].map((px) => <path key={`c${px}`} d={inkBox(px - .6, 5.4, 4.8, 3.6, 1, 0)} fill={woodL} {...OS} />)}
-      <path d="M44 25.4V56M50.6 25.4V56" stroke={INK} strokeWidth="3.4" strokeLinecap="round" />
-      <path d="M44 25.4V56M50.6 25.4V56" stroke={woodL} strokeWidth="1.5" strokeLinecap="round" />
-      {[32, 38, 44, 50].map((ry) => <path key={ry} d={`M44 ${ry}H50.6`} stroke={woodD} strokeWidth="1.6" strokeLinecap="round" />)}
-    </g>
-  );
-}
-
-/** PERCH. Church organ: a wooden case carrying a fan of silver pipes that rise well above head height, and below them the console
- *  with two stepped keyboards and a row of stop knobs, with the organist's red padded bench pulled up at the lower middle of
- *  the tile where a placed token sits and plays. */
-export function Organ() {
-  const wood = "#7a4c2c", woodL = "#9c6a42", woodD = "#4f301b", pipe = "#cfd5dc", pipeD = "#8f98a4", key = "#f6f1e3";
-  const seat = "#a8303f", seatL = "#c95a66", seatD = "#7b2230", leg = "#5e3b22";
-  const tops = [14, 9, 5, 9, 4, 9, 5, 9, 14];
-  return (
-    <g>
-      <GroundShadow cx={31} cy={57.6} rx={26} ry={3.4} />
-      <path d={slabSide(7, 4, 46, 30, 5, 5)} fill={woodD} {...OS} />
-      <path d={slabTop(7, 4, 46, 5, 5)} fill={woodL} {...OS} />
-      <path d={inkBox(7, 4, 46, 30, 1.4, .3)} fill={wood} {...OS} />
-      {tops.map((ty, i) => {
-        const px = 9.4 + i * 4.8;
-        return (
-          <g key={i}>
-            <path d={`M${px} 31V${ty + 2}Q${px + 2} ${ty - .6} ${px + 4} ${ty + 2}V31Z`} fill={pipe} {...OS} />
-            <path d={`M${px + 2.6} 31V${ty + 1.4}Q${px + 3.4} ${ty + .2} ${px + 4} ${ty + 2}V31Z`} fill={pipeD} />
-            <path d={`M${px + .4} ${ty + 12}h3.2v2.6h-3.2z`} fill={INK} />
-          </g>
-        );
-      })}
-      <path d="M7 31H53" stroke={INK} strokeWidth="1.5" />
-      <path d={slabSide(10, 34, 40, 14, 4, 4)} fill={woodD} {...OS} />
-      <path d={inkBox(10, 34, 40, 14, 1.2, .3)} fill={wood} {...OS} />
-      <path d={slabTop(10, 34, 40, 4, 4)} fill={woodL} {...OS} />
-      {[...Array(8)].map((_, i) => <circle key={i} cx={14.6 + i * 3.8} cy={36.2} r="1" {...IS} fill={i % 2 ? BRASS : CREAM} />)}
-      {[[38.4, 14, 32], [42.8, 16, 28]].map(([ky, kx, kw]) => (
-        <g key={ky}>
-          <path d={inkBox(kx, ky, kw, 3.8, .6, 0)} fill={key} {...OS} />
-          {Array.from({ length: Math.floor(kw / 3) - 1 }, (_, i) => <path key={i} d={`M${r2(kx + 3 + i * 3)} ${ky}V${r2(ky + 3.8)}`} stroke="#8a8576" strokeWidth=".6" />)}
-        </g>
-      ))}
-      {[[16.4, 1], [36.4, -1]].map(([lx, sg]) => <path key={lx} d={polyD([lx, 51], [lx + 3.4, 51], [lx + 3.4 + sg * 1.2, 57], [lx + sg * 1.2, 57])} fill={leg} {...OS} />)}
-      <path d={slabSide(14, 49, 28, 4, 4, 4)} fill={seatD} {...OS} />
-      <path d={slabTop(14, 49, 28, 4, 4)} fill={seatL} {...OS} />
-      <path d={inkBox(14, 49, 28, 4, 1.6, .3)} fill={seat} {...OS} />
-    </g>
-  );
-}
-
 /* ---------------------------------------------------------------------- */
 /*  Registry + dispatcher                                                  */
 /* ---------------------------------------------------------------------- */
@@ -8413,11 +7847,7 @@ export const SPRITES = { TABLE: Table, PLANT: Plant, SHELF: Shelf, TV, STATUE: S
   STAGE_CURTAIN: StageCurtain, STAGE_FLAT: StageFlat, SPOTLIGHT: Spotlight, HARP: Harp, COSTUME_TRUNK: CostumeTrunk, PROPS_TABLE: PropsTable,
   DOUBLE_BASS: DoubleBass, CELLO: Cello, TIMPANI: Timpani, MUSIC_STAND: MusicStand, CONDUCTOR_PODIUM: ConductorPodium, THEATER_SEAT: TheaterSeat, FOOTLIGHTS: Footlights, VELVET_ROPE: VelvetRope,
   // Bayou sub-biome
-  CYPRESS: Cypress, MOSSY_OAK: MossyOak, AIRBOAT: Airboat, CRAB_TRAP: CrabTrap, LILY_PADS: LilyPads,
-  // sub-theme batch
-  COUNTER: Counter, WORKBENCH: Workbench, MANNEQUIN: Mannequin, ALTAR: Altar, DRAFTING_TABLE: DraftingTable, MAQUETTE: Maquette,
-  CLOTHES_RAIL: ClothesRail, OVEN: Oven, PRESS: Press, NET_RACK: NetRack, SALT_PILE: SaltPile, TRAM: Tram, TELESCOPE: Telescope, CRANE: Crane,
-  BUNK_BED: BunkBed, ORGAN: Organ };
+  CYPRESS: Cypress, MOSSY_OAK: MossyOak, AIRBOAT: Airboat, CRAB_TRAP: CrabTrap, LILY_PADS: LilyPads };
 export const PROP_ORDER = ["TABLE", "PLANT", "SHELF", "TV", "STATUE", "PILLAR", "SAFE", "PIANO", "SCREEN", "CHAIR", "RUG", "BED", "STOOL", "CORPSE", "EASEL", "DISPLAY_CASE", "CHANDELIER_FALL", "GRAMOPHONE", "CUSHION", "CARPET_RUNNER", "FLOOR_GRATE", "SOFA",
   "ARMOR", "BILLIARD_TABLE", "DESK", "STOVE", "WINE_RACK", "CLOCK", "TEA_TROLLEY",
   "STAGE_CURTAIN", "STAGE_FLAT", "SPOTLIGHT", "HARP", "COSTUME_TRUNK", "PROPS_TABLE", "DOUBLE_BASS", "CELLO", "TIMPANI", "MUSIC_STAND", "CONDUCTOR_PODIUM", "THEATER_SEAT", "FOOTLIGHTS", "VELVET_ROPE", // Opera House sub-biome
@@ -8432,9 +7862,7 @@ export const PROP_ORDER = ["TABLE", "PLANT", "SHELF", "TV", "STATUE", "PILLAR", 
   "DUMPSTER", "PHONE_BOOTH", "HYDRANT", "FOUNTAIN", "MANHOLE", "GRATE", "STREETLIGHT", "NEWSSTAND", "TRASH_BAG", "CARDBOARD_BOX", "GRAFFITI",
   "BARBER_CHAIR", "BENCH", "JUKEBOX", "POSTER_COLUMN", "WASHER", "WATER_TOWER", "TRAFFIC_CONE", "TRASH_CAN",
   "CAROUSEL", "POPCORN_CART", "TENT_POLE", "CANNON", "FUNHOUSE_MIRROR", "FERRIS_WHEEL", "RING_TOSS", "SAWDUST_RING", // Carnival sub-biome
-  "WARDROBE", "BEEHIVE", "SARCOPHAGUS",
-  "COUNTER", "WORKBENCH", "MANNEQUIN", "CLOTHES_RAIL", "OVEN", "PRESS", "TRAM", // sub-theme batch
-  "ALTAR", "DRAFTING_TABLE", "MAQUETTE", "TELESCOPE", "BUNK_BED", "ORGAN", "NET_RACK", "SALT_PILE", "CRANE"];
+  "WARDROBE", "BEEHIVE", "SARCOPHAGUS"];
 export const PROP_NOTE = {
   TABLE: "Chestnut table at waist height: a plank top seen from above with a cream linen runner hanging over the front edge, a jug of flowers and a bowl of fruit on it, an apron and four square legs. Waist height: sight passes over.",
   PLANT: "Big potted plant: a dense fan of about twenty long ribbed leaves on short stems growing out of the soil inside a terracotta pot, arching up past head height, with two leaves spilling over the rim in front of the pot. Tall.",
@@ -8602,23 +8030,6 @@ export const PROP_NOTE = {
   AIRBOAT: "Swamp airboat in side profile, bow to the east: a long flat olive hull swept up to a blunt bow with a cream stripe and an aluminium deck, the driver's high crimson seat on a tube frame midships, and the big caged fan with its engine and a rudder vane at the stern. Perch: blocks sight, the driver is seen.",
   CRAB_TRAP: "Wire crab trap at waist height: a green mesh cage over a dark inside with a crab in it, an orange float with a cream band on the lid and a length of rope looped to the floor. Short: sight passes over it.",
   LILY_PADS: "Lily pads in the shallows, seen from above: a muddy bank round clear green water with a pale sandy patch in the middle where someone can stand, five notched pads and one pink water lily. Flush: you stand in it. No shadow.",
-  // sub-theme batch
-  COUNTER: "Shop counter at waist height: a long timber counter with a panelled front and plinth, a brass bell, a small cash register and a jar of sweets on top. Short: sight passes over it.",
-  WORKBENCH: "Joiner's workbench at waist height: a thick pine top on trestle legs with a lower shelf and a red tool box, an iron vice at one corner, a hammer and a plank lying on top. Short: sight passes over it.",
-  MANNEQUIN: "Tailor's dummy, shoulder-wide and chest high: a linen torso with a wooden knob on a pole and a three-footed stand, a yellow tape measure round its neck and a few pins. Short: sight passes over it.",
-  ALTAR: "Stone altar at waist height: a block of grey masonry on a step under a purple cloth with gold fringe and a gold diamond, two candles and a chalice on top. Short: sight passes over it.",
-  DRAFTING_TABLE: "Draughtsman's table below eye height: a pale board tilted up and away on trestle legs with a brace, a pencil ledge, a blue-print sheet with a green set square and a T-square. Short: sight passes over it.",
-  MAQUETTE: "Architectural model of a hotel on its display table: a green base plate with a long main block, a tower with a gold roof band, a low wing, tiny windows and little trees. Drawn once along its span, in either orientation. Waist height: sight passes over.",
-  CLOTHES_RAIL: "Rail of hanging clothes: a chrome rail on two stands with feet, five coats in different colours on hangers, hanging from above head height to the knee. Tall.",
-  OVEN: "Brick oven built up to the ceiling: a stout brick base with an arched glowing fire mouth beside a log store, a brick dome above it and a tall chimney stack behind. Tall.",
-  PRESS: "Cast-iron hand printing press above head height: a wooden stand with a bed and paper stack, two iron standards under a heavy crossbeam, a big screw spindle with its long handle bar and the platen. Tall.",
-  NET_RACK: "Net rack on the quay: three tall timber poles under a crossbeam, two drooping fishing nets of teal mesh with orange floats along the top and lead weights along the hem. Tall.",
-  SALT_PILE: "Heap of coarse salt piled into a cone taller than a person: white on the sun side, blue-grey on the east, with crystal facets and a wooden shovel stuck in its foot. Tall.",
-  TRAM: "Closed tram car, drawn once across its two tiles: a cream car with a red skirt, windows, two door pairs, a curved grey roof with a pantograph and bogie wheels (seen head-on when it runs down a column). Tall: blocks sight.",
-  TELESCOPE: "Observatory telescope on a tripod: a long cream tube with brass bands, dew cap, finder scope and eyepiece, swung up on a brass fork head over a stout pier, its muzzle well above head height. Tall.",
-  CRANE: "Harbour crane in yellow iron: a concrete plinth under a lattice mast, a cab, a long lattice jib to the east with a counterweight at the back, tie cables from the apex and a hook on a cable. Tall.",
-  BUNK_BED: "Bunk bed seen from the side: four timber posts, a bottom bunk and a person-sized top bunk with a guard rail, mattresses, pillows and blankets, and a ladder at the foot end. Perch: blocks sight, the sleeper is seen.",
-  ORGAN: "Church organ: a wooden case carrying a fan of silver pipes well above head height, a console with two keyboards and stop knobs, and the organist's red padded bench at the lower middle where a placed token sits and plays. Perch: blocks sight, the organist is seen.",
 };
 /** Optional per-prop scale about the base (kind to factor). Empty: every prop is drawn at its final size, so none needs it; kept as a hook for the board's PropSprite. */
 export const FIT = {};
@@ -8640,8 +8051,6 @@ export const SPAN_SPRITES = {
   RUG: RugN,
   SOFA: SofaSpan,
   BILLIARD_TABLE: BilliardSpan,
-  MAQUETTE: MaquetteSpan,
-  TRAM: TramSpan,
   FOOTPRINTS: FootprintsSpan,
   BED: BedSpan,
   CARPET_RUNNER: CarpetRunner,
