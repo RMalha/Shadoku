@@ -21,6 +21,16 @@ export const DAILY_RELEASE_LEAD_MS = 3 * 3600 * 1000;
 export const COSMETIC_PRICES = Object.freeze({ common: 50, rare: 100, epic: 200, legendary: 400 });
 /** The two shelves of cosmetics: an item kind → its group. */
 export const COSMETIC_GROUP = Object.freeze({ avatar: "avatar", prop: "hideout", furniture: "hideout" });
+/** Free hints a day (decided 2026-11-13): everyone has 5; the two permanent memberships raise it. After them a hint comes from the stock, or from an ad. */
+export const HINTS_PER_DAY = Object.freeze({ free: 5, member: 10, member_gold: 15 });
+/** → the day's free hints of an account with these entitlement keys. */
+export const hintsPerDay = (entitlements) => (entitlements.includes("member_gold") ? HINTS_PER_DAY.member_gold : entitlements.includes("member") ? HINTS_PER_DAY.member : HINTS_PER_DAY.free);
+/** Card rarities, most common first. */
+export const RARITIES = Object.freeze(["common", "rare", "epic", "legendary"]);
+/** A card's variants by tier: three of one tier merge into one of the next (decided 2026-11-13). */
+export const VARIANTS = Object.freeze(["card", "bronze", "silver", "gold", "diamond"]);
+export const MAX_TIER = VARIANTS.length - 1;
+export const MERGE_COUNT = 3;
 /** An unpaid ad ticket older than this is dead. */
 export const AD_TICKET_TTL_MS = 3600 * 1000;
 
@@ -118,9 +128,14 @@ export function dailyCase(caseId, now, cfg) {
   return { mode: "daily", difficulty, size };
 }
 
-/** → true when a quest of this kind advances on a solve with these facts. */
-export const questCounts = (kind, { hints, difficulty }) =>
-  kind === "solve" || (kind === "solve_no_hints" && hints === 0) || (kind === "solve_expert" && difficulty === "expert");
+/** The kinds of quest the server can advance (quest_defs.kind). */
+export const QUEST_KINDS = Object.freeze([
+  "solve", "solve_no_hints", "solve_daily", "solve_very_easy", "solve_easy", "solve_medium", "solve_hard", "solve_expert", // a closed contract
+  "open_pack", "merge_cards", "new_props", "shop_buy", "watch_ad", "streak", // a pack opened, three cards merged, a hideout item held for the first time, a Shop buy with coins, a rewarded ad, the Daily Reward
+]);
+/** → true when a quest of this kind advances on a solve with these facts (difficulty: a REWARDS key; mode: daily, story, …). */
+export const questCounts = (kind, { hints, difficulty, mode }) =>
+  kind === "solve" || (kind === "solve_no_hints" && hints === 0) || (kind === "solve_daily" && mode === "daily") || kind === `solve_${difficulty}`;
 
 /* ───────────── deals: the same answer on every call ───────────── */
 /** FNV-1a: a small stable hash for dealing quests and shop shelves. Predictable on purpose; never for anything secret. */
@@ -134,18 +149,75 @@ const byHash = (ids, salt) => ids.map((id) => [hash32(`${salt}|${id}`), id]).sor
 /** The quest ids a period deals an account: `count` of that period's active quests, in slot order. */
 export const dealQuests = (defs, period, account, key, count) => byHash(defs.filter((q) => q.period === period).map((q) => q.id), `${account}|${key}`).slice(0, count);
 
+/** A cosmetic's shelf in the Shop: "<group>:<rarity>" (avatar or hideout), or null for anything that is not a priced cosmetic. */
+export const shelfOf = (item) => (Object.hasOwn(COSMETIC_GROUP, item.kind) && Object.hasOwn(COSMETIC_PRICES, item.rarity) ? `${COSMETIC_GROUP[item.kind]}:${item.rarity}` : null);
+
 /**
- * The Shop's cosmetics of the day: one item per group (avatar, hideout) and rarity, the same for everyone on that date.
- * `items`: [{ id, kind, rarity }] on sale. → a Set of item ids.
+ * A player's cosmetics of the day in the Shop (decided 2026-11-13: random, each player their own): for every shelf, the items
+ * on sale in the order this account is dealt them on that date. The first is the day's item; the same on every call.
+ * `items`: [{ id, kind, rarity }] on sale. → Map shelf → [item ids]
  */
-export function cosmeticsOfDay(items, day) {
+export function shopShelves(items, day, account) {
   const shelves = new Map();
   for (const it of items) {
-    if (!Object.hasOwn(COSMETIC_GROUP, it.kind) || !Object.hasOwn(COSMETIC_PRICES, it.rarity)) continue;
-    const shelf = `${COSMETIC_GROUP[it.kind]}:${it.rarity}`;
-    shelves.set(shelf, [...(shelves.get(shelf) || []), it.id]);
+    const shelf = shelfOf(it);
+    if (shelf) shelves.set(shelf, [...(shelves.get(shelf) || []), it.id]);
   }
-  return new Set([...shelves].map(([shelf, ids]) => byHash(ids, `${day}|${shelf}`)[0]));
+  return new Map([...shelves].map(([shelf, ids]) => [shelf, byHash(ids, `${account}|${day}|${shelf}`)]));
+}
+
+/* ───────────── packs ───────────── */
+/** → a uniform random integer in [0, n), from the platform's cryptographic generator (no modulo bias). */
+export function randomInt(n) {
+  const limit = Math.floor(0x100000000 / n) * n, buf = new Uint32Array(1);
+  do crypto.getRandomValues(buf); while (buf[0] >= limit);
+  return buf[0] % n;
+}
+
+/**
+ * The table a pack is rolled from, and its name. `data`: the pack row's { cards, hints, guaranteed: [rarities], legendaryEvery };
+ * `weights`: { rarity: weight } (pack_odds); `pool`: the active cosmetics [{ id, rarity }].
+ * → { version, cards, hints (on the hints card, or 0), guaranteed: [rarities, one card of exactly each], random (number of
+ *     random cards), legendaryEvery (the Legendary timer, 0 = none), rarities: [{ rarity, weight, items: [ids] }], total }
+ * A rarity with no cosmetic is left out and the others share the whole; a guaranteed rarity with no cosmetic becomes one more
+ * random card; without a Legendary cosmetic there is no timer. `version` changes whenever anything a player could have been
+ * shown changes.
+ */
+export function packOdds(packId, data, weights, pool) {
+  const rarities = RARITIES.map((rarity) => ({ rarity, weight: Number.isInteger(weights[rarity]) && weights[rarity] > 0 ? weights[rarity] : 0, items: pool.filter((c) => c.rarity === rarity).map((c) => c.id).sort() }))
+    .filter((r) => r.items.length);
+  const has = (rarity) => rarities.some((r) => r.rarity === rarity);
+  const cards = Number.isInteger(data.cards) && data.cards >= 1 && data.cards <= 10 ? data.cards : 5;
+  const hints = Number.isInteger(data.hints) && data.hints > 0 ? data.hints : 0;
+  const guaranteed = (Array.isArray(data.guaranteed) ? data.guaranteed : [data.guaranteed]).filter((r) => RARITIES.includes(r) && has(r)); // each drawn from its whole rarity
+  const legendaryEvery = Number.isInteger(data.legendaryEvery) && data.legendaryEvery > 0 && has("legendary") ? data.legendaryEvery : 0;
+  const total = rarities.reduce((n, r) => n + r.weight, 0);
+  const random = total ? Math.max(0, cards - (hints ? 1 : 0) - guaranteed.length) : 0;
+  const version = hash32(JSON.stringify([packId, cards, hints, guaranteed, legendaryEvery, rarities.map((r) => [r.rarity, r.weight, r.items])])).toString(16).padStart(8, "0");
+  return { version, cards, hints, guaranteed, legendaryEvery, random, rarities: total || guaranteed.length ? rarities : [], total };
+}
+
+/** → true when the next pack of this kind is the one the Legendary timer pays: `opened` = how many the account opened so far. */
+export const legendaryDue = (info, opened) => info.legendaryEvery > 0 && (opened + 1) % info.legendaryEvery === 0;
+
+/**
+ * Rolls one pack from its table. `rnd(n)` → an integer in [0, n). `legendary`: the Legendary timer is due (legendaryDue):
+ * a guaranteed Legendary card takes the place of one random card.
+ * → [{ hints } | { item, rarity, guaranteed?, timer? }]
+ */
+export function rollPack(info, rnd, { legendary = false } = {}) {
+  const cards = [];
+  const shelf = (rarity) => info.rarities.find((r) => r.rarity === rarity);
+  const from = (r, extra = {}) => ({ item: r.items[rnd(r.items.length)], rarity: r.rarity, ...extra });
+  if (info.hints) cards.push({ hints: info.hints });
+  for (const rarity of info.guaranteed) cards.push(from(shelf(rarity), { guaranteed: true }));
+  let random = info.random;
+  if (legendary && info.legendaryEvery && random > 0) { cards.push(from(shelf("legendary"), { guaranteed: true, timer: true })); random--; }
+  for (let i = 0; i < random; i++) {
+    let x = rnd(info.total);
+    cards.push(from(info.rarities.find((r) => (x -= r.weight) < 0)));
+  }
+  return cards;
 }
 
 /* ───────────── shapes ───────────── */

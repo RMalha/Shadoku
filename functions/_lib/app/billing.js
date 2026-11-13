@@ -1,7 +1,7 @@
 /**
  * Real-money purchases (architecture 4.4). The phone sends a Play purchase token; a BillingVerifier (verifiers.js) asks Google
  * whether it is real; what it grants comes from the server's `items` row for the sku (data: {"coins": n, "hints": n,
- * "entitlement": "remove_ads", "inventory": {"<item id>": n}, "once": true}). The token's SHA-256 is the primary key of
+ * "entitlements": ["remove_ads", "member"], "inventory": {"<item id>": n}, "once": true}). The token's SHA-256 is the primary key of
  * `purchases`, so a token grants once, for one account. "once" (the Noob Kit): one per account, ever, kept as the entitlement
  * "once:<item id>"; a second purchase is refused before it is consumed, so Google refunds it.
  * Refunds write a negative `refund` line; a balance below zero blocks spending until it recovers (ledger.js when.funds).
@@ -22,13 +22,15 @@ const grantOf = (item) => {
   const amount = (v) => (Number.isInteger(v) && v > 0 ? v : 0);
   const inventory = data.inventory && typeof data.inventory === "object" && !Array.isArray(data.inventory)
     ? Object.entries(data.inventory).filter(([itemId, qty]) => /^[A-Za-z0-9_.-]{1,64}$/.test(itemId) && amount(qty)) : [];
-  return { coins: amount(data.coins), hints: amount(data.hints), entitlement: typeof data.entitlement === "string" ? data.entitlement : "", inventory, once: data.once === true };
+  const entitlements = [...(Array.isArray(data.entitlements) ? data.entitlements : []), data.entitlement].filter((key) => typeof key === "string" && /^[a-z0-9_]{1,40}$/.test(key));
+  return { coins: amount(data.coins), hints: amount(data.hints), entitlements, inventory, once: data.once === true };
 };
 const onceKey = (itemId) => `once:${itemId}`;
-const shown = (grant) => ({ coins: grant.coins, hints: grant.hints, entitlement: grant.entitlement, inventory: Object.fromEntries(grant.inventory) });
+const shown = (grant) => ({ coins: grant.coins, hints: grant.hints, entitlements: grant.entitlements, inventory: Object.fromEntries(grant.inventory) });
 
+// a product that grants an entitlement is permanent (No ads, the memberships): acknowledged, never consumed
 const finish = async (d, verifier, item, purchaseToken, tokenHash) => {
-  const done = await verifier.finishPurchase({ sku: item.sku, purchaseToken, consumable: item.kind !== "remove_ads" }).catch(() => ({ ok: false }));
+  const done = await verifier.finishPurchase({ sku: item.sku, purchaseToken, consumable: !grantOf(item).entitlements.length }).catch(() => ({ ok: false }));
   if (done && done.ok) await d.prepare("UPDATE purchases SET consumed = 1 WHERE token_hash = ?").bind(tokenHash).run();
   return !!(done && done.ok);
 };
@@ -71,10 +73,10 @@ export async function redeem(ctx, verifier, { sku, purchaseToken }) {
     .bind(id, key, now, `iap:${tokenHash}`, ...mine.binds);
   if (grant.coins) stmts.push(...post(d, { id: newOp(), account: id, delta: grant.coins, reason: "iap", ref: tokenHash, day, at: now, meta, guards: [mine] }));
   if (grant.hints) stmts.push(...post(d, { id: newOp(), account: id, currency: "hint", delta: grant.hints, reason: "iap", ref: tokenHash, day, at: now, meta, guards: [mine] }));
-  if (grant.entitlement) stmts.push(entitle(grant.entitlement));
+  for (const key of grant.entitlements) stmts.push(entitle(key)); // one the account already has keeps its first source
   if (grant.once) stmts.push(entitle(onceKey(item.id)));
   for (const [itemId, qty] of grant.inventory) {
-    stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, qty, first_at) SELECT ?, ?, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, item_id) DO UPDATE SET qty = qty + excluded.qty`)
+    stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, qty, first_at) SELECT ?, ?, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, item_id, tier) DO UPDATE SET qty = qty + excluded.qty`)
       .bind(id, itemId, qty, now, ...mine.binds));
   }
   const res = await d.batch(stmts);
@@ -106,13 +108,10 @@ export async function voidPurchase(d, purchaseToken, now) {
   if (grant.coins) stmts.push(...post(d, { id: newOp(), account: p.account_id, delta: -grant.coins, reason: "refund", ref, day, at: now, meta, guards: [mine] }));
   if (grant.hints) stmts.push(...post(d, { id: newOp(), account: p.account_id, currency: "hint", delta: -grant.hints, reason: "refund", ref, day, at: now, meta, guards: [mine] }));
   const unentitle = (key) => d.prepare(`DELETE FROM entitlements WHERE account_id = ? AND key = ? AND source = ? AND ${mine.sql}`).bind(p.account_id, key, `iap:${tokenHash}`, ...mine.binds);
-  if (grant.entitlement) stmts.push(unentitle(grant.entitlement));
+  for (const key of grant.entitlements) stmts.push(unentitle(key)); // only what THIS purchase gave (source)
   if (grant.once && p.item_id) stmts.push(unentitle(onceKey(p.item_id)));
-  for (const [itemId, qty] of grant.inventory) { // first the rows that hold no more than was granted, then the bigger ones
-    stmts.push(
-      d.prepare(`DELETE FROM inventory WHERE account_id = ? AND item_id = ? AND qty <= ? AND ${mine.sql}`).bind(p.account_id, itemId, qty, ...mine.binds),
-      d.prepare(`UPDATE inventory SET qty = qty - ? WHERE account_id = ? AND item_id = ? AND qty > ? AND ${mine.sql}`).bind(qty, p.account_id, itemId, qty, ...mine.binds),
-    );
+  for (const [itemId, qty] of grant.inventory) {
+    stmts.push(d.prepare(`UPDATE inventory SET qty = MAX(0, qty - ?) WHERE account_id = ? AND item_id = ? AND tier = 0 AND ${mine.sql}`).bind(qty, p.account_id, itemId, ...mine.binds));
   }
   const res = await d.batch(stmts);
   return wrote(res[0]) ? "voided" : "already";

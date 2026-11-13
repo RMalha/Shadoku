@@ -33,8 +33,8 @@ CREATE TABLE wallets (
 -- solve, ad, purchase, quest, streak day or shop request can never be written twice. (The currency is part of the key so
 -- one purchase or shop request can carry a coin line and a hint line.)
 -- reason -> ref: solve (case id) | ad (AdMob transaction id) | iap (purchase token hash) | quest (period key ":" quest id)
---   | streak (date) | social (network) | shop (request id) | hint_use (event id) | refund (order id)
---   | later: infinite, pack, merge, grant
+--   | streak (date) | social (network) | shop (request id) | hint_use (event id) | pack (open request id) | refund (order id)
+--   | later: infinite, merge, grant
 CREATE TABLE ledger (
   seq INTEGER PRIMARY KEY AUTOINCREMENT,
   id TEXT NOT NULL UNIQUE,
@@ -87,12 +87,13 @@ BEGIN
 END;
 
 -- ───────────── catalogue, inventory, entitlements ─────────────
--- kind: avatar | prop | furniture | hint_bundle | coin_pack | remove_ads | promo | pack
+-- kind: avatar | prop | furniture | hint_bundle | coin_pack | remove_ads | upgrade | promo | pack
 -- rarity: common | rare | epic | legendary for cosmetics (avatar, prop, furniture): it sets their price and their place in the
 --   Shop's "cosmetics of the day" (functions/_lib/app/shop.js); '' for everything else.
 -- price_coins: what it costs in the Shop (NULL = a cosmetic's rarity price, or not sold for coins). sku: its Play Billing product id.
--- data (JSON): what a purchase grants: {"coins": n, "hints": n, "entitlement": "remove_ads", "inventory": {"<item id>": n}, "once": true}
---   (once: one per account, ever), or a pack's contents, or the cosmetic's own fields.
+-- data (JSON): what a purchase grants: {"coins": n, "hints": n, "entitlements": ["remove_ads", "member"], "inventory": {"<item id>": n}, "once": true}
+--   (once: one per account, ever; entitlements are permanent), or a pack's contents {"cards": 5, "hints": 5, "guaranteed": ["rare"], "legendaryEvery": 30},
+--   or the cosmetic's own fields.
 CREATE TABLE items (
   id TEXT PRIMARY KEY,
   kind TEXT NOT NULL,
@@ -105,12 +106,64 @@ CREATE TABLE items (
   ends INTEGER
 );
 
+-- What an account holds: unopened packs and cards (cosmetics). Duplicates are kept and counted.
+-- tier: 0 the card as won or bought; 1 Bronze, 2 Silver, 3 Gold, 4 Diamond variant: three of one tier merge into one of the next.
+-- A row may stand at qty 0 (all its cards were merged or opened): the account held it once.
 CREATE TABLE inventory (
   account_id TEXT NOT NULL,
   item_id TEXT NOT NULL,
-  qty INTEGER NOT NULL CHECK (qty > 0),
+  tier INTEGER NOT NULL DEFAULT 0 CHECK (tier BETWEEN 0 AND 4),
+  qty INTEGER NOT NULL CHECK (qty >= 0),
   first_at INTEGER NOT NULL,
-  PRIMARY KEY (account_id, item_id)
+  PRIMARY KEY (account_id, item_id, tier)
+);
+
+-- The chance of each rarity for one random card of a pack (weights; their sum is the whole). The roll reads this table
+-- and GET /api/app/shop publishes it: what the player is shown is what is applied (functions/_lib/app/packs.js).
+CREATE TABLE pack_odds (
+  pack_id TEXT NOT NULL,
+  rarity TEXT NOT NULL CHECK (rarity IN ('common', 'rare', 'epic', 'legendary')),
+  weight INTEGER NOT NULL CHECK (weight >= 0),
+  PRIMARY KEY (pack_id, rarity)
+);
+
+-- Every pack opened: the audit of every roll, and why a repeated request opens nothing more. result: the cards, as JSON.
+-- seq: the account's count of packs of this kind, this one included (the Legendary timer: every Nth holds a Legendary card).
+CREATE TABLE pack_opens (
+  account_id TEXT NOT NULL,
+  request_id TEXT NOT NULL,
+  pack_id TEXT NOT NULL,
+  seq INTEGER NOT NULL,
+  odds_version TEXT NOT NULL,
+  result TEXT NOT NULL,
+  at INTEGER NOT NULL,
+  op TEXT NOT NULL,
+  PRIMARY KEY (account_id, request_id)
+);
+
+-- Every swap of one of a player's "cosmetics of the day" in the Shop. shelf: '<group>:<rarity>'; item_id: what the swap put
+-- there (the latest row of a shelf and day is what the shelf holds). how: free (one a day) | ad (a "shop_refresh" ticket each).
+CREATE TABLE shop_refreshes (
+  seq INTEGER PRIMARY KEY AUTOINCREMENT,
+  account_id TEXT NOT NULL,
+  day TEXT NOT NULL,
+  shelf TEXT NOT NULL,
+  item_id TEXT NOT NULL,
+  how TEXT NOT NULL CHECK (how IN ('free', 'ad')),
+  at INTEGER NOT NULL,
+  op TEXT NOT NULL
+);
+CREATE INDEX shop_refreshes_day ON shop_refreshes (account_id, day);
+
+-- Every merge of three cards into a variant (tier: the tier of the three).
+CREATE TABLE card_merges (
+  account_id TEXT NOT NULL,
+  request_id TEXT NOT NULL,
+  item_id TEXT NOT NULL,
+  tier INTEGER NOT NULL,
+  at INTEGER NOT NULL,
+  op TEXT NOT NULL,
+  PRIMARY KEY (account_id, request_id)
 );
 
 CREATE TABLE entitlements (
@@ -140,8 +193,8 @@ CREATE TABLE purchases (
 CREATE INDEX purchases_account ON purchases (account_id);
 CREATE INDEX purchases_order ON purchases (order_id);
 
--- One per rewarded ad the app is about to show. placement: coins | hint | quest_refresh (later: infinite).
--- used_at: a quest_refresh ticket, once paid, is spent by one refresh.
+-- One per rewarded ad the app is about to show. placement: coins | hint | quest_refresh | shop_refresh (later: infinite).
+-- used_at: a quest_refresh or shop_refresh ticket, once paid, is spent by one refresh.
 CREATE TABLE ad_tickets (
   id TEXT PRIMARY KEY,
   account_id TEXT NOT NULL,
@@ -199,7 +252,7 @@ CREATE TABLE solves (
 );
 CREATE INDEX solves_op ON solves (op);
 
--- period: daily | weekly. kind: solve | solve_no_hints | solve_expert | open_pack | new_props.
+-- period: daily | weekly. kind: one of QUEST_KINDS in functions/_lib/app/economy.js (a kind the server does not know never advances).
 CREATE TABLE quest_defs (
   id TEXT PRIMARY KEY,
   period TEXT NOT NULL CHECK (period IN ('daily', 'weekly')),
@@ -237,9 +290,22 @@ CREATE TABLE streaks (
   op TEXT
 );
 
+-- Every hint used, once per event. source: free (the day's allowance: 5, or 10 / 15 with a membership) | stock (a hint the
+-- account owned: a ledger line "hint_use" was written with it).
+CREATE TABLE hint_uses (
+  account_id TEXT NOT NULL,
+  event_id TEXT NOT NULL,
+  day TEXT NOT NULL,
+  source TEXT NOT NULL CHECK (source IN ('free', 'stock')),
+  case_id TEXT NOT NULL DEFAULT '',
+  at INTEGER NOT NULL,
+  PRIMARY KEY (account_id, event_id)
+);
+CREATE INDEX hint_uses_day ON hint_uses (account_id, day, source);
+
 -- The 30-day Daily Reward list. A day without a row gives nothing. kind:
 --   coins     amount coins                      hints     amount hints
---   item      `amount` of the item `item` (a pack)   cosmetic  one random cosmetic the account does not own yet; item = '<group>:<rarity>',
+--   item      `amount` of the item `item` (a pack)   cosmetic  one random cosmetic (a duplicate if it comes up); item = '<group>:<rarity>',
 --                                                         group avatar | hideout (props and furniture), e.g. 'hideout:common'
 CREATE TABLE streak_rewards (
   day INTEGER PRIMARY KEY CHECK (day BETWEEN 1 AND 30),

@@ -28,9 +28,9 @@ const toMonday = () => { do NOW += DAY; while (new Date(NOW).getUTCDay() !== 1);
 const today = () => eco.dayKey(NOW);
 
 const ROUTES = {
-  "GET /wallet": "wallet.js", "GET /bootstrap": "bootstrap.js", "POST /sync": "sync.js", "GET /shop": "shop/index.js", "POST /shop/buy": "shop/buy.js",
+  "GET /wallet": "wallet.js", "GET /bootstrap": "bootstrap.js", "POST /sync": "sync.js", "GET /shop": "shop/index.js", "POST /shop/buy": "shop/buy.js", "POST /shop/refresh": "shop/refresh.js",
   "POST /ads/ticket": "ads/ticket/index.js", "GET /ads/ticket/:id": "ads/ticket/[id].js", "GET /ads/ssv": "ads/ssv.js", "POST /ads/claim": "ads/claim.js",
-  "POST /billing/verify": "billing/verify.js", "POST /billing/rtdn": "billing/rtdn.js", "POST /quests/claim": "quests/claim.js", "POST /quests/refresh": "quests/refresh.js",
+  "POST /billing/verify": "billing/verify.js", "POST /billing/rtdn": "billing/rtdn.js", "POST /quests/claim": "quests/claim.js", "POST /quests/refresh": "quests/refresh.js", "POST /packs/open": "packs/open.js", "POST /cards/merge": "cards/merge.js",
   "POST /streak/claim": "streak/claim.js", "POST /social/open": "social/open.js", "POST /social/claim": "social/claim.js",
 };
 const tokens = new Map();
@@ -99,15 +99,17 @@ const ITEMS = [ // id, kind, rarity, price_coins, sku, data, active, starts, end
 ];
 for (const it of ITEMS) d1.raw.prepare("INSERT INTO items (id, kind, rarity, price_coins, sku, data, active, starts, ends) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)").run(...it);
 // every quest dealt to everyone: the scripted tests below name quests (dealing a few of them, and refreshing, has its own section)
-setConfig("daily_quests", 5); setConfig("weekly_quests", 3);
+setConfig("daily_quests", 50); setConfig("weekly_quests", 50);
 
 /* ───────────── the brief's numbers and the calendar ───────────── */
 eq("solve rewards are the brief's", eco.REWARDS, { tutorial: 25, very_easy: 5, easy: 10, medium: 15, hard: 20, expert: 25 });
 eq("an ad pays 5, three a day", [eco.AD_COIN_REWARD, eco.CONFIG_DEFAULTS.ad_coins_per_day], [5, 3]);
 eq("a social visit pays 25, on three networks", [eco.SOCIAL_REWARD, eco.SOCIAL_NETWORKS.length], [25, 3]);
-eq("the seeded quests are the brief's examples", rows("SELECT id, period, kind, target, reward FROM quest_defs ORDER BY id").map((q) => `${q.id}:${q.period}:${q.kind}:${q.target}:${q.reward}`), [
+eq("the brief's example quests are seeded with the brief's numbers", rows("SELECT id, period, kind, target, reward FROM quest_defs WHERE id IN ('d_expert1', 'd_nohint2', 'd_pack1', 'd_solve2', 'd_solve5', 'w_nohint5', 'w_props8', 'w_solve20') ORDER BY id").map((q) => `${q.id}:${q.period}:${q.kind}:${q.target}:${q.reward}`), [
   "d_expert1:daily:solve_expert:1:25", "d_nohint2:daily:solve_no_hints:2:25", "d_pack1:daily:open_pack:1:10", "d_solve2:daily:solve:2:10", "d_solve5:daily:solve:5:25",
   "w_nohint5:weekly:solve_no_hints:5:100", "w_props8:weekly:new_props:8:120", "w_solve20:weekly:solve:20:100"]);
+eq("…in a longer list, each of a kind the server can advance, each kind used", [rows("SELECT period, COUNT(*) AS n FROM quest_defs GROUP BY period ORDER BY period").map((r) => `${r.period}:${r.n}`), rows("SELECT DISTINCT kind FROM quest_defs").every((r) => eco.QUEST_KINDS.includes(r.kind)), eco.QUEST_KINDS.filter((k) => !one("SELECT 1 AS x FROM quest_defs WHERE kind = ?", k))], [["daily:16", "weekly:14"], true, []]);
+eq("free hints a day, and the variants of a card", [eco.HINTS_PER_DAY, eco.hintsPerDay([]), eco.hintsPerDay(["remove_ads", "member"]), eco.hintsPerDay(["member", "member_gold"]), eco.VARIANTS, eco.MERGE_COUNT], [{ free: 5, member: 10, member_gold: 15 }, 5, 10, 15, ["card", "bronze", "silver", "gold", "diamond"], 3]);
 eq("the seeded coin packs are the brief's", rows("SELECT sku, data FROM items WHERE kind = 'coin_pack' ORDER BY id").map((i) => `${i.sku}=${JSON.parse(i.data).coins}`), ["coins_100=100", "coins_1200=1200", "coins_2500=2500", "coins_500=500"]);
 eq("dayKey follows the time zone", [eco.dayKey(Date.UTC(2026, 10, 16, 23, 30)), eco.dayKey(Date.UTC(2026, 10, 16, 23, 30), 60), eco.dayKey(Date.UTC(2026, 10, 16, 0, 30), -60)], ["2026-11-16", "2026-11-17", "2026-11-15"]);
 eq("clampTz keeps real offsets only", [eco.clampTz(99999), eco.clampTz(-99999), eco.clampTz("60"), eco.clampTz(NaN), eco.clampTz(540.7)], [840, -720, 0, 0, 540]);
@@ -222,16 +224,44 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   eq("an absurd time zone is clamped", one("SELECT tz_offset FROM accounts WHERE id = ?", B).tz_offset, 840);
 }
 
-/* ───────────── hints ───────────── */
+/* ───────────── hints: five free a day (ten or fifteen for members), then the stock ───────────── */
 {
-  const A = "google:hints";
+  toMonday();
+  const A = "google:hints", dev = { env: { DEV_BILLING: "1" }, host: LOCAL };
   const hintEvent = () => ({ eventId: uid(), type: "hint_use", caseId: "e1" });
-  eq("no hints, none used", [(await sync(A, [hintEvent()])).body.results[0].reason, wallet(A).hints], ["no_stock", 0]);
-  eq("…and the overuse is flagged", one("SELECT COUNT(*) AS n FROM flags WHERE account_id = ? AND kind = 'hint_overuse'", A).n, 1);
-  await grant(A, 2, "hint");
+  const st = async (as = A) => (await call("GET /wallet", { as })).body.state;
+  const how = (r) => r.body.results.map((x) => x.source || x.reason || x.result);
+  eq("a new player has five free hints today and no stock", [(await st()).hintsToday, wallet(A).hints], [{ free: 5, used: 0, left: 5 }, 0]);
   const ev = hintEvent();
-  eq("a hint is used once per event", [results(await sync(A, [ev, ev])), results(await sync(A, [ev])), wallet(A).hints], ["ok,duplicate", "duplicate", 1]);
-  eq("the stock stops at zero", [results(await sync(A, [hintEvent(), hintEvent(), hintEvent()])), wallet(A).hints], ["ok,rejected,rejected", 0]);
+  eq("a free hint is counted once per event", [how(await sync(A, [ev, ev])), how(await sync(A, [ev])), (await st()).hintsToday.left], [["free", "duplicate"], ["duplicate"], 4]);
+  eq("after the day's five, with no stock, a hint is refused", [how(await sync(A, Array.from({ length: 6 }, hintEvent))), (await st()).hintsToday, one("SELECT COUNT(*) AS n FROM flags WHERE account_id = ? AND kind = 'hint_overuse'", A).n], [["free", "free", "free", "free", "no_stock", "no_stock"], { free: 5, used: 5, left: 0 }, 2]);
+  await grant(A, 2, "hint");
+  const spent = hintEvent();
+  eq("then the stock is spent, once per event, never below zero", [how(await sync(A, [spent, spent, hintEvent(), hintEvent()])), how(await sync(A, [spent])), wallet(A).hints], [["stock", "duplicate", "stock", "no_stock"], ["duplicate"], 0]);
+  eq("free hints leave no ledger line; stock hints leave one each", [one("SELECT COUNT(*) AS n FROM ledger WHERE account_id = ? AND reason = 'hint_use'", A).n, rows("SELECT source, COUNT(*) AS n FROM hint_uses WHERE account_id = ? GROUP BY source ORDER BY source", A).map((r) => `${r.source}:${r.n}`)], [2, ["free:5", "stock:2"]]);
+  NOW += DAY;
+  await grant(A, 1, "hint");
+  const burst = await atOnce(Array.from({ length: 8 }, () => () => sync(A, [hintEvent()])));
+  eq("a new day, eight hints at once: five free, one from the stock, two refused", [burst.flatMap(how).sort().join(), wallet(A).hints, (await st()).hintsToday], ["free,free,free,free,free,no_stock,no_stock,stock", 0, { free: 5, used: 5, left: 0 }]);
+
+  // the two permanent memberships: 10 and 15 free hints a day, with No ads
+  const M = "google:member";
+  const buy = (sku, token) => call("POST /billing/verify", { as: M, body: { sku, purchaseToken: token }, ...dev });
+  const refund = (token) => call("POST /billing/rtdn", { body: { voided: [{ purchaseToken: token }] }, ...dev });
+  const m1 = await buy("member", "dev.member.token0001");
+  eq("a Member has No ads and ten free hints a day", [m1.status, m1.body.granted.entitlements, m1.body.state.entitlements, m1.body.state.hintsToday], [200, ["remove_ads", "member"], ["member", "remove_ads"], { free: 10, used: 0, left: 10 }]);
+  eq("ten, then no more", [how(await sync(M, Array.from({ length: 11 }, hintEvent))).join(), (await st(M)).hintsToday.left], [[...Array(10).fill("free"), "no_stock"].join(), 0]);
+  const m2 = await buy("member_gold", "dev.member_gold.token0002");
+  eq("a Golden Member has fifteen: five more today", [m2.body.state.entitlements, m2.body.state.hintsToday, how(await sync(M, Array.from({ length: 6 }, hintEvent))).join()], [["member", "member_gold", "remove_ads"], { free: 15, used: 10, left: 5 }, "free,free,free,free,free,no_stock"]);
+  NOW += DAY;
+  eq("…and fifteen again the next day", (await st(M)).hintsToday, { free: 15, used: 0, left: 15 });
+  await refund("dev.member_gold.token0002");
+  eq("a refunded Golden membership leaves the Member one", [(await st(M)).entitlements, (await st(M)).hintsToday.free], [["member", "remove_ads"], 10]);
+  await refund("dev.member.token0001");
+  eq("a refunded membership takes its No ads with it", [(await st(M)).entitlements, (await st(M)).hintsToday.free], [[], 5]);
+  eq("memberships moved no coin and no hint", one("SELECT COUNT(*) AS n FROM ledger WHERE account_id = ?", M).n, 0);
+  const G = "guest:hints01";
+  eq("a guest has the five free hints too", [how(await sync(G, Array.from({ length: 6 }, hintEvent))).join(), (await st(G)).hintsToday.left], ["free,free,free,free,free,no_stock", 0]);
 }
 
 /* ───────────── rewarded ads: 5 coins, 3 a day, verified ───────────── */
@@ -339,7 +369,9 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
 /* ───────────── quests: a few dealt per player; one free refresh a day each for daily and weekly, more with an ad ───────────── */
 {
   toMonday();
-  dropConfig("daily_quests"); dropConfig("weekly_quests"); // the defaults: 3 daily of the 5, 2 weekly of the 3
+  dropConfig("daily_quests"); dropConfig("weekly_quests"); // the defaults: 3 daily and 2 weekly
+  // this section runs on a short list (the brief's eight examples: 5 daily, 3 weekly), so that it can also run out of quests
+  d1.raw.exec("UPDATE quest_defs SET active = 0 WHERE id NOT IN ('d_solve2', 'd_solve5', 'd_nohint2', 'd_expert1', 'd_pack1', 'w_nohint5', 'w_solve20', 'w_props8')");
   const A = "google:refresh", B = "google:refresh2", dev = { env: { DEV_ADS: "1" }, host: LOCAL };
   const st = async (as = A) => (await call("GET /wallet", { as })).body.state;
   const ids = (state, period) => state.quests.filter((q) => q.period === period).map((q) => q.id);
@@ -416,12 +448,17 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   d1.raw.prepare("UPDATE quest_defs SET active = 0 WHERE id = 'd_test50'").run();
   dropConfig("daily_quests");
   eq("refreshing never paid a coin", one("SELECT COUNT(*) AS n FROM ledger WHERE account_id IN (?, ?, ?) AND currency = 'coin' AND reason NOT IN ('solve', 'quest')", A, B, C).n, 0);
+  d1.raw.exec("UPDATE quest_defs SET active = 1 WHERE id <> 'd_test50'");
+  // with the whole list: a refresh draws from many more
+  NOW += DAY;
+  const L = "google:refresh6", sl = await st(L), firstL = sl.quests.find((q) => q.period === "daily"), rl = await refresh(firstL.id, undefined, L);
+  eq("the full list: 16 daily and 14 weekly quests to draw from", [(await call("GET /bootstrap", { as: L })).body.quests.list.length, rl.body.result, ids(rl.body.state, "daily").length, ids(sl, "daily").includes(rl.body.questId)], [30, "ok", 3, false]);
 }
 
 /* ───────────── the daily streak: the author's 30-day list ───────────── */
 {
   toMonday();
-  setConfig("daily_quests", 5); setConfig("weekly_quests", 3);
+  setConfig("daily_quests", 50); setConfig("weekly_quests", 50);
   const A = "google:streak", t = today();
   const claim = (date, as = A) => call("POST /streak/claim", { as, body: { date, reward: 500, current: 29, cycleDay: 30 } });
   const has = (item, as = A) => (one("SELECT qty FROM inventory WHERE account_id = ? AND item_id = ?", as, item) || { qty: 0 }).qty;
@@ -448,15 +485,17 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   eq("day 30 is the Gold Pack; then the list starts over and the streak continues", [c30.body.cycleDay, c30.body.reward, c31.body.current, c31.body.cycleDay, c31.body.reward, has("pack_gold"), has("pack_silver")], [30, { item: "pack_gold", qty: 1 }, 31, 1, { item: "pack_silver", qty: 1 }, 1, 3]);
   d1.raw.prepare("UPDATE streaks SET cycle_day = 3 WHERE account_id = ?").run(A);
   NOW += DAY;
-  const none = await claim(today());
-  eq("a cosmetic day with nothing left to give: the streak goes on, with no reward", [none.body.result, none.body.cycleDay, none.body.reward, none.body.current, has("lamp")], ["ok", 4, null, 32, 1]);
+  const dup = await claim(today());
+  eq("a cosmetic day may give a card the player already holds: a duplicate", [dup.body.result, dup.body.cycleDay, dup.body.reward, dup.body.current, has("lamp")], ["ok", 4, { item: "lamp", qty: 1 }, 32, 2]);
   d1.raw.prepare("UPDATE streaks SET cycle_day = 6 WHERE account_id = ?").run(A);
   NOW += DAY;
   eq("day 7: a common avatar cosmetic", (await claim(today())).body.reward, { item: "hat", qty: 1 });
   eq("the ledger holds the coin and hint days only", rows("SELECT currency, COUNT(*) AS n, SUM(delta) AS total FROM ledger WHERE account_id = ? AND reason = 'streak' GROUP BY currency ORDER BY currency", A).map((l) => `${l.currency}:${l.n}:${l.total}`), ["coin:1:5", "hint:1:5"]);
   const R = "google:streak-race";
   const pair = await atOnce([() => claim(today(), R), () => claim(eco.addDays(today(), 1), R)]);
-  eq("today and tomorrow claimed at once: both count, each with its own day's reward", [pair.map((r) => [r.body.result, r.body.current, r.body.reward]), wallet(R).hints, has("pack_silver", R)], [[["ok", 1, { item: "pack_silver", qty: 1 }], ["ok", 2, { hints: 5 }]], 5, 1]);
+  // whichever lands first decides: today then tomorrow (two days), or tomorrow first (today is then in the past). Never a day twice.
+  const won = pair.filter((r) => r.body.result === "ok").length, raced = one("SELECT current, cycle_day FROM streaks WHERE account_id = ?", R);
+  eq("today and tomorrow claimed at once: the streak advances once per accepted day, each with its own reward", [[1, 2].includes(won), raced.current === won, raced.cycle_day === won, pair.filter((r) => r.body.result !== "ok").every((r) => r.body.reason === "date"), wallet(R).hints === (won === 2 ? 5 : 0), has("pack_silver", R)], [true, true, true, true, true, 1]);
   // a phone that claims every date it can reach: N days never give more than N + 2 claims
   const B = "google:streak-greedy"; let got = 0;
   for (let dayNo = 0; dayNo < 5; dayNo++, NOW += DAY) for (const off of [-1, 0, 1, 2, 5]) if ((await claim(eco.addDays(today(), off), B)).body.result === "ok") got++;
@@ -469,14 +508,14 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   const A = "google:shop";
   const buy = (itemId, requestId = uid(), extra = {}, as = A) => call("POST /shop/buy", { as, body: { itemId, requestId, ...extra } });
   eq("no coins, no goods", [(await buy("lamp")).status, (await buy("hints3")).status, (await buy("pack_bronze")).status, wallet(A), one("SELECT COUNT(*) AS n FROM inventory WHERE account_id = ?", A).n], [402, 402, 402, { coins: 0, hints: 0 }, 0]);
-  await grant(A, 100);
+  await grant(A, 120);
   const req = uid(), b1 = await buy("hints3", req, { price: 0, priceCoins: 1, coins: 9999, hints: 99 });
-  eq("a hint bundle: 30 coins for 3 hints, whatever the request says", [b1.status, b1.body.spent, wallet(A)], [200, 30, { coins: 70, hints: 3 }]);
-  eq("the same request again: no second debit", [(await buy("hints3", req)).body.duplicate, wallet(A)], [true, { coins: 70, hints: 3 }]);
-  eq("a request id is for one item", [(await buy("hat", req)).body.error, wallet(A).coins], ["request_reused", 70]);
-  eq("a cosmetic is owned once", [(await buy("hat")).status, (await buy("hat")).body.error, coins(A)], [200, "owned", 50]);
+  eq("a hint bundle: 30 coins for 3 hints, whatever the request says", [b1.status, b1.body.spent, wallet(A)], [200, 30, { coins: 90, hints: 3 }]);
+  eq("the same request again: no second debit", [(await buy("hints3", req)).body.duplicate, wallet(A)], [true, { coins: 90, hints: 3 }]);
+  eq("a request id is for one item", [(await buy("hat", req)).body.error, wallet(A).coins], ["request_reused", 90]);
+  eq("a second card of a cosmetic is a duplicate, kept and counted", [(await buy("hat")).status, (await buy("hat")).status, coins(A)], [200, 200, 50]);
   await buy("lamp"); await buy("lamp"); await buy("rug");
-  eq("props stack", [rows("SELECT item_id, qty FROM inventory WHERE account_id = ? ORDER BY item_id", A).map((i) => `${i.item_id}:${i.qty}`), coins(A)], [["hat:1", "lamp:2", "rug:1"], 15]);
+  eq("props stack", [rows("SELECT item_id, qty FROM inventory WHERE account_id = ? ORDER BY item_id", A).map((i) => `${i.item_id}:${i.qty}`), coins(A)], [["hat:2", "lamp:2", "rug:1"], 15]);
   eq("the props quest counts new props only", (await call("GET /wallet", { as: A })).body.state.quests.find((q) => q.id === "w_props8").progress, 2);
   eq("not enough coins: nothing happens", [(await buy("sofa")).body.error, coins(A), one("SELECT COUNT(*) AS n FROM inventory WHERE account_id = ? AND item_id = 'sofa'", A).n], ["insufficient", 15, 0]);
   eq("what is not on sale, or not sold for coins", [(await buy("gone")).status, (await buy("expired")).status, (await buy("future")).status, (await buy("nope")).status, (await buy("coins_2500")).body.error, (await buy("noob_kit")).body.error, (await buy("hints5_money")).body.error, (await buy("free")).body.error, (await buy("plain")).body.error, (await buy("lamp", "short")).status, (await buy(["lamp"])).status], [404, 404, 404, 404, "not_for_coins", "not_for_coins", "not_for_coins", "not_for_coins", "not_for_coins", 400, 400]);
@@ -485,16 +524,47 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   await grant(A, 1000);
   eq("packs wait in the inventory, at the author's prices", [(await buy("pack_bronze")).body.spent, (await buy("pack_bronze")).body.spent, (await buy("pack_gold")).body.spent, rows("SELECT item_id, qty FROM inventory WHERE account_id = ? AND item_id LIKE 'pack_%' ORDER BY item_id", A).map((i) => `${i.item_id}:${i.qty}`), coins(A)], [90, 90, 300, ["pack_bronze:2", "pack_gold:1"], 535]);
   eq("the seeded hint bundles", [(await buy("hints_5")).body.hints, (await buy("hints_15")).body.spent, wallet(A)], [5, 160, { coins: 315, hints: 23 }]);
-  // cosmetics of the day: one per shelf, the same choice the pure function makes
-  const shelf = (await call("GET /shop", { as: A })).body.items;
-  const todays = eco.cosmeticsOfDay(rows("SELECT id, kind, rarity FROM items WHERE active = 1 AND (starts IS NULL OR starts <= ?) AND (ends IS NULL OR ends > ?)", NOW, NOW), today());
-  const mask = todays.has("mask_a") ? "mask_a" : "mask_b", other = mask === "mask_a" ? "mask_b" : "mask_a";
-  eq("the shop shows today's cosmetics only, one per shelf", [shelf.filter((i) => i.ofTheDay).map((i) => i.id).sort(), todays.has(other), shelf.some((i) => ["gone", "expired", "future", "plain", other].includes(i.id))], [[...todays].sort(), false, false]);
+  // cosmetics of the day: each player their own, one per shelf, the choice the pure function makes
+  const onSaleNow = () => rows("SELECT id, kind, rarity FROM items WHERE active = 1 AND (starts IS NULL OR starts <= ?) AND (ends IS NULL OR ends > ?)", NOW, NOW);
+  const dealt = (as) => eco.shopShelves(onSaleNow(), today(), as);
+  const shelfItems = async (as = A) => (await call("GET /shop", { as })).body.items;
+  const rareAvatar = async (as = A) => (await shelfItems(as)).find((i) => i.kind === "avatar" && i.rarity === "rare").id;
+  const shelf = await shelfItems();
+  const mask = dealt(A).get("avatar:rare")[0], other = mask === "mask_a" ? "mask_b" : "mask_a";
+  eq("the shop shows the player's cosmetics of the day only, one per shelf", [shelf.filter((i) => i.ofTheDay).map((i) => i.id).sort(), shelf.some((i) => ["gone", "expired", "future", "plain", other].includes(i.id))], [[...dealt(A).values()].map((ids) => ids[0]).sort(), false]);
   eq("prices on the shelf", [shelf.find((i) => i.id === mask).priceCoins, shelf.find((i) => i.id === "lamp").priceCoins, shelf.find((i) => i.id === "hints_40").priceCoins, shelf.find((i) => i.id === "coins_100").priceCoins, shelf.find((i) => i.id === "coins_100").sku], [100, 10, 650, null, "coins_100"]);
-  eq("today's rare avatar costs 100; the other one is not for sale today", [(await buy(mask)).body.spent, (await buy(other)).body.error, (await buy(other)).status, coins(A)], [100, "not_today", 404, 215]);
-  let seen = new Set();
-  for (let i = 0; i < 40; i++) for (const id of eco.cosmeticsOfDay([{ id: "mask_a", kind: "avatar", rarity: "rare" }, { id: "mask_b", kind: "avatar", rarity: "rare" }], eco.addDays(today(), i))) seen.add(id);
-  eq("the shelf rotates from day to day", seen.size, 2);
+  eq("today's rare avatar costs 100; the other one is not on this player's shelf", [(await buy(mask)).body.spent, (await buy(other)).body.error, (await buy(other)).status, coins(A)], [100, "not_today", 404, 215]);
+  eq("players are dealt their own shelves, and they change from day to day", (() => { const players = new Set(), days = new Set(); for (let i = 0; i < 40; i++) { players.add(eco.shopShelves(onSaleNow(), today(), `player${i}`).get("avatar:rare")[0]); days.add(eco.shopShelves(onSaleNow(), eco.addDays(today(), i), A).get("avatar:rare")[0]); } return [players.size, days.size, eco.shelfOf({ kind: "prop", rarity: "epic" }), eco.shelfOf({ kind: "pack", rarity: "" })]; })(), [2, 2, "hideout:epic", null]);
+
+  // swapping a cosmetic of the day: one free a day, then one ad each, as often as the player likes
+  const dev = { env: { DEV_ADS: "1" }, host: LOCAL };
+  const refresh = (itemId, ticket, as = A) => call("POST /shop/refresh", { as, body: { itemId, ticket, price: 0, item: "sofa" } });
+  const adTicket = async (placement, as = A, pay = true) => { const t = (await call("POST /ads/ticket", { as, body: { placement } })).body.ticket; if (pay) await call("POST /ads/claim", { as, body: { ticket: t }, ...dev }); return t; };
+  eq("what cannot be swapped", [(await refresh(other)).body.error, (await refresh("lamp")).body.error, (await refresh("hints3")).body.error, (await refresh("nope")).status, (await refresh(["x"])).status, (await call("GET /wallet", { as: A })).body.state.shopRefresh], ["not_today", "no_other_item", "not_today", 404, 400, { free: true, adTickets: 0 }]);
+  const r1 = await refresh(mask);
+  eq("the free swap puts another item of the same shelf there", [r1.status, r1.body.shelf, r1.body.item, r1.body.replaced, r1.body.how, r1.body.state.shopRefresh, await rareAvatar()], [200, "avatar:rare", other, mask, "free", { free: false, adTickets: 0 }, other]);
+  eq("the swapped-out item is off the shelf, the new one is for sale", [(await buy(mask)).body.error, (await buy(other)).body.spent, coins(A)], ["not_today", 100, 115]);
+  eq("the day's second free swap is refused", [(await refresh(other)).body.error, await rareAvatar()], ["free_used", other]);
+  const unpaid = await adTicket("shop_refresh", A, false);
+  eq("an ad that was not watched swaps nothing, nor does an ad of another kind", [(await refresh(other, unpaid)).body.error, (await refresh(other, await adTicket("quest_refresh"))).body.error, (await refresh(other, await adTicket("hint"))).body.error, (await refresh(other, "nope")).body.error, await rareAvatar()], ["ticket", "ticket", "ticket", "ticket", other]);
+  const t1 = await adTicket("shop_refresh");
+  eq("a watched ad shows as one more swap", (await call("GET /wallet", { as: A })).body.state.shopRefresh, { free: false, adTickets: 1 });
+  const r2 = await refresh(other, t1);
+  eq("after an ad: one more swap, and the ticket is spent", [r2.body.item, r2.body.how, r2.body.state.shopRefresh.adTickets, (await refresh(mask, t1)).body.error, await rareAvatar()], [mask, "ad", 0, "ticket", mask]);
+  for (let i = 0; i < 3; i++) await refresh(await rareAvatar(), await adTicket("shop_refresh"));
+  eq("as many swaps as ads watched", [one("SELECT COUNT(*) AS n FROM shop_refreshes WHERE account_id = ? AND how = 'ad'", A).n, one("SELECT COUNT(*) AS n FROM shop_refreshes WHERE account_id = ? AND how = 'free'", A).n, coins(A)], [4, 1, 115]);
+  const S2 = "google:shop-b", mine2 = dealt(S2).get("avatar:rare")[0];
+  eq("another player's watched ad is not mine", [(await refresh(mine2, await adTicket("shop_refresh"), S2)).body.error, await rareAvatar(S2)], ["ticket", mine2]);
+  const twoFree = await atOnce([() => refresh(mine2, undefined, S2), () => refresh(mine2, undefined, S2)]);
+  eq("two free swaps at once: one", [twoFree.map((r) => r.status).sort().join(), one("SELECT COUNT(*) AS n FROM shop_refreshes WHERE account_id = ?", S2).n], ["200,409", 1]);
+  const t2 = await adTicket("shop_refresh", S2), cur2 = await rareAvatar(S2);
+  const sameAd = await atOnce([() => refresh(cur2, t2, S2), () => refresh(cur2, t2, S2)]);
+  eq("one watched ad used for two swaps at once: one", [sameAd.map((r) => r.status).sort().join(), one("SELECT COUNT(*) AS n FROM shop_refreshes WHERE account_id = ? AND how = 'ad'", S2).n], ["200,409", 1]);
+  // a player whose deal is the same item today and tomorrow: today's swap must not still be on the shelf tomorrow
+  const S3 = Array.from({ length: 40 }, (_, i) => `google:shop-d${i}`).find((acc) => eco.shopShelves(onSaleNow(), today(), acc).get("avatar:rare")[0] === eco.shopShelves(onSaleNow(), eco.addDays(today(), 1), acc).get("avatar:rare")[0]);
+  const deal3 = dealt(S3).get("avatar:rare")[0], swap3 = await refresh(deal3, undefined, S3);
+  NOW += DAY;
+  eq("a new day: the day's own deal, and the free swap is back", [await rareAvatar(S2), (await call("GET /wallet", { as: S2 })).body.state.shopRefresh.free, swap3.body.item !== deal3, await rareAvatar(S3)], [dealt(S2).get("avatar:rare")[0], true, true, deal3]);
 
   const B = "google:shop-race";
   await grant(B, 40);
@@ -504,7 +574,124 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   const same = uid(), twice = await atOnce([() => buy("lamp", same, {}, B), () => buy("lamp", same, {}, B)]);
   eq("one request sent twice at once: one debit", [twice.map((r) => r.status).join(), twice.filter((r) => r.body.duplicate).length, coins(B), one("SELECT qty FROM inventory WHERE account_id = ? AND item_id = 'lamp'", B).qty], ["200,200", 1, 90, 1]);
   const hats = await atOnce([1, 2].map(() => () => buy("hat", uid(), {}, B)));
-  eq("a once-only cosmetic bought twice at once: one", [hats.map((r) => r.status).sort().join(), coins(B)], ["200,409", 70]);
+  eq("two of a cosmetic bought at once: two cards, two debits", [hats.map((r) => r.status).sort().join(), coins(B), one("SELECT qty FROM inventory WHERE account_id = ? AND item_id = 'hat'", B).qty], ["200,200", 50, 2]);
+}
+
+/* ───────────── packs: the server rolls from the published odds; duplicates merge into variants ───────────── */
+{
+  toMonday();
+  const A = "google:packs", M = "google:merge";
+  const packOdds = async () => Object.fromEntries((await call("GET /shop", { as: A })).body.items.filter((i) => i.kind === "pack").map((i) => [i.id, i.odds]));
+  const open = (packId, oddsVersion, requestId = uid(), extra = {}) => call("POST /packs/open", { as: A, body: { packId, oddsVersion, requestId, ...extra } });
+  const merge = (itemId, tier, requestId = uid()) => call("POST /cards/merge", { as: M, body: { itemId, tier, requestId } });
+  const qty = (item, tier = 0, as = A) => (one("SELECT qty FROM inventory WHERE account_id = ? AND item_id = ? AND tier = ?", as, item, tier) || { qty: 0 }).qty;
+  const odds = await packOdds(), bronze = odds.pack_bronze.version;
+  eq("the Shop publishes what each pack holds", [odds.pack_bronze.cards, odds.pack_bronze.hintsCard, odds.pack_bronze.guaranteed.map((g) => g.rarity), odds.pack_bronze.randomCards, odds.pack_silver.guaranteed.map((g) => g.rarity), odds.pack_gold.hintsCard, odds.pack_gold.guaranteed.map((g) => g.rarity), odds.pack_gold.randomCards], [5, 5, ["rare"], 3, ["epic"], 0, ["rare", "epic"], 3]);
+  eq("…and the Legendary timer of each", [odds.pack_bronze.legendaryTimer.every, odds.pack_silver.legendaryTimer.every, odds.pack_gold.legendaryTimer.every, odds.pack_gold.legendaryTimer.rarity, odds.pack_gold.legendaryTimer.items.map((i) => i.id)], [30, 20, 10, "legendary", ["expired", "future"]]);
+  eq("…the odds of a random card: 40 / 30 / 20 / 10", odds.pack_gold.random.map((r) => `${r.rarity}:${r.percent}`), ["common:40", "rare:30", "epic:20", "legendary:10"]);
+  eq("…down to each card, adding up to 100 %", [odds.pack_gold.random[0].items, odds.pack_bronze.guaranteed[0].items.map((i) => i.id), Math.round(odds.pack_gold.random.flatMap((r) => r.items).reduce((n, i) => n + i.percent, 0) * 1000) / 1000, /^[0-9a-f]{8}$/.test(bronze)], [[{ id: "hat", percent: 20 }, { id: "lamp", percent: 20 }], ["mask_a", "mask_b", "rug"], 100, true]);
+  eq("no pack, nothing to open", [(await open("pack_bronze", bronze)).body.error, (await open("nope", "x")).status, (await open("hints_5", "x")).status, (await open("pack_bronze")).status, (await open("pack_bronze", bronze, "short")).status], ["no_pack", 404, 404, 400, 400]);
+  await grant(A, 1000);
+  for (const pack of ["pack_bronze", "pack_bronze", "pack_silver", "pack_gold"]) await call("POST /shop/buy", { as: A, body: { itemId: pack, requestId: uid() } });
+  const stale = await open("pack_bronze", "00000000");
+  eq("odds the player was not shown: refused with the current table, nothing spent", [stale.status, stale.body.error, stale.body.odds.version, qty("pack_bronze")], [409, "odds_changed", bronze, 2]);
+  const req = uid(), o1 = await open("pack_bronze", bronze, req, { cards: [{ item: "sofa" }, { item: "sofa" }], hints: 99, rarity: "legendary" });
+  const cards = o1.body.cards, tally = {};
+  for (const c of cards.slice(1)) tally[c.item] = (tally[c.item] || 0) + 1;
+  eq("a Bronze Pack: a 5-hints card, a Rare card, three random cards", [o1.status, cards.length, cards[0], cards[1].rarity, cards[1].guaranteed, ["mask_a", "mask_b", "rug"].includes(cards[1].item), cards.slice(2).every((c) => c.item && !c.guaranteed && eco.RARITIES.includes(c.rarity)), qty("pack_bronze"), wallet(A).hints], [200, 5, { hints: 5 }, "rare", true, true, true, 1, 5]);
+  eq("its cards are in the inventory, duplicates counted", Object.entries(tally).map(([item, n]) => qty(item) === n), Object.keys(tally).map(() => true));
+  const o2 = await open("pack_bronze", bronze, req);
+  eq("the same request again shows the same cards and opens nothing", [o2.body.duplicate, o2.body.cards, qty("pack_bronze"), wallet(A).hints], [true, cards, 1, 5]);
+  eq("a request id is for one pack", (await open("pack_gold", odds.pack_gold.version, req)).body.error, "request_reused");
+  const two = await atOnce([() => open("pack_bronze", bronze), () => open("pack_bronze", bronze)]);
+  eq("one pack opened twice at once: once", [two.map((r) => r.status).sort().join(), qty("pack_bronze"), wallet(A).hints], ["200,409", 0, 10]);
+  const silver = await open("pack_silver", odds.pack_silver.version), gold = await open("pack_gold", odds.pack_gold.version);
+  eq("a Silver Pack guarantees an Epic card; a Gold Pack a Rare and an Epic, three random cards and no hints", [silver.body.cards[0], silver.body.cards[1].item, silver.body.cards[1].guaranteed, gold.body.cards.length, gold.body.cards.slice(0, 2).map((c) => `${c.rarity}:${c.guaranteed}`), gold.body.cards.slice(2).every((c) => c.item && !c.guaranteed), gold.body.cards.some((c) => c.hints || c.timer), gold.body.number, wallet(A).hints], [{ hints: 5 }, "sofa", true, 5, ["rare:true", "epic:true"], true, false, 1, 15]);
+  const after = (await call("GET /wallet", { as: A })).body.state;
+  eq("every open is kept, and counts for the pack quests", [one("SELECT COUNT(*) AS n FROM pack_opens WHERE account_id = ?", A).n, after.quests.find((q) => q.id === "w_packs3").progress, after.quests.find((q) => q.id === "d_pack1").progress, rows("SELECT delta FROM ledger WHERE account_id = ? AND reason = 'pack'", A).map((l) => l.delta)], [4, 4, 4, [5, 5, 5]]);
+  eq("the cards a pack gave are exactly what the inventory gained", rows("SELECT item_id, qty FROM inventory WHERE account_id = ? AND item_id NOT LIKE 'pack_%' AND qty > 0 ORDER BY item_id", A).map((i) => `${i.item_id}:${i.qty}`), (() => { const t = {}; for (const r of rows("SELECT result FROM pack_opens WHERE account_id = ?", A)) for (const c of JSON.parse(r.result)) if (c.item) t[c.item] = (t[c.item] || 0) + 1; return Object.keys(t).sort().map((k) => `${k}:${t[k]}`); })());
+  d1.raw.prepare("INSERT INTO items (id, kind, rarity, data) VALUES ('crown', 'avatar', 'legendary', '{}')").run();
+  const wider = await packOdds();
+  eq("a new cosmetic changes the odds, and so their version", [wider.pack_gold.version !== odds.pack_gold.version, wider.pack_gold.random[3].items.map((i) => i.id).includes("crown"), (await open("pack_gold", odds.pack_gold.version)).body.error], [true, true, "odds_changed"]);
+  d1.raw.prepare("UPDATE items SET active = 0 WHERE id = 'crown'").run();
+  eq("the same table has the same version", (await packOdds()).pack_gold.version, odds.pack_gold.version);
+
+  // the roll follows the published odds: 40,000 Gold Packs through the same pure functions, with a seeded generator
+  const pool = rows("SELECT id, rarity FROM items WHERE active = 1 AND kind IN ('avatar', 'prop', 'furniture')");
+  const table = eco.packOdds("pack_gold", { cards: 5, hints: 0 }, { common: 40, rare: 30, epic: 20, legendary: 10 }, pool);
+  let seed = 7;
+  const rnd = (k) => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) % k; };
+  const seen = {}, perItem = {}; let drawn = 0;
+  for (let i = 0; i < 40000; i++) for (const c of eco.rollPack(table, rnd)) { seen[c.rarity] = (seen[c.rarity] || 0) + 1; perItem[c.item] = (perItem[c.item] || 0) + 1; drawn++; }
+  const published = Object.fromEntries(odds.pack_gold.random.flatMap((r) => r.items).map((i) => [i.id, i.percent]));
+  eq("200,000 rolled cards match the published odds within one point", [drawn, eco.RARITIES.map((r) => Math.abs(seen[r] / drawn * 100 - { common: 40, rare: 30, epic: 20, legendary: 10 }[r]) < 1), Object.keys(published).every((item) => Math.abs((perItem[item] || 0) / drawn * 100 - published[item]) < 1), Object.keys(perItem).every((item) => item in published)], [200000, [true, true, true, true], true, true]);
+  const bronzeTable = eco.packOdds("pack_bronze", { cards: 5, hints: 5, guaranteed: "rare" }, { common: 40, rare: 30, epic: 20, legendary: 10 }, pool);
+  eq("every Bronze Pack has its hints card and its Rare card", Array.from({ length: 2000 }, () => eco.rollPack(bronzeTable, rnd)).every((c) => c.length === 5 && c[0].hints === 5 && c[1].rarity === "rare" && c[1].guaranteed && c.filter((x) => x.hints).length === 1), true);
+  eq("the server's random numbers stay in range and cover it", (() => { const got = new Set(); for (let i = 0; i < 3000; i++) { const x = eco.randomInt(7); if (!Number.isInteger(x) || x < 0 || x > 6) return false; got.add(x); } return got.size === 7; })(), true);
+  eq("a rarity with no cosmetic is left out; a guaranteed rarity with none becomes a random card", (() => { const t = eco.packOdds("p", { cards: 5, hints: 5, guaranteed: "epic" }, { common: 40, rare: 30, epic: 20, legendary: 10 }, [{ id: "a", rarity: "common" }, { id: "b", rarity: "rare" }]); return [t.guaranteed, t.random, t.total, t.rarities.map((r) => r.rarity), t.legendaryEvery]; })(), [[], 4, 70, ["common", "rare"], 0]);
+  // the Legendary timer: the 10th Gold Pack a player opens, and the 20th, holds a guaranteed Legendary card in place of a random one
+  const T = "google:timer";
+  await call("GET /wallet", { as: T });
+  d1.raw.prepare("INSERT INTO inventory (account_id, item_id, tier, qty, first_at) VALUES (?, 'pack_gold', 0, 21, 0), (?, 'pack_bronze', 0, 30, 0)").run(T, T);
+  const openAs = (packId) => call("POST /packs/open", { as: T, body: { packId, oddsVersion: odds[packId].version, requestId: uid() } });
+  const golds = [];
+  for (let i = 0; i < 8; i++) golds.push(await openAs("pack_gold"));
+  golds.push(...(await atOnce([() => openAs("pack_gold"), () => openAs("pack_gold")]))); // the 9th and the 10th, at once
+  for (let i = 0; i < 10; i++) golds.push(await openAs("pack_gold"));
+  const timed = (list) => list.filter((g) => g.body.cards.some((c) => c.timer));
+  eq("the 10th and the 20th Gold Pack hold the timer's Legendary card, and only they", [golds.every((g) => g.status === 200 && g.body.cards.length === 5), golds.map((g) => g.body.number).sort((a, b) => a - b).join(), timed(golds).map((g) => g.body.number).sort((a, b) => a - b), timed(golds).every((g) => { const c = g.body.cards.find((x) => x.timer); return c.rarity === "legendary" && c.guaranteed && ["expired", "future"].includes(c.item) && g.body.cards.filter((x) => x.guaranteed).length === 3 && g.body.cards.filter((x) => x.timer).length === 1; })], [true, Array.from({ length: 20 }, (_, i) => i + 1).join(), [10, 20], true]);
+  const bronzes = [];
+  for (let i = 0; i < 30; i++) bronzes.push(await openAs("pack_bronze"));
+  const thirtieth = bronzes[29].body.cards;
+  eq("the 30th Bronze Pack too, still with its hints card and its Rare card", [timed(bronzes).map((g) => g.body.number), thirtieth.length, thirtieth[0], thirtieth[1].rarity, thirtieth.filter((c) => c.timer).map((c) => c.rarity), (await call("GET /wallet", { as: T })).body.state.packsOpened], [[30], 5, { hints: 5 }, "rare", ["legendary"], { pack_bronze: 30, pack_gold: 20 }]);
+  eq("the timer is rolled only when it is due", [eco.legendaryDue({ legendaryEvery: 10 }, 8), eco.legendaryDue({ legendaryEvery: 10 }, 9), eco.legendaryDue({ legendaryEvery: 10 }, 19), eco.legendaryDue({ legendaryEvery: 0 }, 9), eco.rollPack(table, rnd, { legendary: true }).some((c) => c.timer)], [false, true, true, false, false]);
+  eq("with no cosmetics at all there is nothing to roll", eco.packOdds("p", { cards: 5 }, { common: 40 }, []).rarities.length, 0);
+  d1.raw.exec("UPDATE items SET active = 0 WHERE kind IN ('avatar', 'prop', 'furniture')");
+  await call("POST /shop/buy", { as: A, body: { itemId: "pack_gold", requestId: uid() } });
+  eq("…and such a pack stays unopened", [(await open("pack_gold", (await packOdds()).pack_gold.version)).body.error, qty("pack_gold")], ["empty_pool", 1]);
+  d1.raw.exec("UPDATE items SET active = 1 WHERE kind IN ('avatar', 'prop', 'furniture') AND id NOT IN ('gone', 'crown')");
+
+  // merging: three of a kind become the next variant
+  await call("GET /wallet", { as: M });
+  const give = (item, tier, n) => d1.raw.prepare("INSERT INTO inventory (account_id, item_id, tier, qty, first_at) VALUES (?, ?, ?, ?, 0) ON CONFLICT (account_id, item_id, tier) DO UPDATE SET qty = excluded.qty").run(M, item, tier, n);
+  give("lamp", 0, 7); give("hat", 0, 2);
+  eq("two cards do not merge", [(await merge("hat", 0)).body.error, qty("hat", 0, M)], ["not_enough", 2]);
+  const mreq = uid(), m1 = await merge("lamp", 0, mreq);
+  eq("three cards become a Bronze variant", [m1.status, m1.body.tier, m1.body.variant, qty("lamp", 0, M), qty("lamp", 1, M), m1.body.state.inventory.lamp, m1.body.state.variants], [200, 1, "bronze", 4, 1, 4, { lamp: { bronze: 1 } }]);
+  eq("the same request again merges nothing more", [(await merge("lamp", 0, mreq)).body.duplicate, (await merge("hat", 0, mreq)).body.error, qty("lamp", 0, M), qty("lamp", 1, M)], [true, "request_reused", 4, 1]);
+  const twice = await atOnce([() => merge("lamp", 0), () => merge("lamp", 0)]);
+  eq("four cards, two merges at once: one", [twice.map((r) => r.status).sort().join(), qty("lamp", 0, M), qty("lamp", 1, M)], ["200,409", 1, 2]);
+  give("lamp", 1, 3);
+  const up = [await merge("lamp", 1)];
+  give("lamp", 2, 3); up.push(await merge("lamp", 2));
+  give("lamp", 3, 3); up.push(await merge("lamp", 3));
+  give("lamp", 4, 3); up.push(await merge("lamp", 4));
+  eq("variants merge upwards: Silver, Gold, Diamond, and no further", [up.map((r) => r.body.variant || r.body.error), [1, 2, 3, 4].map((t) => qty("lamp", t, M)), (await call("GET /wallet", { as: M })).body.state.variants.lamp], [["silver", "gold", "diamond", "max_tier"], [0, 0, 0, 3], { diamond: 3 }]);
+  eq("only cards merge", [(await merge("pack_bronze", 0)).body.error, (await merge("hints_5", 0)).body.error, (await merge("nope", 0)).body.error, (await merge("lamp", 5)).status, (await merge("lamp", -1)).status, (await merge("lamp", 0.5)).status, (await merge("lamp", "0")).status], ["not_a_card", "not_a_card", "not_a_card", 400, 400, 400, 400]);
+  const ms = (await call("GET /wallet", { as: M })).body.state;
+  give("rug", 0, 6);
+  const sameMerge = uid(), doubled = await atOnce([() => merge("rug", 0, sameMerge), () => merge("rug", 0, sameMerge)]);
+  eq("one merge request sent twice at once: one merge", [doubled.map((r) => r.status).join(), doubled.filter((r) => r.body.duplicate).length, qty("rug", 0, M), qty("rug", 1, M)], ["200,200", 1, 3, 1]);
+  const merged = (await call("GET /wallet", { as: M })).body.state;
+  eq("merging moves no coin or hint, is kept, and counts for the merge quests", [one("SELECT COUNT(*) AS n FROM ledger WHERE account_id = ?", M).n, one("SELECT COUNT(*) AS n FROM card_merges WHERE account_id = ?", M).n, merged.quests.find((q) => q.id === "d_merge1").progress, merged.quests.find((q) => q.id === "w_merge3").progress], [0, 6, 6, 6]);
+}
+
+/* ───────────── the quest kinds: each advances on its own event, and on nothing else ───────────── */
+{
+  toMonday();
+  const A = "google:kinds", t = today();
+  const progress = async () => Object.fromEntries((await call("GET /wallet", { as: A })).body.state.quests.map((q) => [q.id, q.progress]));
+  const pick = (all, ids) => ids.map((id) => all[id]);
+  await sync(A, [solveEv(`daily-${t}`), solveEv("m1"), solveEv("h1"), solveEv("ve1", { hints: 1 })]); // Monday's daily is Very Easy
+  eq("solves count by what they were", pick(await progress(), ["d_daily1", "w_daily5", "w_daily7", "d_veryeasy3", "d_easy2", "d_medium2", "w_medium8", "d_hard1", "w_hard5", "d_expert1", "d_nohint1", "d_solve3", "w_solve10", "d_shop1", "d_ad1", "d_reward1", "d_merge1", "d_pack1"]), [1, 1, 1, 2, 0, 1, 1, 1, 1, 0, 3, 4, 4, 0, 0, 0, 0, 0]);
+  const ticket = (await call("POST /ads/ticket", { as: A, body: { placement: "hint" } })).body.ticket;
+  await atOnce([1, 2].map(() => () => call("POST /ads/claim", { as: A, body: { ticket }, env: { DEV_ADS: "1" }, host: LOCAL })));
+  await call("POST /shop/buy", { as: A, body: { itemId: "hints3", requestId: uid() } });
+  await call("POST /shop/buy", { as: A, body: { itemId: "sofa", requestId: uid() } }); // not enough coins: no purchase
+  await call("POST /streak/claim", { as: A, body: { date: t } });
+  await call("POST /streak/claim", { as: A, body: { date: t } });
+  eq("an ad, a purchase and the Daily Reward each count once", pick(await progress(), ["d_ad1", "w_ads10", "d_shop1", "d_reward1", "w_reward7", "d_solve3", "d_merge1"]), [1, 1, 1, 1, 1, 4, 0]);
+  eq("…and their quests pay their own rewards", [(await call("POST /quests/claim", { as: A, body: { questId: "d_daily1" } })).body.reward, (await call("POST /quests/claim", { as: A, body: { questId: "d_ad1" } })).body.reward, (await call("POST /quests/claim", { as: A, body: { questId: "d_easy2" } })).body.reason, coins(A)], [15, 5, "incomplete", 5 + 15 + 20 + 5 - 30 + 15 + 5]);
 }
 
 /* ───────────── Play purchases: verified, once per token; refunds ───────────── */
@@ -512,7 +699,7 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   toMonday();
   const A = "google:buyer", dev = { env: { DEV_BILLING: "1" }, host: LOCAL };
   const verify = (as, sku, purchaseToken, opt = dev, extra = {}) => call("POST /billing/verify", { as, body: { sku, purchaseToken, ...extra }, ...opt });
-  eq("without a verifier nothing is granted: 503", [(await verify(A, "coins_2500", "dev.coins_2500.aaaaaaaa", {})).status, coins(A), one("SELECT COUNT(*) AS n FROM purchases").n], [503, 0, 0]);
+  eq("without a verifier nothing is granted: 503", [(await verify(A, "coins_2500", "dev.coins_2500.aaaaaaaa", {})).status, coins(A), one("SELECT COUNT(*) AS n FROM purchases WHERE account_id = ?", A).n], [503, 0, 0]);
   eq("DEV_BILLING does nothing on the production domain", [(await verify(A, "coins_2500", "dev.coins_2500.aaaaaaaa", { env: { DEV_BILLING: "1" } })).status, coins(A)], [503, 0]);
   eq("a guest must sign in before buying", [(await verify("guest:0001", "coins_100", "dev.coins_100.aaaaaaaa")).body.error, coins("guest:0001")], ["signin_required", 0]);
   const p1 = await verify(A, "coins_500", "dev.coins_500.token0001", dev, { coins: 99999, amount: 99999 });
@@ -525,6 +712,9 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   const C = "google:buyer-race";
   const race = await atOnce([1, 2, 3].map(() => () => verify(C, "coins_1200", "dev.coins_1200.racetoken")));
   eq("one token sent three times at once grants once", [race.map((r) => r.status).join(), race.filter((r) => r.body.duplicate).length, coins(C)], ["200,200,200", 2, 1200]);
+  const rivals = await atOnce(["google:rival1", "google:rival2"].map((who) => () => verify(who, "member", "dev.member.sharedtoken")));
+  const winner = rivals[0].status === 200 ? "google:rival1" : "google:rival2", loser = winner === "google:rival1" ? "google:rival2" : "google:rival1";
+  eq("one token sent by two accounts at once: one of them is a member, the other gets nothing", [rivals.map((r) => r.status).sort().join(), rows("SELECT key FROM entitlements WHERE account_id = ? ORDER BY key", winner).map((e) => e.key), rows("SELECT key FROM entitlements WHERE account_id = ?", loser).length], ["200,409", ["member", "remove_ads"], 0]);
   const ads = await verify(A, "remove_ads", "dev.remove_ads.token0003");
   eq("Remove ads is an entitlement", [ads.body.state.entitlements, coins(A)], [["remove_ads"], 600]);
   await verify(A, "hints_5_money", "dev.hints_5_money.token0004");
@@ -538,6 +728,8 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   up = true;
   const f2 = await verify(D, "coins_100", "tok-retry-1", { env: { BILLING_VERIFIER: flaky } });
   eq("the resend finishes it and grants nothing more", [f2.body.duplicate, coins(D), one("SELECT consumed FROM purchases WHERE account_id = ?", D).consumed, finishes], [true, 100, 1, [true, true]]);
+  await verify(D, "remove_ads", "tok-retry-ads", { env: { BILLING_VERIFIER: flaky } });
+  eq("a permanent upgrade is acknowledged, never consumed", finishes[finishes.length - 1], false);
   for (const [error, status] of [["invalid", 400], ["pending", 409], ["wrong_account", 403], ["upstream", 502], ["???", 400]]) {
     const no = { ...flaky, verifyPurchase: async () => ({ ok: false, error }) };
     eq(`a purchase Google does not confirm (${error}) grants nothing`, [(await verify(D, "coins_2500", `tok-${error}-12345`, { env: { BILLING_VERIFIER: no } })).status, coins(D)], [status, 100]);
@@ -561,12 +753,12 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   eq("playing pays the debt back", coins(A), -455);
 
   // the Noob Kit: 500 coins, 15 hints and three packs, once per account
-  const N = "google:noob", inv = (as) => rows("SELECT item_id, qty FROM inventory WHERE account_id = ? ORDER BY item_id", as).map((i) => `${i.item_id}:${i.qty}`);
+  const N = "google:noob", inv = (as) => rows("SELECT item_id, qty FROM inventory WHERE account_id = ? AND qty > 0 ORDER BY item_id", as).map((i) => `${i.item_id}:${i.qty}`);
   await call("POST /shop/buy", { as: N, body: { itemId: "pack_gold", requestId: uid() } });
   await grant(N, 300);
   await call("POST /shop/buy", { as: N, body: { itemId: "pack_gold", requestId: uid() } });
   const k1 = await verify(N, "noob_kit", "dev.noob_kit.token0001");
-  eq("the Noob Kit", [k1.status, k1.body.granted, wallet(N), inv(N), k1.body.state.entitlements], [200, { coins: 500, hints: 15, entitlement: "", inventory: { pack_bronze: 1, pack_silver: 1, pack_gold: 1 } }, { coins: 500, hints: 15 }, ["pack_bronze:1", "pack_gold:2", "pack_silver:1"], ["once:noob_kit"]]);
+  eq("the Noob Kit", [k1.status, k1.body.granted, wallet(N), inv(N), k1.body.state.entitlements], [200, { coins: 500, hints: 15, entitlements: [], inventory: { pack_bronze: 1, pack_silver: 1, pack_gold: 1 } }, { coins: 500, hints: 15 }, ["pack_bronze:1", "pack_gold:2", "pack_silver:1"], ["once:noob_kit"]]);
   eq("a second kit is refused before anything is consumed", [(await verify(N, "noob_kit", "dev.noob_kit.token0002")).body.error, wallet(N), one("SELECT COUNT(*) AS n FROM purchases WHERE account_id = ?", N).n], ["owned", { coins: 500, hints: 15 }, 1]);
   const N2 = "google:noob2";
   const kits = await atOnce([() => verify(N2, "noob_kit", "dev.noob_kit.raceA001"), () => verify(N2, "noob_kit", "dev.noob_kit.raceB001")]);
@@ -651,6 +843,13 @@ function audit(label) {
   ok(`${label}: never more than one free refresh a day for daily quests and one for weekly`, !one("SELECT 1 AS x FROM quest_state WHERE replaced_how = 'free' GROUP BY account_id, replaced_day, SUBSTR(period_key, 1, 1) HAVING COUNT(*) > 1"));
   ok(`${label}: every ad refresh spent a paid ticket of its own`, rows("SELECT account_id, COUNT(*) AS n FROM quest_state WHERE replaced_how = 'ad' GROUP BY account_id").every((r) => r.n === one("SELECT COUNT(*) AS n FROM ad_tickets WHERE account_id = ? AND placement = 'quest_refresh' AND paid_at IS NOT NULL AND used_at IS NOT NULL", r.account_id).n));
   ok(`${label}: a quest pays its reward once per period, and only when dealt and finished`, rows("SELECT account_id, ref, delta FROM ledger WHERE reason = 'quest'").every((l) => { const cut = l.ref.lastIndexOf(":"), q = one("SELECT s.progress, s.claimed_at, s.replaced_at, d.target, d.reward FROM quest_state s JOIN quest_defs d ON d.id = s.quest_id WHERE s.account_id = ? AND s.period_key = ? AND s.quest_id = ?", l.account_id, l.ref.slice(0, cut), l.ref.slice(cut + 1)); return q && q.claimed_at && !q.replaced_at && q.progress >= q.target && q.reward === l.delta; }));
+  ok(`${label}: never more free hints in a day than a Golden Member has, and five for the others`, rows("SELECT account_id, COUNT(*) AS n FROM hint_uses WHERE source = 'free' GROUP BY account_id, day").every((r) => r.n <= (/member/.test(r.account_id) ? 15 : 5)));
+  ok(`${label}: every hint taken from the stock has its ledger line`, rows("SELECT account_id, COUNT(*) AS n FROM hint_uses WHERE source = 'stock' GROUP BY account_id").every((r) => r.n === one("SELECT COUNT(*) AS n FROM ledger WHERE account_id = ? AND reason = 'hint_use'", r.account_id).n) && !one("SELECT 1 AS x FROM ledger l WHERE l.reason = 'hint_use' AND NOT EXISTS (SELECT 1 FROM hint_uses h WHERE h.account_id = l.account_id AND h.event_id = l.ref AND h.source = 'stock')"));
+  ok(`${label}: never more than one free Shop swap a day`, !one("SELECT 1 AS x FROM shop_refreshes WHERE how = 'free' GROUP BY account_id, day HAVING COUNT(*) > 1"));
+  ok(`${label}: every Shop swap after it spent a watched ad of its own`, rows("SELECT account_id, COUNT(*) AS n FROM shop_refreshes WHERE how = 'ad' GROUP BY account_id").every((r) => r.n === one("SELECT COUNT(*) AS n FROM ad_tickets WHERE account_id = ? AND placement = 'shop_refresh' AND paid_at IS NOT NULL AND used_at IS NOT NULL", r.account_id).n));
+  ok(`${label}: a player's packs of a kind are numbered 1, 2, 3 …`, !one("SELECT 1 AS x FROM pack_opens GROUP BY account_id, pack_id HAVING COUNT(*) <> MAX(seq) OR COUNT(DISTINCT seq) <> COUNT(*)"));
+  ok(`${label}: the Legendary timer's card is in every 30th Bronze, 20th Silver, 10th Gold pack and in no other`, rows("SELECT pack_id, seq, result FROM pack_opens").every((o) => JSON.parse(o.result).some((c) => c.timer) === (o.seq % { pack_bronze: 30, pack_silver: 20, pack_gold: 10 }[o.pack_id] === 0)));
+  ok(`${label}: a pack's hints are paid once per opened pack`, rows("SELECT account_id, ref FROM ledger WHERE reason = 'pack'").every((l) => one("SELECT 1 AS x FROM pack_opens WHERE account_id = ? AND request_id = ?", l.account_id, l.ref)));
   ok(`${label}: hints never below zero without a refund`, rows("SELECT w.account_id, w.hints FROM wallets w WHERE w.hints < 0").every((w) => one("SELECT 1 AS x FROM ledger WHERE account_id = ? AND reason = 'refund'", w.account_id)));
 }
 audit("after the scripted tests");
@@ -669,11 +868,12 @@ audit("after the scripted tests");
   const dev = { env: { DEV_ADS: "1", DEV_BILLING: "1" }, host: LOCAL };
   const tickets = [], tokensUsed = [], requests = [];
   dropConfig("daily_quests"); dropConfig("weekly_quests");
+  for (const player of players) await grant(player, 1500); // enough to buy packs and cards: opening and merging are within reach
   let failures = 0;
   for (let step = 0; step < 500; step++) {
     const as = pick(players);
     try {
-      switch (rnd(14)) {
+      switch (rnd(17)) {
         case 0: case 1: case 2: {
           const events = Array.from({ length: 1 + rnd(4) }, () => pick([
             () => solveEv(rnd(4) ? pick(caseIds) : `daily-${eco.addDays(today(), rnd(6) - 3)}`, { seconds: pick([300, 300, 300, 2, junk()]), hints: pick([0, 0, 1, junk()]), at: pick([NOW, NOW, NOW - rnd(5) * DAY, NOW + 9 * DAY, junk()]), reward: junk(), coins: junk(), delta: junk() }),
@@ -683,12 +883,13 @@ audit("after the scripted tests");
             () => ({ eventId: uid(), type: "quest_claim", questId: pick(["d_solve2", "d_solve5", "d_nohint2", "d_expert1", "w_solve20", "w_props8", "nope"]), reward: junk(), progress: junk() }),
             () => ({ eventId: uid(), type: pick(["mint", "grant", "iap", "refund", ""]), coins: junk(), delta: junk() }),
           ])());
+          if (!rnd(4)) events.push(...Array.from({ length: 7 }, () => ({ eventId: uid(), type: "hint_use", hints: junk() }))); // past the day's free hints, into the stock
           await sync(as, events, { tz: pick([0, 60, -300, 840, junk()]), coins: junk() });
           break;
         }
         case 3: { const t = await call("POST /ads/ticket", { as, body: { placement: pick(["coins", "coins", "hint"]), reward: junk() } }); if (t.body && t.body.ticket) { tickets.push(t.body.ticket); if (rnd(2)) await call("POST /ads/claim", { as, body: { ticket: t.body.ticket, reward: junk() }, ...dev }); } break; }
         case 4: case 5: if (tickets.length) await call("POST /ads/claim", { as, body: { ticket: pick(tickets), reward: junk(), coins: junk() }, ...dev }); break;
-        case 6: { const requestId = rnd(3) && requests.length ? pick(requests) : uid(); requests.push(requestId); await call("POST /shop/buy", { as, body: { itemId: pick(["hints3", "hat", "lamp", "rug", "sofa", "pack_bronze", "mask_a", "mask_b", "coins_2500", "free"]), requestId, price: junk(), coins: junk() } }); break; }
+        case 6: { const requestId = rnd(3) && requests.length ? pick(requests) : uid(); requests.push(requestId); await call("POST /shop/buy", { as, body: { itemId: pick(["hints3", "hat", "lamp", "lamp", "lamp", "rug", "sofa", "pack_bronze", "pack_bronze", "mask_a", "mask_b", "coins_2500", "free"]), requestId, price: junk(), coins: junk() } }); break; }
         case 7: { const sku = pick(["coins_100", "coins_500", "hints_5_money", "remove_ads", "noob_kit"]); const token = rnd(3) && tokensUsed.length ? pick(tokensUsed) : `dev.${sku}.fuzz${step}xx`; tokensUsed.push(token); await call("POST /billing/verify", { as, body: { sku: rnd(5) ? sku : "coins_2500", purchaseToken: token, coins: junk() }, ...dev }); break; }
         case 8: if (tokensUsed.length && !rnd(3)) await call("POST /billing/rtdn", { body: { voided: [{ purchaseToken: pick(tokensUsed) }] }, ...dev }); break;
         case 9: await call("POST /social/open", { as, body: { network: pick(eco.SOCIAL_NETWORKS) } }); await call("POST /social/claim", { as, body: { network: pick(eco.SOCIAL_NETWORKS), reward: junk() } }); break;
@@ -697,6 +898,25 @@ audit("after the scripted tests");
           let ticket;
           if (rnd(2)) { ticket = (await call("POST /ads/ticket", { as, body: { placement: "quest_refresh" } })).body?.ticket; if (ticket && rnd(4)) await call("POST /ads/claim", { as, body: { ticket }, ...dev }); if (ticket) tickets.push(ticket); if (!rnd(4)) ticket = pick(tickets); }
           await call("POST /quests/refresh", { as, body: { questId: rnd(5) ? pick(dealt) : pick(["d_solve2", "w_props8", "nope"]), ticket, reward: junk() } });
+          break;
+        }
+        case 13: {
+          const pack = pick(["pack_bronze", "pack_silver", "pack_gold", "nope"]);
+          const version = rnd(5) ? (await call("GET /shop", { as })).body.items.find((i) => i.id === pack)?.odds?.version : "00000000";
+          const requestId = rnd(4) || !requests.length ? uid() : pick(requests); requests.push(requestId);
+          await call("POST /packs/open", { as, body: { packId: pack, oddsVersion: version || "x", requestId, cards: junk(), hints: junk() } });
+          break;
+        }
+        case 15: {
+          const mine = (await call("GET /shop", { as })).body.items.filter((i) => i.ofTheDay).map((i) => i.id);
+          let ticket;
+          if (rnd(2)) { ticket = (await call("POST /ads/ticket", { as, body: { placement: "shop_refresh" } })).body?.ticket; if (ticket && rnd(4)) await call("POST /ads/claim", { as, body: { ticket }, ...dev }); if (ticket) tickets.push(ticket); if (!rnd(4)) ticket = pick(tickets); }
+          await call("POST /shop/refresh", { as, body: { itemId: rnd(5) ? pick(mine.filter((x) => x.startsWith("mask")).concat(mine)) : pick(["sofa", "hints3", "nope"]), ticket, item: junk() } });
+          break;
+        }
+        case 14: {
+          const held = Object.entries((await call("GET /wallet", { as })).body.state.inventory).filter(([item, n]) => n >= 3 && !item.startsWith("pack_")).map(([item]) => item);
+          await call("POST /cards/merge", { as, body: { itemId: held.length && rnd(4) ? pick(held) : pick(["lamp", "hat", "rug", "sofa", "mask_a", "pack_bronze", "nope"]), tier: pick([0, 0, 0, 1, 4, junk()]), requestId: uid() } });
           break;
         }
         case 10: {
@@ -711,10 +931,12 @@ audit("after the scripted tests");
   }
   eq("500 random hostile calls: none crashed", failures, 0);
   audit("after the fuzz");
-  ok("the fuzz used every player and was not stopped by the rate limiter", players.every((p) => one("SELECT 1 AS x FROM accounts WHERE id = ?", p)) && !one("SELECT 1 AS x FROM rate_limits WHERE k LIKE '%fuzz%' AND ((k LIKE 'app-sync%' AND n > 120) OR (k LIKE 'app-ad%' AND n > 40) OR (k LIKE 'app-buy%' AND n > 60) OR (k LIKE 'app-billing%' AND n > 30) OR (k LIKE 'app-social%' AND n > 30) OR (k LIKE 'app-claim%' AND n > 120))"));
+  ok("the fuzz used every player and was not stopped by the rate limiter", players.every((p) => one("SELECT 1 AS x FROM accounts WHERE id = ?", p)) && !one("SELECT 1 AS x FROM rate_limits WHERE k LIKE '%fuzz%' AND ((k LIKE 'app-sync%' AND n > 120) OR (k LIKE 'app-ad%' AND n > 40) OR (k LIKE 'app-buy%' AND n > 60) OR (k LIKE 'app-billing%' AND n > 30) OR (k LIKE 'app-social%' AND n > 30) OR (k LIKE 'app-claim%' AND n > 120) OR (k LIKE 'app-pack%' AND n > 120) OR (k LIKE 'app-shop-refresh%' AND n > 120))"));
+  ok("the fuzz opened packs, merged cards and used free hints", !!one("SELECT 1 AS x FROM pack_opens WHERE account_id LIKE '%fuzz%'") && !!one("SELECT 1 AS x FROM card_merges WHERE account_id LIKE '%fuzz%'") && !!one("SELECT 1 AS x FROM hint_uses WHERE source = 'free' AND account_id LIKE '%fuzz%'"));
+  ok("the fuzz swapped Shop cosmetics both ways", ["free", "ad"].every((how) => one("SELECT 1 AS x FROM shop_refreshes WHERE how = ? AND account_id LIKE '%fuzz%'", how)));
   ok("the fuzz refreshed quests both ways", ["free", "ad"].every((how) => one("SELECT 1 AS x FROM quest_state WHERE replaced_how = ? AND account_id LIKE '%fuzz%'", how)));
   if (process.argv.includes("--show")) console.log(rows("SELECT account_id, reason, currency, COUNT(*) AS n, SUM(delta) AS total FROM ledger WHERE account_id LIKE '%fuzz%' GROUP BY account_id, reason, currency").map((r) => `${r.account_id} ${r.reason} ${r.currency} x${r.n} = ${r.total}`).join("\n"));
-  ok("the fuzz did earn, spend, buy and get refunded", ["solve", "ad", "quest", "streak", "social", "shop", "iap", "refund", "hint_use"].every((reason) => one("SELECT 1 AS x FROM ledger WHERE reason = ? AND account_id LIKE '%fuzz%'", reason)));
+  ok("the fuzz did earn, spend, buy and get refunded", ["solve", "ad", "quest", "streak", "social", "shop", "iap", "refund", "hint_use", "pack"].every((reason) => one("SELECT 1 AS x FROM ledger WHERE reason = ? AND account_id LIKE '%fuzz%'", reason)));
   ok("a guest never got a purchase through", !one("SELECT 1 AS x FROM purchases WHERE account_id LIKE 'guest:%'"));
 }
 
@@ -722,7 +944,7 @@ audit("after the scripted tests");
 {
   const A = "google:buyer";
   await eraseAppAccount(baseEnv, A);
-  const left = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags"].filter((t) => one(`SELECT 1 AS x FROM ${t} WHERE account_id = ?`, A));
+  const left = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes"].filter((t) => one(`SELECT 1 AS x FROM ${t} WHERE account_id = ?`, A));
   eq("the account's wallet and play records are erased", [left, one("SELECT 1 AS x FROM accounts WHERE id = ?", A)], [[], undefined]);
   eq("its purchases stay, without the account", [one("SELECT COUNT(*) AS n FROM purchases WHERE account_id = ?", A).n, one("SELECT COUNT(*) AS n FROM purchases WHERE account_id = 'erased'").n > 0], [0, true]);
   eq("its token still cannot be redeemed by anyone", (await call("POST /billing/verify", { as: "google:thief", body: { sku: "coins_100", purchaseToken: "dev.coins_100.token0002" }, env: { DEV_BILLING: "1" }, host: LOCAL })).body.error, "token_used");

@@ -14,7 +14,7 @@
 import { json, readSession, sameOrigin, seal, unseal, sessionAlive, SESSION_DAYS } from "../auth.js";
 import { db } from "../db.js";
 import { limit } from "../ratelimit.js";
-import { parseConfig, dayKey, periodKey, AD_COIN_REWARD, SOCIAL_NETWORKS } from "./economy.js";
+import { parseConfig, dayKey, hintsPerDay, periodKey, AD_COIN_REWARD, SOCIAL_NETWORKS, VARIANTS } from "./economy.js";
 import { openWallet } from "./ledger.js";
 import { dealStatements, questDefs } from "./quests.js";
 
@@ -102,13 +102,17 @@ export async function snapshot(ctx) {
     ...deal,
     d.prepare("SELECT coins, hints, version FROM wallets WHERE account_id = ?").bind(id),
     d.prepare("SELECT key FROM entitlements WHERE account_id = ? ORDER BY key").bind(id),
-    d.prepare("SELECT item_id, qty FROM inventory WHERE account_id = ? ORDER BY item_id").bind(id),
+    d.prepare("SELECT item_id, tier, qty FROM inventory WHERE account_id = ? AND qty > 0 ORDER BY item_id, tier").bind(id),
     d.prepare("SELECT current, best, last_date, cycle_day FROM streaks WHERE account_id = ?").bind(id),
     d.prepare("SELECT DISTINCT SUBSTR(period_key, 1, 1) AS period FROM quest_state WHERE account_id = ? AND replaced_day = ? AND replaced_how = 'free'").bind(id, day),
     d.prepare("SELECT period_key, quest_id, slot, progress, claimed_at FROM quest_state WHERE account_id = ? AND period_key IN (?, ?) AND replaced_at IS NULL ORDER BY period_key, slot").bind(id, keys[0], keys[1]),
     d.prepare("SELECT COUNT(*) AS n FROM ledger WHERE account_id = ? AND currency = 'coin' AND reason = 'ad' AND day = ?").bind(id, day),
     d.prepare("SELECT COUNT(*) AS n FROM ad_tickets WHERE account_id = ? AND placement = 'quest_refresh' AND paid_at IS NOT NULL AND used_at IS NULL").bind(id),
     d.prepare("SELECT v.network, EXISTS (SELECT 1 FROM ledger l WHERE l.account_id = v.account_id AND l.currency = 'coin' AND l.reason = 'social' AND l.ref = v.network) AS claimed FROM social_visits v WHERE v.account_id = ?").bind(id),
+    d.prepare("SELECT COUNT(*) AS n FROM hint_uses WHERE account_id = ? AND day = ? AND source = 'free'").bind(id, day),
+    d.prepare("SELECT COUNT(*) AS n FROM shop_refreshes WHERE account_id = ? AND day = ? AND how = 'free'").bind(id, day),
+    d.prepare("SELECT COUNT(*) AS n FROM ad_tickets WHERE account_id = ? AND placement = 'shop_refresh' AND paid_at IS NOT NULL AND used_at IS NULL").bind(id),
+    d.prepare("SELECT pack_id, COUNT(*) AS n FROM pack_opens WHERE account_id = ? GROUP BY pack_id").bind(id),
   ])).slice(deal.length);
   const wallet = r[0].results[0] || { coins: 0, hints: 0, version: 0 };
   const streak = r[3].results[0] || { current: 0, best: 0, last_date: "", cycle_day: 0 };
@@ -116,14 +120,19 @@ export async function snapshot(ctx) {
   const freeUsed = new Set(r[4].results.map((f) => f.period));
   const visits = new Map(r[8].results.map((v) => [v.network, v.claimed ? "claimed" : "opened"]));
   const adsToday = r[6].results[0].n;
+  const entitlements = r[1].results.map((e) => e.key), freeHints = hintsPerDay(entitlements), freeHintsUsed = r[9].results[0].n;
+  const variants = {};
+  for (const i of r[2].results) if (i.tier > 0) (variants[i.item_id] ||= {})[VARIANTS[i.tier]] = i.qty;
   return {
     serverTime: now,
     day,
     coins: wallet.coins,
-    hints: wallet.hints,
+    hints: wallet.hints, // the stock: bought, won or earned with an ad; it is spent only after the day's free hints
+    hintsToday: { free: freeHints, used: freeHintsUsed, left: Math.max(0, freeHints - freeHintsUsed) },
     version: wallet.version,
-    entitlements: r[1].results.map((e) => e.key),
-    inventory: Object.fromEntries(r[2].results.map((i) => [i.item_id, i.qty])),
+    entitlements,
+    inventory: Object.fromEntries(r[2].results.filter((i) => i.tier === 0).map((i) => [i.item_id, i.qty])), // packs and cards held (duplicates counted)
+    variants, // merged cards: { "<item id>": { bronze: n, silver: n, gold: n, diamond: n } }
     ads: { coinReward: AD_COIN_REWARD, perDay: cfg.ad_coins_per_day, left: Math.max(0, cfg.ad_coins_per_day - adsToday) },
     streak: { current: streak.current, best: streak.best, lastDate: streak.last_date, cycleDay: streak.cycle_day },
     // the quests dealt for today and this week (a quest switched off since it was dealt is left out)
@@ -133,6 +142,9 @@ export async function snapshot(ctx) {
     }),
     // one free refresh a day for a daily quest and one for a weekly quest; each paid "quest_refresh" ad ticket is one more
     questRefresh: { dailyFree: !freeUsed.has("d"), weeklyFree: !freeUsed.has("w"), adTickets: r[7].results[0].n },
+    // the Shop's cosmetics of the day: one free swap a day; each paid "shop_refresh" ad ticket is one more
+    shopRefresh: { free: r[10].results[0].n === 0, adTickets: r[11].results[0].n },
+    packsOpened: Object.fromEntries(r[12].results.map((o) => [o.pack_id, o.n])), // per kind of pack: the Legendary timer counts these (GET /shop: odds.legendaryTimer.every)
     social: Object.fromEntries(SOCIAL_NETWORKS.map((n) => [n, visits.get(n) || "new"])),
   };
 }
@@ -149,7 +161,7 @@ export async function eraseAppAccount(env, id) {
   try {
     await d.batch([
       gone("wallets"), gone("ledger"), gone("inventory"), gone("entitlements"), gone("ad_tickets"), gone("ad_rewards"), gone("solves"),
-      gone("quest_state"), gone("streaks"), gone("social_visits"), gone("flags"),
+      gone("quest_state"), gone("streaks"), gone("social_visits"), gone("flags"), gone("pack_opens"), gone("card_merges"), gone("hint_uses"), gone("shop_refreshes"),
       d.prepare("UPDATE purchases SET account_id = 'erased' WHERE account_id = ?").bind(id),
       gone("accounts", "id"),
     ]);

@@ -1,4 +1,4 @@
-// POST /api/app/ads/ticket { placement: "coins" | "hint" | "quest_refresh" }  →  { ticket, placement, reward }   before a rewarded ad is shown.
+// POST /api/app/ads/ticket { placement: "coins" | "hint" | "quest_refresh" | "shop_refresh" }  →  { ticket, placement, reward }   before a rewarded ad is shown.
 // 409 cap: today's coin ads are used up (3 a day): the app shows no ad. The ticket itself is worth nothing until a verifier pays it.
 import { json } from "../../../../_lib/auth.js";
 import { readBody } from "../../../../_lib/db.js";

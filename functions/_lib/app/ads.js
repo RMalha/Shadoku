@@ -2,15 +2,16 @@
  * Rewarded ads (architecture 4.5). The flow: the app asks for a ticket, shows the ad with the ticket as its custom data,
  * and a verifier (verifiers.js: AdMob's server callback, or the fallback claim) later says the ad was watched. Only then is
  * the ticket paid, here, once: the ticket can be paid one time and AdMob's transaction id is a primary key.
- * Placements: "coins" (AD_COIN_REWARD coins, cfg.ad_coins_per_day a day), "hint" (one hint) and "quest_refresh" (the paid
- * ticket is spent by one quest refresh: quests.js refreshQuest).
+ * Placements: "coins" (AD_COIN_REWARD coins, cfg.ad_coins_per_day a day), "hint" (one hint), "quest_refresh" and "shop_refresh"
+ * (the paid ticket is spent by one refresh: quests.js refreshQuest, shop.js refreshShelf).
  */
 import { post, when, wrote, newOp } from "./ledger.js";
+import { questBumps, questDefs } from "./quests.js";
 import { randomToken } from "../auth.js";
 import { AD_COIN_REWARD, AD_TICKET_TTL_MS, dayKey } from "./economy.js";
 
-const PLACEMENTS = ["coins", "hint", "quest_refresh"]; // "infinite" (the unlock of an Infinite board) comes with that mode
-const rewardOf = (placement) => (placement === "coins" ? { coins: AD_COIN_REWARD } : placement === "hint" ? { hints: 1 } : { questRefresh: 1 });
+const PLACEMENTS = ["coins", "hint", "quest_refresh", "shop_refresh"]; // "infinite" (the unlock of an Infinite board) comes with that mode
+const rewardOf = (placement) => (placement === "coins" ? { coins: AD_COIN_REWARD } : placement === "hint" ? { hints: 1 } : placement === "quest_refresh" ? { questRefresh: 1 } : { shopRefresh: 1 });
 
 /** Before the ad: → { status, body: { ticket, placement, reward } }, or 409 "cap" when today's coin ads are used up (no ad should be shown). */
 export async function createTicket(ctx, placement) {
@@ -50,6 +51,7 @@ export async function payTicket(d, cfg, { ticketId, account, transactionId, adUn
   if (now - ticket.created > AD_TICKET_TTL_MS) return { result: "rejected", reason: "expired" };
   const day = dayKey(now, ticket.tz_offset);
   const op = newOp(), line = newOp(), mine = when.gate("ad_rewards", op);
+  const viewer = { d, id: account, cfg }; // enough of a context for the "watch an ad" quests
   const clientCap = verified === "client"
     ? " AND (SELECT COUNT(*) FROM ad_rewards r WHERE r.account_id = t.account_id AND r.verified = 'client' AND r.day = ?) < ?" : "";
   const res = await d.batch([
@@ -63,11 +65,12 @@ export async function payTicket(d, cfg, { ticketId, account, transactionId, adUn
       ? post(d, { id: line, account, delta: AD_COIN_REWARD, reason: "ad", ref: transactionId, day, at: now, meta: { ticket: ticketId, verified }, guards: [mine, when.perDay("ad", day, cfg.ad_coins_per_day)] })
       : ticket.placement === "hint"
         ? post(d, { id: line, account, currency: "hint", delta: 1, reason: "ad", ref: transactionId, day, at: now, meta: { ticket: ticketId, verified }, guards: [mine] })
-        : []), // quest_refresh: the paid ticket itself is the reward
+        : []), // quest_refresh, shop_refresh: the paid ticket itself is the reward, spent by one refresh
+    ...questBumps(viewer, await questDefs(viewer), day, (kind) => kind === "watch_ad", mine),
   ]);
   if (!wrote(res[0])) { // the transaction was seen before, the ticket was paid by a racing call, or the fallback's daily limit is reached
     const seen = await d.prepare("SELECT 1 AS x FROM ad_rewards WHERE transaction_id = ? OR ticket_id = ?").bind(transactionId, ticketId).first();
     return seen ? { result: "duplicate" } : { result: "rejected", reason: "client_cap" };
   }
-  return ticket.placement === "quest_refresh" || wrote(res[2]) ? { result: "ok", reward: rewardOf(ticket.placement) } : { result: "capped" };
+  return !["coins", "hint"].includes(ticket.placement) || wrote(res[2]) ? { result: "ok", reward: rewardOf(ticket.placement) } : { result: "capped" };
 }

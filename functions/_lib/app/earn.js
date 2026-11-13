@@ -10,8 +10,8 @@ import { post, when, wrote, newOp, lineFor } from "./ledger.js";
 import { flag, snapshot } from "./context.js";
 import { claimQuest, questBumps, questDefs } from "./quests.js";
 import {
-  CASE_ID_RE, CLIENT_ID_RE, COSMETIC_GROUP, SOCIAL_NETWORKS, SOCIAL_REWARD, STREAK_CYCLE,
-  addDays, clampAt, clampTz, dailyCase, dayKey, dayStart, difficultyKey, intIn, questCounts, solveReward,
+  CASE_ID_RE, CLIENT_ID_RE, COSMETIC_GROUP, HINTS_PER_DAY, SOCIAL_NETWORKS, SOCIAL_REWARD, STREAK_CYCLE,
+  addDays, clampAt, clampTz, dailyCase, dayKey, dayStart, difficultyKey, intIn, questCounts, randomInt, solveReward,
 } from "./economy.js";
 
 const rejected = (reason) => ({ result: "rejected", reason });
@@ -45,23 +45,38 @@ async function solve(ctx, ev, at, day) {
   ];
   if (reward > 0) stmts.push(...post(d, { id: newOp(), account: id, delta: reward, reason: "solve", ref: ev.caseId, day, at: now, meta: { mode: info.mode, difficulty: info.difficulty }, guards: [mine] }));
   if (fast) stmts.push(flag(d, id, "fast_solve", { caseId: ev.caseId, seconds, min }, now, mine));
-  stmts.push(...questBumps(ctx, await questDefs(ctx), day, (kind) => questCounts(kind, { hints, difficulty: info.difficulty }), mine));
+  stmts.push(...questBumps(ctx, await questDefs(ctx), day, (kind) => questCounts(kind, { hints, difficulty: info.difficulty, mode: info.mode }), mine));
   const res = await d.batch(stmts);
   if (!wrote(res[0])) return { result: "duplicate" };
   return fast ? { result: "ok", reward: 0, flagged: "fast_solve" } : { result: "ok", reward };
 }
 
 /* ───────────── hints ───────────── */
-/** A hint from the stock was used (possibly offline). The stock never goes below zero: using more than owned raises a flag. */
+/** The day's free hints of the account `?`, in SQL: its entitlements decide (economy.js HINTS_PER_DAY). */
+const FREE_HINTS = `CASE WHEN EXISTS (SELECT 1 FROM entitlements e WHERE e.account_id = ? AND e.key = 'member_gold') THEN ${HINTS_PER_DAY.member_gold}
+  WHEN EXISTS (SELECT 1 FROM entitlements e WHERE e.account_id = ? AND e.key = 'member') THEN ${HINTS_PER_DAY.member} ELSE ${HINTS_PER_DAY.free} END`;
+
+/**
+ * A hint was used (possibly offline), on the event's day. The day's free hints go first (5, or 10 / 15 with a membership); after
+ * them one hint of the stock is spent (bought, won, or earned with an ad). With neither, the event is refused and flagged: the
+ * stock never goes below zero. Counted once per event, by the database, in one batch.
+ */
 async function hintUse(ctx, ev, day) {
   const { d, id, now } = ctx;
-  const line = newOp();
-  const res = await d.batch(post(d, {
-    id: line, account: id, currency: "hint", delta: -1, reason: "hint_use", ref: ev.eventId, day, at: now,
-    meta: typeof ev.caseId === "string" && CASE_ID_RE.test(ev.caseId) ? { caseId: ev.caseId } : null, guards: [when.funds("hint", 1)],
-  }));
-  if (wrote(res[0])) return { result: "ok" };
-  if (await lineFor(d, id, "hint", "hint_use", ev.eventId)) return { result: "duplicate" };
+  const line = newOp(), caseId = typeof ev.caseId === "string" && CASE_ID_RE.test(ev.caseId) ? ev.caseId : "";
+  const note = (source, condition) => `INSERT INTO hint_uses (account_id, event_id, day, source, case_id, at) SELECT ?, ?, ?, '${source}', ?, ? WHERE ${condition}
+    ON CONFLICT (account_id, event_id) DO NOTHING RETURNING source`;
+  const res = await d.batch([
+    d.prepare(note("free", `(SELECT COUNT(*) FROM hint_uses h WHERE h.account_id = ? AND h.day = ? AND h.source = 'free') < ${FREE_HINTS}`)).bind(id, ev.eventId, day, caseId, now, id, day, id, id),
+    ...post(d, {
+      id: line, account: id, currency: "hint", delta: -1, reason: "hint_use", ref: ev.eventId, day, at: now, meta: caseId ? { caseId } : null,
+      guards: [when.funds("hint", 1), { sql: "NOT EXISTS (SELECT 1 FROM hint_uses h WHERE h.account_id = w.account_id AND h.event_id = ?)", binds: [ev.eventId] }],
+    }),
+    d.prepare(note("stock", "EXISTS (SELECT 1 FROM ledger WHERE id = ?)")).bind(id, ev.eventId, day, caseId, now, line),
+  ]);
+  if (wrote(res[0])) return { result: "ok", source: "free" };
+  if (wrote(res[1])) return { result: "ok", source: "stock" };
+  if (await d.prepare("SELECT 1 AS x FROM hint_uses WHERE account_id = ? AND event_id = ?").bind(id, ev.eventId).first()) return { result: "duplicate" };
   await flag(d, id, "hint_overuse", { eventId: ev.eventId }, now).run();
   return rejected("no_stock");
 }
@@ -69,7 +84,8 @@ async function hintUse(ctx, ev, day) {
 /* ───────────── daily streak ───────────── */
 /**
  * What a day of the Daily Reward list gives this account: { coins } | { hints } | { item, qty } | null.
- * A "cosmetic" day draws one item of its shelf (group and rarity) that the account does not own; with none left it gives nothing.
+ * A "cosmetic" day draws one item of its shelf (group and rarity) at random: a duplicate if the account holds it already
+ * (duplicates merge into variants: packs.js). A shelf with no item gives nothing.
  */
 async function streakReward(ctx, row) {
   if (!row) return null;
@@ -80,10 +96,9 @@ async function streakReward(ctx, row) {
   const kinds = Object.keys(COSMETIC_GROUP).filter((k) => COSMETIC_GROUP[k] === group);
   if (!kinds.length) return null;
   const free = (await ctx.d.prepare(
-    `SELECT id FROM items WHERE active = 1 AND rarity = ? AND kind IN (${kinds.map(() => "?").join(", ")})
-       AND id NOT IN (SELECT item_id FROM inventory WHERE account_id = ?) ORDER BY id`,
-  ).bind(rarity || "", ...kinds, ctx.id).all()).results;
-  return free.length ? { item: free[crypto.getRandomValues(new Uint32Array(1))[0] % free.length].id, qty: 1 } : null;
+    `SELECT id FROM items WHERE active = 1 AND rarity = ? AND kind IN (${kinds.map(() => "?").join(", ")}) ORDER BY id`,
+  ).bind(rarity || "", ...kinds).all()).results;
+  return free.length ? { item: free[randomInt(free.length)].id, qty: 1 } : null;
 }
 
 /**
@@ -117,9 +132,10 @@ export async function claimStreak(ctx, date, attempt = 1) {
   if (reward && reward.coins) stmts.push(...post(d, { id: newOp(), account: id, delta: reward.coins, reason: "streak", ref: date, day: date, at: now, meta: { cycleDay }, guards: [mine] }));
   if (reward && reward.hints) stmts.push(...post(d, { id: newOp(), account: id, currency: "hint", delta: reward.hints, reason: "streak", ref: date, day: date, at: now, meta: { cycleDay }, guards: [mine] }));
   if (reward && reward.item) {
-    stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, qty, first_at) SELECT ?, ?, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, item_id) DO UPDATE SET qty = qty + excluded.qty`)
+    stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, qty, first_at) SELECT ?, ?, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, item_id, tier) DO UPDATE SET qty = qty + excluded.qty`)
       .bind(id, reward.item, reward.qty, now, ...mine.binds));
   }
+  stmts.push(...questBumps(ctx, await questDefs(ctx), date, (kind) => kind === "streak", mine));
   const res = await d.batch(stmts);
   // another claim moved the streak between the read and the batch: read again (it was this date, or this one now follows it)
   if (!wrote(res[0])) return attempt < 3 ? claimStreak(ctx, date, attempt + 1) : rejected("busy");
