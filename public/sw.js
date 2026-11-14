@@ -4,9 +4,10 @@
 //  - Pages (navigations): network first, so a new deploy (a daily release) shows at once; offline, the last page shell.
 //    Every route serves the same index.html (public/_redirects), so one cached shell covers them all.
 //  - /assets/* (Vite's hashed bundles, the puzzles included): cache first, they never change; old builds are pruned.
-//  - Other same-origin files (icons, favicons) and Google Fonts: served from the cache, refreshed in the background.
+//  - Other same-origin files (icons, favicons, the fonts in /fonts): served from the cache, refreshed in the background.
+//    Nothing is fetched from another origin: the fonts are the site's own files (v2 dropped the cached Google Fonts).
 // Bump VERSION to drop the shell and static caches on the next visit.
-const VERSION = "v1";
+const VERSION = "v2";
 const SHELL = `shadoku-shell-${VERSION}`;
 const STATIC = `shadoku-static-${VERSION}`;
 const ASSETS = "shadoku-assets-v2"; // hashed names: safe across versions (v2: the v1 cache could hold index.html saved under a missing asset URL)
@@ -86,8 +87,5 @@ self.addEventListener("fetch", (event) => {
     if (url.pathname.startsWith("/assets/")) return event.respondWith(cacheFirst(request));
     if (url.pathname === "/sw.js") return;
     return event.respondWith(staleWhileRevalidate(request, event));
-  }
-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
-    event.respondWith(staleWhileRevalidate(request, event));
   }
 });

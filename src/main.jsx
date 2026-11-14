@@ -8,7 +8,7 @@ import { installErrorReporting } from './reportError.js'
 
 installErrorReporting()
 
-// The Google Fonts stylesheet loads as media=print (it never blocks the first paint) and is switched on here: an inline onload= handler in
+// The fonts stylesheet (public/fonts/fonts.css: the fonts are served by the site itself, never by Google) loads as media=print (it never blocks the first paint) and is switched on here: an inline onload= handler in
 // index.html would be blocked by the Content-Security-Policy.
 document.getElementById('sh-fonts')?.setAttribute('media', 'all')
 
