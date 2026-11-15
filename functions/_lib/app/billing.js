@@ -9,12 +9,15 @@
 import { post, when, wrote, newOp } from "./ledger.js";
 import { sha256b64u } from "../auth.js";
 import { dayKey } from "./economy.js";
-import { snapshot } from "./context.js";
+import { snapshot, accountHash, ERASED_ACCOUNT } from "./context.js";
 
 const FAIL_STATUS = { unconfigured: 503, upstream: 502, pending: 409, wrong_account: 403, invalid: 400 };
+const failed = (v) => {
+  const error = v && Object.hasOwn(FAIL_STATUS, v.error) ? v.error : "invalid";
+  return { status: FAIL_STATUS[error], body: { error: error === "unconfigured" ? "billing_unavailable" : error } };
+};
 
-/** What the app passes to Play as obfuscatedAccountId when it starts a purchase; the verifier checks Google reports the same. */
-export const accountHash = (id) => sha256b64u(`shadoku-account|${id}`);
+export { accountHash }; // (what the app passes to Play as obfuscatedAccountId: context.js)
 
 const grantOf = (item) => {
   let data = {};
@@ -48,8 +51,9 @@ export async function redeem(ctx, verifier, { sku, purchaseToken }) {
   if (!item) return { status: 404, body: { error: "unknown_sku" } };
   const grant = grantOf(item);
   const tokenHash = await sha256b64u(purchaseToken);
-  const known = await d.prepare("SELECT account_id, sku, consumed, voided_at FROM purchases WHERE token_hash = ?").bind(tokenHash).first();
+  const known = await d.prepare("SELECT account_id, sku, consumed, voided_at, owner_hash FROM purchases WHERE token_hash = ?").bind(tokenHash).first();
   if (known) {
+    if (known.account_id === ERASED_ACCOUNT) return restore(ctx, verifier, item, grant, { sku, purchaseToken, tokenHash, known });
     if (known.account_id !== id || known.sku !== sku) return { status: 409, body: { error: "token_used" } };
     if (known.voided_at) return { status: 409, body: { error: "voided" } };
     if (!known.consumed) await finish(d, verifier, item, purchaseToken, tokenHash);
@@ -58,10 +62,7 @@ export async function redeem(ctx, verifier, { sku, purchaseToken }) {
   const had = "EXISTS (SELECT 1 FROM entitlements e WHERE e.account_id = ? AND e.key = ?)";
   if (grant.once && (await d.prepare(`SELECT ${had} AS x`).bind(id, onceKey(item.id)).first()).x) return { status: 409, body: { error: "owned" } };
   const v = await verifier.verifyPurchase({ sku, purchaseToken, accountId: id, accountHash: await accountHash(id) });
-  if (!v || !v.ok) {
-    const error = v && Object.hasOwn(FAIL_STATUS, v.error) ? v.error : "invalid";
-    return { status: FAIL_STATUS[error], body: { error: error === "unconfigured" ? "billing_unavailable" : error } };
-  }
+  if (!v || !v.ok) return failed(v);
   const op = newOp(), mine = when.gate("purchases", op), day = dayKey(now, tz), meta = { sku, item: item.id };
   const stmts = [
     d.prepare( // a once-only product: the row is written only if the account does not have it (two tokens racing: one wins)
@@ -88,6 +89,34 @@ export async function redeem(ctx, verifier, { sku, purchaseToken }) {
   }
   const finished = await finish(d, verifier, item, purchaseToken, tokenHash);
   return { status: 200, body: { ok: true, granted: shown(grant), finished, state: await snapshot(ctx) } };
+}
+
+/**
+ * The token of a purchase whose account was deleted (its row stands as account "erased": context.js eraseAppAccount).
+ * A PERMANENT purchase (No ads, a membership: Play says the buyer still owns it and will not sell it twice) goes back to the
+ * buyer: the row kept the buyer's hash, the caller's must be the same, and Google must confirm the purchase once more. Then
+ * the row is this account's again and the entitlements return. Nothing else does: coins, hints and cards a purchase gave were
+ * erased with the account and are never granted twice. Anything else about an erased row answers 409 token_used, as before.
+ */
+async function restore(ctx, verifier, item, grant, { sku, purchaseToken, tokenHash, known }) {
+  const { d, id, now } = ctx, used = { status: 409, body: { error: "token_used" } };
+  const owner = await accountHash(id);
+  if (known.sku !== sku || known.voided_at || !grant.entitlements.length || !known.owner_hash || known.owner_hash !== owner) return used;
+  const v = await verifier.verifyPurchase({ sku, purchaseToken, accountId: id, accountHash: owner });
+  if (!v || !v.ok) return failed(v);
+  const op = newOp(), mine = when.gate("purchases", op, "restore_op");
+  const res = await d.batch([
+    d.prepare("UPDATE purchases SET account_id = ?, owner_hash = NULL, restore_op = ?, restored_at = ? WHERE token_hash = ? AND account_id = ? AND owner_hash = ? AND voided_at IS NULL RETURNING token_hash")
+      .bind(id, op, now, tokenHash, ERASED_ACCOUNT, owner),
+    ...grant.entitlements.map((key) => d.prepare(`INSERT INTO entitlements (account_id, key, since, source) SELECT ?, ?, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, key) DO NOTHING`)
+      .bind(id, key, now, `iap:${tokenHash}`, ...mine.binds)),
+  ]);
+  if (!wrote(res[0])) { // sent twice at once and the other call restored it, or a refund arrived meanwhile
+    const row = await d.prepare("SELECT account_id, voided_at FROM purchases WHERE token_hash = ?").bind(tokenHash).first();
+    return row && row.account_id === id && !row.voided_at ? { status: 200, body: { ok: true, duplicate: true, state: await snapshot(ctx) } } : used;
+  }
+  if (!known.consumed) await finish(d, verifier, item, purchaseToken, tokenHash);
+  return { status: 200, body: { ok: true, restored: true, granted: { coins: 0, hints: 0, entitlements: grant.entitlements, inventory: {} }, state: await snapshot(ctx) } };
 }
 
 /**

@@ -5,12 +5,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 
+const WRITES = /^\s*(INSERT|UPDATE|DELETE|REPLACE)\b/i;
+
 export function openD1(migrationsDir) {
   const raw = new DatabaseSync(":memory:");
   for (const f of fs.readdirSync(migrationsDir).filter((n) => n.endsWith(".sql")).sort()) raw.exec(fs.readFileSync(path.join(migrationsDir, f), "utf8"));
   const exec = (sql, binds) => {
     for (const b of binds) if (b === undefined) throw new Error("D1_TYPE_ERROR: undefined is not a bindable value");
-    return { success: true, results: raw.prepare(sql).all(...binds).map((r) => ({ ...r })), meta: {} };
+    const results = raw.prepare(sql).all(...binds).map((r) => ({ ...r }));
+    // meta.changes as D1 reports it: the rows a write changed, 0 for a read (functions/api/community/[id]/play.js counts on it)
+    return { success: true, results, meta: { changes: WRITES.test(sql) ? raw.prepare("SELECT changes() AS n").get().n : 0 } };
   };
   // every call is a round trip in D1: yield to the event loop first, so two requests running "at once" in a test really
   // interleave between their reads and their batches (a batch itself stays atomic)

@@ -12,8 +12,11 @@
  *   - a browser on the site's own origin with the site's session cookie (local testing with DEV_LOGIN): writes must be
  *     same-origin, and a call that names any other origin is refused, reads too (cookies are never accepted cross-origin).
  * Storage: the app's tables come from migrations/ (not created lazily): until they are applied the answer is 503 "schema".
+ *
+ * The endpoints the app shares with the website (/api/progress, /api/community/*, ...) take the same token through appSession
+ * below (functions/_lib/caller.js decides when). Deleting an account: eraseAppAccount, at the end of the file.
  */
-import { json, readSession, sameOrigin, siteOrigin, seal, unseal, sessionAlive, SESSION_DAYS } from "../auth.js";
+import { json, readSession, sameOrigin, siteOrigin, seal, unseal, sessionAlive, sha256b64u, SESSION_DAYS } from "../auth.js";
 import { db } from "../db.js";
 import { limit } from "../ratelimit.js";
 import { parseConfig, dayKey, hintsPerDay, periodKey, AD_COIN_REWARD, SOCIAL_NETWORKS, VARIANTS } from "./economy.js";
@@ -39,14 +42,17 @@ export const clock = (env) => (typeof env.NOW === "function" ? env.NOW() : Date.
 
 const fail = (error, status, extra = {}) => ({ error: json({ error, ...extra }, status) });
 
+// an account was seen (db.js seenStatement), written only when the caller turns out to be real: the guard goes between the two halves
+const SEEN_SQL = "INSERT INTO account_seen (id, at) SELECT ?1, ?2", SEEN_UPSERT = "ON CONFLICT (id) DO UPDATE SET at = excluded.at WHERE account_seen.at <= excluded.at - ?3";
+
 let schemaSeen = false; // one look per isolate, remembered only once the tables are there
 
 async function appDb(env) {
   const d = await db(env);
   if (!d) return fail("storage", 503);
   if (!schemaSeen) {
-    const row = await d.prepare("SELECT COUNT(*) AS n FROM sqlite_master WHERE type = 'table' AND name IN ('wallets', 'ledger', 'devices', 'identities')").first();
-    if (!row || row.n !== 4) return fail("schema", 503); // every migration up to 0003_app_identity.sql
+    const row = await d.prepare("SELECT COUNT(*) AS n FROM sqlite_master WHERE type IN ('table', 'index') AND name IN ('wallets', 'ledger', 'devices', 'identities', 'kept_ledger', 'kept_bans', 'purchases_restore')").first();
+    if (!row || row.n !== 7) return fail("schema", 503); // every migration up to 0004_app_erasure.sql (its last statement makes the index)
     schemaSeen = true;
   }
   return { d };
@@ -72,6 +78,51 @@ async function caller(request, env, write) {
   if (write ? !sameOrigin(request, env) : !!origin && origin !== siteOrigin(request, env)) return fail("origin", 403);
   const s = await readSession(request, env);
   return s ? { id: s.id, dev: "" } : fail("auth", 401);
+}
+
+/**
+ * What the app passes to Play as obfuscatedAccountId when it starts a purchase; the verifier checks Google reports the same
+ * (billing.js). It is also what an erased account's permanent purchases keep, so the same sign-in can have them back.
+ */
+export const accountHash = (id) => sha256b64u(`shadoku-account|${id}`);
+
+/**
+ * The key a banned sign-in leaves behind when its account is erased (table kept_bans): a hash of the account id under its own
+ * prefix, so it says nothing by itself and is not the hash Play holds for the account's purchases (billing.js accountHash).
+ */
+export const banKey = (id) => sha256b64u(`shadoku-ban|${id}`);
+
+/**
+ * The statement that makes an account's row if it has none. A sign-in whose earlier account was banned and then deleted starts
+ * banned (kept_bans). `key`: await banKey(id).
+ */
+export const openAccount = (d, id, kind, now, key) =>
+  d.prepare("INSERT INTO accounts (id, kind, created, banned) SELECT ?, ?, ?, EXISTS (SELECT 1 FROM kept_bans WHERE account_hash = ?) WHERE true ON CONFLICT (id) DO NOTHING").bind(id, kind, now, key);
+
+/**
+ * The app's session on an endpoint OUTSIDE /api/app (the ones it shares with the website: functions/_lib/caller.js). The same
+ * token and the same checks as appContext: the signature, aud "app", the expiry, the account not deleted since, not closed by
+ * a sign-in (409 merged), not banned (unless `banned`: deleting the account), and the token's device still standing and still
+ * this account's (401 revoked). Stricter in one thing: a token that names no device is refused (only tests make those).
+ * Nothing is written: no account is made, no wallet opened, the device is not marked as seen.
+ * → { s: the token's payload ({ id, dev, provider, name, avatar }), account: { kind, banned, merged_into } } or { error: Response }
+ */
+export async function appSession(request, env, { banned = false } = {}) {
+  const s = await readBearer(request, env);
+  if (!s || !s.dev || !(await sessionAlive(env, s))) return fail("auth", 401);
+  const store = await appDb(env);
+  if (store.error) return store;
+  const res = await store.d.batch([
+    store.d.prepare("SELECT kind, banned, merged_into FROM accounts WHERE id = ?").bind(s.id),
+    store.d.prepare("SELECT account_id, revoked_at FROM devices WHERE id = ?").bind(s.dev),
+    store.d.prepare(`${SEEN_SQL} WHERE EXISTS (SELECT 1 FROM accounts a JOIN devices v ON v.account_id = a.id WHERE a.id = ?1 AND a.merged_into IS NULL AND v.id = ?4 AND v.revoked_at IS NULL) ${SEEN_UPSERT}`).bind(s.id, clock(env), 24 * 3600 * 1000, s.dev),
+  ]);
+  const account = res[0].results[0], device = res[1].results[0];
+  if (!account) return fail("auth", 401); // erased: the database knows at once, whatever the `gone` mark in KV says yet
+  if (account.banned && !banned) return fail("banned", 403);
+  if (account.merged_into) return fail("merged", 409, { into: account.merged_into });
+  if (!device || device.revoked_at || device.account_id !== s.id) return fail("revoked", 401);
+  return { s, account };
 }
 
 /**
@@ -105,9 +156,13 @@ export async function appContext(request, env, { write = false, rate = null } = 
     if (blocked) return { error: blocked };
   }
   const now = clock(env);
+  // A token with a device was issued with its account and wallet (accounts.js), so it never makes them: when the account was
+  // deleted, a call that is still on its way (or another phone of that account, before the `gone` mark reaches it) must not
+  // bring an empty account back. A site cookie or a token without a device (tests) opens its account on the first call.
+  const nothing = d.prepare("SELECT 1");
   const res = await d.batch([
-    d.prepare("INSERT INTO accounts (id, kind, created) VALUES (?, ?, ?) ON CONFLICT (id) DO NOTHING").bind(who.id, who.id.startsWith("guest:") ? "guest" : "full", now),
-    openWallet(d, who.id),
+    who.dev ? nothing : openAccount(d, who.id, who.id.startsWith("guest:") ? "guest" : "full", now, await banKey(who.id)),
+    who.dev ? nothing : openWallet(d, who.id),
     d.prepare("SELECT * FROM accounts WHERE id = ?").bind(who.id),
     d.prepare("SELECT k, v FROM app_config"),
     // the token's device: seen now (noted once an hour), and read back to see that it is still this account's
@@ -115,8 +170,11 @@ export async function appContext(request, env, { write = false, rate = null } = 
       d.prepare("UPDATE devices SET last_seen = ? WHERE id = ? AND account_id = ? AND revoked_at IS NULL AND last_seen < ?").bind(now, who.dev, who.id, now - 3600 * 1000),
       d.prepare("SELECT account_id, revoked_at FROM devices WHERE id = ?").bind(who.dev),
     ] : []),
+    // seen: what keeps the account from being deleted as inactive (retention.js). Only for an account that exists.
+    d.prepare(`${SEEN_SQL} WHERE EXISTS (SELECT 1 FROM accounts WHERE id = ?1 AND merged_into IS NULL) ${SEEN_UPSERT}`).bind(who.id, now, 24 * 3600 * 1000),
   ]);
   const account = res[2].results[0];
+  if (!account) return fail("auth", 401); // a device token whose account was erased
   if (account.banned) return fail("banned", 403);
   if (account.merged_into) return fail("merged", 409, { into: account.merged_into }); // a guest that signed in: the phone holds a newer token
   if (who.dev) {
@@ -197,23 +255,61 @@ export async function snapshot(ctx) {
   };
 }
 
+/* ───────────── deleting an account (architecture 4.11) ───────────── */
+// every table whose rows name an account and go with it
+const ERASED = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes", "devices", "identities"];
+// the ledger lines that are about money: copied, without the account, before the ledger goes
+const MONEY_REASONS = ["iap", "refund"];
+/** What stands in `purchases.account_id` once the account is gone. */
+export const ERASED_ACCOUNT = "erased";
+
 /**
- * The account is being deleted (DELETE /api/account): its wallet, ledger, inventory and play records go, and with them the phones
- * signed in to it, the sign-ins linked to it and whatever is left of the guest accounts it grew from (accounts.js mergeGuest).
- * Its purchase rows stay, without the account id: the token hash must keep refusing a replay, and a refund from Google must
- * still find its order. A database without the app's tables (migrations not applied) has nothing to erase.
+ * The account is being deleted (DELETE /api/account, from the website or from the app): every row that names it goes, in ONE
+ * batch, so the erasure happens whole or not at all (a caller whose erasure failed still has its session and can ask again).
+ * That is its wallet and ledger, cards, contracts, quests, streak, ad and hint records, flags, its row in `accounts`, the
+ * phones signed in to it (every token it holds stops at once: a token is only as good as its `devices` row), the sign-ins
+ * linked to it, and whatever is left of the guest accounts it grew from (accounts.js mergeGuest).
+ * What stays, and never with the account id (migrations/0004_app_erasure.sql):
+ *   - its `purchases` rows, as account "erased": the token hash must keep refusing a replay, and a refund from Google must
+ *     still find its order (billing.js voidPurchase then marks the row and moves nothing: there is no wallet). The rows of
+ *     its permanent purchases also keep the buyer's hash, so the same sign-in can have them back (billing.js restore);
+ *   - its `iap` and `refund` ledger lines, copied to kept_ledger: what each purchase delivered and each refund took back;
+ *   - if it was banned: a hash per sign-in in kept_bans, so deleting the account does not lift the ban.
+ * A database without the app's tables has nothing to erase; one that has no migration 0003 or 0004 yet erases what it has.
  */
 export async function eraseAppAccount(env, id) {
   const d = await db(env).catch(() => null);
   if (!d) return;
-  const mine = "account_id = ? OR account_id IN (SELECT id FROM accounts WHERE merged_into = ?)";
-  const gone = (table) => d.prepare(`DELETE FROM ${table} WHERE ${mine}`).bind(id, id);
-  const run = (statements) => d.batch(statements).catch((e) => { if (!/no such table/i.test(String(e && e.message))) throw e; });
-  // the sign-in records first, and on their own: a database that has no migration 0003 yet still erases everything below
-  await run([gone("devices"), gone("identities")]);
-  await run([
-    ...["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes"].map(gone),
-    d.prepare(`UPDATE purchases SET account_id = 'erased' WHERE ${mine}`).bind(id, id),
-    d.prepare("DELETE FROM accounts WHERE id = ? OR merged_into = ?").bind(id, id),
-  ]);
+  const names = [...ERASED, "accounts", "purchases", "kept_ledger", "kept_bans", "purchases_restore", "account_seen"];
+  const have = new Set((await d.prepare(`SELECT name FROM sqlite_master WHERE type IN ('table', 'index') AND name IN (${names.map(() => "?").join(", ")})`).bind(...names).all()).results.map((t) => t.name));
+  if (!have.has("accounts")) return;
+  const now = clock(env);
+  const mine = "(account_id = ? OR account_id IN (SELECT id FROM accounts WHERE merged_into = ?))";
+  const stmts = [];
+  if (have.has("kept_bans")) {
+    const account = await d.prepare("SELECT kind, banned FROM accounts WHERE id = ?").bind(id).first();
+    if (account && account.banned && account.kind === "full") {
+      const linked = have.has("identities") ? (await d.prepare("SELECT provider, sub FROM identities WHERE account_id = ?").bind(id).all()).results : [];
+      for (const signIn of [id, ...linked.map((l) => `${l.provider}:${l.sub}`)]) {
+        stmts.push(d.prepare("INSERT INTO kept_bans (account_hash, erased_at) VALUES (?, ?) ON CONFLICT (account_hash) DO NOTHING").bind(await banKey(signIn), now));
+      }
+    }
+  }
+  if (have.has("kept_ledger") && have.has("ledger")) {
+    stmts.push(d.prepare(
+      `INSERT INTO kept_ledger (seq, currency, delta, reason, ref, at, meta, erased_at)
+       SELECT seq, currency, delta, reason, ref, at, meta, ? FROM ledger WHERE ${mine} AND reason IN (${MONEY_REASONS.map(() => "?").join(", ")}) ON CONFLICT (seq) DO NOTHING`,
+    ).bind(now, id, id, ...MONEY_REASONS));
+  }
+  if (have.has("purchases") && have.has("purchases_restore")) {
+    // a permanent purchase (its product grants an entitlement) that was not refunded keeps the buyer's hash, to be given back
+    stmts.push(d.prepare(
+      `UPDATE purchases SET account_id = ?, owner_hash = CASE WHEN voided_at IS NULL AND EXISTS (SELECT 1 FROM items i WHERE i.sku = purchases.sku AND json_valid(i.data)
+         AND (json_array_length(i.data, '$.entitlements') > 0 OR json_extract(i.data, '$.entitlement') IS NOT NULL)) THEN ? ELSE NULL END WHERE ${mine}`,
+    ).bind(ERASED_ACCOUNT, await accountHash(id), id, id));
+  } else if (have.has("purchases")) stmts.push(d.prepare(`UPDATE purchases SET account_id = ? WHERE ${mine}`).bind(ERASED_ACCOUNT, id, id));
+  if (have.has("account_seen")) stmts.push(d.prepare("DELETE FROM account_seen WHERE id = ? OR id IN (SELECT id FROM accounts WHERE merged_into = ?)").bind(id, id));
+  for (const table of ERASED) if (have.has(table)) stmts.push(d.prepare(`DELETE FROM ${table} WHERE ${mine}`).bind(id, id));
+  stmts.push(d.prepare("DELETE FROM accounts WHERE id = ? OR merged_into = ?").bind(id, id)); // last: the lines above find the guests through it
+  await d.batch(stmts);
 }

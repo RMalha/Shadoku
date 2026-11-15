@@ -1,13 +1,15 @@
 // PUT /api/community/<id>/rate { stars: 1–5 }  →  { stars, avg, count }   (signed-in players; a new rating replaces the old one; not your own puzzle)
-import { readSession, json, sameOrigin } from "../../../_lib/auth.js";
+// Signed in: the site's session cookie, or the Android app's bearer token from the app's origin (functions/_lib/caller.js; not a guest).
+import { json } from "../../../_lib/auth.js";
+import { caller } from "../../../_lib/caller.js";
 import { db, noStorage, readBody, recountRatings } from "../../../_lib/db.js";
 import { ID_RE } from "../../../_lib/community.js";
 import { limit } from "../../../_lib/ratelimit.js";
 
 export async function onRequestPut({ request, env, params }) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  const s = await readSession(request, env);
-  if (!s) return json({ error: "auth" }, 401);
+  const who = await caller(request, env, { write: true });
+  if (who.error) return who.error;
+  const { s } = who;
   const blocked = await limit(env, request, "rate", { max: 60, windowSec: 600, id: s.id });
   if (blocked) return blocked;
   if (!ID_RE.test(params.id)) return json({ error: "not_found" }, 404);

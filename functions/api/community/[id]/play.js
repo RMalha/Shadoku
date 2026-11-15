@@ -1,7 +1,9 @@
 // POST /api/community/<id>/play { player, solved }  →  { plays, solves }
 // Counts each player once per puzzle: the account when signed in, else the browser's random id ("player", kept in its storage).
 // `solved: true` (sent when the contract is fulfilled) also counts the player among its solvers, once.
-import { readSession, json, sameOrigin } from "../../../_lib/auth.js";
+// From the site's own pages or the Android app's origin (functions/_lib/caller.js); a guest of the app counts by its "player" id, like a visitor.
+import { json } from "../../../_lib/auth.js";
+import { fromHere, visitor } from "../../../_lib/caller.js";
 import { db, noStorage, readBody } from "../../../_lib/db.js";
 import { ID_RE } from "../../../_lib/community.js";
 import { limit } from "../../../_lib/ratelimit.js";
@@ -9,12 +11,12 @@ import { limit } from "../../../_lib/ratelimit.js";
 const ANON_RE = /^[A-Za-z0-9_-]{16,48}$/;
 
 export async function onRequestPost({ request, env, params }) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
+  if (!fromHere(request, env)) return json({ error: "origin" }, 403);
   if (!ID_RE.test(params.id)) return json({ error: "not_found" }, 404);
   const d = await db(env);
   if (!d) return noStorage();
   const body = (await readBody(request, 1024)) || {};
-  const s = await readSession(request, env).catch(() => null);
+  const s = await visitor(request, env);
   const blocked = await limit(env, request, "play", { max: 60, windowSec: 600, id: s ? s.id : "" });
   if (blocked) return blocked;
   const player = s ? s.id : ANON_RE.test(body.player || "") ? `anon:${body.player}` : "";

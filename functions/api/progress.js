@@ -3,22 +3,27 @@
 //                                    the browser asks before adding progress it kept from before `since` or for another account (src/sync.js)
 // PUT /api/progress { progress } →  { ok }                     replaces it (the browser merged its own progress in first: src/sync.js)
 // Without a KV namespace there is nowhere to keep it: GET answers null and PUT 503, and the game stays local.
-import { readSession, getProgress, setProgress, accountSince, json, sameOrigin } from "../_lib/auth.js";
+// Signed in: the site's session cookie, or the Android app's bearer token from the app's origin (functions/_lib/caller.js; not a guest).
+import { getProgress, setProgress, accountSince, json } from "../_lib/auth.js";
+import { caller } from "../_lib/caller.js";
 import { limit } from "../_lib/ratelimit.js";
 
-const MAX_BYTES = 256 * 1024; // a full pack of boards is a few KB
+// Not a budget for play: a safety ceiling. A board with notes is about 1 KB, so this is some four thousand of them, and the store
+// itself (KV) refuses a value past 25 MB. (Until 2026-11-14 it was 256 KB, which a year of dailies with notes passed.)
+const MAX_BYTES = 4 * 1024 * 1024;
 
 export async function onRequestGet({ request, env }) {
-  const s = await readSession(request, env);
-  if (!s) return json({ error: "auth" }, 401);
+  const who = await caller(request, env);
+  if (who.error) return who.error;
+  const { s } = who;
   const [progress, since] = await Promise.all([getProgress(env, s.id), accountSince(env, s.id)]);
   return json({ progress, account: s.id, since, now: Date.now() });
 }
 
 export async function onRequestPut({ request, env }) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  const s = await readSession(request, env);
-  if (!s) return json({ error: "auth" }, 401);
+  const who = await caller(request, env, { write: true });
+  if (who.error) return who.error;
+  const { s } = who;
   const blocked = await limit(env, request, "progress", { max: 120, windowSec: 600, id: s.id });
   if (blocked) return blocked;
   if (!env.SHADOKU_KV) return json({ error: "storage" }, 503);

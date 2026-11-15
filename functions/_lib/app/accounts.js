@@ -24,10 +24,10 @@
  * Either way the guest account is closed (accounts.merged_into) and can never merge again (a trigger sees to it).
  */
 import { sessionAlive, getRecord, getProgress } from "../auth.js";
-import { readBody } from "../db.js";
+import { readBody, seenStatement } from "../db.js";
 import { limit } from "../ratelimit.js";
 import { postFrom, when, wrote, newOp, openWallet } from "./ledger.js";
-import { sealAppToken, readBearer, APP_TOKEN_SEC } from "./context.js";
+import { sealAppToken, readBearer, openAccount, banKey, APP_TOKEN_SEC } from "./context.js";
 import { verifyIdentity, IDENTITY_FAIL } from "./identity.js";
 import { CLIENT_ID_RE, SOCIAL_NETWORKS, clampTz, dayKey, intIn } from "./economy.js";
 
@@ -69,6 +69,7 @@ export async function createGuest(door, request, body) {
       .bind(id, now, clampTz(body.tz), intIn(body.birthYear, 1900, new Date(now).getUTCFullYear())),
     openWallet(d, id),
     deviceRow(d, { id: device, account: id, installId, appVersion: cleanVersion(body.appVersion), now }),
+    seenStatement(d, id, now), // the 12 months without a visit start here (functions/_lib/retention.js)
   ]);
   return { status: 200, body: await session(env, { id, kind: "guest", provider: "guest", device }) };
 }
@@ -178,7 +179,7 @@ export async function signIn(door, request, who, body) {
   const linked = await d.prepare("SELECT account_id FROM identities WHERE provider = ? AND sub = ?").bind(who.provider, who.sub).first();
   const target = linked ? linked.account_id : `${who.provider}:${who.sub}`;
   const pre = await d.batch([
-    d.prepare("INSERT INTO accounts (id, kind, created) VALUES (?, 'full', ?) ON CONFLICT (id) DO NOTHING").bind(target, now),
+    openAccount(d, target, "full", now, await banKey(target)), // banned from its first moment if this sign-in's deleted account was (kept_bans)
     openWallet(d, target),
     d.prepare("SELECT id, kind, banned, merged_into FROM accounts WHERE id IN (?, ?)").bind(target, prior ? prior.id : target),
     d.prepare("SELECT account_id, revoked_at FROM devices WHERE id = ?").bind(prior ? prior.dev : ""),
@@ -210,6 +211,7 @@ export async function signIn(door, request, who, body) {
     dev = crypto.randomUUID();
     await deviceRow(d, { id: dev, account: target, installId: cleanInstall(body.installId), appVersion, now }).run();
   }
+  await seenStatement(d, target, now).run();
   return { status: 200, body: { ...(await session(env, { id: target, kind: "full", provider: who.provider, name: who.name, avatar: who.avatar, device: dev })), merge } };
 }
 

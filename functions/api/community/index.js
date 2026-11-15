@@ -1,6 +1,8 @@
 // GET  /api/community?size=7&sort=stars|plays|difficulty|new&order=asc|desc  →  { puzzles: [list row] }   (anyone; no case data)
 // POST /api/community { puzzle, difficulty }  →  { id }   publish (signed-in players; the case must pass src/creatorCore.js checkCase)
-import { readSession, getRecord, json, sameOrigin } from "../../_lib/auth.js";
+// Signed in: the site's session cookie, or the Android app's bearer token from the app's origin (functions/_lib/caller.js; not a guest).
+import { getRecord, json } from "../../_lib/auth.js";
+import { caller, visitor } from "../../_lib/caller.js";
 import { db, noStorage, readBody, shownAvatar } from "../../_lib/db.js";
 import { cleanCase, listRow, newId, DIFF_RANK, MAX_CASE_BYTES, MAX_PER_AUTHOR, SELECT_LIST } from "../../_lib/community.js";
 import { limit } from "../../_lib/ratelimit.js";
@@ -20,15 +22,15 @@ export async function onRequestGet({ request, env }) {
   const sort = SORTS[url.searchParams.get("sort")] ? url.searchParams.get("sort") : "new";
   const order = url.searchParams.get("order") === "asc" ? "ASC" : "DESC";
   const where = size >= 5 && size <= 10 ? `WHERE size = ${size}` : "";
-  const s = await readSession(request, env).catch(() => null);
+  const s = await visitor(request, env);
   const rows = (await d.prepare(`${SELECT_LIST} ${where} ORDER BY ${SORTS[sort].replace(/\{o\}/g, order)} LIMIT 500`).all()).results;
   return json({ puzzles: rows.map((r) => listRow(r, s && s.id)) });
 }
 
 export async function onRequestPost({ request, env }) {
-  if (!sameOrigin(request, env)) return json({ error: "origin" }, 403);
-  const s = await readSession(request, env);
-  if (!s) return json({ error: "auth" }, 401);
+  const who = await caller(request, env, { write: true });
+  if (who.error) return who.error;
+  const { s } = who;
   const blocked = await limit(env, request, "publish", { max: 10, windowSec: 3600, id: s.id });
   if (blocked) return blocked;
   const d = await db(env);

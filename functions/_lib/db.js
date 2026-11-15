@@ -9,7 +9,9 @@
  *   ratings   one row per player and puzzle (1–5 stars; a new rating replaces the old one)
  *   plays     one row per player (an account id, or "anon:<browser id>") and puzzle; `solved` once they fulfilled it
  *   rate_limits  one row per key (endpoint + account or hashed address) and time window; swept hourly (ratelimit.js)
- *   errors    the last client-side errors the app reported (api/report.js); rows older than 14 days are swept
+ *   errors    the last client-side errors the app reported (api/report.js); rows older than 30 days are swept
+ *   account_seen  one row per account that signed in to anything: when it was last seen (noted once a day). An account not seen
+ *             for 12 months is deleted (functions/_lib/retention.js)
  */
 import { json } from "./auth.js";
 
@@ -36,7 +38,20 @@ const SCHEMA = [
   "CREATE INDEX IF NOT EXISTS rate_limits_until ON rate_limits (until)",
   "CREATE TABLE IF NOT EXISTS errors (id INTEGER PRIMARY KEY AUTOINCREMENT, at INTEGER NOT NULL, route TEXT NOT NULL, build TEXT NOT NULL, message TEXT NOT NULL, stack TEXT NOT NULL, kind TEXT NOT NULL)",
   "CREATE INDEX IF NOT EXISTS errors_at ON errors (at)",
+  "CREATE TABLE IF NOT EXISTS account_seen (id TEXT PRIMARY KEY, at INTEGER NOT NULL)",
+  "CREATE INDEX IF NOT EXISTS account_seen_at ON account_seen (at)",
 ];
+
+/** Client error reports are kept this long (api/report.js, retention.js). */
+export const ERRORS_KEEP_DAYS = 30;
+const SEEN_EVERY_MS = 24 * 3600 * 1000;
+/** The statement that notes an account was seen at `now` (epoch ms): written at most once a day per account. */
+export const seenStatement = (d, id, now) =>
+  d.prepare("INSERT INTO account_seen (id, at) VALUES (?1, ?2) ON CONFLICT (id) DO UPDATE SET at = excluded.at WHERE account_seen.at <= excluded.at - ?3").bind(id, now, SEEN_EVERY_MS);
+/** Notes that the signed-in account `id` was seen now. Never fails the request it rides on. (`env.NOW`, a function, is the tests' clock: a binding, never request data.) */
+export async function seen(env, id, now = typeof env.NOW === "function" ? env.NOW() : Date.now()) {
+  try { const d = await db(env); if (d) await seenStatement(d, id, now).run(); } catch { /* the next visit notes it */ }
+}
 
 /** Columns added after the first release: a database made before them gets them on first use (CREATE TABLE IF NOT EXISTS skips an existing table). */
 const ADDED = { players: { reset: "INTEGER NOT NULL DEFAULT 0", excluded: "TEXT NOT NULL DEFAULT '[]'" } };

@@ -827,7 +827,7 @@ function CodenameModal({ onClose }) {
 }
 
 /* ═════════════════════════ LEGAL MODAL ═════════════════════════ */
-const LEGAL_SECTIONS = 10; // ui.legal.s1.h / ui.legal.s1.p … ui.legal.s10.*
+const LEGAL_SECTIONS = 17; // ui.legal.s1.h / ui.legal.s1.p … ui.legal.s17.* (1-7 the terms, 8-16 privacy, 17 copyright)
 
 /** The terms and privacy text: the sign-in pop-up (LegalModal) and the /legal page (ShadokuPages.jsx LegalPage) show the same. */
 export function LegalText() {
