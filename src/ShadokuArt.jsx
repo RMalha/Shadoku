@@ -23,7 +23,7 @@
  */
 import React, { useId } from "react";
 import { useText, tEn } from "./i18n.js";
-import { kitFace, kitItems, kitSvg } from "./avatarKit.js"; // the Flow-redrawn art: portraits, corpse and props
+import { kitFace, kitItems, kitSvg, tint } from "./avatarKit.js"; // the Flow-redrawn art: portraits, corpse and props
 import { useAvatarKit } from "./avatarKitLoad.js";
 import { KitCorpse, DummyCorpse, CORPSE_BODIES } from "./corpseArt.jsx";
 import { PortraitPic, PropArt, propArtOf } from "./propArt.jsx";
@@ -8493,13 +8493,28 @@ export function SuspectFigure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
 }
 
 /**
- * A Syndicate assassin (S. H. Adow, O. B. Scuro, P. H. Obia, Q. U. Yet, R. E. Aper) or Master U. M. Bra from the avatar kit, in
- * the look's own palette (`pal`). The kit's line work is drawn near-black and keeps its colour, so the assassins' shadow
- * palette is lifted a step (a slate skin, dark clothes) for the lines to read; the Master keeps his warm colours. The sweater
- * or shirt under a blazer takes `pal.shirt`, the neckwear `pal.tie`. Blank while the kit loads; Figure where it cannot load.
+ * A Syndicate assassin (S. H. Adow, O. B. Scuro, P. H. Obia, Q. U. Yet, R. E. Aper) or Master U. M. Bra from the avatar kit.
+ * The assassins are a shadow in one tone, as the SVG art drew them: the kit's drawing in greys is passed through a duotone
+ * (NOIR_FILTER: its near-black line work turns slate, every fill a dark navy, lighter parts a little lighter), and only the
+ * neckwear keeps its colour (`pal.tie`, drawn outside the filter), and coloured shades on the beach. The Master (`lifted`)
+ * keeps his own colours in a palette lifted a step so the kit's line work reads, with brass spectacles. Blank while the kit
+ * loads; Figure where it cannot load.
  */
 const shadowCache = new Map();
 const lum = (h) => { const v = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); return 0.299 * v[0] + 0.587 * v[1] + 0.114 * v[2]; };
+// the duotone: grey level -> colour, as [level, "#rrggbb"] stops (the kit's ink is about 0.11, its fills are drawn at the levels below)
+const NOIR_STOPS = [[0, "#6a78a6"], [0.15, "#5d6a94"], [0.24, "#0b0c13"], [0.42, "#151827"], [0.56, "#1f2335"], [0.75, "#2b3047"], [1, "#3c4462"]];
+const NOIR_FILTER = (() => {
+  const N = 41, ch = (k) => Array.from({ length: N }, (_, i) => {
+    const x = i / (N - 1), j = Math.max(1, NOIR_STOPS.findIndex(([l]) => l >= x));
+    const [l0, c0] = NOIR_STOPS[j - 1], [l1, c1] = NOIR_STOPS[Math.min(j, NOIR_STOPS.length - 1)];
+    const t = l1 > l0 ? (x - l0) / (l1 - l0) : 0, a = parseInt(c0.slice(1 + 2 * k, 3 + 2 * k), 16), b = parseInt(c1.slice(1 + 2 * k, 3 + 2 * k), 16);
+    return ((a + (b - a) * t) / 255).toFixed(3);
+  }).join(" ");
+  return `<filter id="avk-noir" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="table" tableValues="${ch(0)}"/><feFuncG type="table" tableValues="${ch(1)}"/><feFuncB type="table" tableValues="${ch(2)}"/></feComponentTransfer></filter>`;
+})();
+// the levels each part is drawn at before the duotone (skin the reference navy, clothes and hat near black, hair a step lighter)
+const NOIR_GREYS = { skin: "#8f8f8f", hair: "#b0b0b0", hat: "#5a5a5a", clothes: "#626262", frame: "#4a4a4a" };
 export function ShadowFigure({ look, sw = 3.2, zoom = 1, cy = 140 }) {
   const kit = useAvatarKit();
   if (kit === false || !look || !look.pal) return <Figure look={look} sw={sw} zoom={zoom} cy={cy} />;
@@ -8507,16 +8522,39 @@ export function ShadowFigure({ look, sw = 3.2, zoom = 1, cy = 140 }) {
   const key = JSON.stringify(look);
   let s = shadowCache.get(key);
   if (s == null) {
-    const p = look.pal, shadow = lum(p.ink || INK) > 0.25; // the assassins draw in slate; the Master in ink
-    const c = shadow
-      ? { skin: "#4a5376", hair: mix(p.hair || "#2a2f48", 0.18), hat: "#262a3a", clothes: "#1d2030", frame: p.frame === "#05060a" ? "#14151d" : p.frame }
-      : { skin: p.skin, hair: p.hair, hat: p.hat || "#1a1a22", clothes: p.clothes, frame: p.frame };
-    const base = { ...c, accent: p.shirt || c.clothes }, neck = { ...c, accent: p.tie || CRIMSON };
+    const p = look.pal, noir = lum(p.ink || INK) > 0.25 && !look.lifted; // the assassins draw in slate; the Master is lifted
     const ids = kitItems(look, look.hat !== "none" && hidesHair(look.hat));
-    const ti = ids.findIndex((id) => id.startsWith("tie-"));
     const face = kitFace(kit, { ...look, gender: look.gender });
-    s = ti < 0 ? kitSvg(kit, ids, base, face)
-      : kitSvg(kit, ids.slice(0, ti), base, face) + kitSvg(kit, [ids[ti]], neck) + kitSvg(kit, ids.slice(ti + 1), base);
+    if (noir) {
+      const g = { ...NOIR_GREYS, accent: "#8a8a8a" };
+      // drawn in colour, over the shadow: the neckwear, and shades with a coloured frame (the beach's red ones)
+      const coloured = (id) => id.startsWith("tie-") || (id.startsWith("glasses-") && lum(p.frame || "#000000") > 0.2);
+      let out = `<defs>${NOIR_FILTER}</defs>`, run = [];
+      const flush = () => { if (run.length) out += `<g filter="url(#avk-noir)">${kitSvg(kit, run, g, run.some((id) => id.startsWith("base")) ? face : "")}</g>`; run = []; };
+      for (const id of ids) {
+        if (!coloured(id) || !kit.items[id]) { run.push(id); continue; }
+        flush();
+        // path by path, in the item's own order: only its coloured paths skip the shadow (a tie's white collar, its outline and
+        // the lenses of the shades go dark with the rest)
+        const main = id.startsWith("tie-") ? p.tie || CRIMSON : p.frame;
+        let mode = null, buf = "";
+        const done = () => { if (buf) out += mode === "n" ? `<g filter="url(#avk-noir)">${buf}</g>` : buf; buf = ""; };
+        for (const [role, v, d] of kit.items[id]) {
+          const m = role === "k" ? "n" : "c";
+          if (m !== mode) { done(); mode = m; }
+          buf += `<path fill="${role === "k" ? v : tint(main, v)}" d="${d}"/>`;
+        }
+        done();
+      }
+      flush();
+      s = out;
+    } else {
+      const c = { skin: "#4a5376", hair: mix(p.hair || "#2a2f48", 0.18), hat: "#262a3a", clothes: "#1d2030", frame: p.frame };
+      const base = { ...c, accent: p.shirt || c.clothes }, neck = { ...c, accent: p.tie || CRIMSON };
+      const ti = ids.findIndex((id) => id.startsWith("tie-"));
+      s = ti < 0 ? kitSvg(kit, ids, base, face)
+        : kitSvg(kit, ids.slice(0, ti), base, face) + kitSvg(kit, [ids[ti]], neck) + kitSvg(kit, ids.slice(ti + 1), base);
+    }
     if (shadowCache.size > 60) shadowCache.clear();
     shadowCache.set(key, s);
   }
@@ -8898,7 +8936,7 @@ export const ASSASSINS = {
   P: { name: "P. H. Obia", tie: "#ee6fae", look: assassinLook({ gender: "f", hairStyle: "straight02", hairLength: "long", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#ee6fae", hair: "#1d2138" }) },
   Q: { name: "Q. U. Yet", tie: "#3f86e6", look: assassinLook({ gender: "m", hairStyle: "shortCurly", hairLength: "short", hairColor: "black" }, { tie: "#3f86e6", hair: "#58628f" }) },
   M: { name: "U. M. Bra", badge: "U", tie: BRASS, look: { ...ADOW_LOOK, gender: "m", hairStyle: "theCaesarAndSidePart", hairLength: "short", hairColor: "grey", glassesStyle: "round", glasses: true, hat: "none", facialHair: "beardMajestic", tie: "bowtie", eyes: "squint", brows: "raisedExcitedNatural",
-    pal: { ...ADOW_LOOK.pal, tie: CRIMSON, hair: "#7b84a6", frame: "#0a0b11" } } },
+    lifted: true, pal: { ...ADOW_LOOK.pal, tie: CRIMSON, hair: "#7b84a6", frame: BRASS } } }, // lifted: his own colours (ShadowFigure), brass spectacles
   R: { name: "R. E. Aper", tie: "#f0c53a", look: assassinLook({ gender: "f", hairStyle: "curvy", hairLength: "long", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#f0c53a", hair: "#4a3558" }) },
   // N. O. Ir: the Master's second in command, the target of "The Uninvited Guests". Hooded, face in shadow (HoodedFigure), no gender shown.
   N: { name: "N. O. Ir", badge: "N", tie: "#9aa0b8", hooded: true },
