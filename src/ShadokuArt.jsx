@@ -26,7 +26,7 @@ import { useText, tEn } from "./i18n.js";
 import { kitFace, kitItems, kitSvg, tint } from "./avatarKit.js"; // the Flow-redrawn art: portraits, corpse and props
 import { useAvatarKit } from "./avatarKitLoad.js";
 import { KitCorpse, DummyCorpse, CORPSE_BODIES } from "./corpseArt.jsx";
-import { PortraitPic, PropArt, propArtOf } from "./propArt.jsx";
+import { DummyPic, PortraitPic, PropArt, propArtOf } from "./propArt.jsx";
 
 /* ---- Prop classes (V10): mirror of engine/shadoku_catalog.py -------------------------------------
  *   TALL   nobody stands on it · blocks sight                       (tree, TV, tall safe, dumpster)
@@ -8457,7 +8457,10 @@ export function composeLook(look, sw = 4.2, { lashes: withLashes = true, headOnl
  */
 export function Figure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
   const k = (96 / 280) * zoom;
-  if (look && look.dummy) return <g transform={`translate(48 48) scale(${k}) translate(-140 ${-cy})`} dangerouslySetInnerHTML={{ __html: dummySvg(look.dummyColor, sw) }} />;
+  if (look && look.dummy) { // the Flow-redrawn bust of its colour (src/dummyArt), the SVG dummy while it loads or where it cannot
+    const svg = <g dangerouslySetInnerHTML={{ __html: dummySvg(look.dummyColor, sw) }} />;
+    return <g transform={`translate(48 48) scale(${k}) translate(-140 ${-cy})`}>{look.dummyName ? <DummyPic name={look.dummyName} fallback={svg} /> : svg}</g>;
+  }
   return <g transform={`translate(48 48) scale(${k}) translate(-140 ${-cy})`} dangerouslySetInnerHTML={{ __html: composeLook(look || {}, sw) }} />;
 }
 

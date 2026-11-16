@@ -65,3 +65,24 @@ export function PortraitPic({ name, fallback = null }) {
   }, [name]);
   return src ? <image href={src} x="0" y="0" width="96" height="96" preserveAspectRatio="none" /> : fallback;
 }
+
+const dummies = new Map(), dummyWait = new Map(); // colour name -> { box, src } | false
+function loadDummy(name) {
+  if (!dummyWait.has(name)) dummyWait.set(name, import(`./dummyArt/${name}.json`).then((m) => dummies.set(name, m.default || m)).catch(() => dummies.set(name, false)));
+  return dummyWait.get(name);
+}
+/**
+ * A crash-test dummy's bust redrawn by Flow (src/dummyArt/<colour name>.json, scripts/avatar-kit/dummies.mjs), placed in the
+ * 280 x 280 avataaar space where ShadokuArt.jsx dummySvg draws; `fallback` (that SVG) until it loads or where it cannot.
+ */
+export function DummyPic({ name, fallback = null }) {
+  const [pic, setPic] = useState(() => dummies.get(name));
+  useEffect(() => {
+    let live = true;
+    loadDummy(name).then(() => live && setPic(dummies.get(name)));
+    return () => { live = false; };
+  }, [name]);
+  if (!pic) return fallback;
+  const [x, y, w, h] = pic.box;
+  return <image href={pic.src} x={x} y={y} width={w} height={h} preserveAspectRatio="none" />;
+}
