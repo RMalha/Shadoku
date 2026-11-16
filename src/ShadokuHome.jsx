@@ -1640,7 +1640,8 @@ svg{direction:ltr}
 .sh-env:focus-visible{box-shadow:0 0 0 3px var(--sh-brass)}
 .sh-env-lift{transition:transform .25s ease,filter .25s ease;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5))}
 .sh-env:hover:not(.opening) .sh-env-lift,.sh-env:focus-visible .sh-env-lift{transform:translateY(-10px);filter:drop-shadow(0 28px 24px rgba(0,0,0,.55))}
-.sh-env-stage{position:relative;width:100%;aspect-ratio:480/420;perspective:1200px}
+.sh-env-stage{position:relative;width:100%;aspect-ratio:480/420}
+.sh-env.opening:not(.ready) .sh-env-stage{perspective:1200px} /* 3D only while the flap swings: under a perspective Chrome draws the seal, the Polaroid and their shadows at a lower resolution (blurry); shut or fully open, the flap looks the same flat */
 /* the landing page's envelope while its contract is not fulfilled: a slow brass glow behind the usual shadow */
 .sh-env.glow .sh-env-lift{animation:shEnvGlow 2.4s ease-in-out infinite}
 @keyframes shEnvGlow{0%,100%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 14px rgba(240,185,74,.55)) drop-shadow(0 0 38px rgba(217,155,38,.4))}50%{filter:drop-shadow(0 18px 18px rgba(0,0,0,.5)) drop-shadow(0 0 26px rgba(255,205,96,.95)) drop-shadow(0 0 70px rgba(240,170,50,.75))}}
@@ -1674,9 +1675,9 @@ svg{direction:ltr}
 .sh-flap{position:absolute;inset:0;z-index:4;pointer-events:none;transform-origin:50% 35.714%;transform-style:preserve-3d}
 .sh-flap-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .sh-flap-in{transform-origin:50% 35.714%;transform:rotateX(180deg)}
-.sh-seal{position:absolute;z-index:5;left:50%;top:71.43%;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5));transition:filter .25s}
-.sh-env:hover:not(.opening) .sh-seal,.sh-env:focus-visible .sh-seal{filter:drop-shadow(0 0 12px rgba(217,155,38,.95)) drop-shadow(0 0 26px rgba(200,62,59,.8));animation:shGlow 1.4s ease-in-out infinite}
-.sh-env.tone-obsidian:hover:not(.opening) .sh-seal,.sh-env.tone-obsidian:focus-visible .sh-seal{filter:drop-shadow(0 0 12px rgba(240,242,248,.95)) drop-shadow(0 0 26px rgba(150,160,190,.75))}
+.sh-seal{position:absolute;z-index:5;left:50%;top:71.43%;width:15%;aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 3px 4px rgba(0,0,0,.5));transition:filter .25s;--sh-glow-a:rgba(217,155,38,.95);--sh-glow-b:rgba(200,62,59,.8)}
+.sh-env.tone-obsidian .sh-seal{--sh-glow-a:rgba(240,242,248,.95);--sh-glow-b:rgba(150,160,190,.75)}
+.sh-env:hover:not(.opening) .sh-seal,.sh-env:focus-visible .sh-seal{filter:drop-shadow(0 0 12px var(--sh-glow-a)) drop-shadow(0 0 26px var(--sh-glow-b));animation:shGlow 1.4s ease-in-out infinite} /* the glow pulses, the wax stays opaque */
 .sh-seal-half{position:absolute;inset:0}.sh-seal-half svg{width:100%;height:100%;display:block}
 .sh-seal-l{clip-path:inset(0 50% 0 0)}.sh-seal-r{clip-path:inset(0 0 0 50%)}
 .sh-crack{position:absolute;inset:0;width:100%;height:100%;opacity:0}
@@ -1687,8 +1688,7 @@ svg{direction:ltr}
 .sh-env.opening .sh-card{animation:shCard 420ms 430ms cubic-bezier(.2,.8,.2,1) forwards}
 .sh-env.pre .sh-seal-l,.sh-env.pre .sh-seal-r{animation:none;opacity:0}.sh-env.pre .sh-crack{animation:none;opacity:0}
 .sh-env.pre .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}.sh-env.pre .sh-card{animation:none;transform:translateY(-93%)}
-/* Once open, the card leaves the 3D scene: under a perspective, or held by a finished animation, Chrome draws its shadowed seal and Polaroid at a lower resolution (blurry). The flap at 180deg looks the same flat. */
-.sh-env.ready .sh-env-stage,.sh-env.pre .sh-env-stage{perspective:none}
+/* Once open, the card is no longer held by its finished animation: Chrome draws a held layer's shadowed seal and Polaroid at a lower resolution (blurry). */
 @media (prefers-reduced-motion:no-preference){.sh-env.ready .sh-card:not(.sh-card-2){animation:none;transform:translateY(-93%)}}
 .sh-env-cq.mini.opened .sh-env-stage{margin-top:9cqw}
 .sh-env-skip{margin:14px 0 0;text-align:center;font-size:14px}.sh-env-skip .sh-link{color:var(--sh-muted)}.sh-env-skip .sh-link:hover{color:var(--sh-cream)}
@@ -1703,7 +1703,7 @@ svg{direction:ltr}
 @keyframes shFlap{0%{transform:rotateX(0);z-index:4}49%{z-index:4}50%{z-index:1}100%{transform:rotateX(180deg);z-index:1}}
 @keyframes shCard{0%{transform:translateY(0)}100%{transform:translateY(-93%)}}
 @keyframes shCard2{0%{transform:translateY(0)}100%{transform:translate(8%,-167%) rotate(3deg)}}
-@keyframes shGlow{0%,100%{opacity:1}50%{opacity:.82}}
+@keyframes shGlow{0%,100%{filter:drop-shadow(0 0 12px var(--sh-glow-a)) drop-shadow(0 0 26px var(--sh-glow-b))}50%{filter:drop-shadow(0 0 7px var(--sh-glow-a)) drop-shadow(0 0 16px var(--sh-glow-b))}}
 @keyframes shPulse{0%,100%{transform:scale(.86);opacity:.75}50%{transform:scale(1.12);opacity:1}}
 @keyframes shBlink{50%{opacity:.15}}
 
