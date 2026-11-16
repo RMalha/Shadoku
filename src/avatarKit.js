@@ -5,7 +5,8 @@
  * The kit is in the 280×280 frame of the suspects' portraits (ShadokuArt.jsx Figure), so the same crops apply. Each item
  * is a list of [role, value, d] in paint order: "k" = drawn in `value` (a colour); "t" = the item's chosen colour, `value`
  * being the path's shade in [-1, 1] (below 0 darker, above 0 lighter); "u" = the same for the item's second colour (the
- * T-shirt under the overall). Plain JS (no React) so the build's preview can use it too.
+ * T-shirt under the overall); "o" = as "t", with a thin rim in a dark tone of the colour (the wire of the round glasses, which
+ * has no ink outline of its own). Plain JS (no React) so the build's preview can use it too.
  */
 
 const hex2rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
@@ -48,6 +49,9 @@ export function kitFace(kit, look) {
   return part("mouth", look.mouth, "default") + part("eyes", look.eyes, "default") + part("brows", look.brows, "defaultNatural") + extra;
 }
 
+/** The rim of an "o" path: its shade against the path's own fill, and its width in frame units (half of it shows, outside the path). */
+const RIM_SHADE = -0.55, RIM_W = 1.4;
+
 /** Hats that hide the ears: the base is drawn without them and the hat's notch is filled in its colour. */
 const EARS_HIDDEN = new Set(["hijab", "winterHat1"]);
 
@@ -70,8 +74,10 @@ export function kitItems(look, hides) {
 
 /** The portrait as SVG markup in the 280 frame. `colors`: { skin, hair, hat, clothes, accent, frame } as hex; `face`: markup drawn
  *  right over the base (the eyes, brows and mouth: kitFace). Under a hat the hair keeps only what lies below
- *  the hat's edge (kit.clip; the same id for the same hat, so repeated portraits share an identical clip path). */
-export function kitSvg(kit, ids, colors, face = "") {
+ *  the hat's edge (kit.clip; the same id for the same hat, so repeated portraits share an identical clip path).
+ *  `paint(id, role, v, fill)`, if given, may return another fill for a path (the assassins' shadow, ShadokuArt.jsx ShadowFigure);
+ *  `fill` is the colour the kit would use. */
+export function kitSvg(kit, ids, colors, face = "", paint = null) {
   const slot = { base: colors.skin, hair: colors.hair, facialHair: colors.hair, hat: colors.hat, clothing: colors.clothes, tie: colors.accent, glasses: colors.frame };
   const hat = (ids.find((id) => /^hat-[A-Za-z0-9]+$/.test(id)) || "").slice(4);
   const cut = hat && kit.clip && kit.clip[hat] ? `avk-hat-${hat}` : null;
@@ -82,8 +88,10 @@ export function kitSvg(kit, ids, colors, face = "") {
       const main = slot[id.split("-")[0]];
       let paths = "";
       for (const [role, v, d] of item) {
-        const fill = role === "k" ? v : tint(role === "u" ? colors.accent : main || "#808080", v);
-        paths += `<path fill="${fill}" d="${d}"/>`;
+        const own = role === "k" ? v : tint(role === "u" ? colors.accent : main || "#808080", v);
+        const fill = (paint && paint(id, role, v, own)) || own;
+        const rim = role === "o" ? ` stroke="${tint(fill, RIM_SHADE)}" stroke-width="${RIM_W}" stroke-linejoin="round" paint-order="stroke"` : "";
+        paths += `<path fill="${fill}"${rim} d="${d}"/>`;
       }
       out += cut && id.startsWith("hair-") ? `<g clip-path="url(#${cut})">${paths}</g>` : paths;
     }
