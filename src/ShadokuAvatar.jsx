@@ -1,18 +1,20 @@
 /**
  * ShadokuAvatar.jsx — the avatar card on /profile (ShadokuPages.jsx ProfileInfo).
  *
- * Three choices: S. H. Adow (the default), "your own agent" (a portrait built from the suspects' kit in ShadokuArt.jsx: face, hair,
- * hat, glasses, clothes and backdrop, each option drawn as a small portrait) or the Google / GitHub account picture. Saving calls
+ * Three choices: S. H. Adow (the default), "your own agent" (a portrait from the avatar kit, AvatarFigure.jsx: skin, hair, hat,
+ * glasses, clothes and backdrop, each option drawn as a small portrait; the eyes, brows and mouth are the suspects' kit's) or the
+ * Google / GitHub account picture. Saving calls
  * useAuth().setAvatar (src/auth.js → functions/api/avatar.js); the code format is src/avatarLook.js. Strings: ui.avatar.*.
  */
 import React, { useMemo, useState } from "react";
 import { useLang, useAuth, AvatarArt, AVATAR_CROP } from "./ShadokuHome.jsx";
 import {
-  fixLook, deriveLook, Figure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW, HAIR_META, hairList, hatList, genderOk, clothingOk,
+  deriveLook, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW, HAIR_META, hairList, hatList, genderOk, clothingOk,
   SKIN, HAIR_HEX, HAIR_COLORS, HAT_COLORS, FRAME_COLORS, CLOTH, ACCENTS, SUSPECT_COLORS,
   EYES, BROWS, MOUTHS, BEARDS, TIES, TIE_GENDER, GLASSES, CLOTHING,
 } from "./ShadokuArt.jsx";
-import { encodeLook, decodeLook } from "./avatarLook.js";
+import { AvatarFigure } from "./AvatarFigure.jsx";
+import { encodeLook, decodeLook, fixAvatarLook, avatarHatFits } from "./avatarLook.js";
 
 const idx = (list) => list.map((_, i) => i);
 const FRAMES = idx(FRAME_COLORS).filter((i) => FRAME_COLORS.indexOf(FRAME_COLORS[i]) === i); // the palette repeats its first colour
@@ -34,7 +36,7 @@ const TABS = {
     ["facialHair", "thumb", (L) => (L.gender === "m" ? BEARDS : [])],
   ],
   hat: [
-    ["hat", "thumb", (L) => ["none", ...hatList(L.gender)]],
+    ["hat", "thumb", (L) => ["none", ...hatList(L.gender).filter((h) => avatarHatFits(h, L.hairStyle))]], // only hats the hair fits under
     ["hatC", "swatch", (L) => (L.hat === "none" ? [] : idx(HAT_COLORS)), (v) => HAT_COLORS[v]],
   ],
   glasses: [
@@ -61,19 +63,19 @@ function withField(L, key, v) {
   if (key === "hairStyle") o.hairLength = v === "bald" ? "bald" : (HAIR_META[v] || [])[1] || "short";
   if (key === "hairStyle" && v !== "bald" && (!o.hairColor || o.hairColor === "none")) o.hairColor = "brown";
   if (key === "glassesStyle") o.glasses = v !== "none";
-  return fixLook(o);
+  return fixAvatarLook(o); // a hair the hat does not fit takes the hat off
 }
-const firstLook = (name) => deriveLook(name || "Agent", "A", "avatar", {});
+const firstLook = (name) => fixAvatarLook(deriveLook(name || "Agent", "A", "avatar", {}));
 function randomLook() {
   const L = deriveLook(Math.random().toString(36).slice(2), "A", "avatar", {});
-  return fixLook({ ...L, clothing: BEACH.has(L.clothing) ? "shirtCrewNeck" : L.clothing, back: SUSPECT_COLORS[Math.floor(Math.random() * SUSPECT_COLORS.length)] });
+  return fixAvatarLook({ ...L, clothing: BEACH.has(L.clothing) ? "shirtCrewNeck" : L.clothing, back: SUSPECT_COLORS[Math.floor(Math.random() * SUSPECT_COLORS.length)] });
 }
 
 function Portrait({ look, crop }) {
   const [zoom, cy] = crop || [TOKEN_ZOOM, TOKEN_CY];
   return (
     <svg viewBox="0 0 96 96" width="100%" height="100%" aria-hidden="true" focusable="false">
-      <rect width="96" height="96" fill={look.back} /><Figure look={look} zoom={zoom} cy={cy} sw={TOKEN_SW} />
+      <rect width="96" height="96" fill={look.back} /><AvatarFigure look={look} zoom={zoom} cy={cy} sw={TOKEN_SW} />
     </svg>
   );
 }
@@ -87,7 +89,7 @@ export function AvatarMaker() {
   const [look, setLook] = useState(() => decodeLook(saved) || firstLook(user && user.username));
   const [tab, setTab] = useState("face");
   const [status, setStatus] = useState(null); // "saving" | "saved" | "error"
-  const L = useMemo(() => fixLook(look), [look]);
+  const L = useMemo(() => fixAvatarLook(look), [look]);
   if (!user) return null;
   const choice = mode === "photo" ? "photo" : mode === "custom" ? encodeLook(L) : "";
   const dirty = choice !== saved;
@@ -118,6 +120,9 @@ export function AvatarMaker() {
       {mode === "photo" && <p className="sh-muted sm">{t("avatar.photoNote")}</p>}
       {mode === "custom" && (
         <div className="sh-avm-maker">
+          {/* the look being made, large and in sight while the options scroll */}
+          <div className="sh-avm-big" aria-hidden="true"><span className="sh-avm-disc"><Portrait look={L} crop={AVATAR_CROP} /></span></div>
+          <div className="sh-avm-edit">
           <div className="sh-avm-tabs" role="tablist" aria-label={t("avatar.custom")}>
             {Object.keys(TABS).map((k) => (
               <button key={k} type="button" role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>{t(`avatar.tab.${k}`)}</button>
@@ -149,6 +154,7 @@ export function AvatarMaker() {
               );
             })}
           </div>
+          </div>
         </div>
       )}
       <div className="sh-avm-actions">
@@ -166,10 +172,12 @@ const AVATAR_CSS = `
 .sh-avm-mode{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:104px;padding:10px 12px;border-radius:12px;border:1px solid var(--sh-line);background:#1a1a23;color:var(--sh-cream);font:600 13px 'Barlow',sans-serif;cursor:pointer}
 .sh-avm-mode.on{border-color:var(--sh-brass);box-shadow:0 0 0 1px var(--sh-brass) inset;background:rgba(217,155,38,.08)}
 .sh-avm-mode:focus-visible,.sh-avm-tabs button:focus-visible,.sh-avm-th:focus-visible,.sh-avm-sw:focus-visible{outline:2px solid var(--sh-brass);outline-offset:2px}
-.sh-avm-disc{box-sizing:border-box;height:120px;aspect-ratio:112/142;display:flex;flex-direction:column;align-items:center;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 4px rgba(0,0,0,.45);transform:rotate(-2deg)}
+.sh-avm-disc{box-sizing:border-box;height:150px;aspect-ratio:112/142;display:flex;flex-direction:column;align-items:center;background:#f5f0e6;border:1px solid #d8cfb8;border-radius:2px;box-shadow:1px 2px 4px rgba(0,0,0,.45);transform:rotate(-2deg)}
 .sh-avm-disc.adow{background:#2a2a33;border-color:#3b3b47}
 .sh-avm-disc svg,.sh-avm-disc img{display:block;width:86%;height:auto;aspect-ratio:1;margin-top:7%;object-fit:cover;background:#171a26}
-.sh-avm-maker{border-top:1px solid var(--sh-line);padding-top:12px;margin-top:4px}
+.sh-avm-maker{display:grid;grid-template-columns:minmax(200px,260px) minmax(0,1fr);gap:24px;align-items:start;border-top:1px solid var(--sh-line);padding-top:16px;margin-top:4px}
+.sh-avm-big{position:sticky;top:16px;display:flex;justify-content:center;padding:8px 0}
+.sh-avm-big .sh-avm-disc{height:auto;width:100%;max-width:240px}
 .sh-avm-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .sh-avm-tabs button{padding:6px 12px;border-radius:99px;border:1px solid var(--sh-line);background:transparent;color:var(--sh-cream);font:600 13px 'Barlow',sans-serif;cursor:pointer}
 .sh-avm-tabs button.on{background:var(--sh-brass);border-color:var(--sh-brass);color:#1a1408}
@@ -177,13 +185,14 @@ const AVATAR_CSS = `
 .sh-avm-row{margin-bottom:12px}
 .sh-avm-label{display:block;font:600 12px 'Barlow',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--sh-muted);margin-bottom:6px}
 .sh-avm-opts{display:flex;flex-wrap:wrap;gap:6px}
-.sh-avm-th{position:relative;width:52px;height:52px;padding:0;border-radius:10px;overflow:hidden;border:2px solid transparent;background:#171a26;cursor:pointer}
+.sh-avm-th{position:relative;width:72px;height:72px;padding:0;border-radius:10px;overflow:hidden;border:2px solid transparent;background:#171a26;cursor:pointer}
 .sh-avm-th svg{display:block}
 .sh-avm-th.on{border-color:var(--sh-brass)}
 .sh-avm-none{position:absolute;right:2px;top:0;font:700 14px 'Barlow',sans-serif;color:var(--sh-cream);text-shadow:0 1px 2px #000}
-.sh-avm-sw{width:30px;height:30px;border-radius:50%;border:2px solid rgba(245,240,230,.25);padding:0;cursor:pointer}
+.sh-avm-sw{width:38px;height:38px;border-radius:50%;border:2px solid rgba(245,240,230,.25);padding:0;cursor:pointer}
 .sh-avm-sw.on{border-color:var(--sh-cream);box-shadow:0 0 0 2px var(--sh-brass)}
 .sh-avm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:6px}
 .sh-avm-ok{color:var(--sh-green);font:600 14px 'Barlow',sans-serif}
-@media (max-width:480px){.sh-avm-mode{min-width:0;flex:1 1 0;padding:8px 6px}.sh-avm-disc{height:96px}.sh-avm-th{width:46px;height:46px}}
+@media (max-width:720px){.sh-avm-maker{grid-template-columns:1fr;gap:12px}.sh-avm-big{position:static;padding:0}.sh-avm-big .sh-avm-disc{max-width:200px}}
+@media (max-width:480px){.sh-avm-mode{min-width:0;flex:1 1 0;padding:8px 6px}.sh-avm-disc{height:120px}.sh-avm-th{width:58px;height:58px}.sh-avm-big .sh-avm-disc{max-width:170px}}
 `;

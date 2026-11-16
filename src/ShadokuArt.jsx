@@ -23,6 +23,10 @@
  */
 import React, { useId } from "react";
 import { useText, tEn } from "./i18n.js";
+import { kitFace, kitItems, kitSvg } from "./avatarKit.js"; // the Flow-redrawn art: portraits, corpse and props
+import { useAvatarKit } from "./avatarKitLoad.js";
+import { KitCorpse, DummyCorpse, CORPSE_BODIES } from "./corpseArt.jsx";
+import { PropArt, propArtOf } from "./propArt.jsx";
 
 /* ---- Prop classes (V10): mirror of engine/shadoku_catalog.py -------------------------------------
  *   TALL   nobody stands on it · blocks sight                       (tree, TV, tall safe, dumpster)
@@ -1126,7 +1130,34 @@ export function Bed({ len = 2, horizontal = false }) {
  *  the Master's household at the throat.
  *  `master` wins over `second`, `second` over `victim`; `dummy` wins over all.
  *  Top-down and flush like the other floor items, inked in OS, no shadow. Drawn on every board. */
-export function Corpse({ victim = "Victor", dummy = false, master = false, second = false, look = null } = {}) { // look: overrides of the victim's look (review sheets)
+export function Corpse(props = {}) {
+  const { victim = "Victor", dummy = false, master = false, second = false, look = null } = props;
+  const svg = <SvgCorpse {...props} />;
+  if (look) return svg; // a look override (review sheets) keeps the SVG corpse
+  if (master || second) { // their own redrawn corpses (CORPSE_MASTER, CORPSE_SECOND)
+    if (dummy) return svg;
+    const art = propArtOf("CORPSE", 1, 1, { variant: master ? "master" : "second" });
+    return art ? <PropArt art={art} fallback={svg} /> : svg;
+  }
+  if (dummy) return <DummyCorpse fallback={svg} />; // the tutorial's crash-test dummy, redrawn
+  return <VictimCorpse victim={victim} fallback={svg} />;
+}
+// a victim's trousers: a colour of their own (the corpse kit draws them khaki), from the name, so the same victim always wears the same
+const CORPSE_PANTS = ["#ae9a68", "#3d5a80", "#3a3a42", "#6b4a32", "#5e6b3a", "#8a8d94", "#2b3550", "#7a6a58"];
+/** The victim's corpse from the corpse kit (corpseArt.jsx): the body of their garment, their head, in their colours. */
+function VictimCorpse({ victim, fallback }) {
+  const F = fixLook(victimLook(victim));
+  const colors = {
+    skin: SKIN[(F.skin || 0) % SKIN.length], hair: HAIR_HEX[F.hairColor] || HAIR_HEX.none, hat: HAT_COLORS[(F.hatC || 0) % HAT_COLORS.length],
+    cloth: CLOTH[(F.cloth || 0) % CLOTH.length], accent: ACCENTS[(F.accent || 0) % ACCENTS.length], frame: FRAME_COLORS[(F.frameC || 0) % FRAME_COLORS.length],
+    pants: CORPSE_PANTS[hash(`${victim}/pants`) % CORPSE_PANTS.length],
+  };
+  colors.clothes = colors.cloth;
+  const body = CORPSE_BODIES.has(F.clothing) ? F.clothing : "shirtCrewNeck";
+  return <KitCorpse look={{ ...F, hidesHair: F.hat !== "none" && hidesHair(F.hat) }} colors={colors} body={body} fallback={fallback} />;
+}
+/** The SVG corpse: the dummy, review sheets, and every corpse while the kits load or where they cannot. */
+function SvgCorpse({ victim = "Victor", dummy = false, master = false, second = false, look = null } = {}) { // look: overrides of the victim's look (review sheets)
   const u = useUid();
   const M = !!master && !dummy;
   const N = !!second && !dummy && !M; // N. O. Ir, hooded
@@ -8067,9 +8098,13 @@ export const SPAN_SPRITES = {
  * draws its single-tile sprite ONCE, centred along the span and bottom-centre anchored (scaled by the span's
  * short side, so a 2 × 2 pool fills its box while a 1 × 2 sofa keeps its single-tile size).
  */
-export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second, flip = false }) {
+export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second, flip = false, svg = false }) {
   // `flip`: mirrored to face west (FACING animals beside a wall on their east side; a sofa down a column against its room's east wall)
-  if (flip) return <g transform={`translate(${64 * cw} 0) scale(-1 1)`}><PropSprite kind={kind} cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} victim={victim} dummy={dummy} master={master} second={second} /></g>;
+  if (flip) return <g transform={`translate(${64 * cw} 0) scale(-1 1)`}><PropSprite kind={kind} cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} victim={victim} dummy={dummy} master={master} second={second} svg={svg} /></g>;
+  // the Flow-redrawn picture (propArt.jsx), with this SVG sprite (`svg`) while it loads, where it cannot, and for any prop without
+  // one; the corpse draws its own (Corpse)
+  const art = !svg && kind !== "CORPSE" && propArtOf(kind, cw, ch, { cells });
+  if (art) return <PropArt art={art} fallback={<PropSprite kind={kind} cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} svg />} />;
   const Span = SPAN_SPRITES[kind];
   // `cells`: the object's tiles as offsets from its top-left cell (an L-shaped carpet runner is not its whole box)
   if (Span) return <Span cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} />;
@@ -8427,6 +8462,37 @@ export function Figure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
 }
 
 /**
+ * A suspect's (or the victim's) portrait from the Flow-redrawn avatar kit (avatarKit.js), same contract as Figure. The look keeps
+ * the game's rules (fixLook, and hidesHair for the hats that cover all hair), so the portrait shows exactly the traits the
+ * clues name; a look the kit cannot draw in full (an item it lacks), a crash-test dummy, or any look while the kit loads (blank)
+ * or where it cannot load (Figure) is drawn otherwise.
+ */
+const suspectCache = new Map();
+export function SuspectFigure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
+  const kit = useAvatarKit();
+  if (kit === false || !look || look.dummy) return <Figure look={look} sw={sw} zoom={zoom} cy={cy} />;
+  if (!kit) return null;
+  const L = fixLook(look), key = JSON.stringify(L);
+  let s = suspectCache.get(key);
+  if (s == null) {
+    const ids = kitItems(L, L.hat !== "none" && hidesHair(L.hat));
+    if (!ids.filter((id) => !id.endsWith("-back")).every((id) => kit.items[id])) s = false; // an item the kit lacks: the SVG portrait
+    else {
+      const colors = {
+        skin: SKIN[(L.skin || 0) % SKIN.length], hair: HAIR_HEX[L.hairColor] || HAIR_HEX.none, hat: HAT_COLORS[(L.hatC || 0) % HAT_COLORS.length],
+        clothes: CLOTH[(L.cloth || 0) % CLOTH.length], accent: ACCENTS[(L.accent || 0) % ACCENTS.length], frame: FRAME_COLORS[(L.frameC || 0) % FRAME_COLORS.length],
+      };
+      s = kitSvg(kit, ids, colors, kitFace(kit, L));
+    }
+    if (suspectCache.size > 600) suspectCache.clear();
+    suspectCache.set(key, s);
+  }
+  if (s === false) return <Figure look={look} sw={sw} zoom={zoom} cy={cy} />;
+  const k = (96 / 280) * zoom;
+  return <g transform={`translate(48 48) scale(${k}) translate(-140 ${-cy})`} dangerouslySetInnerHTML={{ __html: s }} />;
+}
+
+/**
  * A crash-test dummy, drawn in the same 280×280 space as the avataaars (head centre ≈ 132,104): a smooth featureless head with the two
  * quartered target discs for eyes, a flat mouth, neck rings and a chest seam. `color` is the body colour; the tutorial gives every suspect a different one.
  */
@@ -8743,7 +8809,7 @@ export function SuspectPolaroid({ name, id = "A", look, tilt, size = 120, tag = 
           <rect width="96" height="96" fill={bg} style={{ fill: bg, transition: "fill .7s ease" }} />
           <clipPath id={pid}><rect width="96" height="96" /></clipPath>
           <circle cx="48" cy="46" r="40" fill="#fff" fillOpacity={placed ? 0.22 : 0.07} style={{ fillOpacity: placed ? 0.22 : 0.07, transition: "fill-opacity .7s ease" }} />
-          <g clipPath={`url(#${pid})`}><Figure look={lk} /></g>
+          <g clipPath={`url(#${pid})`}><SuspectFigure look={lk} /></g>
           <rect width="96" height="96" fill="#565c6c" pointerEvents="none" style={{ opacity: placed ? 0 : 0.34, transition: "opacity .7s ease" }} />
           <rect width="96" height="96" fill="none" stroke="#000" strokeOpacity=".18" />
         </g>
@@ -9266,7 +9332,7 @@ export function TokenAvatar({ cx, cy, r = 19, look, id, uid }) {
       <circle cx={cx} cy={cy} r={r + 2.2} fill={INK} />
       <g clipPath={`url(#${cid})`}>
         <g transform={`translate(${cx - r} ${cy - r}) scale(${s})`}>
-          <rect width="96" height="96" fill={look.back} /><Figure look={look} zoom={TOKEN_ZOOM} cy={TOKEN_CY} sw={TOKEN_SW} />
+          <rect width="96" height="96" fill={look.back} /><SuspectFigure look={look} zoom={TOKEN_ZOOM} cy={TOKEN_CY} sw={TOKEN_SW} />
         </g>
       </g>
       <circle cx={cx} cy={cy} r={r} fill="none" stroke={CREAM} strokeWidth="1.6" />

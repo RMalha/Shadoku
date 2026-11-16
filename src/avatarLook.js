@@ -8,7 +8,24 @@
  *
  * Ranking rows and community cards carry the resolved form: "", an https URL, or an "L:" code.
  */
-import { fixLook, HAIR_META, SUSPECT_COLORS } from "./ShadokuArt.jsx";
+import { fixLook, genderOk, HAIR_META, HAT_META, SUSPECT_COLORS } from "./ShadokuArt.jsx";
+import AVATAR_HATS from "./avatarHats.json"; // made with the avatar kit (scripts/avatar-kit/build.mjs): which hair fits under which hat
+
+/** Whether the avatar kit draws `hair` under `hat` cleanly (no hair above or beside the hat). The suspects' kit has its own rule. */
+export function avatarHatFits(hat, hair) {
+  if (!hat || hat === "none" || !hair || hair === "bald" || AVATAR_HATS.hides.includes(hat)) return true;
+  return (AVATAR_HATS.fit[hat] || []).includes(hair);
+}
+/** Whether the avatar kit draws no hair at all under `hat`. */
+export const avatarHatHides = (hat) => AVATAR_HATS.hides.includes(hat);
+/** fixLook for an avatar: the same repairs, but the hat follows the avatar kit's rule (avatarHatFits) instead of the suspects'
+ *  kit's, so a hair chosen in the maker is never swapped; a hat that does not fit the hair is taken off. */
+export function fixAvatarLook(L) {
+  const hat = L && L.hat;
+  const o = fixLook({ ...L, hat: "none" });
+  if (hat && hat !== "none" && HAT_META[hat] && genderOk(HAT_META[hat][0], o.gender) && avatarHatFits(hat, o.hairStyle)) o.hat = hat;
+  return o;
+}
 
 export const LOOK_FIELDS = ["gender", "skin", "hairStyle", "hairColor", "hat", "hatC", "glassesStyle", "frameC", "facialHair", "tie", "accent", "clothing", "cloth", "eyes", "brows", "mouth", "back"];
 const NUMERIC = new Set(["skin", "hatC", "frameC", "accent", "cloth", "back"]);
@@ -16,7 +33,7 @@ export const AVATAR_RE = /^(|photo|L:[A-Za-z0-9.]{1,200})$/; // the server check
 
 /** A look (ShadokuArt fixLook shape; `back` is an index into SUSPECT_COLORS) → "L:…". */
 export function encodeLook(L) {
-  const f = fixLook(L);
+  const f = fixAvatarLook(L);
   const back = Math.max(0, SUSPECT_COLORS.indexOf(f.back));
   return `L:${LOOK_FIELDS.map((k) => (k === "back" ? back : NUMERIC.has(k) ? f[k] || 0 : String(f[k] || "none"))).join(".")}`;
 }
@@ -29,7 +46,7 @@ export function decodeLook(code) {
   o.back = SUSPECT_COLORS[o.back % SUSPECT_COLORS.length];
   o.hairLength = o.hairStyle === "bald" ? "bald" : (HAIR_META[o.hairStyle] || [])[1] || "short";
   o.glasses = o.glassesStyle !== "none";
-  return fixLook(o);
+  return fixAvatarLook(o);
 }
 
 /** What <Avatar> draws for a player: "" (S. H. Adow), an https picture URL, or an "L:" code. `user`: { avatar, avatarUrl }. */

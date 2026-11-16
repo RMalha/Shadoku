@@ -26,8 +26,9 @@ import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
 import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, DAILIES, dailyShelves, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, Figure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
+import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
 import { avatarOf, decodeLook } from "./avatarLook.js";
+import { AvatarFigure } from "./AvatarFigure.jsx";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
@@ -705,13 +706,13 @@ export function Avatar({ user, round = false }) {
 }
 /** The avatar's crop [zoom, cy] for Figure: head, whole hat and shoulders, like the suspects' Polaroids (the board token's face crop cut the hat and clothes). */
 export const AVATAR_CROP = [1, 144];
-/** The avatar's drawing in a 96×96 SVG: the portrait on its backdrop, or S. H. Adow. `crop`: [zoom, cy] (default AVATAR_CROP). */
+/** The avatar's drawing in a 96×96 SVG: the portrait (the avatar kit, AvatarFigure.jsx) on its backdrop, or S. H. Adow. `crop`: [zoom, cy] (default AVATAR_CROP). */
 export function AvatarArt({ code, look = null, crop = AVATAR_CROP }) {
   const L = look || decodeLook(code);
   const [zoom, cy] = crop;
   return (
     <svg viewBox="0 0 96 96" width="100%" height="100%" focusable="false">
-      {L ? <ArtBoundary fallback={<AdowFigure zoom={zoom} cy={cy} sw={5.6} />}><rect width="96" height="96" fill={L.back} /><Figure look={L} zoom={zoom} cy={cy} sw={TOKEN_SW} /></ArtBoundary> : <AdowFigure zoom={zoom} cy={cy} sw={5.6} />}
+      {L ? <ArtBoundary fallback={<AdowFigure zoom={zoom} cy={cy} sw={5.6} />}><rect width="96" height="96" fill={L.back} /><AvatarFigure look={L} zoom={zoom} cy={cy} sw={TOKEN_SW} /></ArtBoundary> : <AdowFigure zoom={zoom} cy={cy} sw={5.6} />}
     </svg>
   );
 }
