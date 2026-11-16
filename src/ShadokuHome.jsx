@@ -1654,7 +1654,7 @@ svg{direction:ltr}
 .sh-card-head .k{color:var(--sh-crimson);min-width:0;text-align:start;overflow-wrap:anywhere}.sh-card-head .i{min-width:0;text-align:end;overflow-wrap:anywhere}
 .sh-card-seal{width:7.4cqw;height:7.4cqw;filter:drop-shadow(0 .3cqw .5cqw rgba(0,0,0,.4))}.sh-card-seal>*{display:block;width:100%;height:100%}
 .sh-card-body{display:flex;gap:3cqw;align-items:center;flex:1;min-height:0}
-.sh-card-pol{width:19cqw;flex:none;transform:rotate(-4deg);filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto}
+.sh-card-pol{width:19cqw;flex:none;filter:drop-shadow(0 .4cqw 1cqw rgba(0,0,0,.4))}.sh-card-pol>*{display:block;width:100%;height:auto;transform:rotate(-4deg)} /* the shadow on the upright box, the tilt on the picture: a filter on a rotated box is drawn flat, then turned, and blurs */
 .sh-env.ready .sh-card{pointer-events:auto}
 /* two cards: the second (locked) one rises higher behind the first and fans out to the right, so its header and stamp show */
 .sh-env-cq.two.opened .sh-env-stage{margin-top:44cqw}
@@ -1687,6 +1687,9 @@ svg{direction:ltr}
 .sh-env.opening .sh-card{animation:shCard 420ms 430ms cubic-bezier(.2,.8,.2,1) forwards}
 .sh-env.pre .sh-seal-l,.sh-env.pre .sh-seal-r{animation:none;opacity:0}.sh-env.pre .sh-crack{animation:none;opacity:0}
 .sh-env.pre .sh-flap{animation:none;transform:rotateX(180deg);z-index:1}.sh-env.pre .sh-card{animation:none;transform:translateY(-93%)}
+/* Once open, the card leaves the 3D scene: under a perspective, or held by a finished animation, Chrome draws its shadowed seal and Polaroid at a lower resolution (blurry). The flap at 180deg looks the same flat. */
+.sh-env.ready .sh-env-stage,.sh-env.pre .sh-env-stage{perspective:none}
+@media (prefers-reduced-motion:no-preference){.sh-env.ready .sh-card:not(.sh-card-2){animation:none;transform:translateY(-93%)}}
 .sh-env-cq.mini.opened .sh-env-stage{margin-top:9cqw}
 .sh-env-skip{margin:14px 0 0;text-align:center;font-size:14px}.sh-env-skip .sh-link{color:var(--sh-muted)}.sh-env-skip .sh-link:hover{color:var(--sh-cream)}
 .sh-env-prompt.go{opacity:1;color:var(--sh-cream);max-width:460px;margin-left:auto;margin-right:auto}
