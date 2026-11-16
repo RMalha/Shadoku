@@ -26,7 +26,7 @@ import { useText, tEn } from "./i18n.js";
 import { kitFace, kitItems, kitSvg } from "./avatarKit.js"; // the Flow-redrawn art: portraits, corpse and props
 import { useAvatarKit } from "./avatarKitLoad.js";
 import { KitCorpse, DummyCorpse, CORPSE_BODIES } from "./corpseArt.jsx";
-import { PropArt, propArtOf } from "./propArt.jsx";
+import { PortraitPic, PropArt, propArtOf } from "./propArt.jsx";
 
 /* ---- Prop classes (V10): mirror of engine/shadoku_catalog.py -------------------------------------
  *   TALL   nobody stands on it · blocks sight                       (tree, TV, tall safe, dumpster)
@@ -8493,6 +8493,38 @@ export function SuspectFigure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
 }
 
 /**
+ * A Syndicate assassin (S. H. Adow, O. B. Scuro, P. H. Obia, Q. U. Yet, R. E. Aper) or Master U. M. Bra from the avatar kit, in
+ * the look's own palette (`pal`). The kit's line work is drawn near-black and keeps its colour, so the assassins' shadow
+ * palette is lifted a step (a slate skin, dark clothes) for the lines to read; the Master keeps his warm colours. The sweater
+ * or shirt under a blazer takes `pal.shirt`, the neckwear `pal.tie`. Blank while the kit loads; Figure where it cannot load.
+ */
+const shadowCache = new Map();
+const lum = (h) => { const v = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255); return 0.299 * v[0] + 0.587 * v[1] + 0.114 * v[2]; };
+export function ShadowFigure({ look, sw = 3.2, zoom = 1, cy = 140 }) {
+  const kit = useAvatarKit();
+  if (kit === false || !look || !look.pal) return <Figure look={look} sw={sw} zoom={zoom} cy={cy} />;
+  if (!kit) return null;
+  const key = JSON.stringify(look);
+  let s = shadowCache.get(key);
+  if (s == null) {
+    const p = look.pal, shadow = lum(p.ink || INK) > 0.25; // the assassins draw in slate; the Master in ink
+    const c = shadow
+      ? { skin: "#4a5376", hair: mix(p.hair || "#2a2f48", 0.18), hat: "#262a3a", clothes: "#1d2030", frame: p.frame === "#05060a" ? "#14151d" : p.frame }
+      : { skin: p.skin, hair: p.hair, hat: p.hat || "#1a1a22", clothes: p.clothes, frame: p.frame };
+    const base = { ...c, accent: p.shirt || c.clothes }, neck = { ...c, accent: p.tie || CRIMSON };
+    const ids = kitItems(look, look.hat !== "none" && hidesHair(look.hat));
+    const ti = ids.findIndex((id) => id.startsWith("tie-"));
+    const face = kitFace(kit, { ...look, gender: look.gender });
+    s = ti < 0 ? kitSvg(kit, ids, base, face)
+      : kitSvg(kit, ids.slice(0, ti), base, face) + kitSvg(kit, [ids[ti]], neck) + kitSvg(kit, ids.slice(ti + 1), base);
+    if (shadowCache.size > 60) shadowCache.clear();
+    shadowCache.set(key, s);
+  }
+  const k = (96 / 280) * zoom;
+  return <g transform={`translate(48 48) scale(${k}) translate(-140 ${-cy})`} dangerouslySetInnerHTML={{ __html: s }} />;
+}
+
+/**
  * A crash-test dummy, drawn in the same 280×280 space as the avataaars (head centre ≈ 132,104): a smooth featureless head with the two
  * quartered target discs for eyes, a flat mouth, neck rings and a chest seam. `color` is the body colour; the tutorial gives every suspect a different one.
  */
@@ -8837,7 +8869,7 @@ export function AdowFigure({ sw = 3.2, zoom = 1, cy = 140, beach = false }) {
     <g>
       <rect width="96" height="96" fill="#171a26" />
       <circle cx="48" cy="46" r="40" fill={beach ? "#e0453f" : BRASS} fillOpacity={beach ? ".08" : ".1"} />
-      <Figure look={beach ? ADOW_BEACH : ADOW_LOOK} sw={sw} zoom={zoom} cy={cy} />
+      <ShadowFigure look={beach ? ADOW_BEACH : ADOW_LOOK} sw={sw} zoom={zoom} cy={cy} />
     </g>
   );
 }
@@ -8873,6 +8905,9 @@ export const ASSASSINS = {
 };
 /** N. O. Ir in the 96 × 96 photo: a slate cloak and a deep hood, the face lost in shadow but for two pale eyes, the Master's brass clasp at the throat. */
 export function HoodedFigure() {
+  return <PortraitPic name="noir" fallback={<HoodedSvg />} />; // redrawn (src/portraitArt/noir.json)
+}
+function HoodedSvg() {
   const u = useUid();
   return (
     <g>
@@ -8897,7 +8932,7 @@ export function AssassinFigure({ who = "S", sw = 3.2, zoom = 1, cy = 140 }) {
     <g>
       <rect width="96" height="96" fill="#171a26" />
       <circle cx="48" cy="46" r="40" fill={a.tie} fillOpacity=".12" />
-      <Figure look={a.look} sw={sw} zoom={zoom} cy={cy} />
+      <ShadowFigure look={a.look} sw={sw} zoom={zoom} cy={cy} />
     </g>
   );
 }

@@ -52,3 +52,16 @@ export function PropArt({ art, fallback = null }) {
   const img = <image href={src} x={c.x} y={c.y} width={c.w} height={c.h} preserveAspectRatio="none" />;
   return k === 1 && !dx && !dy ? img : <g transform={`translate(${dx} ${dy})${k !== 1 ? ` scale(${k})` : ""}`}>{img}</g>;
 }
+
+const portraits = new Map(), portraitWait = new Map();
+/** A portrait redrawn whole (src/portraitArt/<name>.json, scripts/avatar-kit/props.mjs) over a 96 x 96 photo box, or `fallback`. */
+export function PortraitPic({ name, fallback = null }) {
+  const [src, setSrc] = useState(() => portraits.get(name));
+  useEffect(() => {
+    let live = true;
+    if (!portraitWait.has(name)) portraitWait.set(name, import(`./portraitArt/${name}.json`).then((m) => portraits.set(name, (m.default || m).src)).catch(() => portraits.set(name, false)));
+    portraitWait.get(name).then(() => live && setSrc(portraits.get(name)));
+    return () => { live = false; };
+  }, [name]);
+  return src ? <image href={src} x="0" y="0" width="96" height="96" preserveAspectRatio="none" /> : fallback;
+}
