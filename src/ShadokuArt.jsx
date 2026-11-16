@@ -8495,8 +8495,10 @@ export function SuspectFigure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
 /**
  * A Syndicate assassin (S. H. Adow, O. B. Scuro, P. H. Obia, Q. U. Yet, R. E. Aper) or Master U. M. Bra from the avatar kit.
  * The assassins are a shadow in one tone, as the SVG art drew them. Each path of the kit is recoloured (shadowPaint) from its
- * level when the kit is drawn in greys (NOIR_GREYS): the near-black line work turns slate, the skin, hair and hat a dark navy
- * (NOIR_STOPS); the coat and the glasses are black, the shirt and the collar a dark navy, and only the neckwear keeps its colour
+ * level when the kit is drawn in greys (NOIR_GREYS): each item's silhouette (its first path, under the rest) is filled dark and
+ * stroked round in slate, one steady outline (the wide-brim hat, cut in a front and a back part, gets a ring traced round both,
+ * behind the figure: NOIR_RING), the kit's inner line work and hatching go a shade darker than the fill, and the skin and hat are a dark navy
+ * (NOIR_STOPS) and the hair the assassin's own dark tone (`pal.hair`), whose shading is pulled towards the part's own tone (NOIR_FLAT), so the fills read flat and clean; the coat and the glasses are black, the shirt and the collar a dark navy, and only the neckwear keeps its colour
  * (`pal.tie`), with coloured shades on the beach (`pal.frame`). The eyes, brows and mouth (raster) go through a duotone filter
  * whose line work stays near black. The Master (`lifted`) keeps his own colours in a palette lifted a step so the kit's line work reads, with the
  * same black coat and dark shirt, and brass spectacles. Blank while the kit loads; Figure where it cannot load.
@@ -8522,21 +8524,33 @@ const NOIR_GREYS = { skin: "#8f8f8f", hair: "#b0b0b0", hat: "#5a5a5a", clothes: 
 // black coat (and black glasses: frame, lenses and a dim glint), the shirt and collar in dark navies (by their drawn level)
 const NOIR = { coat: "#0b0c12", lens: "#050609", glint: "#343a52", shirt: ["#131521", "#1a1d2e", "#22263a"] };
 const INK_LEVEL = 0.15; // a kept colour darker than this is line work
+const NOIR_FLAT = 0.45; // how much of the kit's shading the shadow keeps (around each part's own tone)
+const NOIR_INNER = "#0a0b12"; // the kit's inner line work and hatching, inside the outline
+const NOIR_TONE = { base: "skin", hair: "hair", facialHair: "hair", hat: "hat" };
+// the silhouette: dark (no slate shows through the gaps between the kit's fills), stroked round in slate; not the wide-brim hat's,
+// cut in a front and a back part (a stroke would draw the seam): NOIR_RING outlines both at once
+const NOIR_LINE = "#5d6a94", NOIR_LINE_W = 3.6;
+const outline = (fill, id) => (id.startsWith("hat-hat") ? fill : { fill, line: NOIR_LINE, width: NOIR_LINE_W });
+const NOIR_RING = `<filter id="avk-ring" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="${NOIR_LINE_W / 2}" result="d"/><feComposite in="d" in2="SourceAlpha" operator="out" result="r"/><feFlood flood-color="${NOIR_LINE}"/><feComposite in2="r" operator="in"/></filter>`;
+const noirAt = (level) => "#" + noirRgb(level).map((v) => Math.round(v * 255).toString(16).padStart(2, "0")).join("");
 /** The recolouring of each kit path (kitSvg's `paint`): see ShadowFigure. `noir`: the assassins; else the Master. */
 function shadowPaint(p, noir) {
-  return (id, role, v, own) => {
+  return (id, role, v, own, k) => {
     const g = id.split("-")[0], l = lum(own), ink = role === "k" && l < INK_LEVEL;
     if (g === "tie" || g === "clothing") {
       if (role !== "k") return g === "tie" ? null : tint(NOIR.coat, v); // the neckwear in its colour, the garment black
-      if (ink) return noirOf(own); // slate line work, the Master's too (on a black coat his ink would not show)
+      if (ink) return k === 0 ? outline(tint(NOIR.coat, -0.4), id) : tint(NOIR.coat, -0.4); // the slate outline, the Master's too (on a black coat his ink would not show); inner lines dark
       return l < 0.3 ? tint(NOIR.coat, -0.3) : NOIR.shirt[l < 0.45 ? 0 : l < 0.7 ? 1 : 2]; // the coat's folds; the shirt, the collar
     }
     if (!noir) return null;
     if (g === "glasses") {
       if (role !== "k") return lum(p.frame || "#000000") > 0.2 ? null : tint(NOIR.coat, v); // the frame: black, or the beach's red
-      return ink ? noirOf(own) : l > 0.33 ? NOIR.glint : NOIR.lens;
+      return ink ? NOIR.lens : l > 0.33 ? NOIR.glint : NOIR.lens; // no slate outline round the glasses
     }
-    return noirOf(own);
+    if (ink) return k === 0 ? outline(NOIR_INNER, id) : NOIR_INNER;
+    const mid = lum(NOIR_GREYS[NOIR_TONE[g]] || NOIR_GREYS.hat);
+    if (NOIR_TONE[g] === "hair" && p.hair) return tint(p.hair, Math.max(-0.35, Math.min(0.06, (l - mid) * NOIR_FLAT)));
+    return noirAt(Math.max(0.26, mid + (l - mid) * NOIR_FLAT)); // never as dark as the line work: no slate specks in the fills
   };
 }
 export function ShadowFigure({ look, sw = 3.2, zoom = 1, cy = 140 }) {
@@ -8551,8 +8565,12 @@ export function ShadowFigure({ look, sw = 3.2, zoom = 1, cy = 140 }) {
     const face = kitFace(kit, look);
     const colors = noir ? { ...NOIR_GREYS, accent: p.tie || CRIMSON, frame: p.frame || NOIR_GREYS.frame }
       : { skin: "#4a5376", hair: mix(p.hair || "#2a2f48", 0.18), hat: "#262a3a", clothes: NOIR.coat, accent: p.tie || CRIMSON, frame: p.frame };
-    s = noir ? `<defs>${NOIR_FILTER}</defs>${kitSvg(kit, ids, colors, `<g filter="url(#avk-noir)">${face}</g>`, shadowPaint(p, true))}`
-      : kitSvg(kit, ids, colors, face, shadowPaint(p, false));
+    const paint = shadowPaint(p, noir), hf = noir ? `<g filter="url(#avk-noir)">${face}</g>` : face;
+    // the wide-brim hat: one slate ring round its back and front parts, behind everything (the head hides the straight edges
+    // its front part is cut with beside the face)
+    const ring = noir && ids.includes("hat-hat")
+      ? `<g filter="url(#avk-ring)">${["hat-hat-back", "hat-hat"].map((h) => (kit.items[h] ? `<path d="${kit.items[h][0][2]}"/>` : "")).join("")}</g>` : "";
+    s = (noir ? `<defs>${NOIR_FILTER}${ring ? NOIR_RING : ""}</defs>` : "") + ring + kitSvg(kit, ids, colors, hf, paint);
     if (shadowCache.size > 60) shadowCache.clear();
     shadowCache.set(key, s);
   }

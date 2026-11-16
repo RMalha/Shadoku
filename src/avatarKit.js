@@ -75,8 +75,9 @@ export function kitItems(look, hides) {
 /** The portrait as SVG markup in the 280 frame. `colors`: { skin, hair, hat, clothes, accent, frame } as hex; `face`: markup drawn
  *  right over the base (the eyes, brows and mouth: kitFace). Under a hat the hair keeps only what lies below
  *  the hat's edge (kit.clip; the same id for the same hat, so repeated portraits share an identical clip path).
- *  `paint(id, role, v, fill)`, if given, may return another fill for a path (the assassins' shadow, ShadokuArt.jsx ShadowFigure);
- *  `fill` is the colour the kit would use. */
+ *  `paint(id, role, v, fill, k)`, if given, may return another fill for a path (the assassins' shadow, ShadokuArt.jsx ShadowFigure);
+ *  `fill` is the colour the kit would use, `k` the path's place in its item (0: the item's silhouette, under the rest). It may also
+ *  return { fill, line, width }: the path then gets an outline in `line` round it (under its fill; `width` the stroke's, RIM_W * 2 by default). */
 export function kitSvg(kit, ids, colors, face = "", paint = null) {
   const slot = { base: colors.skin, hair: colors.hair, facialHair: colors.hair, hat: colors.hat, clothing: colors.clothes, tie: colors.accent, glasses: colors.frame };
   const hat = (ids.find((id) => /^hat-[A-Za-z0-9]+$/.test(id)) || "").slice(4);
@@ -87,10 +88,11 @@ export function kitSvg(kit, ids, colors, face = "", paint = null) {
     if (item) {
       const main = slot[id.split("-")[0]];
       let paths = "";
-      for (const [role, v, d] of item) {
+      for (const [k, [role, v, d]] of item.entries()) {
         const own = role === "k" ? v : tint(role === "u" ? colors.accent : main || "#808080", v);
-        const fill = (paint && paint(id, role, v, own)) || own;
-        const rim = role === "o" ? ` stroke="${tint(fill, RIM_SHADE)}" stroke-width="${RIM_W}" stroke-linejoin="round" paint-order="stroke"` : "";
+        const got = (paint && paint(id, role, v, own, k)) || own, fill = typeof got === "string" ? got : got.fill;
+        const line = typeof got === "string" ? (role === "o" ? tint(fill, RIM_SHADE) : null) : got.line;
+        const rim = line ? ` stroke="${line}" stroke-width="${typeof got === "string" ? RIM_W : got.width || RIM_W * 2}" stroke-linejoin="round" paint-order="stroke"` : "";
         paths += `<path fill="${fill}"${rim} d="${d}"/>`;
       }
       out += cut && id.startsWith("hair-") ? `<g clip-path="url(#${cut})">${paths}</g>` : paths;
