@@ -23,7 +23,8 @@ function avatarMarkup(kit, look, sw) {
       clothes: CLOTH[(L.cloth || 0) % CLOTH.length], accent: ACCENTS[(L.accent || 0) % ACCENTS.length],
       frame: FRAME_COLORS[(L.frameC || 0) % FRAME_COLORS.length],
     };
-    s = kitSvg(kit, kitItems(L, avatarHatHides(L.hat)), colors, kitFace(kit, L));
+    const hides = avatarHatHides(L.hat);
+    s = kitSvg(kit, kitItems(L, hides), colors, kitFace(kit, L, L.hat && L.hat !== "none" && hides ? null : colors.hair));
     if (markupCache.size > 400) markupCache.clear();
     markupCache.set(key, s);
   }

@@ -36,17 +36,32 @@ export function tint(color, shade) {
   return v;
 }
 
+/** The eyebrows' colour for a hair colour: the same hue, darker (no lighter than BROW_L), so blonde, red or grey hair gets
+ *  brows to match that still read on pale skin. */
+const BROW_L = 0.36;
+export function browColor(hair) {
+  const [h, s, l] = rgb2hsl(hex2rgb(hair));
+  return hsl2hex(h, s * 0.9, Math.min(l * 0.62, BROW_L));
+}
+
 /** The look's eyes, eyebrows and mouth from the kit's redrawn features (kit.face, cut by scripts/avatar-kit/face.mjs): raster
  *  parts laid where the suspects' kit draws the same styles. A style the kit lacks falls back to its default. A woman's
- *  eyes get lashes (kit.face.lashes, drawn the suspects' kit's way on the new eyes), painted over the brows. */
-export function kitFace(kit, look) {
+ *  eyes get lashes (kit.face.lashes: two flicks at each eye's outer corner, filled in the face's ink), painted over the brows.
+ *  `hair`: the hair's colour, which the brows take (browColor); without it (a hat that hides all the hair, so the brows must
+ *  not tell its colour; the assassins' shadow) they stay in the face's ink. */
+export function kitFace(kit, look, hair = null) {
   const f = kit.face || {};
   const lash = look.gender === "f" && f.lashes && f.lashes[look.eyes];
-  const extra = lash ? `<path d="${lash}" fill="none" stroke="#1d1b20" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>` : "";
+  const extra = lash ? `<path d="${lash}" fill="${f.ink || "#2c1c16"}"/>` : "";
   const part = (kind, style, fallback) => ((f[kind] && (f[kind][style] || f[kind][fallback])) || [])
     .map(([x, y, w, h, href]) => `<image x="${x}" y="${y}" width="${w}" height="${h}" href="${href}" preserveAspectRatio="none"/>`).join("");
+  let brows = part("brows", look.brows, "defaultNatural");
+  if (hair) { // the brows are one flat shape: flood it with their colour (the same id for the same colour, so repeats are identical)
+    const c = browColor(hair), id = `avk-brow-${c.slice(1)}`;
+    brows = `<defs><filter id="${id}" color-interpolation-filters="sRGB"><feFlood flood-color="${c}"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs><g filter="url(#${id})">${brows}</g>`;
+  }
   // the lashes go last, over the brows (a raised brow can reach them)
-  return part("mouth", look.mouth, "default") + part("eyes", look.eyes, "default") + part("brows", look.brows, "defaultNatural") + extra;
+  return part("mouth", look.mouth, "default") + part("eyes", look.eyes, "default") + brows + extra;
 }
 
 /** The rim of an "o" path: its shade against the path's own fill, and its width in frame units (half of it shows, outside the path). */

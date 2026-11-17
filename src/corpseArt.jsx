@@ -59,7 +59,7 @@ export function KitCorpse({ look, colors, body, fallback = null }) {
   const ids = kitItems({ ...look, clothing: "shirtless", tie: "none" }, look.hidesHair);
   const bi = ids.findIndex((id) => id === "base" || id === "base-noEars");
   const flat = ["default", "smile", "twinkle", "tongue", "eating"].includes(look.mouth || "default");
-  const face = kitFace(kit, { ...look, eyes: "xDizzy", mouth: flat ? "serious" : look.mouth, gender: "m" }); // no lashes: blots at this size
+  const face = kitFace(kit, { ...look, eyes: "xDizzy", mouth: flat ? "serious" : look.mouth, gender: "m" }, look.hidesHair ? null : colors.hair); // no lashes: blots at this size
   const head = `<g transform="scale(${s}) translate(-140 ${-HEAD_TOP})"><clipPath id="${uid}neck"><rect width="280" height="${cutY.toFixed(1)}"/></clipPath>`
     + `${kitSvg(kit, ids.slice(0, bi), colors)}<g clip-path="url(#${uid}neck)">${kitSvg(kit, [ids[bi]], colors, face)}</g>${kitSvg(kit, ids.slice(bi + 1), colors)}</g>`;
   const html = `<defs>${defs}</defs>${draw(pool)}${draw(layers)}${head}`;

@@ -8478,14 +8478,15 @@ export function SuspectFigure({ look, sw = 4.2, zoom = 1, cy = 140 }) {
   const L = fixLook(look), key = JSON.stringify(L);
   let s = suspectCache.get(key);
   if (s == null) {
-    const ids = kitItems(L, L.hat !== "none" && hidesHair(L.hat));
+    const hides = L.hat !== "none" && hidesHair(L.hat);
+    const ids = kitItems(L, hides);
     if (!ids.filter((id) => !id.endsWith("-back")).every((id) => kit.items[id])) s = false; // an item the kit lacks: the SVG portrait
     else {
       const colors = {
         skin: SKIN[(L.skin || 0) % SKIN.length], hair: HAIR_HEX[L.hairColor] || HAIR_HEX.none, hat: HAT_COLORS[(L.hatC || 0) % HAT_COLORS.length],
         clothes: CLOTH[(L.cloth || 0) % CLOTH.length], accent: ACCENTS[(L.accent || 0) % ACCENTS.length], frame: FRAME_COLORS[(L.frameC || 0) % FRAME_COLORS.length],
       };
-      s = kitSvg(kit, ids, colors, kitFace(kit, L));
+      s = kitSvg(kit, ids, colors, kitFace(kit, L, hides ? null : colors.hair)); // brows in the hair's colour, unless a hat hides it
     }
     if (suspectCache.size > 600) suspectCache.clear();
     suspectCache.set(key, s);
