@@ -8107,6 +8107,16 @@ export const SPAN_SPRITES = {
 export function PropSprite({ kind, cw = 1, ch = 1, len, horizontal, cells, victim, dummy, master, second, flip = false, svg = false }) {
   // `flip`: mirrored to face west (FACING animals beside a wall on their east side; a sofa down a column against its room's east wall)
   if (flip) return <g transform={`translate(${64 * cw} 0) scale(-1 1)`}><PropSprite kind={kind} cw={cw} ch={ch} len={len} horizontal={horizontal} cells={cells} victim={victim} dummy={dummy} master={master} second={second} svg={svg} /></g>;
+  // a footprint trail: the one-tile picture repeated on every tile, turned to run along the trail (the long cuts drew huge prints
+  // of another design; the author, 2026-11-16). Its prints walk up and to the right, 44.4 degrees off the vertical-to-the-right.
+  if (!svg && kind === "FOOTPRINTS" && cw * ch > 1 && (cw === 1 || ch === 1)) {
+    const one = propArtOf(kind, 1, 1);
+    if (one) {
+      const turn = ch === 1 ? 44.4 : -45.6, tiles = [];
+      for (let r = 0; r < ch; r++) for (let c = 0; c < cw; c++) tiles.push(<g key={`${r}-${c}`} transform={`translate(${64 * c} ${64 * r}) rotate(${turn} 32 32)`}><PropArt art={one} /></g>);
+      return <g>{tiles}</g>;
+    }
+  }
   // the Flow-redrawn picture (propArt.jsx), with this SVG sprite (`svg`) while it loads, where it cannot, and for any prop without
   // one; the corpse draws its own (Corpse)
   const art = !svg && kind !== "CORPSE" && propArtOf(kind, cw, ch, { cells });
