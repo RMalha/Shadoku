@@ -44,22 +44,21 @@ export function browColor(hair) {
   return hsl2hex(h, s * 0.9, Math.min(l * 0.62, BROW_L));
 }
 
-/** The look's eyes, eyebrows and mouth from the kit's redrawn features (kit.face, cut by scripts/avatar-kit/face.mjs): raster
- *  parts laid where the suspects' kit draws the same styles. A style the kit lacks falls back to its default. A woman's
- *  eyes get lashes (kit.face.lashes: two flicks at each eye's outer corner, filled in the face's ink), painted over the brows.
+/** The look's eyes, eyebrows and mouth from the kit's redrawn features (kit.face, cut by scripts/avatar-kit/face.mjs): traced
+ *  paths (["v", fill, d], fill "ink" = the face's ink), or a picture ([x, y, w, h, href]) for a soft-edged part, laid where the
+ *  suspects' kit draws the same styles. A style the kit lacks falls back to its default. A woman's eyes get lashes
+ *  (kit.face.lashes: two flicks at each eye's outer corner, filled in the face's ink), painted over the brows.
  *  `hair`: the hair's colour, which the brows take (browColor); without it (a hat that hides all the hair, so the brows must
  *  not tell its colour; the assassins' shadow) they stay in the face's ink. */
 export function kitFace(kit, look, hair = null) {
-  const f = kit.face || {};
+  const f = kit.face || {}, ink = f.ink || "#2c1c16";
   const lash = look.gender === "f" && f.lashes && f.lashes[look.eyes];
-  const extra = lash ? `<path d="${lash}" fill="${f.ink || "#2c1c16"}"/>` : "";
-  const part = (kind, style, fallback) => ((f[kind] && (f[kind][style] || f[kind][fallback])) || [])
-    .map(([x, y, w, h, href]) => `<image x="${x}" y="${y}" width="${w}" height="${h}" href="${href}" preserveAspectRatio="none"/>`).join("");
-  let brows = part("brows", look.brows, "defaultNatural");
-  if (hair) { // the brows are one flat shape: flood it with their colour (the same id for the same colour, so repeats are identical)
-    const c = browColor(hair), id = `avk-brow-${c.slice(1)}`;
-    brows = `<defs><filter id="${id}" color-interpolation-filters="sRGB"><feFlood flood-color="${c}"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs><g filter="url(#${id})">${brows}</g>`;
-  }
+  const extra = lash ? `<path d="${lash}" fill="${ink}"/>` : "";
+  const part = (kind, style, fallback, inkAs = ink) => ((f[kind] && (f[kind][style] || f[kind][fallback])) || [])
+    .map((p) => (p[0] === "v" ? `<path fill="${p[1] === "ink" ? inkAs : p[1]}" fill-rule="evenodd" d="${p[2]}"/>`
+      : `<image x="${p[0]}" y="${p[1]}" width="${p[2]}" height="${p[3]}" href="${p[4]}" preserveAspectRatio="none"/>`)).join("");
+  // the brows are one flat shape, in their colour
+  const brows = part("brows", look.brows, "defaultNatural", hair ? browColor(hair) : ink);
   // the lashes go last, over the brows (a raised brow can reach them)
   return part("mouth", look.mouth, "default") + part("eyes", look.eyes, "default") + brows + extra;
 }
@@ -70,12 +69,14 @@ const RIM_SHADE = -0.55, RIM_W = 1.4;
 /** Hats that hide the ears: the base is drawn without them and the hat's notch is filled in its colour. */
 const EARS_HIDDEN = new Set(["hijab", "winterHat1"]);
 
-/** The kit's item ids a look wears, in paint order. `hides`: the hat covers all the hair. The back of a hat (the wide brim
- *  hanging beside the face) comes first, behind the head and the hair; the hair is cut where the hat holds it (kitSvg). */
+/** The kit's item ids a look wears, in paint order. `hides`: the hat covers all the hair. The back of a hat (the brim's
+ *  underside) and of a garment (a blazer's collar round the neck) come first, behind the head and the hair (an id the kit
+ *  lacks is skipped); the hair is cut where the hat holds it (kitSvg). */
 export function kitItems(look, hides) {
   const hat = look.hat && look.hat !== "none" ? look.hat : null;
   const ids = [];
   if (hat) ids.push(`hat-${hat}-back`);
+  if (look.clothing && look.clothing !== "shirtless") ids.push(`clothing-${look.clothing}-back`); // a collar that goes behind the neck (only some garments have one)
   ids.push(hat && EARS_HIDDEN.has(hat) ? "base-noEars" : "base");
   if (look.clothing && look.clothing !== "shirtless") ids.push(`clothing-${look.clothing}`);
   if (look.hairStyle && look.hairStyle !== "bald" && !(hat && hides)) ids.push(`hair-${look.hairStyle}`);
