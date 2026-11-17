@@ -406,10 +406,10 @@ export function FloorDefs({ align = true, uid = "" }) { // uid: a board mounted 
         <path d="M8 6L18 10M40 30L52 26M20 46L30 52M50 58L58 54" stroke="#6b2d1c" strokeWidth="1.2" strokeOpacity=".6" strokeLinecap="round" />
       </>)}
       {P("salt", <>
-        <rect width="64" height="64" fill="#ece8df" />
-        {[[0, 0, 30, 22], [30, 0, 34, 26], [0, 22, 22, 24], [22, 22, 24, 20], [46, 26, 18, 22], [0, 46, 28, 18], [28, 42, 20, 22], [48, 48, 16, 16]].map(([x, y, w, h], i) =>
-          <rect key={i} x={x} y={y} width={w} height={h} fill={["#f4f1ea", "#e4dfd3", "#eeeadf", "#e9e5da"][i % 4]} stroke="#b9b3a3" strokeWidth="1" strokeOpacity=".8" />)}
-        {specks.map(([x, y], i) => <circle key={i} cx={x} cy={y} r=".7" fill="#fff" fillOpacity=".9" />)}
+        <rect width="64" height="64" fill="#f6f3ea" />
+        {["M0 0L22 -2L27 17L9 24L0 20Z", "M22 -2L64 0L64 14L44 20L27 17Z", "M0 20L9 24L16 46L0 52Z", "M9 24L27 17L44 20L40 40L16 46Z", "M44 20L64 14L64 38L52 44L40 40Z", "M0 52L16 46L24 64L0 64Z", "M16 46L40 40L52 44L46 64L24 64Z", "M52 44L64 38L64 64L46 64Z"].map((d, i) =>
+          <path key={i} d={d} fill={["#fbf9f3", "#efebe0", "#f8f5ed", "#f1ede2"][i % 4]} stroke="#cfc8b6" strokeWidth="1.3" strokeLinejoin="round" />)}
+        {specks.map(([x, y], i) => <circle key={i} cx={x} cy={y} r=".8" fill={i % 2 ? "#ffffff" : "#d8d1bf"} fillOpacity=".9" />)}
       </>)}
       {P("asphalt", <>
         <rect width="64" height="64" fill="#3a3c42" />
