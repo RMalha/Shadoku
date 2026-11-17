@@ -216,15 +216,15 @@ export const SUSPECT_COLORS = ["#f4a259", "#7cc6fe", "#c9a3e6", "#8fd694", "#f78
 /*  Floors: each room gets an architectural texture, picked by its name     */
 /* ---------------------------------------------------------------------- */
 export const INDOOR_FLOORS = ["parquet", "checker", "marble", "carpet", "stone", "slate", "terracotta"];
-export const FLOORS = [...INDOOR_FLOORS, "grass", "dirt", "sand", "boardwalk", "snow", "canyon", "asphalt", "cobble", "marsh"];
+export const FLOORS = [...INDOOR_FLOORS, "grass", "dirt", "sand", "boardwalk", "snow", "canyon", "salt", "asphalt", "cobble", "marsh"];
 export const FLOOR_LABEL = {
   parquet: "Parquet wood", checker: "Checker tile", marble: "Marble", carpet: "Carpet", stone: "Flagstone", slate: "Slate tile", terracotta: "Terracotta", water: "Open water",
-  grass: "Grass", dirt: "Tilled soil", sand: "Wind-rippled sand", boardwalk: "Boardwalk planks", snow: "Alpine snow", canyon: "Canyon rock", asphalt: "Asphalt", cobble: "Cobble pavers", marsh: "Marsh",
+  grass: "Grass", dirt: "Tilled soil", sand: "Wind-rippled sand", boardwalk: "Boardwalk planks", snow: "Alpine snow", canyon: "Canyon rock", salt: "Cracked salt crust", asphalt: "Asphalt", cobble: "Cobble pavers", marsh: "Marsh",
 };
 /** Biome floors, in the order the per-biome pools below hand them out. */
 export const BIOME_FLOORS = { MANSION: INDOOR_FLOORS, FARM: ["grass", "dirt", "boardwalk", "parquet", "stone", "slate"],
   BEACH: ["sand", "boardwalk", "stone", "slate", "grass", "terracotta", "parquet"], FOREST: ["grass", "dirt", "stone", "slate", "boardwalk", "parquet"],
-  MOUNTAINS: ["snow", "stone", "slate", "parquet", "boardwalk", "canyon"], DESERT: ["sand", "canyon", "stone", "terracotta", "grass", "carpet"],
+  MOUNTAINS: ["snow", "stone", "slate", "parquet", "boardwalk", "canyon"], DESERT: ["sand", "canyon", "stone", "terracotta", "grass", "carpet", "salt"],
   STREET: ["asphalt", "cobble", "slate", "stone", "checker", "parquet"],
   LINER: ["boardwalk", "parquet", "carpet", "checker", "slate", "marble"], CARNIVAL: ["dirt", "grass", "cobble", "boardwalk", "carpet", "sand"],
   OPERA: ["carpet", "parquet", "marble", "stone", "checker", "slate"], BAYOU: ["grass", "dirt", "marsh", "boardwalk"] };
@@ -244,7 +244,7 @@ export const BIOME_RULES = {
   BEACH: [[/tide|reef|rock/i, "slate"], [/cove|dune|sand|shore|beach|bay|lagoon/i, "sand"], [/lighthouse|ruin|fort/i, "stone"], [/shack|boardwalk|pier|dock|hut|cabana|boathouse/i, "boardwalk"]],
   FOREST: [[/clearing|meadow|glade/i, "grass"], [/creek|stream|river|pond|lake|brook/i, "slate"], [/grove|trail|camp|path/i, "dirt"], [/ruin|temple|tomb|fort|castle/i, "stone"]],
   MOUNTAINS: [[/ridge|summit|ledge|peak|slope|ice|cave/i, "snow"], [/cliff|trail/i, "stone"], [/station|hut|refuge|tower/i, "slate"]],
-  DESERT: [[/tent|caravan|bazaar|market/i, "carpet"], [/tomb|temple|ruin|pyramid|sphinx/i, "stone"], [/palm|garden/i, "grass"], [/dune|sand|oasis/i, "sand"], [/canyon|mesa|pass|gorge|rock|cliff/i, "canyon"]],
+  DESERT: [[/tent|caravan|bazaar|market/i, "carpet"], [/tomb|temple|ruin|pyramid|sphinx/i, "stone"], [/palm|garden|oasis/i, "grass"], [/salt/i, "salt"], [/dune|sand/i, "sand"], [/canyon|mesa|pass|gorge|rock|cliff/i, "canyon"]],
   STREET: [[/rooftop|roof|alley|crosswalk|crossing|road|street|lane|avenue|parking/i, "asphalt"], [/corner|plaza|sidewalk|square|market|newsstand|stand|courtyard/i, "cobble"], [/subway|station|metro|underpass/i, "slate"]],
   LINER: [[/deck|promenade/i, "boardwalk"], [/boiler|hold/i, "slate"], [/ballroom|bridge/i, "parquet"], [/galley/i, "checker"]],
   CARNIVAL: [[/big top|side show/i, "sand"], [/midway|wheel|cannon|menagerie/i, "dirt"], [/carousel|ring toss/i, "cobble"], [/mirror|ticket/i, "carpet"]],
@@ -267,7 +267,7 @@ export function floorOf(name, id, theme = "MANSION") {
 /** When two touching rooms want the same floor, the loser takes the closest-looking texture instead of an arbitrary one. */
 export const FLOOR_ALT = {
   grass: ["dirt", "stone", "slate"], dirt: ["grass", "boardwalk", "stone"], sand: ["boardwalk", "stone", "slate"], boardwalk: ["parquet", "dirt", "slate"],
-  snow: ["slate", "stone", "canyon"], canyon: ["sand", "stone", "terracotta"], asphalt: ["cobble", "slate", "stone"], cobble: ["asphalt", "stone", "slate"],
+  snow: ["slate", "stone", "canyon"], canyon: ["sand", "stone", "terracotta"], salt: ["sand", "stone", "slate"], asphalt: ["cobble", "slate", "stone"], cobble: ["asphalt", "stone", "slate"],
   stone: ["slate", "cobble"], slate: ["stone", "cobble"], parquet: ["boardwalk", "carpet"], checker: ["slate", "marble"],
 };
 export function assignFloors(p, geo) {
@@ -421,6 +421,12 @@ export function FloorDefs({ align = true, uid = "" }) { // uid: a board mounted 
         // a fine irregular mottle of wet ground and deep water (no big shapes, so the eye reads a surface and not a 64-unit lattice); each blob near an edge is repeated across it, so there is no seam
         const copies = (list, fill) => list.flatMap(([x, y, r, w], i) => [-64, 0, 64].flatMap((ox) => [-64, 0, 64].filter((oy) => x + ox + r * 1.4 > 0 && x + ox - r * 1.4 < 64 && y + oy + r * 1.4 > 0 && y + oy - r * 1.4 < 64).map((oy) => <path key={`${fill}${i}${ox}${oy}`} d={blob(x + ox, y + oy, r, w)} fill={fill} />)));
         const blob = (cx, cy, r, w) => {
+      {P("salt", <>
+        <rect width="64" height="64" fill="#ece8df" />
+        {[[0, 0, 30, 22], [30, 0, 34, 26], [0, 22, 22, 24], [22, 22, 24, 20], [46, 26, 18, 22], [0, 46, 28, 18], [28, 42, 20, 22], [48, 48, 16, 16]].map(([x, y, w, h], i) =>
+          <rect key={i} x={x} y={y} width={w} height={h} fill={["#f4f1ea", "#e4dfd3", "#eeeadf", "#e9e5da"][i % 4]} stroke="#b9b3a3" strokeWidth="1" strokeOpacity=".8" />)}
+        {specks.map(([x, y], i) => <circle key={i} cx={x} cy={y} r=".7" fill="#fff" fillOpacity=".9" />)}
+      </>)}
           const n = w.length, pts = w.map((v, i) => { const a = (i * 2 * Math.PI) / n; return [cx + r * v * Math.cos(a), cy + r * v * .82 * Math.sin(a)]; });
           const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], q = (p) => `${r2(p[0])} ${r2(p[1])}`;
           return `M${q(mid(pts[n - 1], pts[0]))}` + pts.map((p, i) => `Q${q(p)} ${q(mid(p, pts[(i + 1) % n]))}`).join("") + "Z";

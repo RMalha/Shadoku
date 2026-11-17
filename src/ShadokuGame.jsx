@@ -703,6 +703,8 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     out.forEach((it) => {
       it.rank = DRAW_RANK[geo.classOfKind(it.kind)] || 0; it.bottom = it.r + it.ch - 1;
       it.flip = FACING.has(it.kind) && it.cw === 1 && it.ch === 1 && shut(it.r, it.c, 1) && !shut(it.r, it.c, -1); // face away from a wall on the east
+      // walls on both sides: no way to face away, so the sprite shrinks until its head and tail stay inside the tile
+      it.squeeze = FACING.has(it.kind) && it.cw === 1 && it.ch === 1 && shut(it.r, it.c, 1) && shut(it.r, it.c, -1);
       // a sofa down a column has its back on the west: mirror it when the room's wall runs along its east side instead, so it faces into the room
       if (it.kind === "SOFA" && it.ch > it.cw) it.flip = it.cells.every(([r, c]) => edge(r, c, 1)) && !it.cells.every(([r, c]) => edge(r, c, -1));
     });
@@ -842,7 +844,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       {/* props by class: LOW (flush) first, then SHORT, then PERCH and TALL, each pass in reading order so upright props
           overlap correctly. A multi-tile object is ONE item drawn across its span (box origin = its top-left cell). */}
       {props.map((it) => (
-        <g key={`p${it.r}-${it.c}-${it.kind}`} transform={`translate(${X(it.c)} ${Y(it.r)})${+o.objSize ? ` translate(${it.cw * CELL / 2} ${it.ch * CELL / 2}) scale(${1 + +o.objSize}) translate(${-it.cw * CELL / 2} ${-it.ch * CELL / 2})` : ""}`} pointerEvents="none">
+        <g key={`p${it.r}-${it.c}-${it.kind}`} transform={`translate(${X(it.c)} ${Y(it.r)})${+o.objSize ? ` translate(${it.cw * CELL / 2} ${it.ch * CELL / 2}) scale(${1 + +o.objSize}) translate(${-it.cw * CELL / 2} ${-it.ch * CELL / 2})` : ""}${it.squeeze ? " translate(32 58) scale(.84) translate(-32 -58)" : ""}`} pointerEvents="none">
           <PropSprite kind={it.kind} cw={it.cw} ch={it.ch} len={it.len} horizontal={it.horizontal} cells={it.cells.map(([r, c]) => [r - it.r, c - it.c])} flip={it.flip} victim={victimNameOf(p)} dummy={victimIsDummy(p)} master={p.id === UMBRA_FINALE} second={p.id === UMBRA_HARD} />
         </g>
       ))}
