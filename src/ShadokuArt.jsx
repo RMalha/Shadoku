@@ -405,6 +405,12 @@ export function FloorDefs({ align = true, uid = "" }) { // uid: a board mounted 
         {[10, 26, 42, 58].map((y, i) => <path key={y} d={`M0 ${y}C12 ${y - 3} 24 ${y + 3} 36 ${y}S56 ${y - 3} 64 ${y}`} fill="none" stroke={["#c9704a", "#8e3f28", "#d98a5c", "#9c4a30"][i]} strokeWidth={i % 2 ? 3 : 4.5} strokeOpacity=".75" />)}
         <path d="M8 6L18 10M40 30L52 26M20 46L30 52M50 58L58 54" stroke="#6b2d1c" strokeWidth="1.2" strokeOpacity=".6" strokeLinecap="round" />
       </>)}
+      {P("salt", <>
+        <rect width="64" height="64" fill="#ece8df" />
+        {[[0, 0, 30, 22], [30, 0, 34, 26], [0, 22, 22, 24], [22, 22, 24, 20], [46, 26, 18, 22], [0, 46, 28, 18], [28, 42, 20, 22], [48, 48, 16, 16]].map(([x, y, w, h], i) =>
+          <rect key={i} x={x} y={y} width={w} height={h} fill={["#f4f1ea", "#e4dfd3", "#eeeadf", "#e9e5da"][i % 4]} stroke="#b9b3a3" strokeWidth="1" strokeOpacity=".8" />)}
+        {specks.map(([x, y], i) => <circle key={i} cx={x} cy={y} r=".7" fill="#fff" fillOpacity=".9" />)}
+      </>)}
       {P("asphalt", <>
         <rect width="64" height="64" fill="#3a3c42" />
         {specks.concat([[2, 30], [26, 4], [60, 24], [36, 46], [18, 26]]).map(([x, y], i) => <circle key={i} cx={x} cy={y} r={i % 3 ? .8 : 1.3} fill={i % 2 ? "#5b5e66" : "#26272b"} fillOpacity=".8" />)}
@@ -421,12 +427,6 @@ export function FloorDefs({ align = true, uid = "" }) { // uid: a board mounted 
         // a fine irregular mottle of wet ground and deep water (no big shapes, so the eye reads a surface and not a 64-unit lattice); each blob near an edge is repeated across it, so there is no seam
         const copies = (list, fill) => list.flatMap(([x, y, r, w], i) => [-64, 0, 64].flatMap((ox) => [-64, 0, 64].filter((oy) => x + ox + r * 1.4 > 0 && x + ox - r * 1.4 < 64 && y + oy + r * 1.4 > 0 && y + oy - r * 1.4 < 64).map((oy) => <path key={`${fill}${i}${ox}${oy}`} d={blob(x + ox, y + oy, r, w)} fill={fill} />)));
         const blob = (cx, cy, r, w) => {
-      {P("salt", <>
-        <rect width="64" height="64" fill="#ece8df" />
-        {[[0, 0, 30, 22], [30, 0, 34, 26], [0, 22, 22, 24], [22, 22, 24, 20], [46, 26, 18, 22], [0, 46, 28, 18], [28, 42, 20, 22], [48, 48, 16, 16]].map(([x, y, w, h], i) =>
-          <rect key={i} x={x} y={y} width={w} height={h} fill={["#f4f1ea", "#e4dfd3", "#eeeadf", "#e9e5da"][i % 4]} stroke="#b9b3a3" strokeWidth="1" strokeOpacity=".8" />)}
-        {specks.map(([x, y], i) => <circle key={i} cx={x} cy={y} r=".7" fill="#fff" fillOpacity=".9" />)}
-      </>)}
           const n = w.length, pts = w.map((v, i) => { const a = (i * 2 * Math.PI) / n; return [cx + r * v * Math.cos(a), cy + r * v * .82 * Math.sin(a)]; });
           const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], q = (p) => `${r2(p[0])} ${r2(p[1])}`;
           return `M${q(mid(pts[n - 1], pts[0]))}` + pts.map((p, i) => `Q${q(p)} ${q(mid(p, pts[(i + 1) % n]))}`).join("") + "Z";
