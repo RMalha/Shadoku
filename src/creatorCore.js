@@ -45,6 +45,7 @@ const bsList = (b) => { const out = []; for (let w = 0; w < b.length; w++) { let
 
 /* ───────────── geometry ───────────── */
 const DIRS = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+const WINDOW_SIDE = { N: [-1, 0], S: [1, 0], W: [0, -1], E: [0, 1] };
 
 export function geometry(d) {
   const R = d.rooms.length, C = d.rooms[0].length, N = R * C, W = words(N);
@@ -63,6 +64,16 @@ export function geometry(d) {
   (d.doors || []).forEach(([a, b]) => { if (Array.isArray(a) && Array.isArray(b) && inside(a[0], a[1]) && inside(b[0], b[1])) doorSet.add(edge(at(a[0], a[1]), at(b[0], b[1]))); });
   const isDoor = (a, b) => doorSet.has(edge(a, b));
   const isWall = (a, b) => room[a] !== room[b] && !isDoor(a, b);
+  // a window on an inside wall (engine Board.inner / blocks_sight): a "windows" entry [row, col, side] whose side faces another
+  // floor tile lets sight through that edge; for corners, doors and zones it is still a wall. The Workshop makes no windows.
+  const paneSet = new Set();
+  (Array.isArray(d.windows) ? d.windows : []).forEach((w) => {
+    const s = Array.isArray(w) ? WINDOW_SIDE[w[2]] : null;
+    if (!s || !inside(w[0], w[1]) || isVoid(w[0], w[1])) return;
+    const r1 = w[0] + s[0], c1 = w[1] + s[1];
+    if (inside(r1, c1) && !isVoid(r1, c1)) paneSet.add(edge(at(w[0], w[1]), at(r1, c1)));
+  });
+  const isWindow = (a, b) => paneSet.has(edge(a, b));
   const occ = new Uint8Array(N), occB = bsNew(W);
   for (let t = 0; t < N; t++) if (kind[t] !== "CORPSE" && cls[t] !== "TALL" && cls[t] !== "SHORT" && cls[t] !== "VOID") { occ[t] = 1; bsSet(occB, t); }
 
@@ -73,7 +84,7 @@ export function geometry(d) {
       let r0 = r, c0 = c;
       for (;;) {
         const r1 = r0 + dr, c1 = c0 + dc;
-        if (!inside(r1, c1) || isVoid(r1, c1) || isWall(at(r0, c0), at(r1, c1))) break;
+        if (!inside(r1, c1) || isVoid(r1, c1) || (isWall(at(r0, c0), at(r1, c1)) && !isWindow(at(r0, c0), at(r1, c1)))) break;
         const u = at(r1, c1);
         if (cls[u] === "TALL") break;
         seen.push(u); bsSet(b, u);
@@ -110,7 +121,7 @@ export function geometry(d) {
   for (let t = 0; t < N; t++) if (kind[t] === "CORPSE") corpse = t;
   const zoneIdx = (id) => (d.roomIds || []).indexOf(id);
   return {
-    R, C, N, W, at, rc, inside, room, kind, cls, occ, occB, vis, visB, cov, corner, atDoor, besideKinds, diag, corpse, isDoor, isWall, zoneIdx,
+    R, C, N, W, at, rc, inside, room, kind, cls, occ, occB, vis, visB, cov, corner, atDoor, besideKinds, diag, corpse, isDoor, isWall, isWindow, zoneIdx,
     seesCorpse: (t) => corpse >= 0 && bsHas(visB[t], corpse),
     seesOther: (t) => vis[t].some((u) => room[u] !== room[t]),
     bsNew: () => bsNew(W),

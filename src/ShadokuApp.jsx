@@ -59,7 +59,7 @@ import ShadokuHome, {
 } from "./ShadokuHome.jsx";
 import { AboutPage, ContactPage, LegalPage, DeleteAccountPage, AppGatePage, ProfilePage, TestUmbraPage, DIFF_ORDER } from "./ShadokuPages.jsx";
 import { PHONE_GATED } from "./platform.js";
-import ShadokuGame, { PUZZLES, DAILIES, PREVIEWS, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
+import ShadokuGame, { PUZZLES, DAILIES, PREVIEWS, previewShelves, dailyShelves, normalizePuzzles, readBestTimes, fmtTime, useMediaQuery } from "./ShadokuGame.jsx";
 import { MasterPolaroid, AssassinPolaroid } from "./ShadokuArt.jsx";
 import { localizeHead, trOf, dailyDate } from "./caseText.js";
 import { useProgressTick } from "./sync.js";
@@ -464,7 +464,7 @@ const currentPath = () => {
 /** "The Art of the Ghost" → "the-art-of-the-ghost" (accents folded, apostrophes dropped, anything else becomes a dash). */
 export const slugify = (s) => String(s || "").normalize("NFD").replace(/\p{M}+/gu, "").replace(/['’]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 /** The puzzle's address name: its title slug, or a daily contract's id (/play/daily-2026-11-03); the id is accepted too when reading a URL. */
-export const puzzleSlug = (q) => (q ? (q.daily ? q.id : slugify(q.title) || q.id) : "");
+export const puzzleSlug = (q) => (q ? (q.daily || /^lab-/.test(String(q.id)) ? q.id : slugify(q.title) || q.id) : ""); // a lab candidate in the dev previews is titled "lab": its id tells them apart
 /** /play/the-art-of-the-ghost → "the-art-of-the-ghost" · /play → "" */
 export const slugOfPath = (p) => {
   const m = /^\/play\/([^/]+)/.exec(normalise(p));
@@ -731,9 +731,19 @@ function DailyScreen({ go }) {
         {PREVIEWS.length > 0 && (
           <section className="sh-hub-group" aria-label={t("daily.previews")}>
             <h2 className="sh-hub-h"><span className="sh-hub-diff d-queue">{t("daily.previews")}</span></h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {PREVIEWS.map((q) => <button type="button" key={q.id} className="sh-btn ghost" onClick={() => go(`/play/${puzzleSlug(q)}`)}>{q.subtitle} · {q.id}</button>)}
-            </div>
+            {previewShelves().map(([name, items]) => (
+              <div key={name} style={{ marginBottom: 14 }}>
+                <h3 style={{ margin: "10px 0 6px", fontSize: 14, opacity: 0.8 }}>{name}</h3>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {items.map(({ q, size, tags }) => (
+                    <button type="button" key={q.id} className="sh-btn ghost" style={{ textAlign: "left", lineHeight: 1.35 }} title={q.id} onClick={() => go(`/play/${puzzleSlug(q)}`)}>
+                      {q.subtitle} · {size} · {q.difficulty}
+                      <span style={{ display: "block", fontSize: 12, opacity: 0.75 }}>{tags.length ? tags.join(", ") : "no new clue kind"} · {q.id}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
           </section>
         )}
       </main>

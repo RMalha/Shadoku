@@ -22,16 +22,21 @@
 const PH = /\{(\w+)(?:\|(\w+)(?::([^}]*))?)?\}/g;
 /** A sub-biome reads its door phrase from its parent biome (engine SUB_BIOME_DEFS). */
 const SUB_BIOME_PARENT = { LINER: "BEACH", CARNIVAL: "STREET", OPERA: "MANSION", BAYOU: "FOREST" };
-const SELF_KINDS = ["WITH_P", "TWO_P_ROOM", "NO_P_ROOM", "ALONE_WITH_P", "DIAG_P"];
+const SELF_KINDS = ["WITH_P", "TWO_P_ROOM", "NO_P_ROOM", "ALONE_WITH_P", "DIAG_P", "ALONE_WITH_TWO_P", "WALL_ZONE_P", "WALL_SHARE_P", "ALONE_WITH_P_CLS", "ALONE_WITH_TWO_P_CLS",
+  "WITH_P2", "ROW_P", "COL_P", "ALL_P", "TWO_P_BESIDE", "ZONE_P_ROW_HAS", "ZONE_P_COL_HAS", "ALONE_SIT"]; // second line: 2026-11-21, the people-in-the-area family
+// the company-count clues pick their template by the count: "with someone" (ONE), "with two other people" (TWO), "with at least ..." (MIN)
+const COUNT_KINDS = ["ALONE_WITH_N", "ALONE_WITH_PPL", "ALONE_WITH_N_CLS", "ALONE_WITH_PPL_CLS"];
 
 /** Param name → type (engine/shadoku_i18n.py PARAM_TYPES). */
 const TYPE = {};
 const typed = (t, names) => names.split(" ").forEach((n) => { TYPE[n] = t; });
-typed("SuspectRef", "suspect owner other partner pinned blocked x y subject clueOf");
+typed("SuspectRef", "suspect owner other partner pinned blocked x y subject clueOf self other2"); // self: the clue's own subject ({self|poss} "her area")
 typed("WhoRef", "who");
 typed("SuspectRefList", "suspects holders");
 typed("RoomId", "room room2");
 typed("RoomIdList", "rooms empty");
+typed("ZoneClassId", "zclass"); // a kind of area ("indoor area", "deck"): ZCLASS.<ID>.one / .many / .in
+typed("WaterId", "water"); // 2026-11-21: a board's water body ("the creek", "the pool"): WATER.<ID>.the / .noun
 typed("Coord", "coord");
 typed("CoordList", "coords common options");
 const MARKED_MAX = 3; // longer tile lists read "the marked tiles" (engine/shadoku_i18n.py MARKED_MAX)
@@ -44,14 +49,14 @@ function propObjects(d) {
   (d.contents || []).forEach((row, r) => row.forEach((k, c) => { if (k && !grouped.has(`${r},${c}`)) n[k] = (n[k] || 0) + 1; }));
   return n;
 }
-typed("PropId", "prop");
-typed("PropIdList", "lows");
+typed("PropId", "prop prop2");
+typed("PropIdList", "lows props");
 typed("TraitId", "trait");
 typed("SurfaceId", "surface");
 typed("Index", "index line from to");
 typed("IndexList", "lines");
 typed("Dir", "dir");
-typed("Int", "dist count n expected fits allows watch");
+typed("Int", "dist dist2 count n expected fits allows watch"); // dist2: the columns of a two-axis offset (OFF2_P)
 typed("Bool", "selfMatch");
 typed("Token", "said poll rule lead ban reason contra summary span src left body");
 typed("AtomToken", "atom");
@@ -70,7 +75,11 @@ class Ctx {
     this.ass = new Map((d.assassins || []).map((a) => [a.id, a]));
     this.rooms = new Map((d.roomIds || []).map((id, i) => [id, (d.roomNames || [])[i]]));
     this.objects = propObjects(d);
+    this.wording = d.wording || 1; // the case's wording generation (engine shadoku_board.WORDING): a case keeps the wording it was written with
   }
+  /** Wording 2 (the author, 2026-11-21: "any" only when the board holds more than one of a prop, else "the"): this case is written that way and holds one object of prop `k`. */
+  theOne(k) { return this.wording >= 2 && !!k && this.onlyOne(k); }
+  los(key) { return this.wording >= 3 && !!key && this.has(`${key}.LOS`) ? `${key}.LOS` : key; } // wording 3 (engine shadoku_i18n.los_key): "line of sight" where older cases say "sightline" / "stretch"
   /** The board holds exactly one object of prop `k` (a prop group: of all its kinds together): its clue reads "the fireplace". */
   onlyOne(k) { return (PROP_GROUPS[k] || [k]).reduce((s, x) => s + (this.objects[x] || 0), 0) === 1; }
   /** The template/word of `key`; throws when the locale lacks it (the caller falls back to the English in the JSON). */
@@ -153,6 +162,7 @@ function zoneFmt(ctx, f) {
 function pronoun(ctx, g, f) {
   const x = g === "m" || g === "f" ? g : "n";
   if (f === "obj") return ctx.T(`ui.fmt.pronounObj.${x}`);
+  if (f === "poss") return ctx.T(`ui.fmt.pronounPoss.${x}`); // 2026-11-21: "his / her / their" area
   return ctx.T(`${f === "Pronoun" ? "ui.fmt.pronounCap" : "ui.fmt.pronoun"}.${x}`);
 }
 
@@ -160,7 +170,7 @@ function fmtParam(key, val, f, arg, ctx, who) {
   const t = TYPE[key];
   if (t === "SuspectRef") {
     if (f == null) return ctx.name(val);
-    if (f === "pronoun" || f === "Pronoun" || f === "obj") return pronoun(ctx, ctx.gender(val), f);
+    if (f === "pronoun" || f === "Pronoun" || f === "obj" || f === "poss") return pronoun(ctx, ctx.gender(val), f);
     if (f === "clue") return renderClue(val, ctx, false);
     if (f === "gw") { // a word chosen by this person's gender: {owner|gw:ο:η:ο/η} (masculine:feminine:unknown)
       const [m, fe, n = m] = String(arg || "").split(":"), g = ctx.gender(val);
@@ -168,6 +178,10 @@ function fmtParam(key, val, f, arg, ctx, who) {
     }
   } else if (t === "WhoRef" && f == null) {
     return val === "ALL" ? ctx.T("ui.fmt.assassins") : ctx.name(val);
+  } else if (t === "ZoneClassId" && f) {
+    return ctx.T(`ZCLASS.${val}.${f}`);
+  } else if (t === "WaterId" && f) {
+    return ctx.T(`WATER.${val}.${f}`);
   } else if (t === "SuspectRefList") {
     const names = val.map((x) => ctx.name(x));
     if (f === "and") return ctx.andList(names);
@@ -198,6 +212,10 @@ function fmtParam(key, val, f, arg, ctx, who) {
     if (f && ctx.has(`PROP.${val}.${f}`)) return ctx.propForm(val, ctx.onlyOne(val) && ctx.has(`PROP.${val}.${f}_the`) ? `${f}_the` : f);
   } else if (t === "PropIdList" && f === "noun_or") {
     return ctx.orList(val.map((p) => ctx.propForm(p, "noun")));
+  } else if (t === "PropIdList" && f === "any_or") { // "any television, chair or fridge"; a kind the board holds one of reads "the": "the television, any chair or the fridge"
+    const any = (noun) => ctx.fmt("ui.fmt.anyProp", { noun });
+    if (!val.some((p) => ctx.onlyOne(p))) return any(ctx.orList(val.map((p) => ctx.propForm(p, "noun"))));
+    return ctx.orList(val.map((p) => (ctx.onlyOne(p) ? ctx.propForm(p, ctx.has(`PROP.${p}.the`) ? "the" : "a") : any(ctx.propForm(p, "noun")))));
   } else if (t === "TraitId" && f) {
     return ctx.T(`TRAIT.${val}.${f}`);
   } else if (t === "SurfaceId" && f == null) {
@@ -209,6 +227,7 @@ function fmtParam(key, val, f, arg, ctx, who) {
   } else if (t === "Int") {
     if (f == null) return String(val);
     if (f === "plural") { const [one, other] = arg.split(":"); return val === 1 ? one : other; }
+    if (f === "pick") return arg.split(":")[val - 1]; // 2026-11-20: the val-th form, 1-based ("one row:two rows:three rows:four rows")
   } else if (t === "Token" && f == null) {
     return render(val, ctx);
   } else if (t === "AtomToken" && f == null) {
@@ -236,10 +255,22 @@ function atomKey(tok, ctx, register = "ATOM") {
   const base = `${register}.${k}`;
   let v = null;
   if (k === "NOT_BESIDE" && p.prop === "CORPSE") v = "CORPSE";
+  else if (k === "NOT_BESIDE") v = ctx.theOne(p.prop) ? "ONE" : null;
   else if (k === "DOOR") v = SUB_BIOME_PARENT[ctx.theme] || ctx.theme;
-  else if (k === "EXACT_OFFSET") v = p.dir;
+  else if (k === "EXACT_OFFSET") v = p.dir + ((p.dist || 1) > 1 ? ".FAR" : "");
+  else if (k === "DARK_OFF" || k === "DARK_OFF_ONE") v = p.dir + (!p.dist ? ".ANY" : k === "DARK_OFF" && p.dist > 2 ? ".FAR" : "");
+  else if (k === "ROOM_DIR_SG" || k === "ROOM_DIR_P" || k === "OFF_PROP" || k === "OFF_SG" || k === "OFF_A") v = p.dir;
+  else if (k === "EDGE" || k === "ZONE_EDGE" || k === "OCT_OF" || k === "DIR_SAME_ROOM" || k === "ZONE_MOST") v = p.dir; // 2026-11-21, the position family: N / S / E / W, the last two also NE / NW / SE / SW
+  else if (k === "BANK_SIDE") v = p.dir; // 2026-11-21, water: "on the north side of the creek"
+  else if (k === "EDGE2") v = p.axis; // ROW / COLUMN
+  else if (k === "MIX_MF") v = p.trait; // MALE / FEMALE: "another man and a woman" / "a man and another woman"
+  else if (k === "OTHER_NOT_BESIDE") v = ctx.onlyOne(p.prop) ? "ONE" : null;
+  else if (k === "ROW_NOT_HAS" || k === "COL_NOT_HAS") v = ctx.onlyOne(p.prop) ? "ONE" : null; // the author, 2026-11-21: "the fireplace" when the board holds one, "any fireplace" otherwise
+  else if (k === "OFF_P" || k === "OFF2_P" || k === "OFF_ALONE_P") v = p.dir + (p.selfMatch ? ".SELF" : ""); // OFF2_P (2026-11-21): NE / NW / SE / SW
+  else if (k === "OFF_BESIDE" || k === "ZONE_DIR_EMPTY" || k === "ZONE_DIR_OCC") v = p.dir; // 2026-11-21, the pointer family
   else if (k === "ONLY_G_ROOM") v = p.trait;
   else if (SELF_KINDS.includes(k) && p.selfMatch) v = "SELF";
+  else if (COUNT_KINDS.includes(k)) v = p.atLeast ? "MIN" : p.count === 1 ? "ONE" : p.count === 2 ? "TWO" : null;
   else if (register === "HID" && k === "ON" && p.prop === "BED") v = "BED";
   return v != null && ctx.has(`${base}.${v}`) ? `${base}.${v}` : base;
 }
@@ -249,11 +280,16 @@ function renderAtom(tok, ctx, register = "ATOM") {
 }
 
 function globalKey(tok) {
+  if (tok.kind === "DARK_LINE") return `GLOBAL.DARK_LINE.${tok.params.axis}`; // the dark row / column house rule: ROW or COLUMN
   return tok.kind === "NO_TWO_IN_ROOM" ? `GLOBAL.NO_TWO_IN_ROOM.${tok.params.trait}` : `GLOBAL.${tok.kind}`;
 }
 
 function render(tok, ctx, elims) {
-  if (tok.templateKey) return fill(ctx.T(ctx.gKey(tok.templateKey, tok.who)), tok.params || {}, ctx, elims);
+  if (tok.templateKey) {
+    let key = ctx.los(tok.templateKey); // wording 3 first (KEY.LOS), as the engine does; then wording 2: a hint step that says "any piano" reads "the piano" on a board with one (STEP_*.ONE)
+    if (key.startsWith("STEP_") && ctx.theOne((tok.params || {}).prop) && ctx.has(`${key}.ONE`)) key += ".ONE";
+    return fill(ctx.T(ctx.gKey(key, tok.who)), tok.params || {}, ctx, elims);
+  }
   if (tok.subject) return renderAtom(tok, ctx);
   return fill(ctx.T(globalKey(tok)), tok.params || {}, ctx);
 }
@@ -261,6 +297,8 @@ function render(tok, ctx, elims) {
 function part(entry, atoms) {
   if (Number.isInteger(entry)) return atoms[entry];
   if (entry && entry.fuse === "ALONE_IN_ROOM") return { templateKey: "FUSED.ALONE_IN_ROOM", who: atoms[entry.atoms[0]].subject, params: { room: atoms[entry.atoms[0]].params.room } };
+  // "was alone in an area with a television": entry.atoms = [ZONE_HAS, ALONE]
+  if (entry && entry.fuse === "ALONE_ZONE_HAS") return { templateKey: "FUSED.ALONE_ZONE_HAS", who: atoms[entry.atoms[0]].subject, params: { prop: atoms[entry.atoms[0]].params.prop } };
   throw new Error("unknown clue part");
 }
 
@@ -296,16 +334,16 @@ export function caseRenderer(d, tr) {
     assassinClue: (a, fb) => attempt(() => renderAssassinClue(a.atoms, a.clueTokens, ctx), fb),
     globalRule: (g, fb) => attempt(() => render({ kind: g.kind, params: g.params }, ctx), fb),
     step: (st, fb) => attempt(() => render({ templateKey: st.i18n.templateKey, params: st.i18n.params }, ctx, st.elims), fb),
-    stepRule: (st, fb) => attempt(() => fill(ctx.T(st.i18n.ruleKey), {}, ctx), fb),
+    stepRule: (st, fb) => attempt(() => fill(ctx.T(ctx.los(st.i18n.ruleKey)), {}, ctx), fb),
     roomName: (id, fb) => attempt(() => ctx.roomName(id), fb),
-    ruleByKey: (key, fb) => attempt(() => fill(ctx.T(key), {}, ctx), fb),
+    ruleByKey: (key, fb) => attempt(() => fill(ctx.T(ctx.los(key)), {}, ctx), fb),
     /** Strict variants (throw) for tests. */
     strict: {
       clue: (letter) => renderClue(letter, ctx),
       assassinClue: (a) => renderAssassinClue(a.atoms, a.clueTokens, ctx),
       globalRule: (g) => render({ kind: g.kind, params: g.params }, ctx),
       step: (st) => render({ templateKey: st.i18n.templateKey, params: st.i18n.params }, ctx, st.elims),
-      stepRule: (st) => fill(ctx.T(st.i18n.ruleKey), {}, ctx),
+      stepRule: (st) => fill(ctx.T(ctx.los(st.i18n.ruleKey)), {}, ctx),
     },
   };
 }

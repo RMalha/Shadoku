@@ -12,6 +12,9 @@ const names = (s) => [...new Set([...s.matchAll(PH)].map((m) => m[1]))].sort();
 // Placeholders a locale may leave out: in languages that inflect the room name for "in" (Finnish "holvissa" = "in the vault"),
 // ZONE_PREP.<ROOM> is already the whole phrase, so ui.fmt.roomIn is just "{prep}".
 const MAY_DROP = { "ui.fmt.roomIn": ["room"] };
+// {self|poss} ("in the first row of HER area", 2026-11-21): a language whose possessive does not follow the owner (pt "da sua divisão",
+// fr "de sa zone") or that says it without one may leave {self} out of any key.
+const DROP_ANY = ["self"];
 const errs = [], warns = [];
 
 function load(file) {
@@ -39,11 +42,14 @@ for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith(".json") && f !=
     const ref = k in en ? k : /\.[mfn]$/.test(k) && k.slice(0, -2) in en ? k.slice(0, -2) : null;
     // PROP.<id>.<form> / TRAIT.<id>.<form>: a language's own case forms (fr de_a, uk beside/any...; src/caseText.js uses whatever
     // forms the locale has). English has no such key, so they are checked against the prop or trait itself: one English dropped still warns.
-    const own = !ref && /^(PROP|TRAIT)\.[A-Z0-9_]+\.[A-Za-z_]+$/.test(k) && `${k.slice(0, k.lastIndexOf("."))}.a` in en;
+    // ZCLASS.<id>.<form> / WATER.<id>.<form> (2026-11-22) likewise: {zclass|gen}, {water|loc} read whatever forms the locale has.
+    const stem = k.slice(0, k.lastIndexOf("."));
+    const own = !ref && (/^(PROP|TRAIT)\.[A-Z0-9_]+\.[A-Za-z_]+$/.test(k) && `${stem}.a` in en
+      || /^ZCLASS\.[A-Z0-9_]+\.[A-Za-z_]+$/.test(k) && `${stem}.one` in en || /^WATER\.[A-Z0-9_]+\.[A-Za-z_]+$/.test(k) && `${stem}.the` in en);
     if (own) { if (names(v).length) errs.push(`${file}: ${k} is a case form and takes no {placeholder}`); forms++; continue; }
     if (!ref) { warns.push(`${file}: ${k} is not in en.json`); continue; }
     if (!v) continue; // an empty value falls back to English
-    const have = names(v), drop = MAY_DROP[ref] || [];
+    const have = names(v), drop = [...(MAY_DROP[ref] || []), ...DROP_ANY];
     const want = names(en[ref]).filter((n) => !drop.includes(n) || have.includes(n));
     if (want.join() !== have.join()) errs.push(`${file}: ${k} uses {${have.join("}, {")}} but en.json has {${want.join("}, {")}}`);
     checked++;

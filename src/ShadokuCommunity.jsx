@@ -19,7 +19,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useLang, useAuth, useModals, Avatar, Rich, store } from "./ShadokuHome.jsx";
 import { Page, usePageTitle } from "./ShadokuPages.jsx";
 import { Board, BZ, buildGeometry, GAME_CSS, PUZZLES, DAILIES, readBestTimes } from "./ShadokuGame.jsx";
-import { getCastForPuzzle, CELL, SUSPECT_COLORS, SuspectPolaroid, PropSprite, BIOME_META } from "./ShadokuArt.jsx";
+import { getCastForPuzzle, CELL, suspectColor, SuspectPolaroid, PropSprite, BIOME_META } from "./ShadokuArt.jsx";
 import { caseRenderer, trOf, difficultyKey } from "./caseText.js";
 import { tEn } from "./i18n.js";
 import CATALOG from "./creatorCatalog.json";
@@ -374,7 +374,7 @@ function WorkBoard({ d, dr, mode, onTile, onEdge, ghosts = null, focus = null })
   if (!cast || !geo) return null;
   const n = d.rooms.length, W = n * CELL + 2 * BZ, H = W;
   const looks = cast.looks, p = cast.puzzle;
-  const colorOf = (id) => (id === "S" ? "#D99B26" : (looks[id] && looks[id].back) || SUSPECT_COLORS[Math.max(0, p.suspects.findIndex((q) => q.id === id)) % SUSPECT_COLORS.length]);
+  const colorOf = (id) => (id === "S" ? "#D99B26" : (looks[id] && looks[id].back) || suspectColor(Math.max(0, p.suspects.findIndex((q) => q.id === id))));
   const tokens = {};
   if (!ghosts) { d.suspects.forEach((s) => { if (s.solution) tokens[s.id] = s.solution; }); if (d.shadow) tokens.S = d.shadow; }
   const tileOf = (e) => {

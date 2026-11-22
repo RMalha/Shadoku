@@ -29,12 +29,13 @@ import { localizeHead, localizeCase, trOf } from "./caseText.js";
 import { RelicCard, ObsidianEnvelope, OmegaFolder, EvidenceBoard, FinalDossier, acceptFinale, allRelics, isRelicCase, isUnlocked, UMBRA_HARD, UMBRA_FINALE } from "./umbra.jsx";
 import {
   AdowPolaroid, AdowToken, ASSASSINS, AssassinPolaroid, AssassinToken, BIOME_META, BRASS, CELL, CREAM, CRIMSON, DIRS, FOG, FOG_OPACITY, FloorDefs, INK, LAB, LABEL,
-  FACING, MasterPolaroid, PropChip, PropSprite, SUSPECT_COLORS, SuspectPolaroid, TokenAvatar, WallLayer, WindowPane,
+  FACING, MasterPolaroid, PropChip, PropSprite, SUSPECT_COLORS, suspectColor, SuspectPolaroid, TokenAvatar, WallLayer, WindowPane,
   assignFloors, classBlocksSight, classIsSolid, propClassOf, floorOf, getCastForPuzzle, lookFacts, themeOf, windowAt, victimIsDummy, victimNameOf, victimGenderOf, inkOn,
 } from "./ShadokuArt";
 // One JSON file per puzzle (no merged shadoku_puzzles.json). Play order: the tutorial, then Very Easy → Expert.
 // ./puzzles is synced from engine/puzzles by vite.config.js; never edit it by hand.
 import LOGO_IMG from "./logoImg.js";
+import CATALOG from "./creatorCatalog.json"; // the schema's themes as the app holds them (scripts/creator-catalog.mjs): read here for the inside zones only
 import tutorial from "./puzzles/shadoku_tutorial.json";
 import case1 from "./puzzles/shadoku_case1.json";
 import case2 from "./puzzles/shadoku_case2.json";
@@ -130,12 +131,39 @@ const loadSettings = () => {
 /** Board drawing options (the Board's `opts`); the showcase boards on the home page use these defaults. */
 const BOARD_OPTS = { coords: false, roomHover: false, roomLabel: 14, objSize: 0, walls: 1, autoLight: true, tokenStyle: "portrait", selHi: true, lightTint: "warm", myTint: "warm" };
 const COORD_BAND = 20; // board units: the R1..Rn / C1..Cn band added left of and above the floorplan
-/** The core clue words with a tooltip: concept → English trigger words (a locale overrides them with ui.kw.<concept>.words, its definition is ui.kw.<concept>). */
+/** The core clue words with a tooltip: concept → English trigger words (a locale overrides them with ui.kw.<concept>.words, its definition is ui.kw.<concept>).
+ *  A word list may also name phrases that are NOT the keyword, with a leading "!": "outside the Barn" (an assassin's "hid outside the Barn") is not the
+ *  "was outside" of the inside / outside clues. */
 const KW_WORDS = {
   beside: "beside|next to|adjacent", diagonal: "diagonally|diagonal", alone: "alone", same: "same", only: "only", exactly: "exactly", atLeast: "at least",
   north: "north|above", south: "south|under|below", east: "east|to the right of", west: "west|to the left of",
   row: "row|rows", column: "column|columns", corner: "corner", see: "see|saw",
+  inside: "inside", outside: "outside|!outside the|!outside every",
 };
+/* ---- Inside / outside (clue kinds INSIDE, OUTSIDE, BOTH_IN, BOTH_OUT, IN_OUT; engine shadoku_solver.zone_inside) ----
+ * An area is "inside" when the theme's catalog calls its zone a building (schema themes.<THEME>.insideZones, carried into
+ * creatorCatalog.json as zones[].inside). areaRegions(p) → the room indexes of each side, or null when the case has no such
+ * clue or the board is not split (all inside like the Mansion, all outside, a theme the catalog does not know). Only a board
+ * with regions gets the two keywords, their tooltips (which name its areas), the house on its inside areas' names and the
+ * Inspect panel's two lines; every other case is drawn as before. */
+const REGION_KW = { inside: true, outside: true };
+const REGION_KINDS = ["INSIDE", "OUTSIDE", "BOTH_IN", "BOTH_OUT", "IN_OUT"];
+const HOUSE_D = "M4-7.4 8.8-3.3H7.3V0H5V-2.5H3V0H.7V-3.3H-.8Z"; // a small house standing on the text baseline, 8 wide (the inside areas' mark)
+export function areaRegions(p) {
+  const uses = !!p && [...(p.suspects || []), ...(p.assassins || [])].some((q) => Array.isArray(q.atoms) && q.atoms.some((a) => a && REGION_KINDS.includes(a.kind)));
+  const th = uses ? CATALOG.themes[String(p.theme || "").toUpperCase()] : null;
+  if (!th || !Array.isArray(p.roomIds)) return null;
+  const onBoard = new Set(p.rooms.flat()), inside = [], outside = [];
+  p.roomIds.forEach((id, i) => { const z = onBoard.has(i) ? th.zones.find((x) => x.id === id) : null; if (z) (z.inside ? inside : outside).push(i); });
+  return inside.length && outside.length ? { inside, outside } : null;
+}
+/* Open ground (2026-11-19, the author: "no wall between two outdoor areas"): the board's indoor areas, whatever its clues say.
+   A zone the catalog does not know counts as indoor, so its openings are drawn as before. */
+export function indoorRooms(p) {
+  const th = p ? CATALOG.themes[String(p.theme || "").toUpperCase()] : null, out = new Set();
+  (Array.isArray(p && p.roomIds) ? p.roomIds : []).forEach((id, i) => { const z = th ? th.zones.find((x) => x.id === id) : null; if (!z || z.inside) out.add(i); });
+  return out;
+}
 /* The lemon of an opening between two areas: its posts and its outlined dotted line. */
 const OPENING = "#f6e27a";
 /* The shadow's rim (beside the fog), cast by the light and by the walls: [id, gradient x1 y1 x2 y2 (dark edge -> clear), neighbour dr dc]. RIM_W px deep. */
@@ -184,9 +212,52 @@ export const PUZZLES = normalizePuzzles(DEFAULT_PUZZLES);
 const DAILY_RAW = import.meta.glob("./puzzles/shadoku_daily-*.json", { query: "?raw", import: "default", eager: true });
 const parseCase = (s) => { try { return JSON.parse(s); } catch (e) { return null; } };
 export const DAILIES = normalizePuzzles(Object.values(DAILY_RAW).map(parseCase).filter((d) => d && d.daily).sort((a, b) => (a.daily < b.daily ? -1 : 1)));
-/* Sub-biome previews (Puzzle IDs LI / CA / OP / BA, engine/puzzles_preview): only `npm run dev` mirrors them; a build removes them, so this is empty on the site. */
-const PREVIEW_RAW = import.meta.glob("./puzzles/shadoku_{LI,CA,OP,BA}[VEMHX][0-9]*.json", { query: "?raw", import: "default", eager: true });
-export const PREVIEWS = normalizePuzzles(Object.values(PREVIEW_RAW).map(parseCase).filter(Boolean).sort((a, b) => (a.id < b.id ? -1 : 1)));
+/* Sub-biome previews (Puzzle IDs LI / CA / OP / BA, engine/puzzles_preview): only `npm run dev` mirrors them; a build removes them, so this is empty on the site.
+   Big test boards (13x13 to 16x16) may be on any theme: most sub-biomes have too few area names to build one. Two calls, one pattern each
+   (src/bundle.py inlines a glob only in that form); a big case that ships with the story is not a preview. */
+const PREVIEW_RAW = import.meta.glob("./puzzles/shadoku_{LI,CA,OP,BA,FO,MO}[VEMHX][0-9]*.json", { query: "?raw", import: "default", eager: true });
+const PREVIEW_BIG_RAW = import.meta.glob("./puzzles/shadoku_[A-Z][A-Z][VEMHX]1[3-6]1[3-6]*.json", { query: "?raw", import: "default", eager: true });
+export const PREVIEWS = normalizePuzzles(Object.values({ ...PREVIEW_RAW, ...PREVIEW_BIG_RAW }).map(parseCase)
+  .filter((d) => d && !PUZZLES.some((p) => p.id === d.id || (p.puzzleId && p.puzzleId === d.puzzleId))).sort((a, b) => (a.id < b.id ? -1 : 1)));
+/* The dev previews in order (2026-11-20, the author: "organize the preview list"): shelves by what a test puzzle is for, each entry with its
+   size and the new things it shows. English only: a build has no previews. */
+const PREVIEW_TAGS = [
+  ["open ground", (q) => !!q.openGround],
+  ["dark row or column", (q) => (q.globalRules || []).some((x) => x.kind === "DARK_LINE")],
+  ["house rule on a kind of area", (q) => (q.globalRules || []).some((x) => /^CLASS_/.test(x.kind || ""))],
+  ["inside / outside", (q, k) => ["INSIDE", "OUTSIDE", "BOTH_IN", "BOTH_OUT", "IN_OUT"].some((x) => k.has(x))],
+  ["alone in a kind of area", (q, k) => [...k].some((x) => /_CLS$/.test(x))],
+  ["alone with N", (q, k) => ["ALONE_WITH_N", "ALONE_WITH_PPL", "ALONE_WITH_TWO"].some((x) => k.has(x))],
+  ["wall clue", (q, k) => k.has("WALL_ZONE") || k.has("WALL_ZONE_P")],
+  ["sight count", (q, k) => ["SIGHT_V", "SIGHT_H", "SIGHT_T"].some((x) => k.has(x))],
+  ["area direction", (q, k) => k.has("ROOM_DIR_SG") || k.has("ROOM_DIR_P")],
+  ["only scapegoat on", (q, k) => k.has("ONLY_SG_ON")],
+  ["dark-line clue", (q, k) => k.has("DARK_OFF")],
+  ["different head counts", (q) => (q.globalRules || []).some((x) => x.kind === "DIFF_COUNTS")],
+  ["counting house rule", (q) => (q.globalRules || []).some((x) => ["SIT_COUNT", "ZONE_ONE_ON", "DIFF_ZONES", "BUT_ONE", "NO_EMPTY"].includes(x.kind))],
+  ["pointer clue", (q, k) => ["OFF_BESIDE", "OFF2_P", "OFF_ALONE_P", "ZONE_DIR_EMPTY", "ZONE_DIR_OCC", "OFF_A", "OFF_PROP", "OFF_SG", "OFF_P"].some((x) => k.has(x))],
+  ["extra assassins", (q) => (q.assassins || []).length > 0],
+  ["16 to 18 scapegoats", (q) => (q.suspects || []).length >= 16],
+  ["water", (q) => (q.water || []).length > 0],
+  ["water clue", (q, k) => ["IN_WATER", "NOT_IN_WATER", "BESIDE_WATER", "BANK_SIDE", "SAME_BANK", "OPP_BANK", "ONLY_IN_WATER"].some((x) => k.has(x)) || (q.globalRules || []).some((x) => x.kind === "WATER_COUNT")],
+  ["one per line of sight", (q) => (q.steps || []).some((s) => s.i18n && s.i18n.ruleKey === "RULE_SEGMENT_SETS")],
+];
+export function previewShelves(list = PREVIEWS) {
+  const rows = list.map((q) => {
+    const k = new Set([...(q.suspects || []), ...(q.assassins || [])].flatMap((s) => (Array.isArray(s.atoms) ? s.atoms : []).map((a) => a && a.kind)));
+    const R = q.rooms.length, C = q.rooms[0].length;
+    return { q, size: `${R}x${C}`, side: Math.max(R, C), tags: PREVIEW_TAGS.filter(([, f]) => f(q, k)).map(([n]) => n) };
+  }).sort((a, b) => a.side - b.side || (a.q.id < b.q.id ? -1 : 1));
+  const dark = (x) => x.tags.includes("dark row or column"), water = (x) => x.tags.includes("water");
+  return [
+    ["Big boards, 13x13 and up", rows.filter((x) => x.side >= 13)],
+    ["Expert 12x12", rows.filter((x) => x.side === 12)],
+    ["Dark row or column", rows.filter((x) => x.side < 12 && dark(x))],
+    ["Water, up to 11x11", rows.filter((x) => x.side < 12 && !dark(x) && water(x))],
+    ["New clues and the wall rule, up to 11x11", rows.filter((x) => x.side < 12 && !dark(x) && !water(x))],
+  ].filter(([, items]) => items.length);
+}
+
 
 const HINT_RUNGS = 3; // where to look → the key deduction → the placement
 // Note cards (V10.6, Murdoku's first hints): a hint whose groundwork has NOTES_MIN lines or more opens with up to NOTES_MAX cards of
@@ -204,8 +275,12 @@ const edgeKey = (a, b) => { const ka = key(a[0], a[1]), kb = key(b[0], b[1]); re
  * Classes come from the case's own "propClasses" (propClassOf), falling back to ShadokuArt's PROP_CLASS table.
  * Sight (Board._cast): orthogonal rays stop at the border, VOID, a wall (doors pass), and a TALL or PERCH prop.
  * A PERCH tile is occupiable, so it is SEEN (whoever sits at it or rides it is in plain view) and the ray stops there;
- * a TALL prop is not seen, it only stops the ray (`blockers` keeps it for the light ripple). SHORT, LOW and the
- * Corpse are transparent. Nobody stands on TALL, SHORT, the Corpse or VOID (Board.is_occupiable). */
+ * a TALL prop is not seen and stays in the dark: it only stops the ray. SHORT, LOW and the
+ * Corpse are transparent. Nobody stands on TALL, SHORT, the Corpse or VOID (Board.is_occupiable).
+ * Windows on inside walls (Board.inner / blocks_sight, 2026-11-19): a "windows" entry [row, col, side] whose side faces
+ * another floor tile sits on the wall between two areas. Sight passes that edge both ways, like a doorway gap; for
+ * everything else it is still a wall (`isWall` stays true: the wall is drawn, the areas stay apart, props face away from it). */
+const WINDOW_SIDE = { N: [-1, 0], S: [1, 0], W: [0, -1], E: [0, 1] };
 export function buildGeometry(p) {
   const R = p.rooms.length, C = p.rooms[0].length;
   const doors = new Set((p.doors || []).map(([a, b]) => edgeKey(a, b)));
@@ -214,6 +289,15 @@ export function buildGeometry(p) {
   const isVoid = (r, c) => inside(r, c) && (room(r, c) < 0 || kind(r, c) === "VOID");
   const isDoor = (a, b) => doors.has(edgeKey(a, b));
   const isWall = (a, b) => room(a[0], a[1]) !== room(b[0], b[1]) && !isDoor(a, b);
+  const panes = new Set(); // the edges with a window between two floor tiles (an outer-wall window has no tile past it)
+  (Array.isArray(p.windows) ? p.windows : []).forEach((w) => {
+    const d = Array.isArray(w) ? WINDOW_SIDE[w[2]] : null;
+    if (!d || !inside(w[0], w[1]) || isVoid(w[0], w[1])) return;
+    const r1 = w[0] + d[0], c1 = w[1] + d[1];
+    if (inside(r1, c1) && !isVoid(r1, c1)) panes.add(edgeKey([w[0], w[1]], [r1, c1]));
+  });
+  const isWindow = (a, b) => panes.has(edgeKey(a, b));
+  const stopsSight = (a, b) => isWall(a, b) && !isWindow(a, b);
   const clsMemo = new Map();
   const classOfKind = (k) => { if (!clsMemo.has(k)) clsMemo.set(k, propClassOf(p, k)); return clsMemo.get(k); };
   const cls = (r, c) => classOfKind(kind(r, c));
@@ -224,21 +308,20 @@ export function buildGeometry(p) {
   for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) {
     const set = new Set();
     vis[key(r, c)] = set;
-    if (isVoid(r, c)) { info[key(r, c)] = DIRS.map(() => ({ cells: [], block: null })); continue; }
+    if (isVoid(r, c)) { info[key(r, c)] = DIRS.map(() => ({ cells: [] })); continue; }
     if (occupiable(r, c)) occCells.push([r, c]);
     info[key(r, c)] = DIRS.map(([dr, dc]) => {
-      const cells = []; let block = null, r0 = r, c0 = c;
+      const cells = []; let r0 = r, c0 = c;
       for (;;) {
         const r1 = r0 + dr, c1 = c0 + dc;
-        if (!inside(r1, c1) || isVoid(r1, c1) || isWall([r0, c0], [r1, c1])) break;
+        if (!inside(r1, c1) || isVoid(r1, c1) || stopsSight([r0, c0], [r1, c1])) break;
         if (blocksSight(r1, c1)) {
           if (occupiable(r1, c1)) { cells.push([r1, c1]); set.add(key(r1, c1)); } // PERCH: the rider is seen, then the ray stops
-          else block = [r1, c1, cells.length + 1]; // TALL: the prop that stopped the ray is lit too
-          break;
+          break; // TALL: the prop stops the ray and stays in the dark itself (the author, 2026-11-19)
         }
         cells.push([r1, c1]); set.add(key(r1, c1)); r0 = r1; c0 = c1;
       }
-      return { cells, block };
+      return { cells };
     });
   }
   const labelAt = {};
@@ -277,13 +360,12 @@ export function buildGeometry(p) {
   const spanAt = new Map();
   spans.forEach((g) => g.cells.forEach(([r, c]) => spanAt.set(key(r, c), g)));
   return {
-    R, C, room, kind, cls, classOfKind, inside, isVoid, isDoor, isWall, isTall, blocksSight, occupiable, occCells, labelAt, spans,
+    R, C, room, kind, cls, classOfKind, inside, isVoid, isDoor, isWall, isWindow, isTall, blocksSight, occupiable, occCells, labelAt, spans,
     spanAt: (r, c) => spanAt.get(key(r, c)) || null,
     // legacy views of the spans
     beds: spans.filter((g) => g.kind === "BED").map((g) => ({ r: g.r, c: g.c, horizontal: g.horizontal, len: g.len })),
     rugs: spans.filter((g) => g.kind === "RUG").map((g) => ({ r: g.r, c: g.c, w: g.cw, h: g.ch })),
     rays: (r, c) => info[key(r, c)].map((d) => d.cells),
-    blockers: (r, c) => info[key(r, c)].map((d) => d.block).filter(Boolean),
     visible: (r, c) => vis[key(r, c)],
   };
 }
@@ -601,7 +683,11 @@ function buildEmphasis(p, colorOf, t = tEn) {
   });
   const neg = t("emph.negations"), kw = t("emph.logic");
   wordList(neg === "emph.negations" ? NEGATIONS : neg).forEach((n) => add(n, { k: "neg" }));
-  Object.entries(KW_WORDS).forEach(([c, en]) => wordList(tx(`kw.${c}.words`, en)).forEach((n) => add(n, { k: "kw", c })));
+  const regions = areaRegions(p); // "inside" / "outside" are keywords only on a board with such a clue: elsewhere "outside" is just a word
+  Object.entries(KW_WORDS).forEach(([c, en]) => {
+    if (REGION_KW[c] && !regions) return;
+    wordList(tx(`kw.${c}.words`, en)).forEach((n) => (n[0] === "!" ? add(n.slice(1), { k: "skip" }) : add(n, { k: "kw", c })));
+  });
   wordList(kw === "emph.logic" ? LOGIC_WORDS : kw).forEach((n) => add(n, { k: "kw" }));
   const terms = [...kinds.keys()].sort((a, b) => b.length - a.length);
   const re = new RegExp(`(^|[^\\w'])(${terms.map((t) => escRe(t) + (kinds.get(t).k === "pr" ? "(?:e?s)?" : "")).join("|")})(?![\\w'])`, "gi");
@@ -630,13 +716,13 @@ function buildEmphasis(p, colorOf, t = tEn) {
     re.lastIndex = 0;
     while ((m = re.exec(src))) {
       const start = m.index + m[1].length, word = m[2], v = kindOf(word);
-      if (!v) continue;
+      if (!v || v.k === "skip") continue; // a "!" phrase of a keyword's word list: plain text
       if (start > last) out.push(src.slice(last, start));
       const k = `e${i++}`;
       // data-hi / data-kw: what hovering the word shows (board highlight / keyword tooltip, see the clue-hover settings)
       if (v.k === "nm") out.push(<b key={k} className="sk-nm" style={{ "--nc": colorOf(v.id) }} data-hi={`nm:${v.id}`}>{word}</b>);
       else if (v.k === "neg") out.push(<strong key={k} className="sk-neg">{word}</strong>);
-      else if (v.k === "kw") out.push(<b key={k} className="sk-kw" data-kw={v.c}>{word}</b>);
+      else if (v.k === "kw") out.push(<b key={k} className="sk-kw" data-kw={v.c} data-hi={REGION_KW[v.c] ? `io:${v.c}` : undefined}>{word}</b>); // "inside" / "outside" also light their areas
       else if (v.k === "ln") out.push(<b key={k} className="sk-kw" data-hi={`${v.axis}:${v.n}`}>{word}</b>);
       else if (v.k === "bare") out.push(tips.has(start) ? <b key={k} className="sk-kw sk-bare" data-tip={tips.get(start)}>{word}</b> : <b key={k} className="sk-kw">{word}</b>);
       else out.push(<em key={k} className={v.k === "rm" ? "sk-rm" : "sk-pr"} data-hi={v.k === "rm" ? `rm:${v.i}` : `pr:${v.kind}`}>{word}</em>);
@@ -673,7 +759,6 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
   const shine = (r, c) => {
     setMin(key(r, c), 0);
     geo.rays(r, c).forEach((ray) => ray.forEach(([rr, cc], i) => setMin(key(rr, cc), i + 1)));
-    geo.blockers(r, c).forEach(([rr, cc, d]) => setMin(key(rr, cc), d));
   };
   placed.forEach(({ cell: [r, c] }) => {
     geo.rays(r, c).forEach((ray) => ray.forEach(([rr, cc]) => seen.add(key(rr, cc))));
@@ -689,6 +774,8 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
   const cells = [];
   for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) cells.push([r, c]);
   const real = cells.filter(([r, c]) => !geo.isVoid(r, c));
+  // water (case "water": bodies of standable, see-over cells): drawn with the water floor, a pale bank where it meets dry ground
+  const wet = new Set((p.water || []).flatMap((w) => w.cells.map(([r, c]) => key(r, c))));
   const props = useMemo(() => {
     const out = [];
     geo.spans.forEach((g) => out.push({ ...g }));
@@ -711,6 +798,7 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     return out.sort((a, b) => a.rank - b.rank || a.bottom - b.bottom || a.c - b.c);
   }, [geo]); // eslint-disable-line react-hooks/exhaustive-deps
   const floors = useMemo(() => assignFloors(p, geo), [p, geo]);
+  const homes = useMemo(() => { const g = areaRegions(p); return new Set(g ? g.inside : []); }, [p]); // empty unless a clue says "inside" or "outside"
   const theme = themeOf(p), beach = theme === "BEACH";
 
   // Beach: VOID tiles are open water, shaded by distance from the shore, with foam on the shoreline
@@ -736,7 +824,11 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
   };
 
   // walls: an opening is simply a missing wall segment with squared lemon posts and a lemon dotted line (ink outline) across the gap
-  const segs = [], sills = [], postAt = new Map();
+  // open ground: on a board made under the wall rule (case "openGround"), two outdoor areas meet with no wall, no posts and no dotted line,
+  // only a faint ground line that shows where one area ends
+  const segs = [], sills = [], grounds = [], postAt = new Map();
+  const indoor = p.openGround ? indoorRooms(p) : null;
+  const onGround = (a, b) => !!indoor && !indoor.has(geo.room(a[0], a[1])) && !indoor.has(geo.room(b[0], b[1]));
   const addPost = (px, py) => { const k = `${px},${py}`; if (!postAt.has(k)) postAt.set(k, { x: px, y: py, k }); };
   real.forEach(([r, c]) => DIRS.forEach(([dr, dc], d) => {
     const r1 = r + dr, c1 = c + dc, e = edge(X(c), Y(r), d).flat();
@@ -746,6 +838,8 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     }
     if (d === 0 || d === 2 || geo.room(r1, c1) === geo.room(r, c)) return;
     if (geo.isDoor([r, c], [r1, c1])) {
+      if (wet.has(key(r, c)) && wet.has(key(r1, c1))) return; // a river runs on unbroken from one area into the next
+      if (onGround([r, c], [r1, c1])) { grounds.push({ k: `g${r}-${c}-${d}`, x1: e[0], y1: e[1], x2: e[2], y2: e[3] }); return; }
       addPost(e[0], e[1]); addPost(e[2], e[3]);
       const hz = e[1] === e[3];
       sills.push({ k: `s${r}-${c}-${d}`, x1: e[0] + (hz ? 4 : 0), y1: e[1] + (hz ? 0 : 4), x2: e[2] - (hz ? 4 : 0), y2: e[3] - (hz ? 0 : 4) });
@@ -809,8 +903,18 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         </g>
       )}
       <rect x={LAB - BZ} y={LAB - BZ} width={W} height={H} rx="14" fill="#0e0f15" />
-      {real.map(([r, c]) => <rect key={`f${r}-${c}`} x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-${floors[geo.room(r, c)] || floorOf(p.roomNames[geo.room(r, c)], geo.room(r, c), theme)}-${uid})`} />)}
+      {real.map(([r, c]) => <rect key={`f${r}-${c}`} x={X(c)} y={Y(r)} width={CELL} height={CELL} fill={`url(#skf-${wet.has(key(r, c)) ? "water" : floors[geo.room(r, c)] || floorOf(p.roomNames[geo.room(r, c)], geo.room(r, c), theme)}-${uid})`} />)}
       {real.map(([r, c]) => <rect key={`g${r}-${c}`} x={X(c) + 0.5} y={Y(r) + 0.5} width={CELL - 1} height={CELL - 1} fill="none" stroke="#000" strokeOpacity=".16" />)}
+      {wet.size > 0 && (
+        <g pointerEvents="none" strokeLinecap="round">
+          {real.filter(([r, c]) => wet.has(key(r, c))).flatMap(([r, c]) => DIRS.map(([dr, dc], d) => {
+            const r1 = r + dr, c1 = c + dc;
+            if (!geo.inside(r1, c1) || geo.isVoid(r1, c1) || wet.has(key(r1, c1))) return null;
+            const e = edge(X(c), Y(r), d).flat();
+            return <g key={`wb${r}-${c}-${d}`}><line x1={e[0]} y1={e[1]} x2={e[2]} y2={e[3]} stroke="#0b3350" strokeOpacity=".55" strokeWidth="5" /><line x1={e[0]} y1={e[1]} x2={e[2]} y2={e[3]} stroke="#efe2b4" strokeOpacity=".95" strokeWidth="2.2" /></g>;
+          }))}
+        </g>
+      )}
       {LB > 0 && (
         <g pointerEvents="none" textAnchor="middle" fill="#a9b0c4" style={{ fontFamily: "'Barlow', system-ui, sans-serif", fontWeight: 700, fontSize: 10 }}>
           {Array.from({ length: C }, (_, c) => <text key={`cl${c}`} x={X(c) + CELL / 2} y={LAB - BZ - LB / 2 + 3.6}>{t("settings.colNum", { n: c + 1 })}</text>)}
@@ -868,6 +972,10 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
       })}
 
       <g pointerEvents="none" strokeLinecap="round" strokeDasharray="0.1 7">
+        {/* the boundary between two outdoor areas: no wall, but a clear ground line (the author, 2026-11-20: "a thicker line between them, to help distinguish them");
+            a light edge under a dark line, thinner than a wall (7.5) and with no posts, so it never reads as one */}
+        {grounds.map((q) => <line key={`h${q.k}`} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} stroke="#fff" strokeOpacity=".5" strokeWidth={6.6 * (+o.walls || 1)} strokeLinecap="round" strokeDasharray="none" />)}
+        {grounds.map((q) => <line key={q.k} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} stroke={INK} strokeOpacity=".8" strokeWidth={4 * (+o.walls || 1)} strokeLinecap="round" strokeDasharray="none" />)}
         {sills.map((q) => <line key={`i${q.k}`} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} stroke={INK} strokeWidth={5.2 * (+o.walls || 1)} />)}
         {sills.map((q) => <line key={`c${q.k}`} x1={q.x1} y1={q.y1} x2={q.x2} y2={q.y2} stroke={OPENING} strokeWidth={3 * (+o.walls || 1)} />)}
       </g>
@@ -877,7 +985,10 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
           {roomEdges.map((e) => <line key={e.k} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} strokeWidth={(e.door ? 2.4 : 5) * (+o.walls || 1)} strokeDasharray={e.door ? "5 5" : undefined} />)}
         </g>
       )}
-      {(p.windows || []).map((w, i) => <WindowPane key={`win${i}`} {...windowAt(w)} />)}
+      {(p.windows || []).map((w, i) => {
+        const d = WINDOW_SIDE[w[2]]; // a window between two areas lets sight through (buildGeometry): its own two-faced pane
+        return <WindowPane key={`win${i}`} {...windowAt(w)} inner={!!d && geo.isWindow([w[0], w[1]], [w[0] + d[0], w[1] + d[1]])} />;
+      })}
 
       {/* the player's own light switches: a small bulb in the corner, in the player's light colour */}
       {real.filter(([r, c]) => s.lights[key(r, c)] && !tokenAt.has(key(r, c))).map(([r, c]) => (
@@ -949,6 +1060,13 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         );
       })}
 
+      {/* someone standing in water: ripples at the feet */}
+      {Object.entries(tokens).filter(([, [r, c]]) => wet.has(key(r, c))).map(([id, [r, c]]) => (
+        <g key={`rip${id}`} pointerEvents="none" fill="none" stroke="#dff4ff">
+          <ellipse cx={X(c) + CELL / 2} cy={Y(r) + CELL * 0.8} rx={CELL * 0.36} ry={CELL * 0.1} strokeOpacity=".9" strokeWidth="1.8" />
+          <ellipse cx={X(c) + CELL / 2} cy={Y(r) + CELL * 0.8} rx={CELL * 0.45} ry={CELL * 0.14} strokeOpacity=".5" strokeWidth="1.2" />
+        </g>
+      ))}
       {Object.entries(tokens).map(([id, [r, c]]) => {
         const cx = X(c) + CELL / 2, cy = Y(r) + CELL / 2, bad = conflicts.has(id) && <circle cx={cx} cy={cy} r="25" fill="none" stroke="#ff6f6f" strokeWidth="3" className="sk-pulse" />;
         const sel = o.selHi && tool === "suspect" && id === active && <circle cx={cx} cy={cy} r="26.5" fill="none" stroke={colorOf(id)} strokeWidth="3" />;
@@ -978,12 +1096,15 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
         let run = 1;
         while (c + run < C && geo.room(r, c + run) === geo.room(r, c)) run++;
         const pop = hovRoom === +rid, k = (+o.roomLabel || 14) / 14 * (pop ? 1.3 : 1); // room label size (settings) · the hovered room's label pops
-        const name = upper((p.roomLabels || p.roomNames)[rid] || ""), maxW = run * CELL - 12;
+        const home = homes.has(+rid), lead = home ? 11.5 * k : 0; // an inside area (on a board with an inside / outside clue): a small house before its name
+        const name = upper((p.roomLabels || p.roomNames)[rid] || ""), maxW = run * CELL - 12 - lead;
         const fit = name.length * 6.4 * k > maxW ? { textLength: maxW, lengthAdjust: "spacingAndGlyphs" } : {};
-        return (
-          <text key={`rn${rid}`} x={X(c) + 7} y={Y(r) + 5.5 + 8.5 * k} pointerEvents="none" {...fit} fill={pop ? "#bfe0ff" : CREAM} stroke={INK} strokeWidth={2.6 * Math.max(1, k * 0.8)} strokeOpacity=".85"
-            style={{ paintOrder: "stroke", fontFamily: "'Barlow', system-ui, sans-serif", fontWeight: 700, fontSize: 8.5 * k, letterSpacing: ".1em" }}>{name}</text>
-        );
+        const ink = { fill: pop ? "#bfe0ff" : CREAM, stroke: INK, strokeWidth: 2.6 * Math.max(1, k * 0.8), strokeOpacity: ".85" };
+        return [
+          home && <path key={`rh${rid}`} d={HOUSE_D} transform={`translate(${X(c) + 7.8} ${Y(r) + 5.5 + 8.5 * k}) scale(${k})`} pointerEvents="none" {...ink} strokeWidth={ink.strokeWidth / k} strokeLinejoin="round" style={{ paintOrder: "stroke" }} />,
+          <text key={`rn${rid}`} x={X(c) + 7 + lead} y={Y(r) + 5.5 + 8.5 * k} pointerEvents="none" {...fit} {...ink}
+            style={{ paintOrder: "stroke", fontFamily: "'Barlow', system-ui, sans-serif", fontWeight: 700, fontSize: 8.5 * k, letterSpacing: ".1em" }}>{name}</text>,
+        ];
       })}
       {coachCells && coachCells.map(([r, c]) => (
         <g key={`coach${r}-${c}`} pointerEvents="none" className="sk-coach">
@@ -1148,7 +1269,7 @@ function MiniPlan({ id }) {
 const HOW_RULES = ["sight", "nosee", "occupy", "dark"];
 const HOW_KEYWORDS = ["beside", "diagonal", "alone", "same", "exactly", "north", "south", "east", "west", "row", "column", "corner", "see"];
 const HOW_ADVANCED = ["domino", "rayblock", "law", "trial"];
-const HOW_FAQ = ["corpse", "adow", "true", "unique", "guess", "rowcol", "doors", "doorway", "big", "perch", "portraits"];
+const HOW_FAQ = ["corpse", "adow", "true", "unique", "guess", "rowcol", "doors", "doorway", "window", "big", "perch", "portraits"];
 const HOW_TABS = ["play", "keywords", "advanced", "faq"];
 
 export function HowTo({ onClose, children = null }) {
@@ -1798,8 +1919,17 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const caseNow = () => cleanCase(p, geo, normCase(live.current[p.id]));
   const suspects = p.suspects;
   const colorOf = useCallback((id) => (id === "S" ? BRASS : isSym(id) ? NOTE_SYMBOLS[id].color : ASSASSINS[id] && (p.assassins || []).some((a) => a.id === id) ? ASSASSINS[id].tie
-    : (looks[id] && looks[id].back) || SUSPECT_COLORS[Math.max(0, suspects.findIndex((q) => q.id === id)) % SUSPECT_COLORS.length]), [looks, suspects, p.assassins]);
+    : (looks[id] && looks[id].back) || suspectColor(Math.max(0, suspects.findIndex((q) => q.id === id)))), [looks, suspects, p.assassins]);
   const emph = useMemo(() => buildEmphasis(p, colorOf, t), [p, colorOf, t]);
+  /* A board with an inside / outside clue (areaRegions): what "inside" and "outside" mean here, naming its areas as the board labels
+     them and listed the way the clues list things (ui.fmt.list.*). Shown by the two keyword tooltips and in the Inspect panel. */
+  const regions = useMemo(() => areaRegions(p), [p]);
+  const regionText = useMemo(() => {
+    if (!regions) return null;
+    const labels = p.roomLabels || p.roomNames;
+    const list = (ids) => { const w = ids.map((i) => labels[i]); return w.length < 2 ? w[0] || "" : t("fmt.list.and", { head: w.slice(0, -1).reduce((a, x) => t("fmt.list.more", { head: a, tail: x })), last: w[w.length - 1] }); };
+    return { inside: t("kw.inside", { areas: list(regions.inside) }), outside: t("kw.outside", { areas: list(regions.outside) }) };
+  }, [regions, p, t]);
 
   useEffect(() => () => { if (holdTimer.current) clearTimeout(holdTimer.current); }, []);
   useEffect(() => { // another tab saved, or a sync brought another device's boards: take them (every move here is saved at once, so nothing of this tab's is lost)
@@ -2089,7 +2219,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   }), []);
   const resetOpts = useCallback(() => { setSettings({ ...DEFAULT_SETTINGS }); try { localStorage.removeItem(SETTINGS_KEY); } catch (e) { /* ignore */ } }, []);
   /* Clue hover ("Keyword Tooltips"): names, rooms, props and "row 5" light up their tiles; core words show their meaning. */
-  const KW_GATE = { nm: "kwPeople", rm: "kwRooms", pr: "kwObjects", row: "kwLines", col: "kwLines" };
+  const KW_GATE = { nm: "kwPeople", rm: "kwRooms", pr: "kwObjects", row: "kwLines", col: "kwLines", io: "kwRooms" }; // io: "inside" / "outside" light their areas
   const onClueOver = (e) => {
     if (e.pointerType && e.pointerType !== "mouse") return;
     const at = e.target && e.target.closest ? e.target : null;
@@ -2120,13 +2250,14 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
     keys.forEach((hk) => {
       const i = hk.indexOf(":"), type = hk.slice(0, i), val = hk.slice(i + 1);
       if (type === "nm") { if (st.tokens[val]) add(...st.tokens[val]); return; }
+      const side = type === "io" && regions ? regions[val] || [] : null; // "io:inside" / "io:outside": every tile of those areas
       for (let r = 0; r < geo.R; r++) for (let c = 0; c < geo.C; c++) {
         if (geo.isVoid(r, c)) continue;
-        if ((type === "pr" && val.split(",").includes(geo.kind(r, c))) || (type === "rm" && String(geo.room(r, c)) === val) || (type === "row" && r === +val - 1) || (type === "col" && c === +val - 1)) add(r, c);
+        if ((type === "pr" && val.split(",").includes(geo.kind(r, c))) || (type === "rm" && String(geo.room(r, c)) === val) || (type === "row" && r === +val - 1) || (type === "col" && c === +val - 1) || (side && side.includes(geo.room(r, c)))) add(r, c);
       }
     });
     return out.length ? out : null;
-  }, [clueHi, selClueHi, geo, st.tokens]);
+  }, [clueHi, selClueHi, geo, st.tokens, regions]);
   const hiCard = clueHi && clueHi.startsWith("nm:") ? clueHi.slice(3) : null;
   useEffect(() => { clearClueHover(); }, [p.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -2742,6 +2873,12 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
               );
             })}
           </ul>
+          {regionText && ( /* a board with an inside / outside clue: which areas are which (the keyword tooltips' own text; the house is the mark on the board's names) */
+            <div className="sk-insp-areas">
+              <p><svg viewBox="-1.6 -8.2 11.2 9" aria-hidden="true"><path d={HOUSE_D} /></svg>{boldNodes(regionText.inside)}</p>
+              <p>{boldNodes(regionText.outside)}</p>
+            </div>
+          )}
           <label className="sk-insp-opt">
             <input type="checkbox" checked={hoverTips} onChange={(e) => setHoverTipsOn(e.target.checked)} />
             <span>{tr("inspect.hover", INSPECTOR_EN.hover)}</span>
@@ -2749,7 +2886,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
         </aside>
       )}
 
-      {kwTip && <div className="sk-kwtip" role="tooltip" style={{ left: kwTip.left, top: kwTip.top }}>{kwTip.text || boldNodes(t(`kw.${kwTip.c}`))}</div>}
+      {kwTip && <div className="sk-kwtip" role="tooltip" style={{ left: kwTip.left, top: kwTip.top }}>{kwTip.text || boldNodes((regionText && regionText[kwTip.c]) || t(`kw.${kwTip.c}`))}</div>}
       {doneOpen && (() => {
         // The Uninvited Guests' next contract is the finale in its red Omega folder: picking it opens Dossier № 000-OMEGA, not the board
         const omegaNext = p.id === UMBRA_HARD;
@@ -3099,6 +3236,9 @@ const CSS = `
 .sk-insp-tag:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .sk-insp-tag.yes{color:#73d9a4}.sk-insp-tag.no{color:#ff9a8f}
 .sk-insp-empty{padding:10px 8px;color:var(--muted);font-size:13px}
+.sk-insp-areas{padding:9px 14px 10px;border-top:1px solid var(--line);font-size:13px;line-height:1.35;color:var(--fg)}
+.sk-insp-areas p{margin:0}.sk-insp-areas p+p{margin-top:5px}.sk-insp-areas b{color:var(--brass2)}
+.sk-insp-areas svg{width:13px;height:11px;margin-right:5px;vertical-align:-1px;fill:var(--paper)}
 .sk-insp-opt{display:flex;align-items:center;gap:9px;padding:10px 14px 12px;border-top:1px solid var(--line);font-size:13.5px;font-weight:600;cursor:pointer}
 .sk-insp-opt input{width:17px;height:17px;accent-color:var(--brass);cursor:pointer}
 @keyframes skTipIn{from{opacity:0}to{opacity:1}}

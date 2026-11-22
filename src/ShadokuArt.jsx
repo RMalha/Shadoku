@@ -223,6 +223,14 @@ export const WALL = "#e9e2cf", GLASS = "#9fd4ee";
 export const SUSPECT_COLORS = ["#f4a259", "#7cc6fe", "#c9a3e6", "#8fd694", "#f78fb3",
   "#efd96b", "#7fe0d4", "#ff9e80", "#b8c4d6", "#a3b1ff", "#e6c79c", "#9fe870",
   "#e58fd8", "#4fb0a6"]; // 13 + 14 (M, N): orchid and deep teal, distinct from the 12 above and legible as uppercase notes
+/* The 15th scapegoat (O) of a full cast: cobalt. A constant of its own, not a 15th entry above: avatar codes and the victims'
+   backgrounds index SUSPECT_COLORS modulo its length, so a longer list would recolour them. Before it, O wore A's orange. */
+export const SUSPECT_COLOR_15 = "#4a82e0";
+/* 2026-11-21: with S. H. Adow alone a board above 12x12 holds up to 18 scapegoats (A to R). P, Q and R get colours of their own
+   (olive, copper, violet), darker than the pastels like O's cobalt, and none close to S. H. Adow's brass or the crimson. */
+export const SUSPECT_COLOR_BIG = [SUSPECT_COLOR_15, "#b5ad45", "#b9774a", "#7a5cd6"];
+export const suspectColor = (i) => (i >= SUSPECT_COLORS.length && i < SUSPECT_COLORS.length + SUSPECT_COLOR_BIG.length
+  ? SUSPECT_COLOR_BIG[i - SUSPECT_COLORS.length] : SUSPECT_COLORS[i % SUSPECT_COLORS.length]);
 
 /* ---------------------------------------------------------------------- */
 /*  Floors: each room gets an architectural texture, picked by its name     */
@@ -8757,8 +8765,20 @@ export function WallLayer({ segs, posts, core = WALL, postCore = core, k = 1 }) 
   );
 }
 
-/** Window set into an exterior wall. (cx,cy) = midpoint of the edge. */
-export function WindowPane({ cx, cy, vertical }) {
+/** Window set into a wall. (cx,cy) = midpoint of the edge. The plain pane is a window in an outer wall. `inner`: a window in the wall
+ *  between two areas, which sight passes through: three glass panes in one line (the author, 2026-11-19: never a double row),
+ *  a little longer than an outer window so it reads on the thinner inside wall. */
+export function WindowPane({ cx, cy, vertical, inner = false }) {
+  if (inner) {
+    const L = 42, T = 9; // drawn along a horizontal wall, turned for a vertical one
+    return (
+      <g pointerEvents="none" transform={`translate(${cx} ${cy})${vertical ? " rotate(90)" : ""} translate(${-L / 2} ${-T / 2})`}>
+        <rect width={L} height={T} rx="1.5" fill={GLASS} stroke={INK} strokeWidth="1.8" />
+        <rect x="1.4" y="1.4" width={L - 2.8} height={T - 2.8} rx=".8" fill="#d8eef9" fillOpacity=".55" />
+        <path d={`M${L / 3} 0V${T}M${(2 * L) / 3} 0V${T}`} stroke={INK} strokeWidth="1.2" />
+      </g>
+    );
+  }
   const len = 38, th = 8.5;
   const w = vertical ? th : len, h = vertical ? len : th;
   return (
@@ -8914,7 +8934,7 @@ export const CLOTHING_GENDER = { shirtScoopNeck: "f", shirtless: "m", bikini: "f
 export const TIE_GENDER = { necktie: "m", bowtie: "m", scarf: "x" };
 /** Which clothing each piece of neckwear can be worn with (first = the default). */
 export const TIE_CLOTHING = {
-  necktie: ["blazerAndSweater"],
+  necktie: ["blazerAndShirt", "dressShirt"], // the necktie brings its own shirt collar: never over a garment with one of its own (2026-11-17)
   bowtie: ["blazerAndShirt", "blazerAndSweater", "collarAndSweater", "shirtCrewNeck"],
   scarf: ["shirtCrewNeck", "shirtVNeck", "shirtScoopNeck"],
 };
@@ -9382,7 +9402,7 @@ export function deriveLook(name, id = "A", puzzleId = "", over = {}) {
   const rnd = rngOf("look", puzzleId, name, id);
   const g = over.gender || OLD_NAMES[name] || (hash(`${puzzleId}${name}`) % 2 ? "m" : "f");
   const idx = Math.max(0, String(id).charCodeAt(0) - 65);
-  return makeLook(over.traits || {}, g, rnd, SUSPECT_COLORS[idx % SUSPECT_COLORS.length], over);
+  return makeLook(over.traits || {}, g, rnd, suspectColor(idx), over);
 }
 
 
@@ -9433,7 +9453,7 @@ export function getCastForPuzzle(p, seed = 0) {
   const sig = (l) => [l.hairStyle, l.hairColor, l.hat, l.glassesStyle, l.facialHair, l.eyes, l.skin].join("|");
   const looks = {}, seen = new Set();
   puzzle.suspects.forEach((s, i) => {
-    const back = SUSPECT_COLORS[i % SUSPECT_COLORS.length];
+    const back = suspectColor(i);
     const base = makeLook(s.traits, s.gender, rngOf("cast", p.id, s.id, s.name), back, {}, { hideOk });
     let look = base;
     for (let tries = 0; tries < 8; tries++) {
@@ -9491,7 +9511,7 @@ export const TOKEN_ZOOM = 1.5, TOKEN_CY = 126, TOKEN_SW = 7;
 
 /** Murdoku-style Polaroid: tilted vintage frame, flat rich backdrop, avataaars portrait in the 96×96 photo box. */
 /** `placed` false = the photo is toned down (a slate veil, the backdrop drained into cool slate); it lights up in the suspect's colours once they are on the board. */
-export function SuspectPolaroid({ name, id = "A", look, tilt, size = 120, tag = true, showName = true, placed = true, fluid = false }) {
+export function SuspectPolaroid({ name, id = "A", look, tilt, size = 120, tag = true, showName = true, placed = true, fluid = false, tagFill = null }) { // tagFill: the letter's disc (default: the suspect's colour)
   const lk = look || deriveLook(name, id);
   const bg = placed ? lk.back : mutedBack(lk.back);
   const t = tilt ?? ((hash(name + id) % 9) - 4);
@@ -9513,8 +9533,8 @@ export function SuspectPolaroid({ name, id = "A", look, tilt, size = 120, tag = 
         {showName && <text x="15" y="131" fontFamily="'Special Elite', 'Courier New', monospace" fontSize="14" fill="#3a2f24"
           {...(name.length * 8.4 > 66 ? { textLength: 66, lengthAdjust: "spacingAndGlyphs" } : {})}>{name}</text>}
         {tag && <g transform="translate(60 6)"><circle r="6.4" fill={CRIMSON} stroke={INK} strokeWidth="1.2" /><circle cx="-1.8" cy="-2" r="1.6" fill="#fff" fillOpacity=".55" /></g>}
-        {tag && <g transform="translate(94 124)"><circle r="9" fill={bg} stroke={INK} strokeWidth="1.4" style={{ fill: bg, transition: "fill .7s ease" }} />
-          <text y="4.6" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontWeight="700" fontSize="13" fill={inkOn(bg)}>{id}</text></g>}
+        {tag && <g transform="translate(94 124)"><circle r="9" fill={tagFill || bg} stroke={INK} strokeWidth="1.4" style={{ fill: tagFill || bg, transition: "fill .7s ease" }} />
+          <text y="4.6" textAnchor="middle" fontFamily="'JetBrains Mono', monospace" fontWeight="700" fontSize="13" fill={inkOn(tagFill || bg)}>{id}</text></g>}
       </g>
     </svg>
   );
@@ -9561,14 +9581,16 @@ export function AdowPolaroid({ size = 120, tilt = 3, beach = false }) {
 const assassinLook = (over, pal) => ({ ...ADOW_LOOK, hat: "none", ...over, pal: { ...ADOW_LOOK.pal, ...pal } });
 export const ASSASSINS = {
   S: { name: "S. H. Adow", tie: CRIMSON, look: ADOW_LOOK },
-  O: { name: "O. B. Scuro", tie: "#2fb36d", look: assassinLook({ gender: "m", hairStyle: "theCaesarAndSidePart", hairLength: "short", hairColor: "black", brows: "defaultNatural" }, { tie: "#2fb36d", hair: "#3a4270" }) },
+  O: { name: "O. B. Scuro", tie: "#f0c53a", look: assassinLook({ gender: "m", hairStyle: "theCaesarAndSidePart", hairLength: "short", hairColor: "black", brows: "defaultNatural" }, { tie: "#f0c53a", hair: "#3a4270" }) },
   P: { name: "P. H. Obia", tie: "#ee6fae", look: assassinLook({ gender: "f", hairStyle: "straight02", hairLength: "long", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#ee6fae", hair: "#1d2138" }) },
   Q: { name: "Q. U. Yet", tie: "#3f86e6", look: assassinLook({ gender: "m", hairStyle: "shortCurly", hairLength: "short", hairColor: "black" }, { tie: "#3f86e6", hair: "#58628f" }) },
   M: { name: "U. M. Bra", badge: "U", tie: BRASS, look: { ...ADOW_LOOK, gender: "m", hairStyle: "theCaesarAndSidePart", hairLength: "short", hairColor: "grey", glassesStyle: "round", glasses: true, hat: "none", facialHair: "beardMajestic", tie: "bowtie", eyes: "squint", brows: "raisedExcitedNatural",
     lifted: true, pal: { ...ADOW_LOOK.pal, tie: CRIMSON, hair: "#7b84a6", frame: BRASS } } }, // lifted: his own colours (ShadowFigure), brass spectacles
-  R: { name: "R. E. Aper", tie: "#f0c53a", look: assassinLook({ gender: "f", hairStyle: "curvy", hairLength: "long", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#f0c53a", hair: "#4a3558" }) },
+  R: { name: "R. E. Aper", tie: "#2fb36d", look: assassinLook({ gender: "f", hairStyle: "curvy", hairLength: "long", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#2fb36d", hair: "#4a3558" }) },
   // N. O. Ir: the Master's second in command, the target of "The Uninvited Guests". Hooded, face in shadow (HoodedFigure), no gender shown.
   N: { name: "N. O. Ir", badge: "N", tie: "#9aa0b8", hooded: true },
+  // T. N. Breux: the seventh assassin (the author, 2026-11-19), a purple scarf
+  T: { name: "T. N. Breux", tie: "#9b5de5", look: assassinLook({ gender: "f", hairStyle: "shaggy", hairLength: "short", hairColor: "black", tie: "scarf", clothing: "shirtCrewNeck", mouth: "serious" }, { tie: "#9b5de5", hair: "#8d87b4" }) },
 };
 /** N. O. Ir in the 96 × 96 photo: a slate cloak and a deep hood, the face lost in shadow but for two pale eyes, the Master's brass clasp at the throat. */
 export function HoodedFigure() {

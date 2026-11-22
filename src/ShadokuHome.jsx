@@ -26,7 +26,7 @@ import React, {
   createContext, useCallback, useContext, useEffect, useMemo, useRef, useState,
 } from "react";
 import { Board, BZ, buildGeometry, ShadokuLogo, PUZZLES, DAILIES, dailyShelves, GAME_CSS, readBestTimes, fmtTime } from "./ShadokuGame.jsx";
-import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, CELL, LABEL, AdowFigure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
+import { AdowPolaroid, AssassinPolaroid, SuspectPolaroid, VictimPolaroid, UninvitedSigil, victimNameOf, hash, getCastForPuzzle, BRASS, SUSPECT_COLORS, suspectColor, CELL, LABEL, AdowFigure, TOKEN_ZOOM, TOKEN_CY, TOKEN_SW } from "./ShadokuArt.jsx";
 import { avatarOf, decodeLook } from "./avatarLook.js";
 import { AvatarFigure } from "./AvatarFigure.jsx";
 import { LOCALES, LOCALE_CODES, localeKey, codeKey, TextContext } from "./i18n.js";
@@ -144,8 +144,8 @@ export const STRINGS = {
 
     "show1.caption": "Every scapegoat has an alibi. S. H. Adow only needs a blind spot.",
     "show1.tag": "Exhibit A · The Study",
-    "show2.caption": "Orthogonal sightlines sweep across 7 biomes—blocked by walls and tall obstacles, passing through openings between areas.",
-    "show2.tag": "Exhibit B · Sightlines",
+    "show2.caption": "Orthogonal lines of sight sweep across 7 biomes—blocked by walls and tall obstacles, passing through openings between areas.",
+    "show2.tag": "Exhibit B · Lines of Sight",
     "show2.left": "Beach cove",
     "show2.right": "Street courtyard",
     "show3.caption": "Every eye in the room, and still one tile no one can see. That is where you vanish.",
@@ -220,10 +220,10 @@ export const STRINGS = {
     "propInspector.perchTag": "Perch Prop",
     "propInspector.shortTag": "Short Prop",
     "propInspector.lowTag": "Low Prop",
-    "propInspector.tallRule": "Blocks sightlines · Cannot be occupied",
-    "propInspector.perchRule": "Blocks sightlines · Can be occupied · Whoever is on it is seen",
-    "propInspector.shortRule": "Sightlines pass over · Cannot be occupied",
-    "propInspector.lowRule": "Sightlines pass over · Can be occupied",
+    "propInspector.tallRule": "Blocks lines of sight · Cannot be occupied",
+    "propInspector.perchRule": "Blocks lines of sight · Can be occupied · Whoever is on it is seen",
+    "propInspector.shortRule": "Lines of sight pass over · Cannot be occupied",
+    "propInspector.lowRule": "Lines of sight pass over · Can be occupied",
     "propInspector.corpseRule": "Cannot be occupied · Does not block sight",
 
     /* Prop names, one key per prop: "prop.SAFE", "prop.TEA_SET" … (English gold standard = ShadokuArt's LABEL, all 94 props + the corpse).
@@ -536,7 +536,7 @@ function castFor(p) {
     const { puzzle, looks } = getCastForPuzzle(p, 0);
     const geo = buildGeometry(puzzle);
     const colorOf = (id) => (id === "S" ? BRASS
-      : (looks[id] && looks[id].back) || SUSPECT_COLORS[Math.max(0, puzzle.suspects.findIndex((q) => q.id === id)) % SUSPECT_COLORS.length]);
+      : (looks[id] && looks[id].back) || suspectColor(Math.max(0, puzzle.suspects.findIndex((q) => q.id === id))));
     out = { puzzle, looks, geo, colorOf };
   } catch (e) { console.warn("[Shadoku] could not cast", p.id, e); }
   castCache.set(p.id, out);
