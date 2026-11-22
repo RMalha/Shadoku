@@ -1,0 +1,1429 @@
+{
+ "id": "daily-2026-11-23",
+ "title": "Daily Contract, Monday 23 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Very Easy · Desert",
+ "theme": "DESERT",
+ "difficulty": "Very Easy",
+ "tier": "easy",
+ "shape": "lwing",
+ "seed": 261123,
+ "attempt": 1085,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "DEV0606LAR1-261123",
+ "puzzleId": "DEV0606LAR1-261123",
+ "engine": "V10.7",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 6,
+ "zoneWord": "area",
+ "size": 6,
+ "rooms": [
+  [
+   -1,
+   -1,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   -1,
+   -1,
+   1,
+   0,
+   0,
+   0
+  ],
+  [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2
+  ],
+  [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2
+  ],
+  [
+   1,
+   1,
+   1,
+   2,
+   2,
+   2
+  ],
+  [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ]
+ ],
+ "roomNames": [
+  "Mesa",
+  "Oasis",
+  "Caravan",
+  "Nomad Tent"
+ ],
+ "roomIds": [
+  "MESA",
+  "OASIS",
+  "CARAVAN",
+  "NOMAD_TENT"
+ ],
+ "doors": [
+  [
+   [
+    1,
+    4
+   ],
+   [
+    2,
+    4
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    2,
+    3
+   ]
+  ],
+  [
+   [
+    4,
+    2
+   ],
+   [
+    5,
+    2
+   ]
+  ]
+ ],
+ "windows": [],
+ "contents": [
+  [
+   "VOID",
+   "VOID",
+   "",
+   "CACTUS",
+   "",
+   "CACTUS"
+  ],
+  [
+   "VOID",
+   "VOID",
+   "PALM",
+   "",
+   "",
+   ""
+  ],
+  [
+   "CAMEL",
+   "CAMPFIRE",
+   "",
+   "FOOTPRINTS",
+   "",
+   "CAMEL"
+  ],
+  [
+   "OASIS_POOL",
+   "OASIS_POOL",
+   "CAMEL",
+   "",
+   "",
+   ""
+  ],
+  [
+   "OASIS_POOL",
+   "OASIS_POOL",
+   "",
+   "CAMPFIRE",
+   "CORPSE",
+   "CAMEL"
+  ],
+  [
+   "WOVEN_MAT",
+   "",
+   "",
+   "AMPHORA",
+   "AMPHORA",
+   ""
+  ]
+ ],
+ "multiTile": [
+  {
+   "kind": "OASIS_POOL",
+   "cells": [
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     0
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  }
+ ],
+ "corpse": [
+  4,
+  4
+ ],
+ "biomeProps": [
+  "AMPHORA",
+  "CACTUS",
+  "CAMEL",
+  "CAMPFIRE",
+  "OASIS_POOL",
+  "PALM",
+  "WOVEN_MAT"
+ ],
+ "propClasses": {
+  "AMPHORA": "SHORT",
+  "CACTUS": "TALL",
+  "CAMEL": "PERCH",
+  "CAMPFIRE": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "OASIS_POOL": "LOW",
+  "PALM": "TALL",
+  "WOVEN_MAT": "LOW"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.25,
+  "lowTiles": 6,
+  "openTiles": 24,
+  "lowKinds": [
+   "FOOTPRINTS",
+   "OASIS_POOL",
+   "WOVEN_MAT"
+  ],
+  "roomProps": {
+   "MESA": [
+    "CACTUS"
+   ],
+   "OASIS": [
+    "CAMEL",
+    "CAMPFIRE",
+    "OASIS_POOL",
+    "PALM"
+   ],
+   "CARAVAN": [
+    "CAMEL",
+    "CAMPFIRE",
+    "FOOTPRINTS"
+   ],
+   "NOMAD_TENT": [
+    "AMPHORA",
+    "WOVEN_MAT"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Augustin",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 4,
+    "cloth": 2
+   },
+   "look": "bald, necktie",
+   "clue": "Augustin was in front of an opening between two areas.",
+   "text": "Augustin was in front of an opening between two areas.",
+   "atoms": [
+    {
+     "kind": "DOOR",
+     "subject": "A",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    4
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Boris",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "bald",
+    "hairLength": "bald",
+    "hairColor": "none",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "goatee",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 5
+   },
+   "look": "bald, fedora, goatee",
+   "clue": "Boris was at the Oasis and was riding a camel.",
+   "text": "Boris was at the Oasis and was riding a camel.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "B",
+     "params": {
+      "prop": "CAMEL"
+     }
+    },
+    {
+     "kind": "ROOM",
+     "subject": "B",
+     "params": {
+      "room": "OASIS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     1,
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    0
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Camille",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 2,
+    "cloth": 3
+   },
+   "look": "blonde long hair, cloche",
+   "clue": "Camille was beside an amphora and could see into another area.",
+   "text": "Camille was beside an amphora and could see into another area.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "C",
+     "params": {
+      "prop": "AMPHORA"
+     }
+    },
+    {
+     "kind": "SEE_OTHER_ROOM",
+     "subject": "C",
+     "params": {}
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    2
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Dominic",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 2
+   },
+   "look": "grey wavy hair, round glasses",
+   "clue": "Dominic was beside a camel.",
+   "text": "Dominic was beside a camel.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "CAMEL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    1
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Evangeline",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 0,
+    "cloth": 2
+   },
+   "look": "black curly hair, horn-rimmed glasses",
+   "clue": "Evangeline was beside a cactus.",
+   "text": "Evangeline was beside a cactus.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "E",
+     "params": {
+      "prop": "CACTUS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    2
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Freya",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "none",
+    "skin": 3,
+    "cloth": 1
+   },
+   "look": "grey ponytail hair, round glasses",
+   "clue": "Freya was riding a camel.",
+   "text": "Freya was riding a camel.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "F",
+     "params": {
+      "prop": "CAMEL"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    5
+   ]
+  }
+ ],
+ "shadow": [
+  3,
+  3
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Camille “was beside an amphora and could see into another area”: only r6c3 fits. Place Camille there.",
+   "focus": [
+    [
+     5,
+     2
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      2
+     ]
+    ],
+    "B": [
+     [
+      3,
+      2
+     ]
+    ],
+    "D": [
+     [
+      4,
+      2
+     ]
+    ],
+    "F": [
+     [
+      3,
+      2
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    5,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      5,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Boris “was at the Oasis and was riding a camel”: of the 2 tiles that fit, only r3c1 is still open. Place Boris there.",
+   "focus": [
+    [
+     2,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ]
+    ],
+    "D": [
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      0
+     ]
+    ],
+    "F": [
+     [
+      2,
+      0
+     ],
+     [
+      2,
+      5
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    2,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      2,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Augustin “was in front of an opening between two areas”: of the 6 tiles that fit, only r2c5 is still open. Place Augustin there.",
+   "focus": [
+    [
+     1,
+     4
+    ]
+   ],
+   "elims": {
+    "E": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      5
+     ]
+    ]
+   },
+   "suspect": "A",
+   "cell": [
+    1,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      1,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Evangeline “was beside a cactus”: of the 4 tiles that fit, only r1c3 is still open. Place Evangeline there.",
+   "focus": [
+    [
+     0,
+     2
+    ]
+   ],
+   "elims": {},
+   "suspect": "E",
+   "cell": [
+    0,
+    2
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      0,
+      2
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Freya “was riding a camel”: of the 4 tiles that fit, only r5c6 is still open. Place Freya there.",
+   "focus": [
+    [
+     4,
+     5
+    ]
+   ],
+   "elims": {
+    "D": [
+     [
+      3,
+      5
+     ]
+    ]
+   },
+   "suspect": "F",
+   "cell": [
+    4,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 4,
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      4,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Dominic “was beside a camel”: of the 6 tiles that fit, only r4c2 is still open. Place Dominic there.",
+   "focus": [
+    [
+     3,
+     1
+    ]
+   ],
+   "elims": {},
+   "suspect": "D",
+   "cell": [
+    3,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      3,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r4c4. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    3,
+    3
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      3,
+      3
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "C",
+   "cell": [
+    5,
+    2
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     5,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Camille “was beside an amphora and could see into another area”: only r6c3 fits. Place Camille there.",
+    "focus": [
+     [
+      5,
+      2
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       4,
+       2
+      ],
+      [
+       5,
+       2
+      ]
+     ],
+     "B": [
+      [
+       3,
+       2
+      ]
+     ],
+     "D": [
+      [
+       4,
+       2
+      ]
+     ],
+     "F": [
+      [
+       3,
+       2
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     5,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       5,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    2,
+    0
+   ],
+   "needs": [
+    "C"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     2,
+     0
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Boris “was at the Oasis and was riding a camel”: of the 2 tiles that fit, only r3c1 is still open. Place Boris there.",
+    "focus": [
+     [
+      2,
+      0
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       4
+      ]
+     ],
+     "D": [
+      [
+       2,
+       2
+      ],
+      [
+       2,
+       4
+      ],
+      [
+       3,
+       0
+      ]
+     ],
+     "F": [
+      [
+       2,
+       0
+      ],
+      [
+       2,
+       5
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     2,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       2,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    1,
+    4
+   ],
+   "needs": [
+    "B",
+    "C"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Augustin “was in front of an opening between two areas”: of the 6 tiles that fit, only r2c5 is still open. Place Augustin there.",
+    "focus": [
+     [
+      1,
+      4
+     ]
+    ],
+    "elims": {
+     "E": [
+      [
+       0,
+       4
+      ],
+      [
+       1,
+       3
+      ],
+      [
+       1,
+       5
+      ]
+     ]
+    },
+    "suspect": "A",
+    "cell": [
+     1,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       1,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    0,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Evangeline “was beside a cactus”: of the 4 tiles that fit, only r1c3 is still open. Place Evangeline there.",
+    "focus": [
+     [
+      0,
+      2
+     ]
+    ],
+    "elims": {},
+    "suspect": "E",
+    "cell": [
+     0,
+     2
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       0,
+       2
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    4,
+    5
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Freya “was riding a camel”: of the 4 tiles that fit, only r5c6 is still open. Place Freya there.",
+    "focus": [
+     [
+      4,
+      5
+     ]
+    ],
+    "elims": {
+     "D": [
+      [
+       3,
+       5
+      ]
+     ]
+    },
+    "suspect": "F",
+    "cell": [
+     4,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 4,
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       4,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    3,
+    1
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Dominic “was beside a camel”: of the 6 tiles that fit, only r4c2 is still open. Place Dominic there.",
+    "focus": [
+     [
+      3,
+      1
+     ]
+    ],
+    "elims": {},
+    "suspect": "D",
+    "cell": [
+     3,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       3,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    3,
+    3
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r4c4. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      3,
+      3
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     3,
+     3
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       3,
+       3
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 1.0,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 1.0,
+   "late_elim_gap": 0,
+   "place_push": 2.83,
+   "global_uses": 0,
+   "global_first_t2": false,
+   "unlock_by_place": 1.0,
+   "star_opener": false
+  },
+  "flow_arc_ok": true,
+  "clue_fits": [
+   1,
+   2,
+   4,
+   4,
+   6,
+   6
+  ],
+  "entry": 1,
+  "G18_one_entry": true,
+  "shadow_candidates_before_last": 2,
+  "shadow_candidates_before_last_two": 3,
+  "dark_known_at": 6,
+  "G5_late_shadow": true,
+  "reveal_leaks": [],
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "AMPHORA",
+   "CACTUS",
+   "CAMEL",
+   "CAMPFIRE",
+   "OASIS_POOL",
+   "PALM",
+   "WOVEN_MAT"
+  ],
+  "biome_props_in_clues": [
+   "AMPHORA",
+   "CACTUS",
+   "CAMEL"
+  ],
+  "biome_props_load_bearing": [
+   "AMPHORA",
+   "CACTUS",
+   "CAMEL"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 14,
+  "rules_used": [],
+  "steps": 6,
+  "difficulty_score": 6,
+  "hardest_step_tier": 1,
+  "tall_scale": 1.6,
+  "model": "m-20261118-2337"
+ },
+ "daily": "2026-11-23"
+}
