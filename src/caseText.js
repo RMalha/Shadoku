@@ -134,7 +134,9 @@ class Ctx {
     if (this.pairs === undefined) {
       this.pairs = (this.tr("ui.fmt.contract") || "").split("|").filter(Boolean).map((p) => {
         const i = p.lastIndexOf("="), from = p.slice(0, i), to = p.slice(i + 1); // the last "=": a pattern may hold a lookahead (hu "a\(z\)(?=\s+[aeiou…])=az")
-        return [new RegExp(String.raw`(^|[^\p{L}])(${from.replace(/ /g, String.raw`\s+`)})(?![\p{L}])`, "giu"), to];
+        // an elision (to ends in an apostrophe: fr "de(?=\s+[AEIOU…])=d’") also takes the space after it: "de Ira" → "d’Ira"
+        const end = /['’]$/.test(to) ? String.raw`\s+(?=\p{L})` : String.raw`(?![\p{L}])`;
+        return [new RegExp(String.raw`(^|[^\p{L}])(${from.replace(/ /g, String.raw`\s+`)})${end}`, "giu"), to];
       });
     }
     return this.pairs.reduce((s, [re, to]) => s.replace(re, (_, pre, hit) => pre + (hit[0] !== hit[0].toLowerCase() ? to[0].toUpperCase() + to.slice(1) : to)), text);

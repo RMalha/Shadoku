@@ -167,6 +167,7 @@
   "ui.fmt.pronounPoss.m": "sa",
   "ui.fmt.pronounPoss.f": "sa",
   "ui.fmt.pronounPoss.n": "sa",
+  "ui.fmt.contract": "de(?=\\s+[AEIOUYÉÈÊËÀÂÎÏÔÛHaeiouyéèêëàâîïôû])=d'|que(?=\\s+[AEIOUYÉÈÊËÀÂÎÏÔÛHaeiouyéèêëàâîïôû])=qu'",
   "ui.assassin.S": "S. H. Adow",
   "ui.assassin.O": "O. B. Scuro",
   "ui.assassin.P": "P. H. Obia",

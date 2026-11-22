@@ -3355,5 +3355,5 @@
   "PROP.THEATER_SEAT.the": "la poltrona da teatro",
   "PROP.THEATER_SEAT.onPhrase": "sedeva su una poltrona da teatro",
   "PROP.THEATER_SEAT.plural": "poltrone da teatro",
-  "ui.fmt.contract": "a il=al|su il=sul|di il=del|da il=dal|in il=nel|a lo=allo|su lo=sullo|di lo=dello|a la=alla|su la=sulla|di la=della|a i=ai|su i=sui|a le=alle|su le=sulle|di le=delle|a gli=agli|su gli=sugli|di gli=degli|e era=ed era|e è=ed è|in lo=nello|in la=nella|in i=nei|in gli=negli|in le=nelle|da la=dalla|da lo=dallo|da i=dai|da le=dalle"
+  "ui.fmt.contract": "a il=al|su il=sul|di il=del|da il=dal|in il=nel|a lo=allo|su lo=sullo|di lo=dello|a la=alla|su la=sulla|di la=della|a i=ai|su i=sui|a le=alle|su le=sulle|di le=delle|a gli=agli|su gli=sugli|di gli=degli|e era=ed era|e è=ed è|in lo=nello|in la=nella|in i=nei|in gli=negli|in le=nelle|da la=dalla|da lo=dallo|da i=dai|da le=dalle|di i=dei|da gli=dagli|a l(?=['’])=all|su l(?=['’])=sull|di l(?=['’])=dell|da l(?=['’])=dall|in l(?=['’])=nell"
 }
