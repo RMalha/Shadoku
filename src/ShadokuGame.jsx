@@ -838,8 +838,9 @@ function Board({ p, geo, st, looks, colorOf, active, tool = "suspect", focus, so
     }
     if (d === 0 || d === 2 || geo.room(r1, c1) === geo.room(r, c)) return;
     if (geo.isDoor([r, c], [r1, c1])) {
-      if (wet.has(key(r, c)) && wet.has(key(r1, c1))) return; // a river runs on unbroken from one area into the next
-      if (onGround([r, c], [r1, c1])) { grounds.push({ k: `g${r}-${c}-${d}`, x1: e[0], y1: e[1], x2: e[2], y2: e[3] }); return; }
+      // a river runs on from one area into the next, but the area line still shows across it (the author, 2026-11-22:
+      // "the area division should also be visible in water"): the same line as between two outdoor areas, no posts
+      if (onGround([r, c], [r1, c1]) || (wet.has(key(r, c)) && wet.has(key(r1, c1)))) { grounds.push({ k: `g${r}-${c}-${d}`, x1: e[0], y1: e[1], x2: e[2], y2: e[3] }); return; }
       addPost(e[0], e[1]); addPost(e[2], e[3]);
       const hz = e[1] === e[3];
       sills.push({ k: `s${r}-${c}-${d}`, x1: e[0] + (hz ? 4 : 0), y1: e[1] + (hz ? 0 : 4), x2: e[2] - (hz ? 4 : 0), y2: e[3] - (hz ? 0 : 4) });

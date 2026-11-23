@@ -274,6 +274,7 @@ function atomKey(tok, ctx, register = "ATOM") {
   else if (SELF_KINDS.includes(k) && p.selfMatch) v = "SELF";
   else if (COUNT_KINDS.includes(k)) v = p.atLeast ? "MIN" : p.count === 1 ? "ONE" : p.count === 2 ? "TWO" : null;
   else if (register === "HID" && k === "ON" && p.prop === "BED") v = "BED";
+  else if (k === "BARE" && ctx.wording >= 4) v = "PLAIN"; // wording 4 (2026-11-23, the author: "keep bare ground, but don't explain what it is on the clue"): no list of floor props
   return v != null && ctx.has(`${base}.${v}`) ? `${base}.${v}` : base;
 }
 
