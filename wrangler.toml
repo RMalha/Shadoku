@@ -34,12 +34,12 @@ migrations_dir = "migrations"
 # DEV_BILLING / DEV_ADS / DEV_KIT work only on localhost and *.pages.dev preview addresses (functions/_lib/app/verifiers.js devHost).
 [[env.preview.kv_namespaces]]
 binding = "SHADOKU_KV"
-id = "REPLACE_WITH_TEST_KV_ID"
+id = "1173ccf9f5fa422a9801c063c5226496"
 
 [[env.preview.d1_databases]]
 binding = "SHADOKU_DB"
 database_name = "shadoku-test"
-database_id = "REPLACE_WITH_TEST_DB_ID"
+database_id = "349d5115-2dae-49dd-92d0-cbd0c2e3195d"
 migrations_dir = "migrations"
 
 [env.preview.vars]
