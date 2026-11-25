@@ -51,7 +51,8 @@ const unconfiguredAds = {
  * DEV_BILLING=1: a purchase token "dev.<sku>.<anything>" is a paid purchase of that sku; POST /api/app/billing/rtdn takes
  * { "voided": [{ "purchaseToken": "…" }] }. DEV_ADS=1: POST /api/app/ads/claim pays the ticket without an ad.
  * Both work only on localhost or a Pages PREVIEW address (<name>.<project>.pages.dev), never on the site's own domain,
- * so setting one of them in production by mistake gives nothing away.
+ * so setting one of them in production by mistake gives nothing away. DEV_KIT=1 (the test server, wrangler.toml [env.preview]:
+ * its own database) also lets a guest buy with a dev token, and opens POST /api/app/dev/kit (devkit.js).
  */
 export const devHost = (request) => /^(localhost|127\.0\.0\.1|\[::1\]|[a-z0-9-]+\.[a-z0-9-]+\.pages\.dev)$/.test(new URL(request.url).hostname);
 
@@ -69,6 +70,14 @@ const devBilling = {
   },
 };
 
+/**
+ * The test server (DEV_KIT=1 as well, wrangler.toml [env.preview]): the same, and a GUEST may "buy" too (billing.js redeem
+ * reads `guests`), so a phone that never signs in can try every product. A plain DEV_BILLING build keeps production's rule
+ * (a guest account dies with a reinstall: bought coins must not), and the real verifier never sets `guests`.
+ * @type {BillingVerifier & { guests: true }}
+ */
+const devBillingForGuests = Object.freeze({ ...devBilling, guests: true });
+
 /** @type {AdsVerifier} */
 const devAds = {
   verifyCallback: async () => UNCONFIGURED, // nobody calls back in a test build
@@ -80,7 +89,7 @@ const isObject = (v, method) => !!v && typeof v[method] === "function";
 /** → the BillingVerifier for this request. (`env.BILLING_VERIFIER`, an object, is the tests' seam: bindings are never request data.) */
 export function billingVerifier(env, request) {
   if (isObject(env.BILLING_VERIFIER, "verifyPurchase")) return env.BILLING_VERIFIER;
-  if (env.DEV_BILLING === "1" && devHost(request)) return devBilling;
+  if (env.DEV_BILLING === "1" && devHost(request)) return env.DEV_KIT === "1" ? devBillingForGuests : devBilling;
   return unconfiguredBilling;
 }
 

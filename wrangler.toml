@@ -21,3 +21,28 @@ binding = "SHADOKU_DB"
 database_name = "shadoku"
 database_id = "256df518-c797-4a52-8683-3bf3b19d9220"
 migrations_dir = "migrations"
+
+# ───────────── the TEST server: every Pages preview deployment (architecture 4.17) ─────────────
+# Every deployment that is not the production branch ("main") is a preview, e.g. `--branch test` -> https://test.shadoku.pages.dev.
+# Previews get their OWN database and KV namespace, so fake purchases and the tester kit never touch a real account or the
+# production economy. Pages allows only [env.preview] and [env.production]; the top level above stays production (and local dev).
+# Bindings and vars are NOT inherited: everything a preview needs is listed again here. Created once by the author with:
+#   npx wrangler d1 create shadoku-test                      -> put its database_id below
+#   npx wrangler kv namespace create SHADOKU_KV_TEST         -> put its id below
+#   npx wrangler d1 migrations apply shadoku-test --remote --env preview
+#   npx wrangler pages secret put SESSION_SECRET --project-name shadoku --env preview   (a NEW random value, not production's)
+# DEV_BILLING / DEV_ADS / DEV_KIT work only on localhost and *.pages.dev preview addresses (functions/_lib/app/verifiers.js devHost).
+[[env.preview.kv_namespaces]]
+binding = "SHADOKU_KV"
+id = "REPLACE_WITH_TEST_KV_ID"
+
+[[env.preview.d1_databases]]
+binding = "SHADOKU_DB"
+database_name = "shadoku-test"
+database_id = "REPLACE_WITH_TEST_DB_ID"
+migrations_dir = "migrations"
+
+[env.preview.vars]
+DEV_BILLING = "1"
+DEV_ADS = "1"
+DEV_KIT = "1"

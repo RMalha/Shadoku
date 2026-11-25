@@ -46,7 +46,8 @@ const finish = async (d, verifier, item, purchaseToken, tokenHash) => {
  */
 export async function redeem(ctx, verifier, { sku, purchaseToken }) {
   const { d, id, account, now, tz } = ctx;
-  if (account.kind !== "full") return { status: 403, body: { error: "signin_required" } }; // a guest account dies with a reinstall: bought coins must not
+  // a guest account dies with a reinstall: bought coins must not. (The test server's dev verifier lets guests buy: verifiers.js devBillingForGuests.)
+  if (account.kind !== "full" && verifier.guests !== true) return { status: 403, body: { error: "signin_required" } };
   if (typeof sku !== "string" || !/^[A-Za-z0-9_.]{1,80}$/.test(sku) || typeof purchaseToken !== "string" || purchaseToken.length < 8 || purchaseToken.length > 4096) return { status: 400, body: { error: "format" } };
   const item = await d.prepare("SELECT id, kind, sku, data FROM items WHERE sku = ? AND active = 1").bind(sku).first();
   if (!item) return { status: 404, body: { error: "unknown_sku" } };

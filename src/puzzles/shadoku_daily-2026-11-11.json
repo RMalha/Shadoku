@@ -1,0 +1,1776 @@
+{
+ "id": "daily-2026-11-11",
+ "title": "Daily Contract, Wednesday 11 November 2026",
+ "titleKey": "ui.daily.title",
+ "subtitleKey": "ui.daily.subtitle",
+ "subtitle": "Easy · Bayou",
+ "theme": "BAYOU",
+ "difficulty": "Easy",
+ "tier": "easy",
+ "shape": "rect",
+ "seed": 261111,
+ "attempt": 3845,
+ "traitMode": "any",
+ "propMode": "require",
+ "castKey": "BAE0707RAR1-261111",
+ "puzzleId": "BAE0707RAR1-261111",
+ "engine": "V10.7",
+ "i18nSchema": "shadoku-i18n/1",
+ "difficultyScore": 11,
+ "zoneWord": "area",
+ "size": 7,
+ "rooms": [
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   3,
+   3,
+   3,
+   3,
+   2,
+   1
+  ],
+  [
+   0,
+   4,
+   4,
+   4,
+   4,
+   2,
+   1
+  ],
+  [
+   0,
+   4,
+   4,
+   4,
+   4,
+   2,
+   1
+  ],
+  [
+   0,
+   4,
+   4,
+   4,
+   4,
+   2,
+   1
+  ],
+  [
+   0,
+   4,
+   4,
+   4,
+   4,
+   2,
+   1
+  ]
+ ],
+ "roomNames": [
+  "Swamp",
+  "Bait Shop",
+  "Mangrove",
+  "Backwater",
+  "Moss Grove"
+ ],
+ "roomIds": [
+  "SWAMP",
+  "BAIT_SHOP",
+  "MANGROVE",
+  "BACKWATER",
+  "MOSS_GROVE"
+ ],
+ "doors": [
+  [
+   [
+    1,
+    5
+   ],
+   [
+    2,
+    5
+   ]
+  ],
+  [
+   [
+    1,
+    6
+   ],
+   [
+    2,
+    6
+   ]
+  ],
+  [
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    2
+   ]
+  ],
+  [
+   [
+    2,
+    4
+   ],
+   [
+    2,
+    5
+   ]
+  ],
+  [
+   [
+    3,
+    4
+   ],
+   [
+    3,
+    5
+   ]
+  ],
+  [
+   [
+    4,
+    0
+   ],
+   [
+    4,
+    1
+   ]
+  ],
+  [
+   [
+    6,
+    5
+   ],
+   [
+    6,
+    6
+   ]
+  ]
+ ],
+ "windows": [
+  [
+   2,
+   6,
+   "E"
+  ]
+ ],
+ "contents": [
+  [
+   "CYPRESS",
+   "",
+   "FERN",
+   "FERN",
+   "PUDDLE",
+   "",
+   "LILY_PADS"
+  ],
+  [
+   "STUMP",
+   "CORPSE",
+   "FERN",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "STUMP",
+   "LILY_PADS",
+   "",
+   "",
+   "LILY_PADS",
+   "STUMP",
+   ""
+  ],
+  [
+   "STUMP",
+   "MOSSY_OAK",
+   "STUMP",
+   "STUMP",
+   "",
+   "",
+   ""
+  ],
+  [
+   "STUMP",
+   "",
+   "",
+   "",
+   "",
+   "SHRUB",
+   "FOOTPRINTS"
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "FERN",
+   "FOOTPRINTS",
+   ""
+  ],
+  [
+   "",
+   "",
+   "",
+   "",
+   "PUDDLE",
+   "",
+   ""
+  ]
+ ],
+ "multiTile": [],
+ "corpse": [
+  1,
+  1
+ ],
+ "biomeProps": [
+  "CYPRESS",
+  "FERN",
+  "LILY_PADS",
+  "MOSSY_OAK",
+  "SHRUB",
+  "STUMP"
+ ],
+ "propClasses": {
+  "CYPRESS": "TALL",
+  "FERN": "SHORT",
+  "FOOTPRINTS": "LOW",
+  "LILY_PADS": "LOW",
+  "MOSSY_OAK": "TALL",
+  "PUDDLE": "LOW",
+  "SHRUB": "TALL",
+  "STUMP": "LOW"
+ },
+ "dress": "integrated",
+ "dressing": {
+  "lowShare": 0.341,
+  "lowTiles": 14,
+  "openTiles": 41,
+  "lowKinds": [
+   "FOOTPRINTS",
+   "LILY_PADS",
+   "PUDDLE",
+   "STUMP"
+  ],
+  "roomProps": {
+   "SWAMP": [
+    "CYPRESS",
+    "FERN",
+    "LILY_PADS",
+    "PUDDLE",
+    "STUMP"
+   ],
+   "BACKWATER": [
+    "LILY_PADS"
+   ],
+   "MANGROVE": [
+    "FOOTPRINTS",
+    "SHRUB",
+    "STUMP"
+   ],
+   "MOSS_GROVE": [
+    "FERN",
+    "MOSSY_OAK",
+    "PUDDLE",
+    "STUMP"
+   ],
+   "BAIT_SHOP": [
+    "FOOTPRINTS"
+   ]
+  }
+ },
+ "suspects": [
+  {
+   "id": "A",
+   "name": "Alistair",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "curly",
+    "hairLength": "short",
+    "hairColor": "brown",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "fedora",
+    "facialHair": "beard",
+    "tie": "necktie",
+    "skin": 0,
+    "cloth": 5
+   },
+   "look": "brown curly hair, fedora, beard, necktie",
+   "clue": "Alistair was beside a fern.",
+   "text": "Alistair was beside a fern.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "A",
+     "params": {
+      "prop": "FERN"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "A",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    6,
+    4
+   ]
+  },
+  {
+   "id": "B",
+   "name": "Byron",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "goatee",
+    "tie": "bowtie",
+    "skin": 4,
+    "cloth": 3
+   },
+   "look": "black crop hair, horn-rimmed glasses, goatee, bowtie",
+   "clue": "Byron was the only person beside the mossy oak.",
+   "text": "Byron was the only person beside the mossy oak.",
+   "atoms": [
+    {
+     "kind": "ONLY_BESIDE",
+     "subject": "B",
+     "params": {
+      "prop": "MOSSY_OAK"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "B",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    4,
+    1
+   ]
+  },
+  {
+   "id": "C",
+   "name": "Cecily",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "long",
+    "hairLength": "long",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "necktie",
+    "skin": 1,
+    "cloth": 0
+   },
+   "look": "black long hair, necktie",
+   "clue": "Cecily was sitting on a tree stump.",
+   "text": "Cecily was sitting on a tree stump.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "C",
+     "params": {
+      "prop": "STUMP"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "C",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    3,
+    3
+   ]
+  },
+  {
+   "id": "D",
+   "name": "Douglas",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "crop",
+    "hairLength": "short",
+    "hairColor": "black",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "beret",
+    "facialHair": "goatee",
+    "tie": "necktie",
+    "skin": 1,
+    "cloth": 6
+   },
+   "look": "black crop hair, beret, goatee, necktie",
+   "clue": "Douglas was beside the Corpse.",
+   "text": "Douglas was beside the Corpse.",
+   "atoms": [
+    {
+     "kind": "BESIDE",
+     "subject": "D",
+     "params": {
+      "prop": "CORPSE"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "D",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    1,
+    0
+   ]
+  },
+  {
+   "id": "E",
+   "name": "Elspeth",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "bob",
+    "hairLength": "short",
+    "hairColor": "grey",
+    "glasses": true,
+    "glassesStyle": "horn-rimmed",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 3,
+    "cloth": 7
+   },
+   "look": "grey bob hair, horn-rimmed glasses, scarf",
+   "clue": "Elspeth was wading in a lily pond.",
+   "text": "Elspeth was wading in a lily pond.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "E",
+     "params": {
+      "prop": "LILY_PADS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "E",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    0,
+    6
+   ]
+  },
+  {
+   "id": "F",
+   "name": "Freya",
+   "gender": "f",
+   "pronoun": "she",
+   "traits": {
+    "hairStyle": "ponytail",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": true,
+    "glassesStyle": "round",
+    "hat": "cloche",
+    "facialHair": "none",
+    "tie": "bowtie",
+    "skin": 0,
+    "cloth": 6
+   },
+   "look": "blonde ponytail hair, round glasses, cloche, bowtie",
+   "clue": "Freya was standing on a trail of footprints.",
+   "text": "Freya was standing on a trail of footprints.",
+   "atoms": [
+    {
+     "kind": "ON",
+     "subject": "F",
+     "params": {
+      "prop": "FOOTPRINTS"
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "F",
+    "place": [
+     0
+    ],
+    "people": []
+   },
+   "solution": [
+    5,
+    5
+   ]
+  },
+  {
+   "id": "G",
+   "name": "Gustav",
+   "gender": "m",
+   "pronoun": "he",
+   "traits": {
+    "hairStyle": "wavy",
+    "hairLength": "long",
+    "hairColor": "blonde",
+    "glasses": false,
+    "glassesStyle": "none",
+    "hat": "none",
+    "facialHair": "none",
+    "tie": "scarf",
+    "skin": 2,
+    "cloth": 1
+   },
+   "look": "blonde wavy hair, scarf",
+   "clue": "Gustav was in the Backwater and was in column 4.",
+   "text": "Gustav was in the Backwater and was in column 4.",
+   "atoms": [
+    {
+     "kind": "ROOM",
+     "subject": "G",
+     "params": {
+      "room": "BACKWATER"
+     }
+    },
+    {
+     "kind": "COL",
+     "subject": "G",
+     "params": {
+      "index": 3
+     }
+    }
+   ],
+   "clueTokens": {
+    "subject": "G",
+    "place": [
+     0,
+     1
+    ],
+    "people": []
+   },
+   "solution": [
+    2,
+    3
+   ]
+  }
+ ],
+ "shadow": [
+  5,
+  2
+ ],
+ "shadowSuspect": {
+  "id": "S",
+  "name": "S. H. Adow",
+  "gender": null,
+  "traits": null,
+  "note": "Silhouette: unknown gender and traits. Trait and gender clues never count S."
+ },
+ "globalRules": [],
+ "steps": [
+  {
+   "n": 1,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Gustav “was in the Backwater and was in column 4”: only r3c4 fits. Place Gustav there.",
+   "focus": [
+    [
+     2,
+     3
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      2,
+      5
+     ]
+    ],
+    "E": [
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      4
+     ]
+    ]
+   },
+   "suspect": "G",
+   "cell": [
+    2,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_ONE_FIT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "suspect": "G",
+     "clueOf": "G",
+     "coord": [
+      2,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 2,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Elspeth “was wading in a lily pond”: of the 3 tiles that fit, only r1c7 is still open. Place Elspeth there.",
+   "focus": [
+    [
+     0,
+     6
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      4
+     ]
+    ],
+    "D": [
+     [
+      0,
+      1
+     ]
+    ],
+    "F": [
+     [
+      4,
+      6
+     ]
+    ]
+   },
+   "suspect": "E",
+   "cell": [
+    0,
+    6
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 3,
+     "suspect": "E",
+     "clueOf": "E",
+     "coord": [
+      0,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "n": 3,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Douglas “was beside the Corpse”: of the 2 tiles that fit, only r2c1 is still open. Place Douglas there.",
+   "focus": [
+    [
+     1,
+     0
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      1,
+      3
+     ]
+    ],
+    "C": [
+     [
+      1,
+      0
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      3,
+      0
+     ],
+     [
+      4,
+      0
+     ]
+    ]
+   },
+   "suspect": "D",
+   "cell": [
+    1,
+    0
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "D",
+     "clueOf": "D",
+     "coord": [
+      1,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "n": 4,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Freya “was standing on a trail of footprints”: of the 2 tiles that fit, only r6c6 is still open. Place Freya there.",
+   "focus": [
+    [
+     5,
+     5
+    ]
+   ],
+   "elims": {},
+   "suspect": "F",
+   "cell": [
+    5,
+    5
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "F",
+     "clueOf": "F",
+     "coord": [
+      5,
+      5
+     ]
+    }
+   }
+  },
+  {
+   "n": 5,
+   "tier": 1,
+   "rule": "Ray block",
+   "kind": "eliminate",
+   "text": "Ray block: Cecily can only be at r4c3 or r4c4, and those tiles all lie on one sightline. Whichever one Cecily takes, the whole stretch is watched, so nobody else can stand on r4c3.",
+   "focus": [
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "elims": {
+    "B": [
+     [
+      3,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_RAY_BLOCK",
+    "ruleKey": "RULE_RAY_BLOCK",
+    "params": {
+     "suspect": "C",
+     "options": [
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       3
+      ]
+     ],
+     "coords": [
+      [
+       3,
+       2
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "n": 6,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Byron “was the only person beside the mossy oak”: of the 2 tiles that fit, only r5c2 is still open. Place Byron there.",
+   "focus": [
+    [
+     4,
+     1
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      4,
+      4
+     ]
+    ]
+   },
+   "suspect": "B",
+   "cell": [
+    4,
+    1
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 2,
+     "suspect": "B",
+     "clueOf": "B",
+     "coord": [
+      4,
+      1
+     ]
+    }
+   }
+  },
+  {
+   "n": 7,
+   "tier": 2,
+   "rule": "Monopoly mask",
+   "kind": "eliminate",
+   "text": "Byron was the only person beside the mossy oak, so no other person (S. H. Adow included) can be beside any mossy oak.",
+   "focus": [
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "elims": {
+    "C": [
+     [
+      3,
+      2
+     ]
+    ]
+   },
+   "i18n": {
+    "templateKey": "STEP_MONOPOLY_BESIDE",
+    "ruleKey": "RULE_MONOPOLY",
+    "params": {
+     "owner": "B",
+     "prop": "MOSSY_OAK"
+    }
+   }
+  },
+  {
+   "n": 8,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Cecily “was sitting on a tree stump”: of the 7 tiles that fit, only r4c4 is still open. Place Cecily there.",
+   "focus": [
+    [
+     3,
+     3
+    ]
+   ],
+   "elims": {
+    "A": [
+     [
+      5,
+      3
+     ]
+    ]
+   },
+   "suspect": "C",
+   "cell": [
+    3,
+    3
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 7,
+     "suspect": "C",
+     "clueOf": "C",
+     "coord": [
+      3,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "n": 9,
+   "tier": 1,
+   "rule": "Sightline domino",
+   "kind": "place",
+   "text": "Alistair “was beside a fern”: of the 6 tiles that fit, only r7c5 is still open. Place Alistair there.",
+   "focus": [
+    [
+     6,
+     4
+    ]
+   ],
+   "elims": {},
+   "suspect": "A",
+   "cell": [
+    6,
+    4
+   ],
+   "i18n": {
+    "templateKey": "STEP_PLACE_LAST_LEFT",
+    "ruleKey": "RULE_SINGLE",
+    "params": {
+     "fits": 6,
+     "suspect": "A",
+     "clueOf": "A",
+     "coord": [
+      6,
+      4
+     ]
+    }
+   }
+  },
+  {
+   "n": 10,
+   "tier": 1,
+   "rule": "The blindspot",
+   "kind": "shadow",
+   "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r6c3. That is where S. H. Adow is hiding!",
+   "focus": [
+    [
+     5,
+     2
+    ]
+   ],
+   "elims": {},
+   "cell": [
+    5,
+    2
+   ],
+   "suspect": "S",
+   "i18n": {
+    "templateKey": "STEP_BLINDSPOT_FOUND",
+    "ruleKey": "RULE_BLINDSPOT",
+    "params": {
+     "coord": [
+      5,
+      2
+     ]
+    }
+   }
+  }
+ ],
+ "hints": [
+  {
+   "suspect": "G",
+   "cell": [
+    2,
+    3
+   ],
+   "needs": [],
+   "tier": 1,
+   "fits": [
+    [
+     2,
+     3
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Gustav “was in the Backwater and was in column 4”: only r3c4 fits. Place Gustav there.",
+    "focus": [
+     [
+      2,
+      3
+     ]
+    ],
+    "elims": {
+     "C": [
+      [
+       2,
+       5
+      ]
+     ],
+     "E": [
+      [
+       2,
+       1
+      ],
+      [
+       2,
+       4
+      ]
+     ]
+    },
+    "suspect": "G",
+    "cell": [
+     2,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_ONE_FIT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "suspect": "G",
+      "clueOf": "G",
+      "coord": [
+       2,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "E",
+   "cell": [
+    0,
+    6
+   ],
+   "needs": [
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     6
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Elspeth “was wading in a lily pond”: of the 3 tiles that fit, only r1c7 is still open. Place Elspeth there.",
+    "focus": [
+     [
+      0,
+      6
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       0,
+       1
+      ],
+      [
+       0,
+       4
+      ]
+     ],
+     "D": [
+      [
+       0,
+       1
+      ]
+     ],
+     "F": [
+      [
+       4,
+       6
+      ]
+     ]
+    },
+    "suspect": "E",
+    "cell": [
+     0,
+     6
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 3,
+      "suspect": "E",
+      "clueOf": "E",
+      "coord": [
+       0,
+       6
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "D",
+   "cell": [
+    1,
+    0
+   ],
+   "needs": [
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Douglas “was beside the Corpse”: of the 2 tiles that fit, only r2c1 is still open. Place Douglas there.",
+    "focus": [
+     [
+      1,
+      0
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       1,
+       3
+      ]
+     ],
+     "C": [
+      [
+       1,
+       0
+      ],
+      [
+       2,
+       0
+      ],
+      [
+       3,
+       0
+      ],
+      [
+       4,
+       0
+      ]
+     ]
+    },
+    "suspect": "D",
+    "cell": [
+     1,
+     0
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "D",
+      "clueOf": "D",
+      "coord": [
+       1,
+       0
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "F",
+   "cell": [
+    5,
+    5
+   ],
+   "needs": [
+    "D",
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Freya “was standing on a trail of footprints”: of the 2 tiles that fit, only r6c6 is still open. Place Freya there.",
+    "focus": [
+     [
+      5,
+      5
+     ]
+    ],
+    "elims": {},
+    "suspect": "F",
+    "cell": [
+     5,
+     5
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "F",
+      "clueOf": "F",
+      "coord": [
+       5,
+       5
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "B",
+   "cell": [
+    4,
+    1
+   ],
+   "needs": [
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 1,
+     "rule": "Ray block",
+     "kind": "eliminate",
+     "text": "Ray block: Cecily can only be at r4c3 or r4c4, and those tiles all lie on one sightline. Whichever one Cecily takes, the whole stretch is watched, so nobody else can stand on r4c3.",
+     "focus": [
+      [
+       3,
+       2
+      ],
+      [
+       3,
+       3
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       5
+      ]
+     ],
+     "elims": {
+      "B": [
+       [
+        3,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_RAY_BLOCK",
+      "ruleKey": "RULE_RAY_BLOCK",
+      "params": {
+       "suspect": "C",
+       "options": [
+        [
+         3,
+         2
+        ],
+        [
+         3,
+         3
+        ]
+       ],
+       "coords": [
+        [
+         3,
+         2
+        ]
+       ]
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Byron “was the only person beside the mossy oak”: of the 2 tiles that fit, only r5c2 is still open. Place Byron there.",
+    "focus": [
+     [
+      4,
+      1
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       4,
+       4
+      ]
+     ]
+    },
+    "suspect": "B",
+    "cell": [
+     4,
+     1
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 2,
+      "suspect": "B",
+      "clueOf": "B",
+      "coord": [
+       4,
+       1
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "C",
+   "cell": [
+    3,
+    3
+   ],
+   "needs": [
+    "B",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 2,
+   "fits": [
+    [
+     1,
+     0
+    ],
+    [
+     2,
+     0
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     0
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     0
+    ]
+   ],
+   "key": [
+    0
+   ],
+   "chain": [
+    {
+     "n": 1,
+     "tier": 2,
+     "rule": "Monopoly mask",
+     "kind": "eliminate",
+     "text": "Byron was the only person beside the mossy oak, so no other person (S. H. Adow included) can be beside any mossy oak.",
+     "focus": [
+      [
+       3,
+       2
+      ],
+      [
+       4,
+       1
+      ]
+     ],
+     "elims": {
+      "C": [
+       [
+        3,
+        2
+       ]
+      ]
+     },
+     "i18n": {
+      "templateKey": "STEP_MONOPOLY_BESIDE",
+      "ruleKey": "RULE_MONOPOLY",
+      "params": {
+       "owner": "B",
+       "prop": "MOSSY_OAK"
+      }
+     }
+    }
+   ],
+   "place": {
+    "n": 2,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Cecily “was sitting on a tree stump”: of the 7 tiles that fit, only r4c4 is still open. Place Cecily there.",
+    "focus": [
+     [
+      3,
+      3
+     ]
+    ],
+    "elims": {
+     "A": [
+      [
+       5,
+       3
+      ]
+     ]
+    },
+    "suspect": "C",
+    "cell": [
+     3,
+     3
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 7,
+      "suspect": "C",
+      "clueOf": "C",
+      "coord": [
+       3,
+       3
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "A",
+   "cell": [
+    6,
+    4
+   ],
+   "needs": [
+    "B",
+    "C",
+    "D",
+    "E"
+   ],
+   "tier": 1,
+   "fits": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "Sightline domino",
+    "kind": "place",
+    "text": "Alistair “was beside a fern”: of the 6 tiles that fit, only r7c5 is still open. Place Alistair there.",
+    "focus": [
+     [
+      6,
+      4
+     ]
+    ],
+    "elims": {},
+    "suspect": "A",
+    "cell": [
+     6,
+     4
+    ],
+    "i18n": {
+     "templateKey": "STEP_PLACE_LAST_LEFT",
+     "ruleKey": "RULE_SINGLE",
+     "params": {
+      "fits": 6,
+      "suspect": "A",
+      "clueOf": "A",
+      "coord": [
+       6,
+       4
+      ]
+     }
+    }
+   }
+  },
+  {
+   "suspect": "S",
+   "cell": [
+    5,
+    2
+   ],
+   "needs": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+   ],
+   "tier": 1,
+   "fits": [],
+   "key": [],
+   "chain": [],
+   "place": {
+    "n": 1,
+    "tier": 1,
+    "rule": "The blindspot",
+    "kind": "shadow",
+    "text": "Every scapegoat is placed and no two of them see each other. Exactly one open tile is still dark: r6c3. That is where S. H. Adow is hiding!",
+    "focus": [
+     [
+      5,
+      2
+     ]
+    ],
+    "elims": {},
+    "cell": [
+     5,
+     2
+    ],
+    "suspect": "S",
+    "i18n": {
+     "templateKey": "STEP_BLINDSPOT_FOUND",
+     "ruleKey": "RULE_BLINDSPOT",
+     "params": {
+      "coord": [
+       5,
+       2
+      ]
+     }
+    }
+   }
+  }
+ ],
+ "gates": {
+  "G12_floorplan_theme_legal": true,
+  "human_solved": true,
+  "G0_clues_true": true,
+  "G0_solver_sound": true,
+  "G10_cast_valid": true,
+  "G1_no_mutual_sight": true,
+  "G2_single_shadow": true,
+  "init_singles": 1,
+  "G4_domino_pacing": true,
+  "flow": {
+   "first_place_pos": 0.0,
+   "elims_before_first_place": 0,
+   "last_fifth_t1_share": 1.0,
+   "hardest_last_pos": 0.75,
+   "trials_in_last_fifth": 0,
+   "late_cascade": 0.333,
+   "late_elim_gap": 1,
+   "place_push": 2.0,
+   "global_uses": 0,
+   "global_first_t2": false,
+   "unlock_by_place": 0.667,
+   "star_opener": false
+  },
+  "flow_arc_ok": true,
+  "clue_fits": [
+   1,
+   2,
+   2,
+   2,
+   3,
+   6,
+   7
+  ],
+  "entry": 1,
+  "G18_one_entry": true,
+  "shadow_candidates_before_last": 2,
+  "shadow_candidates_before_last_two": 7,
+  "dark_known_at": 7,
+  "G5_late_shadow": true,
+  "reveal_leaks": [],
+  "G6_tier": true,
+  "G7_globals_true": true,
+  "G13_clue_atoms_capped": true,
+  "G15_clue_hygiene": true,
+  "max_atoms_per_clue": 2,
+  "G8_globals_needed": true,
+  "trait_clues": 0,
+  "trait_atoms": [],
+  "trait_rules_used": [],
+  "trait_load_bearing": false,
+  "biome_props_on_board": [
+   "CYPRESS",
+   "FERN",
+   "LILY_PADS",
+   "MOSSY_OAK",
+   "SHRUB",
+   "STUMP"
+  ],
+  "biome_props_in_clues": [
+   "FERN",
+   "LILY_PADS",
+   "MOSSY_OAK",
+   "STUMP"
+  ],
+  "biome_props_load_bearing": [
+   "FERN",
+   "LILY_PADS",
+   "MOSSY_OAK",
+   "STUMP"
+  ],
+  "G11_biome_props_load_bearing": true,
+  "G3_unique_full": true,
+  "unique_without_shadow_law": true,
+  "bruteforce_nodes": 16,
+  "rules_used": [
+   "monopoly",
+   "ray_block"
+  ],
+  "steps": 9,
+  "difficulty_score": 11,
+  "hardest_step_tier": 2,
+  "tall_scale": 0.55
+ },
+ "daily": "2026-11-11"
+}

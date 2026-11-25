@@ -1,6 +1,6 @@
 // POST /api/app/billing/verify { sku, purchaseToken }  →  { ok, granted, finished, state }   a Play purchase, checked with Google
 // by the BillingVerifier (functions/_lib/app/verifiers.js) and granted once per token. Until the real verifier is in place:
-// 503 billing_unavailable, and nothing is granted. 403 signin_required for a guest. 409 token_used for another account's token.
+// 503 billing_unavailable, and nothing is granted. 403 signin_required for a guest (except on the test server: DEV_BILLING and DEV_KIT on a preview address). 409 token_used for another account's token.
 import { json } from "../../../_lib/auth.js";
 import { readBody } from "../../../_lib/db.js";
 import { appContext } from "../../../_lib/app/context.js";
