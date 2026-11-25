@@ -1,5 +1,5 @@
 /**
- * The Syndicate Coin economy's numbers and calendar (docs/android/product_brief.md "Economy", architecture.md 3.4).
+ * The Syndicate Coin economy's numbers and calendar (app/docs/product_brief.md "Economy", architecture.md 3.4).
  * Pure functions and constants: no storage, no request. Every amount the server ever pays is decided from this file
  * and the server's own tables; nothing here reads a value sent by the phone except an event's time, which is clamped.
  */
@@ -14,7 +14,9 @@ export const SOCIAL_NETWORKS = Object.freeze(["facebook", "instagram", "tiktok"]
 /** The Daily Reward list is this long, then starts over. */
 export const STREAK_CYCLE = 30;
 /** Monday .. Sunday: the daily contract's difficulty and board side (DAILY_PLAN in engine/shadoku_engine.py). */
-export const DAILY_PLAN = Object.freeze([["very_easy", 6], ["easy", 7], ["easy", 7], ["medium", 8], ["medium", 8], ["hard", 9], ["expert", 10]]);
+export const DAILY_PLAN = Object.freeze([["very_easy", 6], ["easy", 7], ["easy", 7], ["medium", 8], ["medium", 8], ["hard", 9], ["expert", 12]]);
+/** Sunday's Expert was a 10 x 10 until the contract of 2026-11-22 (the author, 2026-11-19: Expert starts at 12 x 12): older Sundays keep that side. */
+export const SUNDAY_12_FROM = "2026-11-29";
 /** A daily contract ships the evening before its date (22:00 Lisbon = 21:00 or 22:00 UTC): its solve is accepted from then. */
 export const DAILY_RELEASE_LEAD_MS = 3 * 3600 * 1000;
 /** Coins for a cosmetic (avatar, prop, furniture) of each rarity, unless its row sets its own price. */
@@ -27,8 +29,8 @@ export const HINTS_PER_DAY = Object.freeze({ free: 5, member: 10, member_gold: 1
 export const hintsPerDay = (entitlements) => (entitlements.includes("member_gold") ? HINTS_PER_DAY.member_gold : entitlements.includes("member") ? HINTS_PER_DAY.member : HINTS_PER_DAY.free);
 /** Card rarities, most common first. */
 export const RARITIES = Object.freeze(["common", "rare", "epic", "legendary"]);
-/** A card's variants by tier: three of one tier merge into one of the next (decided 2026-11-13). */
-export const VARIANTS = Object.freeze(["card", "bronze", "silver", "gold", "diamond"]);
+/** A card's variants by tier: three of one tier merge into one of the next (decided 2026-11-13; the top tier renamed Diamond -> Shadow 2026-11-16). */
+export const VARIANTS = Object.freeze(["card", "bronze", "silver", "gold", "shadow"]);
 export const MAX_TIER = VARIANTS.length - 1;
 export const MERGE_COUNT = 3;
 /** An unpaid ad ticket older than this is dead. */
@@ -127,7 +129,8 @@ export function dailyCase(caseId, now, cfg) {
   if (!Number.isFinite(t)) return { error: "bad_date" };
   if (now < t - DAILY_RELEASE_LEAD_MS) return { error: "not_released" };
   if (now - t > (cfg.daily_max_age_days + 1) * DAY_MS) return { error: "too_old" };
-  const [difficulty, size] = DAILY_PLAN[weekday(m[1])];
+  const [difficulty, side] = DAILY_PLAN[weekday(m[1])];
+  const size = difficulty === "expert" && m[1] < SUNDAY_12_FROM ? 10 : side;
   return { mode: "daily", difficulty, size };
 }
 

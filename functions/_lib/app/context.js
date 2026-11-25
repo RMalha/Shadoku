@@ -236,7 +236,7 @@ export async function snapshot(ctx) {
     version: wallet.version,
     entitlements,
     inventory: Object.fromEntries(r[2].results.filter((i) => i.tier === 0).map((i) => [i.item_id, i.qty])), // packs and cards held (duplicates counted)
-    variants, // merged cards: { "<item id>": { bronze: n, silver: n, gold: n, diamond: n } }
+    variants, // merged cards: { "<item id>": { bronze: n, silver: n, gold: n, shadow: n } }
     ads: { coinReward: AD_COIN_REWARD, perDay: cfg.ad_coins_per_day, left: Math.max(0, cfg.ad_coins_per_day - adsToday) },
     streak: { current: streak.current, best: streak.best, lastDate: streak.last_date, cycleDay: streak.cycle_day },
     // the quests dealt for today and this week (a quest switched off since it was dealt is left out)

@@ -46,7 +46,7 @@ export async function onRequestPut({ request, env }) {
   await d.prepare(`INSERT INTO players (id, codename, avatar, solved, hints, seconds, speed, score, updated, reset, excluded) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
     ON CONFLICT (id) DO UPDATE SET codename = ?2, avatar = ?3, solved = ?4, hints = ?5, seconds = ?6, speed = ?7, score = ?8, reset = ?10, excluded = ?11,
     updated = CASE WHEN players.score = ?8 AND players.solved = ?4 AND players.seconds = ?6 THEN players.updated ELSE ?9 END`)
-    .bind(s.id, codename, shownAvatar(rec.avatar, s), st.solved, st.hints, st.seconds, st.speed, st.score, Date.now(), reset, JSON.stringify(excluded)).run();
+    .bind(s.id, codename, shownAvatar(rec.avatar, s), st.solved, st.hints, st.seconds, st.speed, st.score, typeof env.NOW === "function" ? env.NOW() : Date.now(), reset, JSON.stringify(excluded)).run();
   return json({ ok: true, stats: st });
 }
 

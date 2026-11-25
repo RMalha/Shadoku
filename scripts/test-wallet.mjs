@@ -112,7 +112,7 @@ eq("the brief's example quests are seeded with the brief's numbers", rows("SELEC
   "d_expert1:daily:solve_expert:1:25", "d_nohint2:daily:solve_no_hints:2:25", "d_pack1:daily:open_pack:1:10", "d_solve2:daily:solve:2:10", "d_solve5:daily:solve:5:25",
   "w_nohint5:weekly:solve_no_hints:5:100", "w_props8:weekly:new_props:8:120", "w_solve20:weekly:solve:20:100"]);
 eq("…in a longer list, each of a kind the server can advance, each kind used", [rows("SELECT period, COUNT(*) AS n FROM quest_defs GROUP BY period ORDER BY period").map((r) => `${r.period}:${r.n}`), rows("SELECT DISTINCT kind FROM quest_defs").every((r) => eco.QUEST_KINDS.includes(r.kind)), eco.QUEST_KINDS.filter((k) => !one("SELECT 1 AS x FROM quest_defs WHERE kind = ?", k))], [["daily:16", "weekly:14"], true, []]);
-eq("free hints a day, and the variants of a card", [eco.HINTS_PER_DAY, eco.hintsPerDay([]), eco.hintsPerDay(["remove_ads", "member"]), eco.hintsPerDay(["member", "member_gold"]), eco.VARIANTS, eco.MERGE_COUNT], [{ free: 5, member: 10, member_gold: 15 }, 5, 10, 15, ["card", "bronze", "silver", "gold", "diamond"], 3]);
+eq("free hints a day, and the variants of a card", [eco.HINTS_PER_DAY, eco.hintsPerDay([]), eco.hintsPerDay(["remove_ads", "member"]), eco.hintsPerDay(["member", "member_gold"]), eco.VARIANTS, eco.MERGE_COUNT], [{ free: 5, member: 10, member_gold: 15 }, 5, 10, 15, ["card", "bronze", "silver", "gold", "shadow"], 3]);
 eq("the seeded coin packs are the brief's", rows("SELECT sku, data FROM items WHERE kind = 'coin_pack' ORDER BY id").map((i) => `${i.sku}=${JSON.parse(i.data).coins}`), ["coins_100=100", "coins_1200=1200", "coins_2500=2500", "coins_500=500"]);
 eq("dayKey follows the time zone", [eco.dayKey(Date.UTC(2026, 10, 16, 23, 30)), eco.dayKey(Date.UTC(2026, 10, 16, 23, 30), 60), eco.dayKey(Date.UTC(2026, 10, 16, 0, 30), -60)], ["2026-11-16", "2026-11-17", "2026-11-15"]);
 eq("clampTz keeps real offsets only", [eco.clampTz(99999), eco.clampTz(-99999), eco.clampTz("60"), eco.clampTz(NaN), eco.clampTz(540.7)], [840, -720, 0, 0, 540]);
@@ -690,7 +690,7 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   give("lamp", 2, 3); up.push(await merge("lamp", 2));
   give("lamp", 3, 3); up.push(await merge("lamp", 3));
   give("lamp", 4, 3); up.push(await merge("lamp", 4));
-  eq("variants merge upwards: Silver, Gold, Diamond, and no further", [up.map((r) => r.body.variant || r.body.error), [1, 2, 3, 4].map((t) => qty("lamp", t, M)), (await call("GET /wallet", { as: M })).body.state.variants.lamp], [["silver", "gold", "diamond", "max_tier"], [0, 0, 0, 3], { diamond: 3 }]);
+  eq("variants merge upwards: Silver, Gold, Shadow, and no further", [up.map((r) => r.body.variant || r.body.error), [1, 2, 3, 4].map((t) => qty("lamp", t, M)), (await call("GET /wallet", { as: M })).body.state.variants.lamp], [["silver", "gold", "shadow", "max_tier"], [0, 0, 0, 3], { shadow: 3 }]);
   eq("only cards merge", [(await merge("pack_bronze", 0)).body.error, (await merge("hints_5", 0)).body.error, (await merge("nope", 0)).body.error, (await merge("lamp", 5)).status, (await merge("lamp", -1)).status, (await merge("lamp", 0.5)).status, (await merge("lamp", "0")).status], ["not_a_card", "not_a_card", "not_a_card", 400, 400, 400, 400]);
   const ms = (await call("GET /wallet", { as: M })).body.state;
   give("rug", 0, 6);

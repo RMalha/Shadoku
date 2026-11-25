@@ -1,5 +1,5 @@
 // POST /api/app/cards/merge { itemId, tier, requestId }  →  { ok, item, tier, variant, state }
-// Three cards of one kind and tier become one of the next: tier 0 (the card) -> 1 Bronze -> 2 Silver -> 3 Gold -> 4 Diamond.
+// Three cards of one kind and tier become one of the next: tier 0 (the card) -> 1 Bronze -> 2 Silver -> 3 Gold -> 4 Shadow.
 // 409 not_enough | 400 not_a_card | 400 max_tier. The same requestId never merges twice.
 import { json } from "../../../_lib/auth.js";
 import { readBody } from "../../../_lib/db.js";

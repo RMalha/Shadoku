@@ -7,7 +7,7 @@
  * Legendary card out of a pack of that kind, by chance or by the timer, starts that kind's count again (the author, 2026-11-13).
  * A random card is Common 40 %, Rare 30 %, Epic 20 %, Legendary 10 % (table pack_odds), then any
  * cosmetic of that rarity with equal chance. Cards are cosmetics (avatar items, hideout props and furniture); duplicates are
- * kept and counted, and three of a kind merge into the next variant: card -> Bronze -> Silver -> Gold -> Diamond.
+ * kept and counted, and three of a kind merge into the next variant: card -> Bronze -> Silver -> Gold -> Shadow.
  *
  * The server rolls (Workers' crypto random); the phone only shows the result. Play requires the odds to be disclosed before a
  * purchase: GET /api/app/shop publishes, for each pack, exactly the table the roll reads, with a version that names it. An
@@ -122,7 +122,7 @@ export async function openPack(ctx, { packId, oddsVersion, requestId }) {
 
 /**
  * POST /api/app/cards/merge { itemId, tier, requestId } → { status, body: { ok, item, tier (the new variant), variant, state } }.
- * Three cards of one kind and tier become one of the next tier (tier 0 the card itself, 1 Bronze ... 4 Diamond, the last).
+ * Three cards of one kind and tier become one of the next tier (tier 0 the card itself, 1 Bronze ... 4 Shadow, the last).
  * The three are taken only if the account holds them, in the batch that adds the variant.
  */
 export async function mergeCards(ctx, { itemId, tier = 0, requestId }) {

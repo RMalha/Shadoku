@@ -7,7 +7,7 @@
  *
  * The key is the signed-in account id, else a hash of the client address (salted with SESSION_SECRET and kept for at most an hour:
  * no raw address is stored). Without the D1 binding it lets everything through: the endpoints that need D1 answer 503 anyway.
- * This is a second line behind Cloudflare's own rate-limiting rules (docs/ops/runbook.md), not a replacement.
+ * This is a second line behind Cloudflare's own rate-limiting rules (web/ops/runbook.md), not a replacement.
  */
 import { json, sha256b64u } from "./auth.js";
 import { db } from "./db.js";
