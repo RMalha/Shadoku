@@ -257,7 +257,8 @@ export async function snapshot(ctx) {
 
 /* ───────────── deleting an account (architecture 4.11) ───────────── */
 // every table whose rows name an account and go with it
-const ERASED = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes", "devices", "identities"];
+// (hideouts and hideout_rooms: migration 0005, achievements: 0006; a table not applied yet is skipped)
+const ERASED = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes", "devices", "identities", "hideouts", "hideout_rooms", "achievements"];
 // the ledger lines that are about money: copied, without the account, before the ledger goes
 const MONEY_REASONS = ["iap", "refund"];
 /** What stands in `purchases.account_id` once the account is gone. */
@@ -266,7 +267,8 @@ export const ERASED_ACCOUNT = "erased";
 /**
  * The account is being deleted (DELETE /api/account, from the website or from the app): every row that names it goes, in ONE
  * batch, so the erasure happens whole or not at all (a caller whose erasure failed still has its session and can ask again).
- * That is its wallet and ledger, cards, contracts, quests, streak, ad and hint records, flags, its row in `accounts`, the
+ * That is its wallet and ledger, cards, contracts, quests, streak, ad and hint records, flags, its hideout (every room) and achievements,
+ * its row in `accounts`, the
  * phones signed in to it (every token it holds stops at once: a token is only as good as its `devices` row), the sign-ins
  * linked to it, and whatever is left of the guest accounts it grew from (accounts.js mergeGuest).
  * What stays, and never with the account id (migrations/0004_app_erasure.sql):

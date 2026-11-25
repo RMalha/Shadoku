@@ -104,7 +104,8 @@ const DEV = { env: { ...baseEnv, DEV_BILLING: "1" }, host: LOCAL }; // test purc
 const buy = (token, sku, purchaseToken) => app("POST", "/api/app/billing/verify", token, { ...DEV, body: { sku, purchaseToken } });
 const refund = (purchaseToken) => hit("POST", "/api/app/billing/rtdn", { ...DEV, body: { voided: [{ purchaseToken }] } });
 
-for (const [id, mode, difficulty, size] of [["tut1", "tutorial", "Tutorial", 5], ["e1", "story", "Easy", 7], ["e2", "story", "Easy", 7], ["m1", "classic", "Medium", 8]]) d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size) VALUES (?, ?, ?, ?)").run(id, mode, difficulty, size);
+// tut_never: a tutorial nobody solves here, so the "every tutorial contract" achievement (25 coins) stays out of these totals
+for (const [id, mode, difficulty, size] of [["tut1", "tutorial", "Tutorial", 5], ["tut_never", "tutorial", "Tutorial", 5], ["e1", "story", "Easy", 7], ["e2", "story", "Easy", 7], ["m1", "classic", "Medium", 8]]) d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size) VALUES (?, ?, ?, ?)").run(id, mode, difficulty, size);
 
 // a community puzzle the server accepts: a shipped case, its clues reduced to "was in <room>" (as scripts/test-hardening.mjs does)
 const caseDir = fs.existsSync(path.join(ROOT, "engine", "puzzles")) ? path.join(ROOT, "engine", "puzzles") : path.join(ROOT, "src", "puzzles");
@@ -153,7 +154,7 @@ let webPuzzle = "";
     await answer(web("PUT", "/api/progress", cookie, { body: { progress: { pad: "x".repeat(4 * 1024 * 1024) } } })), (await web("GET", "/api/progress", cookie)).body.progress], [200, 900 * 1024, 200, "413 size", PROGRESS]);
   eq("codename", [(await web("GET", "/api/username?name=Web_Agent", cookie)).body, await status(web("PUT", "/api/username", cookie, { body: { name: "Web_Agent" } })), (await web("GET", "/api/username?name=web_agent", other)).body, await answer(web("PUT", "/api/username", other, { body: { name: "WEB_AGENT" } })),
     await answer(hit("PUT", "/api/username", { cookie, body: { name: "Nope_1" } })), await answer(hit("GET", "/api/username?name=Nope_1")), kv.get("name:web_agent")], [{ available: true }, 200, { available: false }, "409 taken", "403 origin", "401 auth", W]);
-  eq("avatar", [(await web("PUT", "/api/avatar", cookie, { body: { avatar: "photo" } })).body, await answer(hit("PUT", "/api/avatar", { cookie, from: "evil", body: { avatar: "" } })), await answer(web("PUT", "/api/avatar", undefined, { body: { avatar: "" } }))], [{ ok: true, shown: "https://lh3.googleusercontent.com/a/web" }, "403 origin", "401 auth"]);
+  eq("avatar", [(await web("PUT", "/api/avatar", cookie, { body: { avatar: "photo" } })).body, await answer(hit("PUT", "/api/avatar", { cookie, from: "evil", body: { avatar: "" } })), await answer(web("PUT", "/api/avatar", undefined, { body: { avatar: "" } }))], [{ ok: true, shown: "https://lh3.googleusercontent.com/a/web", updated: NOW }, "403 origin", "401 auth"]);
   const pub = await web("POST", "/api/community", cookie, { body: puzzle("The Web Case") });
   webPuzzle = pub.body.id;
   eq("community: publish, list, read, rate, play, take down", [
@@ -176,7 +177,7 @@ let appPuzzle = "";
   eq("…the very copy the website sees for that account: one account, two doors", (await web("GET", "/api/progress", await cookieFor(A))).body.progress, PROGRESS);
   eq("…under the same ceiling", [await answer(app("PUT", "/api/progress", a.token, { body: { progress: { ...PROGRESS, pad: "x".repeat(900 * 1024) } } })), await answer(app("PUT", "/api/progress", a.token, { body: { progress: PROGRESS } })), await answer(app("PUT", "/api/progress", a.token, { body: { progress: { pad: "x".repeat(4 * 1024 * 1024) } } }))], [200, 200, "413 size"]);
   eq("codename: checked, taken, and unique across both doors", [(await app("GET", "/api/username?name=App_Agent", a.token)).body, await status(app("PUT", "/api/username", a.token, { body: { name: "App_Agent" } })), await answer(app("PUT", "/api/username", b.token, { body: { name: "app_agent" } })), await answer(app("PUT", "/api/username", b.token, { body: { name: "Web_Agent" } })), await answer(app("PUT", "/api/username", b.token, { body: { name: "x" } })), kv.get("name:app_agent")], [{ available: true }, 200, "409 taken", "409 taken", "400 format", A]);
-  eq("avatar: \"photo\" is the picture the app's sign-in brought", (await app("PUT", "/api/avatar", a.token, { body: { avatar: "photo" } })).body, { ok: true, shown: "https://lh3.googleusercontent.com/a/9020001" });
+  eq("avatar: \"photo\" is the picture the app's sign-in brought", (await app("PUT", "/api/avatar", a.token, { body: { avatar: "photo" } })).body, { ok: true, shown: "https://lh3.googleusercontent.com/a/9020001", updated: NOW });
   const pub = await app("POST", "/api/community", a.token, { body: puzzle("The App Case") });
   appPuzzle = pub.body.id;
   eq("community: published from the app, listed for everyone, rated and played by another phone, taken down by its author only", [

@@ -4,6 +4,8 @@
 //   hint_use      { caseId }                        one hint from the stock was used
 //   streak_claim  { date }                          the Daily Reward for the phone's local date
 //   quest_claim   { questId, periodKey? }           collects a finished quest
+//   avatar_created {}                               the player made their avatar (the "Create your Avatar" achievement)
+// A result may carry `unlocked: [{ id, tier, reward }]`: the achievement tiers that event reached (functions/_lib/app/achievements.js).
 // result: ok | duplicate (already counted: a resend) | rejected (+ reason) | deferred (more than the per-call limit: send it
 //         again). An event carries no amount, and any it carries is ignored.
 import { json } from "../../_lib/auth.js";

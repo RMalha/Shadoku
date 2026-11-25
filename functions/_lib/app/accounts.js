@@ -86,9 +86,12 @@ const FRESH_SQL = `(${[
 const freshBinds = (id) => Array(HISTORY.length + 2).fill(id);
 // everything of a guest that is keyed by its account and is not the wallet or the ledger (those move by ledger lines)
 const MOVED = ["inventory", "entitlements", "solves", "quest_state", "streaks", "social_visits", "hint_uses", "pack_opens", "card_merges", "shop_refreshes", "ad_tickets", "ad_rewards", "purchases", "flags"];
+// …and those of the later migrations, moved only once they exist (0005 hideouts and their rooms, 0006 achievements). The
+// account, new to the app, can have no achievement of its own and at most a starter-only room 1: the guest's replace them.
+const MOVED_LATER = ["hideouts", "hideout_rooms", "achievements"];
 
 /** "moved": the statements that make `target` (new to the app) what `guest` was. All of them hang on the first one. */
-function moveStatements(d, { guest, target, op, day, now }) {
+function moveStatements(d, { guest, target, op, day, now, later = [] }) {
   const mine = when.gate("accounts", op, "merge_op");
   const tied = (sql, ...binds) => d.prepare(`${sql} AND ${mine.sql}`).bind(...binds, ...mine.binds);
   const out = { coin: newOp(), hint: newOp() }; // the guest's two closing lines
@@ -99,6 +102,7 @@ function moveStatements(d, { guest, target, op, day, now }) {
     // what the account was dealt while it was empty makes room for the guest's
     ...["quest_state", "streaks", "ad_tickets"].map((table) => tied(`DELETE FROM ${table} WHERE account_id = ?`, target)),
     ...MOVED.map((table) => tied(`UPDATE ${table} SET account_id = ? WHERE account_id = ?`, target, guest)),
+    ...later.flatMap((table) => [tied(`DELETE FROM ${table} WHERE account_id = ?`, target), tied(`UPDATE ${table} SET account_id = ? WHERE account_id = ?`, target, guest)]),
     tied(
       `UPDATE accounts SET tz_offset = (SELECT tz_offset FROM accounts WHERE id = ?), last_sync = MAX(last_sync, (SELECT last_sync FROM accounts WHERE id = ?)),
          birth_year = COALESCE(birth_year, (SELECT birth_year FROM accounts WHERE id = ?)) WHERE id = ?`, guest, guest, guest, target),
@@ -143,6 +147,7 @@ export async function mergeGuest(d, { guest, target, leave = false, now }) {
       d.prepare("SELECT a.kind, a.merged_into, a.banned, a.tz_offset, COALESCE(w.coins, 0) AS coins, COALESCE(w.hints, 0) AS hints FROM accounts a LEFT JOIN wallets w ON w.account_id = a.id WHERE a.id = ?").bind(guest),
       d.prepare("SELECT COALESCE(SUM(qty), 0) AS n FROM inventory WHERE account_id = ?").bind(guest),
       d.prepare(`SELECT ${FRESH_SQL} AS fresh`).bind(...freshBinds(target)),
+      d.prepare(`SELECT name FROM sqlite_master WHERE type = 'table' AND name IN (${MOVED_LATER.map(() => "?").join(", ")})`).bind(...MOVED_LATER),
     ]);
     const g = pre[0].results[0];
     if (!g || g.kind !== "guest" || guest === target) return { result: "none" };
@@ -151,7 +156,7 @@ export async function mergeGuest(d, { guest, target, leave = false, now }) {
     const has = { coins: g.coins, hints: g.hints, items: pre[1].results[0].n };
     const op = newOp(), day = dayKey(now, g.tz_offset);
     if (pre[2].results[0].fresh) {
-      const res = await d.batch(moveStatements(d, { guest, target, op, day, now }));
+      const res = await d.batch(moveStatements(d, { guest, target, op, day, now, later: pre[3].results.map((t) => t.name) }));
       if (!wrote(res[0])) continue; // the guest merged meanwhile, or the account stopped being new: look again
       const lines = (await d.prepare("SELECT currency, delta FROM ledger WHERE account_id = ? AND reason = 'merge' AND ref = ?").bind(guest, target).all()).results;
       const moved = (currency) => -(lines.find((l) => l.currency === currency) || { delta: 0 }).delta;

@@ -1577,6 +1577,9 @@ function SuspectSheet({ q, look, color, placed, emph, beach, onClose, gender = n
  *  - lockCaseMenu    freezes the case picker, the ‹ › arrows and "Next Case" (first-time tutorial)
  *  - forcePuzzleId   opens this case (and keeps it open while set); the choice is not saved as "last case"
  *  - onGameEvent     ({type, id?}) for "select" ({id}) | "note" ({id,r,c,drag}) | "place" ({id,r,c}) | "unplace" | "light" ({r,c,on}) | "cross" ({r,c,on}) | "erase" ({r,c} or {all:true}) | "undo" | "tool" ({tool}) | "hint" ({open}) | "solved" | "view" ({view: "play" | "lab"})
+ *  - onHintRequest   ({ id, hid, fresh }) => false to refuse: asked when the player opens the hint panel (not when it closes). `hid` is the hint on offer (null when nothing is left to hint),
+ *                    `fresh` is true when opening it would be the first look at that hint (a hint already opened this run is not asked again). The Android app uses it to stop
+ *                    a hint at zero; with no handler (the website) the hint always opens
  *  - helpExtra       node, or ({ close }) => node, appended to the "How to play" dialog (e.g. a "Replay tutorial" button)
  *  - fixedCase      the contract cannot be changed from here (no picker, no arrows): the wrapper's contracts page is the only way
  *  - onExit          () => void, the "Back to Contracts" button of the solved banner (with fixedCase)
@@ -1830,7 +1833,7 @@ export default function ShadokuGame(props) {
   const ctxT = useText(), t = props.t || ctxT;
   return <TextContext.Provider value={t}><GameScreen {...props} t={t} /></TextContext.Provider>;
 }
-function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, dossierCard = null, doneExtra = null, exitLabel = null, t }) {
+function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, lockCaseMenu = false, forcePuzzleId = null, onGameEvent = null, onHintRequest = null, helpExtra = null, insetY = 0, onCaseChange = null, jumpTo = null, coach = null, fixedCase = false, onExit = null, renderEnvelope = null, hideLogo = false, onLogo = null, menu = null, langPicker = null, onLaunch = null, headEnd = null, dossierCard = null, doneExtra = null, exitLabel = null, t }) {
   const puzzles = useMemo(() => normalizePuzzles(puzzlesProp), [puzzlesProp]);
   const heads = useMemo(() => puzzles.map((q) => localizeHead(q, trOf(t))), [puzzles, t]); // title + difficulty in the active language, for the picker / title bar
   const [caseIdx, setCaseIdx] = useState(() => {
@@ -2345,6 +2348,7 @@ function GameScreen({ puzzles: puzzlesProp = PUZZLES, logoSrc, lab: Lab = null, 
   const LB = coordsOn ? COORD_BAND : 0, seaM = seaBand(p);
   const onHint = () => {
     if (hintOpen) { setHintOpen(false); return; }
+    if (onHintRequest && onHintRequest({ id: p.id, hid: cur ? cur.hid : null, fresh: !!cur && !revealed }) === false) return;
     setHintOpen(true);
     if (cur && noteOn < 0) showNext(); // a note card on show stays
   };

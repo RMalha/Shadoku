@@ -10,6 +10,7 @@ import { seal } from "../functions/_lib/auth.js";
 import { sealAppToken, eraseAppAccount } from "../functions/_lib/app/context.js";
 import { post, newOp } from "../functions/_lib/app/ledger.js";
 import * as eco from "../functions/_lib/app/economy.js";
+import { ACHIEVEMENTS, REWARD_ITEMS } from "../functions/_lib/app/achievements.js";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const HOUR = 3600 * 1000, DAY = 24 * HOUR;
@@ -87,6 +88,8 @@ const CASES = { tut1: ["tutorial", "Tutorial", 5], tut2: ["tutorial", "Tutorial"
 for (let i = 1; i <= 60; i++) CASES[`e${i}`] = ["story", "Easy", 7];
 for (const [id, [mode, difficulty, size]] of Object.entries(CASES)) d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size) VALUES (?, ?, ?, ?)").run(id, mode, difficulty, size);
 d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size, active) VALUES ('retired', 'story', 'Expert', 10, 0)").run();
+// a tutorial nobody solves here, so the "every tutorial contract" achievement (25 coins) stays out of these totals (scripts/test-app-achievements.mjs tests it)
+d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size) VALUES ('tut_never', 'tutorial', 'Tutorial', 5)").run();
 const REWARD_OF = (id) => (CASES[id][0] === "tutorial" ? 25 : eco.REWARDS[eco.difficultyKey(CASES[id][1])]);
 // test goods beside the seeded ones. Each cosmetic here is alone on its shelf (group and rarity), so it is always "of the day";
 // mask_a and mask_b share one shelf, priced by rarity.
@@ -609,7 +612,12 @@ eq("a deal is the same on every call and never deals a quest twice", (() => { co
   eq("a Silver Pack guarantees an Epic card; a Gold Pack a Rare and an Epic, three random cards and no hints", [silver.body.cards[0], silver.body.cards[1].item, silver.body.cards[1].guaranteed, gold.body.cards.length, gold.body.cards.slice(0, 2).map((c) => `${c.rarity}:${c.guaranteed}`), gold.body.cards.slice(2).every((c) => c.item && !c.guaranteed), gold.body.cards.some((c) => c.hints || c.timer), gold.body.number, wallet(A).hints], [{ hints: 5 }, "sofa", true, 5, ["rare:true", "epic:true"], true, false, 1, 15]);
   const after = (await call("GET /wallet", { as: A })).body.state;
   eq("every open is kept, and counts for the pack quests", [one("SELECT COUNT(*) AS n FROM pack_opens WHERE account_id = ?", A).n, after.quests.find((q) => q.id === "w_packs3").progress, after.quests.find((q) => q.id === "d_pack1").progress, rows("SELECT delta FROM ledger WHERE account_id = ? AND reason = 'pack'", A).map((l) => l.delta)], [4, 4, 4, [5, 5, 5]]);
-  eq("the cards a pack gave are exactly what the inventory gained", rows("SELECT item_id, qty FROM inventory WHERE account_id = ? AND item_id NOT LIKE 'pack_%' AND qty > 0 ORDER BY item_id", A).map((i) => `${i.item_id}:${i.qty}`), (() => { const t = {}; for (const r of rows("SELECT result FROM pack_opens WHERE account_id = ?", A)) for (const c of JSON.parse(r.result)) if (c.item) t[c.item] = (t[c.item] || 0) + 1; return Object.keys(t).sort().map((k) => `${k}:${t[k]}`); })());
+  eq("the cards a pack gave are exactly what the inventory gained", rows("SELECT item_id, qty FROM inventory WHERE account_id = ? AND item_id NOT LIKE 'pack_%' AND item_id NOT IN (SELECT value FROM json_each(?)) AND qty > 0 ORDER BY item_id", A, JSON.stringify(REWARD_ITEMS)).map((i) => `${i.item_id}:${i.qty}`), (() => { const t = {}; for (const r of rows("SELECT result FROM pack_opens WHERE account_id = ?", A)) for (const c of JSON.parse(r.result)) if (c.item) t[c.item] = (t[c.item] || 0) + 1; return Object.keys(t).sort().map((k) => `${k}:${t[k]}`); })());
+  // an achievement can add its own reward in the batch of an open ("collect everything", when the rolls cover this small pool:
+  // GOLDEN_FLOOR): those are told apart, and must be exactly the rewards of the tiers the account unlocked
+  const rewardRows = rows("SELECT item_id, qty FROM inventory WHERE account_id = ? AND item_id IN (SELECT value FROM json_each(?)) AND qty > 0 ORDER BY item_id", A, JSON.stringify(REWARD_ITEMS)).map((i) => `${i.item_id}:${i.qty}`);
+  eq("…the only other items it gained are the rewards of the achievements it unlocked, one each", rewardRows, rows("SELECT achievement, tier FROM achievements WHERE account_id = ?", A)
+    .flatMap((u) => ACHIEVEMENTS.find((a) => a.id === u.achievement).tiers[u.tier - 1].items || []).sort().map((item) => `${item}:1`));
   d1.raw.prepare("INSERT INTO items (id, kind, rarity, data) VALUES ('crown', 'avatar', 'legendary', '{}')").run();
   const wider = await packOdds();
   eq("a new cosmetic changes the odds, and so their version", [wider.pack_gold.version !== odds.pack_gold.version, wider.pack_gold.random[3].items.map((i) => i.id).includes("crown"), (await open("pack_gold", odds.pack_gold.version)).body.error], [true, true, "odds_changed"]);
@@ -911,7 +919,7 @@ audit("after the scripted tests");
           await sync(as, events, { tz: pick([0, 60, -300, 840, junk()]), coins: junk() });
           break;
         }
-        case 3: { const t = await call("POST /ads/ticket", { as, body: { placement: pick(["coins", "coins", "hint"]), reward: junk() } }); if (t.body && t.body.ticket) { tickets.push(t.body.ticket); if (rnd(2)) await call("POST /ads/claim", { as, body: { ticket: t.body.ticket, reward: junk() }, ...dev }); } break; }
+        case 3: { const t = await call("POST /ads/ticket", { as, body: { placement: pick(["coins", "coins", "hint"]), reward: junk() } }); const claim = rnd(2); if (t.body && t.body.ticket) { tickets.push(t.body.ticket); if (claim) await call("POST /ads/claim", { as, body: { ticket: t.body.ticket, reward: junk() }, ...dev }); } break; }
         case 4: case 5: if (tickets.length) await call("POST /ads/claim", { as, body: { ticket: pick(tickets), reward: junk(), coins: junk() }, ...dev }); break;
         case 6: { const requestId = rnd(3) && requests.length ? pick(requests) : uid(); requests.push(requestId); await call("POST /shop/buy", { as, body: { itemId: pick(["hints3", "hat", "lamp", "lamp", "lamp", "rug", "sofa", "pack_bronze", "pack_bronze", "mask_a", "mask_b", "coins_2500", "free"]), requestId, price: junk(), coins: junk() } }); break; }
         case 7: { const sku = pick(["coins_100", "coins_500", "hints_5_money", "remove_ads", "noob_kit"]); const token = rnd(3) && tokensUsed.length ? pick(tokensUsed) : `dev.${sku}.fuzz${step}xx`; tokensUsed.push(token); await call("POST /billing/verify", { as, body: { sku: rnd(5) ? sku : "coins_2500", purchaseToken: token, coins: junk() }, ...dev }); break; }
@@ -920,7 +928,7 @@ audit("after the scripted tests");
         case 11: case 12: {
           const dealt = (await call("GET /wallet", { as })).body.state.quests.map((q) => q.id);
           let ticket;
-          if (rnd(2)) { ticket = (await call("POST /ads/ticket", { as, body: { placement: "quest_refresh" } })).body?.ticket; if (ticket && rnd(4)) await call("POST /ads/claim", { as, body: { ticket }, ...dev }); if (ticket) tickets.push(ticket); if (!rnd(4)) ticket = pick(tickets); }
+          if (rnd(2)) { ticket = (await call("POST /ads/ticket", { as, body: { placement: "quest_refresh" } })).body?.ticket; const claim = rnd(4); if (ticket && claim) await call("POST /ads/claim", { as, body: { ticket }, ...dev }); if (ticket) tickets.push(ticket); if (!rnd(4)) ticket = pick(tickets); }
           await call("POST /quests/refresh", { as, body: { questId: rnd(5) ? pick(dealt) : pick(["d_solve2", "w_props8", "nope"]), ticket, reward: junk() } });
           break;
         }
@@ -934,19 +942,21 @@ audit("after the scripted tests");
         case 15: {
           const mine = (await call("GET /shop", { as })).body.items.filter((i) => i.ofTheDay).map((i) => i.id);
           let ticket;
-          if (rnd(2)) { ticket = (await call("POST /ads/ticket", { as, body: { placement: "shop_refresh" } })).body?.ticket; if (ticket && rnd(4)) await call("POST /ads/claim", { as, body: { ticket }, ...dev }); if (ticket) tickets.push(ticket); if (!rnd(4)) ticket = pick(tickets); }
+          if (rnd(2)) { ticket = (await call("POST /ads/ticket", { as, body: { placement: "shop_refresh" } })).body?.ticket; const claim = rnd(4); if (ticket && claim) await call("POST /ads/claim", { as, body: { ticket }, ...dev }); if (ticket) tickets.push(ticket); if (!rnd(4)) ticket = pick(tickets); }
           await call("POST /shop/refresh", { as, body: { itemId: rnd(5) ? pick(mine.filter((x) => x.startsWith("mask")).concat(mine)) : pick(["sofa", "hints3", "nope"]), ticket, item: junk() } });
           break;
         }
         case 14: {
           const held = Object.entries((await call("GET /wallet", { as })).body.state.inventory).filter(([item, n]) => n >= 3 && !item.startsWith("pack_")).map(([item]) => item);
-          await call("POST /cards/merge", { as, body: { itemId: held.length && rnd(4) ? pick(held) : pick(["lamp", "hat", "rug", "sofa", "mask_a", "pack_bronze", "nope"]), tier: pick([0, 0, 0, 1, 4, junk()]), requestId: uid() } });
+          const mine = rnd(4);
+          await call("POST /cards/merge", { as, body: { itemId: held.length && mine ? pick(held) : pick(["lamp", "hat", "rug", "sofa", "mask_a", "pack_bronze", "nope"]), tier: pick([0, 0, 0, 1, 4, junk()]), requestId: uid() } });
           break;
         }
         case 10: {
           await call("POST /streak/claim", { as, body: { date: eco.addDays(today(), rnd(4) - 1), reward: junk() } });
           const done = (await call("GET /wallet", { as })).body.state.quests.filter((q) => q.progress >= q.target && !q.claimed).map((q) => q.id);
-          await call("POST /quests/claim", { as, body: { questId: done.length && rnd(4) ? pick(done) : pick(["d_solve2", "d_solve5", "w_solve20"]), reward: junk() } });
+          const fromDone = rnd(4);
+          await call("POST /quests/claim", { as, body: { questId: done.length && fromDone ? pick(done) : pick(["d_solve2", "d_solve5", "w_solve20"]), reward: junk() } });
           break;
         }
         default: NOW += pick([HOUR, 5 * HOUR, DAY]);

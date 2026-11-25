@@ -168,11 +168,12 @@ const userKey = (id) => `user:${id}`;
 const nameKey = (name) => `name:${name.toLowerCase()}`;
 const progressKey = (id) => `progress:${id}`;
 
-/** The account's record: { username, avatar, since } ("" when unset; avatar: src/avatarLook.js; since: when an account deleted before
- *  was made again, epoch ms, else 0: progress a browser kept from before then is not this account's, see accountSince). */
+/** The account's record: { username, avatar, avatarAt, since } ("" when unset; avatar: src/avatarLook.js; avatarAt: when the avatar was
+ *  last saved, epoch ms, 0 = never; since: when an account deleted before was made again, epoch ms, else 0: progress a browser kept
+ *  from before then is not this account's, see accountSince). */
 export const getRecord = async (env, id) => {
   const rec = env.SHADOKU_KV ? await env.SHADOKU_KV.get(userKey(id), "json") : null;
-  return { username: rec?.username || "", avatar: typeof rec?.avatar === "string" ? rec.avatar : "", since: Number.isFinite(rec?.since) ? rec.since : 0 };
+  return { username: rec?.username || "", avatar: typeof rec?.avatar === "string" ? rec.avatar : "", avatarAt: Number.isFinite(rec?.avatarAt) ? rec.avatarAt : 0, since: Number.isFinite(rec?.since) ? rec.since : 0 };
 };
 
 /** → when this account started (epoch ms; 0 = its first life). An account deleted before starts at its deletion: the `gone` mark expires
@@ -203,11 +204,12 @@ export async function setCodename(env, id, name) {
   if (prev && prev.toLowerCase() !== name.toLowerCase()) await env.SHADOKU_KV.delete(nameKey(prev));
 }
 
-/** Saves the avatar choice ("" = S. H. Adow, "photo", "L:…") in the account's record. */
-export async function setAvatar(env, id, avatar) {
+/** Saves the avatar choice ("" = S. H. Adow, "photo", "L:…") in the account's record, with when (`at`, epoch ms: the app's sync
+ *  compares it with its own unsent edit). */
+export async function setAvatar(env, id, avatar, at = Date.now()) {
   if (!env.SHADOKU_KV) return;
   const rec = await getRecord(env, id);
-  await env.SHADOKU_KV.put(userKey(id), JSON.stringify({ ...rec, avatar }));
+  await env.SHADOKU_KV.put(userKey(id), JSON.stringify({ ...rec, avatar, avatarAt: at }));
 }
 
 export async function deleteRecord(env, id) {

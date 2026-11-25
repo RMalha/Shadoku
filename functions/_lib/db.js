@@ -14,11 +14,25 @@
  *             for 12 months is deleted (functions/_lib/retention.js)
  */
 import { json } from "./auth.js";
+import { AVATAR_RE, COSMETIC_BY_ID, avatarCodeOk } from "../../src/avatarCosmetics.js";
 
-/** An avatar choice: "" (S. H. Adow), "photo" or an "L:" portrait (src/avatarLook.js has the same pattern; it imports the art, so not shared). */
-export const AVATAR_RE = /^(|photo|L:[A-Za-z0-9.]{1,200})$/;
-/** AVATAR_RE plus the shape of an "L:" code: 17 fields (src/avatarLook.js LOOK_FIELDS), none named like an Object.prototype member (the art looks fields up in plain tables). */
-export const avatarOk = (v) => typeof v === "string" && AVATAR_RE.test(v) && (!v.startsWith("L:") || (v.slice(2).split(".").length === 17 && v.slice(2).split(".").every((f) => !(f in Object.prototype))));
+/** An avatar choice: "" (S. H. Adow), "photo" or an "L:" portrait (format v2: src/avatarCosmetics.js, shared with the site and the app). */
+export { AVATAR_RE };
+/** The server's check of an avatar code: AVATAR_RE (at most 200 characters) plus the v2 shape: 17 to 19 fields, none empty or named
+ *  like an Object.prototype member (the art looks fields up in plain tables), a known accessory, tier digits only on card cosmetics. */
+export const avatarOk = avatarCodeOk;
+
+/** The avatar cosmetics an account holds, from the app's `inventory` (tier 0 = the card as won, 1-4 Bronze ... Shadow):
+ *  { "<cosmetic id>": [tiers held] }. {} when the account holds none, or before the app's tables exist. */
+export async function heldCosmetics(env, id) {
+  if (!env.SHADOKU_DB || !id) return {};
+  try {
+    const rows = (await env.SHADOKU_DB.prepare("SELECT item_id, tier FROM inventory WHERE account_id = ? AND qty > 0 ORDER BY item_id, tier").bind(id).all()).results || [];
+    const out = {};
+    for (const r of rows) if (COSMETIC_BY_ID.has(r.item_id) && Number.isInteger(r.tier) && r.tier >= 0 && r.tier <= 4) (out[r.item_id] ||= []).push(r.tier);
+    return out;
+  } catch { return {}; } // no inventory table (the app's migrations not applied here)
+}
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS players (id TEXT PRIMARY KEY, codename TEXT NOT NULL, avatar TEXT NOT NULL DEFAULT '', solved INTEGER NOT NULL DEFAULT 0,

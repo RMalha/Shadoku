@@ -3,11 +3,13 @@
  * scripts/avatar-kit/build.mjs from docs/android/design/art/New: never edit the JSON by hand).
  *
  * The kit is in the 280×280 frame of the suspects' portraits (ShadokuArt.jsx Figure), so the same crops apply. Each item
- * is a list of [role, value, d] in paint order: "k" = drawn in `value` (a colour); "t" = the item's chosen colour, `value`
+ * is a list of [role, value, d] in paint order: "i" = a picture (the 2026-11-22 cosmetics: `value` = [x, y, w, h] in the frame, `d` = its WebP data URI, never tinted); "k" = drawn in `value` (a colour); "t" = the item's chosen colour, `value`
  * being the path's shade in [-1, 1] (below 0 darker, above 0 lighter); "u" = the same for the item's second colour (the
  * T-shirt under the overall); "o" = as "t", with a thin rim in a dark tone of the colour (the wire of the round glasses, which
  * has no ink outline of its own). Plain JS (no React) so the build's preview can use it too.
+ * A cosmetic worn as a Bronze, Silver, Gold or Shadow variant is drawn through the tier's tone map (tierTone.js tierFilterSvg).
  */
+import { tierFilterSvg } from "./tierTone.js";
 
 const hex2rgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
 function rgb2hsl([r, g, b]) {
@@ -93,25 +95,32 @@ export function kitItems(look, hides) {
  *  the hat's edge (kit.clip; the same id for the same hat, so repeated portraits share an identical clip path).
  *  `paint(id, role, v, fill, k)`, if given, may return another fill for a path (the assassins' shadow, ShadokuArt.jsx ShadowFigure);
  *  `fill` is the colour the kit would use, `k` the path's place in its item (0: the item's silhouette, under the rest). It may also
- *  return { fill, line, width }: the path then gets an outline in `line` round it (under its fill; `width` the stroke's, RIM_W * 2 by default). */
-export function kitSvg(kit, ids, colors, face = "", paint = null) {
+ *  return { fill, line, width }: the path then gets an outline in `line` round it (under its fill; `width` the stroke's, RIM_W * 2 by default).
+ *  `tiers`, if given: { item id: "bronze" | "silver" | "gold" | "shadow" }, the variant each cosmetic is drawn in. */
+export function kitSvg(kit, ids, colors, face = "", paint = null, tiers = null) {
   const slot = { base: colors.skin, hair: colors.hair, facialHair: colors.hair, hat: colors.hat, clothing: colors.clothes, tie: colors.accent, glasses: colors.frame };
   const hat = (ids.find((id) => /^hat-[A-Za-z0-9]+$/.test(id)) || "").slice(4);
   const cut = hat && kit.clip && kit.clip[hat] ? `avk-hat-${hat}` : null;
   let out = cut ? `<defs><clipPath id="${cut}"><path d="${kit.clip[hat]}"/></clipPath></defs>` : "";
+  // one filter per tier worn; the same id for the same tier everywhere, so repeated portraits share an identical definition
+  const used = tiers ? [...new Set(ids.map((id) => tiers[id]).filter(Boolean))] : [];
+  if (used.length) out += `<defs>${used.map((t) => tierFilterSvg(t, `avk-tier-${t}`, { rim: 2 })).join("")}</defs>`;
   for (const id of ids) {
     const item = kit.items[id];
     if (item) {
       const main = slot[id.split("-")[0]];
       let paths = "";
       for (const [k, [role, v, d]] of item.entries()) {
+        if (role === "i") { paths += `<image x="${v[0]}" y="${v[1]}" width="${v[2]}" height="${v[3]}" href="${d}" preserveAspectRatio="none"/>`; continue; } // a picture: v = [x, y, w, h], d = its data URI
         const own = role === "k" ? v : tint(role === "u" ? colors.accent : main || "#808080", v);
         const got = (paint && paint(id, role, v, own, k)) || own, fill = typeof got === "string" ? got : got.fill;
         const line = typeof got === "string" ? (role === "o" ? tint(fill, RIM_SHADE) : null) : got.line;
         const rim = line ? ` stroke="${line}" stroke-width="${typeof got === "string" ? RIM_W : got.width || RIM_W * 2}" stroke-linejoin="round" paint-order="stroke"` : "";
         paths += `<path fill="${fill}"${rim} d="${d}"/>`;
       }
-      out += cut && id.startsWith("hair-") ? `<g clip-path="url(#${cut})">${paths}</g>` : paths;
+      // the hair, and the head under a hat that hides its dome (kit.cover), keep only what lies below the hat's edge
+      if (tiers && tiers[id]) paths = `<g filter="url(#avk-tier-${tiers[id]})">${paths}</g>`;
+      out += cut && (id.startsWith("hair-") || (id.startsWith("base") && kit.cover && kit.cover.includes(hat))) ? `<g clip-path="url(#${cut})">${paths}</g>` : paths;
     }
     if (id === "base" || id === "base-noEars") out += face;
   }

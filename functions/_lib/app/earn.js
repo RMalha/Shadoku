@@ -9,12 +9,15 @@
 import { post, when, wrote, newOp, lineFor } from "./ledger.js";
 import { flag, snapshot } from "./context.js";
 import { claimQuest, questBumps, questDefs } from "./quests.js";
+import { ON, achievementStatements, unlocksOf } from "./achievements.js";
 import {
   CASE_ID_RE, CLIENT_ID_RE, COSMETIC_GROUP, HINTS_PER_DAY, SOCIAL_NETWORKS, SOCIAL_REWARD, STREAK_CYCLE,
   addDays, clampAt, clampTz, dailyCase, dayKey, dayStart, difficultyKey, intIn, questCounts, randomInt, solveReward,
 } from "./economy.js";
 
 const rejected = (reason) => ({ result: "rejected", reason });
+/** The hour (0-23) of the epoch ms `at` on the clock `tz` minutes east of UTC. */
+export const localHour = (at, tz) => new Date(at + tz * 60000).getUTCHours();
 
 /* ───────────── solve ───────────── */
 /**
@@ -46,9 +49,15 @@ async function solve(ctx, ev, at, day) {
   if (reward > 0) stmts.push(...post(d, { id: newOp(), account: id, delta: reward, reason: "solve", ref: ev.caseId, day, at: now, meta: { mode: info.mode, difficulty: info.difficulty }, guards: [mine] }));
   if (fast) stmts.push(flag(d, id, "fast_solve", { caseId: ev.caseId, seconds, min }, now, mine));
   stmts.push(...questBumps(ctx, await questDefs(ctx), day, (kind) => questCounts(kind, { hints, difficulty: info.difficulty, mode: info.mode }), mine));
+  // achievements: the counts read the solves table (this row included); a daily solved between midnight and 6 AM on the
+  // account's clock (the event's time, kept between the last sync and now) is the coffee machine
+  const night = info.mode === "daily" && localHour(at, ctx.tz) < 6;
+  const ach = await achievementStatements(ctx, [...ON.solve({ mode: info.mode, difficulty: info.difficulty, hints }), ...(night ? ["night_daily"] : [])], { op, day, guard: mine });
+  stmts.push(...ach);
   const res = await d.batch(stmts);
   if (!wrote(res[0])) return { result: "duplicate" };
-  return fast ? { result: "ok", reward: 0, flagged: "fast_solve" } : { result: "ok", reward };
+  const unlocked = ach.length ? await unlocksOf(ctx, op) : [];
+  return { ...(fast ? { result: "ok", reward: 0, flagged: "fast_solve" } : { result: "ok", reward }), ...(unlocked.length ? { unlocked } : {}) };
 }
 
 /* ───────────── hints ───────────── */
@@ -136,10 +145,13 @@ export async function claimStreak(ctx, date, attempt = 1) {
       .bind(id, reward.item, reward.qty, now, ...mine.binds));
   }
   stmts.push(...questBumps(ctx, await questDefs(ctx), date, (kind) => kind === "streak", mine));
+  const ach = await achievementStatements(ctx, ON.streak, { op, day: date, guard: mine });
+  stmts.push(...ach);
   const res = await d.batch(stmts);
   // another claim moved the streak between the read and the batch: read again (it was this date, or this one now follows it)
   if (!wrote(res[0])) return attempt < 3 ? claimStreak(ctx, date, attempt + 1) : rejected("busy");
-  return { result: "ok", reward, current, cycleDay };
+  const unlocked = ach.length ? await unlocksOf(ctx, op) : [];
+  return { result: "ok", reward, current, cycleDay, ...(unlocked.length ? { unlocked } : {}) };
 }
 
 /* ───────────── social visits ───────────── */
@@ -162,6 +174,21 @@ export async function socialClaim(ctx, network) {
   return (await lineFor(d, id, "coin", "social", network)) ? { result: "duplicate" } : rejected("not_opened");
 }
 
+/* ───────────── the avatar ───────────── */
+/**
+ * The player made their avatar (the app sends it once, a guest too: its avatar lives on the phone until it signs in). It only
+ * unlocks the "Create your Avatar" achievement (the wayfarers); the phone's word is taken, since faking it gains what opening
+ * the avatar screen gives anyway. A second one is a duplicate.
+ */
+async function avatarCreated(ctx, day) {
+  const op = newOp();
+  const ach = await achievementStatements(ctx, ["avatar"], { op, day });
+  if (!ach.length) return { result: "deferred" }; // migration 0006 is not applied yet: the outbox keeps it and sends it again
+  await ctx.d.batch(ach);
+  const unlocked = await unlocksOf(ctx, op);
+  return unlocked.length ? { result: "ok", unlocked } : { result: "duplicate" };
+}
+
 /* ───────────── the outbox ───────────── */
 async function applyEvent(ctx, ev, floor) {
   if (!ev || typeof ev !== "object" || Array.isArray(ev) || typeof ev.eventId !== "string" || !CLIENT_ID_RE.test(ev.eventId)) return rejected("format");
@@ -171,6 +198,7 @@ async function applyEvent(ctx, ev, floor) {
     case "hint_use": return hintUse(ctx, ev, day);
     case "streak_claim": return claimStreak(ctx, ev.date);
     case "quest_claim": return typeof ev.questId === "string" ? claimQuest(ctx, ev.questId, ev.periodKey) : rejected("format");
+    case "avatar_created": return avatarCreated(ctx, day);
     default: return rejected("type");
   }
 }

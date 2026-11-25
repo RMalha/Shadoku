@@ -19,6 +19,7 @@
 import { post, when, wrote, newOp } from "./ledger.js";
 import { questBumps, questDefs } from "./quests.js";
 import { snapshot } from "./context.js";
+import { ON, achievementStatements, unlocksOf } from "./achievements.js";
 import { CLIENT_ID_RE, COSMETIC_GROUP, MAX_TIER, MERGE_COUNT, VARIANTS, dayKey, dryAfter, legendaryDue, packOdds, randomInt, rollPack } from "./economy.js";
 
 const ITEM_ID_RE = /^[A-Za-z0-9_.-]{1,64}$/;
@@ -107,8 +108,10 @@ export async function openPack(ctx, { packId, oddsVersion, requestId }) {
       stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, tier, qty, first_at) SELECT ?, ?, 0, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, item_id, tier) DO UPDATE SET qty = qty + excluded.qty`)
         .bind(id, item, qty, now, ...mine.binds));
     }
+    const ach = await achievementStatements(ctx, ON.pack, { op, day, guard: mine }); // after the cards: "collect everything" counts them
+    stmts.push(...ach);
     const res = await d.batch(stmts);
-    if (wrote(res[0])) return { status: 200, body: { ok: true, pack: packId, number: opened + 1, cards, state: await snapshot(ctx) } };
+    if (wrote(res[0])) return { status: 200, body: { ok: true, pack: packId, number: opened + 1, cards, state: await snapshot(ctx), unlocked: ach.length ? await unlocksOf(ctx, op) : [] } };
     const raced = await before(); // the same request, twice at once
     if (raced) return again(raced);
     if (!(await d.prepare(`SELECT ${holds} AS x`).bind(id, packId).first()).x) return { status: 409, body: { error: "no_pack" } };

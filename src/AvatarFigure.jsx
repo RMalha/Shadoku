@@ -4,12 +4,15 @@
  * [zoom, cy] crops. The kit is loaded on first use, in its own chunk; where it cannot load (the standalone bundle has no
  * dynamic import) the older SVG Figure is drawn instead. The suspects are drawn from the same kit (ShadokuArt.jsx SuspectFigure),
  * with the game's own hat rule (fixLook); an avatar follows the kit's (fixAvatarLook).
+ * The avatar cosmetics (format v2, src/avatarCosmetics.js) are kit items too: a cosmetic neckwear is the kit's "neck-" item where
+ * the tie goes, a background ("bg-") is painted first and an accessory ("acc-") last; a variant is drawn through its tier's tone map.
  */
 import React from "react";
 import { Figure, SKIN, HAIR_HEX, HAT_COLORS, CLOTH, ACCENTS, FRAME_COLORS } from "./ShadokuArt.jsx";
 import { kitFace, kitItems, kitSvg } from "./avatarKit.js";
 import { useAvatarKit } from "./avatarKitLoad.js";
-import { fixAvatarLook, avatarHatHides } from "./avatarLook.js";
+import { fixAvatarLook, avatarHatHides, isCos } from "./avatarLook.js";
+import { TIER_NAMES, TIER_SLOTS, cosmeticAt } from "./avatarCosmetics.js";
 
 const markupCache = new Map();
 /** The look's portrait markup in the 280 frame (cached). */
@@ -24,7 +27,12 @@ function avatarMarkup(kit, look, sw) {
       frame: FRAME_COLORS[(L.frameC || 0) % FRAME_COLORS.length],
     };
     const hides = avatarHatHides(L.hat);
-    s = kitSvg(kit, kitItems(L, hides), colors, kitFace(kit, L, L.hat && L.hat !== "none" && hides ? null : colors.hair));
+    const ids = kitItems(L, hides).map((id) => (id.startsWith("tie-") && isCos("tie", id.slice(4)) ? `neck-${id.slice(4)}` : id));
+    if (L.bgArt && L.bgArt !== "none") ids.unshift(`bg-${L.bgArt}`);
+    if (L.acc && L.acc !== "none") ids.push(`acc-${L.acc}`);
+    const tiers = {};
+    for (const k of TIER_SLOTS) { const c = cosmeticAt(k, L[k]); if (c && L.tiers && L.tiers[k]) tiers[c.id] = TIER_NAMES[L.tiers[k]]; }
+    s = kitSvg(kit, ids, colors, kitFace(kit, L, L.hat && L.hat !== "none" && hides ? null : colors.hair), null, tiers);
     if (markupCache.size > 400) markupCache.clear();
     markupCache.set(key, s);
   }

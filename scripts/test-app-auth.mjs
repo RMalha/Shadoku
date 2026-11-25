@@ -100,6 +100,8 @@ const file = (s) => ({ coins: s.coins, hints: s.hints, hintsToday: s.hintsToday,
 // the server's case index and two test goods
 const CASES = { tut1: ["tutorial", "Tutorial", 5], tut2: ["tutorial", "Tutorial", 5], e1: ["story", "Easy", 7], e2: ["story", "Easy", 7], e3: ["story", "Easy", 7], m1: ["classic", "Medium", 8], x1: ["story", "Expert", 10] };
 for (const [id, [mode, difficulty, size]] of Object.entries(CASES)) d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size) VALUES (?, ?, ?, ?)").run(id, mode, difficulty, size);
+// a tutorial nobody solves here, so the "every tutorial contract" achievement (25 coins) stays out of these totals (scripts/test-app-achievements.mjs tests it)
+d1.raw.prepare("INSERT INTO case_index (case_id, mode, difficulty, size) VALUES ('tut_never', 'tutorial', 'Tutorial', 5)").run();
 d1.raw.prepare("INSERT INTO items (id, kind, rarity, price_coins, data) VALUES ('hints3', 'hint_bundle', '', 30, '{\"hints\":3}'), ('hints35', 'hint_bundle', '', 35, '{\"hints\":4}')").run();
 setConfig("daily_quests", 50); setConfig("weekly_quests", 50); // every quest dealt to everyone: an account's quests do not depend on its id
 

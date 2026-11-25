@@ -10,6 +10,7 @@ import { post, when, wrote, newOp } from "./ledger.js";
 import { sha256b64u } from "../auth.js";
 import { dayKey } from "./economy.js";
 import { snapshot, accountHash, ERASED_ACCOUNT } from "./context.js";
+import { ON, achievementStatements, unlocksOf } from "./achievements.js";
 
 const FAIL_STATUS = { unconfigured: 503, upstream: 502, pending: 409, wrong_account: 403, invalid: 400 };
 const failed = (v) => {
@@ -80,6 +81,8 @@ export async function redeem(ctx, verifier, { sku, purchaseToken }) {
     stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, qty, first_at) SELECT ?, ?, ?, ? WHERE ${mine.sql} ON CONFLICT (account_id, item_id, tier) DO UPDATE SET qty = qty + excluded.qty`)
       .bind(id, itemId, qty, now, ...mine.binds));
   }
+  const ach = grant.entitlements.length ? await achievementStatements(ctx, ON.upgrade, { op, day, guard: mine }) : []; // "Support the game": any upgrade
+  stmts.push(...ach);
   const res = await d.batch(stmts);
   if (!wrote(res[0])) { // the same token arrived twice at once and the other call wrote it: for this account it is a duplicate
     const owner = await d.prepare("SELECT account_id FROM purchases WHERE token_hash = ?").bind(tokenHash).first();
@@ -88,7 +91,7 @@ export async function redeem(ctx, verifier, { sku, purchaseToken }) {
     return { status: 200, body: { ok: true, duplicate: true, state: await snapshot(ctx) } };
   }
   const finished = await finish(d, verifier, item, purchaseToken, tokenHash);
-  return { status: 200, body: { ok: true, granted: shown(grant), finished, state: await snapshot(ctx) } };
+  return { status: 200, body: { ok: true, granted: shown(grant), finished, state: await snapshot(ctx), ...(ach.length ? { unlocked: await unlocksOf(ctx, op) } : {}) } };
 }
 
 /**

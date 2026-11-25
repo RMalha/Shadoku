@@ -22,6 +22,7 @@ import { post, when, wrote, newOp, lineFor } from "./ledger.js";
 import { questBumps, questDefs } from "./quests.js";
 import { packTables, publishedOdds } from "./packs.js";
 import { snapshot } from "./context.js";
+import { ON, achievementStatements, unlocksOf } from "./achievements.js";
 import { CLIENT_ID_RE, COSMETIC_GROUP, COSMETIC_PRICES, dayKey, randomInt, shopShelves } from "./economy.js";
 
 const HIDEOUT = ["prop", "furniture"];
@@ -127,8 +128,10 @@ export async function buy(ctx, { itemId, requestId }) {
     }
     stmts.push(d.prepare(`INSERT INTO inventory (account_id, item_id, qty, first_at) SELECT ?, ?, 1, ? WHERE ${paid.sql} ON CONFLICT (account_id, item_id, tier) DO UPDATE SET qty = qty + 1`).bind(id, item.id, now, ...paid.binds));
   }
+  const ach = isCosmetic(item) ? await achievementStatements(ctx, ON.cosmetic, { op: debit, day, guard: paid }) : [];
+  stmts.push(...ach);
   const res = await d.batch(stmts);
-  if (wrote(res[0])) return { status: 200, body: { ok: true, item: item.id, spent: price, ...(hints ? { hints } : {}), state: await snapshot(ctx) } };
+  if (wrote(res[0])) return { status: 200, body: { ok: true, item: item.id, spent: price, ...(hints ? { hints } : {}), state: await snapshot(ctx), ...(ach.length ? { unlocked: await unlocksOf(ctx, debit) } : {}) } };
   if (await lineFor(d, id, "coin", "shop", requestId)) return { status: 200, body: { ok: true, duplicate: true, state: await snapshot(ctx) } }; // the same request, twice at once
   return { status: 402, body: { error: "insufficient", price } };
 }
