@@ -9,7 +9,9 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const en = JSON.parse(fs.readFileSync(path.join(ROOT, "src", "locales", "en.json"), "utf8"));
 const tr = (k) => en[k];
 // the engine folders exist on the maintainer's PC only; the public repo (and its CI) has the same cases in src/puzzles
-const dirs = fs.existsSync(path.join(ROOT, "engine", "puzzles")) ? ["engine/puzzles", "engine/puzzles_multi"] : ["src/puzzles"];
+// optional folders as arguments (e.g. engine/puzzles_pool): node scripts/test-case-text.mjs DIR [DIR ...]
+const dirs = process.argv.length > 2 ? process.argv.slice(2)
+  : fs.existsSync(path.join(ROOT, "engine", "puzzles")) ? ["engine/puzzles", "engine/puzzles_multi"] : ["src/puzzles"];
 const files = dirs.flatMap((d) => fs.readdirSync(path.join(ROOT, d)).filter((f) => /^shadoku_.*\.json$/.test(f) && !/^shadoku_daily-/.test(f)).map((f) => path.join(ROOT, d, f)));
 let n = 0; const bad = [];
 const eq = (where, got, want) => { n++; if (got !== want) bad.push(`${where}\n  got  ${JSON.stringify(got)}\n  want ${JSON.stringify(want)}`); };

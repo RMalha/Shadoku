@@ -19,9 +19,12 @@
  * Anything that fails to render (a missing key, a case without tokens) falls back to the English stored in the case JSON.
  */
 
+import { SCENARIOS } from "./scenarioThemes.js";
+
 const PH = /\{(\w+)(?:\|(\w+)(?::([^}]*))?)?\}/g;
 /** A sub-biome reads its door phrase from its parent biome (engine SUB_BIOME_DEFS). */
-const SUB_BIOME_PARENT = { LINER: "BEACH", CARNIVAL: "STREET", OPERA: "MANSION", BAYOU: "FOREST" };
+const SUB_BIOME_PARENT = { LINER: "BEACH", CARNIVAL: "STREET", OPERA: "MANSION", BAYOU: "FOREST",
+  ...Object.fromEntries(Object.entries(SCENARIOS).map(([id, s]) => [id, s.parent])) }; // + the 71 scenarios (2026-11-25)
 const SELF_KINDS = ["WITH_P", "TWO_P_ROOM", "NO_P_ROOM", "ALONE_WITH_P", "DIAG_P", "ALONE_WITH_TWO_P", "WALL_ZONE_P", "WALL_SHARE_P", "ALONE_WITH_P_CLS", "ALONE_WITH_TWO_P_CLS",
   "WITH_P2", "ROW_P", "COL_P", "ALL_P", "TWO_P_BESIDE", "ZONE_P_ROW_HAS", "ZONE_P_COL_HAS", "ALONE_SIT"]; // second line: 2026-11-21, the people-in-the-area family
 // the company-count clues pick their template by the count: "with someone" (ONE), "with two other people" (TWO), "with at least ..." (MIN)

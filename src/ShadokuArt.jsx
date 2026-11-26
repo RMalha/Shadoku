@@ -27,6 +27,7 @@ import { kitFace, kitItems, kitSvg, tint } from "./avatarKit.js"; // the Flow-re
 import { useAvatarKit } from "./avatarKitLoad.js";
 import { KitCorpse, DummyCorpse, CORPSE_BODIES } from "./corpseArt.jsx";
 import { DummyPic, PortraitPic, PropArt, propArtOf } from "./propArt.jsx";
+import { SCENARIOS, baseTheme } from "./scenarioThemes.js";
 
 /* ---- Prop classes (V10): mirror of engine/shadoku_catalog.py -------------------------------------
  *   TALL   nobody stands on it · blocks sight                       (tree, TV, tall safe, dumpster)
@@ -162,6 +163,8 @@ export const BIOME_META = {
   OPERA: { label: "Opera House", icon: "🎭", wall: "#7d3b45" },
   BAYOU: { label: "Bayou", icon: "🐊", wall: "#6b6a47" },
 };
+// the 71 scenarios (src/scenarioThemes.js, 2026-11-25): their parent's wall, their own label and icon; not in BIOMES
+for (const [id, s] of Object.entries(SCENARIOS)) BIOME_META[id] = { label: s.label, icon: s.icon, wall: BIOME_META[s.parent].wall };
 export const themeOf = (p) => (p && BIOME_META[String(p.theme || "").toUpperCase()] ? String(p.theme).toUpperCase() : "MANSION");
 /** Which kit each prop belongs to (drives the Biome Filter in the inspector). A value is one biome, UNIVERSAL, or a list of
  *  biomes for a prop the engine allows in several themes (see `biomesOf`). */
@@ -272,7 +275,7 @@ export const BIOME_RULES = {
   BAYOU: [[/backwater/i, "marsh"], [/dock|shack|stilt|smoke/i, "boardwalk"], [/grove/i, "grass"], [/swamp|mangrove/i, "dirt"]],
 };
 export function floorOf(name, id, theme = "MANSION") {
-  const t = BIOME_META[String(theme || "").toUpperCase()] ? String(theme).toUpperCase() : "MANSION", n = name || "";
+  const t = baseTheme(BIOME_META[String(theme || "").toUpperCase()] ? String(theme).toUpperCase() : "MANSION"), n = name || "";
   if (t === "MANSION") {
     const hit = FLOOR_RULES.find(([re]) => re.test(n));
     return hit ? hit[1] : INDOOR_FLOORS[Math.abs(id) % INDOOR_FLOORS.length];
@@ -291,7 +294,7 @@ export const FLOOR_ALT = {
   stone: ["slate", "cobble"], slate: ["stone", "cobble"], parquet: ["boardwalk", "carpet"], checker: ["slate", "marble"],
 };
 export function assignFloors(p, geo) {
-  const theme = themeOf(p), pool = BIOME_FLOORS[theme];
+  const theme = baseTheme(themeOf(p)), pool = BIOME_FLOORS[theme];
   const ids = [], nb = {};
   for (let r = 0; r < geo.R; r++) for (let c = 0; c < geo.C; c++) {
     const a = geo.room(r, c);
