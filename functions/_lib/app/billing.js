@@ -149,3 +149,34 @@ export async function voidPurchase(d, purchaseToken, now) {
   const res = await d.batch(stmts);
   return wrote(res[0]) ? "voided" : "already";
 }
+
+/**
+ * The nightly check (architecture 4.4 step 7; POST /api/cron/retention?task=voided): Google's own list of the purchases it
+ * voided in the last 30 days, compared with ours. A notification that never arrived is caught here; each purchase is taken
+ * back once, by voidPurchase, exactly as a notification would. Google lists only orders that were refunded AND revoked.
+ * One query per page finds the listed tokens we granted and have not voided; at most `limit` are voided per call (`more`).
+ * `dry`: count them only. → { listed, due, voided, more } | { error: "unconfigured" | "invalid" | "upstream" }
+ */
+export async function sweepVoided(d, verifier, { now, dry = false, limit = 25, pages = 3 } = {}) {
+  if (!verifier || typeof verifier.listVoided !== "function") return { error: "unconfigured" };
+  let listed = 0, due = 0, voided = 0, more = false, pageToken = "";
+  for (let page = 0; page < pages; page++) {
+    const list = await verifier.listVoided({ pageToken });
+    if (!list || !list.ok) return { error: (list && list.error) || "invalid" };
+    listed += list.voided.length;
+    const byHash = new Map();
+    for (const v of list.voided) byHash.set(await sha256b64u(v.purchaseToken), v.purchaseToken);
+    const open = byHash.size
+      ? (await d.prepare("SELECT token_hash FROM purchases WHERE voided_at IS NULL AND token_hash IN (SELECT value FROM json_each(?))").bind(JSON.stringify([...byHash.keys()])).all()).results : [];
+    for (const row of open) {
+      due++;
+      if (dry) continue;
+      if (voided >= limit) { more = true; continue; }
+      if ((await voidPurchase(d, byHash.get(row.token_hash), now)) === "voided") voided++;
+    }
+    pageToken = list.next || "";
+    if (!pageToken) break;
+    if (page === pages - 1) more = true;
+  }
+  return { listed, due, voided, more };
+}

@@ -12,6 +12,8 @@
  * The session is a stateless HMAC-signed cookie (HttpOnly, SameSite=Lax); the codename and the game progress are stored server-side.
  */
 
+import { codenameIssue } from "./codename/index.js";
+
 const enc = new TextEncoder();
 export const SESSION_DAYS = 30;
 export const USERNAME_RE = /^[A-Za-z0-9_]{3,20}$/;
@@ -195,8 +197,11 @@ export async function codenameFree(env, name, id) {
   return !owner || owner === id;
 }
 
-/** Reserves `name` for `id` and releases the account's previous one. KV is not transactional: a same-instant race on one name is possible and harmless. */
+/** Reserves `name` for `id` and releases the account's previous one. KV is not transactional: a same-instant race on one name is possible and harmless.
+ *  The last line of defence of the Codename filter (_lib/codename): a blocked or reserved name is never written, and the call answers `false` (any other call answers as it always did,
+ *  undefined). The endpoints refuse such a name before they get here (PUT /api/username, the dev sign-in), so this is only reached by a caller that forgot to. */
 export async function setCodename(env, id, name) {
+  if (codenameIssue(name)) return false;
   if (!env.SHADOKU_KV) return;
   const rec = await getRecord(env, id), prev = rec.username;
   await env.SHADOKU_KV.put(nameKey(name), id);

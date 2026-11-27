@@ -1,8 +1,11 @@
 // POST /api/app/hideout/grow { room?, to }  →  { ok, room, size, spent, hideout, state, unlocked }
 //   One more row and column for a room (room 1 when left out), bought with coins at the server's price (table hideout_sizes,
-//   the same for every room): `to` must be the room's next size, at most 10. A resend of a step already bought answers
-//   { ok, duplicate: true, room, size, hideout, state }.
-//   400 format | 404 no_room | 409 max_size | 409 not_next { size, next } | 409 not_for_sale | 402 insufficient { price, coins } | 503 schema.
+//   the same for every room): `to` must be the room's next size, at most 10. The room grows toward its `grow` corner (toward
+//   the left or up its x / y go down by 1 and its layout and edges shift with it, version + 1): the grown room must stay on
+//   the board, overlap no room and keep out of the newest room's growing square while that room is under 8 x 8. A resend of
+//   a step already bought answers { ok, duplicate: true, room, size, hideout, state }.
+//   400 format | 404 no_room | 409 max_size | 409 not_next { size, next } | 409 not_for_sale | 409 no_space { room, size, to,
+//   rooms, reserved?, board? } | 402 insufficient { price, coins } | 503 schema.
 import { json } from "../../../_lib/auth.js";
 import { readBody } from "../../../_lib/db.js";
 import { appContext } from "../../../_lib/app/context.js";

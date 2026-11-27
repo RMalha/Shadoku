@@ -9,6 +9,8 @@ import { post, when, wrote, newOp } from "./ledger.js";
 import { questBumps, questDefs } from "./quests.js";
 import { randomToken } from "../auth.js";
 import { AD_COIN_REWARD, AD_TICKET_TTL_MS, dayKey } from "./economy.js";
+import { snapshot } from "./context.js";
+import { integrityStatements } from "./integrity.js";
 
 const PLACEMENTS = ["coins", "hint", "quest_refresh", "shop_refresh"]; // "infinite" (the unlock of an Infinite board) comes with that mode
 const rewardOf = (placement) => (placement === "coins" ? { coins: AD_COIN_REWARD } : placement === "hint" ? { hints: 1 } : placement === "quest_refresh" ? { questRefresh: 1 } : { shopRefresh: 1 });
@@ -73,4 +75,31 @@ export async function payTicket(d, cfg, { ticketId, account, transactionId, adUn
     return seen ? { result: "duplicate" } : { result: "rejected", reason: "client_cap" };
   }
   return !["coins", "hint"].includes(ticket.placement) || wrote(res[2]) ? { result: "ok", reward: rewardOf(ticket.placement) } : { result: "capped" };
+}
+
+/**
+ * POST /api/app/ads/claim { ticket, integrity }: the fallback when AdMob's callback is late or lost (architecture 4.5).
+ * The phone waits 10 seconds after the ad's "rewarded" event, looking at its ticket, and only then claims. Here:
+ *   - a claim sooner than the verifier's `claimWaitMs` after the ticket was made is too early: 409 "early" with how long is
+ *     left, and Google is not asked (a test build's verifier has no wait and is paid at once);
+ *   - a ticket the callback paid meanwhile is "duplicate", and a ticket that is not the caller's is rejected, without asking either;
+ *   - then the verifier reads the Play Integrity token. OBSERVE MODE: its verdict is kept on the device and flagged when it is
+ *     not a pass (integrity.js), and the claim stands whatever it says, inside the few-a-day limit payTicket keeps.
+ * → { status, body }
+ */
+export async function claimTicket(ctx, verifier, { ticket, integrity }) {
+  const { d, id, cfg, now } = ctx;
+  const wait = Number(verifier.claimWaitMs) || 0;
+  if (wait) {
+    const t = await d.prepare("SELECT account_id, created, paid_at FROM ad_tickets WHERE id = ?").bind(ticket).first();
+    if (!t || t.account_id !== id) return { status: 409, body: { result: "rejected", reason: "ticket", state: await snapshot(ctx) } };
+    if (t.paid_at) return { status: 200, body: { result: "duplicate", state: await snapshot(ctx) } };
+    if (now - t.created < wait) return { status: 409, body: { error: "early", retryInMs: wait - (now - t.created) } };
+  }
+  const v = await verifier.verifyClientClaim({ accountId: id, ticketId: ticket, integrity });
+  if (!v || !v.ok) return v && v.error === "unconfigured" ? { status: 503, body: { error: "ads_unavailable" } } : { status: 403, body: { error: "integrity" } };
+  const noted = integrityStatements(ctx, v.integrity, "ad_claim");
+  if (noted.length) await d.batch(noted);
+  const out = await payTicket(d, cfg, { ticketId: ticket, account: id, transactionId: v.transactionId, verified: v.verified === "dev" ? "dev" : "client", now });
+  return { status: out.result === "rejected" ? 409 : 200, body: { ...out, state: await snapshot(ctx) } };
 }

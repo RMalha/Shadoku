@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "packageName": "net.shadoku.app",
+  "eventTimeMillis": "1794916800000",
+  "voidedPurchaseNotification": {
+    "purchaseToken": "fixture.oneTime.kfbgpnmjdeoahcilkgnbpafe.AO-J1OzFixtureTokenForTheVerifierTestsOnly0001",
+    "orderId": "GPA.3345-1122-7788-90011",
+    "productType": 2,
+    "refundType": 1
+  }
+}

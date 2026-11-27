@@ -1,4 +1,4 @@
--- Shadoku app: the wallet backend (docs/android/architecture.md 4.2). Functions: functions/api/app/**, functions/_lib/app/**.
+-- Shadoku app: the wallet backend (app/docs/architecture.md 4.2). Functions: functions/api/app/**, functions/_lib/app/**.
 -- Apply:  npx wrangler d1 migrations apply shadoku --local      (the database `wrangler pages dev` uses)
 --         npx wrangler d1 migrations apply shadoku --remote     (production; until then /api/app/* answers 503 "schema")
 -- The site's six tables keep their own mechanism (functions/_lib/db.js creates them on first use).

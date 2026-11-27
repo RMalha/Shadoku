@@ -1,0 +1,33 @@
+{
+  "pageInfo": { "totalResults": 3, "resultPerPage": 1000, "startIndex": 0 },
+  "voidedPurchases": [
+    {
+      "kind": "androidpublisher#voidedPurchase",
+      "purchaseToken": "fixture.oneTime.kfbgpnmjdeoahcilkgnbpafe.AO-J1OzFixtureTokenForTheVerifierTestsOnly0001",
+      "purchaseTimeMillis": "1794830400000",
+      "voidedTimeMillis": "1794916800000",
+      "orderId": "GPA.3345-1122-7788-90011",
+      "voidedSource": 0,
+      "voidedReason": 1
+    },
+    {
+      "kind": "androidpublisher#voidedPurchase",
+      "purchaseToken": "fixture.oneTime.somebodyElse.AO-J1OzATokenThisServerNeverSaw0002",
+      "purchaseTimeMillis": "1794744000000",
+      "voidedTimeMillis": "1794916900000",
+      "orderId": "GPA.3399-0000-1111-22222",
+      "voidedSource": 2,
+      "voidedReason": 7
+    },
+    {
+      "kind": "androidpublisher#voidedPurchase",
+      "purchaseToken": "fixture.oneTime.partial.AO-J1OzAQuantityRefundThatIsNotAVoid0003",
+      "purchaseTimeMillis": "1794744000000",
+      "voidedTimeMillis": "1794916950000",
+      "orderId": "GPA.3399-0000-1111-33333",
+      "voidedSource": 1,
+      "voidedReason": 1,
+      "voidedQuantity": 1
+    }
+  ]
+}

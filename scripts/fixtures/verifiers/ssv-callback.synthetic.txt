@@ -1,0 +1,1 @@
+https://www.shadoku.net/api/app/ads/ssv?ad_network=5450213213286189855&ad_unit=2747237135&custom_data=Zml4dHVyZS10aWNrZXQtMDAx&reward_amount=1&reward_item=Reward&timestamp=1795953600000&transaction_id=0006a1f2c3b4d5e6f708192a3b4c5d6e&user_id=google%3A8800001&signature=MEQCIHRet7semPV2UgysVU-mduBDISeyaUQ9ZdXhpAwZHhmGAiA5AcCQ3ICh6O9rdbjsWXji1qBXn37J3eX8HVdLuIjdhw&key_id=990000001

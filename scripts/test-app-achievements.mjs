@@ -60,7 +60,8 @@ const done = (body) => body.achievements.filter((a) => a.done).map((a) => a.id);
 /* ───────────── without migration 0006: everything works as before ───────────── */
 {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "shadoku-0005-"));
-  for (const f of fs.readdirSync(path.join(ROOT, "migrations")).filter((f) => f.endsWith(".sql") && f < "0006")) fs.copyFileSync(path.join(ROOT, "migrations", f), path.join(dir, f));
+  // every migration but 0006 (0007, the hideout's board, does not need it, and the hideout needs 0007)
+  for (const f of fs.readdirSync(path.join(ROOT, "migrations")).filter((f) => f.endsWith(".sql") && !f.startsWith("0006"))) fs.copyFileSync(path.join(ROOT, "migrations", f), path.join(dir, f));
   const old = openD1(dir);
   fs.rmSync(dir, { recursive: true, force: true });
   await siteTables(old);

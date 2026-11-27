@@ -1,4 +1,4 @@
--- Shadoku app: what stays when an account is deleted (docs/android/architecture.md 4.11). Functions: functions/api/account.js,
+-- Shadoku app: what stays when an account is deleted (app/docs/architecture.md 4.11). Functions: functions/api/account.js,
 -- functions/_lib/app/context.js eraseAppAccount.
 -- Apply:  npx wrangler d1 migrations apply shadoku --local | --remote
 -- Until it is applied, /api/app/* answers 503 "schema", and so does the app's bearer token on the endpoints it shares with the

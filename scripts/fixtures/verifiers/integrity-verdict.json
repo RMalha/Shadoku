@@ -1,0 +1,21 @@
+{
+  "tokenPayloadExternal": {
+    "requestDetails": {
+      "requestPackageName": "net.shadoku.app",
+      "requestHash": "set-by-the-test",
+      "timestampMillis": "set-by-the-test"
+    },
+    "appIntegrity": {
+      "appRecognitionVerdict": "PLAY_RECOGNIZED",
+      "packageName": "net.shadoku.app",
+      "certificateSha256Digest": ["6a6a1474b5cbbb2b1aa57e0bc3"],
+      "versionCode": "42"
+    },
+    "deviceIntegrity": {
+      "deviceRecognitionVerdict": ["MEETS_DEVICE_INTEGRITY"]
+    },
+    "accountDetails": {
+      "appLicensingVerdict": "LICENSED"
+    }
+  }
+}

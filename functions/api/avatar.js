@@ -2,22 +2,29 @@
 // is the truth, edited on either side). Signed in: the site's session cookie, or the app's bearer token from the app's origin
 // (functions/_lib/caller.js; a guest of the app gets 403 signin_required, as on every shared endpoint).
 //
-//   GET /api/avatar               → { avatar, updated, cosmetics }
+//   GET /api/avatar               → { avatar, updated, cosmetics, badges }
 //       avatar     "" (S. H. Adow), "photo" (the account picture) or an "L:" code (format v2: src/avatarCosmetics.js)
 //       updated    when it was last saved (epoch ms; 0 = never saved)
 //       cosmetics  the avatar cosmetics the account holds: { "<cosmetic id>": [tiers held] } (0 = the card as won, 1-4 Bronze,
 //                  Silver, Gold, Shadow), read from the app's inventory: what the makers may offer
+//       badges     the badges the account may pin on its avatar (format v2's 20th field, src/avatarCosmetics.js lookBadge /
+//                  withBadge): [{ badge: "m-member" | "m-golden", kind: "membership", key }, then
+//                  { badge: "a-<achievement>-<tier>", kind: "achievement", achievement, tier, material, at } in the order earned]
+//                  (functions/_lib/db.js heldBadges)
 //   PUT /api/avatar { avatar }    → { ok, shown, updated }
 //       400 format      not a valid code (avatarOk)
 //       403 not_held    { items: [ids] }: it wears cosmetics the account does not hold, at that tier (the card as won needs any
 //                       copy; a variant needs that variant). The kit's options are free; what the saved avatar already wears stays
 //                       allowed (an avatar from before the rule, a reward glasses look from the site's first maker)
+//       403 not_held    { items: [], badge }: it wears a badge the account does not hold (an achievement tier not unlocked, a
+//                       membership not bought). Checked on every save, even when the saved avatar already wears it: a
+//                       refunded membership's badge comes off with the next change
 //   The ranking and the player's community puzzles show the new avatar at once (`shown`: what others see).
 import { setAvatar, getRecord, json } from "../_lib/auth.js";
 import { caller } from "../_lib/caller.js";
-import { shownAvatar, setPlayerAvatar, avatarOk, heldCosmetics } from "../_lib/db.js";
+import { shownAvatar, setPlayerAvatar, avatarOk, heldCosmetics, heldBadges } from "../_lib/db.js";
 import { limit } from "../_lib/ratelimit.js";
-import { notHeld, wornCosmetics } from "../../src/avatarCosmetics.js";
+import { lookBadge, notHeld, wornCosmetics } from "../../src/avatarCosmetics.js";
 
 const nowOf = (env) => (typeof env.NOW === "function" ? env.NOW() : Date.now());
 
@@ -28,7 +35,7 @@ export async function onRequestGet({ request, env }) {
   const blocked = await limit(env, request, "avatar-read", { max: 120, windowSec: 600, id: s.id });
   if (blocked) return blocked;
   const rec = await getRecord(env, s.id);
-  return json({ avatar: rec.avatar, updated: rec.avatarAt, cosmetics: await heldCosmetics(env, s.id) });
+  return json({ avatar: rec.avatar, updated: rec.avatarAt, cosmetics: await heldCosmetics(env, s.id), badges: await heldBadges(env, s.id) });
 }
 
 export async function onRequestPut({ request, env }) {
@@ -45,6 +52,8 @@ export async function onRequestPut({ request, env }) {
     const missing = notHeld(worn, await heldCosmetics(env, s.id), wornCosmetics(rec.avatar));
     if (missing.length) return json({ error: "not_held", items: missing }, 403);
   }
+  const badge = lookBadge(avatar);
+  if (badge && !(await heldBadges(env, s.id)).some((b) => b.badge === badge)) return json({ error: "not_held", items: [], badge }, 403);
   const at = nowOf(env);
   await setAvatar(env, s.id, avatar, at);
   const shown = shownAvatar(avatar, s);

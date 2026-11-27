@@ -15,11 +15,13 @@
  */
 import { json } from "./auth.js";
 import { AVATAR_RE, COSMETIC_BY_ID, avatarCodeOk } from "../../src/avatarCosmetics.js";
+import { ACHIEVEMENTS } from "./app/achievements.js";
 
 /** An avatar choice: "" (S. H. Adow), "photo" or an "L:" portrait (format v2: src/avatarCosmetics.js, shared with the site and the app). */
 export { AVATAR_RE };
-/** The server's check of an avatar code: AVATAR_RE (at most 200 characters) plus the v2 shape: 17 to 19 fields, none empty or named
- *  like an Object.prototype member (the art looks fields up in plain tables), a known accessory, tier digits only on card cosmetics. */
+/** The server's check of an avatar code: AVATAR_RE (at most 240 characters) plus the v2 shape: 17 to 20 fields, none empty or named
+ *  like an Object.prototype member (the art looks fields up in plain tables), a known accessory, tier digits only on card cosmetics,
+ *  a badge field that reads as a badge token. */
 export const avatarOk = avatarCodeOk;
 
 /** The avatar cosmetics an account holds, from the app's `inventory` (tier 0 = the card as won, 1-4 Bronze ... Shadow):
@@ -32,6 +34,36 @@ export async function heldCosmetics(env, id) {
     for (const r of rows) if (COSMETIC_BY_ID.has(r.item_id) && Number.isInteger(r.tier) && r.tier >= 0 && r.tier <= 4) (out[r.item_id] ||= []).push(r.tier);
     return out;
   } catch { return {}; } // no inventory table (the app's migrations not applied here)
+}
+
+/** The memberships that come with a badge: the badge token → the entitlement it needs (migrations/0002 items member, member_gold). */
+export const MEMBERSHIP_BADGES = Object.freeze({ "m-member": "member", "m-golden": "member_gold" });
+/**
+ * The badges an account may pin on its avatar (format v2's 20th field: src/avatarCosmetics.js), from the app's tables:
+ *   { badge: "m-member" | "m-golden", kind: "membership", key }        the membership bought (an `entitlements` row)
+ *   { badge: "a-<id>-<tier>", kind: "achievement", achievement, tier, material, at }   a tier unlocked that has a badge
+ *                                                                        material (migrations/0006 `achievements`; one-off
+ *                                                                        achievements give items, not badges)
+ * Memberships first, then achievement badges in the order they were earned. [] before the app's tables exist.
+ */
+export async function heldBadges(env, id) {
+  if (!env.SHADOKU_DB || !id) return [];
+  const out = [];
+  try {
+    const keys = Object.values(MEMBERSHIP_BADGES);
+    const rows = (await env.SHADOKU_DB.prepare(`SELECT key FROM entitlements WHERE account_id = ? AND key IN (${keys.map(() => "?").join(", ")})`).bind(id, ...keys).all()).results || [];
+    const have = new Set(rows.map((r) => r.key));
+    for (const [badge, key] of Object.entries(MEMBERSHIP_BADGES)) if (have.has(key)) out.push({ badge, kind: "membership", key });
+  } catch { /* no entitlements table */ }
+  try {
+    const byId = new Map(ACHIEVEMENTS.map((a) => [a.id, a]));
+    const rows = (await env.SHADOKU_DB.prepare("SELECT achievement, tier, at FROM achievements WHERE account_id = ? ORDER BY at, achievement, tier").bind(id).all()).results || [];
+    for (const r of rows) {
+      const t = byId.has(r.achievement) && byId.get(r.achievement).tiers[r.tier - 1];
+      if (t && t.badge) out.push({ badge: `a-${r.achievement}-${r.tier}`, kind: "achievement", achievement: r.achievement, tier: r.tier, material: t.badge, at: r.at });
+    }
+  } catch { /* no achievements table (migration 0006 not applied) */ }
+  return out;
 }
 
 const SCHEMA = [

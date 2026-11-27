@@ -97,6 +97,10 @@ const DEV = { env: { ...baseEnv, DEV_BILLING: "1" }, host: LOCAL };
     put("INSERT INTO ad_rewards (transaction_id, account_id, ticket_id, verified, day, at, op) VALUES (?, ?, 't', 'dev', '2026-01-01', ?, ?)", `r-${tag}`, A, ago(days), tag);
     put("INSERT INTO shop_refreshes (account_id, day, shelf, item_id, how, at, op) VALUES (?, '2026-01-01', 'avatar:common', ?, 'free', ?, ?)", A, tag, ago(days), tag);
   }
+  // the 1v1 (migration 0008): a wait nobody came back to goes after a day, an invitation 30 days after it ran out
+  for (const [tag, days] of [["old", 1.1], ["new", 0.9]]) put("INSERT INTO duel_queue (account_id, rating, joined, seen) VALUES (?, 1000, ?, ?)", `google:wait-${tag}`, ago(days), ago(days));
+  for (const [tag, days] of [["old", 31], ["new", 29]]) put("INSERT INTO duel_invites (id, account_id, to_account, created, expires) VALUES (?, ?, ?, ?, ?)", `inv-${tag}`, A, `google:other-${tag}`, ago(days + 1), ago(days));
+  const duelLeft = () => [rows("SELECT account_id FROM duel_queue ORDER BY account_id").map((r) => r.account_id), rows("SELECT id FROM duel_invites ORDER BY id").map((r) => r.id)];
   const years = (y) => t0 - y * 365.25 * DAY;
   for (const [tag, y] of [["old", KEPT_YEARS + 0.1], ["new", KEPT_YEARS - 0.1]]) {
     put("INSERT INTO purchases (token_hash, account_id, sku, state, verified_at, op) VALUES (?, 'erased', 'coins_100', 'purchased', ?, ?)", `h-${tag}`, years(y), `e-${tag}`);
@@ -106,11 +110,14 @@ const DEV = { env: { ...baseEnv, DEV_BILLING: "1" }, host: LOCAL };
   const left = () => [rows("SELECT message FROM errors ORDER BY id").map((r) => r.message), rows("SELECT id FROM ad_tickets WHERE id LIKE 't-%' ORDER BY id").map((r) => r.id), rows("SELECT kind FROM flags WHERE account_id = ? ORDER BY id", A).map((r) => r.kind), rows("SELECT transaction_id FROM ad_rewards WHERE account_id = ?", A).map((r) => r.transaction_id), rows("SELECT item_id FROM shop_refreshes WHERE account_id = ?", A).map((r) => r.item_id),
     rows("SELECT id FROM devices WHERE account_id = ? ORDER BY created, id", A).length, rows("SELECT token_hash FROM purchases WHERE token_hash LIKE 'h-%' OR token_hash LIKE 'live-%' ORDER BY token_hash").map((r) => r.token_hash), rows("SELECT ref FROM kept_ledger WHERE seq >= 900000").map((r) => r.ref)];
   const before = left(), dry = await cron("task=expired&dry=1");
-  eq("a dry run counts what is due and deletes nothing", [dry.body.deleted, left()], [{ errors: 1, devices: 1, ad_tickets: 1, ad_rewards: 1, flags: 1, shop_refreshes: 1, kept_ledger: 1, purchases: 1 }, before]);
+  eq("a dry run counts what is due and deletes nothing", [dry.body.deleted, left()], [{ errors: 1, devices: 1, ad_tickets: 1, ad_rewards: 1, flags: 1, shop_refreshes: 1, duel_queue: 1, duel_invites: 1, kept_ledger: 1, purchases: 1 }, before]);
+  const duelBefore = duelLeft();
   const run = await cron("task=expired");
+  eq("a 1v1 wait goes after a day, a friendly invitation 30 days after it ran out", [duelBefore, duelLeft(), (await cron("task=duels")).body, (await cron("task=duels&dry=1")).body],
+    [[["google:wait-new", "google:wait-old"], ["inv-new", "inv-old"]], [["google:wait-new"], ["inv-new"]], { ok: true, task: "duels", dry: false, due: 0, closed: 0 }, { ok: true, task: "duels", dry: true, due: 0, closed: 0 }]);
   eq("error reports and ad tickets go after 30 days, ad views, anti-cheat signals and Shop swaps after 90, a signed-out phone after 30, the purchase records of deleted accounts after 10 years", [run.body.deleted, left()],
-    [{ errors: 1, devices: 1, ad_tickets: 1, ad_rewards: 1, flags: 1, shop_refreshes: 1, kept_ledger: 1, purchases: 1 }, [["new"], ["t-new"], ["new"], ["r-new"], ["new"], 2, ["h-new", "live-new", "live-old"], ["h-new"]]]);
-  eq("…a living account's own purchases never, its signed-in phone neither, and nothing twice", [(await cron("task=expired")).body.deleted, await (async () => (await app("GET", "/api/app/wallet", p.token)).status)()], [{ errors: 0, devices: 0, ad_tickets: 0, ad_rewards: 0, flags: 0, shop_refreshes: 0, kept_ledger: 0, purchases: 0 }, 200]);
+    [{ errors: 1, devices: 1, ad_tickets: 1, ad_rewards: 1, flags: 1, shop_refreshes: 1, duel_queue: 1, duel_invites: 1, kept_ledger: 1, purchases: 1 }, [["new"], ["t-new"], ["new"], ["r-new"], ["new"], 2, ["h-new", "live-new", "live-old"], ["h-new"]]]);
+  eq("…a living account's own purchases never, its signed-in phone neither, and nothing twice", [(await cron("task=expired")).body.deleted, await (async () => (await app("GET", "/api/app/wallet", p.token)).status)()], [{ errors: 0, devices: 0, ad_tickets: 0, ad_rewards: 0, flags: 0, shop_refreshes: 0, duel_queue: 0, duel_invites: 0, kept_ledger: 0, purchases: 0 }, 200]);
 }
 
 /* ───────────── accounts that predate the "seen" table get their date ───────────── */

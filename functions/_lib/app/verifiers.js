@@ -2,10 +2,14 @@
  * The two outside authorities the wallet trusts, each behind one small interface: Google Play (did this purchase happen?)
  * and AdMob (was this rewarded ad watched?). The wallet code (billing.js, ads.js) only ever talks to these interfaces.
  *
- * TODAY BOTH ARE STUBS THAT FAIL CLOSED: with nothing configured every check answers { ok: false, error: "unconfigured" },
- * the endpoints answer 503 and no coin moves. The real implementations (architecture 4.4 and 4.5) replace `unconfigured*`
- * below without touching the wallet: the Play Developer API with GOOGLE_SA_EMAIL / GOOGLE_SA_KEY, and AdMob's ECDSA
- * signature check against Google's public keys.
+ * THE DEFAULT IS TO FAIL CLOSED: with nothing configured every check answers { ok: false, error: "unconfigured" }, the
+ * endpoints answer 503 and no coin moves. The real verifiers (architecture 4.4, 4.5 and 4.21) take over only when their own
+ * setting is there, each by itself:
+ *   Google Play (play.js)   the secret PLAY_SERVICE_ACCOUNT (the Play Developer API as our service account); its
+ *                           notifications also need PLAY_RTDN_EMAIL
+ *   AdMob (admob.js)        ADMOB_AD_UNITS, our rewarded ad units (the signature check needs no secret: Google's keys are
+ *                           public); the fallback claim also needs PLAY_SERVICE_ACCOUNT, for Play Integrity (integrity.js)
+ * Every setting is named, with where it comes from, in wrangler.toml and functions/CLAUDE.md.
  *
  * A verifier never decides an amount. It answers "real or not" and hands back identifiers; what a purchase or an ad is worth
  * comes from the server's `items` table and economy.js.
@@ -20,16 +24,26 @@
  *     left unacknowledged for three days, so billing.js retries this on every resend until it succeeds.
  * @property {(request: Request) => Promise<{ ok: true, voided: Array<{ purchaseToken: string }> } | { ok: false, error: "unconfigured" | "invalid" }>} readNotification
  *     Authenticates a Real-time Developer Notification (Pub/Sub push) and lists the purchases Google refunded or revoked.
+ * @property {(p?: { pageToken?: string }) => Promise<{ ok: true, voided: Array<{ purchaseToken: string }>, next: string } | { ok: false, error: "unconfigured" | "invalid" | "upstream" }>} listVoided
+ *     One page of Google's own list of voided purchases (the last 30 days), for the nightly check (billing.js sweepVoided);
+ *     `next`: the token of the following page, "" on the last.
  *
  * @typedef {Object} AdsVerifier
- * @property {(url: URL) => Promise<{ ok: true, transactionId: string, ticketId: string, userId: string, adUnit: string } | { ok: false, error: "unconfigured" | "invalid" }>} verifyCallback
+ * @property {(url: URL) => Promise<{ ok: true, transactionId: string, ticketId: string, userId: string, adUnit: string } | { ok: false, error: "unconfigured" | "invalid" | "upstream" }>} verifyCallback
  *     Checks the signature of AdMob's server-side verification callback over the query string exactly as received, and returns
  *     transaction_id, custom_data (our ticket id), user_id (our account id) and ad_unit. AdMob's reward_amount is ignored.
  * @property {(p: { accountId: string, ticketId: string, integrity: unknown }) =>
- *   Promise<{ ok: true, transactionId: string, verified: "client" | "dev" } | { ok: false, error: "unconfigured" | "invalid" }>} verifyClientClaim
+ *   Promise<{ ok: true, transactionId: string, verified: "client" | "dev", integrity?: object } | { ok: false, error: "unconfigured" | "invalid" }>} verifyClientClaim
  *     The fallback when the callback is late or lost: the phone says the ad finished and proves it is a genuine install with a
- *     Play Integrity token. ads.js allows only a few of these a day.
+ *     Play Integrity token. ads.js allows only a few of these a day. `integrity`: the verdict (integrity.js), for ads.js to
+ *     keep and flag; in observe mode it refuses nothing.
+ * @property {number} [claimWaitMs]
+ *     A fallback claim made sooner than this after its ticket was made is refused as too early (ads.js claimTicket). Only the
+ *     real verifier sets it: a test build is paid at once.
  */
+import { playBilling } from "./play.js";
+import { admobAds } from "./admob.js";
+
 
 const UNCONFIGURED = Object.freeze({ ok: false, error: "unconfigured" });
 
@@ -38,6 +52,7 @@ const unconfiguredBilling = {
   verifyPurchase: async () => UNCONFIGURED,
   finishPurchase: async () => ({ ok: false }),
   readNotification: async () => UNCONFIGURED,
+  listVoided: async () => UNCONFIGURED,
 };
 
 /** @type {AdsVerifier} */
@@ -68,6 +83,7 @@ const devBilling = {
     const voided = body && Array.isArray(body.voided) ? body.voided.filter((v) => v && typeof v.purchaseToken === "string") : null;
     return voided ? { ok: true, voided } : { ok: false, error: "invalid" };
   },
+  listVoided: async () => UNCONFIGURED, // a test build has no list at Google to read
 };
 
 /**
@@ -90,12 +106,12 @@ const isObject = (v, method) => !!v && typeof v[method] === "function";
 export function billingVerifier(env, request) {
   if (isObject(env.BILLING_VERIFIER, "verifyPurchase")) return env.BILLING_VERIFIER;
   if (env.DEV_BILLING === "1" && devHost(request)) return env.DEV_KIT === "1" ? devBillingForGuests : devBilling;
-  return unconfiguredBilling;
+  return playBilling(env) || unconfiguredBilling;
 }
 
 /** → the AdsVerifier for this request. (`env.ADS_VERIFIER` is the tests' seam.) */
 export function adsVerifier(env, request) {
   if (isObject(env.ADS_VERIFIER, "verifyCallback")) return env.ADS_VERIFIER;
   if (env.DEV_ADS === "1" && devHost(request)) return devAds;
-  return unconfiguredAds;
+  return admobAds(env) || unconfiguredAds;
 }

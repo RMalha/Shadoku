@@ -257,8 +257,17 @@ export async function snapshot(ctx) {
 
 /* ───────────── deleting an account (architecture 4.11) ───────────── */
 // every table whose rows name an account and go with it
-// (hideouts and hideout_rooms: migration 0005, achievements: 0006; a table not applied yet is skipped)
-const ERASED = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes", "devices", "identities", "hideouts", "hideout_rooms", "achievements"];
+// (hideouts and hideout_rooms: migration 0005, achievements: 0006, the 1v1's duel_*: 0008; a table not applied yet is skipped)
+const ERASED = ["wallets", "ledger", "inventory", "entitlements", "ad_tickets", "ad_rewards", "solves", "quest_state", "streaks", "social_visits", "flags", "pack_opens", "card_merges", "hint_uses", "shop_refreshes", "devices", "identities", "hideouts", "hideout_rooms", "achievements",
+  "duel_ratings", "duel_queue", "duel_dealt", "duel_recordings", "duel_invites"];
+// The 1v1's rows that name the account in another column. An invitation TO the account goes. A match is also the opponent's:
+// it stays, with "erased" in the account's place (the opponent keeps its result and its rating change; a match still being
+// played goes to the opponent, who is the only one left asking).
+const ERASED_ELSEWHERE = [
+  ["duel_invites", "DELETE FROM duel_invites WHERE to_account = ?"],
+  ["duel_matches", "UPDATE duel_matches SET a = 'erased', a_name = '', a_avatar = '' WHERE a = ?"],
+  ["duel_matches", "UPDATE duel_matches SET b = 'erased', b_name = '', b_avatar = '' WHERE b = ?"],
+];
 // the ledger lines that are about money: copied, without the account, before the ledger goes
 const MONEY_REASONS = ["iap", "refund"];
 /** What stands in `purchases.account_id` once the account is gone. */
@@ -268,7 +277,7 @@ export const ERASED_ACCOUNT = "erased";
  * The account is being deleted (DELETE /api/account, from the website or from the app): every row that names it goes, in ONE
  * batch, so the erasure happens whole or not at all (a caller whose erasure failed still has its session and can ask again).
  * That is its wallet and ledger, cards, contracts, quests, streak, ad and hint records, flags, its hideout (every room) and achievements,
- * its row in `accounts`, the
+ * its 1v1 rating, recordings and invitations (its matches stay for the opponent, without its id), its row in `accounts`, the
  * phones signed in to it (every token it holds stops at once: a token is only as good as its `devices` row), the sign-ins
  * linked to it, and whatever is left of the guest accounts it grew from (accounts.js mergeGuest).
  * What stays, and never with the account id (migrations/0004_app_erasure.sql):
@@ -282,7 +291,7 @@ export const ERASED_ACCOUNT = "erased";
 export async function eraseAppAccount(env, id) {
   const d = await db(env).catch(() => null);
   if (!d) return;
-  const names = [...ERASED, "accounts", "purchases", "kept_ledger", "kept_bans", "purchases_restore", "account_seen"];
+  const names = [...ERASED, ...ERASED_ELSEWHERE.map(([table]) => table), "accounts", "purchases", "kept_ledger", "kept_bans", "purchases_restore", "account_seen"];
   const have = new Set((await d.prepare(`SELECT name FROM sqlite_master WHERE type IN ('table', 'index') AND name IN (${names.map(() => "?").join(", ")})`).bind(...names).all()).results.map((t) => t.name));
   if (!have.has("accounts")) return;
   const now = clock(env);
@@ -312,6 +321,7 @@ export async function eraseAppAccount(env, id) {
   } else if (have.has("purchases")) stmts.push(d.prepare(`UPDATE purchases SET account_id = ? WHERE ${mine}`).bind(ERASED_ACCOUNT, id, id));
   if (have.has("account_seen")) stmts.push(d.prepare("DELETE FROM account_seen WHERE id = ? OR id IN (SELECT id FROM accounts WHERE merged_into = ?)").bind(id, id));
   for (const table of ERASED) if (have.has(table)) stmts.push(d.prepare(`DELETE FROM ${table} WHERE ${mine}`).bind(id, id));
+  for (const [table, sql] of ERASED_ELSEWHERE) if (have.has(table)) stmts.push(d.prepare(sql).bind(id));
   stmts.push(d.prepare("DELETE FROM accounts WHERE id = ? OR merged_into = ?").bind(id, id)); // last: the lines above find the guests through it
   await d.batch(stmts);
 }

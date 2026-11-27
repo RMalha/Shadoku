@@ -1,7 +1,9 @@
 // GET /api/app/ads/ssv?…&signature=…&key_id=…  →  AdMob's server-side verification callback (public: Google calls it, no session).
-// The AdsVerifier (functions/_lib/app/verifiers.js) checks the signature; until the real one is in place every call is refused
-// with 503 and pays nothing. A verified callback names the ticket (custom_data) and the account (user_id); the reward is the
-// server's own (AdMob's reward_amount is never read) and a transaction id pays once.
+// The AdsVerifier (functions/_lib/app/verifiers.js; the real one is admob.js) checks Google's signature over the query string as
+// it was received and that the ad unit is ours; with no ad unit configured every call is refused with 503 and pays nothing.
+// A verified callback names the ticket (custom_data) and the account (user_id); the reward is the server's own (AdMob's
+// reward_amount is never read) and a transaction id pays once. The "Verify URL" button of the AdMob console sends a signed
+// callback with no ticket: it is answered 200 and pays nothing.
 import { json } from "../../../_lib/auth.js";
 import { db } from "../../../_lib/db.js";
 import { clock } from "../../../_lib/app/context.js";
@@ -11,7 +13,7 @@ import { parseConfig } from "../../../_lib/app/economy.js";
 
 export async function onRequestGet({ request, env }) {
   const v = await adsVerifier(env, request).verifyCallback(new URL(request.url));
-  if (!v || !v.ok) return v && v.error === "unconfigured" ? json({ error: "ads_unavailable" }, 503) : json({ error: "signature" }, 403);
+  if (!v || !v.ok) return v && v.error === "unconfigured" ? json({ error: "ads_unavailable" }, 503) : v && v.error === "upstream" ? json({ error: "upstream" }, 502) : json({ error: "signature" }, 403); // (502: Google's keys could not be read, and AdMob sends the callback again)
   const d = await db(env);
   if (!d) return json({ error: "storage" }, 503);
   const cfg = parseConfig((await d.prepare("SELECT k, v FROM app_config").all()).results);

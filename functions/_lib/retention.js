@@ -6,6 +6,7 @@
  *   signed-out phones (revoked `devices`)    30 days
  *   rewarded-ad tickets (`ad_tickets`)       30 days
  *   ad views (`ad_rewards`), anti-cheat signals (`flags`), Shop swaps (`shop_refreshes`)   90 days
+ *   a 1v1 wait nobody came back to (`duel_queue`)   1 day; a friendly invitation (`duel_invites`)   30 days after it ran out
  *   rate-limit counters                      about an hour (ratelimit.js)
  *   the mark that ends a deleted account's sessions   31 days (KV's own expiry: auth.js endSessions)
  *   what stays of a deleted account's purchases (`purchases` as "erased", `kept_ledger`)   10 years from the purchase
@@ -33,6 +34,8 @@ const TTL = [
   ["ad_rewards", "at", 90, "ms", ""],
   ["flags", "at", 90, "ms", ""],
   ["shop_refreshes", "at", 90, "ms", ""],
+  ["duel_queue", "seen", 1, "ms", ""],
+  ["duel_invites", "expires", 30, "ms", ""],
   ["kept_ledger", "at", KEPT_YEARS * 365.25, "ms", ""],
   ["purchases", "verified_at", KEPT_YEARS * 365.25, "ms", `account_id = '${ERASED_ACCOUNT}'`],
 ];

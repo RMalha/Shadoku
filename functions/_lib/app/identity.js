@@ -13,6 +13,7 @@
  * @typedef {{ ok: true, provider: string, sub: string, name: string, avatar: string } | { ok: false, error: "unconfigured" | "invalid" | "upstream" }} Identity
  */
 import { USERNAME_RE } from "../auth.js";
+import { codenameIssue } from "../codename/index.js";
 import { clock } from "./context.js";
 
 const GOOGLE_CERTS_URL = "https://www.googleapis.com/oauth2/v3/certs";
@@ -41,11 +42,15 @@ async function googleKeys(env, again) {
   return cached.keys;
 }
 
-/** A Google ID token → who it names. @returns {Promise<Identity>} */
-export async function verifyGoogleIdToken(env, idToken) {
-  if (!env.GOOGLE_CLIENT_ID) return no("unconfigured");
-  if (typeof idToken !== "string" || idToken.length > 4096) return no("invalid");
-  const [h, p, s, extra] = idToken.split(".");
+/**
+ * A JWT that Google signed (RS256, Google's public keys) → its claims. ONLY the signature is checked here: who it was made for
+ * (aud), who made it (iss), when it ends (exp) and whom it names are the caller's to check, every time.
+ * Used for a sign-in's ID token (below) and for the token Pub/Sub puts on a Play notification (play.js readNotification).
+ * @returns {Promise<{ ok: true, claims: Record<string, unknown> } | { ok: false, error: "invalid" | "upstream" }>}
+ */
+export async function googleSignedClaims(env, jwt) {
+  if (typeof jwt !== "string" || jwt.length > 4096) return no("invalid");
+  const [h, p, s, extra] = jwt.split(".");
   if (!h || !p || !s || extra !== undefined) return no("invalid");
   let header, claims, signature;
   try { header = part(h); claims = part(p); signature = bytes(s); } catch { return no("invalid"); }
@@ -60,9 +65,22 @@ export async function verifyGoogleIdToken(env, idToken) {
     const key = await crypto.subtle.importKey("jwk", { kty: "RSA", n: jwk.n, e: jwk.e, alg: "RS256", ext: true }, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
     if (!(await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, signature, new TextEncoder().encode(`${h}.${p}`)))) return no("invalid");
   } catch { return no("invalid"); }
+  return { ok: true, claims };
+}
+
+/** → true when Google is the issuer and the token is inside its time (two minutes of clock difference allowed). */
+export function googleClaimsCurrent(env, claims) {
   const now = clock(env) / 1000;
-  if (!GOOGLE_ISSUERS.includes(claims.iss) || claims.aud !== env.GOOGLE_CLIENT_ID) return no("invalid"); // made for another app: not ours to accept
-  if (!Number.isFinite(claims.exp) || claims.exp < now - CLOCK_SKEW_SEC || (Number.isFinite(claims.iat) && claims.iat > now + CLOCK_SKEW_SEC)) return no("invalid");
+  return GOOGLE_ISSUERS.includes(claims.iss) && Number.isFinite(claims.exp) && claims.exp >= now - CLOCK_SKEW_SEC && !(Number.isFinite(claims.iat) && claims.iat > now + CLOCK_SKEW_SEC);
+}
+
+/** A Google ID token → who it names. @returns {Promise<Identity>} */
+export async function verifyGoogleIdToken(env, idToken) {
+  if (!env.GOOGLE_CLIENT_ID) return no("unconfigured");
+  const signed = await googleSignedClaims(env, idToken);
+  if (!signed.ok) return signed;
+  const { claims } = signed;
+  if (!googleClaimsCurrent(env, claims) || claims.aud !== env.GOOGLE_CLIENT_ID) return no("invalid"); // made for another app: not ours to accept
   if (typeof claims.sub !== "string" || !/^[0-9]{1,64}$/.test(claims.sub)) return no("invalid");
   return { ok: true, provider: "google", sub: claims.sub, name: clean(claims.name, 80), avatar: clean(claims.picture, 300) };
 }
@@ -72,7 +90,7 @@ const localhost = (request) => /^(localhost|127\.0\.0\.1|\[::1\])$/.test(new URL
 /** A test player, by codename: the same account /api/auth/dev/login signs a browser in to. @returns {Identity} */
 function verifyDev(env, request, name) {
   if (env.DEV_LOGIN !== "1" || !localhost(request)) return no("unconfigured");
-  return typeof name === "string" && USERNAME_RE.test(name) ? { ok: true, provider: "dev", sub: name.toLowerCase(), name, avatar: "" } : no("invalid");
+  return typeof name === "string" && USERNAME_RE.test(name) && !codenameIssue(name) ? { ok: true, provider: "dev", sub: name.toLowerCase(), name, avatar: "" } : no("invalid");
 }
 
 /**

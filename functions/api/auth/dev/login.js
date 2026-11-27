@@ -6,6 +6,7 @@
 import { seal, setCookie, redirect, safeReturn, setCodename, json, SESSION_DAYS, USERNAME_RE } from "../../../_lib/auth.js";
 import { db } from "../../../_lib/db.js";
 import { rankStats } from "../../../../src/ranking.js";
+import { codenameIssue } from "../../../_lib/codename/index.js";
 
 const local = (request) => /^(localhost|127\.0\.0\.1|\[::1\])$/.test(new URL(request.url).hostname);
 const SAMPLES = [["VelvetPhantom_64", 14, 1.1, 0], ["SilentRook_17", 11, 0.8, 2], ["CrimsonCourier_88", 9, 1.4, 1], ["GhostSleeper_23", 6, 0.6, 6], ["BrassRaven_301", 4, 2.2, 0], ["HollowMask_45", 2, 1.0, 9]];
@@ -46,8 +47,10 @@ export async function onRequestGet({ request, env }) {
   const name = url.searchParams.get("name");
   if (!name) return page();
   if (!USERNAME_RE.test(name)) return page("3–20 letters, numbers or underscores.");
+  const issue = codenameIssue(name); // the same filter as PUT /api/username
+  if (issue) return page(issue === "reserved" ? "That name is reserved." : "That name isn't allowed.");
   const id = `dev:${name.toLowerCase()}`;
-  await setCodename(env, id, name);
+  if ((await setCodename(env, id, name)) === false) return page("That name isn't allowed."); // the filter's last line of defence (never reached after the check above)
   const session = await seal(env, { id, provider: "dev", name, email: "", avatar: "" }, SESSION_DAYS * 86400);
   return redirect(safeReturn(url.searchParams.get("return")), [setCookie(request, "sh_session", session, SESSION_DAYS * 86400)]);
 }

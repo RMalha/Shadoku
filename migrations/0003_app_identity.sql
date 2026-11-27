@@ -1,4 +1,4 @@
--- Shadoku app: sign-in for the native shell (docs/android/architecture.md 4.1, 5 and 4.10). Functions: functions/api/app/auth/**,
+-- Shadoku app: sign-in for the native shell (app/docs/architecture.md 4.1, 5 and 4.10). Functions: functions/api/app/auth/**,
 -- functions/_lib/app/accounts.js, identity.js.
 -- Apply:  npx wrangler d1 migrations apply shadoku --local | --remote
 -- Until it is applied, /api/app/* answers 503 "schema" (the wallet included: its endpoints read `devices`). The site is not affected.

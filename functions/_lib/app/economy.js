@@ -35,6 +35,12 @@ export const MAX_TIER = VARIANTS.length - 1;
 export const MERGE_COUNT = 3;
 /** An unpaid ad ticket older than this is dead. */
 export const AD_TICKET_TTL_MS = 3600 * 1000;
+/**
+ * AdMob's callback can be late or lost: the phone waits this long after the ad's own "rewarded" event, then claims with a Play
+ * Integrity token (POST /api/app/ads/claim, architecture 4.5). The server cannot see that event: it refuses a claim made
+ * sooner than this after the TICKET was made, which no claim that waited can be.
+ */
+export const AD_CLAIM_WAIT_MS = 10 * 1000;
 
 /**
  * Caps and thresholds; a row in the table app_config (k, JSON v) overrides one of them without a deploy.

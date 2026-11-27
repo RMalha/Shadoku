@@ -1,0 +1,15 @@
+{
+  "kind": "androidpublisher#productPurchase",
+  "purchaseTimeMillis": "1794830400000",
+  "purchaseState": 0,
+  "consumptionState": 0,
+  "developerPayload": "",
+  "orderId": "GPA.3345-1122-7788-90011",
+  "acknowledgementState": 0,
+  "purchaseToken": "fixture.oneTime.kfbgpnmjdeoahcilkgnbpafe.AO-J1OzFixtureTokenForTheVerifierTestsOnly0001",
+  "productId": "coins_500",
+  "quantity": 1,
+  "obfuscatedExternalAccountId": "PvAcN1Fnax9ecpmSoSnTRZq4HtaZioIPbkFP8G1t3oU",
+  "regionCode": "PT",
+  "refundableQuantity": 1
+}

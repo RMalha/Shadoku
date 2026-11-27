@@ -1,0 +1,19 @@
+{
+  "kind": "androidpublisher#subscriptionPurchaseV2",
+  "regionCode": "PT",
+  "startTime": "2026-11-16T10:00:00.000Z",
+  "subscriptionState": "SUBSCRIPTION_STATE_ACTIVE",
+  "acknowledgementState": "ACKNOWLEDGEMENT_STATE_PENDING",
+  "externalAccountIdentifiers": {
+    "obfuscatedExternalAccountId": "PvAcN1Fnax9ecpmSoSnTRZq4HtaZioIPbkFP8G1t3oU"
+  },
+  "lineItems": [
+    {
+      "productId": "member_sub",
+      "expiryTime": "2026-12-16T10:00:00.000Z",
+      "latestSuccessfulOrderId": "GPA.3301-5566-4433-21001",
+      "autoRenewingPlan": { "autoRenewEnabled": true },
+      "offerDetails": { "basePlanId": "monthly" }
+    }
+  ]
+}

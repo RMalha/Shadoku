@@ -1,6 +1,7 @@
 // POST /api/app/billing/rtdn  →  Google's Real-time Developer Notifications (public: Pub/Sub calls it, no session).
 // The BillingVerifier authenticates the message and lists the refunded or revoked purchases; each is taken back once
-// (functions/_lib/app/billing.js voidPurchase). Until the real verifier is in place: 503, and nothing changes.
+// (functions/_lib/app/billing.js voidPurchase). Without PLAY_SERVICE_ACCOUNT and PLAY_RTDN_EMAIL (play.js): 503, and nothing changes.
+// The nightly check of Google's voided-purchases list catches a notification that never arrived (billing.js sweepVoided).
 import { json } from "../../../_lib/auth.js";
 import { db } from "../../../_lib/db.js";
 import { clock } from "../../../_lib/app/context.js";

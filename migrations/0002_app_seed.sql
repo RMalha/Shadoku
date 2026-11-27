@@ -1,4 +1,4 @@
--- Shadoku app: the first rows of the economy's lists (docs/android/product_brief.md "Economy"; app/docs/Stuff.xlsx of 2026-11-13).
+-- Shadoku app: the first rows of the economy's lists (app/docs/product_brief.md "Economy"; app/docs/Stuff.xlsx of 2026-11-13).
 -- These are DATA, not schema: change them later with ordinary UPDATE/INSERT statements (a new migration, or
 -- `npx wrangler d1 execute shadoku --remote --command "..."`), never by editing this file after it was applied.
 

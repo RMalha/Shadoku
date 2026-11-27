@@ -22,6 +22,27 @@ database_name = "shadoku"
 database_id = "256df518-c797-4a52-8683-3bf3b19d9220"
 migrations_dir = "migrations"
 
+# ───────────── the app's real verifiers: Google Play, AdMob, Play Integrity (functions/_lib/app/verifiers.js; architecture 4.21) ─────────────
+# Nothing here is set by default, and without it the endpoints answer 503 and grant nothing (fail closed). Each switches on by itself.
+# Where each value comes from, step by step: functions/CLAUDE.md "Secrets and settings of the app's verifiers".
+#
+# SECRET (its value is never written in this file, in the repository or in a log: it is only named here):
+#   PLAY_SERVICE_ACCOUNT   the JSON key file of the Google Cloud service account that may read and finish purchases in Play
+#                          Console and decode Play Integrity tokens. Switches on /api/app/billing/verify, the nightly
+#                          voided-purchases check, /api/app/integrity and the fallback of /api/app/ads/claim. From PowerShell:
+#       Get-Content "$env:USERPROFILE\.shadoku\play-service-account.json" -Raw | npx wrangler pages secret put PLAY_SERVICE_ACCOUNT --project-name shadoku
+#   (already there: CRON_SECRET, which the nightly check shares with the rest of /api/cron/retention)
+#
+# SETTINGS (not secret: an ad unit id ships inside the app, the others are names). Uncomment and fill in, then deploy:
+#   ADMOB_AD_UNITS       our rewarded ad units, comma-separated. Switches on /api/app/ads/ssv: a callback Google signed for
+#                        any other ad unit is refused.
+#   PLAY_RTDN_EMAIL      the service account the Pub/Sub push subscription signs as. Switches on /api/app/billing/rtdn.
+#   PLAY_SUBSCRIPTIONS   product ids sold as subscriptions, comma-separated. Empty: every product is a one-time product.
+# [vars]
+# ADMOB_AD_UNITS = "ca-app-pub-0000000000000000/0000000000"
+# PLAY_RTDN_EMAIL = "play-rtdn-push@YOUR-PROJECT.iam.gserviceaccount.com"
+# PLAY_SUBSCRIPTIONS = ""
+
 # ───────────── the TEST server: every Pages preview deployment (architecture 4.17) ─────────────
 # Every deployment that is not the production branch ("main") is a preview, e.g. `--branch test` -> https://test.shadoku.pages.dev.
 # Previews get their OWN database and KV namespace, so fake purchases and the tester kit never touch a real account or the
@@ -32,6 +53,7 @@ migrations_dir = "migrations"
 #   npx wrangler d1 migrations apply shadoku-test --remote --env preview
 #   npx wrangler pages secret put SESSION_SECRET --project-name shadoku --env preview   (a NEW random value, not production's)
 # DEV_BILLING / DEV_ADS / DEV_KIT work only on localhost and *.pages.dev preview addresses (functions/_lib/app/verifiers.js devHost).
+# There they come before the real verifiers, so the test server needs none of the settings above.
 [[env.preview.kv_namespaces]]
 binding = "SHADOKU_KV"
 id = "1173ccf9f5fa422a9801c063c5226496"
