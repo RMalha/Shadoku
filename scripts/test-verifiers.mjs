@@ -350,7 +350,10 @@ const ticketRow = (id, account, placement = "coins") => d1.raw.prepare("INSERT I
   const REAL = path.join(FIX, "ssv-callback.real.txt");
   if (fs.existsSync(REAL)) { // a callback captured from AdMob (README.md): Google's real signature, checked with Google's real key
     // pasted as ssv.js logs it ("…&signature =…", the space keeps the log's redaction off it) or as a plain URL or query string
-    const pasted = fs.readFileSync(REAL, "utf8").trim().replace(/^.*?(\?|ad_network=)/, (m, q) => (q === "?" ? "?" : "?ad_network=")).replace("&signature =", "&signature=");
+    const text = fs.readFileSync(REAL, "utf8").trim();
+    if (/REDACTED/.test(text) || !/ad_unit=\d+/.test(text) || !/&signature ?=[A-Za-z0-9_-]{60,}/.test(text))
+      ok("ssv-callback.real.txt holds a whole callback (copy the log line \"admob ssv console test callback …\" that follows the request line in the tail, not the request line, whose signature the tail shows as REDACTED)", false);
+    const pasted = text.replace(/^.*?(\?|ad_network=)/, (m, q) => (q === "?" ? "?" : "?ad_network=")).replace("&signature =", "&signature=");
     const real = new URL(`https://www.shadoku.net/api/app/ads/ssv${pasted}`), unit = new URLSearchParams(real.search).get("ad_unit"), env = { ...LIVE, ADMOB_AD_UNITS: unit };
     const tampered = real.search.replace(/([?&]transaction_id=)[^&]*/, "$10");
     eq("the callback captured from AdMob verifies with Google's real key, and not with one parameter changed", [(await ssv(real.search, env)).status, (await ssv(tampered, env)).status], [200, 403]);

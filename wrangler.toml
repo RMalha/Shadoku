@@ -34,12 +34,12 @@ migrations_dir = "migrations"
 #   (already there: CRON_SECRET, which the nightly check shares with the rest of /api/cron/retention)
 #
 # SETTINGS (not secret: an ad unit id ships inside the app, the others are names). Uncomment and fill in, then deploy:
-#   ADMOB_AD_UNITS       our rewarded ad units, comma-separated. Switches on /api/app/ads/ssv: a callback Google signed for
-#                        any other ad unit is refused.
+#   ADMOB_AD_UNITS       our REWARDED ad units only (interstitials and banners send no callback), comma-separated. Switches
+#                        on /api/app/ads/ssv: a callback Google signed for any other ad unit pays nothing.
 #   PLAY_RTDN_EMAIL      the service account the Pub/Sub push subscription signs as. Switches on /api/app/billing/rtdn.
 #   PLAY_SUBSCRIPTIONS   product ids sold as subscriptions, comma-separated. Empty: every product is a one-time product.
 [vars]
-ADMOB_AD_UNITS = "ca-app-pub-9051737903532615/7921679354,ca-app-pub-9051737903532615/7935342980,ca-app-pub-9051737903532615/3772736695"
+ADMOB_AD_UNITS = "ca-app-pub-9051737903532615/7935342980,ca-app-pub-9051737903532615/3772736695"
 PLAY_RTDN_EMAIL = "shadokuservice@heroic-vial-513417-k3.iam.gserviceaccount.com"
 PLAY_SUBSCRIPTIONS = ""
 
