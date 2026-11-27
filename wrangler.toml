@@ -39,7 +39,7 @@ migrations_dir = "migrations"
 #   PLAY_RTDN_EMAIL      the service account the Pub/Sub push subscription signs as. Switches on /api/app/billing/rtdn.
 #   PLAY_SUBSCRIPTIONS   product ids sold as subscriptions, comma-separated. Empty: every product is a one-time product.
 [vars]
-ADMOB_AD_UNITS = "ca-app-pub-9051737903532615/7935342980,ca-app-pub-9051737903532615/3772736695"
+ADMOB_AD_UNITS = "ca-app-pub-9051737903532615/7935342980,ca-app-pub-9051737903532615/3772736695, ca-app-pub-9051737903532615/8287851726, ca-app-pub-9051737903532615/5575551760"
 PLAY_RTDN_EMAIL = "shadokuservice@heroic-vial-513417-k3.iam.gserviceaccount.com"
 PLAY_SUBSCRIPTIONS = ""
 
