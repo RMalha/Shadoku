@@ -349,7 +349,9 @@ const ticketRow = (id, account, placement = "coins") => d1.raw.prepare("INSERT I
   ok("Google's own key, as published, is a key this code reads", !!(await crypto.subtle.importKey("spki", Buffer.from(realKey.base64, "base64"), { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"])));
   const REAL = path.join(FIX, "ssv-callback.real.txt");
   if (fs.existsSync(REAL)) { // a callback captured from AdMob (README.md): Google's real signature, checked with Google's real key
-    const real = new URL(fs.readFileSync(REAL, "utf8").trim()), unit = new URLSearchParams(real.search).get("ad_unit"), env = { ...LIVE, ADMOB_AD_UNITS: unit };
+    // pasted as ssv.js logs it ("…&signature =…", the space keeps the log's redaction off it) or as a plain URL or query string
+    const pasted = fs.readFileSync(REAL, "utf8").trim().replace(/^.*?(\?|ad_network=)/, (m, q) => (q === "?" ? "?" : "?ad_network=")).replace("&signature =", "&signature=");
+    const real = new URL(`https://www.shadoku.net/api/app/ads/ssv${pasted}`), unit = new URLSearchParams(real.search).get("ad_unit"), env = { ...LIVE, ADMOB_AD_UNITS: unit };
     const tampered = real.search.replace(/([?&]transaction_id=)[^&]*/, "$10");
     eq("the callback captured from AdMob verifies with Google's real key, and not with one parameter changed", [(await ssv(real.search, env)).status, (await ssv(tampered, env)).status], [200, 403]);
   } else console.log("  (no callback captured from AdMob in scripts/fixtures/verifiers/ssv-callback.real.txt: the synthetic one stands in)");
@@ -368,7 +370,12 @@ const ticketRow = (id, account, placement = "coins") => d1.raw.prepare("INSERT I
   eq("the AdMob console's \"Verify URL\" (signed, no ticket, no player): answered 200, nothing paid", [(await ssv(await cb({}))).body, one("SELECT COUNT(*) AS n FROM ad_rewards").n], [{ ok: true, result: "rejected" }, 2]);
   ticketRow("their-ticket-0001", A, "hint");
   const theirs = await cb({ ad_unit: "9999999999", custom_data: "their-ticket-0001", user_id: A });
-  eq("a callback Google signed for SOMEBODY ELSE'S ad unit, pointed at our ticket: refused", [(await ssv(theirs)).status, one("SELECT paid_at FROM ad_tickets WHERE id = 'their-ticket-0001'").paid_at, (await ssv(theirs, { ...LIVE, ADMOB_AD_UNITS: `${AD_UNIT}, 9999999999` })).body.result], [403, null, "ok"]);
+  eq("a callback Google signed for SOMEBODY ELSE'S ad unit, pointed at our ticket: answered 200 and paid nothing", [await ssv(theirs).then((r) => [r.status, r.body]), one("SELECT paid_at FROM ad_tickets WHERE id = 'their-ticket-0001'").paid_at, (await ssv(theirs, { ...LIVE, ADMOB_AD_UNITS: `${AD_UNIT}, 9999999999` })).body.result], [[200, { ok: true, result: "ignored" }], null, "ok"]);
+  const logged = [], log = console.log;
+  console.log = (...a) => logged.push(a.join(" "));
+  const consoleTest = await cb({ ad_unit: "1234567890", ad_network: "5450213213286189855", reward_amount: "5", reward_item: "Hints", transaction_id: "123456789" });
+  const answer = await ssv(consoleTest).finally(() => { console.log = log; });
+  eq("the AdMob console's own test (the dummy ad unit 1234567890): 200, nothing paid, and logged whole with the signature spaced off", [answer.status, answer.body, one("SELECT COUNT(*) AS n FROM ad_rewards WHERE transaction_id = '123456789'").n, logged.length === 1 && logged[0].includes("&signature =") && logged[0].includes("ad_unit=1234567890")], [200, { ok: true, result: "ignored" }, 0, true]);
   ticketRow("b-ticket-000001", B, "hint");
   eq("a ticket paid to the account the callback names only if it is that account's; a transaction id of a strange shape is refused", [(await ssv(await cb({ custom_data: "b-ticket-000001", user_id: A }))).body.result, (await ssv(await cb({ custom_data: "b-ticket-000001", user_id: B, transaction_id: "a b" }))).status, (await ssv(await cb({ custom_data: "b-ticket-000001", user_id: B }))).body.result], ["rejected", 403, "ok"]);
 

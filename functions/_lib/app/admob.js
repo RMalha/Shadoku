@@ -63,6 +63,9 @@ export function derToRaw(der, size = 32) {
   return raw;
 }
 
+/** The ad unit the AdMob console's "Verify URL" test callback names (seen 2026-11-27): a dummy, never one of ours. */
+export const ADMOB_TEST_UNIT = "1234567890";
+
 let held = { at: 0, keys: [] }; // Google's keys in this isolate: [{ keyId: "3335741209", base64: "<SPKI>" }]
 
 const keep = (body, at) => ({ at, keys: (body && Array.isArray(body.keys) ? body.keys : []).filter((k) => k && typeof k.base64 === "string" && k.base64.length < 2000 && k.keyId !== undefined).map((k) => ({ keyId: String(k.keyId), base64: k.base64 })) });
@@ -122,7 +125,9 @@ export function admobAds(env) {
       // Google signed this. Whose ad was it?
       const p = new URLSearchParams(query.slice(0, cut));
       const adUnit = p.get("ad_unit") || "", transactionId = p.get("transaction_id") || "";
-      if (!units.has(adUnit)) return no("invalid"); // another publisher's ad unit, pointed at us
+      // Another publisher's ad unit pointed at us, or the AdMob console's "Verify URL" test (ad unit ADMOB_TEST_UNIT): signed, but
+      // never ours to pay. The caller answers 200 and pays nothing (a 403 would fail the console's test and make Google retry).
+      if (!units.has(adUnit)) return { ok: false, error: "not_ours", adUnit };
       if (!/^[A-Za-z0-9_.:-]{1,200}$/.test(transactionId)) return no("invalid");
       return { ok: true, transactionId, ticketId: p.get("custom_data") || "", userId: p.get("user_id") || "", adUnit };
     },

@@ -20,12 +20,14 @@ key, its own "Google" signing key and its own ad key on every run and keeps none
 Only the owner of the AdMob account can do this, and it is worth doing once: it proves the signature check against a
 signature Google really made.
 
-1. Production must know the ad unit (`ADMOB_AD_UNITS`, see `wrangler.toml`) and be deployed.
+1. Production must have `ADMOB_AD_UNITS` set (see `wrangler.toml`) and be deployed.
 2. In one terminal: `npx wrangler pages deployment tail --project-name shadoku`
 3. In AdMob: Apps > Shadoku > Ad units > the rewarded unit > Server-side verification, enter
    `https://www.shadoku.net/api/app/ads/ssv` and press **Verify URL**. AdMob should say the URL was verified
-   (the endpoint answers 200 to anything Google signed for our ad unit; this test callback names no ticket, so it pays nothing).
-4. Copy the whole request URL from the tail (it ends in `&signature=...&key_id=...`) into `ssv-callback.real.txt`, one line.
+   (its test callback names the dummy ad unit 1234567890 and no ticket: answered 200, it pays nothing).
+4. The tail shows the request line with the signature REDACTED, and below it a log line
+   `admob ssv console test callback (capture for ssv-callback.real.txt): ?ad_network=...&signature =...&key_id=...`.
+   Copy that log line, as it is, into `ssv-callback.real.txt` (one line; the test removes the space in `signature =`).
 5. `npm run test:verifiers`. If it says the key is unknown, Google rotated its keys: replace the first key of
    `ssv-keys.json` with what `https://www.gstatic.com/admob/reward/verifier-keys.json` shows now.
 
